@@ -1,15 +1,48 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/home">Home</router-link> |
-      <router-link to="/">Landing</router-link> |    
-      <router-link to="/about">About</router-link> |
-      <router-link to="/login">Login</router-link> |
-      <router-link to="/register">Register</router-link> |
-    </div>
+    <v-toolbar app>
+      <span class="hidden-sm-and-up">
+        <v-toolbar-side-icon @click="sidebar = !sidebar">
+        </v-toolbar-side-icon>
+      </span>
+      <v-toolbar-title>
+        <router-link to="/" tag="span" style="cursor: pointer">
+          {{ appTitle }}
+        </router-link>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-items class="hidden-xs-only">
+        <v-btn
+          flat
+          v-for="item in menuItems"
+          :key="item.title"
+          :to="item.path">
+          <v-icon left dark>{{ item.icon }}</v-icon>
+          {{ item.title }}
+        </v-btn>
+      </v-toolbar-items>
+    </v-toolbar>
+    <br><br>
     <router-view/>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'App',
+  data(){
+    return {
+      appTitle: 'RAKANG',
+      sidebar: false,
+      menuItems: [
+          { title: 'Home', path: '/home'},
+          { title: 'About', path: '/about'},
+          { title: 'Log in', path: '/login'}
+     ]
+    }
+  },
+}
+</script>
 
 <style>
 #app {
