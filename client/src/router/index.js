@@ -5,6 +5,7 @@ import Landing from '@/views/Landing.vue'
 
 const Login                     = () => import('@/components/profile/Login')
 const Register                  = () => import('@/components/profile/Register')
+const Admin                     = () => import('@/components/admin/Admin')
 
 Vue.use(VueRouter)
 
@@ -36,6 +37,11 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: Register
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: Admin
   }
 ]
 
