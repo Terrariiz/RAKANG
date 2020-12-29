@@ -5,6 +5,10 @@ import Landing from '@/views/Landing.vue'
 
 const Login                     = () => import('@/components/profile/Login')
 const Register                  = () => import('@/components/profile/Register')
+const ListAddnews               = () => import('@/components/admin/ListAddnews')
+const Addnews                   = () => import('@/components/admin/Addnews')
+const editAddnews               = () => import('@/components/admin/editAddnews')
+const ListAdddoctrine           = () => import('@/components/admin/ListAdddoctrine')
 const Admin                     = () => import('@/components/admin/Admin')
 
 Vue.use(VueRouter)
@@ -37,6 +41,26 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: Register
+  },
+  {
+    path: '/ListAddnews',
+    name: 'ListAddnews',
+    component: ListAddnews
+  },
+  {
+    path: '/addnews',
+    name: 'Addnews',
+    component: Addnews
+  },
+  {
+    path: '/editaddnews',
+    name: 'editAddnews',
+    component: editAddnews
+  },
+  {
+    path: '/ListAdddoctrine',
+    name: 'ListAdddoctrine',
+    component: ListAdddoctrine
   },
   {
     path: '/admin',
