@@ -1,107 +1,67 @@
 <template>
   <div class='addnews'>
-    <h1>This is addหลักธรรม page.</h1>
+    <h1>This is addnews page.</h1>
     <div id ='headaddnews'>
         <div class="text-center">
-            <v-btn rounded color="primary" dark>Add Doctrine</v-btn>
+          
+            <v-btn rounded color="primary" dark to = "/addnews">เพิ่มหลักธรรม</v-btn>
+  
+            <!-- <v-btn rounded color="primary"  to = "/addnews" >Add NEWS</v-btn> -->
         </div>
     </div>
-    <v-container id = "table">
-      <v-data-table
-    dense
-    :headers="headers"
-    :items="desserts"
-    item-key="name"
-    class="elevation-1"
-  ></v-data-table>
+    <v-container>
+      <v-simple-table >
+          <template v-slot:default>
+            <thead>
+              <tr>
+                <th class="text-left">
+                  Name
+                </th>
+                <th class="text-left">
+                  Editor
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr  v-for="item in desserts"  :key="item.name">
+                <td>{{ item.name }}</td>
+                <td>
+                  
+                    <v-btn style="margin-left:5%;" class="ma-2"  color="purple" to = "/editaddnews"  dark><v-icon dark>mdi-wrench</v-icon></v-btn>
+                    <v-btn style="margin-left:5%;"><v-icon>{{ icons.mdiDelete }}</v-icon></v-btn>
+                  
+                </td>
+                <!-- <td>{{ item.calories }}</td> -->
+              </tr>
+            </tbody>
+          </template>
+      </v-simple-table>
     </v-container>
   </div>
 </template>
 
 <script>
+
+import {
+    mdiAccount,
+    mdiPencil,
+    mdiShareVariant,
+    mdiDelete,
+  } from '@mdi/js'
+
   export default {
     data: () => ({
       desserts: [
         {
           name: 'Frozen Yogurt',
-          icon:  5,
-        //   fat: 6.0,
-        //   carbs: 24,
-        //   protein: 4.0,
-        //   iron: '1%',
+          
+        
         },
-        // {
-        //   name: 'Ice cream sandwich',
-        //   calories: 237,
-        //   fat: 9.0,
-        //   carbs: 37,
-        //   protein: 4.3,
-        //   iron: '1%',
-        // },
-        // {
-        //   name: 'Eclair',
-        //   calories: 262,
-        //   fat: 16.0,
-        //   carbs: 23,
-        //   protein: 6.0,
-        //   iron: '7%',
-        // },
-        // {
-        //   name: 'Cupcake',
-        //   calories: 305,
-        //   fat: 3.7,
-        //   carbs: 67,
-        //   protein: 4.3,
-        //   iron: '8%',
-        // },
-        // {
-        //   name: 'Gingerbread',
-        //   calories: 356,
-        //   fat: 16.0,
-        //   carbs: 49,
-        //   protein: 3.9,
-        //   iron: '16%',
-        // },
-        // {
-        //   name: 'Jelly bean',
-        //   calories: 375,
-        //   fat: 0.0,
-        //   carbs: 94,
-        //   protein: 0.0,
-        //   iron: '0%',
-        // },
-        // {
-        //   name: 'Lollipop',
-        //   calories: 392,
-        //   fat: 0.2,
-        //   carbs: 98,
-        //   protein: 0,
-        //   iron: '2%',
-        // },
-        // {
-        //   name: 'Honeycomb',
-        //   calories: 408,
-        //   fat: 3.2,
-        //   carbs: 87,
-        //   protein: 6.5,
-        //   iron: '45%',
-        // },
-        // {
-        //   name: 'Donut',
-        //   calories: 452,
-        //   fat: 25.0,
-        //   carbs: 51,
-        //   protein: 4.9,
-        //   iron: '22%',
-        // },
-        // {
-        //   name: 'KitKat',
-        //   calories: 518,
-        //   fat: 26.0,
-        //   carbs: 65,
-        //   protein: 7,
-        //   iron: '6%',
-        // },
+         {
+           name: 'Ice cream sandwich',
+       
+         },
+        
       ],
       headers: [
         {
@@ -111,12 +71,14 @@
           sortable: false,
           value: 'name',
         },
-        { text: 'Setting', value: 'icon' },
-        // { text: 'Fat (g)', value: 'fat' },
-        // { text: 'Carbs (g)', value: 'carbs' },
-        // { text: 'Protein (g)', value: 'protein' },
-        // { text: 'Iron (%)', value: 'iron' },
+        
       ],
+      icons: {
+        mdiAccount,
+        mdiPencil,
+        mdiShareVariant,
+        mdiDelete,
+      },
     }),
   }
 </script>
@@ -124,8 +86,10 @@
 <style>
     #table{
         text-align: left;
+        
     }
     #headaddnews{
         margin: 3%;
     }
+    
 </style>
