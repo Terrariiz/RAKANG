@@ -2,7 +2,17 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import axios from "axios";
 import vuetify from './plugins/vuetify';
+
+
+
+
+const base = axios.create({
+  baseURL: "http://localhost:4000"
+});
+
+Vue.prototype.$http = base;
 Vue.config.productionTip = false
 
 // Bootstrap-vue
@@ -14,6 +24,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 Vue.use(BootstrapVue);
 // Bootstrap-vue
+
 new Vue({
   router,
   store,

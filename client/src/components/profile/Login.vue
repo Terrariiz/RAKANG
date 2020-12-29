@@ -6,9 +6,11 @@
         ref="form"
         v-model="valid"
         lazy-validation
+        @submit.prevent="loginUser"
       >
         <v-text-field
-          v-model="name"
+          id = "email"
+          v-model="login.email"
           :counter="12"
           :rules="nameRules"
           label="Name"
@@ -16,17 +18,11 @@
         ></v-text-field>
 
         <v-text-field
-          v-model="password"
+          id = "password"
+          v-model="login.password"
           :counter="12"
           :rules="passwordRules"
           label="Password"
-          required
-        ></v-text-field>
-
-        <v-text-field
-          v-model="email"
-          :rules="emailRules"
-          label="E-mail"
           required
         ></v-text-field>
 
@@ -42,6 +38,7 @@
           color="success"
           class="mr-4"
           @click="validate"
+          type='submit'
         >
           Log in
         </v-btn>
@@ -62,27 +59,44 @@
 <script>
 export default {
 
-    data: () => ({
-        valid: true,
-        name: '',
-        nameRules: [
-          v => !!v || 'Name is required',
-          v => (v && v.length <= 12) || 'Name must be less than 12 characters',
-        ],
-        password: '',
-        passwordRules: [
-          v => !!v || 'Password is required',
-          v => (v && v.length <= 12) || 'Password must be less than 12 characters',
-        ],
-        email: '',
-        emailRules: [
-          v => !!v || 'E-mail is required',
-          v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-        ],
-        checkbox: false,
-    }),
+    // data: () => ({
+    //     valid: true,
+    //     name: '',
+    //     nameRules: [
+    //       v => !!v || 'Name is required',
+    //       v => (v && v.length <= 12) || 'Name must be less than 12 characters',
+    //     ],
+    //     password: '',
+    //     passwordRules: [
+    //       v => !!v || 'Password is required',
+    //       v => (v && v.length <= 12) || 'Password must be less than 12 characters',
+    //     ],
+    //     checkbox: false,
+    // }),
+    data() {
+    return {
+      login: {
+        email: "",
+        password: ""
+      }
+    };
+  },
 
     methods: {
+      async loginUser() {
+      try {
+        let response = await this.$http.post("/user/login", this.login);
+        let token = response.data.token;
+        localStorage.setItem("jwt", token);
+        if (token) {
+          // swal("Success", "Login Successful", "success");
+          this.$router.push("/home");
+        }
+      } catch (err) {
+        // swal("Error", "Something Went Wrong", "error");
+        console.log(err.response);
+      }
+    },
       validate () {
         this.$refs.form.validate()
       },
@@ -92,6 +106,7 @@ export default {
       resetValidation () {
         this.$refs.form.resetValidation()
       },
+      
     },
 }
 
