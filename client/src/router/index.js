@@ -5,12 +5,14 @@ import Landing from '@/views/Landing.vue'
 
 const Login                     = () => import('@/components/profile/Login')
 const Register                  = () => import('@/components/profile/Register')
-const ListAddnews               = () => import('@/components/admin/ListAddnews')
+const Listnews               = () => import('@/components/admin/Listnews')
 const Addnews                   = () => import('@/components/admin/Addnews')
-const editAddnews               = () => import('@/components/admin/editAddnews')
-const ListAdddoctrine           = () => import('@/components/admin/ListAdddoctrine')
+const editnews               = () => import('@/components/admin/editnews')
+const Listdoctrine           = () => import('@/components/admin/Listdoctrine')
 const Adddoctrine               = () => import('@/components/admin/Adddoctrine')
 const Admin                     = () => import('@/components/admin/Admin')
+const loginAdmin                = () => import('@/components/admin/loginAdmin')
+const ListCampaign           = () => import('@/components/admin/ListCampaign')
 
 Vue.use(VueRouter)
 
@@ -44,34 +46,44 @@ const routes = [
     component: Register
   },
   {
-    path: '/ListAddnews',
-    name: 'ListAddnews',
-    component: ListAddnews
+    path: '/admin/Listnews',
+    name: 'Listnews',
+    component: Listnews
   },
   {
-    path: '/addnews',
+    path: '/admin/addnews',
     name: 'Addnews',
     component: Addnews
   },
   {
-    path: '/editaddnews',
-    name: 'editAddnews',
-    component: editAddnews
+    path: '/admin/editnews',
+    name: 'editnews',
+    component: editnews
   },
   {
-    path: '/ListAdddoctrine',
-    name: 'ListAdddoctrine',
-    component: ListAdddoctrine
+    path: '/admin/Listdoctrine',
+    name: 'Listdoctrine',
+    component: Listdoctrine
   },
   {
-    path: '/Adddoctrine',
+    path: '/admin/Adddoctrine',
     name: 'Adddoctrine',
     component: Adddoctrine
+  },
+  {
+    path: '/admin/ListCampaign',
+    name: 'ListCampaign',
+    component: ListCampaign
   },
   {
     path: '/admin',
     name: 'Admin',
     component: Admin
+  },
+  {
+    path: '/admin/login',
+    name: 'loginAdmin',
+    component: loginAdmin
   }
 ]
 

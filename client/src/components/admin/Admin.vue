@@ -29,10 +29,9 @@
     </v-container> -->
     <v-container >
                 <div id="grid-container">
-                    <v-btn style="margin:3%; background-color:#4895ef ;" color="success" to = "">Campaign</v-btn>
-                    <v-btn style="margin:3%; background-color:#4895ef ;" color="success" to = "/listaddnews">บอร์ดหลักธรรม</v-btn>
-                    <v-btn style="margin:3%; background-color:#4895ef ;" color="primary" to = "/listadddoctrine">บอร์ดประชาสัมพันธ์</v-btn>
-                    <v-btn style="margin:3%; background-color:#4895ef ;" color="primary" to = "">Logout</v-btn> 
+                    <v-btn style="margin:3%; background-color:#4895ef ;" color="success" to = "/admin/listcampaign">Campaign</v-btn>
+                    <v-btn style="margin:3%; background-color:#4895ef ;" color="success" to = "/admin/listnews">บอร์ดหลักธรรม</v-btn>
+                    <v-btn style="margin:3%; background-color:#4895ef ;" color="primary" to = "/admin/listdoctrine">บอร์ดประชาสัมพันธ์</v-btn>
                 </div>
 
             <!-- <v-btn style="margin-right= 50%;" color="primary" dark>cancle</v-btn> 
