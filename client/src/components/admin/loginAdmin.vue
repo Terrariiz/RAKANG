@@ -55,7 +55,6 @@
         </v-btn>
       </v-form>
     </v-container>
-    <router-link to='/register'>Register</router-link>
   </div>
 </template>
 
