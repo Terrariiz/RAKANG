@@ -5,14 +5,14 @@ import Landing from '@/views/Landing.vue'
 
 const Login                     = () => import('@/components/profile/Login')
 const Register                  = () => import('@/components/profile/Register')
-const Listnews               = () => import('@/components/admin/ListAddnews')
+const Listnews               = () => import('@/components/admin/Listnews')
 const Addnews                   = () => import('@/components/admin/Addnews')
-const editnews               = () => import('@/components/admin/editAddnews')
-const Listdoctrine           = () => import('@/components/admin/ListAdddoctrine')
+const editnews               = () => import('@/components/admin/editnews')
+const Listdoctrine           = () => import('@/components/admin/Listdoctrine')
 const Adddoctrine               = () => import('@/components/admin/Adddoctrine')
 const Admin                     = () => import('@/components/admin/Admin')
 const loginAdmin                = () => import('@/components/admin/loginAdmin')
-const ListCampaign           = () => import('@/components/admin/ListAddCampaign')
+const ListCampaign           = () => import('@/components/admin/ListCampaign')
 
 Vue.use(VueRouter)
 

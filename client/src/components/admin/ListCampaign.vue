@@ -1,10 +1,10 @@
 <template>
   <div class='addnews'>
-    <h1>This is addnews page.</h1>
+    <h1>This is add campaign page.</h1>
     <div id ='headaddnews'>
         <div class="text-center">
           
-            <v-btn rounded color="primary" dark to = "/addnews">เพิ่มหลักธรรม</v-btn>
+            <v-btn rounded color="primary" dark to = "/admin/addnews">Add CAMPAIGN</v-btn>
   
             <!-- <v-btn rounded color="primary"  to = "/addnews" >Add NEWS</v-btn> -->
         </div>
@@ -27,8 +27,8 @@
                 <td>{{ item.name }}</td>
                 <td>
                   
-                    <v-btn style="margin-left:5%;" class="ma-2"  color="purple" to = "/editaddnews"  dark><v-icon dark>mdi-wrench</v-icon></v-btn>
-                    <v-btn style="margin-left:5%;"><v-icon>{{ icons.mdiDelete }}</v-icon></v-btn>
+                    <v-btn style="margin-left:5%; margin-top:3%; margin-bottom:3%;" class="ma-2"  color="purple" to = "/admin/editnews"  dark><v-icon dark>mdi-wrench</v-icon></v-btn>
+                    <v-btn style="margin-left:5%; margin-top:3%; margin-bottom:3%;"><v-icon>{{ icons.mdiDelete }}</v-icon></v-btn>
                   
                 </td>
                 <!-- <td>{{ item.calories }}</td> -->
