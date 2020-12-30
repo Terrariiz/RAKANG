@@ -1,7 +1,7 @@
 <template>
   <div class='register'>
     <h1>This is register page.</h1>
-    <v-container>
+    <!-- <v-container>
       <v-form
         ref="form"
         v-model="valid"
@@ -59,7 +59,9 @@
           Reset Form
         </v-btn>
       </v-form>
-    </v-container>
+    </v-container> -->
+
+    
   </div>
 </template>
 
