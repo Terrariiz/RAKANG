@@ -27,7 +27,7 @@
                 <td>{{ item.name }}</td>
                 <td>
                   
-                    <v-btn style="margin-left:5%; margin-top:3%; margin-bottom:3%;" class="ma-2"  color="purple" to = "/editaddnews"  dark><v-icon dark>mdi-wrench</v-icon></v-btn>
+                    <v-btn style="margin-left:5%; margin-top:3%; margin-bottom:3%;" class="ma-2"  color="purple" to = "/editnews"  dark><v-icon dark>mdi-wrench</v-icon></v-btn>
                     <v-btn style="margin-left:5%; margin-top:3%; margin-bottom:3%;"><v-icon>{{ icons.mdiDelete }}</v-icon></v-btn>
                   
                 </td>
