@@ -5,14 +5,14 @@ import Landing from '@/views/Landing.vue'
 
 const Login                     = () => import('@/components/profile/Login')
 const Register                  = () => import('@/components/profile/Register')
-const ListAddnews               = () => import('@/components/admin/ListAddnews')
+const Listnews               = () => import('@/components/admin/ListAddnews')
 const Addnews                   = () => import('@/components/admin/Addnews')
-const editAddnews               = () => import('@/components/admin/editAddnews')
-const ListAdddoctrine           = () => import('@/components/admin/ListAdddoctrine')
+const editnews               = () => import('@/components/admin/editAddnews')
+const Listdoctrine           = () => import('@/components/admin/ListAdddoctrine')
 const Adddoctrine               = () => import('@/components/admin/Adddoctrine')
 const Admin                     = () => import('@/components/admin/Admin')
 const loginAdmin                = () => import('@/components/admin/loginAdmin')
-const ListAddCampaign           = () => import('@/components/admin/ListAddCampaign')
+const ListCampaign           = () => import('@/components/admin/ListAddCampaign')
 
 Vue.use(VueRouter)
 
@@ -46,39 +46,34 @@ const routes = [
     component: Register
   },
   {
-    path: '/ListAddnews',
-    name: 'ListAddnews',
-    component: ListAddnews
+    path: '/admin/Listnews',
+    name: 'Listnews',
+    component: Listnews
   },
   {
-    path: '/addnews',
+    path: '/admin/addnews',
     name: 'Addnews',
     component: Addnews
   },
   {
-    path: '/editaddnews',
-    name: 'editAddnews',
-    component: editAddnews
+    path: '/admin/editnews',
+    name: 'editnews',
+    component: editnews
   },
   {
-    path: '/ListAdddoctrine',
-    name: 'ListAdddoctrine',
-    component: ListAdddoctrine
+    path: '/admin/Listdoctrine',
+    name: 'Listdoctrine',
+    component: Listdoctrine
   },
   {
-    path: '/Adddoctrine',
+    path: '/admin/Adddoctrine',
     name: 'Adddoctrine',
     component: Adddoctrine
   },
   {
-    path: '/ListAddCampaign',
-    name: 'ListAddCampaign',
-    component: ListAddCampaign
-  },
-  {
-    path: '/Adddoctrine',
-    name: 'Adddoctrine',
-    component: Adddoctrine
+    path: '/admin/ListCampaign',
+    name: 'ListCampaign',
+    component: ListCampaign
   },
   {
     path: '/admin',
@@ -86,7 +81,7 @@ const routes = [
     component: Admin
   },
   {
-    path: '/loginAdmin',
+    path: '/admin/login',
     name: 'loginAdmin',
     component: loginAdmin
   }
