@@ -10,8 +10,12 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "@mdi/js": "^5.8.55",
+    "axios": "^0.21.1",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
+    "bootstrap": "^4.5.3",
+    "bootstrap-vue": "^2.21.1",
     "core-js": "^3.6.5",
     "cors": "^2.8.5",
     "express": "^4.17.1",
@@ -20,7 +24,10 @@
     "morgan": "^1.10.0",
     "nodemon": "^2.0.6",
     "path": "^0.12.7",
+    "swal": "^0.1.0",
+    "sweetalert": "^2.1.2",
     "vue": "^2.6.11",
+    "vue-jwt-decode": "^0.1.0",
     "vue-router": "^3.2.0",
     "vuetify": "^2.3.21",
     "vuex": "^3.4.0",
