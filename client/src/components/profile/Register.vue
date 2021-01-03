@@ -1,65 +1,93 @@
 <template>
   <div class='register'>
     <h1>This is register page.</h1>
-    <v-container>
-      <v-form
-        ref="form"
-        v-model="valid"
-        lazy-validation
-        @submit.prevent="registerUser"
-      >
-        <v-text-field
-          id = "name"
-          v-model="register.name"
-          :counter="10"
-          :rules="nameRules"
-          label="Name"
-          required
-        ></v-text-field>
+    
+      <v-container style="-webkit-box-shadow: 0 10px 6px -6px #777;
+     -moz-box-shadow: 0 10px 6px -6px #777;
+          box-shadow: 0 10px 6px -6px #777; border-radius: 15px;" >
+    <!-- Columns are always 50% wide, on mobile and desktop -->
+    <v-row>
 
-        <v-text-field
-          id = "password"
-          v-model="register.password"
-          :counter="12"
-          :rules="passwordRules"
-          label="Password"
-          required
-        ></v-text-field>
+      <v-col cols="12" sm="6" >
+         <v-text-field single-line solo  id = "username" :counter="10" label="Username" :rules="[rules.required]"  required></v-text-field>
+      </v-col>
 
-        <v-text-field
-          id = "email"
-          v-model="register.email"
-          :rules="emailRules"
-          label="E-mail"
-          required
-        ></v-text-field>
+      <v-col cols="12" sm="6" >
+         <v-text-field single-line solo  id = "e-mail" :counter="10" label="Mail" :rules="[rules.required]"  required></v-text-field>
+      </v-col>
 
-        <v-checkbox
-          v-model="checkbox"
-          :rules="[v => !!v || 'You must agree to continue!']"
-          label="Do you agree?"
-          required
-        ></v-checkbox>
-
-        <v-btn
-          :disabled="!valid"
-          color="success"
-          class="mr-4"
-          @click="validate"
-          type='submit'
+      <v-col
+          cols="12"
+          sm="6"
         >
-          Sign up
-        </v-btn>
+          <v-text-field single-line solo
+            v-model="password"
+            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+            :rules="[rules.required, rules.min]"
+            :type="show1 ? 'text' : 'password'"
+            name="input-10-1"
+            label="Password"
+            hint="At least 8 characters"
+            counter
+            @click:append="show1 = !show1"
+          ></v-text-field>
+        </v-col>
 
-        <v-btn
-          color="error"
-          class="mr-4"
-          @click="reset"
+        <v-col
+          cols="12"
+          sm="6"
         >
-          Reset Form
-        </v-btn>
-      </v-form>
-    </v-container>
+          <v-text-field single-line solo
+            :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+            :rules="[rules.required, rules.min]"
+            :type="show2 ? 'text' : 'password'"
+            name="input-10-2"
+            label="Confirm password"
+            hint="At least 8 characters"
+            value=""
+            class="input-group--focused"
+            @click:append="show2 = !show2"
+          ></v-text-field>
+        </v-col>
+
+        <v-col cols="12" sm="6" >
+         <v-text-field single-line solo  id = "name" :counter="10" label="Name" :rules="[rules.required]"  required></v-text-field>
+      </v-col>
+
+      <v-col cols="12" sm="6" >
+         <v-text-field single-line solo  id = "surname" :counter="10" label="Surname" :rules="[rules.required]"  required></v-text-field>
+      </v-col>
+
+      <v-col cols="6" sm="4" >
+         <v-text-field single-line solo  id = "age" :counter="10" label="Age"   ></v-text-field>
+      </v-col>
+
+      <v-col cols="6" sm="4" >
+         <v-text-field single-line solo  id = "phone" :counter="10" label="Phone" ></v-text-field>
+      </v-col>
+
+        
+
+    </v-row>
+    <div>
+                  <b-form-checkbox
+                    id="checkbox-1"
+                    v-model="status"
+                    name="checkbox-1"
+                    value="accepted"
+                    unchecked-value="not_accepted" 
+                    style="text-align:left ;"
+                  >
+                    I accept the terms and use
+                  </b-form-checkbox>
+                </div>
+  </v-container>
+
+                <br>
+                <center><router-link style="color:green;" to="/login"  >Login ?</router-link></center>
+                <center><v-btn style="margin-top:1% "  color="primary" dark>Register</v-btn></center>
+      
+    
   </div>
 </template>
 
@@ -86,14 +114,29 @@
     //   ],
     //   checkbox: false,
     // }),
+    
   data() {
+    // return {
+    //   register: {
+    //     name: "",
+    //     email: "",
+    //     password: "",
+
+        
+    //   }
+    // }
     return {
-      register: {
-        name: "",
-        email: "",
-        password: ""
+        show1: false,
+        show2: false,
+        show3: false,
+        show4: false,
+       
+        rules: {
+          required: value => !!value || 'Required.',
+          min: v => v.length >= 8 || 'Min 8 characters',
+          emailMatch: () => (`The email and password you entered don't match`),
+        },
       }
-    };
   },
     methods: {
       async registerUser() {
@@ -132,5 +175,15 @@
 </script>
 
 <style>
+#grid-container{
+    display: grid;
+    /* background-color: white; */
+    padding: 10px;
+    grid-template-columns: auto  auto;
+    grid-column-gap: 10%;
+   
+    
+}
+
 
 </style>
