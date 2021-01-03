@@ -57,6 +57,7 @@
 </template>
 
 <script>
+import swal from "sweetalert";
 export default {
 
     // data: () => ({
@@ -89,11 +90,11 @@ export default {
         let token = response.data.token;
         localStorage.setItem("jwt", token);
         if (token) {
-          // swal("Success", "Login Successful", "success");
+          swal("Success", "Login Successful", "success");
           this.$router.push("/home");
         }
       } catch (err) {
-        // swal("Error", "Something Went Wrong", "error");
+        swal("Error", "Something Went Wrong", "error");
         console.log(err.response);
       }
     },
