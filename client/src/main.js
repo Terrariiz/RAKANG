@@ -4,10 +4,7 @@ import router from './router'
 import store from './store'
 import axios from "axios";
 import vuetify from './plugins/vuetify';
-
-
-
-
+import CKEditor from 'ckeditor4-vue';
 
 const base = axios.create({
   baseURL: "http://localhost:4000"
@@ -24,7 +21,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 Vue.use(BootstrapVue);
-// Bootstrap-vue
+Vue.use( CKEditor );
 
 new Vue({
   router,
