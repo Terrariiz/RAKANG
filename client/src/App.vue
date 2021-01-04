@@ -90,5 +90,5 @@ export default {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
-
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
 </style>

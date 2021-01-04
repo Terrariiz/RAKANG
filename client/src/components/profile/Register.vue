@@ -1,5 +1,5 @@
 <template>
-  <div class='register'>
+  <div style="" class='register'>
     <h1>This is register page.</h1>
 
     <v-form
@@ -9,11 +9,10 @@
         @submit.prevent="registerUser"
       >
     
-      <v-container style="-webkit-box-shadow: 0 10px 6px -6px #777;
-     -moz-box-shadow: 0 10px 6px -6px #777;
-          box-shadow: 0 10px 6px -6px #777; border-radius: 15px;" >
+      <v-container style="width:50% ; 
+          border-radius: 15px; border:1px solid; " >
     <!-- Columns are always 50% wide, on mobile and desktop -->
-    <v-row>
+    <v-row >
 
       <v-col cols="12" sm="6" >
          <v-text-field single-line solo  id = "username" v-model="register.username"  :counter="10" label="Username" :rules="[rules.required]"  required></v-text-field>
@@ -198,5 +197,6 @@ import swal from "sweetalert";
     padding: 10px;
     grid-template-columns: auto  auto;
     grid-column-gap: 10%;
+    
 }
 </style>
