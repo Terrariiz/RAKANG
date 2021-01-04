@@ -14,6 +14,8 @@ const Adddoctrine               = () => import('@/components/admin/Adddoctrine')
 const Admin                     = () => import('@/components/admin/Admin')
 const loginAdmin                = () => import('@/components/admin/loginAdmin')
 const ListCampaign           = () => import('@/components/admin/ListCampaign')
+const AddCampaign           = () => import('@/components/admin/AddCampaign')
+const editCampaign               = () => import('@/components/admin/EditCampaign')
 
 Vue.use(VueRouter)
 
@@ -75,6 +77,16 @@ const routes = [
     path: '/admin/ListCampaign',
     name: 'ListCampaign',
     component: ListCampaign
+  },
+  {
+    path: '/admin/addCampaign',
+    name: 'addCampaign',
+    component: AddCampaign
+  },
+  {
+    path: '/admin/editCampaign',
+    name: 'editCampaign',
+    component: editCampaign
   },
   {
     path: '/admin',
