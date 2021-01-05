@@ -17,6 +17,7 @@ const ListCampaign           = () => import('@/components/admin/ListCampaign')
 const AddCampaign           = () => import('@/components/admin/AddCampaign')
 const editCampaign               = () => import('@/components/admin/EditCampaign')
 const profile                 = () => import('@/components/profile/profile')
+const editprofile                 = () => import('@/components/profile/editprofile')
 
 Vue.use(VueRouter)
 
@@ -103,6 +104,11 @@ const routes = [
     path: '/profile',
     name: 'profile',
     component: profile
+  },
+  {
+    path: '/editprofile',
+    name: 'editprofile',
+    component: editprofile
   }
 ]
 
