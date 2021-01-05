@@ -15,11 +15,13 @@
                                 <center><v-text-field style="width:70%; text-align: center;" label="หัวข้อเรื่อง"></v-text-field></center>
                                 <br><br>
                                 <v-container id ="detailnews" style="background-color: white ; margin-right:3%;">
-                                    <v-container fluid>
+                                    <!-- <v-container fluid>
                                         <v-textarea name="input-7-1" filledlabel="Label" label="รายละเอียด" auto-grow></v-textarea>
-                                    </v-container>
+                                    </v-container> -->
+                                    <div id="app">
+                                    <ckeditor @input="onEditorInput"></ckeditor>
+                                </div>
                                     <!-- <v-btn small style="text-align: right;" rounded color="primary" dark  >Add detailnews</v-btn> -->
-                                
                                 </v-container>
                                 
                         </v-flex>

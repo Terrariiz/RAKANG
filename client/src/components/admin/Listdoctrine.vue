@@ -1,10 +1,10 @@
 <template>
   <div class='addnews'>
-    <h1>This is addnews page.</h1>
+    <h1>This is doctrine page.</h1>
     <div id ='headaddnews'>
         <div class="text-center">
           
-            <v-btn rounded color="primary" dark to = "/admin/addnews">เพิ่มหลักธรรม</v-btn>
+            <v-btn rounded color="primary" dark to = "/admin/Adddoctrine">เพิ่มหลักธรรม</v-btn>
   
             <!-- <v-btn rounded color="primary"  to = "/addnews" >Add NEWS</v-btn> -->
         </div>
