@@ -9,7 +9,7 @@
                     <div class="row m-l-0 m-r-0">
                         <div class="col-sm-4 bg-c-lite-green user-profile">
                             <div class="card-block text-center text-white">
-                                
+
                                 <div class="m-b-25"> <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image"> </div>
                                 
                                 <hr><h6 class="f-w-600">เลทเกม กุเก่ง</h6>
@@ -22,12 +22,12 @@
                                            
                                         </v-cols> -->
 
-                                        <v-col cols="12" sm ="6">
+                                        <v-col cols="12" sm ="12" md="12">
                                             
                                             <v-btn small>ประวัติการบริจาค</v-btn>
                                         </v-col>
 
-                                        <v-col cols="12" sm ="6">
+                                        <v-col cols="12" sm ="12" md="12">
                                             
                                             <v-btn small  >ประวัติการซื้อ coin</v-btn>
                                         </v-col>
@@ -42,9 +42,9 @@
                             </div>
                         </div>
                         <div class="col-sm-8">
-                            <div class="card-block">
-                                <!-- <router-link style=" color:gray;" to="/editprofile"  ><i style="text-align:right;" class="fa fa-edit"></i>Edit</router-link> -->
-                                <div style="text-align: right;"><router-link style="color:gray; " to="/editprofile"><i class="fa fa-edit"></i>Edit</router-link></div>
+                            <div style="text-align:right; margin-right:3%;"><router-link style="color:gray; " to="/editprofile"><v-btn color="secondary" icon ><v-icon>mdi-pencil</v-icon></v-btn></router-link></div>
+                            <div class="card-block">       
+                                <!-- <div style="text-align: right;"><router-link style="color:gray; " to="/editprofile"><i class="fa fa-edit"></i>Edit</router-link></div> -->
                                 <h6 class="m-b-20 p-b-5 b-b-default f-w-600" style="font-size:20px;">Profile</h6>
                                 <div class="row">
                                     <div class="col-sm-6">

@@ -8,25 +8,26 @@
                 <div class="card user-card-full">
                     <div class="row m-l-0 m-r-0">
                         <div class="col-sm-4 bg-c-lite-green user-profile">
-                            <div class="card-block text-center text-white">
-                                <i class="fa fa-pencil" ></i>
-
-                                <div class="m-b-25"> <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image"> </div>
+                            <div  class="card-block text-center text-white">
+                                <div style="text-align:right;"><v-btn icon ><label for="file-input"><v-icon>mdi-pencil</v-icon></label></v-btn></div>
+                                <div class="m-b-25"><img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image"><br></div>
+                                <div style="text-align:center; display:none;"><input style="visibility:hidden;  width:0;  height:0" id="file-input" type="file" /></div>
+                                
                                 <hr><v-container><v-text-field single-line solo label="" ></v-text-field></v-container>
-                                <h6 class="f-w-600">200 Coin</h6>
+                                <h6 class="f-w-600">200 Coin</h6> 
                                 <!-- <p>Web Designer</p> <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i> -->
-                                <v-container fluid>
+                                <center><v-container >
                                     <v-row >
                                         <!-- <v-cols cols="4" >
                                            
                                         </v-cols> -->
 
-                                        <v-col cols="12" sm ="6">
+                                        <v-col cols="12" sm ="12" md="12">
                                             
                                             <v-btn small>ประวัติการบริจาค</v-btn>
                                         </v-col>
 
-                                        <v-col cols="12" sm ="6">
+                                        <v-col cols="12" sm ="12" md="12">
                                             
                                             <v-btn small  >ประวัติการซื้อ coin</v-btn>
                                         </v-col>
@@ -37,7 +38,7 @@
 
 
                                     </v-row>
-                                </v-container>
+                                </v-container></center>
                             </div>
                         </div>
                         
@@ -246,6 +247,7 @@ h6 {
 
 .m-t-40 {
     margin-top: 20px
+     
 }
 
 .user-card-full .social-link li {
