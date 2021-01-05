@@ -81,6 +81,7 @@ export default {
         password: ""
       }
     };
+
   },
 
     methods: {
@@ -88,10 +89,10 @@ export default {
       try {
         let response = await this.$http.post("/user/login", this.login);
         let token = response.data.token;
-        localStorage.setItem("jwt", token);
+        localStorage.setItem("user_token", token);
         if (token) {
           swal("Success", "Login Successful", "success");
-          this.$router.push("/home");
+          this.$router.push("/profile");
         }
       } catch (err) {
         swal("Error", "Something Went Wrong", "error");

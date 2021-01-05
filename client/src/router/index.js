@@ -17,6 +17,7 @@ const ListCampaign           = () => import('@/components/admin/ListCampaign')
 const AddCampaign           = () => import('@/components/admin/AddCampaign')
 const editCampaign               = () => import('@/components/admin/EditCampaign')
 const profile                 = () => import('@/components/profile/profile')
+const editprofile                 = () => import('@/components/profile/editprofile')
 
 Vue.use(VueRouter)
 
@@ -48,6 +49,22 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: Register
+  },  
+  {
+    path: '/profile',
+    name: 'profile',
+    component: profile,
+    meta: {
+      requiresUserAuth: true
+    }
+  },  
+  {
+    path: '/editprofile',
+    name: 'editprofile',
+    component: editprofile,
+    meta: {
+      requiresUserAuth: true
+    }
   },
   {
     path: '/admin/Listnews',
@@ -99,11 +116,6 @@ const routes = [
     name: 'loginAdmin',
     component: loginAdmin
   },
-  {
-    path: '/profile',
-    name: 'profile',
-    component: profile
-  }
 ]
 
 const router = new VueRouter({
@@ -112,10 +124,12 @@ const router = new VueRouter({
   routes
 });
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (localStorage.getItem("jwt") == null) {
+  if (to.matched.some(record => record.meta.requiresUserAuth)) {
+    if (localStorage.getItem("user_token") == null) {
+       window.alert("please sign in!!")
       next({
-        path: "/"
+        path: "/login",
+        params: { nextUrl: to.fullPath }
       });
     } else {
       next();

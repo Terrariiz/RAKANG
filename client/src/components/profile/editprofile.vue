@@ -1,22 +1,22 @@
 <template>
 <div>
-   <h1>This is profile page.</h1>
-    <v-container>
+   <h1>This is editprofile page.</h1>
+    <v-container >
         <div class="padding">
         <div class="row container d-flex justify-content-center">
             <div class="col-xl-6 col-md-12">
                 <div class="card user-card-full">
                     <div class="row m-l-0 m-r-0">
                         <div class="col-sm-4 bg-c-lite-green user-profile">
-                            <div class="card-block text-center text-white">
-
-                                <div class="m-b-25"> <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image"> </div>
+                            <div  class="card-block text-center text-white">
+                                <div style="text-align:right;"><v-btn icon ><label for="file-input"><v-icon>mdi-pencil</v-icon></label></v-btn></div>
+                                <div class="m-b-25"><img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image"><br></div>
+                                <div style="text-align:center; display:none;"><input style="visibility:hidden;  width:0;  height:0" id="file-input" type="file" /></div>
                                 
-                                <hr><h6 class="f-w-600">เลทเกม กุเก่ง</h6>
-                                <h6 class="f-w-600">200 Coin</h6>
-                                
+                                <hr><v-container><v-text-field single-line solo label="" ></v-text-field></v-container>
+                                <h6 class="f-w-600">200 Coin</h6> 
                                 <!-- <p>Web Designer</p> <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i> -->
-                                <v-container fluid>
+                                <center><v-container >
                                     <v-row >
                                         <!-- <v-cols cols="4" >
                                            
@@ -38,29 +38,29 @@
 
 
                                     </v-row>
-                                </v-container>
+                                </v-container></center>
                             </div>
                         </div>
+                        
                         <div class="col-sm-8">
-                            <div style="text-align:right; margin-right:3%;"><router-link style="color:gray; " to="/editprofile"><v-btn color="secondary" icon ><v-icon>mdi-pencil</v-icon></v-btn></router-link></div>
-                            <div class="card-block">       
+                            <div class="card-block">
+                                <!-- <router-link style=" color:gray;" to="/editprofile"  ><i style="text-align:right;" class="fa fa-edit"></i>Edit</router-link> -->
                                 <!-- <div style="text-align: right;"><router-link style="color:gray; " to="/editprofile"><i class="fa fa-edit"></i>Edit</router-link></div> -->
                                 <h6 class="m-b-20 p-b-5 b-b-default f-w-600" style="font-size:20px;">Profile</h6>
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <p class="m-b-10 f-w-600">Email</p>
-                                        <h6 class="text-muted f-w-400">rntng@gmail.com</h6>
+                                        <v-container><v-text-field single-line solo label="" ></v-text-field></v-container>
                                     </div>
                                     <div class="col-sm-6">
                                         <p class="m-b-10 f-w-600">เบอร์โทรติดต่อ</p>
-                                        <h6 class="text-muted f-w-400">08x-xxxxxxx</h6>
+                                        <v-container ><v-text-field  single-line solo label="" ></v-text-field></v-container>
                                     </div>
                                     <div class="col-sm-6">
                                         <p class="m-b-10 f-w-600">อายุ(ปี)</p>
-                                        <h6 class="text-muted f-w-400">34</h6>
+                                        <v-container><v-text-field single-line solo label="" ></v-text-field></v-container>
                                     </div>
                                 </div>
-                                <a class="nav-link"><button class="btn btn-green" v-on:click="sign_out()">Sign out</button></a>
                                 <!-- <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Projects</h6>
                                 <div class="row">
                                     <div class="col-sm-6">
@@ -79,13 +79,41 @@
                                 </ul> -->
                             </div>
                         </div>
+                        
                     </div>
                 </div>
+                <v-container fluid>
+            <v-row>
+                <v-col  cols ="12" sm = "2">
+                    
+                            
+                </v-col>
+                
+                <v-col  cols ="12" sm = "2">
+                    
+                            
+                </v-col>
+
+                <v-col  cols ="12" sm = "2">
+                            <v-btn  color="primary" dark>cancle</v-btn>
+                            
+                </v-col>   
+                
+                <v-col  cols ="12" sm = "2">
+                            <v-btn  color="primary" dark>submit</v-btn>
+                            
+                </v-col>
+
+            </v-row>
+        </v-container>
             </div>
         </div>
-    </div>
+        </div>
+        
     </v-container>
+   
 </div>
+
 
 </template>
 
@@ -96,19 +124,13 @@ export default {
         const token = window.localStorage.getItem('user_token')
 			if (token) {
 				try{
-                    this.$router.push('/profile')
+                    this.$router.push('/editprofile')
 				}catch(err){
                     console.log(err)
                     localStorage.removeItem('user_token')
 				}
 			}
-    },
-    methods: {
-		async sign_out () {
-			localStorage.removeItem('user_token')
-			await this.$router.push('/login')
-		}
-	},
+    }
 }
 </script>
 
@@ -132,6 +154,7 @@ export default {
     box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
     border: none;
     margin-bottom: 30px
+    
 }
 
 .m-r-0 {
@@ -236,6 +259,7 @@ h6 {
 
 .m-t-40 {
     margin-top: 20px
+     
 }
 
 .user-card-full .social-link li {
