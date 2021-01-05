@@ -155,8 +155,8 @@ import swal from "sweetalert";
         console.log(response);
         let token = response.data.token;
         if (token) {
-          localStorage.setItem("jwt", token);
-          this.$router.push("/login");
+          localStorage.setItem("user_token", token);
+          this.$router.push("/profile");
           swal("Success", "Registration Was successful", "success");
           console.log('success')
         } else {
