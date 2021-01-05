@@ -1,5 +1,5 @@
 <template>
-  <div class='register' >
+  <div style="" class='register'>
     <h1>This is register page.</h1>
 
     <v-form
@@ -8,10 +8,11 @@
         lazy-validation
         @submit.prevent="registerUser"
       >
-
-      <v-container style="width : 50%">
+    
+      <v-container style="width:50% ; 
+          border-radius: 15px; border:1px solid; " >
     <!-- Columns are always 50% wide, on mobile and desktop -->
-    <v-row>
+    <v-row >
 
       <v-col cols="12" sm="6" >
          <v-text-field single-line solo  v-model="register.username"  :counter="10" label="Username" :rules="usernameRules"  required></v-text-field>
@@ -98,27 +99,6 @@
 import swal from "sweetalert";
   export default {
     name: 'Register',
-    
-    // data: () => ({
-    //   valid: true,
-    //   name: '',
-    //   nameRules: [
-    //     v => !!v || 'Name is required',
-    //     v => (v && v.length <= 10) || 'Name must be less than 10 characters',
-    //   ],
-    //   password: '',
-    //     passwordRules: [
-    //       v => !!v || 'Password is required',
-    //       v => (v && v.length <= 12) || 'Password must be less than 12 characters',
-    //   ],
-    //   email: '',
-    //   emailRules: [
-    //     v => !!v || 'E-mail is required',
-    //     v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-    //   ],
-    //   checkbox: false,
-    // }),
-    
   data() {
     return {
       register: {
@@ -214,5 +194,6 @@ import swal from "sweetalert";
     padding: 10px;
     grid-template-columns: auto  auto;
     grid-column-gap: 10%;
+    
 }
 </style>
