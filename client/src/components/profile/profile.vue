@@ -1,5 +1,5 @@
 <template>
-    <div>
+<div>
    <h1>This is profile page.</h1>
     <v-container>
         <div class="padding">
@@ -85,7 +85,7 @@
         </div>
     </div>
     </v-container>
-    </div>
+</div>
 
 </template>
 

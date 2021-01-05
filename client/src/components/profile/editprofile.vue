@@ -1,5 +1,5 @@
 <template>
-    <div>
+<div>
    <h1>This is editprofile page.</h1>
     <v-container >
         <div class="padding">
@@ -110,16 +110,28 @@
         </div>
         
     </v-container>
-
-    
-        
-    </div>
-
-
    
+</div>
+
 
 </template>
 
+<script>
+export default {
+
+    async created (){
+        const token = window.localStorage.getItem('user_token')
+			if (token) {
+				try{
+                    this.$router.push('/editprofile')
+				}catch(err){
+                    console.log(err)
+                    localStorage.removeItem('user_token')
+				}
+			}
+    }
+}
+</script>
 
 <style>
        
