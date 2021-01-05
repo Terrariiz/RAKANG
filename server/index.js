@@ -28,8 +28,13 @@ app.use(morgan("dev")); // configire morgan
 app.get("/", (req, res) => {
   console.log("Hello MEVN Soldier");
 });
+
 const userRoutes = require('./api/user/route/user'); //bring in our user routes
+const doctrineRoutes = require("./api/doctrine/route/doctrine"); //bring in our user routes
+
 app.use("/user", userRoutes);
+app.use("/doctrine", doctrineRoutes);
+
 app.listen(PORT, () => {
   console.log(`App is running on ${PORT}`);
 });
