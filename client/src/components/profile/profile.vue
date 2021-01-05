@@ -1,5 +1,5 @@
 <template>
-    <div>
+<div>
    <h1>This is profile page.</h1>
     <v-container>
         <div class="padding">
@@ -60,6 +60,7 @@
                                         <h6 class="text-muted f-w-400">34</h6>
                                     </div>
                                 </div>
+                                <a class="nav-link"><button class="btn btn-green" v-on:click="sign_out()">Sign out</button></a>
                                 <!-- <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Projects</h6>
                                 <div class="row">
                                     <div class="col-sm-6">
@@ -84,10 +85,32 @@
         </div>
     </div>
     </v-container>
-    </div>
+</div>
 
 </template>
 
+<script>
+export default {
+
+    async created (){
+        const token = window.localStorage.getItem('user_token')
+			if (token) {
+				try{
+                    this.$router.push('/profile')
+				}catch(err){
+                    console.log(err)
+                    localStorage.removeItem('user_token')
+				}
+			}
+    },
+    methods: {
+		async sign_out () {
+			localStorage.removeItem('user_token')
+			await this.$router.push('/login')
+		}
+	},
+}
+</script>
 
 <style>
        
