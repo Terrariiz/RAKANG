@@ -10,7 +10,6 @@
       >
         <v-text-field
           v-model="login.email"
-          :counter="12"
           :rules="nameRules"
           label="Email"
           required
@@ -18,7 +17,7 @@
 
         <v-text-field
           v-model="login.password"
-          :counter="12"
+          type="password"
           :rules="passwordRules"
           label="Password"
           required
