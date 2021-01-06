@@ -9,11 +9,13 @@
                     
                         <v-flex xs12 md6 >
                             <v-container id = "picturenews"  >
-                                <v-file-input label="File input" filled prepend-icon="mdi-camera"></v-file-input>
+                                <v-file-input v-model="doctrine.image" label="File input" filled prepend-icon="mdi-camera"></v-file-input>
+                                <input type="file" @change="onFileSelected">
                             </v-container>
                             <v-container>
                             <span>{{doctrine.title}}</span>
                             <span>{{doctrine.content}}</span>
+                            <span>{{doctrine.image}}</span>
                             </v-container>
                         </v-flex>
                         <v-flex xs12 md6>
@@ -81,14 +83,22 @@ export default {
         return{
             doctrine: {
                 title: "",
-                content: ""
+                content: "",
+                image: null,
+                imagepath: "" 
             }
         }
     },
     methods: {
         async Adddoctrine(){
     try {
-        let doctrine = await this.$http.post("/doctrine/adddoctrine", this.doctrine);
+        const formData = new FormData();
+        formData.append('title', this.doctrine.title)
+        formData.append('content', this.doctrine.content)
+        formData.append('image', this.doctrine.image)
+        formData.append('imagepath', this.doctrine.image.name)
+        console.log(formData)
+        let doctrine = await this.$http.post("/doctrine/adddoctrine", formData);
         console.log(doctrine);
         if (doctrine) {
           swal("Success", "Add doctrine Was successful", "success");
@@ -107,6 +117,9 @@ export default {
         console.log('error')
         }
       }
+        },
+        async onFileSelected(event){
+            this.doctrine.image = event.target.files[0]
         }
     },
 

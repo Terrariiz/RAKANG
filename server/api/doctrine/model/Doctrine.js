@@ -6,9 +6,9 @@ const doctrineSchema = new mongoose.Schema({
   content: {
     type: String,
   },
-  // image: {
-  //   type: String,
-  // },
+  image: {
+    type: String,
+  },
 });
 
 const Doctrine = mongoose.model("Doctrine", doctrineSchema);
