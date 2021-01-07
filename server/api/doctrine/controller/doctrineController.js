@@ -19,3 +19,24 @@ exports.addnewdoctrine = async(req,res) => {
     }
 }
 
+
+exports.ShowListDoctrine = function(req,res){
+  try{
+    Doctrine.find({},function(err, doctrine){
+      if(err){
+        console.log(err)
+      } else {
+        console.log('else')
+        res.json(doctrine);
+      }
+    })
+  } catch (err) {
+    res.status(400).json({ err: err });
+    console.log(err)
+  }
+}
+  
+  
+
+
+

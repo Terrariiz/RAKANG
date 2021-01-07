@@ -15,5 +15,7 @@ const storage = multer.diskStorage({
   const upload = multer({storage: storage }); 
 
 router.post("/adddoctrine", upload.single('image'), doctrineController.addnewdoctrine);
+router.get("/ShowListDoctrine", doctrineController.ShowListDoctrine);
+
 
 module.exports = router;
