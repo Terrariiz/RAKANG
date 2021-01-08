@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <v-app>
         <div>
             <b-navbar toggleable="lg" type="dark" variant="info">
               <b-navbar-brand href="/home">NavBar</b-navbar-brand>
@@ -10,6 +11,10 @@
                 <b-navbar-nav>
                   <b-nav-item href="/about">About</b-nav-item>
                 </b-navbar-nav>
+
+              
+
+               
 
                 <!-- Right aligned nav items -->
                 <b-navbar-nav class="ml-auto">                                  
@@ -47,8 +52,9 @@
         </v-btn>
       </v-toolbar-items>
     </v-toolbar> -->
-    <br><br>
+    
     <router-view/>
+    </v-app>
   </div>
 </template>
 
@@ -74,8 +80,8 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  /* text-align: center;
+  color: #2c3e50; */
 }
 
 #nav {
@@ -90,4 +96,5 @@ export default {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
 </style>

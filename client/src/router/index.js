@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '@/views/Home.vue'
 import Landing from '@/views/Landing.vue'
 
+
 const Login                     = () => import('@/components/profile/Login')
 const Register                  = () => import('@/components/profile/Register')
 const Listnews               = () => import('@/components/admin/Listnews')
@@ -10,9 +11,16 @@ const Addnews                   = () => import('@/components/admin/Addnews')
 const editnews               = () => import('@/components/admin/editnews')
 const Listdoctrine           = () => import('@/components/admin/Listdoctrine')
 const Adddoctrine               = () => import('@/components/admin/Adddoctrine')
+const DetailDoctrine               = () => import('@/components/admin/DetailDoctrine')
 const Admin                     = () => import('@/components/admin/Admin')
 const loginAdmin                = () => import('@/components/admin/loginAdmin')
 const ListCampaign           = () => import('@/components/admin/ListCampaign')
+const AddCampaign           = () => import('@/components/admin/AddCampaign')
+const editCampaign               = () => import('@/components/admin/EditCampaign')
+const profile                 = () => import('@/components/profile/profile')
+const editprofile                 = () => import('@/components/profile/editprofile')
+
+
 
 Vue.use(VueRouter)
 
@@ -44,6 +52,22 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: Register
+  },  
+  {
+    path: '/profile',
+    name: 'profile',
+    component: profile,
+    meta: {
+      requiresUserAuth: true
+    }
+  },  
+  {
+    path: '/editprofile',
+    name: 'editprofile',
+    component: editprofile,
+    meta: {
+      requiresUserAuth: true
+    }
   },
   {
     path: '/admin/Listnews',
@@ -76,6 +100,16 @@ const routes = [
     component: ListCampaign
   },
   {
+    path: '/admin/addCampaign',
+    name: 'addCampaign',
+    component: AddCampaign
+  },
+  {
+    path: '/admin/editCampaign',
+    name: 'editCampaign',
+    component: editCampaign
+  },
+  {
     path: '/admin',
     name: 'Admin',
     component: Admin
@@ -84,7 +118,12 @@ const routes = [
     path: '/admin/login',
     name: 'loginAdmin',
     component: loginAdmin
-  }
+  },
+  {
+    path: '/admin/listdoctrine/:id',
+    name: 'DetailDoctrine',
+    component: DetailDoctrine
+  },
 ]
 
 const router = new VueRouter({
@@ -93,10 +132,12 @@ const router = new VueRouter({
   routes
 });
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (localStorage.getItem("jwt") == null) {
+  if (to.matched.some(record => record.meta.requiresUserAuth)) {
+    if (localStorage.getItem("user_token") == null) {
+       window.alert("please sign in!!")
       next({
-        path: "/"
+        path: "/login",
+        params: { nextUrl: to.fullPath }
       });
     } else {
       next();
