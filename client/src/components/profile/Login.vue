@@ -9,29 +9,19 @@
         @submit.prevent="loginUser"
       >
         <v-text-field
-          id = "email"
           v-model="login.email"
-          :counter="12"
           :rules="nameRules"
-          label="Name"
+          label="Email"
           required
         ></v-text-field>
 
         <v-text-field
-          id = "password"
           v-model="login.password"
-          :counter="12"
+          type="password"
           :rules="passwordRules"
           label="Password"
           required
         ></v-text-field>
-
-        <v-checkbox
-          v-model="checkbox"
-          :rules="[v => !!v || 'You must agree to continue!']"
-          label="Do you agree?"
-          required
-        ></v-checkbox>
 
         <v-btn
           :disabled="!valid"
@@ -95,7 +85,7 @@ export default {
           this.$router.push("/profile");
         }
       } catch (err) {
-        swal("Error", "Something Went Wrong", "error");
+        swal("Error", "Email or Password Went Wrong", "error");
         console.log(err.response);
       }
     },
@@ -108,7 +98,6 @@ export default {
       resetValidation () {
         this.$refs.form.resetValidation()
       },
-      
     },
 }
 

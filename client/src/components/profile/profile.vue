@@ -49,7 +49,7 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <p class="m-b-10 f-w-600">Email</p>
-                                        <h6 class="text-muted f-w-400">rntng@gmail.com</h6>
+                                        <h6 class="text-muted f-w-400">{{dataUser.email}}</h6>
                                     </div>
                                     <div class="col-sm-6">
                                         <p class="m-b-10 f-w-600">เบอร์โทรติดต่อ</p>
@@ -90,10 +90,18 @@
 </template>
 
 <script>
+const jwt = require("jsonwebtoken")
+const token = window.localStorage.getItem('user_token')
+const decoded = jwt.verify(token, "secret")
+console.log(decoded)
 export default {
-
+    data(){
+        return{
+            dataUser: decoded
+        }
+    },
     async created (){
-        const token = window.localStorage.getItem('user_token')
+        // const token = window.localStorage.getItem('user_token')
 			if (token) {
 				try{
                     this.$router.push('/profile')

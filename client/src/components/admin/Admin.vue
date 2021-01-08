@@ -30,8 +30,8 @@
     <!-- <v-container >
                 <div id="grid-container">
                     <v-btn style="margin:3%; background-color:#4895ef ;" color="success" to = "/admin/listcampaign">Campaign</v-btn>
-                    <v-btn style="margin:3%; background-color:#4895ef ;" color="success" to = "/admin/listnews">บอร์ดหลักธรรม</v-btn>
-                    <v-btn style="margin:3%; background-color:#4895ef ;" color="primary" to = "/admin/listdoctrine">บอร์ดประชาสัมพันธ์</v-btn>
+                    <v-btn style="margin:3%; background-color:#4895ef ;" color="success" to = "/admin/listdoctrine">บอร์ดหลักธรรม</v-btn>
+                    <v-btn style="margin:3%; background-color:#4895ef ;" color="primary" to = "/admin/listnews">บอร์ดประชาสัมพันธ์</v-btn>
                 </div>
 
            >

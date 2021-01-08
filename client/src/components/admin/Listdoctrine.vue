@@ -1,10 +1,10 @@
 <template>
   <div class='addnews'>
-    <h1>This is addnews page.</h1>
+    <h1>This is doctrine page.</h1>
     <div id ='headaddnews'>
         <div class="text-center">
           
-            <v-btn rounded color="primary" dark to = "/admin/addnews">เพิ่มหลักธรรม</v-btn>
+            <v-btn rounded color="primary" dark to = "/admin/Adddoctrine">เพิ่มหลักธรรม</v-btn>
   
             <!-- <v-btn rounded color="primary"  to = "/addnews" >Add NEWS</v-btn> -->
         </div>
@@ -23,14 +23,14 @@
               </tr>
             </thead>
             <tbody>
-              <tr  v-for="item in desserts"  :key="item.name">
-                <td>{{ item.name }}</td>
-                <td>
-                  
+              <tr  v-for="doctrine in doctrines"  :key="doctrine._id">
+                <td>{{ doctrine.title }}</td>
+                <td>{{ doctrine.content }}</td>
+                <!-- <td>
                     <v-btn style="margin-left:5%;" class="ma-2"  color="purple" to = "/admin/editnews"  dark><v-icon dark>mdi-wrench</v-icon></v-btn>
                     <v-btn style="margin-left:5%;"><v-icon>{{ icons.mdiDelete }}</v-icon></v-btn>
                   
-                </td>
+                </td> -->
                 <!-- <td>{{ item.calories }}</td> -->
               </tr>
             </tbody>
@@ -41,52 +41,31 @@
 </template>
 
 <script>
-
-import {
-    mdiAccount,
-    mdiPencil,
-    mdiShareVariant,
-    mdiDelete,
-  } from '@mdi/js'
-
   export default {
-    data: () => ({
-      desserts: [
-        {
-          name: 'Frozen Yogurt',
-          
-        
-        },
-         {
-           name: 'Ice cream sandwich',
-       
-         },
-        
-      ],
-      headers: [
-        {
-          text: 'Name',
-          
-          align: 'start',
-          sortable: false,
-          value: 'name',
-        },
-        
-      ],
-      icons: {
-        mdiAccount,
-        mdiPencil,
-        mdiShareVariant,
-        mdiDelete,
-      },
-    }),
+    name : "Listdoctrine",
+    data (){
+      return {
+        doctrines : []
+        }
+    },
+    mounted: async function mounted(){
+      await this.$http.get("/doctrine/ShowListDoctrine")
+      .then((res) => {
+        console.log(res.data)
+        this.doctrines = res.data;
+        console.log(this.doctrines)
+      })
+      .catch(function(err){
+        console.log(err)
+      })
+    },
   }
+
 </script>
 
 <style>
     #table{
         text-align: left;
-        
     }
     #headaddnews{
         margin: 3%;

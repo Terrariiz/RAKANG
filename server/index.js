@@ -24,12 +24,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //configure body-parser ends here
 app.use(morgan("dev")); // configire morgan
+app.use(express.static('uploads'));
 // define first route
 app.get("/", (req, res) => {
   console.log("Hello MEVN Soldier");
 });
+
 const userRoutes = require('./api/user/route/user'); //bring in our user routes
+const doctrineRoutes = require("./api/doctrine/route/doctrine"); //bring in our user routes
+
+// app.use("/user", userRoutes);
+app.use("/doctrine", doctrineRoutes);
+
+const adminRoutes = require('./api/admin/route/admin'); //bring in our user routes
 app.use("/user", userRoutes);
+app.use("/admin", adminRoutes);
 app.listen(PORT, () => {
   console.log(`App is running on ${PORT}`);
 });
