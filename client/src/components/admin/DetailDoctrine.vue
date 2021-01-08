@@ -4,10 +4,17 @@
       {{$route.params.id}}
       <div  v-if="doctrines" >
                 
+              <center>
+              <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+              <a href="#">
+                <img class="img-fluid rounded" id="showimage" :src="'http://localhost:4000/uploads/' + doctrines.image"/>
+              </a>
+              </div>
+              </center>
+
+              <div>{{ doctrines.title }}</div>
                 
-                <div>{{ doctrines.title }}</div>
-                
-                {{ doctrines.content }}
+              {{ doctrines.content }}
                 
                 
       </div>
@@ -48,6 +55,8 @@ export default {
         console.log(res.data)
         that.doctrines = res.data;
         console.log(that.doctrines)
+        
+      
       })
       .catch(function(err){
         console.log(err)
@@ -59,5 +68,10 @@ export default {
 </script>
 
 <style>
-
+.showimage {
+  
+  width: 700px;
+  height: 250px; 
+  object-fit: cover;
+}
 </style>
