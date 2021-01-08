@@ -72,7 +72,7 @@
                         class="grey darken-4"
                       ></v-img>
                       <v-card-title class="title">
-                        height
+                        งานวัด 1
                       </v-card-title>
                     </v-card>
                   </v-col>
@@ -85,7 +85,7 @@
                         class="grey darken-4"
                       ></v-img>
                       <v-card-title class="title">
-                        height with contain
+                        งานวัด 2
                       </v-card-title>
                     </v-card>
                   </v-col>
@@ -98,7 +98,7 @@
                         class="grey darken-4"
                       ></v-img>
                       <v-card-title class="title">
-                        max-height
+                        งานวัด 3
                       </v-card-title>
                     </v-card>
                   </v-col>
@@ -111,7 +111,7 @@
                         class="grey darken-4"
                       ></v-img>
                       <v-card-title class="title">
-                        max-height with contain
+                        งานวัด 4
                       </v-card-title>
                     </v-card>
                   </v-col>
@@ -127,7 +127,7 @@
 
 
   <v-container>
-            <h1 style="text-align:center;">ข่าว</h1>
+            <h1 style="text-align:center;">หลักธรรม</h1>
         <v-container>
           <a  style=" color:blue; float:right;   margin-right:3%;" href="/login">แสดงทั้งหมด>>>></a>
            <v-container class="fill-height"  fluid  style="min-height: 434px; "  >
@@ -143,7 +143,7 @@
                         class="grey darken-4"
                       ></v-img>
                       <v-card-title class="title">
-                        height
+                        ศีล 5
                       </v-card-title>
                     </v-card>
                   </v-col>
@@ -156,7 +156,7 @@
                         class="grey darken-4"
                       ></v-img>
                       <v-card-title class="title">
-                        height with contain
+                        ศีล 6
                       </v-card-title>
                     </v-card>
                   </v-col>
@@ -169,7 +169,7 @@
                         class="grey darken-4"
                       ></v-img>
                       <v-card-title class="title">
-                        max-height
+                        ศีล 7
                       </v-card-title>
                     </v-card>
                   </v-col>
@@ -182,7 +182,7 @@
                         class="grey darken-4"
                       ></v-img>
                       <v-card-title class="title">
-                        max-height with contain
+                        ศีล 8
                       </v-card-title>
                     </v-card>
                   </v-col>
