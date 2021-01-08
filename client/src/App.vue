@@ -51,7 +51,7 @@
         </v-btn>
       </v-toolbar-items>
     </v-toolbar> -->
-    <br><br>
+    
     <router-view/>
   </div>
 </template>
