@@ -7,6 +7,7 @@ import axios from "axios";
 import vuetify from './plugins/vuetify';
 import CKEditor from 'ckeditor4-vue';
 
+
 const base = axios.create({
   baseURL: "http://localhost:4000"
 });

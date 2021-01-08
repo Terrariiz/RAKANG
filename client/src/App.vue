@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <v-app>
         <div>
             <b-navbar toggleable="lg" type="dark" variant="info">
               <b-navbar-brand href="/home">NavBar</b-navbar-brand>
@@ -53,6 +54,7 @@
     </v-toolbar> -->
     
     <router-view/>
+    </v-app>
   </div>
 </template>
 
@@ -78,8 +80,8 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  /* text-align: center;
+  color: #2c3e50; */
 }
 
 #nav {

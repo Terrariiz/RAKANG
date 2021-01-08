@@ -1,207 +1,78 @@
 <template>
-  <div class="home">
-    <!-- <h1>HOMEPAGE</h1> -->
-  <div>
-      <b-carousel
-      id="carousel-1"
-      v-model="slide"
-      :interval="4000"
-      controls
-      indicators
-      background="#ababab"
-      img-width="1024"
-      img-height="480"
-      style="text-shadow: 1px 1px 2px #333;"
-      @sliding-start="onSlideStart"
-      @sliding-end="onSlideEnd">
-
-       <!-- Text slides with image -->
-      <b-carousel-slide
-        caption="First slide"
-        text="Nulla vitae elit libero, a pharetra augue mollis interdum."
-        img-src="https://picsum.photos/1024/480/?image=52"
-      ><v-btn href="">คลิก</v-btn></b-carousel-slide>
-
-       <!-- Slides with custom text -->
-      <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=54">
-        <h1>Hello world!</h1>
-      </b-carousel-slide>
-      
-       <!-- Slides with image only -->
-      <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=58"></b-carousel-slide>
-
-      <!-- Slides with img slot -->
-      <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->
-      <b-carousel-slide>
-        <template #img>
-          <img
-            class="d-block img-fluid w-100"
-            width="1024"
-            height="480"
-            src="https://picsum.photos/1024/480/?image=55"
-            alt="image slot"
-          >
-
-          
-        </template>
-      </b-carousel-slide>
-      <!-- <v-btn style="background-color:red; margin-top:40%;">xaXxXAX</v-btn> -->
-
-      
-      
-      
-    </b-carousel>
-    
-  </div>
-
-
-  <v-container>
-            <h1 style="text-align:center;">ข่าว</h1>
-        <v-container>
-          <a  style=" color:blue; float:right;   margin-right:3%;" href="/login">แสดงทั้งหมด>>>></a>
-           <v-container class="fill-height"  fluid  style="min-height: 434px; "  >
-             
-             
-              <v-fade-transition mode="out-in">
-                <v-row>
-                  <v-col cols="12" md="4">
-                    <v-card>
-                      <v-img
-                        src="https://picsum.photos/350/165?random"
-                        max-height="125"
-                        class="grey darken-4"
-                      ></v-img>
-                      <v-card-title class="title">
-                        งานวัด 1
-                      </v-card-title>
-                    </v-card>
-                  </v-col>
-
-                  <v-col cols="12" md="4">
-                    <v-card>
-                      <v-img
-                        src="https://picsum.photos/350/165?random"
-                        max-height="125"
-                        class="grey darken-4"
-                      ></v-img>
-                      <v-card-title class="title">
-                        งานวัด 2
-                      </v-card-title>
-                    </v-card>
-                  </v-col>
-
-                  <v-col cols="12" md="4">
-                    <v-card>
-                      <v-img
-                        src="https://picsum.photos/350/165?random"
-                        max-height="125"
-                        class="grey darken-4"
-                      ></v-img>
-                      <v-card-title class="title">
-                        งานวัด 3
-                      </v-card-title>
-                    </v-card>
-                  </v-col>
-
-                  <v-col cols="12" md="4">
-                    <v-card>
-                      <v-img
-                        src="https://picsum.photos/350/165?random"
-                        max-height="125"
-                        class="grey darken-4"
-                      ></v-img>
-                      <v-card-title class="title">
-                        งานวัด 4
-                      </v-card-title>
-                    </v-card>
-                  </v-col>
-                </v-row>
-              </v-fade-transition>
-            </v-container>    
-           
-               
-        </v-container>  
+  <div class="heroBlock">
+    <v-carousel cycle hide-delimiters>
+      <v-carousel-item href="/"
+        v-for="(item,i) in items"
+        :key="i"
+        :src="item.src"
         
-  </v-container>
+        reverse-transition="fade-transition"
+        transition="fade-transition"
+      >
+        <v-row  class="title fill-height hidden-xs-only" align="center" justify="center">{{ item.title }}</v-row>
+      </v-carousel-item>
+    </v-carousel>
 
-
-
-  <v-container>
-            <h1 style="text-align:center;">หลักธรรม</h1>
-        <v-container>
-          <a  style=" color:blue; float:right;   margin-right:3%;" href="/login">แสดงทั้งหมด>>>></a>
-           <v-container class="fill-height"  fluid  style="min-height: 434px; "  >
-             
-             
-              <v-fade-transition mode="out-in">
-                <v-row>
-                  <v-col cols="12" md="4">
-                    <v-card>
-                      <v-img
-                        src="https://picsum.photos/350/165?random"
-                        max-height="125"
-                        class="grey darken-4"
-                      ></v-img>
-                      <v-card-title class="title">
-                        ศีล 5
-                      </v-card-title>
-                    </v-card>
-                  </v-col>
-
-                  <v-col cols="12" md="4">
-                    <v-card>
-                      <v-img
-                        src="https://picsum.photos/350/165?random"
-                        max-height="125"
-                        class="grey darken-4"
-                      ></v-img>
-                      <v-card-title class="title">
-                        ศีล 6
-                      </v-card-title>
-                    </v-card>
-                  </v-col>
-
-                  <v-col cols="12" md="4">
-                    <v-card>
-                      <v-img
-                        src="https://picsum.photos/350/165?random"
-                        max-height="125"
-                        class="grey darken-4"
-                      ></v-img>
-                      <v-card-title class="title">
-                        ศีล 7
-                      </v-card-title>
-                    </v-card>
-                  </v-col>
-
-                  <v-col cols="12" md="4">
-                    <v-card>
-                      <v-img
-                        src="https://picsum.photos/350/165?random"
-                        max-height="125"
-                        class="grey darken-4"
-                      ></v-img>
-                      <v-card-title class="title">
-                        ศีล 8
-                      </v-card-title>
-                    </v-card>
-                  </v-col>
-                </v-row>
-              </v-fade-transition>
-            </v-container>    
-           
-               
-        </v-container>  
-        
-  </v-container>
-
-
-      
-
+    <div class="block latestPostBlock">
+    <v-container>
+      <h2 class="text-center">ข่าวประชาสัมพันธ์</h2>
+      <v-row>
+        <v-col v-for="news in news" :key="news.id" cols="12" md="4">
+          <v-card outlined class="mx-auto">
+            <v-img
+              class="white--text align-end"
+              height="200px"
+              :src="news.src"
+            >
+              <v-card-title>{{ news.name }}</v-card-title>
+            </v-img>
+            <v-card-subtitle class="pb-0">{{ news.subtitle }}</v-card-subtitle>
+            <v-card-text class="text--primary">
+              <div>{{ news.description }}</div>
+            </v-card-text>
+            <v-card-actions>
+              <v-btn color="primary" text>More</v-btn>
+            </v-card-actions>
+          </v-card>
+         
+        </v-col>
+         
+      </v-row>
+      <a href="/news" style="float:right;">แสดงทั้งหมด >>></a>
+    </v-container>
   </div>
-
   
 
+   <div class="block latestPostBlock">
+    <v-container>
+      <h2 class="text-center">หลักธรรม</h2>
+      <v-row>
+        <v-col v-for="news in news" :key="news.id" cols="12" md="4">
+          <v-card outlined class="mx-auto">
+            <v-img
+              class="white--text align-end"
+              height="200px"
+              :src="news.src"
+            >
+              <v-card-title>{{ news.name }}</v-card-title>
+            </v-img>
+            <v-card-subtitle class="pb-0">{{ news.subtitle }}</v-card-subtitle>
+            <v-card-text class="text--primary">
+              <div>{{ news.description }}</div>
+            </v-card-text>
+            <v-card-actions>
+              <v-btn color="primary" text>More</v-btn>
+            </v-card-actions>
+          </v-card>
+         
+        </v-col>
+         
+      </v-row>
+      <a href="/news" style="float:right;">แสดงทั้งหมด >>></a>
+    </v-container>
+  </div>
+    
+  </div>
 
   
 </template>
@@ -209,11 +80,54 @@
 <script>
 
 export default {
-  name: 'Home',
+  name: "home",
+  data() {
+    return {
+      items: [
+        {
+          src: require("../assets/images/img-carousel1.jpg"),
+          title: "We are creative"
+        },
+        {
+          src: require("../assets/images/img-carousel2.jpg"),
+          title: "We are hard worker"
+        },
+        {
+          src: require("../assets/images/img-carousel3.jpg"),
+          title: "We are professional"
+        }
+      ],
 
+       show: false,
+    news: [
+      {
+        id: 1,
+        name: "No.1",
+        title: "Top western road trips",
+        subtitle: "1,000 miles of wonder",
+        description: "His ubique laboramus ne. Expetenda assueverit sed ad. Id nec malis lucilius delicatissimi. Nec assum sonet suscipit ex, diam deterruisset ut usu, ad dicat fabellas aliquando eam.",
+        src: require("../assets/images/img-carousel1.jpg")
+      },
+      {
+        id: 2,
+        name: "No.2",
+        title: "Christmas tales to read",
+        subtitle: "2,000 miles of wonder",
+        description: "Sea ad habemus assueverit, omnes platonem convenire sit et, at integre pericula quo. Facete adolescens definitionem cu qui, in putant aliquid fierent ius.",
+        src: require("../assets/images/img-carousel2.jpg")
+      },
+      {
+        id: 3,
+        name: "No.3",
+        title: "20 movies not to miss in 2020",
+        subtitle: "3,000 miles of wonder",
+        description: "Aliquam albucius mei ei, debitis torquatos et pro, eos natum scribentur no. Putant verear constituto te qui. Adolescens persequeris vim ei. Vel nullam reprimique te.",
+        src: require("../assets/images/img-carousel3.jpg")
+      }
+    ]
+    };
+  },
   
 
-}
-
-
+};
 </script>
