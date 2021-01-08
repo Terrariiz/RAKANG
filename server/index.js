@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const config = require("./config/db");
 const app = express();
+const path = require("path");
 //configure database and mongoose
 mongoose.set("useCreateIndex", true);
 mongoose
@@ -25,6 +26,8 @@ app.use(bodyParser.json());
 //configure body-parser ends here
 app.use(morgan("dev")); // configire morgan
 app.use(express.static('uploads'));
+app.use(express.static(path.join(__dirname, 'public')));
+
 // define first route
 app.get("/", (req, res) => {
   console.log("Hello MEVN Soldier");
@@ -39,6 +42,9 @@ app.use("/doctrine", doctrineRoutes);
 const adminRoutes = require('./api/admin/route/admin'); //bring in our user routes
 app.use("/user", userRoutes);
 app.use("/admin", adminRoutes);
+
+
+
 app.listen(PORT, () => {
   console.log(`App is running on ${PORT}`);
 });

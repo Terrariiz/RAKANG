@@ -11,6 +11,7 @@ const Addnews                   = () => import('@/components/admin/Addnews')
 const editnews               = () => import('@/components/admin/editnews')
 const Listdoctrine           = () => import('@/components/admin/Listdoctrine')
 const Adddoctrine               = () => import('@/components/admin/Adddoctrine')
+const DetailDoctrine               = () => import('@/components/admin/DetailDoctrine')
 const Admin                     = () => import('@/components/admin/Admin')
 const loginAdmin                = () => import('@/components/admin/loginAdmin')
 const ListCampaign           = () => import('@/components/admin/ListCampaign')
@@ -119,9 +120,9 @@ const routes = [
     component: loginAdmin
   },
   {
-    path: '/test',
-    name: 'test',
-    component: test
+    path: '/admin/listdoctrine/:id',
+    name: 'DetailDoctrine',
+    component: DetailDoctrine
   },
 ]
 
