@@ -23,13 +23,18 @@
               </tr>
             </thead>
             <tbody>
-              <tr  v-for="doctrine in doctrines"  :key="doctrine._id">
+              <tr  @submit.prevent="editdoctrine" v-for="doctrine in doctrines"  :key="doctrine._id">
                 <td>{{ doctrine.title }}</td>
                 <td>{{ doctrine.content }}</td>
+                <td>
+                  <!-- <router-link :to="`/admin/listdoctrine/${doctrine._id}`">detail</router-link> -->
+                  <!-- <router-link :to="{name : 'DetailDoctrine', params: {id:doctrine._id}}">detail</router-link> -->
+                  <button @click="ViewDoctrine(doctrine._id)">view</button>
+                </td>
                 <!-- <td>
                     <v-btn style="margin-left:5%;" class="ma-2"  color="purple" to = "/admin/editnews"  dark><v-icon dark>mdi-wrench</v-icon></v-btn>
                     <v-btn style="margin-left:5%;"><v-icon>{{ icons.mdiDelete }}</v-icon></v-btn>
-                  
+                  dddd=dddddd`fsหหdddssss
                 </td> -->
                 <!-- <td>{{ item.calories }}</td> -->
               </tr>
@@ -59,6 +64,19 @@
         console.log(err)
       })
     },
+    methods: {
+      // async ViewDoctrine(doctrineid){
+      //   await this.$http.get("/DetailDoctrine/"+doctrineid)
+      //   .then((res)=> {
+
+      //   })
+      // }
+      ViewDoctrine(doctrineid){
+        this.$router.push({ name: 'DetailDoctrine' , params: {id : doctrineid}})
+          
+        }
+      }
+    
   }
 
 </script>

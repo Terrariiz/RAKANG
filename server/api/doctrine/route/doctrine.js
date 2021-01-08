@@ -16,6 +16,8 @@ const storage = multer.diskStorage({
 
 router.post("/adddoctrine", upload.single('image'), doctrineController.addnewdoctrine);
 router.get("/ShowListDoctrine", doctrineController.ShowListDoctrine);
+router.get("/DetailDoctrine/:id", doctrineController.DetailDoctrine);
+router.delete("/DeleteDoctrine/:id", doctrineController.DeleteDoctrine);
 
 
 module.exports = router;
