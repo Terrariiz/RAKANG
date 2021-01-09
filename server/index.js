@@ -7,8 +7,12 @@ const mongoose = require("mongoose");
 const config = require("./config/db");
 const app = express();
 const path = require("path");
+
+
 //configure database and mongoose
+mongoose.set('useFindAndModify', false);
 mongoose.set("useCreateIndex", true);
+mongoose.set('useUnifiedTopology', true);
 mongoose
   .connect(config.database, { useNewUrlParser: true })
   .then(() => {
@@ -27,6 +31,7 @@ app.use(bodyParser.json());
 app.use(morgan("dev")); // configire morgan
 app.use(express.static('uploads'));
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 // define first route
 app.get("/", (req, res) => {

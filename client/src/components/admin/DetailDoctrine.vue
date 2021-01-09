@@ -16,8 +16,10 @@
                 
               {{ doctrines.content }}
                 
-                
+               <div>   <button @click="EditDoctrine($route.params.id)">Edit</button>    </div>
+               <div>  <button @click="DeleteDoctrine($route.params.id)">Delete</button> </div> 
       </div>
+      
         
   </div>
 </template>
@@ -31,21 +33,7 @@ export default {
         }
     },
     mounted: function(){
-    //     var that = this;
-    //   await this.$http.get("/doctrine/DetailDoctrine/"+this.$route.params.id)
-    //   .then((res) => {
-    //       console.log('-------')
-    //     console.log(res.data)
-    //     console.log('-------')
-    //     that.doctrines = res.data;
-    //     console.log('-------')
-    //     console.log(this.doctrines)
-    //     console.log('-------')
-    //   })
-    //   .catch(function(err){
-    //     console.log(err)
-    //   })
-    this.getData()
+      this.getData()
     },
     methods: {
          getData(){
@@ -61,7 +49,13 @@ export default {
       .catch(function(err){
         console.log(err)
       })
-        }
+        },
+      EditDoctrine(doctrineid){
+        this.$router.push({ name: 'EditDoctrine' , params: {id : doctrineid}})
+      },
+      DeleteDoctrine(doctrineid){
+        this.$router.push({ name: 'DeleteDoctrine' , params: {id : doctrineid}})
+      },
     }
     
 }

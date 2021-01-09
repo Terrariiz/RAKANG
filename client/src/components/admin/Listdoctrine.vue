@@ -31,7 +31,9 @@
                 <td>
                   <!-- <router-link :to="`/admin/listdoctrine/${doctrine._id}`">detail</router-link> -->
                   <!-- <router-link :to="{name : 'DetailDoctrine', params: {id:doctrine._id}}">detail</router-link> -->
-                  <button @click="ViewDoctrine(doctrine._id)">view</button>
+                  <button @click="ViewDoctrine(doctrine._id)">View</button>
+                  <button @click="EditDoctrine(doctrine._id)">Edit</button>
+                  <button @click="DeleteDoctrine(doctrine._id)">Delete</button>
                   
                 </td>
                 <!-- <td>
@@ -68,17 +70,10 @@
       })
     },
     methods: {
-      // async ViewDoctrine(doctrineid){
-      //   await this.$http.get("/DetailDoctrine/"+doctrineid)
-      //   .then((res)=> {
-
-      //   })
-      // }
       ViewDoctrine(doctrineid){
         this.$router.push({ name: 'DetailDoctrine' , params: {id : doctrineid}})
-          
-        }
-      }
+        },
+    }
     
   }
 

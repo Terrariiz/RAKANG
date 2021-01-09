@@ -9,7 +9,7 @@
                     
                         <v-flex xs12 md6 >
                             <v-container id = "picturenews"  >
-                                <v-file-input v-model="doctrine.image" label="File input" filled prepend-icon="mdi-camera"></v-file-input>
+                                <!-- <v-file-input v-model="doctrine.image" label="File input" filled prepend-icon="mdi-camera"></v-file-input> -->
                                 <input type="file" @change="onFileSelected">
                             </v-container>
                             <v-container>
@@ -92,7 +92,7 @@ export default {
     methods: {
         async Adddoctrine(){
     try {
-        const formData = new FormData();
+        var formData = new FormData();
         formData.append('title', this.doctrine.title)
         formData.append('content', this.doctrine.content)
         formData.append('image', this.doctrine.image)

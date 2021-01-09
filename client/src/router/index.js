@@ -12,6 +12,7 @@ const editnews               = () => import('@/components/admin/editnews')
 const Listdoctrine           = () => import('@/components/admin/Listdoctrine')
 const Adddoctrine               = () => import('@/components/admin/Adddoctrine')
 const DetailDoctrine               = () => import('@/components/admin/DetailDoctrine')
+const EditDoctrine               = () => import('@/components/admin/EditDoctrine')
 const Admin                     = () => import('@/components/admin/Admin')
 const loginAdmin                = () => import('@/components/admin/loginAdmin')
 const ListCampaign           = () => import('@/components/admin/ListCampaign')
@@ -19,6 +20,7 @@ const AddCampaign           = () => import('@/components/admin/AddCampaign')
 const editCampaign               = () => import('@/components/admin/EditCampaign')
 const profile                 = () => import('@/components/profile/profile')
 const editprofile                 = () => import('@/components/profile/editprofile')
+
 
 
 
@@ -124,6 +126,12 @@ const routes = [
     name: 'DetailDoctrine',
     component: DetailDoctrine
   },
+  {
+    path: '/admin/listdoctrine/:id/edit',
+    name: 'EditDoctrine',
+    component: EditDoctrine
+  },
+  
 ]
 
 const router = new VueRouter({
