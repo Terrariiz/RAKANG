@@ -1,5 +1,8 @@
 <template>
     <div class="dashboard" >
+        <div>
+            <Navbar></Navbar>
+        </div>
          <v-form
          @submit.prevent="Adddoctrine">
         <v-container id ='rounded' style="background-color: #F09C0B;">
@@ -76,6 +79,7 @@
 </style>
 
 <script>
+const Navbar = () => import('@/components/navbar/admin_navbar')
 import swal from "sweetalert";
 export default {
     name : "Adddoctrine",
@@ -88,6 +92,9 @@ export default {
                 imagepath: "" 
             }
         }
+    },
+    components:{
+        Navbar
     },
     methods: {
         async Adddoctrine(){

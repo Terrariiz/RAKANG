@@ -1,5 +1,8 @@
 <template>
   <div class='login'>
+    <div>
+      <Navbar></Navbar>
+    </div>
     <h1>This is login page.</h1>
     <v-container>
       <v-form
@@ -48,6 +51,7 @@
 
 <script>
 import swal from "sweetalert";
+const Navbar = () => import('@/components/navbar/visitor_navbar')
 export default {
 
     // data: () => ({
@@ -70,9 +74,12 @@ export default {
         email: "",
         password: ""
       }
-    };
+    }
 
   },
+  components:{
+        Navbar
+    },
 
     methods: {
       async loginUser() {

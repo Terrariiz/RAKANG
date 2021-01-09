@@ -1,5 +1,8 @@
 <template>
   <div class="heroBlock">
+    <div>
+      <Navbar></Navbar>
+    </div>
     <v-carousel cycle hide-delimiters>
       <v-carousel-item href="/"
         v-for="(item,i) in items"
@@ -78,9 +81,9 @@
 </template>
 
 <script>
-
+const Navbar = () => import('@/components/navbar/visitor_navbar')
 export default {
-  name: "home",
+  name: "Home",
   data() {
     return {
       items: [
@@ -127,6 +130,9 @@ export default {
     ]
     };
   },
+  components:{
+        Navbar
+    },
   
 
 };

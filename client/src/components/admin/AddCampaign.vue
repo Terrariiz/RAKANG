@@ -1,5 +1,8 @@
 <template>
     <div class="dashboard" >
+        <div>
+            <Navbar></Navbar>
+        </div>
         <v-container id ='rounded' style="background-color: #F09C0B;">
             <center><h1>Add new Campaign</h1></center>
             <v-container class="my-5">
@@ -67,4 +70,12 @@
 }
 </style>
 
-
+<script>
+const Navbar = () => import('@/components/navbar/admin_navbar')
+export default {
+  name: 'Addcampaign',
+  components:{
+    Navbar
+  }
+}
+</script>

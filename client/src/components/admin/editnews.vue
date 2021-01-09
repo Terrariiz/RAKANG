@@ -1,5 +1,8 @@
 <template>
-    <div class="dashboard" >
+    <div class="Editnews">
+        <div>
+            <Navbar></Navbar>
+        </div>
         <v-container id ='rounded' style="background-color: #F09C0B;">
             <v-container class="my-5">
                 <v-layout row wrap >
@@ -62,3 +65,13 @@
     grid-column-gap: 10%;
 }
 </style>
+
+<script>
+const Navbar = () => import('@/components/navbar/admin_navbar')
+export default {
+  name: 'Editnews',
+  components:{
+    Navbar
+  }
+}
+</script>

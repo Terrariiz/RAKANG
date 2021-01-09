@@ -1,5 +1,8 @@
 <template>
   <div style="" class='register'>
+    <div>
+      <Navbar></Navbar>
+    </div>
     <h1>This is register page.</h1>
 
     <v-form
@@ -96,6 +99,7 @@
 </template>
 
 <script>
+const Navbar = () => import('@/components/navbar/visitor_navbar')
 import swal from "sweetalert";
   export default {
     name: 'Register',
@@ -145,9 +149,13 @@ import swal from "sweetalert";
           required: value => !!value || 'Required.',
           min: v => v.length >= 8 || 'Min 8 characters',
           emailMatch: () => (`The email and password you entered don't match`),
-        },
-      }
+        }
+    }
   },
+    components:{
+      Navbar
+  },
+  
     methods: {
       async registerUser() {
       try {

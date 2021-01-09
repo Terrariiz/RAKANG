@@ -1,5 +1,8 @@
 <template>
   <div class="admin">
+    <div>
+      <Navbar></Navbar>
+    </div>
     <h1>ADMIN SITE</h1>
     <!-- <v-container>
          <v-btn
@@ -48,15 +51,15 @@
         </v-col>
       
         <v-col cols="12" sm="12" md="2">
-          <v-btn style="margin:3%; background-color:#4895ef ;" color="success" to = "/admin/listnews">บอร์ดหลักธรรม</v-btn>
+          <v-btn style="margin:3%; background-color:#4895ef ;" color="success" to = "/admin/listdoctrine">บอร์ดหลักธรรม</v-btn>
         </v-col>
       
         <v-col cols="12"   sm="12" md="2">
-          <v-btn style="margin:3%; background-color:#4895ef ;" color="primary" to = "/admin/listdoctrine">บอร์ดประชาสัมพันธ์</v-btn>
+          <v-btn style="margin:3%; background-color:#4895ef ;" color="primary" to = "/admin/listnews">บอร์ดประชาสัมพันธ์</v-btn>
         </v-col>
 
         <v-col cols="12"   sm="12" md="2">
-          <v-btn style="margin:3%; background-color:red ;" color="primary" to = "/loginadmin">Logout</v-btn>
+          <v-btn style="margin:3%; background-color:red ;" color="primary" to = "/home">Logout</v-btn>
         </v-col>
 
         
@@ -73,8 +76,11 @@
 </template>
 
 <script>
-
+const Navbar = () => import('@/components/navbar/admin_navbar')
 export default {
-  name: 'Admin'
+  name: 'Admin',
+  components:{
+    Navbar
+  }
 }
 </script>
