@@ -9,6 +9,7 @@
         ref="form"
         v-model="valid"
         lazy-validation
+        @submit.prevent="loginAdmin"
       >
         <v-text-field single-line solo
             id = "username" 
@@ -50,6 +51,7 @@
           color="success"
           class="mr-4"
           @click="validate"
+          type="submit"
         >
           Log in
         </v-btn>
@@ -67,6 +69,7 @@
 </template>
 
 <script>
+import swal from "sweetalert";
 const Navbar = () => import('@/components/navbar/visitor_navbar')
 export default {
 
@@ -99,8 +102,7 @@ export default {
         show1:false,
         rules: {
           required: value => !!value || 'Required.',
-          min: v => v.length >= 8 || 'Min 8 characters',
-          emailMatch: () => (`The email and password you entered don't match`),
+          min: v => v.length >= 8 || 'Min 8 characters'
         },
       }
     },
@@ -109,6 +111,25 @@ export default {
     },    
 
     methods: {
+      async loginAdmin() {
+      try {
+        const formData = new FormData();
+        formData.append('username', this.admin.username)
+        formData.append('password', this.admin.password)        
+        console.log(this.admin.username);
+        console.log(this.admin.password);
+        let response = await this.$http.post("/admin/login", formData);
+        let token = response.data.token;
+        localStorage.setItem("admin_token", token);
+        if (token) {
+          swal("Success", "Login Successful", "success");
+          this.$router.push("/admin");
+        }
+      } catch (err) {
+        swal("Error", "Email or Password Went Wrong", "error");
+        console.log(err.response);
+      }
+    },
       validate () {
         this.$refs.form.validate()
       },
