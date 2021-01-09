@@ -13,7 +13,7 @@
                
 
                 <!-- Right aligned nav items -->
-                <b-navbar-nav class="ml-auto">                                  
+                <b-navbar-nav class="ml-auto">
                   <b-nav-item v-on:click="sign_out()">Log out</b-nav-item>
                 </b-navbar-nav>
               </b-collapse>
