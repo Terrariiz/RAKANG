@@ -1,24 +1,29 @@
 <template>
-  <div class='login'>
-    <div>
+  <div  class='login'>
+     <div>
       <Navbar></Navbar>
     </div>
-    <h1>This is login page.</h1>
-    <v-container>
+    <h1 style="text-align:center;">This is login page.</h1>
+    <v-container id="border-login" rounded-xl style="text-align:center;  margin-top:5%; box-shadow: 5px 6px 5px #888888; ">
+      <h1>Login</h1>
+      <v-container :elevation="11" style="">
+     
       <v-form
         ref="form"
         v-model="valid"
         lazy-validation
         @submit.prevent="loginUser"
       >
-        <v-text-field
+        <v-text-field style="text-align:center; "
+          single-line solo
           v-model="login.email"
           :rules="nameRules"
           label="Email"
           required
         ></v-text-field>
 
-        <v-text-field
+        <v-text-field style="text-align:center; "
+          single-line solo
           v-model="login.password"
           type="password"
           :rules="passwordRules"
@@ -27,25 +32,20 @@
         ></v-text-field>
 
         <v-btn
-          :disabled="!valid"
+          
           color="success"
-          class="mr-4"
+          
           @click="validate"
           type='submit'
         >
           Log in
-        </v-btn>
-
-        <v-btn
-          color="error"
-          class="mr-4"
-          @click="reset"
-        >
-          Reset Form
-        </v-btn>
+        </v-btn><br>
+        <v-btn text><router-link  to='/register'>Register ?</router-link></v-btn>
+        
       </v-form>
+      </v-container>
     </v-container>
-    <router-link to='/register'>Register</router-link>
+    
   </div>
 </template>
 
@@ -111,5 +111,15 @@ export default {
 </script>
 
 <style>
+#border-login{
+  width:500px; box-shadow: 5px 6px 5px #888888; background-color:white;
+}
+@media screen and (max-width: 400px) {
+  #border-login{
+    width:350px;
+    
+  }
+}
+  
 
 </style>

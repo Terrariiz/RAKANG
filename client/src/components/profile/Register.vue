@@ -12,16 +12,16 @@
         @submit.prevent="registerUser"
       >
     
-      <v-container style="width:50% ; 
-          border-radius: 15px; border:1px solid; " >
+      <v-container id="border-login" style="border-radius: 15px; " >
+        <h1 style="text-align:center">Register </h1>
     <!-- Columns are always 50% wide, on mobile and desktop -->
     <v-row >
 
-      <v-col cols="12" sm="6" >
+      <!-- <v-col cols="12" sm="6" >
          <v-text-field single-line solo  v-model="register.username"  :counter="10" label="Username" :rules="usernameRules"  required></v-text-field>
-      </v-col>
+      </v-col> -->
 
-      <v-col cols="12" sm="6" >
+      <v-col cols="12" sm="12" >
          <v-text-field single-line solo  v-model="register.email" :counter="10" label="Mail" :rules="emailRules"  required></v-text-field>
       </v-col>
 
@@ -89,10 +89,13 @@
                     I accept the terms and use
                   </b-form-checkbox>
     </div>
-  </v-container>
-              <br>
+      <br>
               <center><router-link style="color:green;" to="/login"  >Login ?</router-link></center>
               <center><v-btn type="submit" style="margin-top:1% "  color="primary" dark>Register</v-btn></center>
+  </v-container>
+              <!-- <br>
+              <center><router-link style="color:green;" to="/login"  >Login ?</router-link></center>
+              <center><v-btn type="submit" style="margin-top:1% "  color="primary" dark>Register</v-btn></center> -->
   </v-form>
   </div>
 
@@ -196,12 +199,19 @@ import swal from "sweetalert";
 </script>
 
 <style>
-#grid-container{
-    display: grid;
-    /* background-color: white; */
-    padding: 10px;
-    grid-template-columns: auto  auto;
-    grid-column-gap: 10%;
-    
+#border-login{
+  width:600px; box-shadow: 5px 6px 5px #888888; background-color:white;
 }
+@media screen and (max-width: 400px) {
+  #border-login{
+    width:350px;
+    
+  }
+  }
+@media screen and (max-width: 450px) {
+  #border-login{
+    width:350px;
+    
+  }
+  }
 </style>
