@@ -82,6 +82,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   /* text-align: center;
   color: #2c3e50; */
+  background: linear-gradient(90deg, hsla(16, 100%, 76%, 1) 0%, hsla(49, 100%, 81%, 1) 100%);
 }
 
 #nav {
