@@ -80,10 +80,7 @@ const routes = [
   {
     path: '/admin/login',
     name: 'loginAdmin',
-    component: loginAdmin,
-    meta: {
-      requiresAdminAuth: true
-    }
+    component: loginAdmin
   },
   {
     path: '/admin/Listnews',
