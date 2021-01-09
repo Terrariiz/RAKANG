@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div class='DetailDoctrine'>
+    <div>
+      <Navbar></Navbar>
+    </div>
       <h1>detail page</h1>
       {{$route.params.id}}
       <div  v-if="doctrines" >
@@ -25,12 +28,16 @@
 </template>
 
 <script>
+const Navbar = () => import('@/components/navbar/admin_navbar')
 export default {
     name : "DetailDoctrine",
     data (){
       return {
         doctrines: null
         }
+    },
+    components:{
+      Navbar
     },
     mounted: function(){
       this.getData()

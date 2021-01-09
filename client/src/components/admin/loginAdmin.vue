@@ -1,5 +1,8 @@
 <template>
   <div class='login'>
+    <div>
+      <Navbar></Navbar>
+    </div>
     <h1>This is admin login page.</h1>
     <v-container>
       <v-form
@@ -64,6 +67,7 @@
 </template>
 
 <script>
+const Navbar = () => import('@/components/navbar/visitor_navbar')
 export default {
 
     // data: () => ({
@@ -85,6 +89,7 @@ export default {
     //     ],
     //     checkbox: false,
     // }),
+    name:'Loginadmin',
     data(){
       return{
         admin:{
@@ -99,7 +104,9 @@ export default {
         },
       }
     },
-    
+    components:{
+      Navbar
+    },    
 
     methods: {
       validate () {

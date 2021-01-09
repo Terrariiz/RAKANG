@@ -1,5 +1,8 @@
 <template>
-  <div class='addnews'>
+  <div class='Listdoctrine'>
+    <div>
+      <Navbar></Navbar>
+    </div>
     <h1>This is doctrine page.</h1>
     <div id ='headaddnews'>
         <div class="text-center">
@@ -51,12 +54,16 @@
 </template>
 
 <script>
+const Navbar = () => import('@/components/navbar/admin_navbar')
   export default {
     name : "Listdoctrine",
     data (){
       return {
         doctrines : []
         }
+    },
+    components:{
+      Navbar
     },
     mounted: async function mounted(){
       await this.$http.get("/doctrine/ShowListDoctrine")

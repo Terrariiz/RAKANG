@@ -1,5 +1,8 @@
 <template>
 <div>
+    <div>
+        <Navbar></Navbar>
+    </div>
    <h1>This is editprofile page.</h1>
     <v-container >
         <div class="padding">
@@ -118,7 +121,12 @@
 </template>
 
 <script>
+const Navbar = () => import('@/components/navbar/user_navbar')
 export default {
+    name:'Editprofile',
+    components:{
+        Navbar
+    },
 
     async created (){
         const token = window.localStorage.getItem('user_token')

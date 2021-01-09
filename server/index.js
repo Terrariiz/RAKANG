@@ -44,9 +44,9 @@ const doctrineRoutes = require("./api/doctrine/route/doctrine"); //bring in our 
 // app.use("/user", userRoutes);
 app.use("/doctrine", doctrineRoutes);
 
-const adminRoutes = require('./api/admin/route/admin'); //bring in our user routes
+const newsRoutes = require('./api/news/route/news'); //bring in our user routes
 app.use("/user", userRoutes);
-app.use("/admin", adminRoutes);
+app.use("/news", newsRoutes);
 
 
 
