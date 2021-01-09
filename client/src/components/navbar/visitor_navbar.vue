@@ -11,9 +11,9 @@
               
 
                
-
+                
                 <!-- Right aligned nav items -->
-                <b-navbar-nav class="ml-auto">                                  
+                <b-navbar-nav class="ml-auto">
                   <b-nav-item href="/login">Log in</b-nav-item>
                   <b-nav-item-dropdown right>
                     <template #button-content>

@@ -72,49 +72,12 @@ const routes = [
     }
   },
   {
-    path: '/admin/Listnews',
-    name: 'Listnews',
-    component: Listnews
-  },
-  {
-    path: '/admin/addnews',
-    name: 'Addnews',
-    component: Addnews
-  },
-  {
-    path: '/admin/editnews',
-    name: 'editnews',
-    component: editnews
-  },
-  {
-    path: '/admin/Listdoctrine',
-    name: 'Listdoctrine',
-    component: Listdoctrine
-  },
-  {
-    path: '/admin/Adddoctrine',
-    name: 'Adddoctrine',
-    component: Adddoctrine
-  },
-  {
-    path: '/admin/ListCampaign',
-    name: 'ListCampaign',
-    component: ListCampaign
-  },
-  {
-    path: '/admin/addCampaign',
-    name: 'addCampaign',
-    component: AddCampaign
-  },
-  {
-    path: '/admin/editCampaign',
-    name: 'editCampaign',
-    component: editCampaign
-  },
-  {
     path: '/admin',
     name: 'Admin',
-    component: Admin
+    component: Admin,
+    meta: {
+      requiresAdminAuth: true
+    }
   },
   {
     path: '/admin/login',
@@ -122,9 +85,76 @@ const routes = [
     component: loginAdmin
   },
   {
+    path: '/admin/Listnews',
+    name: 'Listnews',
+    component: Listnews,
+    meta: {
+      requiresAdminAuth: true
+    }
+  },
+  {
+    path: '/admin/addnews',
+    name: 'Addnews',
+    component: Addnews,
+    meta: {
+      requiresAdminAuth: true
+    }
+  },
+  {
+    path: '/admin/editnews',
+    name: 'editnews',
+    component: editnews,
+    meta: {
+      requiresAdminAuth: true
+    }
+  },
+  {
+    path: '/admin/Listdoctrine',
+    name: 'Listdoctrine',
+    component: Listdoctrine,
+    meta: {
+      requiresAdminAuth: true
+    }
+  },
+  {
+    path: '/admin/Adddoctrine',
+    name: 'Adddoctrine',
+    component: Adddoctrine,
+    meta: {
+      requiresAdminAuth: true
+    }
+  },
+  {
+    path: '/admin/ListCampaign',
+    name: 'ListCampaign',
+    component: ListCampaign,
+    meta: {
+      requiresAdminAuth: true
+    }
+  },
+  {
+    path: '/admin/addCampaign',
+    name: 'addCampaign',
+    component: AddCampaign,
+    meta: {
+      requiresAdminAuth: true
+    }
+  },
+  {
+    path: '/admin/editCampaign',
+    name: 'editCampaign',
+    component: editCampaign,
+    meta: {
+      requiresAdminAuth: true
+    }
+  },
+  {
     path: '/admin/listdoctrine/:id',
     name: 'DetailDoctrine',
-    component: DetailDoctrine
+    component: DetailDoctrine,
+    meta: {
+      requiresAdminAuth: true
+    }
   },
   {
     path: '/admin/listdoctrine/:id/edit',
@@ -140,18 +170,30 @@ const router = new VueRouter({
   routes
 });
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresUserAuth)) {
-    if (localStorage.getItem("user_token") == null) {
-       window.alert("please sign in!!")
-      next({
-        path: "/login",
-        params: { nextUrl: to.fullPath }
-      });
-    } else {
-      next();
-    }
-  } else {
-    next();
+  if(to.matched.some(record => record.meta.requiresUserAuth)) {
+      if (localStorage.getItem('user_token') == null) {
+        window.alert("please sign in!!")
+          next({
+              path: '/login',
+              params: { nextUrl: to.fullPath }
+          })
+      }  
+      else { 
+        next()
+        }
+  } else if(to.matched.some(record => record.meta.requiresAdminAuth)) {
+      if(localStorage.getItem('admin_token') == null){
+        window.alert("please sign in!!")
+        next({
+          path: '/admin/login',
+          params: { nextUrl: to.fullPath }
+      })
+      }
+      else{
+          next()
+      }
+  }else {
+      next()
   }
 });
 
