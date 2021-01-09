@@ -31,6 +31,8 @@ exports.registerNewUser = async (req, res) => {
     try {
       const email = req.body.email;
       const password = req.body.password;
+      console.log(email);
+      console.log(password);
       const user = await User.findByCredentials(email, password);
       if (!user) {
         return res.status(401).json({ error: "Login failed! Check authentication credentials" });

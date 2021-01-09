@@ -55,10 +55,6 @@
 <script>
 const Navbar = () => import('@/components/navbar/admin_navbar')
 import {
-    mdiAccount,
-    mdiPencil,
-    mdiShareVariant,
-    mdiDelete,
   } from '@mdi/js'
 
   export default {
@@ -77,7 +73,11 @@ import {
       })
       .catch(function(err){
         console.log(err)
+
       })
+    },
+    components: {
+      Navbar
     },
     methods: {
       // async ViewDoctrine(doctrineid){

@@ -22,20 +22,20 @@ const adminSchema = new mongoose.Schema({
 //this method generates an auth token for the user
 adminSchema.methods.generateAuthToken = async function() {
   const admin = this;
-  const token = jwt.sign({ _id: admin._id, name: admin.name},
+  const token = jwt.sign({ _id: admin._id, username: admin.username},
   "secret");
-  admin.tokens = admin.tokens.concat({ token });
-  await admin.save();
+  // admin.tokens = admin.tokens.concat({ token });
+  // await admin.save();
   return token;
 };
 
 //this method search for a user by email and password.
 adminSchema.statics.findByCredentials = async (username, password) => {
-  const admin = await Admin.findOne({ username });
+  const admin = await Admin.findOne({username});
   if (!admin) {
     throw new Error({ error: "Invalid login details" });
   }
-  const isPasswordMatch = await compare(password, admin.password);
+  const isPasswordMatch = await bcrypt.compare(password, admin.password);
   if (!isPasswordMatch) {
     throw new Error({ error: "Invalid login details" });
   }

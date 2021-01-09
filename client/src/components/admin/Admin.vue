@@ -59,7 +59,7 @@
         </v-col>
 
         <v-col cols="12"   sm="12" md="6">
-          <v-btn block style="margin:3%; " color="error" to = "/loginadmin">Logout</v-btn>
+          <v-btn block v-on:click="sign_out()" style="margin:3%; " color="error">Logout</v-btn>
         </v-col>
 
         
@@ -81,6 +81,12 @@ export default {
   name: 'Admin',
   components:{
     Navbar
-  }
+  },
+  methods: {
+    async sign_out () {
+			localStorage.removeItem('admin_token')
+			await this.$router.push('/home')
+		}
+    }
 }
 </script>

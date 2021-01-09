@@ -51,7 +51,7 @@
 <script>
 import swal from "sweetalert";
 const Navbar = () => import('@/components/navbar/admin_navbar')
-import axios from "axios";
+// import axios from "axios";
 
     export default {
         name: 'Addnews',

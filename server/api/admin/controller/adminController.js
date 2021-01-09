@@ -2,11 +2,11 @@ const Admin = require("../model/Admin");
 
   exports.loginAdmin = async (req, res) => {
     try {
-      const name = req.body.username;
+      const username = req.body.username;
       const password = req.body.password;
-      console.log(name);
+      console.log(username);
       console.log(password);
-      const admin = await Admin.findByCredentials(name, password);
+      const admin = await Admin.findByCredentials(username, password);
       if (!admin) {
         return res.status(401).json({ error: "Login failed! Check authentication credentials" });
       }

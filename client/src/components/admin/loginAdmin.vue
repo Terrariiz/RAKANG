@@ -25,7 +25,7 @@
             :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
             :rules="[rules.required, rules.min]"
             :type="show1 ? 'text' : 'password'"
-            name="input-10-1"
+            
             label="Password"
             hint="At least 8 characters"
             counter
@@ -113,12 +113,10 @@ export default {
     methods: {
       async loginAdmin() {
       try {
-        const formData = new FormData();
-        formData.append('username', this.admin.username)
-        formData.append('password', this.admin.password)        
+
         console.log(this.admin.username);
         console.log(this.admin.password);
-        let response = await this.$http.post("/admin/login", formData);
+        let response = await this.$http.post("/admin/login", this.admin);
         let token = response.data.token;
         localStorage.setItem("admin_token", token);
         if (token) {
