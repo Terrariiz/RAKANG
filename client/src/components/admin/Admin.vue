@@ -1,5 +1,8 @@
 <template>
   <div class="admin">
+    <div>
+      <Navbar></Navbar>
+    </div>
     <h1>ADMIN SITE</h1>
     <!-- <v-container>
          <v-btn
@@ -73,8 +76,11 @@
 </template>
 
 <script>
-
+const Navbar = () => import('@/components/navbar/admin_navbar')
 export default {
-  name: 'Admin'
+  name: 'Admin',
+  components:{
+    Navbar
+  }
 }
 </script>

@@ -1,5 +1,8 @@
 <template>
 <div>
+    <div>
+        <Navbar></Navbar>
+    </div>
    <h1>This is profile page.</h1>
     <v-container>
         <div class="padding">
@@ -94,11 +97,16 @@ const jwt = require("jsonwebtoken")
 const token = window.localStorage.getItem('user_token')
 const decoded = jwt.verify(token, "secret")
 console.log(decoded)
+const Navbar = () => import('@/components/navbar/user_navbar')
 export default {
+    name:'Profile',
     data(){
         return{
             dataUser: decoded
         }
+    },
+    components:{
+        Navbar
     },
     async created (){
         // const token = window.localStorage.getItem('user_token')

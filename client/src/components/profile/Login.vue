@@ -1,9 +1,13 @@
 <template>
   <div  class='login'>
+     <div>
+      <Navbar></Navbar>
+    </div>
     <h1 style="text-align:center;">This is login page.</h1>
     <v-container id="border-login" rounded-xl style="text-align:center;  margin-top:5%; box-shadow: 5px 6px 5px #888888; ">
       <h1>Login</h1>
       <v-container :elevation="11" style="">
+     
       <v-form
         ref="form"
         v-model="valid"
@@ -47,6 +51,7 @@
 
 <script>
 import swal from "sweetalert";
+const Navbar = () => import('@/components/navbar/visitor_navbar')
 export default {
 
     // data: () => ({
@@ -69,9 +74,12 @@ export default {
         email: "",
         password: ""
       }
-    };
+    }
 
   },
+  components:{
+        Navbar
+    },
 
     methods: {
       async loginUser() {
