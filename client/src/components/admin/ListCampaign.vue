@@ -1,5 +1,8 @@
 <template>
-  <div class='addnews'>
+  <div class='ListCampaign'>
+    <div>
+      <Navbar></Navbar>
+    </div>
     <h1>This is add campaign page.</h1>
     <div id ='headaddnews'>
         <div class="text-center">
@@ -41,7 +44,7 @@
 </template>
 
 <script>
-
+const Navbar = () => import('@/components/navbar/admin_navbar')
 import {
     mdiAccount,
     mdiPencil,
@@ -80,6 +83,9 @@ import {
         mdiDelete,
       },
     }),
+    components:{
+      Navbar
+    }
   }
 </script>
 

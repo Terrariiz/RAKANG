@@ -1,5 +1,8 @@
 <template>
-    <div class="dashboard" >
+    <div class="EditCampaign" >
+        <div>
+            <Navbar></Navbar>
+        </div>
         <v-container id ='rounded' style="background-color: #F09C0B;">
             <center><h1>Edit Campaign</h1></center>
             <v-container class="my-5">
@@ -66,3 +69,13 @@
     grid-column-gap: 10%;
 }
 </style>
+
+<script>
+const Navbar = () => import('@/components/navbar/admin_navbar')
+export default {
+  name: 'EditCampaign',
+  components:{
+    Navbar
+  }
+}
+</script>

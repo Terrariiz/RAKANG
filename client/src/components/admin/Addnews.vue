@@ -1,5 +1,8 @@
 <template>
-    <div class="dashboard" >
+    <div class="Addnews" >
+        <div>
+            <Navbar></Navbar>
+        </div>
         <form @submit.prevent="handleSubmit">
         <v-container id ='rounded' style="background-color: #F09C0B;">
             <v-container class="my-5">
@@ -47,9 +50,11 @@
 
 <script>
 import swal from "sweetalert";
+const Navbar = () => import('@/components/navbar/admin_navbar')
+import axios from "axios";
 
     export default {
-        name: 'app',
+        name: 'Addnews',
         data() {
             return {
                 selctedFile: null,
@@ -62,6 +67,9 @@ import swal from "sweetalert";
                     // The configuration of the editor.
                 }
             };
+        },
+        components:{
+            Navbar
         },
         methods:{
         async handleSubmit(){
