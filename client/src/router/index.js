@@ -20,6 +20,7 @@ const AddCampaign           = () => import('@/components/admin/AddCampaign')
 const editCampaign               = () => import('@/components/admin/EditCampaign')
 const profile                 = () => import('@/components/profile/profile')
 const editprofile                 = () => import('@/components/profile/editprofile')
+const test                    = () => import('@/components/admin/test')
 
 
 
@@ -160,6 +161,12 @@ const routes = [
     path: '/admin/listdoctrine/:id/edit',
     name: 'EditDoctrine',
     component: EditDoctrine
+  },
+  
+  {
+    path: '/test',
+    name: 'test',
+    component: test
   },
   
 ]
