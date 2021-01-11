@@ -160,7 +160,10 @@ const routes = [
   {
     path: '/admin/listdoctrine/:id/edit',
     name: 'EditDoctrine',
-    component: EditDoctrine
+    component: EditDoctrine,
+    meta: {
+      requiresAdminAuth: true
+    }
   },
   
   {
