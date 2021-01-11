@@ -20,7 +20,7 @@
               {{ doctrines.content }}
                 
                <div>   <button @click="EditDoctrine($route.params.id)">Edit</button>    </div>
-               <div>  <button @click="DeleteDoctrine($route.params.id)">Delete</button> </div> 
+               <div>  <button @click="DeleteDoctrine()">Delete</button> </div> 
       </div>
       
         
@@ -50,8 +50,6 @@ export default {
         console.log(res.data)
         that.doctrines = res.data;
         console.log(that.doctrines)
-        
-      
       })
       .catch(function(err){
         console.log(err)
@@ -60,8 +58,10 @@ export default {
       EditDoctrine(doctrineid){
         this.$router.push({ name: 'EditDoctrine' , params: {id : doctrineid}})
       },
-      DeleteDoctrine(doctrineid){
-        this.$router.push({ name: 'DeleteDoctrine' , params: {id : doctrineid}})
+      DeleteDoctrine(){
+        this.$http.delete("/doctrine/DeleteDoctrine/"+this.$route.params.id)
+        console.log("delete")
+        this.$router.push({ name: 'Listdoctrine'})
       },
     }
     

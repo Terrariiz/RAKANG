@@ -87,11 +87,19 @@ exports.DetailDoctrine = function(req,res){
 
 exports.DeleteDoctrine = function(req,res){
   try{
-    Doctrine.find({_id : id},function(err, doctrine){
+    Doctrine.findOneAndDelete({_id : req.params.id},function(err, doctrine){
       if(err){
         console.log(err)
       } else {
-        doctrine.deleteOne({_id : req.params.id})
+          const image  = './public/uploads/' + doctrine.image;
+          fs.unlink(image , function(err){
+              if(err){
+                  console.log(err);
+              } else {
+                console.log("unlink image success")
+              } 
+          })
+        console.log('delete doctrine completed')
       }
     })
   } catch (err) {
