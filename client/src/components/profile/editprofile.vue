@@ -24,7 +24,8 @@
                                     <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  @input="onSelectFile" >
                                 </v-div></center>
 
-                                <hr><v-container><v-text-field single-line solo label="" ></v-text-field></v-container>
+                                <hr>
+                                <!-- <v-container><v-text-field single-line solo label="" ></v-text-field></v-container>
                                 <h6 class="f-w-600">200 Coin</h6> 
                                 
                                 <center><v-container >
@@ -45,7 +46,7 @@
 
 
                                     </v-row>
-                                </v-container></center>
+                                </v-container></center> -->
                             </div>
                         </div>
                         
@@ -53,21 +54,38 @@
                             <div  class="card-block">
                                 <!-- <router-link style=" color:gray;" to="/editprofile"  ><i style="text-align:right;" class="fa fa-edit"></i>Edit</router-link> -->
                                 <!-- <div style="text-align: right;"><router-link style="color:gray; " to="/editprofile"><i class="fa fa-edit"></i>Edit</router-link></div> -->
-                                <h6 class="m-b-20 p-b-5 b-b-default f-w-600" style="font-size:20px;">Profile</h6>
+                                <h6 class="m-b-20 p-b-5 b-b-default f-w-600" style="font-size:20px;">Edit Profile</h6>
+                                <v-form
+                                    ref="form"
+                                    v-model="valid"
+                                    lazy-validation
+                                    @submit.prevent="EditProfile"
+                                >
                                 <div class="row">
+                                    
                                     <div class="col-sm-6">
-                                        <p class="m-b-10 f-w-600">Email</p>
-                                        <v-container><v-text-field single-line solo label="" ></v-text-field></v-container>
+                                        <p class="m-b-10 f-w-600">ชื่อ</p>
+                                        <v-text-field single-line solo  v-model="dataEdit.firstname" v-bind:label="dataUser.firstname"></v-text-field>
                                     </div>
                                     <div class="col-sm-6">
-                                        <p class="m-b-10 f-w-600">เบอร์โทรติดต่อ</p>
-                                        <v-container ><v-text-field  single-line solo label="" ></v-text-field></v-container>
+                                        <p class="m-b-10 f-w-600">นามสกุล</p>
+                                        <v-text-field single-line solo  v-model="dataEdit.lastname" v-bind:label="dataUser.lastname"></v-text-field>
                                     </div>
                                     <div class="col-sm-6">
                                         <p class="m-b-10 f-w-600">อายุ(ปี)</p>
-                                        <v-container><v-text-field single-line solo label="" ></v-text-field></v-container>
+                                        <v-text-field single-line solo  v-model="dataEdit.age" v-bind:label="dataUser.age"></v-text-field>
                                     </div>
+                                    <div class="col-sm-6">
+                                        <p class="m-b-10 f-w-600">เบอร์โทรติดต่อ</p>
+                                        <v-text-field single-line solo  v-model="dataEdit.phone" v-bind:label="dataUser.phone"></v-text-field>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <router-link style="color:yellow;" to="/profile" >Cancel</router-link>
+                                        <v-btn type="submit" style="margin-top:1% "  color="primary" dark>Edit</v-btn>
+                                    </div>
+                                    
                                 </div>
+                                </v-form>
                                 <!-- <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Projects</h6>
                                 <div class="row">
                                     <div class="col-sm-6">
@@ -89,7 +107,7 @@
                         
                     </div>
                 </div>
-                <v-container fluid>
+                <!-- <v-container fluid>
             <v-row>
                 <v-col  cols ="12" sm = "2">
                     
@@ -112,7 +130,7 @@
                 </v-col>
 
             </v-row>
-        </v-container>
+        </v-container> -->
             </div>
         </div>
         </div>
@@ -125,22 +143,41 @@
 </template>
 
 <script>
+import swal from "sweetalert";
 const Navbar = () => import('@/components/navbar/user_navbar')
+const jwt = require("jsonwebtoken")
+const token = window.localStorage.getItem('user_token')
+const decoded = jwt.verify(token, "secret")
 export default {
     
     name:'Editprofile',
-     data() {
-    return {
-        imageData:null,
-          }
-    },
     components:{
         Navbar
     },
-    
-
+    data() {
+        return {
+            imageData:null,
+            dataUser: {},
+            dataEdit:{
+                firstname: "",
+                lastname: "",
+                age: "",
+                phone: ""
+            }
+        }
+    },
+    // get data of user
+    mounted: async function mounted(){
+      await this.$http.get("/user/"+decoded._id)
+      .then((res) => {
+        this.dataUser = res.data;
+      })
+      .catch(function(err){
+        console.log(err)
+      })
+    },
     async created (){
-        const token = window.localStorage.getItem('user_token')
+        // const token = window.localStorage.getItem('user_token')
 			if (token) {
 				try{
                     this.$router.push('/editprofile')
@@ -151,24 +188,58 @@ export default {
 			}
     },
     methods: {
-
-    chooseImage () {
-        this.$refs.fileInput.click()
-    },
-    onSelectFile () {
-        const input = this.$refs.fileInput
-  const files = input.files
-  if (files && files[0]) {
-    const reader = new FileReader
-    reader.onload = e => {
-      this.imageData = e.target.result
-    }
-    reader.readAsDataURL(files[0])
-    this.$emit('input', files[0])
-  }
-    },
-   
-}}
+        chooseImage () {
+            this.$refs.fileInput.click()
+        },
+        onSelectFile () {
+            const input = this.$refs.fileInput
+            const files = input.files
+            if (files && files[0]) {
+                const reader = new FileReader
+                reader.onload = e => {
+                    this.imageData = e.target.result
+                }
+            reader.readAsDataURL(files[0])
+            this.$emit('input', files[0])
+            }
+        },
+        async EditProfile() {
+            if(this.dataEdit.firstname == ""){
+                this.dataEdit.firstname = this.dataUser.firstname
+            }
+            if(this.dataEdit.lastname == ""){
+                this.dataEdit.lastname = this.dataUser.lastname
+            }
+            if(this.dataEdit.age == ""){
+                this.dataEdit.age = this.dataUser.age
+            }
+            if(this.dataEdit.phone == ""){
+                this.dataEdit.phone = this.dataUser.phone
+            }
+            try {
+                let response = await this.$http.post("/user/"+decoded._id+"/editProfile", this.dataEdit);
+                let check = response.data
+                if (check == true) {
+                    this.$router.push("/profile");
+                    swal("Success", "Edit your profile Was successful", "success");
+                    console.log('success')
+                } else {
+                    swal("Error", "Something Went Wrong", "error");
+                    console.log('error')
+                }
+            } catch (err) {
+                let error = err.response;
+                if (error.status == 409) {
+                    swal("Error", error.data.message, "error");
+                    console.log('success')
+                } else {
+                    swal("Error", error.data.err.message, "error");
+                    console.log('error')
+                }
+            }
+        }
+   }
+}
 </script>
 
 <style>
