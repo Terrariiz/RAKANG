@@ -12,6 +12,7 @@ const editnews               = () => import('@/components/admin/editnews')
 const Listdoctrine           = () => import('@/components/admin/Listdoctrine')
 const Adddoctrine               = () => import('@/components/admin/Adddoctrine')
 const DetailDoctrine               = () => import('@/components/admin/DetailDoctrine')
+const DetailNews               = () => import('@/components/admin/DetailNews')
 const EditDoctrine               = () => import('@/components/admin/EditDoctrine')
 const Admin                     = () => import('@/components/admin/Admin')
 const loginAdmin                = () => import('@/components/admin/loginAdmin')
@@ -105,6 +106,14 @@ const routes = [
     path: '/admin/editnews',
     name: 'editnews',
     component: editnews,
+    meta: {
+      requiresAdminAuth: true
+    }
+  },
+  {
+    path: '/admin/listnews/:id',
+    name: 'DetailNews',
+    component: DetailNews,
     meta: {
       requiresAdminAuth: true
     }

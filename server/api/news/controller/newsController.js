@@ -68,4 +68,35 @@ exports.DeleteNews = function(req,res){
   }
 }
 
-
+exports.EditNews = async(req,res) =>{
+  try{
+    console.log(req.params.id)
+    console.log(req.body.title)
+    console.log(req.body.content)
+    console.log(req.body.imagepath)
+    console.log(req.body.oldimage)
+    if(req.body.imagepath == req.body.oldimage){
+      const image  = './public/uploads/' + req.body.imagepath;
+      fs.unlink(image , function(err){
+          if(err){
+              console.log(err);
+          } else {
+            console.log("deleted")
+          } 
+      })
+    } else {
+      console.log("not delete")
+    }
+    News.findOneAndUpdate({_id : req.params.id},{title : req.body.title , content : req.body.content , image : req.body.imagepath},function(err, news){
+      if(err){
+        console.log(err)
+      } else {
+        console.log('success')
+        res.status(201).json({ news });
+      }
+    })
+  } catch (err) {
+    res.status(400).json({ err: err });
+    console.log(err)
+  }
+}
