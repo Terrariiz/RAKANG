@@ -1,5 +1,6 @@
 const News = require("../model/News");
 const multer = require('multer');
+const fs = require('fs');
 
 
 
@@ -55,11 +56,19 @@ exports.DetailNews = function(req,res){
 
 exports.DeleteNews = function(req,res){
   try{
-    News.find({_id : id},function(err, news){
+    News.findOneAndDelete({_id : req.params.id},function(err, news){
       if(err){
         console.log(err)
       } else {
-        news.deleteOne({_id : req.params.id})
+          const image  = './public/uploads/' + news.image;
+          fs.unlink(image , function(err){
+              if(err){
+                  console.log(err);
+              } else {
+                console.log("unlink image success")
+              } 
+          })
+        console.log('delete news completed')
       }
     })
   } catch (err) {

@@ -19,8 +19,8 @@
                 
               {{ news.content }}
                 
-               <div>   <button @click="EditDoctrine($route.params.id)">Edit</button>    </div>
-               <div>  <button @click="DeleteDoctrine($route.params.id)">Delete</button> </div> 
+               <div>   <button @click="EditNews($route.params.id)">Edit</button>    </div>
+               <div>  <button @click="DeleteNews($route.params.id)">Delete</button> </div> 
       </div>
       
         
@@ -57,11 +57,13 @@ export default {
         console.log(err)
       })
         },
-      EditDoctrine(newsid){
+      EditNews(newsid){
         this.$router.push({ name: 'editnews' , params: {id : newsid}})
       },
-      DeleteDoctrine(newsid){
-        this.$router.push({ name: 'DeleteDoctrine' , params: {id : newsid}})
+       DeleteNews(){
+        this.$http.delete("/news/DeleteNews/"+this.$route.params.id)
+        console.log("delete")
+        this.$router.push({ name: 'Listnews'})
       },
     }
     
