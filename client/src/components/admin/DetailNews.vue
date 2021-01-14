@@ -1,26 +1,26 @@
 <template>
-  <div class='DetailDoctrine'>
+  <div class='DetailNews'>
     <div>
       <Navbar></Navbar>
     </div>
       <h1>detail page</h1>
       {{$route.params.id}}
-      <div  v-if="doctrines" >
+      <div  v-if="news" >
                 
               <center>
               <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
               <a href="#">
-                <img class="img-fluid rounded" id="showimage" :src="'http://localhost:4000/uploads/' + doctrines.image"/>
+                <img class="img-fluid rounded" id="showimage" :src="'http://localhost:4000/uploads/' + news.image"/>
               </a>
               </div>
               </center>
 
-              <div>{{ doctrines.title }}</div>
+              <div>{{ news.title }}</div>
                 
-              {{ doctrines.content }}
+              {{ news.content }}
                 
-               <div>   <button @click="EditDoctrine($route.params.id)">Edit</button>    </div>
-               <div>  <button @click="DeleteDoctrine()">Delete</button> </div> 
+               <div>   <button @click="EditNews($route.params.id)">Edit</button>    </div>
+               <div>  <button @click="DeleteNews($route.params.id)">Delete</button> </div> 
       </div>
       
         
@@ -30,10 +30,10 @@
 <script>
 const Navbar = () => import('@/components/navbar/admin_navbar')
 export default {
-    name : "DetailDoctrine",
+    name : "DetailNews",
     data (){
       return {
-        doctrines: null
+        news: null
         }
     },
     components:{
@@ -45,23 +45,25 @@ export default {
     methods: {
          getData(){
             var that = this;
-       this.$http.get("/doctrine/DetailDoctrine/"+this.$route.params.id)
+       this.$http.get("/news/DetailNews/"+this.$route.params.id)
       .then((res) => {
         console.log(res.data)
-        that.doctrines = res.data;
-        console.log(that.doctrines)
+        that.news = res.data;
+        console.log(that.news)
+        
+      
       })
       .catch(function(err){
         console.log(err)
       })
         },
-      EditDoctrine(doctrineid){
-        this.$router.push({ name: 'EditDoctrine' , params: {id : doctrineid}})
+      EditNews(newsid){
+        this.$router.push({ name: 'editnews' , params: {id : newsid}})
       },
-      DeleteDoctrine(){
-        this.$http.delete("/doctrine/DeleteDoctrine/"+this.$route.params.id)
+       DeleteNews(){
+        this.$http.delete("/news/DeleteNews/"+this.$route.params.id)
         console.log("delete")
-        this.$router.push({ name: 'Listdoctrine'})
+        this.$router.push({ name: 'Listnews'})
       },
     }
     
