@@ -15,7 +15,7 @@
 
                                 <div class="m-b-25"> <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image"> </div>
                                 
-                                <hr><h6 class="f-w-600">เลทเกม กุเก่ง</h6>
+                                <hr><h6 class="f-w-600">{{dataUser.firstname}} {{dataUser.lastname}}</h6>
                                 <h6 class="f-w-600">200 Coin</h6>
                                 
                                 <!-- <p>Web Designer</p> <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i> -->
@@ -56,11 +56,11 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <p class="m-b-10 f-w-600">เบอร์โทรติดต่อ</p>
-                                        <h6 class="text-muted f-w-400">08x-xxxxxxx</h6>
+                                        <h6 class="text-muted f-w-400">{{dataUser.phone}}</h6>
                                     </div>
                                     <div class="col-sm-6">
                                         <p class="m-b-10 f-w-600">อายุ(ปี)</p>
-                                        <h6 class="text-muted f-w-400">34</h6>
+                                        <h6 class="text-muted f-w-400">{{dataUser.age}}</h6>
                                     </div>
                                 </div>
                                 <!-- <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Projects</h6>
@@ -95,17 +95,25 @@
 const jwt = require("jsonwebtoken")
 const token = window.localStorage.getItem('user_token')
 const decoded = jwt.verify(token, "secret")
-console.log(decoded)
 const Navbar = () => import('@/components/navbar/user_navbar')
 export default {
     name:'Profile',
     data(){
         return{
-            dataUser: decoded
+            dataUser: {}
         }
     },
     components:{
         Navbar
+    },
+    mounted: async function mounted(){
+      await this.$http.get("/user/"+decoded._id)
+      .then((res) => {
+        this.dataUser = res.data;
+      })
+      .catch(function(err){
+        console.log(err)
+      })
     },
     async created (){
         // const token = window.localStorage.getItem('user_token')

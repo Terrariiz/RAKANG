@@ -46,5 +46,37 @@ exports.registerNewUser = async (req, res) => {
   };
 
 exports.getUserDetails = async (req, res) => {
-  await res.json(req.userData);
+  try{
+    User.findById(req.params.id, function(err,found){
+      if(err){
+        console.log(err);
+      } else{
+        res.json(found);
+      }
+    })
+  } catch (err) {
+    res.status(400).json({ err: err });
+    console.log(err);
+  }
+};
+
+exports.editProfile = async (req,res) => {
+  try{
+    const dataEdit = {
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      phone: req.body.phone,
+      age: req.body.age
+    }
+    User.findByIdAndUpdate(req.params.id, dataEdit, function(err,update){
+      if(err){
+        console.log(err);
+      } else{
+        res.json(true);
+      }
+    });
+  } catch (err) {
+    res.status(400).json({ err: err });
+    console.log(err);
+  }
 };
