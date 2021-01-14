@@ -108,8 +108,10 @@ export default {
         let doctrine = await this.$http.post("/doctrine/adddoctrine", formData);
         console.log(doctrine);
         if (doctrine) {
+          this.$router.push({ name: 'Listdoctrine'})
           swal("Success", "Add doctrine Was successful", "success");
           console.log('success')
+          
         } else {
           swal("Error", "Something Went Wrong", "error");
           console.log('error')

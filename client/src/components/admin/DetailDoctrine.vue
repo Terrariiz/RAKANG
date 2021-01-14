@@ -15,9 +15,9 @@
               </div>
               </center>
 
-              <div>{{ doctrines.title }}</div>
+              <div >{{ doctrines.title }}</div>
                 
-              {{ doctrines.content }}
+              <div v-html="doctrines.content"> {{ doctrines.content }} </div>
                 
                <div>   <button @click="EditDoctrine($route.params.id)">Edit</button>    </div>
                <div>  <button @click="DeleteDoctrine()">Delete</button> </div> 
@@ -29,6 +29,7 @@
 
 <script>
 const Navbar = () => import('@/components/navbar/admin_navbar')
+import swal from "sweetalert";
 export default {
     name : "DetailDoctrine",
     data (){
@@ -50,6 +51,7 @@ export default {
         console.log(res.data)
         that.doctrines = res.data;
         console.log(that.doctrines)
+        
       })
       .catch(function(err){
         console.log(err)
@@ -60,9 +62,13 @@ export default {
       },
       DeleteDoctrine(){
         this.$http.delete("/doctrine/DeleteDoctrine/"+this.$route.params.id)
-        console.log("delete")
         this.$router.push({ name: 'Listdoctrine'})
+        swal("Success", "Delete Doctrine Success", "success");
+
+
+        
       },
+      
     }
     
 }

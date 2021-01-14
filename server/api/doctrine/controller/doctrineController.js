@@ -44,8 +44,8 @@ exports.EditDoctrine = async(req,res) =>{
     console.log(req.body.content)
     console.log(req.body.imagepath)
     console.log(req.body.oldimage)
-    if(req.body.imagepath == req.body.oldimage){
-      const image  = './public/uploads/' + req.body.imagepath;
+    if(req.body.imagepath != req.body.oldimage){
+      const image  = './public/uploads/' + req.body.oldimage;
       fs.unlink(image , function(err){
           if(err){
               console.log(err);
