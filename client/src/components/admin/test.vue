@@ -1,116 +1,113 @@
 <template>
-  <div  class='test'>
-     <div>
+  <div class='test'>
+    <div>
       <Navbar></Navbar>
     </div>
-    <h1 style="text-align:center;">This is test page.</h1>
-    <!-- <div class="base-image-input">
-    <span class="placeholder">Choose an Image</span>
-    <input type="file">
-  </div> -->
-
-  <div
-    class="base-image-input"
-    :style="{ 'background-image': `url(${imageData})` }"
-    @click="chooseImage"
-  >
-    <span
-      v-if="!imageData"
-      class="placeholder"
-    >
-      Choose an Image
-    </span>
-    <input
-      class="file-input"
-      ref="fileInput"
-      type="file"
-      @input="onSelectFile"
-    >
-  </div>
-    
-    
+    <h1>This is test page.</h1>
+    <div id ='headaddnews'>
+        <div class="text-center">
+          
+            <v-btn rounded color="primary" dark to = "/admin/addnews">Add NEWS</v-btn>
+  
+            <!-- <v-btn rounded color="primary"  to = "/addnews" >Add NEWS</v-btn> -->
+        </div>
+    </div>
+    <v-container>
+      <v-simple-table fixed-header>
+          <template v-slot:default >
+            <thead>
+              <tr>
+                <th class="text-left">
+                  Image
+                </th>
+                <th class="text-left">
+                  Name
+                </th>
+                <th  class="text-left">
+                  Editor
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr   @submit.prevent="editnews" v-for="news in doctrines"  :key="news._id">
+                <td><center><img :src="'http://localhost:4000/uploads/' + news.image" class="img-fluid" style="width: 100px; height: 100px; object-fit: cover; margin:3%;" align="center"></center></td>
+                <td>{{ news.title }}</td>
+                <!-- <td>{{ news.content }}</td> -->
+                <td>
+                  <!-- <router-link :to="`/admin/listdoctrine/${doctrine._id}`">detail</router-link> -->
+                  <!-- <router-link :to="{name : 'DetailDoctrine', params: {id:doctrine._id}}">detail</router-link> -->
+                  <!-- <button @click="ViewDoctrine(news._id)">view</button> -->
+                  <v-btn style="margin:3%;"  @click="ViewDoctrine(news._id)" color="primary" elevation="2" small>view</v-btn>
+                  <v-btn style="margin:3%;" elevation="2" small color="primary">Delete</v-btn>
+                  
+                </td>
+                <!-- <td>{{ item.name }}</td>
+                <td>
+                  
+                    <v-btn style="margin-left:5%; margin-top:3%; margin-bottom:3%;" class="ma-2"  color="purple" to = "/admin/editnews"  dark><v-icon dark>mdi-wrench</v-icon></v-btn>
+                    <v-btn style="margin-left:5%; margin-top:3%; margin-bottom:3%;"><v-icon>{{ icons.mdiDelete }}</v-icon></v-btn>
+                  
+                </td> -->
+                <!-- <td>{{ item.calories }}</td> -->
+              </tr>
+            </tbody>
+          </template>
+      </v-simple-table>
+    </v-container>
   </div>
 </template>
 
 <script>
+const Navbar = () => import('@/components/navbar/admin_navbar')
+import {
+  } from '@mdi/js'
 
-
-const Navbar = () => import('@/components/navbar/visitor_navbar')
-export default {
-    
-
-    // data: () => ({
-    //     valid: true,
-    //     name: '',
-    //     nameRules: [
-    //       v => !!v || 'Name is required',
-    //       v => (v && v.length <= 12) || 'Name must be less than 12 characters',
-    //     ],
-    //     password: '',
-    //     passwordRules: [
-    //       v => !!v || 'Password is required',
-    //       v => (v && v.length <= 12) || 'Password must be less than 12 characters',
-    //     ],
-    //     checkbox: false,
-    // }),
-    data() {
-    return {
-        imageData:null,
-          }
-
-  },
-  components:{
-        Navbar
+  export default {
+    name : "Listnews",
+    data (){
+      return {
+        doctrines : []
+        }
     },
+    mounted: async function mounted(){
+      await this.$http.get("/news/ShowListNews")
+      .then((res) => {
+        console.log(res.data)
+        this.doctrines = res.data;
+        console.log(this.doctrines)
+      })
+      .catch(function(err){
+        console.log(err)
 
+      })
+    },
+    components: {
+      Navbar
+    },
     methods: {
+      // async ViewDoctrine(doctrineid){
+      //   await this.$http.get("/DetailDoctrine/"+doctrineid)
+      //   .then((res)=> {
 
-    chooseImage () {
-        this.$refs.fileInput.click()
-    },
-    onSelectFile () {
-        const input = this.$refs.fileInput
-  const files = input.files
-  if (files && files[0]) {
-    const reader = new FileReader
-    reader.onload = e => {
-      this.imageData = e.target.result
-    }
-    reader.readAsDataURL(files[0])
-    this.$emit('input', files[0])
-  }
-    },
-    }
+      //   })
+      // }
+      ViewDoctrine(doctrineid){
+        this.$router.push({ name: 'DetailNews' , params: {id : doctrineid}})
+          
+        }
+      }
     
-}
-
+  }
 
 </script>
 
 <style>
-.base-image-input {
-  display: block;
-  width: 200px;
-  height: 200px;
-  cursor: pointer;
-  background-size: cover;
-  background-position: center center;
-}
-.placeholder {
-  background: #F0F0F0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #333;
-  font-size: 18px;
-  font-family: Helvetica;
-}
-.placeholder:hover {
-  background: #E0E0E0;
-}
-.file-input {
-  display: none;
-}
+    #table{
+        text-align: left;
+        
+    }
+    #headaddnews{
+        margin: 3%;
+    }
+    
 </style>

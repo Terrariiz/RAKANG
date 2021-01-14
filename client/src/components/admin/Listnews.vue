@@ -27,7 +27,7 @@
             </thead>
             <tbody>
               <tr   @submit.prevent="editnews" v-for="news in doctrines"  :key="news._id">
-                <td><center><img :src="'http://localhost:4000/uploads/' + news.image" class="img-fluid" style="width: 700px; height: 480px; object-fit: cover;" align="center"></center></td>
+                <td><center><img :src="'http://localhost:4000/uploads/' + news.image" class="img-fluid" style="width: 100px; height: 100px; object-fit: cover; margin:3%;" align="center"></center></td>
                 <td>{{ news.title }}</td>
                 <td>{{ news.content }}</td>
                 <td>
