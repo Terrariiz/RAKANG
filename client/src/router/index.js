@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/Home.vue'
 import Landing from '@/views/Landing.vue'
+import coin from '@/views/coin.vue'
+import detailcoin from '@/views/detailcoin.vue'
 
 
 const Login                     = () => import('@/components/profile/Login')
@@ -22,6 +24,7 @@ const editCampaign               = () => import('@/components/admin/EditCampaign
 const profile                 = () => import('@/components/profile/profile')
 const editprofile                 = () => import('@/components/profile/editprofile')
 const test                    = () => import('@/components/admin/test')
+// const coin                    = () => import('@/views/coin')
 const payment                  = () => import('@/components/admin/payment')
 
 
@@ -179,10 +182,20 @@ const routes = [
     component: test
   },
   {
+    path: '/coin',
+    name: 'coin',
+    component: coin
+  },
+  {
+    path: '/detailcoin',
+    name: 'detailcoin',
+    component: detailcoin
+  },
+  {
     path: '/payment',
     name: 'payment',
     component: payment
-  },
+  }
   
 ]
 
