@@ -13,7 +13,7 @@
                         <div class="col-sm-4 bg-c-lite-green user-profile">
                             <div class="card-block text-center text-white">
 
-                                <div class="m-b-25"> <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image"> </div>
+                                <div class="m-b-25"> <img :src="'http://localhost:4000/image/profile/' + dataUser.image" class="img-radius base-image-input" alt="User-Profile-Image"> </div>
                                 
                                 <hr><h6 class="f-w-600">{{dataUser.firstname}} {{dataUser.lastname}}</h6>
                                 <h6 class="f-w-600">200 Coin</h6>
@@ -270,6 +270,15 @@ h6 {
     margin: 0 10px 0 0;
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out
+}
+
+.base-image-input {
+  display: block;
+  width: 110px;
+  height: 100px;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center center;
 }
         
 </style>

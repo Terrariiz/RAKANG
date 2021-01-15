@@ -12,18 +12,24 @@
                 <!-- กรอบชั้นใน -->
                 <div  class="card user-card-full">
                     <div class="row m-l-0 m-r-0">
+
+                        <v-form
+                                    ref="form"
+                                    v-model="valid"
+                                    lazy-validation
+                                    @submit.prevent="EditProfile"
+                                >
+                        
                         <div  class="col-sm-4 bg-c-lite-green user-profile">
                             <div style="text-align:center;"  class="card-block text-center text-white">
                                 <div style="text-align:right;"><v-btn icon ><label for="file-input"><v-icon>mdi-pencil</v-icon></label></v-btn></div>
                                 <!-- <div class="m-b-25"><img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image"><br></div>
                                 <div style="text-align:center; display:none;"><input style="visibility:hidden;  width:0;  height:0" id="file-input" type="file" /></div>
                                  -->
-
                                 <center><v-div style=""  class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
                                     <span  v-if="!imageData"  class="placeholder">Choose an Image</span>
                                     <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  @input="onSelectFile" >
                                 </v-div></center>
-
                                 <hr>
                                 <!-- <v-container><v-text-field single-line solo label="" ></v-text-field></v-container>
                                 <h6 class="f-w-600">200 Coin</h6> 
@@ -55,12 +61,12 @@
                                 <!-- <router-link style=" color:gray;" to="/editprofile"  ><i style="text-align:right;" class="fa fa-edit"></i>Edit</router-link> -->
                                 <!-- <div style="text-align: right;"><router-link style="color:gray; " to="/editprofile"><i class="fa fa-edit"></i>Edit</router-link></div> -->
                                 <h6 class="m-b-20 p-b-5 b-b-default f-w-600" style="font-size:20px;">Edit Profile</h6>
-                                <v-form
+                                <!-- <v-form
                                     ref="form"
                                     v-model="valid"
                                     lazy-validation
                                     @submit.prevent="EditProfile"
-                                >
+                                > -->
                                 <div class="row">
                                     
                                     <div class="col-sm-6">
@@ -83,9 +89,8 @@
                                         <router-link style="color:yellow;" to="/profile" >Cancel</router-link>
                                         <v-btn type="submit" style="margin-top:1% "  color="primary" dark>Edit</v-btn>
                                     </div>
-                                    
                                 </div>
-                                </v-form>
+                                <!-- </v-form> -->
                                 <!-- <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Projects</h6>
                                 <div class="row">
                                     <div class="col-sm-6">
@@ -104,6 +109,8 @@
                                 </ul> -->
                             </div>
                         </div>
+
+                        </v-form>
                         
                     </div>
                 </div>
@@ -162,7 +169,11 @@ export default {
                 firstname: "",
                 lastname: "",
                 age: "",
-                phone: ""
+                phone: "",
+                image: null,
+                imagepath: "" ,
+                newimage: null,
+                oldimage: ""
             }
         }
     },
@@ -171,6 +182,8 @@ export default {
       await this.$http.get("/user/"+decoded._id)
       .then((res) => {
         this.dataUser = res.data;
+        this.dataEdit.oldimage = res.data.image;
+        this.imageData = "http://localhost:4000/image/profile/" + res.data.image;
       })
       .catch(function(err){
         console.log(err)
@@ -194,6 +207,8 @@ export default {
         onSelectFile () {
             const input = this.$refs.fileInput
             const files = input.files
+            this.dataEdit.newimage = event.target.files[0]
+            console.log(this.dataEdit.newimage)
             if (files && files[0]) {
                 const reader = new FileReader
                 reader.onload = e => {
@@ -202,6 +217,9 @@ export default {
             reader.readAsDataURL(files[0])
             this.$emit('input', files[0])
             }
+        },
+        async EditImage() {
+
         },
         async EditProfile() {
             if(this.dataEdit.firstname == ""){
@@ -217,7 +235,21 @@ export default {
                 this.dataEdit.phone = this.dataUser.phone
             }
             try {
-                let response = await this.$http.post("/user/"+decoded._id+"/editProfile", this.dataEdit);
+                var formData = new FormData();
+                formData.append('firstname', this.dataEdit.firstname)
+                formData.append('lastname', this.dataEdit.lastname)
+                formData.append('age', this.dataEdit.age)
+                formData.append('phone', this.dataEdit.phone)
+            
+                if(this.dataEdit.newimage == null){
+                    formData.append('imagepath', this.dataUser.image)
+                    formData.append('oldimage', this.dataUser.image)
+                }else {
+                    formData.append('image', this.dataEdit.newimage)
+                    formData.append('imagepath', this.dataEdit.newimage.name)
+                    formData.append('oldimage', this.dataEdit.oldimage)
+                }
+                let response = await this.$http.put("/user/"+decoded._id+"/editProfile", formData);
                 let check = response.data
                 if (check == true) {
                     this.$router.push("/profile");
