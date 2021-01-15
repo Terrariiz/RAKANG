@@ -3,134 +3,77 @@
     <div>
         <Navbar></Navbar>
     </div>
-   <h1>This is editprofile page.</h1>
+   <!-- <h1>This is editprofile page.</h1> -->
     <v-container >
-        <div  class="padding">
-        <div  class="row container d-flex justify-content-center">
+        <div class="padding">
+        <div id="borderbox1"  class="row container d-flex justify-content-center ">
             <!-- กรอบนอกสุด -->
-            <div style=" width: 700px;">
+            <div id="borderbox2">
                 <!-- กรอบชั้นใน -->
                 <div  class="card user-card-full">
                     <div class="row m-l-0 m-r-0">
-                        <div  class="col-sm-4 bg-c-lite-green user-profile">
-                            <div style="text-align:center;"  class="card-block text-center text-white">
-                                <div style="text-align:right;"><v-btn icon ><label for="file-input"><v-icon>mdi-pencil</v-icon></label></v-btn></div>
-                                <!-- <div class="m-b-25"><img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image"><br></div>
-                                <div style="text-align:center; display:none;"><input style="visibility:hidden;  width:0;  height:0" id="file-input" type="file" /></div>
-                                 -->
 
-                                <center><v-div style=""  class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
-                                    <span  v-if="!imageData"  class="placeholder">Choose an Image</span>
-                                    <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  @input="onSelectFile" >
-                                </v-div></center>
-
-                                <hr>
-                                <!-- <v-container><v-text-field single-line solo label="" ></v-text-field></v-container>
-                                <h6 class="f-w-600">200 Coin</h6> 
-                                
-                                <center><v-container >
-                                    <v-row >
-                                        
-
-                                        <v-col cols="12" sm ="12" md="12">
-                                            
-                                            <v-btn small>ประวัติการบริจาค</v-btn>
-                                        </v-col>
-
-                                        <v-col cols="12" sm ="12" md="12">
-                                            
-                                            <v-btn small  >ประวัติการซื้อ coin</v-btn>
-                                        </v-col>
-
-                                        
-
-
-                                    </v-row>
-                                </v-container></center> -->
-                            </div>
-                        </div>
-                        
-                        <div class="col-sm-8">
-                            <div  class="card-block">
-                                <!-- <router-link style=" color:gray;" to="/editprofile"  ><i style="text-align:right;" class="fa fa-edit"></i>Edit</router-link> -->
-                                <!-- <div style="text-align: right;"><router-link style="color:gray; " to="/editprofile"><i class="fa fa-edit"></i>Edit</router-link></div> -->
-                                <h6 class="m-b-20 p-b-5 b-b-default f-w-600" style="font-size:20px;">Edit Profile</h6>
-                                <v-form
+                        <v-form
                                     ref="form"
                                     v-model="valid"
                                     lazy-validation
                                     @submit.prevent="EditProfile"
                                 >
-                                <div class="row">
-                                    
-                                    <div class="col-sm-6">
-                                        <p class="m-b-10 f-w-600">ชื่อ</p>
-                                        <v-text-field single-line solo  v-model="dataEdit.firstname" v-bind:label="dataUser.firstname"></v-text-field>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <p class="m-b-10 f-w-600">นามสกุล</p>
-                                        <v-text-field single-line solo  v-model="dataEdit.lastname" v-bind:label="dataUser.lastname"></v-text-field>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <p class="m-b-10 f-w-600">อายุ(ปี)</p>
-                                        <v-text-field single-line solo  v-model="dataEdit.age" v-bind:label="dataUser.age"></v-text-field>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <p class="m-b-10 f-w-600">เบอร์โทรติดต่อ</p>
-                                        <v-text-field single-line solo  v-model="dataEdit.phone" v-bind:label="dataUser.phone"></v-text-field>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <router-link style="color:yellow;" to="/profile" >Cancel</router-link>
-                                        <v-btn type="submit" style="margin-top:1% "  color="primary" dark>Edit</v-btn>
-                                    </div>
+                        
+                            <div  class="col-sm-4 bg-c-lite-green user-profile">
+                                <div style="text-align:center;"  class="card-block text-center text-white">
+                                    <div style="text-align:right;"><v-btn icon ><label for="file-input"><v-icon>mdi-pencil</v-icon></label></v-btn></div>
+                                    <!-- <div class="m-b-25"><img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image"><br></div>
+                                    <div style="text-align:center; display:none;"><input style="visibility:hidden;  width:0;  height:0" id="file-input" type="file" /></div>
+                                    -->
+
+                                    <center><v-div  class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
+                                        <span  v-if="!imageData"  class="placeholder">Choose an Image</span>
+                                        <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  @input="onSelectFile" >
+                                    </v-div></center>
+                                    <hr>
                                     
                                 </div>
-                                </v-form>
-                                <!-- <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Projects</h6>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <p class="m-b-10 f-w-600">Recent</p>
-                                        <h6 class="text-muted f-w-400">Sam Disuja</h6>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <p class="m-b-10 f-w-600">Most Viewed</p>
-                                        <h6 class="text-muted f-w-400">Dinoter husainm</h6>
-                                    </div>
-                                </div>
-                                <ul class="social-link list-unstyled m-t-40 m-b-10">
-                                    <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="facebook" data-abc="true"><i class="mdi mdi-facebook feather icon-facebook facebook" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="twitter" data-abc="true"><i class="mdi mdi-twitter feather icon-twitter twitter" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="instagram" data-abc="true"><i class="mdi mdi-instagram feather icon-instagram instagram" aria-hidden="true"></i></a></li>
-                                </ul> -->
                             </div>
-                        </div>
+                            
+                            <div class="col-sm-8">
+                                <div  class="card-block">
+                                    <!-- <router-link style=" color:gray;" to="/editprofile"  ><i style="text-align:right;" class="fa fa-edit"></i>Edit</router-link> -->
+                                    <!-- <div style="text-align: right;"><router-link style="color:gray; " to="/editprofile"><i class="fa fa-edit"></i>Edit</router-link></div> -->
+                                    <h6 class="m-b-20 p-b-5 b-b-default f-w-600" style="font-size:20px;">Edit Profile</h6>
+                                    
+                                    <div class="row">
+                                        
+                                        <div class="col-sm-6">
+                                            <p class="m-b-10 f-w-600">ชื่อ</p>
+                                            <v-text-field single-line solo  v-model="dataEdit.firstname" v-bind:label="dataUser.firstname"></v-text-field>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p class="m-b-10 f-w-600">นามสกุล</p>
+                                            <v-text-field single-line solo  v-model="dataEdit.lastname" v-bind:label="dataUser.lastname"></v-text-field>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p class="m-b-10 f-w-600">อายุ(ปี)</p>
+                                            <v-text-field single-line solo  v-model="dataEdit.age" v-bind:label="dataUser.age"></v-text-field>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p class="m-b-10 f-w-600">เบอร์โทรติดต่อ</p>
+                                            <v-text-field single-line solo  v-model="dataEdit.phone" v-bind:label="dataUser.phone"></v-text-field>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <v-btn type="submit" style="margin:1%; text-align:center;" to="/profile" color="error" dark>Cancel</v-btn>
+                                            <v-btn type="submit" style="margin:1% text-align:center;"  color="primary" dark>Edit</v-btn>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+                        </v-form>
                         
                     </div>
                 </div>
-                <!-- <v-container fluid>
-            <v-row>
-                <v-col  cols ="12" sm = "2">
-                    
-                            
-                </v-col>
-                
-                <v-col  cols ="12" sm = "2">
-                    
-                            
-                </v-col>
-
-                <v-col  cols ="12" sm = "2">
-                            <v-btn  color="primary" dark>cancle</v-btn>
-                            
-                </v-col>   
-                
-                <v-col  cols ="12" sm = "2">
-                            <v-btn  color="primary" dark>submit</v-btn>
-                            
-                </v-col>
-
-            </v-row>
-        </v-container> -->
+               
             </div>
         </div>
         </div>
@@ -162,7 +105,11 @@ export default {
                 firstname: "",
                 lastname: "",
                 age: "",
-                phone: ""
+                phone: "",
+                image: null,
+                imagepath: "" ,
+                newimage: null,
+                oldimage: ""
             }
         }
     },
@@ -171,6 +118,8 @@ export default {
       await this.$http.get("/user/"+decoded._id)
       .then((res) => {
         this.dataUser = res.data;
+        this.dataEdit.oldimage = res.data.image;
+        this.imageData = "http://localhost:4000/image/profile/" + res.data.image;
       })
       .catch(function(err){
         console.log(err)
@@ -194,6 +143,8 @@ export default {
         onSelectFile () {
             const input = this.$refs.fileInput
             const files = input.files
+            this.dataEdit.newimage = event.target.files[0]
+            console.log(this.dataEdit.newimage)
             if (files && files[0]) {
                 const reader = new FileReader
                 reader.onload = e => {
@@ -202,6 +153,9 @@ export default {
             reader.readAsDataURL(files[0])
             this.$emit('input', files[0])
             }
+        },
+        async EditImage() {
+
         },
         async EditProfile() {
             if(this.dataEdit.firstname == ""){
@@ -217,7 +171,21 @@ export default {
                 this.dataEdit.phone = this.dataUser.phone
             }
             try {
-                let response = await this.$http.post("/user/"+decoded._id+"/editProfile", this.dataEdit);
+                var formData = new FormData();
+                formData.append('firstname', this.dataEdit.firstname)
+                formData.append('lastname', this.dataEdit.lastname)
+                formData.append('age', this.dataEdit.age)
+                formData.append('phone', this.dataEdit.phone)
+            
+                if(this.dataEdit.newimage == null){
+                    formData.append('imagepath', this.dataUser.image)
+                    formData.append('oldimage', this.dataUser.image)
+                }else {
+                    formData.append('image', this.dataEdit.newimage)
+                    formData.append('imagepath', this.dataEdit.newimage.name)
+                    formData.append('oldimage', this.dataEdit.oldimage)
+                }
+                let response = await this.$http.put("/user/"+decoded._id+"/editProfile", formData);
                 let check = response.data
                 if (check == true) {
                     this.$router.push("/profile");
@@ -307,11 +275,25 @@ h6 {
     line-height: 25px
 }
 
+
 @media only screen and (min-width: 1400px) {
     p {
         font-size: 14px
     }
+    
 }
+@media only screen and (max-width: 820px) {
+    p {
+        font-size: 14px
+    }
+    #borderbox1{
+        width:300px;
+    }
+    #borderbox2{
+        width:600px;
+    }
+}
+
 
 .card-block {
     padding: 1.25rem

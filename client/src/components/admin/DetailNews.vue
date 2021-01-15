@@ -17,7 +17,7 @@
 
               <div>{{ news.title }}</div>
                 
-              {{ news.content }}
+              <div v-html="news.content">{{ news.content }}</div>
                 
                <div>   <button @click="EditNews($route.params.id)">Edit</button>    </div>
                <div>  <button @click="DeleteNews($route.params.id)">Delete</button> </div> 

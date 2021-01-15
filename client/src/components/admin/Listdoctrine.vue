@@ -28,9 +28,9 @@
             <tbody>
               <tr  @submit.prevent="editdoctrine" v-for="doctrine in doctrines"  :key="doctrine._id">
                 
-                <td><center><img :src="'http://localhost:4000/uploads/' + doctrine.image" class="img-fluid" style="width: 700px; height: 480px; object-fit: cover;" align="center"></center></td>
+                <td><center><img :src="'http://localhost:4000/uploads/' + doctrine.image" class="img-fluid" style="width: 100px; height: 100px; object-fit: cover;" align="center"></center></td>
                 <td>{{ doctrine.title }}</td>
-                <td>{{ doctrine.content }}</td>
+                <td v-html="doctrine.content">{{ doctrine.content }}</td>
                 <td>
                   <!-- <router-link :to="`/admin/listdoctrine/${doctrine._id}`">detail</router-link> -->
                   <!-- <router-link :to="{name : 'DetailDoctrine', params: {id:doctrine._id}}">detail</router-link> -->
