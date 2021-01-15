@@ -25,6 +25,7 @@ const profile                 = () => import('@/components/profile/profile')
 const editprofile                 = () => import('@/components/profile/editprofile')
 const test                    = () => import('@/components/admin/test')
 // const coin                    = () => import('@/views/coin')
+const payment                  = () => import('@/components/admin/payment')
 
 
 
@@ -174,7 +175,7 @@ const routes = [
     name: 'EditDoctrine',
     component: EditDoctrine
   },
-  
+
   {
     path: '/test',
     name: 'test',
@@ -189,6 +190,11 @@ const routes = [
     path: '/detailcoin',
     name: 'detailcoin',
     component: detailcoin
+  },
+  {
+    path: '/payment',
+    name: 'payment',
+    component: payment
   }
   
 ]
