@@ -10,8 +10,20 @@
                     
                         <v-flex xs12 md6 >
                             <v-container id = "picturenews"  >
-                                <v-file-input v-model="image" label="File input" filled prepend-icon="mdi-camera"></v-file-input>
-                                <input  type="file" id="file" ref="file" multiple v-on:change="onFileSelected">
+                                 <!-- preview image -->
+                                <div style="text-align:right;"></div>
+                                <!-- <div class="m-b-25"><img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image"><br></div>
+                                <div style="text-align:center; display:none;"><input style="visibility:hidden;  width:0;  height:0" id="file-input" type="file" /></div>
+                                 -->
+
+                                <center><v-div style=""  class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
+                                    <span  v-if="!imageData"  class="placeholder">Choose an Image</span>
+                                    <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  @input="onSelectFile" >
+                                </v-div></center>
+
+                                <hr>
+                                <!-- <v-file-input v-model="image" label="File input" filled prepend-icon="mdi-camera"></v-file-input>
+                                <input  type="file" id="file" ref="file" multiple v-on:change="onFileSelected"> -->
                             </v-container>
                         
                         </v-flex>
@@ -20,13 +32,19 @@
                                 <center><v-text-field v-model="title" style="width:70%; text-align: center;" label="หัวข้อเรื่อง" ></v-text-field></center>
                                 <br><br>
                                 <v-container id ="detailnews"  style="background-color: white ; margin-right:3%;">
-                                    <v-container fluid>
+                                    <!-- <v-container fluid>
                                         <v-textarea name="input-7-1" v-model="content" filledlabel="Label" label="รายละเอียด" auto-grow></v-textarea>
-                                    </v-container>
+                                    </v-container> -->
+                                    
                                     <!-- <v-btn small style="text-align: right;" rounded color="primary" dark  >Add detailnews</v-btn> -->
                                 <!-- <div id="app">
                                     <ckeditor @input="onEditorInput"></ckeditor>
                                 </div> -->
+                                 <ckeditor 
+                                    id="content"
+                                    v-model="content"
+                                    @input="onEditorInput">
+                                    </ckeditor>
                                 </v-container>
                                 
                         </v-flex>
@@ -65,13 +83,29 @@ const Navbar = () => import('@/components/navbar/admin_navbar')
                 editorData: '<p>Content of the editor.</p>',
                 editorConfig: {
                     // The configuration of the editor.
-                }
+                },
+                imageData:null,
             };
         },
         components:{
             Navbar
         },
         methods:{
+            chooseImage () {
+            this.$refs.fileInput.click()
+        },
+        onSelectFile () {
+            const input = this.$refs.fileInput
+            const files = input.files
+            if (files && files[0]) {
+                const reader = new FileReader
+                reader.onload = e => {
+                    this.imageData = e.target.result
+                }
+            reader.readAsDataURL(files[0])
+            this.$emit('input', files[0])
+            }
+        },
         async handleSubmit(){
     try {
         const formData = new FormData();
@@ -129,5 +163,33 @@ const Navbar = () => import('@/components/navbar/admin_navbar')
     padding: 10px;
     grid-template-columns: auto 10% 10% auto;
     grid-column-gap: 10%;
+}
+
+/* previewsimage */
+
+ .base-image-input {
+  display: block;
+  width: 300px;
+  height: 300px;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center center;
+}
+.placeholder {
+  background: #F0F0F0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+  font-size: 20px;
+  font-family: Helvetica;
+}
+.placeholder:hover {
+  background: #E0E0E0;
+}
+.file-input {
+  display: none;
 }
 </style>
