@@ -13,7 +13,7 @@
                         <div class="col-sm-4 bg-c-lite-green user-profile">
                             <div class="card-block text-center text-white">
 
-                                <div> <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image"> </div>
+                                <center><div class="m-b-25"> <img :src="'http://localhost:4000/image/profile/' + dataUser.image" class="img-radius base-image-input" alt="User-Profile-Image"> </div></center>
                                 
                                 <hr><h6 class="f-w-600">{{dataUser.firstname}} {{dataUser.lastname}}</h6>
                                 <h6 class="f-w-600">200 Coin</h6>
@@ -88,7 +88,7 @@
 const jwt = require("jsonwebtoken")
 const token = window.localStorage.getItem('user_token')
 const decoded = jwt.verify(token, "secret")
-const Navbar = () => import('@/components/navbar/user_navbar')
+const Navbar = () => import('@/components/navbar/navbar')
 export default {
     name:'Profile',
     data(){

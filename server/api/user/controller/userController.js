@@ -1,4 +1,5 @@
 const User = require("../model/User");
+const fs = require('fs');
 
 exports.registerNewUser = async (req, res) => {
     try {
@@ -17,6 +18,7 @@ exports.registerNewUser = async (req, res) => {
         lastname: req.body.lastname,
         phone: req.body.phone,
         age: req.body.age,
+        image: "user.png"
       });
       let data = await user.save();
       const token = await user.generateAuthToken(); // here it is calling the method that we created in the model
@@ -62,11 +64,26 @@ exports.getUserDetails = async (req, res) => {
 
 exports.editProfile = async (req,res) => {
   try{
+    if(req.body.imagepath != req.body.oldimage){
+      const image  = './public/image/profile/' + req.body.oldimage;
+      if(req.body.oldimage != "user.png"){
+        fs.unlink(image , function(err){
+          if(err){
+              console.log(err);
+          } else {
+            console.log("deleted")
+          } 
+        })
+      }
+    } else {
+      console.log("not delete")
+    }
     const dataEdit = {
       firstname: req.body.firstname,
       lastname: req.body.lastname,
       phone: req.body.phone,
-      age: req.body.age
+      age: req.body.age,
+      image: req.body.imagepath
     }
     User.findByIdAndUpdate(req.params.id, dataEdit, function(err,update){
       if(err){

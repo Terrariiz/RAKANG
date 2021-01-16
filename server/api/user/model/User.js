@@ -23,6 +23,9 @@ const userSchema = new mongoose.Schema({
   age: {
     type: String,
   },
+  image: {
+    type: String,
+  },
   tokens: [
     {
       token: {
