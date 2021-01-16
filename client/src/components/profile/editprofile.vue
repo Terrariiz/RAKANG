@@ -30,6 +30,7 @@
                         </div>
                         
                         <div class="col-sm-8">
+                            <div style="text-align:right; margin-right:3%;"></div>
                             <div  class="card-block">
                                 <!-- <router-link style=" color:gray;" to="/editprofile"  ><i style="text-align:right;" class="fa fa-edit"></i>Edit</router-link> -->
                                 <!-- <div style="text-align: right;"><router-link style="color:gray; " to="/editprofile"><i class="fa fa-edit"></i>Edit</router-link></div> -->

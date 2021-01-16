@@ -52,16 +52,24 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <p class="m-b-10 f-w-600">Email</p>
-                                        <h6 class="text-muted f-w-400">{{dataUser.email}}</h6>
+                                        <v-text-field value="" v-bind:label="dataUser.email"  solo readonly  ></v-text-field>
+                                        <!-- <h6 style="width:100px" class="text-muted f-w-400">{{dataUser.email}}</h6> -->
                                     </div>
                                     <div class="col-sm-6">
                                         <p class="m-b-10 f-w-600">เบอร์โทรติดต่อ</p>
-                                        <h6 class="text-muted f-w-400">{{dataUser.phone}}</h6>
+                                        <v-text-field value="" v-bind:label="dataUser.phone"  solo readonly  >{{dataUser.phone}}</v-text-field>
+                                        <!-- <h6 class="text-muted f-w-400">{{dataUser.phone}}</h6> -->
                                     </div>
                                     <div class="col-sm-6">
                                         <p class="m-b-10 f-w-600">อายุ(ปี)</p>
-                                        <h6 class="text-muted f-w-400">{{dataUser.age}}</h6>
+                                        <v-text-field value="" v-bind:label="dataUser.age"  solo readonly  ></v-text-field>
+                                        <!-- <h6 class="text-muted f-w-400">{{dataUser.age}}</h6> -->
                                     </div>
+                                    <!-- <div class="col-sm-6">
+                                        <p class="m-b-10 f-w-600">อายุ(ปี)</p>
+                                        <v-text-field value=""  solo readonly  ></v-text-field>
+                                        
+                                    </div> -->
                                 </div>
                                 
                             </div>
@@ -140,6 +148,7 @@ export default {
     box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
     border: none;
     margin-bottom: 30px
+    
 }
 
 .m-r-0 {
@@ -184,6 +193,7 @@ h6 {
     line-height: 25px
 }
 
+
 @media only screen and (min-width: 1400px) {
     p {
         font-size: 14px
@@ -201,6 +211,7 @@ h6 {
         width:600px;
     }
 }
+
 
 .card-block {
     padding: 1.25rem
@@ -256,6 +267,7 @@ h6 {
 
 .m-t-40 {
     margin-top: 20px
+     
 }
 
 .user-card-full .social-link li {
@@ -268,6 +280,32 @@ h6 {
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out
 }
-        
-</style>
 
+/* previewsimage */
+
+ .base-image-input {
+  display: block;
+  width: 110px;
+  height: 100px;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center center;
+}
+.placeholder {
+  background: #F0F0F0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+  font-size: 8px;
+  font-family: Helvetica;
+}
+.placeholder:hover {
+  background: #E0E0E0;
+}
+.file-input {
+  display: none;
+}
+</style>
