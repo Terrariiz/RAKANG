@@ -13,9 +13,9 @@
                         <div class="col-sm-4 bg-c-lite-green user-profile">
                             <div class="card-block text-center text-white">
 
-                                <center><div class="m-b-25"> <img :src="'http://localhost:4000/image/profile/' + dataUser.image" class="img-radius base-image-input" alt="User-Profile-Image"> </div></center>
+                                <center><div> <img style="width: 200px; height: 200px; background-size:cover; " :src="'http://localhost:4000/image/profile/' + dataUser.image" class="img-radius base-image-input" alt="User-Profile-Image"> </div></center>
                                 
-                                <hr><h6 class="f-w-600">{{dataUser.firstname}} {{dataUser.lastname}}</h6>
+                                <hr><h6 style="font-size: 20px; color;blue;" class="f-w-600">{{dataUser.firstname}} {{dataUser.lastname}}</h6>
                                 <h6 class="f-w-600">200 Coin</h6>
                                 
                                 <!-- <p>Web Designer</p> <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i> -->
@@ -157,7 +157,8 @@ export default {
 }
 
 .m-l-0 {
-    margin-left: 0px
+    margin-left: 0px;
+    
 }
 
 .user-card-full .user-profile {
@@ -238,7 +239,7 @@ h6 {
 }
 
 .text-muted {
-    color: #919aa3 !important
+    color: #919aa3 
 }
 
 .b-b-default {
@@ -285,10 +286,10 @@ h6 {
 
  .base-image-input {
   display: block;
-  width: 110px;
-  height: 100px;
-  cursor: pointer;
-  background-size: cover;
+  width: 200px;
+  height: 200px;
+  
+  background-size: center;
   background-position: center center;
 }
 .placeholder {
