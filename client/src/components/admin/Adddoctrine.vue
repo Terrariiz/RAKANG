@@ -14,25 +14,23 @@
                             <v-container id = "picturenews"  >
                               <!-- preview image -->
                                 <div style="text-align:right;"></div>
-                                <!-- <div class="m-b-25"><img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image"><br></div>
-                                <div style="text-align:center; display:none;"><input style="visibility:hidden;  width:0;  height:0" id="file-input" type="file" /></div>
-                                 -->
+                                
 
-                                <center><v-div style=""  class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
+                                <!-- <center><v-div style=""  class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
                                     <span  v-if="!imageData"  class="placeholder">Choose an Image</span>
-                                    <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  @input="onSelectFile" >
-                                </v-div></center>
+                                    <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  @change="onFileSelected" >
+                                </v-div></center>-->
 
-                                <hr>
+                                <!-- <hr> -->
                                
-                                <!-- <v-file-input v-model="doctrine.image" label="File input" filled prepend-icon="mdi-camera"></v-file-input> -->
+                                <v-file-input v-model="doctrine.image" label="File input"  filled prepend-icon="mdi-camera"></v-file-input>
                                 <!-- <input type="file" @change="onFileSelected"> -->
                             </v-container>
-                            <v-container>
+                            <!-- <v-container>
                             <span>{{doctrine.title}}</span>
                             <span>{{doctrine.content}}</span>
                             <span>{{doctrine.image}}</span>
-                            </v-container>
+                            </v-container> -->
                         </v-flex>
                         <v-flex xs12 md6>
                                 <center><v-text-field  v-model="doctrine.title" style="width:70%; text-align: center;" label="หัวข้อเรื่อง" required></v-text-field></center>
@@ -139,21 +137,22 @@ export default {
     components:{
         Navbar
     },
-    methods: {chooseImage () {
+    methods: {
+        chooseImage () {
             this.$refs.fileInput.click()
         },
-        onSelectFile () {
-            const input = this.$refs.fileInput
-            const files = input.files
-            if (files && files[0]) {
-                const reader = new FileReader
-                reader.onload = e => {
-                    this.imageData = e.target.result
-                }
-            reader.readAsDataURL(files[0])
-            this.$emit('input', files[0])
-            }
-        },
+        // onSelectFile () {
+        //     const input = this.$refs.fileInput
+        //     const files = input.files
+        //     if (files && files[0]) {
+        //         const reader = new FileReader
+        //         reader.onload = e => {
+        //             this.imageData = e.target.result
+        //         }
+        //     reader.readAsDataURL(files[0])
+        //     this.$emit('input', files[0])
+        //     }
+        // },
         async Adddoctrine(){
     try {
         var formData = new FormData();
@@ -186,6 +185,16 @@ export default {
         },
         async onFileSelected(event){
             this.doctrine.image = event.target.files[0]
+            const input = this.$refs.fileInput
+            const files = input.files
+            if (files && files[0]) {
+                const reader = new FileReader
+                reader.onload = e => {
+                    this.imageData = e.target.result
+                }
+            reader.readAsDataURL(files[0])
+            this.$emit('input', files[0])
+            }
         }
     },
 

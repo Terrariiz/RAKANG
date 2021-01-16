@@ -17,18 +17,22 @@
         <v-text-field style="text-align:center; "
           single-line solo
           v-model="login.email"
-          :rules="nameRules"
           label="Email"
           required
         ></v-text-field>
 
         <v-text-field style="text-align:center; "
           single-line solo
-          v-model="login.password"
-          type="password"
-          :rules="passwordRules"
-          label="Password"
-          required
+           v-model="login.password"
+            id="password"
+            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="show1 ? 'text' : 'password'"
+            
+            label="Password"
+            hint="At least 8 characters"
+            counter
+            @click:append="show1 = !show1"
+            aria-required=""
         ></v-text-field>
 
         <v-btn
@@ -53,27 +57,17 @@
 import swal from "sweetalert";
 const Navbar = () => import('@/components/navbar/navbar')
 export default {
-
-    // data: () => ({
-    //     valid: true,
-    //     name: '',
-    //     nameRules: [
-    //       v => !!v || 'Name is required',
-    //       v => (v && v.length <= 12) || 'Name must be less than 12 characters',
-    //     ],
-    //     password: '',
-    //     passwordRules: [
-    //       v => !!v || 'Password is required',
-    //       v => (v && v.length <= 12) || 'Password must be less than 12 characters',
-    //     ],
-    //     checkbox: false,
-    // }),
     data() {
     return {
       login: {
         email: "",
         password: ""
-      }
+      },
+        show1:false,
+        rules: {
+          required: value => !!value || 'Required.',
+          min: v => v.length >= 8 || 'Min 8 characters'
+        },
     }
 
   },
@@ -89,6 +83,7 @@ export default {
         localStorage.setItem("user_token", token);
         if (token) {
           swal("Success", "Login Successful", "success");
+          this.$store.dispatch('UserLoggedIn');
           this.$router.push("/profile");
         }
       } catch (err) {

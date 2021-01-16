@@ -4,6 +4,12 @@
         <Navbar></Navbar>
     </div>
    <!-- <h1>This is editprofile page.</h1> -->
+   <v-form
+        ref="form"
+        v-model="valid"
+        lazy-validation
+        @submit.prevent="EditProfile"
+    >
     <v-container >
         <div class="padding">
         <div id="borderbox1"  class="row container d-flex justify-content-center ">
@@ -12,26 +18,19 @@
                 <!-- กรอบชั้นใน -->
                 <div  class="card user-card-full">
                     <div class="row m-l-0 m-r-0">
-
-                        <v-form
-                                    ref="form"
-                                    v-model="valid"
-                                    lazy-validation
-                                    @submit.prevent="EditProfile"
-                                >
-                        
                             <div  class="col-sm-4 bg-c-lite-green user-profile">
                                 <div style="text-align:center;"  class="card-block text-center text-white">
-                                    <div style="text-align:right;"><v-btn icon ><label for="file-input"><v-icon>mdi-pencil</v-icon></label></v-btn></div>
+                                    <div style="text-align:right;"><v-btn  icon ><label style=" cursor: pointer;" for="file-input"><v-icon>mdi-pencil</v-icon></label></v-btn></div>
                                     <!-- <div class="m-b-25"><img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image"><br></div>
                                     <div style="text-align:center; display:none;"><input style="visibility:hidden;  width:0;  height:0" id="file-input" type="file" /></div>
                                     -->
 
-                                    <center><v-div  class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
-                                        <span  v-if="!imageData"  class="placeholder">Choose an Image</span>
-                                        <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  @input="onSelectFile" >
-                                    </v-div></center>
-                                    <hr>
+                                    <center><v-div style=""  class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
+                                    <span  v-if="!imageData"  class="placeholder">Choose an Image</span>
+                                    <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  @input="onSelectFile" >
+                                </v-div></center>
+
+                                <hr>
                                     
                                 </div>
                             </div>
@@ -69,7 +68,7 @@
                                 </div>
                             </div>
 
-                        </v-form>
+                        
                         
                     </div>
                 </div>
@@ -79,7 +78,7 @@
         </div>
         
     </v-container>
-   
+   </v-form>
 </div>
 
 
@@ -367,8 +366,8 @@ h6 {
 
  .base-image-input {
   display: block;
-  width: 110px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
   cursor: pointer;
   background-size: cover;
   background-position: center center;
@@ -391,4 +390,3 @@ h6 {
   display: none;
 }
 </style>
-

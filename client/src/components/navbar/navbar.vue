@@ -15,6 +15,7 @@
 
                 <!-- Right aligned nav items -->
                 <b-navbar-nav class="ml-auto">
+                  <b-nav-item href='/profile'>Profile</b-nav-item>
                   <b-nav-item v-on:click="sign_out()">Log out</b-nav-item>
                 </b-navbar-nav>
               </b-collapse>
@@ -57,13 +58,7 @@
                 <!-- Right aligned nav items -->
                 <b-navbar-nav class="ml-auto">
                   <b-nav-item href="/login">Log in</b-nav-item>
-                  <b-nav-item-dropdown right>
-                    <template #button-content>
-                      <em>Admin</em>
-                    </template>
-                    <b-dropdown-item href="/admin/login">Log in</b-dropdown-item>
-                    <b-dropdown-item href="/admin">Admin</b-dropdown-item>
-                  </b-nav-item-dropdown>
+                  <b-nav-item href="/admin/login">Admin site</b-nav-item>
                 </b-navbar-nav>
               </b-collapse>
         </b-navbar>
@@ -73,10 +68,11 @@
 
 <script>
 export default {
-    name:'Visitor_navbar',
+    name:'Navbar',
     methods:{
       async sign_out () {
-			localStorage.removeItem('user_token')
+      localStorage.removeItem('user_token')
+      this.$store.dispatch('UserLoggedOut')
 			await this.$router.push('/home')
 		}
   }
