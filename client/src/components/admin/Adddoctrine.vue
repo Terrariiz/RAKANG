@@ -121,7 +121,7 @@
 </style>
 
 <script>
-const Navbar = () => import('@/components/navbar/admin_navbar')
+const Navbar = () => import('@/components/navbar/navbar')
 import swal from "sweetalert";
 export default {
     name : "Adddoctrine",

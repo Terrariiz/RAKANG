@@ -102,7 +102,7 @@
 </template>
 
 <script>
-const Navbar = () => import('@/components/navbar/visitor_navbar')
+const Navbar = () => import('@/components/navbar/navbar')
 import swal from "sweetalert";
   export default {
     name: 'Register',

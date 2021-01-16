@@ -80,7 +80,7 @@
 const jwt = require("jsonwebtoken")
 const token = window.localStorage.getItem('user_token')
 const decoded = jwt.verify(token, "secret")
-const Navbar = () => import('@/components/navbar/user_navbar')
+const Navbar = () => import('@/components/navbar/navbar')
 export default {
     name:'Profile',
     data(){

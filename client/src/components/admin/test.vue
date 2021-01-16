@@ -3,6 +3,8 @@
         <div>
             <Navbar></Navbar>
         </div>
+        <h1>{{$store.getters.AdminIsLoggedIn}}</h1>
+        <h1>{{$store.getters.UserIsLoggedIn}}</h1>
          <v-form
          @submit.prevent="Adddoctrine">
         <v-container id ='rounded' style="background-color: #F09C0B;">
@@ -121,7 +123,7 @@
 </style>
 
 <script>
-const Navbar = () => import('@/components/navbar/admin_navbar')
+const Navbar = () => import('@/components/navbar/navbar')
 import swal from "sweetalert";
 export default {
     name : "Adddoctrine",

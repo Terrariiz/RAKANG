@@ -150,7 +150,7 @@
     </div>
 </template>
 <script>
-const Navbar = () => import('@/components/navbar/user_navbar')
+const Navbar = () => import('@/components/navbar/navbar')
 export default {
     
     

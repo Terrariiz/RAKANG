@@ -51,7 +51,7 @@
 
 <script>
 import swal from "sweetalert";
-const Navbar = () => import('@/components/navbar/visitor_navbar')
+const Navbar = () => import('@/components/navbar/navbar')
 export default {
 
     // data: () => ({
@@ -98,12 +98,6 @@ export default {
     },
       validate () {
         this.$refs.form.validate()
-      },
-      reset () {
-        this.$refs.form.reset()
-      },
-      resetValidation () {
-        this.$refs.form.resetValidation()
       },
     },
 }
