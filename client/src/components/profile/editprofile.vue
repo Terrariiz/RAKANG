@@ -4,6 +4,12 @@
         <Navbar></Navbar>
     </div>
    <!-- <h1>This is editprofile page.</h1> -->
+   <v-form
+        ref="form"
+        v-model="valid"
+        lazy-validation
+        @submit.prevent="EditProfile"
+    >
     <v-container >
         <div class="padding">
         <div id="borderbox1"  class="row container d-flex justify-content-center ">
@@ -13,12 +19,7 @@
                 <div  class="card user-card-full">
                     <div class="row m-l-0 m-r-0">
 
-                        <v-form
-                                    ref="form"
-                                    v-model="valid"
-                                    lazy-validation
-                                    @submit.prevent="EditProfile"
-                                >
+                        
                         
                             <div  class="col-sm-4 bg-c-lite-green user-profile">
                                 <div style="text-align:center;"  class="card-block text-center text-white">
@@ -69,7 +70,7 @@
                                 </div>
                             </div>
 
-                        </v-form>
+                        
                         
                     </div>
                 </div>
@@ -79,7 +80,7 @@
         </div>
         
     </v-container>
-   
+   </v-form>
 </div>
 
 
