@@ -1,4 +1,4 @@
-const News = require("../model/News");
+const Campaign = require("../model/Campaign");
 const multer = require('multer');
 const fs = require('fs');
 
@@ -6,13 +6,15 @@ const fs = require('fs');
 
   
   
-exports.addnews = async(req,res) => {
+exports.addnewcampaign = async(req,res) => {
   try{     
     console.log(req.body)
-    const add = new News({
-      title: req.body.title,
+    const add = new Campaign({
+      name: req.body.name,
       content: req.body.content,
-      image: req.body.imagepath
+      image: req.body.imagepath,
+      date: req.body.date,
+      amount: req.body.amount,
     });
     console.log(add)
     let data = await add.save()
@@ -23,14 +25,14 @@ exports.addnews = async(req,res) => {
   }
 };
 
-exports.ShowListNews = function(req,res){
+exports.ShowListCampaign = function(req,res){
   try{
-    News.find({},function(err, news){
+    Campaign.find({},function(err, campaign){
       if(err){
         console.log(err)
       } else {
         console.log('else')
-        res.json(news);
+        res.json(campaign);
       }
     })
   } catch (err) {
@@ -39,13 +41,13 @@ exports.ShowListNews = function(req,res){
   }
 }
 
-exports.DetailNews = function(req,res){
+exports.DetailCampaign = function(req,res){
   try{
-    News.findOne({_id : req.params.id},function(err, news){
+    Campaign.findOne({_id : req.params.id},function(err, campaign){
       if(err){
         console.log(err)
       } else {
-        res.send(news);
+        res.send(campaign);
       }
     })
   } catch (err) {
@@ -54,13 +56,13 @@ exports.DetailNews = function(req,res){
   }
 }
 
-exports.DeleteNews = function(req,res){
+exports.DeleteCampaign = function(req,res){
   try{
-    News.findOneAndDelete({_id : req.params.id},function(err, news){
+    Campaign.findOneAndDelete({_id : req.params.id},function(err, campaign){
       if(err){
         console.log(err)
       } else {
-          const image  = './public/uploads/' + news.image;
+          const image  = './public/uploads/' + campaign.image;
           fs.unlink(image , function(err){
               if(err){
                   console.log(err);
@@ -77,10 +79,10 @@ exports.DeleteNews = function(req,res){
   }
 }
 
-exports.EditNews = async(req,res) =>{
+exports.EditCampaign = async(req,res) =>{
   try{
     console.log(req.params.id)
-    console.log(req.body.title)
+    console.log(req.body.name)
     console.log(req.body.content)
     console.log(req.body.imagepath)
     console.log(req.body.oldimage)
@@ -96,12 +98,12 @@ exports.EditNews = async(req,res) =>{
     } else {
       console.log("not delete")
     }
-    News.findOneAndUpdate({_id : req.params.id},{title : req.body.title , content : req.body.content , image : req.body.imagepath},function(err, news){
+    Campaign.findOneAndUpdate({_id : req.params.id},{name : req.body.name , content : req.body.content , image : req.body.imagepath , date : req.body.date , amount : req.body.amount},function(err, campaign){
       if(err){
         console.log(err)
       } else {
         console.log('success')
-        res.status(201).json({ news });
+        res.status(201).json({ campaign });
       }
     })
   } catch (err) {
