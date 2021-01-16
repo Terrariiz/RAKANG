@@ -11,16 +11,16 @@
                         <v-flex xs12 md6 >
                             <v-container id = "picturenews"  >
                                  <!-- preview image -->
-                                <!-- <div style="text-align:right;"></div>
+                                <div style="text-align:right;"></div>
 
                                 <center><v-div style=""  class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
                                     <span  v-if="!imageData"  class="placeholder">Choose an Image</span>
                                     <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  v-on:change="onFileSelected" >
                                 </v-div></center>
 
-                                <hr> -->
+                                <hr>
                                  <!-- preview image -->
-                                <v-file-input v-model="image" label="File input" filled prepend-icon="mdi-camera"></v-file-input>
+                                <!-- <v-file-input v-model="image" label="File input" filled prepend-icon="mdi-camera"></v-file-input> -->
                                 <!-- <input  type="file" id="file" ref="file" multiple v-on:change="onFileSelected"> -->
                             </v-container>
                         

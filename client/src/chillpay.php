@@ -23,3 +23,4 @@ echo "cURL Error #:" . $err;
 } else {
 echo $response;
 }
+?>
