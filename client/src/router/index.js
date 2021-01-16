@@ -15,6 +15,7 @@ const Listdoctrine           = () => import('@/components/admin/Listdoctrine')
 const Adddoctrine               = () => import('@/components/admin/Adddoctrine')
 const DetailDoctrine               = () => import('@/components/admin/DetailDoctrine')
 const DetailNews               = () => import('@/components/admin/DetailNews')
+const DetailCampaign               = () => import('@/components/admin/DetailCampaign')
 const EditDoctrine               = () => import('@/components/admin/EditDoctrine')
 const Admin                     = () => import('@/components/admin/Admin')
 const loginAdmin                = () => import('@/components/admin/loginAdmin')
@@ -158,6 +159,14 @@ const routes = [
     path: '/admin/editCampaign',
     name: 'editCampaign',
     component: editCampaign,
+    meta: {
+      requiresAdminAuth: true
+    }
+  },
+  {
+    path: '/admin/listcampaign/:id',
+    name: 'DetailCampaign',
+    component: DetailCampaign,
     meta: {
       requiresAdminAuth: true
     }

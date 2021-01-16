@@ -15,7 +15,7 @@
 
                                 <center><v-div style=""  class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
                                     <span  v-if="!imageData"  class="placeholder">Choose an Image</span>
-                                    <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  @input="onSelectFile" >
+                                    <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  v-on:change="onFileSelected" >
                                 </v-div></center>
 
                                 <hr> -->
@@ -74,8 +74,8 @@ const Navbar = () => import('@/components/navbar/navbar')
         data() {
             return {
                 selctedFile: null,
-                head: null,
-                detail: null,
+                title: null,
+                content: null,
                 image: null,
                 imagepath: "",
                 editorData: '<p>Content of the editor.</p>',
@@ -89,20 +89,8 @@ const Navbar = () => import('@/components/navbar/navbar')
             Navbar
         },
         methods:{
-            chooseImage () {
-            this.$refs.fileInput.click()
-        },
-        onSelectFile () {
-            const input = this.$refs.fileInput
-            const files = input.files
-            if (files && files[0]) {
-                const reader = new FileReader
-                reader.onload = e => {
-                    this.imageData = e.target.result
-                }
-            reader.readAsDataURL(files[0])
-            this.$emit('input', files[0])
-            }
+        chooseImage () {
+            this.$refs.fileInput.click();
         },
         async handleSubmit(){
     try {
@@ -115,6 +103,7 @@ const Navbar = () => import('@/components/navbar/navbar')
         let news = await this.$http.post("/news/addnews", formData);
         console.log(news);
         if (news) {
+            this.$router.push({ name: 'Listnews'})
           swal("Success", "Add News Was successful", "success");
           console.log('success')
         } else {
@@ -134,9 +123,21 @@ const Navbar = () => import('@/components/navbar/navbar')
         },
         async onFileSelected(event){
             this.image = event.target.files[0]
+            const input = this.$refs.fileInput 
+            const files = input.files
+            if (files && files[0]) {
+                const reader = new FileReader
+                reader.onload = e => {
+                    this.imageData = e.target.result
+                    
+                }
+            reader.readAsDataURL(files[0])
+            // this.$emit('input', files[0])
+            }
         }
     }
-};
+    }
+
 </script>
 
 <style >
