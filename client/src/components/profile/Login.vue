@@ -51,7 +51,7 @@
 
 <script>
 import swal from "sweetalert";
-const Navbar = () => import('@/components/navbar/visitor_navbar')
+const Navbar = () => import('@/components/navbar/navbar')
 export default {
 
     // data: () => ({
@@ -89,6 +89,7 @@ export default {
         localStorage.setItem("user_token", token);
         if (token) {
           swal("Success", "Login Successful", "success");
+          this.$store.dispatch('UserLoggedIn');
           this.$router.push("/profile");
         }
       } catch (err) {
@@ -98,12 +99,6 @@ export default {
     },
       validate () {
         this.$refs.form.validate()
-      },
-      reset () {
-        this.$refs.form.reset()
-      },
-      resetValidation () {
-        this.$refs.form.resetValidation()
       },
     },
 }

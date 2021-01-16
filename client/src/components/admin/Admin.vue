@@ -51,7 +51,7 @@
         </v-col>
       
         <v-col cols="12" sm="12" md="6">
-          <v-btn block style="margin:3%; " color="primary" to = "/admin/listnews">บอร์ดประชาสัมพันธ์</v-btn>
+          <v-btn block style="margin:3%; " color="primary" to = "/admin/listnews">บอร์ดข่าวประชาสัมพันธ์</v-btn>
         </v-col>
       
         <v-col cols="12"   sm="12" md="6">
@@ -76,7 +76,7 @@
 </template>
 
 <script>
-const Navbar = () => import('@/components/navbar/admin_navbar')
+const Navbar = () => import('@/components/navbar/navbar')
 export default {
   name: 'Admin',
   components:{
@@ -84,7 +84,8 @@ export default {
   },
   methods: {
     async sign_out () {
-			localStorage.removeItem('admin_token')
+      localStorage.removeItem('admin_token')
+      this.$store.dispatch('AdminLoggedOut')
 			await this.$router.push('/home')
 		}
     }

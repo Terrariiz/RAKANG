@@ -12,8 +12,21 @@
                     
                         <v-flex xs12 md6 >
                             <v-container id = "picturenews"  >
+                              <!-- preview image -->
+                                <div style="text-align:right;"></div>
+                                <!-- <div class="m-b-25"><img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image"><br></div>
+                                <div style="text-align:center; display:none;"><input style="visibility:hidden;  width:0;  height:0" id="file-input" type="file" /></div>
+                                 -->
+
+                                <center><v-div style=""  class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
+                                    <span  v-if="!imageData"  class="placeholder">Choose an Image</span>
+                                    <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  @input="onSelectFile" >
+                                </v-div></center>
+
+                                <hr>
+                               
                                 <!-- <v-file-input v-model="doctrine.image" label="File input" filled prepend-icon="mdi-camera"></v-file-input> -->
-                                <input type="file" @change="onFileSelected">
+                                <!-- <input type="file" @change="onFileSelected"> -->
                             </v-container>
                             <v-container>
                             <span>{{doctrine.title}}</span>
@@ -76,15 +89,45 @@
     grid-template-columns: auto 10% 10% auto;
     grid-column-gap: 10%;
 }
+
+
+/* previewsimage */
+
+ .base-image-input {
+  display: block;
+  width: 300px;
+  height: 300px;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center center;
+}
+.placeholder {
+  background: #F0F0F0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+  font-size: 20px;
+  font-family: Helvetica;
+}
+.placeholder:hover {
+  background: #E0E0E0;
+}
+.file-input {
+  display: none;
+}
 </style>
 
 <script>
-const Navbar = () => import('@/components/navbar/admin_navbar')
+const Navbar = () => import('@/components/navbar/navbar')
 import swal from "sweetalert";
 export default {
     name : "Adddoctrine",
     data(){
         return{
+           imageData:null,
             doctrine: {
                 title: "",
                 content: "",
@@ -96,7 +139,21 @@ export default {
     components:{
         Navbar
     },
-    methods: {
+    methods: {chooseImage () {
+            this.$refs.fileInput.click()
+        },
+        onSelectFile () {
+            const input = this.$refs.fileInput
+            const files = input.files
+            if (files && files[0]) {
+                const reader = new FileReader
+                reader.onload = e => {
+                    this.imageData = e.target.result
+                }
+            reader.readAsDataURL(files[0])
+            this.$emit('input', files[0])
+            }
+        },
         async Adddoctrine(){
     try {
         var formData = new FormData();

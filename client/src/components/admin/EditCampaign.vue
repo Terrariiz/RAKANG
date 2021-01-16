@@ -81,6 +81,7 @@
 <script>
 
 import swal from "sweetalert";
+const Navbar = () => import('@/components/navbar/navbar')
 export default {
     name : "EditCampaign",
 
