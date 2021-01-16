@@ -105,6 +105,7 @@ const Navbar = () => import('@/components/navbar/navbar')
         let news = await this.$http.post("/news/addnews", formData);
         console.log(news);
         if (news) {
+            this.$router.push({ name: 'Listnews'})
           swal("Success", "Add News Was successful", "success");
           console.log('success')
         } else {
