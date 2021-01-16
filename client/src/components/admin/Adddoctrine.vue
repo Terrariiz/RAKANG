@@ -20,7 +20,7 @@
 
                                 <center><v-div style=""  class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
                                     <span  v-if="!imageData"  class="placeholder">Choose an Image</span>
-                                    <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  @input="onSelectFile" >
+                                    <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  @change="onFileSelected" >
                                 </v-div></center>
 
                                 <hr>
@@ -139,21 +139,22 @@ export default {
     components:{
         Navbar
     },
-    methods: {chooseImage () {
+    methods: {
+        chooseImage () {
             this.$refs.fileInput.click()
         },
-        onSelectFile () {
-            const input = this.$refs.fileInput
-            const files = input.files
-            if (files && files[0]) {
-                const reader = new FileReader
-                reader.onload = e => {
-                    this.imageData = e.target.result
-                }
-            reader.readAsDataURL(files[0])
-            this.$emit('input', files[0])
-            }
-        },
+        // onSelectFile () {
+        //     const input = this.$refs.fileInput
+        //     const files = input.files
+        //     if (files && files[0]) {
+        //         const reader = new FileReader
+        //         reader.onload = e => {
+        //             this.imageData = e.target.result
+        //         }
+        //     reader.readAsDataURL(files[0])
+        //     this.$emit('input', files[0])
+        //     }
+        // },
         async Adddoctrine(){
     try {
         var formData = new FormData();
@@ -186,6 +187,16 @@ export default {
         },
         async onFileSelected(event){
             this.doctrine.image = event.target.files[0]
+            const input = this.$refs.fileInput
+            const files = input.files
+            if (files && files[0]) {
+                const reader = new FileReader
+                reader.onload = e => {
+                    this.imageData = e.target.result
+                }
+            reader.readAsDataURL(files[0])
+            this.$emit('input', files[0])
+            }
         }
     },
 

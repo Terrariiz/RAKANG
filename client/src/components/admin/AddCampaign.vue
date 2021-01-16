@@ -12,17 +12,17 @@
                     
                         <v-flex xs12 md6 >
                             <v-container id = "picturenews"  >
-                                <v-file-input label="File input" filled prepend-icon="mdi-camera"></v-file-input>
-                                <input type="file" @change="onFileSelected">
+                                <!-- <v-file-input label="File input" filled prepend-icon="mdi-camera"></v-file-input>
+                                <input type="file" @change="onFileSelected"> -->
                                  <!-- preview image -->
-                                <div style="text-align:right;"></div>
+                                <!-- <div style="text-align:right;"></div> -->
                                 <!-- <div class="m-b-25"><img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image"><br></div>
                                 <div style="text-align:center; display:none;"><input style="visibility:hidden;  width:0;  height:0" id="file-input" type="file" /></div>
                                  -->
 
                                 <center><v-div style=""  class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
                                     <span  v-if="!imageData"  class="placeholder">Choose an Image</span>
-                                    <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  @input="onSelectFile" >
+                                    <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  v-on:change="onFileSelected" >
                                 </v-div></center>
 
                                 <hr>
@@ -118,31 +118,28 @@
 </style>
 
 <script>
-import swal from "sweetalert";
 const Navbar = () => import('@/components/navbar/navbar')
+import swal from "sweetalert";
+
 export default {
     
   name: 'Addcampaign',
   data(){
         return{
            imageData:null,
-        }
-    },
-  components:{
-    Navbar
-  },
-  data(){
-        return{
-            campaign: {
+           campaign: {
                 name: "",
                 content: "",
                 image: null,
                 imagepath: "" ,
                 date: '',
                 amount: ""
-            }
+            },
         }
     },
+  components:{
+    Navbar
+  },
     methods: {
         async Addcampaign(){
     try {
@@ -178,14 +175,6 @@ export default {
         },
         async onFileSelected(event){
             this.campaign.image = event.target.files[0]
-        }
-    },
-  
-  methods:{
-            chooseImage () {
-            this.$refs.fileInput.click()
-        },
-        onSelectFile () {
             const input = this.$refs.fileInput
             const files = input.files
             if (files && files[0]) {
@@ -194,9 +183,13 @@ export default {
                     this.imageData = e.target.result
                 }
             reader.readAsDataURL(files[0])
-            this.$emit('input', files[0])
+            // this.$emit('input', files[0])
             }
-        }
-  }
+        },
+        chooseImage () {
+            this.$refs.fileInput.click()
+        },
+        
+    }
 }
 </script>
