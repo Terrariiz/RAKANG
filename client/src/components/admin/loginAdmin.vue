@@ -118,6 +118,7 @@ export default {
         localStorage.setItem("admin_token", token);
         if (token) {
           swal("Success", "Login Successful", "success");
+          this.$store.dispatch('AdminLoggedIn')
           this.$router.push("/admin");
         }
       } catch (err) {

@@ -73,10 +73,11 @@
 
 <script>
 export default {
-    name:'Visitor_navbar',
+    name:'Navbar',
     methods:{
       async sign_out () {
-			localStorage.removeItem('user_token')
+      localStorage.removeItem('user_token')
+      this.$store.dispatch('UserLoggedOut')
 			await this.$router.push('/home')
 		}
   }

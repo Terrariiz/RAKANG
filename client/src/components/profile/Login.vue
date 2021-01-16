@@ -89,6 +89,7 @@ export default {
         localStorage.setItem("user_token", token);
         if (token) {
           swal("Success", "Login Successful", "success");
+          this.$store.dispatch('UserLoggedIn');
           this.$router.push("/profile");
         }
       } catch (err) {

@@ -84,7 +84,8 @@ export default {
   },
   methods: {
     async sign_out () {
-			localStorage.removeItem('admin_token')
+      localStorage.removeItem('admin_token')
+      this.$store.dispatch('AdminLoggedOut')
 			await this.$router.push('/home')
 		}
     }
