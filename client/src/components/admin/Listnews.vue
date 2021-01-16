@@ -53,7 +53,7 @@
 </template>
 
 <script>
-const Navbar = () => import('@/components/navbar/admin_navbar')
+const Navbar = () => import('@/components/navbar/navbar')
 import {
   } from '@mdi/js'
 

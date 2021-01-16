@@ -8,7 +8,7 @@
 </template>
 
 <script>
-const Navbar = () => import('@/components/navbar/visitor_navbar')
+const Navbar = () => import('@/components/navbar/navbar')
 export default {
   components:{
         Navbar

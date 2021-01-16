@@ -70,7 +70,7 @@
 
 <script>
 import swal from "sweetalert";
-const Navbar = () => import('@/components/navbar/visitor_navbar')
+const Navbar = () => import('@/components/navbar/navbar')
 export default {
 
     // data: () => ({
@@ -113,9 +113,6 @@ export default {
     methods: {
       async loginAdmin() {
       try {
-
-        console.log(this.admin.username);
-        console.log(this.admin.password);
         let response = await this.$http.post("/admin/login", this.admin);
         let token = response.data.token;
         localStorage.setItem("admin_token", token);
@@ -133,10 +130,7 @@ export default {
       },
       reset () {
         this.$refs.form.reset()
-      },
-      resetValidation () {
-        this.$refs.form.resetValidation()
-      },
+      }
     },
 }
 
