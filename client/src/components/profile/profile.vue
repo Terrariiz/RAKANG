@@ -85,10 +85,9 @@
 </template>
 
 <script>
-const jwt = require("jsonwebtoken")
 const token = window.localStorage.getItem('user_token')
-const decoded = jwt.verify(token, "secret")
 const Navbar = () => import('@/components/navbar/navbar')
+const id = window.localStorage.getItem('user_id')
 export default {
     name:'Profile',
     data(){
@@ -100,7 +99,7 @@ export default {
         Navbar
     },
     mounted: async function mounted(){
-      await this.$http.get("/user/"+decoded._id)
+      await this.$http.get("/user/"+id)
       .then((res) => {
         this.dataUser = res.data;
       })

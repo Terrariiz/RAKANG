@@ -80,7 +80,9 @@ export default {
       try {
         let response = await this.$http.post("/user/login", this.login);
         let token = response.data.token;
+        let idUser = response.data.user._id;
         localStorage.setItem("user_token", token);
+        localStorage.setItem("user_id", idUser);
         if (token) {
           swal("Success", "Login Successful", "success");
           this.$store.dispatch('UserLoggedIn');

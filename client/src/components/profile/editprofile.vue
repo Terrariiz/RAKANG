@@ -87,9 +87,8 @@
 <script>
 import swal from "sweetalert";
 const Navbar = () => import('@/components/navbar/navbar')
-const jwt = require("jsonwebtoken")
 const token = window.localStorage.getItem('user_token')
-const decoded = jwt.verify(token, "secret")
+const id = window.localStorage.getItem('user_id')
 export default {
     
     name:'Editprofile',
@@ -114,7 +113,7 @@ export default {
     },
     // get data of user
     mounted: async function mounted(){
-      await this.$http.get("/user/"+decoded._id)
+      await this.$http.get("/user/"+id)
       .then((res) => {
         this.dataUser = res.data;
         this.dataEdit.oldimage = res.data.image;
@@ -184,7 +183,7 @@ export default {
                     formData.append('imagepath', this.dataEdit.newimage.name)
                     formData.append('oldimage', this.dataEdit.oldimage)
                 }
-                let response = await this.$http.put("/user/"+decoded._id+"/editProfile", formData);
+                let response = await this.$http.put("/user/"+id+"/editProfile", formData);
                 let check = response.data
                 if (check == true) {
                     this.$router.push("/profile");
