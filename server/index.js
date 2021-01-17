@@ -12,6 +12,7 @@ const axios = require("Axios")
 var FormData = require('form-data');
 // const URLSearchParams = require('url-search-params-polyfill');
 const { URLSearchParams } = require('url');
+const User = require("./api/user/model/User");
 
 
 //configure database and mongoose
@@ -60,7 +61,7 @@ app.use("/admin", adminRoutes);
 app.use("/campaign", campaignRoutes);
 
 
-app.post("/test", function(req,res){
+app.post("/test", async function(req,res){
 
     const MerchantCode = 'M031001'
     const Apikey = 'Z5O4ARB0wikPpsSwpjXwmeuVCdD2zVV27Sdbti9gTvYWEOiBo7s7fB6S81LZAE3I'
@@ -78,12 +79,6 @@ app.post("/test", function(req,res){
 
     var CheckSum = MD5Hash.toString()
 
-    const config = {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-    }
-
     var form = new URLSearchParams();
 
     form.append("TransactionId",TransactionId);
@@ -92,14 +87,26 @@ app.post("/test", function(req,res){
     form.append("MerchantCode",MerchantCode);
 
     console.log(form)
-    axios.post("https://sandbox-appsrv2.chillpay.co/api/v2/PaymentStatus/",form)
-      .then((res) => {
-        console.log('จงดูวววววว')
-        console.log(res.data)
-    })
+    // await axios.post("https://sandbox-appsrv2.chillpay.co/api/v2/PaymentStatus/",form)
+    //   .then((res) => {
+    //     console.log('จงดูวววววว')
+    //     console.log(res.data)
+    //     var amount = res.data.Amount; 
+    //     var user_id = res.data.CustomerId;
+    //     console.log(amount)
+    //     console.log(user_id)
+    //     User.findById(user_id,function(err,user){
+    //       console.log(user._id);
+    //       console.log(user.coin);
+    //       user.coin = user.coin+(amount/100);
+    //       user.save();
+    //     })
+    // })
+    
 
   res.redirect('http://localhost:8080/home',)
 });
+
 
 
 app.listen(PORT, () => {

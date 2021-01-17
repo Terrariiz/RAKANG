@@ -21,9 +21,9 @@
           class="mx-auto"
           height="200"
           max-width="350"
-          to = "/detailcoin"
+          @click="pay(50)"
         >
-          <v-card-text class="font-weight-medium mt-12 text-center subtitle-1">
+          <v-card-text  class="font-weight-medium mt-12 text-center subtitle-1">
             50 บาท
           </v-card-text>
         </v-card>
@@ -44,9 +44,9 @@
           class="mx-auto"
           height="200"
           max-width="350"
-          to = "/detailcoin"
+          @click="pay(100)"
         >
-          <v-card-text class="font-weight-medium mt-12 text-center subtitle-1">
+          <v-card-text  class="font-weight-medium mt-12 text-center subtitle-1">
             100 บาท
           </v-card-text>
         </v-card>
@@ -67,9 +67,9 @@
           class="mx-auto"
           height="200"
           max-width="350"
-          to = "/detailcoin"
+          @click="pay(150)"
         >
-          <v-card-text class="font-weight-medium mt-12 text-center subtitle-1">
+          <v-card-text   class="font-weight-medium mt-12 text-center subtitle-1">
             150 บาท
           </v-card-text>
         </v-card>
@@ -90,9 +90,9 @@
           class="mx-auto"
           height="200"
           max-width="350"
-          to = "/detailcoin"
+          @click="pay(300)"
         >
-          <v-card-text class="font-weight-medium mt-12 text-center subtitle-1">
+          <v-card-text   class="font-weight-medium mt-12 text-center subtitle-1">
            300 บาท
           </v-card-text>
         </v-card>
@@ -113,9 +113,9 @@
           class="mx-auto"
           height="200"
           max-width="350"
-          to = "/detailcoin"
+          @click="pay(500)"
         >
-          <v-card-text class="font-weight-medium mt-12 text-center subtitle-1">
+          <v-card-text   class="font-weight-medium mt-12 text-center subtitle-1">
             500 บาท
           </v-card-text>
         </v-card>
@@ -136,9 +136,9 @@
           class="mx-auto"
           height="200"
           max-width="350"
-          to = "/detailcoin"
+          @click="pay20()"
         >
-          <v-card-text class="font-weight-medium mt-12 text-center subtitle-1">
+          <v-card-text    class="font-weight-medium mt-12 text-center subtitle-1">
             1000 บาท
           </v-card-text>
         </v-card>
@@ -181,6 +181,23 @@ export default {
       ],
       transparent: 'rgba(255, 255, 255, 0)',
     }),
+    methods: {
+      pay(amount){
+        localStorage.setItem("top-up-amount", amount*100);
+        var test = localStorage.getItem("top-up-amount");
+        console.log(test)
+        console.log(amount)
+        this.$router.push({ name: 'payment' })
+      },
+      pay20(){
+        // this.$http.redirect('https://sandbox-link3.chillpay.co/3K1SQ1NVLP')
+        // window.location = "https://sandbox-link3.chillpay.co/3K1SQ1NVLP";
+        // var a = this.$http.get("https://sandbox-link3.chillpay.co/3K1SQ1NVLP")
+        // localStorage.setItem("a", a);
+        this.$router.push({ name: 'test' })
+
+      }
+    }
 }
 </script>
 <style lang="sass" scoped>
