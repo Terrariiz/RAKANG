@@ -18,7 +18,7 @@
                                     <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  v-on:change="onFileSelected" >
                                 </v-div></center>
 
-                                <hr>
+                                <hr> 
                                  <!-- preview image -->
                                 <!-- <v-file-input v-model="image" label="File input" filled prepend-icon="mdi-camera"></v-file-input> -->
                                 <!-- <input  type="file" id="file" ref="file" multiple v-on:change="onFileSelected"> -->

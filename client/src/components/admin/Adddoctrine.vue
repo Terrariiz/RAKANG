@@ -16,14 +16,14 @@
                                 <div style="text-align:right;"></div>
                                 
 
-                                <!-- <center><v-div style=""  class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
+                                <center><v-div style=""  class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
                                     <span  v-if="!imageData"  class="placeholder">Choose an Image</span>
                                     <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  @change="onFileSelected" >
-                                </v-div></center>-->
+                                </v-div></center>
 
                                 <!-- <hr> -->
                                
-                                <v-file-input v-model="doctrine.image" label="File input"  filled prepend-icon="mdi-camera"></v-file-input>
+                                <!-- <v-file-input v-model="doctrine.image" label="File input"  filled prepend-icon="mdi-camera"></v-file-input> -->
                                 <!-- <input type="file" @change="onFileSelected"> -->
                             </v-container>
                             <!-- <v-container>
