@@ -17,6 +17,7 @@
         <v-text-field style="text-align:center; "
           single-line solo
           v-model="login.email"
+          :rules='emailRules'
           label="Email"
           required
         ></v-text-field>
@@ -27,9 +28,9 @@
             id="password"
             :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
             :type="show1 ? 'text' : 'password'"
-            
+            :rules='passwordRules'
             label="Password"
-            hint="At least 8 characters"
+            hint="At least 6 characters"
             counter
             @click:append="show1 = !show1"
             aria-required=""
@@ -63,11 +64,16 @@ export default {
         email: "",
         password: ""
       },
-        show1:false,
-        rules: {
-          required: value => !!value || 'Required.',
-          min: v => v.length >= 8 || 'Min 8 characters'
-        },
+      show1:false,
+      emailRules:[
+        v => !!v || 'Email is required!',
+        v => /.+@.+/.test(v) || 'E-mail must be valid',
+      ],
+      passwordRules:[
+        v => !!v || 'Password is required!',
+        v => v.length >= 6 || 'Name must be more than 6 characters',
+        v => v.length <= 12 || 'Name must be less than 12 characters',
+      ],
     }
 
   },
