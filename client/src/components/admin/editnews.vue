@@ -73,7 +73,7 @@
 </style>
 
 <script>
-
+const Navbar = () => import('@/components/navbar/navbar')
 import swal from "sweetalert";
 export default {
     name : "EditNews",
@@ -100,6 +100,9 @@ export default {
     },
     mounted: function(){
         this.getData()
+    },
+    components:{
+        Navbar
     },
     methods: {
     async Editnews(){
