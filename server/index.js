@@ -7,6 +7,11 @@ const mongoose = require("mongoose");
 const config = require("./config/db");
 const app = express();
 const path = require("path");
+var CryptoJS = require("crypto-js");
+const axios = require("Axios")
+var FormData = require('form-data');
+// const URLSearchParams = require('url-search-params-polyfill');
+const { URLSearchParams } = require('url');
 
 
 //configure database and mongoose
@@ -42,6 +47,8 @@ const userRoutes = require('./api/user/route/user'); //bring in our user routes
 const doctrineRoutes = require("./api/doctrine/route/doctrine"); //bring in our user routes
 const adminRoutes = require('./api/admin/route/admin');
 const campaignRoutes = require('./api/campaign/route/campaign');
+const testroute = require('./api/test/test');
+
 // app.use("/user", userRoutes);
 app.use("/doctrine", doctrineRoutes);
 
@@ -51,6 +58,48 @@ app.use("/user", userRoutes);
 app.use("/news", newsRoutes);
 app.use("/admin", adminRoutes);
 app.use("/campaign", campaignRoutes);
+
+
+app.post("/test", function(req,res){
+
+    const MerchantCode = 'M031001'
+    const Apikey = 'Z5O4ARB0wikPpsSwpjXwmeuVCdD2zVV27Sdbti9gTvYWEOiBo7s7fB6S81LZAE3I'
+    const TransactionId = req.body.transNo;
+    const md5key = "9kQEjXW1R5jlrD3teFy0qzKYNTwJB0VLeRJjozgFLoUDPy4RrqSu0AQEZyCWRYeJZnCm9835Qe7KVISlCpkC5mHa482E9ApEL3M3z01W03RpbvUUkKbj89NaR1jJNUEnkMyXrATJydyKRh8pqZLu174kf2QxJzBxufAjC"
+    var string = MerchantCode+TransactionId+Apikey+md5key
+
+    console.log(req.body)
+
+    console.log(string)
+
+    const MD5Hash =  CryptoJS.MD5(string);
+
+    console.log(MD5Hash.toString())
+
+    var CheckSum = MD5Hash.toString()
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    }
+
+    var form = new URLSearchParams();
+
+    form.append("TransactionId",TransactionId);
+    form.append("CheckSum",CheckSum);
+    form.append("ApiKey",Apikey);
+    form.append("MerchantCode",MerchantCode);
+
+    console.log(form)
+    axios.post("https://sandbox-appsrv2.chillpay.co/api/v2/PaymentStatus/",form)
+      .then((res) => {
+        console.log('จงดูวววววว')
+        console.log(res.data)
+    })
+
+  res.redirect('http://localhost:8080/home',)
+});
 
 
 app.listen(PORT, () => {
