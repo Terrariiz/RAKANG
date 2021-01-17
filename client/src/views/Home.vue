@@ -41,7 +41,7 @@
         </v-col>
          
       </v-row>
-      <a href="/news" style="float:right;">แสดงทั้งหมด >>></a>
+      <a href="/home" style="float:right;">แสดงทั้งหมด >>></a>
     </v-container>
   </div>
   
@@ -71,7 +71,7 @@
         </v-col>
          
       </v-row>
-      <a href="/news" style="float:right;">แสดงทั้งหมด >>></a>
+      <a href="/home" style="float:right;">แสดงทั้งหมด >>></a>
     </v-container>
   </div>
     
