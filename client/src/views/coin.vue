@@ -136,7 +136,7 @@
           class="mx-auto"
           height="200"
           max-width="350"
-          @click="pay20()"
+          @click="pay(1000)"
         >
           <v-card-text    class="font-weight-medium mt-12 text-center subtitle-1">
             1000 บาท
@@ -188,15 +188,8 @@ export default {
         console.log(test)
         console.log(amount)
         this.$router.push({ name: 'payment' })
-      },
-      pay20(){
-        // this.$http.redirect('https://sandbox-link3.chillpay.co/3K1SQ1NVLP')
-        // window.location = "https://sandbox-link3.chillpay.co/3K1SQ1NVLP";
-        // var a = this.$http.get("https://sandbox-link3.chillpay.co/3K1SQ1NVLP")
-        // localStorage.setItem("a", a);
-        this.$router.push({ name: 'test' })
-
       }
+      
     }
 }
 </script>

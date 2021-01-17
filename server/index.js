@@ -87,24 +87,25 @@ app.post("/test", async function(req,res){
     form.append("MerchantCode",MerchantCode);
 
     console.log(form)
-    // await axios.post("https://sandbox-appsrv2.chillpay.co/api/v2/PaymentStatus/",form)
-    //   .then((res) => {
-    //     console.log('จงดูวววววว')
-    //     console.log(res.data)
-    //     var amount = res.data.Amount; 
-    //     var user_id = res.data.CustomerId;
-    //     console.log(amount)
-    //     console.log(user_id)
-    //     User.findById(user_id,function(err,user){
-    //       console.log(user._id);
-    //       console.log(user.coin);
-    //       user.coin = user.coin+(amount/100);
-    //       user.save();
-    //     })
-    // })
+    if(req.body.status == "complete"){
+    await axios.post("https://sandbox-appsrv2.chillpay.co/api/v2/PaymentStatus/",form)
+    .then((res) => {
+      console.log('จงดูวววววว')
+      console.log(res.data)
+      var amount = res.data.Amount; 
+      var user_id = res.data.CustomerId;
+      console.log(amount)
+      console.log(user_id)
+      User.findById(user_id,function(err,user){
+        console.log(user._id);
+        user.coin = user.coin+(amount/100);
+        user.save();
+      })
+  })
+    }
     
 
-  res.redirect('http://localhost:8080/home',)
+  res.redirect('http://localhost:8082/home',)
 });
 
 
