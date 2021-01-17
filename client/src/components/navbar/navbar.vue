@@ -1,8 +1,8 @@
 <template>
   <div>
     <div v-if='$store.getters.UserIsLoggedIn'>
-        <b-navbar toggleable="lg" type="dark" variant="info">
-              <b-navbar-brand href="/home">NavBar</b-navbar-brand>
+        <b-navbar toggleable="lg" type="light" variant="info">
+              <b-navbar-brand href="/home">RAKANGTHAM</b-navbar-brand>
               <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
               <b-collapse id="nav-collapse" is-nav>
                 <b-navbar-nav>
@@ -22,8 +22,8 @@
         </b-navbar>
     </div>
     <div v-else-if='$store.getters.AdminIsLoggedIn'>
-        <b-navbar toggleable="lg" type="dark" variant="info">
-              <b-navbar-brand href="/home">NavBar</b-navbar-brand>
+        <b-navbar toggleable="lg" type="dark" variant="dark">
+              <b-navbar-brand href="/home">RAKANGTHAM</b-navbar-brand>
               <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
               <b-collapse id="nav-collapse" is-nav>
                 <b-navbar-nav>
@@ -43,8 +43,8 @@
         </b-navbar>
     </div>
     <div v-else>
-        <b-navbar toggleable="lg" type="dark" variant="info">
-              <b-navbar-brand href="/home">NavBar</b-navbar-brand>
+        <b-navbar toggleable="lg" type="light" variant="info">
+              <b-navbar-brand href="/home">RAKANGTHAM</b-navbar-brand>
               <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
               <b-collapse id="nav-collapse" is-nav>
                 <b-navbar-nav>
