@@ -36,7 +36,7 @@
                 <td>
                   <!-- <router-link :to="`/admin/listdoctrine/${doctrine._id}`">detail</router-link> -->
                   <!-- <router-link :to="{name : 'DetailDoctrine', params: {id:doctrine._id}}">detail</router-link> -->
-                  <v-btn @click="ViewDoctrine(news._id)">view</v-btn>
+                  <v-btn color="succes" @click="ViewDoctrine(news._id)">view</v-btn>
                   
                 </td>
                 <!-- <td>{{ item.name }}</td>

@@ -3,33 +3,37 @@
     <div>
       <Navbar></Navbar>
     </div>
-      <h1>detail page</h1>
-      {{$route.params.id}}
-      <v-container style="background-color:white;">
+      <!-- <h1>detail page</h1>
+      {{$route.params.id}} -->
+      
+      <v-container rounded-xl style="background:linear-gradient(90deg, hsla(16, 100%, 76%, 1) 0%, hsla(49, 100%, 81%, 1) 100%); 
+       box-shadow:5px 6px 5px #888888; margin-top: 3%">
+        <i style="float:left;" class="fa fa-arrow-left fa-lg" aria-hidden="true"></i>
       <div  v-if="news" >
                 
               <center>
               <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-              <a href="#">
+                <!-- <div><i style="font-size: 50px; float:left;" class="fa fa-arrow-left" aria-hidden="true"></i></div> -->
+              <a href="#"><br>
                 <img class="img-fluid rounded" id="showimage" :src="'http://localhost:4000/uploads/' + news.image"/>
               </a>
               </div>
               </center>
               <v-container>
-                {{ news.title }}
+                <div style="text-align:center; font-size:40px;">{{ news.title }}</div>
               </v-container>
-              <v-container>  
-                <div v-html="news.content">{{ news.content }}</div>
+              <v-container  rounded-xl style="background-color:white; box-shadow:5px 6px 5px #888888; width:70%;">  
+                <div style="margin:5%" v-html="news.content">{{ news.content }}</div>
               </v-container>
-              <v-row>
-                <v-col style="background-color:blue;" cols = "3"></v-col>
-                <v-col style="background-color:red;" cols = "3">
-                  <v-btn style="float:right;" @click="EditNews($route.params.id)">Edit</v-btn>
+              <v-row style="margin-top:3%;">
+                <v-col  cols = "3"></v-col>
+                <v-col  cols = "3">
+                  <v-btn color="primary" style="float:right;" @click="EditNews($route.params.id)">Edit</v-btn>
                 </v-col>
-                <v-col style="background-color:black;" cols = "3">
-                  <v-btn style="float:left;" @click="DeleteNews($route.params.id)">Delete</v-btn>
+                <v-col  cols = "3">
+                  <v-btn color="primary" style="float:left;" @click="DeleteNews($route.params.id)">Delete</v-btn>
                 </v-col>
-                  <v-col style="background-color:white;" cols = "3"></v-col>
+                  <v-col  cols = "3"></v-col>
               </v-row>
       </div>
       </v-container>
@@ -86,5 +90,10 @@ export default {
   width: 700px;
   height: 250px; 
   object-fit: cover;
+}
+img
+{
+  height: 70%;
+  width: 70%;
 }
 </style>
