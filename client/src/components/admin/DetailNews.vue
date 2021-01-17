@@ -5,6 +5,7 @@
     </div>
       <h1>detail page</h1>
       {{$route.params.id}}
+      <v-container style="background-color:white;">
       <div  v-if="news" >
                 
               <center>
@@ -14,15 +15,24 @@
               </a>
               </div>
               </center>
-
-              <div>{{ news.title }}</div>
-                
-              <div v-html="news.content">{{ news.content }}</div>
-                
-               <div>   <button @click="EditNews($route.params.id)">Edit</button>    </div>
-               <div>  <button @click="DeleteNews($route.params.id)">Delete</button> </div> 
+              <v-container>
+                {{ news.title }}
+              </v-container>
+              <v-container>  
+                <div v-html="news.content">{{ news.content }}</div>
+              </v-container>
+              <v-row>
+                <v-col style="background-color:blue;" cols = "3"></v-col>
+                <v-col style="background-color:red;" cols = "3">
+                  <v-btn style="float:right;" @click="EditNews($route.params.id)">Edit</v-btn>
+                </v-col>
+                <v-col style="background-color:black;" cols = "3">
+                  <v-btn style="float:left;" @click="DeleteNews($route.params.id)">Delete</v-btn>
+                </v-col>
+                  <v-col style="background-color:white;" cols = "3"></v-col>
+              </v-row>
       </div>
-      
+      </v-container>
         
   </div>
 </template>

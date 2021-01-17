@@ -18,6 +18,9 @@
             <thead>
               <tr>
                 <th class="text-left">
+                 
+                </th>
+                <th class="text-left">
                   Name
                 </th>
                 <th class="text-left">
@@ -29,11 +32,11 @@
               <tr   @submit.prevent="editnews" v-for="news in doctrines"  :key="news._id">
                 <td><center><img :src="'http://localhost:4000/uploads/' + news.image" class="img-fluid" style="width: 100px; height: 100px; object-fit: cover; margin:3%;" align="center"></center></td>
                 <td>{{ news.title }}</td>
-                <td v-html="news.content">{{ news.content }}</td>
+                <!-- <td v-html="news.content">{{ news.content }}</td> -->
                 <td>
                   <!-- <router-link :to="`/admin/listdoctrine/${doctrine._id}`">detail</router-link> -->
                   <!-- <router-link :to="{name : 'DetailDoctrine', params: {id:doctrine._id}}">detail</router-link> -->
-                  <button @click="ViewDoctrine(news._id)">view</button>
+                  <v-btn @click="ViewDoctrine(news._id)">view</v-btn>
                   
                 </td>
                 <!-- <td>{{ item.name }}</td>
