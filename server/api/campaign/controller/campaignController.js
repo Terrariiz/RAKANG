@@ -100,7 +100,7 @@ exports.EditCampaign = async(req,res) =>{
         dataEdit = {
           name: req.body.name,
           content: req.body.content,
-          image: req.body.oldimage,
+          image: req.file.filename,
           amount : req.body.amount,
           date : req.body.date
         }
