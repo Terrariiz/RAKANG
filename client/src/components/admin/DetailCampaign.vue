@@ -52,23 +52,6 @@
                 </v-col>
                   <v-col  cols = "3"></v-col>
               </v-row>
-                <!-- test -->
-              <!-- <center>
-              <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-              <a href="#">
-                <img class="img-fluid rounded" id="showimage" :src="'http://localhost:4000/uploads/' + campaign.image"/>
-              </a>
-              </div>
-              </center>
-
-              <div>{{ campaign.name }}</div>
-              <div>{{ campaign.date }}</div>
-              <div>{{ campaign.amount }}</div>
-                
-              <div v-html="campaign.content">{{ campaign.content }}</div>
-                
-               <div>   <button @click="EditCampaign($route.params.id)">Edit</button>    </div>
-               <div>  <button @click="DeleteCampaign($route.params.id)">Delete</button> </div>  -->
       </div>
       
       </v-container>   
@@ -77,7 +60,8 @@
 </template>
 
 <script>
-const Navbar = () => import('@/components/navbar/admin_navbar')
+const Navbar = () => import('@/components/navbar/navbar')
+import swal from "sweetalert";
 export default {
     name : "DetailCampaign",
     data (){
@@ -113,6 +97,7 @@ export default {
         this.$http.delete("/campaign/DeleteCampaign/"+this.$route.params.id)
         console.log("delete")
         this.$router.push({ name: 'ListCampaign'})
+        swal("Success", "Delete Campaign Success", "success");
       },
     }
     

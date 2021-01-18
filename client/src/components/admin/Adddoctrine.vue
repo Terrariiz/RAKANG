@@ -1,9 +1,9 @@
 <template>
-    <div class="dashboard" >
+    <div class="Adddoctrine">
         <div>
             <Navbar></Navbar>
         </div>
-         <v-form
+         <form
          @submit.prevent="Adddoctrine">
         <v-container id ='rounded' style="background-color: #F09C0B;">
            
@@ -11,40 +11,28 @@
                 <v-layout row wrap >
                     
                         <v-flex xs12 md6 >
-                            <v-container id = "picturenews"  >
-                              <!-- preview image -->
+                            <v-container id = "picturedoctrine"  >
                                 <div style="text-align:right;"></div>
                                 
 
                                 <center><v-div style=""  class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
                                     <span  v-if="!imageData"  class="placeholder">Choose an Image</span>
-                                    <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  @change="onFileSelected" >
+                                    <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  v-on:change="onFileSelected" >
                                 </v-div></center>
 
-                                <!-- <hr> -->
+                                <hr>
                                
-                                <!-- <v-file-input v-model="doctrine.image" label="File input"  filled prepend-icon="mdi-camera"></v-file-input> -->
-                                <!-- <input type="file" @change="onFileSelected"> -->
                             </v-container>
-                            <!-- <v-container>
-                            <span>{{doctrine.title}}</span>
-                            <span>{{doctrine.content}}</span>
-                            <span>{{doctrine.image}}</span>
-                            </v-container> -->
                         </v-flex>
                         <v-flex xs12 md6>
-                                <center><v-text-field  v-model="doctrine.title" style="width:70%; text-align: center;" label="หัวข้อเรื่อง" required></v-text-field></center>
+                                <center><v-text-field  v-model="title" style="width:70%; text-align: center;" label="หัวข้อเรื่อง" required></v-text-field></center>
                                 <br><br>
-                                <v-container id ="detailnews" style="background-color: white ; margin-right:3%;">
-                                    <!-- <v-container fluid>
-                                        <v-textarea name="input-7-1" filledlabel="Label" label="รายละเอียด" auto-grow></v-textarea>
-                                    </v-container> -->
+                                <v-container id ="detaildoctrine" style="background-color: white ; margin-right:3%;">
                                     <ckeditor 
                                     id="content"
-                                    v-model="doctrine.content"
+                                    v-model="content"
                                     @input="onEditorInput">
                                     </ckeditor>
-                                    <!-- <v-btn small style="text-align: right;" rounded color="primary" dark  >Add detailnews</v-btn> -->
                                 </v-container>
                         </v-flex>
                     
@@ -52,18 +40,90 @@
             </v-container>
                 <div id="grid-container">
                     <div></div>
-                    <v-btn style="weihgt = 40%" color="primary" dark href='/admin/listdoctrine'>cancle</v-btn>
+                    <v-btn style="weidth = 40%" color="primary" dark href='/admin/listdoctrine'>cancle</v-btn>
                     <v-btn type="submit" color="primary" dark>submit</v-btn>
                     <div></div>  
                 </div>
-
-            <!-- <v-btn style="margin-right= 50%;" color="primary" dark>cancle</v-btn> 
-                <v-btn style="margin-left= 50%;" color="primary" dark>submit</v-btn> -->
         </v-container>    
-        </v-form>
+        </form>
     
     </div>
 </template>
+
+<script>
+const Navbar = () => import('@/components/navbar/navbar')
+import swal from "sweetalert";
+export default {
+    name : "Adddoctrine",
+    data(){
+        return{
+            selctedFile: null,
+            title: null,
+            content: null,
+            image: null,
+            imagepath: "",
+            editorData: '<p>Content of the editor.</p>',
+            editorConfig: {
+                // The configuration of the editor.
+            },
+            imageData:null,
+        }
+    },
+    components:{
+        Navbar
+    },
+    methods: {
+        chooseImage () {
+            this.$refs.fileInput.click();
+        },
+        async Adddoctrine(){
+        try {
+            var formData = new FormData();
+            formData.append('title', this.title)
+            formData.append('content', this.content)
+            formData.append('image', this.image)
+            formData.append('imagepath', this.image.name)
+            console.log(formData)
+            let doctrine = await this.$http.post("/doctrine/adddoctrine", formData);
+            console.log(doctrine);
+            if (doctrine) {
+            this.$router.push({ name: 'Listdoctrine'})
+            swal("Success", "Add doctrine Was successful", "success");
+            console.log('success')
+            
+            } else {
+            swal("Error", "Something Went Wrong", "error");
+            console.log('error')
+            }
+        } catch (err) {
+            let error = err.response;
+            if (error.status == 409) {
+            swal("Error", error.data.message, "error");
+            console.log('success')
+            } else {
+            swal("Error", error.data.err.message, "error");
+            console.log('error')
+            }
+        }
+        },
+        async onFileSelected(event){
+            this.image = event.target.files[0]
+            const input = this.$refs.fileInput
+            const files = input.files
+            if (files && files[0]) {
+                const reader = new FileReader
+                reader.onload = e => {
+                    this.imageData = e.target.result
+                }
+            reader.readAsDataURL(files[0])
+            // this.$emit('input', files[0])
+            }
+        }
+    },
+
+}
+</script>
+
 <style >
 #detailnews{
     text-align: left;
@@ -117,86 +177,3 @@
   display: none;
 }
 </style>
-
-<script>
-const Navbar = () => import('@/components/navbar/navbar')
-import swal from "sweetalert";
-export default {
-    name : "Adddoctrine",
-    data(){
-        return{
-           imageData:null,
-            doctrine: {
-                title: "",
-                content: "",
-                image: null,
-                imagepath: "" 
-            }
-        }
-    },
-    components:{
-        Navbar
-    },
-    methods: {
-        chooseImage () {
-            this.$refs.fileInput.click()
-        },
-        // onSelectFile () {
-        //     const input = this.$refs.fileInput
-        //     const files = input.files
-        //     if (files && files[0]) {
-        //         const reader = new FileReader
-        //         reader.onload = e => {
-        //             this.imageData = e.target.result
-        //         }
-        //     reader.readAsDataURL(files[0])
-        //     this.$emit('input', files[0])
-        //     }
-        // },
-        async Adddoctrine(){
-    try {
-        var formData = new FormData();
-        formData.append('title', this.doctrine.title)
-        formData.append('content', this.doctrine.content)
-        formData.append('image', this.doctrine.image)
-        formData.append('imagepath', this.doctrine.image.name)
-        console.log(formData)
-        let doctrine = await this.$http.post("/doctrine/adddoctrine", formData);
-        console.log(doctrine);
-        if (doctrine) {
-          this.$router.push({ name: 'Listdoctrine'})
-          swal("Success", "Add doctrine Was successful", "success");
-          console.log('success')
-          
-        } else {
-          swal("Error", "Something Went Wrong", "error");
-          console.log('error')
-        }
-      } catch (err) {
-        let error = err.response;
-        if (error.status == 409) {
-          swal("Error", error.data.message, "error");
-        console.log('success')
-        } else {
-          swal("Error", error.data.err.message, "error");
-        console.log('error')
-        }
-      }
-        },
-        async onFileSelected(event){
-            this.doctrine.image = event.target.files[0]
-            const input = this.$refs.fileInput
-            const files = input.files
-            if (files && files[0]) {
-                const reader = new FileReader
-                reader.onload = e => {
-                    this.imageData = e.target.result
-                }
-            reader.readAsDataURL(files[0])
-            this.$emit('input', files[0])
-            }
-        }
-    },
-
-}
-</script>

@@ -3,7 +3,7 @@
         <div>
             <Navbar></Navbar>
         </div>
-        <v-form
+        <form
          @submit.prevent="Editnews">
         <v-container id ='rounded' style="background-color: #F09C0B;">
             <v-container class="my-5">
@@ -44,7 +44,7 @@
             <!-- <v-btn style="margin-right= 50%;" color="primary" dark>cancle</v-btn> 
                 <v-btn style="margin-left= 50%;" color="primary" dark>submit</v-btn> -->
         </v-container>
-        </v-form>    
+        </form>    
     </div>
 </template>
 <style >

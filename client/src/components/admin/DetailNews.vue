@@ -40,6 +40,7 @@
 
 <script>
 const Navbar = () => import('@/components/navbar/navbar')
+import swal from "sweetalert";
 export default {
     name : "DetailNews",
     data (){
@@ -73,8 +74,8 @@ export default {
       },
        DeleteNews(){
         this.$http.delete("/news/DeleteNews/"+this.$route.params.id)
-        console.log("delete")
         this.$router.push({ name: 'Listnews'})
+        swal("Success", "Delete News Success", "success");
       },
     }
     
