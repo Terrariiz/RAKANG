@@ -45,19 +45,19 @@
                                         
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600">ชื่อ</p>
-                                            <v-text-field single-line solo  v-model="dataEdit.firstname" v-bind:label="dataUser.firstname"></v-text-field>
+                                            <v-text-field single-line solo  v-model="dataUser.firstname"></v-text-field>
                                         </div>
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600">นามสกุล</p>
-                                            <v-text-field single-line solo  v-model="dataEdit.lastname" v-bind:label="dataUser.lastname"></v-text-field>
+                                            <v-text-field single-line solo  v-model="dataUser.lastname"></v-text-field>
                                         </div>
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600">อายุ(ปี)</p>
-                                            <v-text-field single-line solo  v-model="dataEdit.age" v-bind:label="dataUser.age"></v-text-field>
+                                            <v-text-field single-line solo  v-model="dataUser.age"></v-text-field>
                                         </div>
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600">เบอร์โทรติดต่อ</p>
-                                            <v-text-field single-line solo  v-model="dataEdit.phone" v-bind:label="dataUser.phone"></v-text-field>
+                                            <v-text-field single-line solo  v-model="dataUser.phone"></v-text-field>
                                         </div>
                                         <div class="col-md-6">
                                             <v-btn type="submit" style="margin:1%; text-align:center;" to="/profile" color="error" dark>Cancel</v-btn>
