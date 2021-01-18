@@ -18,7 +18,8 @@ exports.registerNewUser = async (req, res) => {
         lastname: req.body.lastname,
         phone: req.body.phone,
         age: req.body.age,
-        image: "user.png"
+        image: "user.png",
+        coin: 0
       });
       let data = await user.save();
       const token = await user.generateAuthToken(); // here it is calling the method that we created in the model
@@ -96,4 +97,23 @@ exports.editProfile = async (req,res) => {
     res.status(400).json({ err: err });
     console.log(err);
   }
+};
+
+exports.AddCoin = async (req,res) =>{
+  // const id = window.localStorage.getItem('user_id')
+  // Meteor.methods({
+  //   someUserRelatedMethod: function(){
+  //     var user = currentUserId;
+  //     console.log(user); // Logs "123456" on the server side. Neat!
+  //   }
+  // });
+  // User.findByIdAndUpdate(id,  function(err,update){
+  //   if(err){
+  //     console.log(err);
+  //   } else{
+  //     res.json(true);
+  //   }
+  // });
+
+  
 };
