@@ -12,18 +12,16 @@
                             <v-container id = "picturenews"  >
                                  <!-- preview image -->
                                 <div style="text-align:right;"></div>
-                                <!-- <div class="m-b-25"><img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image"><br></div>
-                                <div style="text-align:center; display:none;"><input style="visibility:hidden;  width:0;  height:0" id="file-input" type="file" /></div>
-                                 -->
 
                                 <center><v-div style=""  class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
                                     <span  v-if="!imageData"  class="placeholder">Choose an Image</span>
                                     <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  v-on:change="onFileSelected" >
                                 </v-div></center>
 
-                                <hr>
-                                <!-- <v-file-input v-model="image" label="File input" filled prepend-icon="mdi-camera"></v-file-input>
-                                <input  type="file" id="file" ref="file" multiple v-on:change="onFileSelected"> -->
+                                <hr> 
+                                 <!-- preview image -->
+                                <!-- <v-file-input v-model="image" label="File input" filled prepend-icon="mdi-camera"></v-file-input> -->
+                                <!-- <input  type="file" id="file" ref="file" multiple v-on:change="onFileSelected"> -->
                             </v-container>
                         
                         </v-flex>
@@ -105,6 +103,7 @@ const Navbar = () => import('@/components/navbar/navbar')
         let news = await this.$http.post("/news/addnews", formData);
         console.log(news);
         if (news) {
+            this.$router.push({ name: 'Listnews'})
           swal("Success", "Add News Was successful", "success");
           console.log('success')
         } else {

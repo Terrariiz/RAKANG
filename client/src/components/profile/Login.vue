@@ -17,18 +17,23 @@
         <v-text-field style="text-align:center; "
           single-line solo
           v-model="login.email"
-          :rules="nameRules"
+          :rules='emailRules'
           label="Email"
           required
         ></v-text-field>
 
         <v-text-field style="text-align:center; "
           single-line solo
-          v-model="login.password"
-          type="password"
-          :rules="passwordRules"
-          label="Password"
-          required
+           v-model="login.password"
+            id="password"
+            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="show1 ? 'text' : 'password'"
+            :rules='passwordRules'
+            label="Password"
+            hint="At least 6 characters"
+            counter
+            @click:append="show1 = !show1"
+            aria-required=""
         ></v-text-field>
 
         <v-btn
@@ -53,27 +58,22 @@
 import swal from "sweetalert";
 const Navbar = () => import('@/components/navbar/navbar')
 export default {
-
-    // data: () => ({
-    //     valid: true,
-    //     name: '',
-    //     nameRules: [
-    //       v => !!v || 'Name is required',
-    //       v => (v && v.length <= 12) || 'Name must be less than 12 characters',
-    //     ],
-    //     password: '',
-    //     passwordRules: [
-    //       v => !!v || 'Password is required',
-    //       v => (v && v.length <= 12) || 'Password must be less than 12 characters',
-    //     ],
-    //     checkbox: false,
-    // }),
     data() {
     return {
       login: {
         email: "",
         password: ""
-      }
+      },
+      show1:false,
+      emailRules:[
+        v => !!v || 'Email is required!',
+        v => /.+@.+/.test(v) || 'E-mail must be valid',
+      ],
+      passwordRules:[
+        v => !!v || 'Password is required!',
+        v => v.length >= 6 || 'Name must be more than 6 characters',
+        v => v.length <= 12 || 'Name must be less than 12 characters',
+      ],
     }
 
   },
@@ -86,7 +86,9 @@ export default {
       try {
         let response = await this.$http.post("/user/login", this.login);
         let token = response.data.token;
+        let idUser = response.data.user._id;
         localStorage.setItem("user_token", token);
+        localStorage.setItem("user_id", idUser);
         if (token) {
           swal("Success", "Login Successful", "success");
           this.$store.dispatch('UserLoggedIn');

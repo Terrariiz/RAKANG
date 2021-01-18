@@ -18,7 +18,16 @@
             <thead>
               <tr>
                 <th class="text-left">
+                 
+                </th>
+                <th class="text-left">
                   Name
+                </th>
+                <th class="text-left">
+                 Date
+                </th>
+                <th class="text-left">
+                 Amount
                 </th>
                 <th class="text-left">
                   Editor
@@ -27,15 +36,15 @@
             </thead>
             <tbody>
               <tr   @submit.prevent="editcampaign" v-for="campaign in campaigns"  :key="campaign._id">
-                <td><center><img :src="'http://localhost:4000/uploads/' + campaign.image" class="img-fluid" style="width: 700px; height: 480px; object-fit: cover;" align="center"></center></td>
+                <td><center><img :src="'http://localhost:4000/uploads/' + campaign.image" class="img-fluid" style="width: 100px; height: 100px; object-fit: cover;  margin:3%;" align="center"></center></td>
                 <td>{{ campaign.name }}</td>
                 <td>{{ campaign.date }}</td>
                 <td>{{ campaign.amount }}</td>
-                <td v-html="campaign.content">{{ campaign.content }}</td>
+                <!-- <td v-html="campaign.content">{{ campaign.content }}</td> -->
                 <td>
                   <!-- <router-link :to="`/admin/listdoctrine/${doctrine._id}`">detail</router-link> -->
                   <!-- <router-link :to="{name : 'DetailDoctrine', params: {id:doctrine._id}}">detail</router-link> -->
-                  <button @click="ViewCampaign(campaign._id)">view</button>
+                  <v-btn @click="ViewCampaign(campaign._id)">view</v-btn>
                   
                 </td>
                 <!-- <td>{{ item.name }}</td>

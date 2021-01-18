@@ -13,7 +13,7 @@
                              <v-container v-model = "news.image"  >
                                 <!-- <v-file-input v-model="doctrine.image" label="File input" filled prepend-icon="mdi-camera"></v-file-input> -->
                                 <input type="file"  @change="onFileSelected">
-
+                                
                                 <!-- <v-btn @click="reset" style="weihgt = 40%" color="red" dark>Clear</v-btn> -->
                                 <p>*if don't submit new picture we just use previous picture</p>
                             </v-container>
@@ -73,7 +73,7 @@
 </style>
 
 <script>
-
+const Navbar = () => import('@/components/navbar/navbar')
 import swal from "sweetalert";
 export default {
     name : "EditNews",
@@ -100,6 +100,9 @@ export default {
     },
     mounted: function(){
         this.getData()
+    },
+    components:{
+        Navbar
     },
     methods: {
     async Editnews(){

@@ -18,21 +18,19 @@
                 <!-- กรอบชั้นใน -->
                 <div  class="card user-card-full">
                     <div class="row m-l-0 m-r-0">
-
-                        
-                        
                             <div  class="col-sm-4 bg-c-lite-green user-profile">
                                 <div style="text-align:center;"  class="card-block text-center text-white">
-                                    <div style="text-align:right;"><v-btn icon ><label for="file-input"><v-icon>mdi-pencil</v-icon></label></v-btn></div>
+                                    <div style="text-align:right;"><v-btn  icon ><label style=" cursor: pointer;" for="file-input"><v-icon>mdi-pencil</v-icon></label></v-btn></div>
                                     <!-- <div class="m-b-25"><img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image"><br></div>
                                     <div style="text-align:center; display:none;"><input style="visibility:hidden;  width:0;  height:0" id="file-input" type="file" /></div>
                                     -->
 
-                                    <center><v-div  class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
-                                        <span  v-if="!imageData"  class="placeholder">Choose an Image</span>
-                                        <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  @input="onSelectFile" >
-                                    </v-div></center>
-                                    <hr>
+                                    <center><v-div style=""  class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
+                                    <span  v-if="!imageData"  class="placeholder">Choose an Image</span>
+                                    <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  @input="onSelectFile" >
+                                </v-div></center>
+
+                                <hr>
                                     
                                 </div>
                             </div>
@@ -89,9 +87,8 @@
 <script>
 import swal from "sweetalert";
 const Navbar = () => import('@/components/navbar/navbar')
-const jwt = require("jsonwebtoken")
 const token = window.localStorage.getItem('user_token')
-const decoded = jwt.verify(token, "secret")
+const id = window.localStorage.getItem('user_id')
 export default {
     
     name:'Editprofile',
@@ -116,7 +113,7 @@ export default {
     },
     // get data of user
     mounted: async function mounted(){
-      await this.$http.get("/user/"+decoded._id)
+      await this.$http.get("/user/"+id)
       .then((res) => {
         this.dataUser = res.data;
         this.dataEdit.oldimage = res.data.image;
@@ -186,7 +183,7 @@ export default {
                     formData.append('imagepath', this.dataEdit.newimage.name)
                     formData.append('oldimage', this.dataEdit.oldimage)
                 }
-                let response = await this.$http.put("/user/"+decoded._id+"/editProfile", formData);
+                let response = await this.$http.put("/user/"+id+"/editProfile", formData);
                 let check = response.data
                 if (check == true) {
                     this.$router.push("/profile");
@@ -368,8 +365,8 @@ h6 {
 
  .base-image-input {
   display: block;
-  width: 110px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
   cursor: pointer;
   background-size: cover;
   background-position: center center;
@@ -392,4 +389,3 @@ h6 {
   display: none;
 }
 </style>
-

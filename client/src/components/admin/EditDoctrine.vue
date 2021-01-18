@@ -1,5 +1,8 @@
 <template>
     <div class="dashboard" >
+        <div>
+            <Navbar></Navbar>
+        </div>
          <v-form
          @submit.prevent="Editdoctrine">
         <v-container id ='rounded' style="background-color: #F09C0B;">
@@ -69,7 +72,7 @@
 </style>
 
 <script>
-
+const Navbar = () => import('@/components/navbar/navbar')
 import swal from "sweetalert";
 export default {
     name : "EditDoctrine",
@@ -93,6 +96,9 @@ export default {
                     // The configuration of the editor.
                 }
         }
+    },
+    components:{
+        Navbar
     },
     mounted: function(){
         this.getData()
