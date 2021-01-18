@@ -3,8 +3,7 @@
     <div>
       <Navbar></Navbar>
     </div>
-    <h1>This is register page.</h1>
-
+    <br>
     <v-form
         ref="form"
         v-model="valid"
@@ -181,6 +180,8 @@ import swal from "sweetalert";
         ],
         ageRules:[
           v => !!v || 'Age is required!',
+          v => v >= 0 || 'Age must be more than 0 years',
+          v => v <= 120 || 'Age must be less than 120 years',
         ],
         phoneRules:[
           v => !!v || 'Phone is required',
