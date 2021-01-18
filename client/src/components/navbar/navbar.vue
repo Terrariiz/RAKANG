@@ -11,7 +11,7 @@
 
               
               <b-navbar-nav class="ml-auto">
-                <b-nav-item href='/coin'>Coin</b-nav-item>
+                <b-nav-item href='/coin'>coin:{{dataUser.firstname}}</b-nav-item>
                <b-nav-item-dropdown right>
                 <!-- Using 'button-content' slot -->
                   <template #button-content>
@@ -70,14 +70,31 @@
 </template>
 
 <script>
+
+const id = window.localStorage.getItem('user_id')
 export default {
     name:'Navbar',
+    data(){
+        return{
+            dataUser: {}
+        }
+    },
     methods:{
       async sign_out () {
       localStorage.removeItem('user_token')
       this.$store.dispatch('UserLoggedOut')
 			await this.$router.push('/home')
-		}
+		},
+    mounted: async function mounted(){
+      console.log(id)
+      await this.$http.get("/user/"+id)
+      .then((res) => {
+        this.dataUser = res.data;
+      })
+      .catch(function(err){
+        console.log(err)
+      })
+    },
   }
 }
 </script>
