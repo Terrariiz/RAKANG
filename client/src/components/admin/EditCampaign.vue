@@ -111,9 +111,6 @@ export default {
     mounted: function(){
         this.getData()
     },
-    components:{
-        Navbar
-    },
     methods: {
     async Editcampaign(){
         try {
