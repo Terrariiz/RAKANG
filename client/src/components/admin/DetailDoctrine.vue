@@ -7,7 +7,7 @@
       {{$route.params.id}} -->
       <v-container rounded-xl style="background:linear-gradient(90deg, hsla(16, 100%, 76%, 1) 0%, hsla(49, 100%, 81%, 1) 100%); 
        box-shadow:5px 6px 5px #888888; margin-top: 3%">
-        <i style="float:left;" class="fa fa-arrow-left fa-lg" aria-hidden="true"></i>
+        <v-btn to='/admin/listdoctrine'> <i style="float:left;" class="fa fa-arrow-left fa-lg" aria-hidden="true"></i></v-btn>
       <div  v-if="doctrines" >
         <center>
               <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">

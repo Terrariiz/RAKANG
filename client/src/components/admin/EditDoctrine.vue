@@ -37,7 +37,7 @@
             </v-container>
                 <div id="grid-container">
                     <div></div>
-                    <v-btn style="weihgt = 40%" color="primary" dark>cancle</v-btn>
+                    <v-btn style="weihgt = 40%" color="primary" dark @click="reset($route.params.id)">cancle</v-btn>
                     <v-btn type="submit" color="primary" dark>submit</v-btn>
                     <div></div>  
                 </div>
@@ -166,10 +166,9 @@ export default {
         console.log(err)
         })
     },
-    // reset(){
-    //     this.$refs.myFileInput.value = null;
-    //     this.doctrine.newimage = null;
-    // }
+    reset(){
+        this.$router.push({ name: 'DetailDoctrine' , params: {id : this.$route.params.id}})
+    }
     },
 }
 </script>

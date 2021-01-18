@@ -51,7 +51,7 @@
             </v-container>
                 <div id="grid-container">
                     <div></div>
-                    <v-btn style="weihgt = 40%" color="primary" dark>cancle</v-btn>
+                    <v-btn style="weihgt = 40%" color="primary" dark href='/admin/listnews'>cancle</v-btn>
                     <!-- <button @click="onUploadFile" class="upload-button">Upload file</button> -->
                     <v-btn type="submit" color="primary" dark>submit</v-btn>
                     <div></div>  
