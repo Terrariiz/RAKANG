@@ -3,6 +3,10 @@
     <div>
         <Navbar></Navbar>
     </div>
+    <div>
+        <changePassword></changePassword>
+    </div>
+   <!-- <h1>This is profile page.</h1> -->
     <v-container>
         <div class="padding">
         <div id="borderbox1" class="row container d-flex justify-content-center">
@@ -32,6 +36,11 @@
                                         <v-col cols="12" sm ="12" md="12">
                                             
                                             <v-btn small  >ประวัติการซื้อ coin</v-btn>
+                                        </v-col>
+
+                                        <v-col cols="12" sm ="12" md="12">
+                                            
+                                            <v-btn small @click="$modal.show('change-password')">change password</v-btn>
                                         </v-col>
 
                                         <!-- <v-cols cols="4" >
@@ -84,6 +93,7 @@
 </template>
 
 <script>
+const changePassword = () => import('@/components/profile/modal_changePassword')
 const token = window.localStorage.getItem('user_token')
 const Navbar = () => import('@/components/navbar/navbar')
 const id = window.localStorage.getItem('user_id')
@@ -91,11 +101,12 @@ export default {
     name:'Profile',
     data(){
         return{
-            dataUser: {}
+            dataUser: {},
         }
     },
     components:{
-        Navbar
+        Navbar,
+        changePassword
     },
     mounted: async function mounted(){
       await this.$http.get("/user/"+id)
@@ -114,9 +125,17 @@ export default {
 				}catch(err){
                     console.log(err)
                     localStorage.removeItem('user_token')
+                    localStorage.removeItem('user_id')
 				}
 			}
-    }
+    },
+    methods: {
+		async sign_out () {
+            localStorage.removeItem('user_id')
+			localStorage.removeItem('user_token')
+			await this.$router.push('/login')
+        }
+	},
 }
 </script>
 

@@ -202,7 +202,7 @@ import swal from "sweetalert";
       async registerUser() {
       try {
         let response = await this.$http.post("/user/register", this.register);
-        console.log(response);
+        // console.log(response);
         let token = response.data.token;
         let id = response.data.data._id;
         if (token) {

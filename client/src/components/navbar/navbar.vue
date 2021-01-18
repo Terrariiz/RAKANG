@@ -93,6 +93,7 @@ export default {
     },
     methods:{
       async sign_out () {
+      localStorage.removeItem('user_id')
       localStorage.removeItem('user_token')
       localStorage.removeItem('user_id')
       localStorage.removeItem("top-up-amount");

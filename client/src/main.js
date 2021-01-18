@@ -27,7 +27,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 // Vue.use(VueAxios, axios);
 Vue.use(BootstrapVue);
 Vue.use( CKEditor );
-Vue.use(vmodal);
+Vue.use(vmodal, { dialog: true });
 
 new Vue({
   router,

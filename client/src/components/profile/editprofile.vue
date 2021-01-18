@@ -131,6 +131,7 @@ export default {
 				}catch(err){
                     console.log(err)
                     localStorage.removeItem('user_token')
+                    localStorage.removeItem('user_id')
 				}
 			}
     },
@@ -151,9 +152,6 @@ export default {
             reader.readAsDataURL(files[0])
             this.$emit('input', files[0])
             }
-        },
-        async EditImage() {
-
         },
         async EditProfile() {
             if(this.dataEdit.firstname == ""){
