@@ -71,25 +71,19 @@
 
 <script>
 
-const id = window.localStorage.getItem('user_id')
+
 export default {
     name:'Navbar',
+    
     data(){
         return{
             dataUser: {}
         }
     },
-    methods:{
-      async sign_out () {
-      localStorage.removeItem('user_token')
-      localStorage.removeItem('user_id')
-      localStorage.removeItem("top-up-amount");
-      this.$store.dispatch('UserLoggedOut')
-			await this.$router.push('/home')
-		},
-    mounted: async function mounted(){
+    mounted: function mounted(){
+      const id = window.localStorage.getItem('user_id')
       console.log(id)
-      await this.$http.get("/user/"+id)
+      this.$http.get("/user/"+id)
       .then((res) => {
         this.dataUser = res.data;
       })
@@ -97,6 +91,14 @@ export default {
         console.log(err)
       })
     },
+    methods:{
+      async sign_out () {
+      localStorage.removeItem('user_token')
+      localStorage.removeItem('user_id')
+      localStorage.removeItem("top-up-amount");
+      this.$store.dispatch('UserLoggedOut')
+      await this.$router.push('/home')
+		},
   }
 }
 </script>

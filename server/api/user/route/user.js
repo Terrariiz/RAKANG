@@ -8,7 +8,7 @@ const storage = multer.diskStorage({
       cb(null, './public/image/profile');
     },
     filename: function(req, file, cb) {
-      cb(null, file.originalname);
+      cb(null, Date.now()+".jpg");
     }
   });
 
@@ -18,7 +18,6 @@ router.post("/register", userController.registerNewUser);
 router.post("/login", userController.loginUser);
 router.get("/:id",userController.getUserDetails);
 router.put("/:id/editProfile", upload.single('image'), userController.editProfile);
-router.post("/AddCoin",userController.AddCoin);
 
 
 module.exports = router;
