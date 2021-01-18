@@ -105,7 +105,7 @@ app.post("/test", async function(req,res){
     }
     
 
-  res.redirect('http://localhost:8082/home',)
+  res.redirect('http://localhost:8080/home',)
 });
 
 
