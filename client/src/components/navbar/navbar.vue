@@ -11,7 +11,7 @@
 
               
               <b-navbar-nav class="ml-auto">
-                <b-nav-item href='/coin'>coin:{{dataUser.firstname}}</b-nav-item>
+                <b-nav-item href='/coin'>coin:{{dataUser.coin}}</b-nav-item>
                <b-nav-item-dropdown right>
                 <!-- Using 'button-content' slot -->
                   <template #button-content>
@@ -82,6 +82,8 @@ export default {
     methods:{
       async sign_out () {
       localStorage.removeItem('user_token')
+      localStorage.removeItem('user_id')
+      localStorage.removeItem("top-up-amount");
       this.$store.dispatch('UserLoggedOut')
 			await this.$router.push('/home')
 		},

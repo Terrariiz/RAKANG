@@ -1,5 +1,6 @@
 <template>
-
+<div>
+  <v-container>
 <form id="payment-form" action="https://sandbox-cdnv3.chillpay.co/Payment/" method="post" role="form" class="form-horizontal">
 
 <modernpay:widget id="modernpay-widget-container" 
@@ -7,10 +8,12 @@ data-merchantid="M031001" :data-amount=top data-orderno="00000001" :data-custome
 data-mobileno="0889999999" data-clientip="124.120.153.53" data-routeno="1" data-currency="764" 
 data-description="Test Payment" data-apikey="Z5O4ARB0wikPpsSwpjXwmeuVCdD2zVV27Sdbti9gTvYWEOiBo7s7fB6S81LZAE3I">
 </modernpay:widget>
-<button type="submit" id="btnSubmit" value="Submit" class="btn">Payment</button>
-<button @click="shit">shit</button>
 </form>
-
+</v-container>
+<div>
+  <center><v-btn href='/home'>get da fak out to home</v-btn></center>
+</div>
+</div>
 </template>
 
 <script>

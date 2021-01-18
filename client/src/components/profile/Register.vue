@@ -191,8 +191,10 @@ import swal from "sweetalert";
         let response = await this.$http.post("/user/register", this.register);
         console.log(response);
         let token = response.data.token;
+        let id = response.data.data._id;
         if (token) {
           localStorage.setItem("user_token", token);
+          localStorage.setItem('user_id', id)
           this.$store.dispatch('UserLoggedIn');
           this.$router.push("/profile");
           swal("Success", "Registration Was successful", "success");

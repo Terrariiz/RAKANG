@@ -117,13 +117,7 @@ export default {
                     localStorage.removeItem('user_token')
 				}
 			}
-    },
-    methods: {
-		async sign_out () {
-			localStorage.removeItem('user_token')
-			await this.$router.push('/login')
-		}
-	},
+    }
 }
 </script>
 
