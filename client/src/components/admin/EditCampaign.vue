@@ -79,9 +79,8 @@
 </style>
 
 <script>
-
+const Navbar = () => import('@/components/navbar/navbar')
 import swal from "sweetalert";
-// const Navbar = () => import('@/components/navbar/navbar')
 export default {
     name : "EditCampaign",
 
@@ -106,6 +105,9 @@ export default {
                 }
         }
     },
+     components:{
+            Navbar
+        },
     mounted: function(){
         this.getData()
     },
