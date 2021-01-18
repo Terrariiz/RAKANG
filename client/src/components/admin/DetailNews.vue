@@ -3,12 +3,9 @@
     <div>
       <Navbar></Navbar>
     </div>
-      <!-- <h1>detail page</h1>
-      {{$route.params.id}} -->
-      
       <v-container rounded-xl style="background:linear-gradient(90deg, hsla(16, 100%, 76%, 1) 0%, hsla(49, 100%, 81%, 1) 100%); 
        box-shadow:5px 6px 5px #888888; margin-top: 3%">
-        <i style="float:left;" class="fa fa-arrow-left fa-lg" aria-hidden="true"></i>
+      <v-btn to='/admin/listnews'><i style="float:left;" class="fa fa-arrow-left fa-lg" aria-hidden="true"></i></v-btn>
       <div  v-if="news" >
                 
               <center>

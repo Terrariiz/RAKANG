@@ -65,28 +65,61 @@ exports.getUserDetails = async (req, res) => {
 
 exports.editProfile = async (req,res) => {
   try{
-    if(req.body.imagepath != req.body.oldimage){
-      const image  = './public/image/profile/' + req.body.oldimage;
-      if(req.body.oldimage != "user.png"){
-        fs.unlink(image , function(err){
-          if(err){
-              console.log(err);
-          } else {
-            console.log("deleted")
-          } 
-        })
+    var dataEdit
+    if(req.file){
+      if(req.file.filename != req.body.oldimage){
+        const image  = './public/image/profile/' + req.body.oldimage;
+        if(req.body.oldimage != "user.png"){
+          fs.unlink(image , function(err){
+            if(err){
+                console.log(err);
+            } else {
+              console.log("deleted")
+            } 
+          })
+        }
+        dataEdit = {
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            phone: req.body.phone,
+            age: req.body.age,
+            image: req.file.filename
+          }
+      } else {
+        console.log("not delete")
       }
-    } else {
-      console.log("not delete")
     }
-    const dataEdit = {
-      firstname: req.body.firstname,
-      lastname: req.body.lastname,
-      phone: req.body.phone,
-      age: req.body.age,
-      image: req.body.imagepath
+    else{
+      dataEdit = {
+          firstname: req.body.firstname,
+          lastname: req.body.lastname,
+          phone: req.body.phone,
+          age: req.body.age,
+          image: req.body.oldimage
+        }
     }
-    User.findByIdAndUpdate(req.params.id, dataEdit, function(err,update){
+    // if(req.body.imagepath != req.body.oldimage){
+    //   const image  = './public/image/profile/' + req.body.oldimage;
+    //   if(req.body.oldimage != "user.png"){
+    //     fs.unlink(image , function(err){
+    //       if(err){
+    //           console.log(err);
+    //       } else {
+    //         console.log("deleted")
+    //       } 
+    //     })
+    //   }
+    // } else {
+    //   console.log("not delete")
+    // }
+    // const dataEdit = {
+    //   firstname: req.body.firstname,
+    //   lastname: req.body.lastname,
+    //   phone: req.body.phone,
+    //   age: req.body.age,
+    //   image: req.body.imagepath
+    // }
+    User.findByIdAndUpdate({_id:req.params.id}, dataEdit, function(err,update){
       if(err){
         console.log(err);
       } else{

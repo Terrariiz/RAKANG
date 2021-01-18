@@ -3,7 +3,7 @@
     <div>
       <Navbar></Navbar>
     </div>
-    <h1>This is admin login page.</h1>
+    <br>
     <v-container id="border-login" rounded-xl style="text-align:center;  margin-top:5%; box-shadow: 5px 6px 5px #888888; ">
       <h1>Admin Login</h1>
       <v-container :elevation="11" style="">

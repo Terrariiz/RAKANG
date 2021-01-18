@@ -9,7 +9,7 @@ exports.addnewdoctrine = async(req,res) => {
       const doctrine = new Doctrine({
         title: req.body.title,
         content: req.body.content,
-        image: req.body.imagepath
+        image: req.file.filename
       });
       console.log(doctrine)
       let data = await doctrine.save()
@@ -44,19 +44,45 @@ exports.EditDoctrine = async(req,res) =>{
     console.log(req.body.content)
     console.log(req.body.imagepath)
     console.log(req.body.oldimage)
-    if(req.body.imagepath != req.body.oldimage){
-      const image  = './public/uploads/' + req.body.oldimage;
-      fs.unlink(image , function(err){
-          if(err){
-              console.log(err);
-          } else {
-            console.log("deleted")
-          } 
-      })
+    if(req.file){
+      if(req.file.filename != req.body.oldimage){
+        const image  = './public/uploads/' + req.body.oldimage;
+        fs.unlink(image , function(err){
+            if(err){
+                console.log(err);
+            } else {
+              console.log("deleted")
+            } 
+        })
+        dataEdit = {
+          title: req.body.title,
+          content: req.body.content,
+          image: req.file.filename
+        }
+
+      } else {
+        console.log("not delete")
+      }
     } else {
-      console.log("not delete")
+      dataEdit = {
+          title: req.body.title,
+          content: req.body.content,
+          image: req.body.oldimage
+        }
     }
-    Doctrine.findOneAndUpdate({_id : req.params.id},{title : req.body.title , content : req.body.content , image : req.body.imagepath},function(err, doctrine){
+    // if(req.file.filename != req.body.oldimage){
+    //   const image  = './public/uploads/' + req.body.oldimage;
+    //   fs.unlink(image , function(err){
+    //       if(err){
+    //           console.log(err);
+    //       } else {
+    //         console.log("deleted")
+    //       } 
+    //   })
+    // } else {
+    //   console.log("not delete")
+    // }
+    Doctrine.findOneAndUpdate({_id : req.params.id},dataEdit,function(err, doctrine){
       if(err){
         console.log(err)
       } else {
