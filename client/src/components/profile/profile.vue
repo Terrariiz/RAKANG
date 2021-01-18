@@ -16,7 +16,7 @@
                                 <center><div> <img style="width: 200px; height: 200px; background-size:cover; " :src="'http://localhost:4000/image/profile/' + dataUser.image" class="img-radius base-image-input" alt="User-Profile-Image"> </div></center>
                                 
                                 <hr><h6 style="font-size: 20px; color;blue;" class="f-w-600">{{dataUser.firstname}} {{dataUser.lastname}}</h6>
-                                <h6 class="f-w-600">200 Coin</h6>
+                                <h6 class="f-w-600">{{dataUser.coin}} Coin</h6>
                                 
                                 <!-- <p>Web Designer</p> <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i> -->
                                 <v-container fluid>

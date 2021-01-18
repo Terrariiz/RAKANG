@@ -33,7 +33,10 @@ const userSchema = new mongoose.Schema({
         required: true
       }
     }
-  ]
+  ],
+  coin: {
+    type: Number
+  }
 });
 
 //this method will hash the password before saving the user model

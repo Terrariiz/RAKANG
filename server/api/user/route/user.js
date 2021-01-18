@@ -18,5 +18,7 @@ router.post("/register", userController.registerNewUser);
 router.post("/login", userController.loginUser);
 router.get("/:id",userController.getUserDetails);
 router.put("/:id/editProfile", upload.single('image'), userController.editProfile);
+router.post("/AddCoin",userController.AddCoin);
+
 
 module.exports = router;

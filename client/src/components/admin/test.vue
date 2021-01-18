@@ -1,6 +1,7 @@
 <template>
 
     <div class="test">
+      <input id="data-merchantid" type="hidden"> 
         <div>
             <Navbar></Navbar>
         </div>
@@ -61,8 +62,15 @@
             <!-- <v-btn style="margin-right= 50%;" color="primary" dark>cancle</v-btn> 
                 <v-btn style="margin-left= 50%;" color="primary" dark>submit</v-btn> -->
         </v-container>  
-        </form>  
+        </form> 
+
+    <div v-html="doctrines.content">
+
+
+
+    </div> 
     </div>
+    
 </template>
 
 <script>
@@ -71,6 +79,7 @@ export default {
     name : "DetailNews",
     data (){
       return {
+        a: null,
         news: null,
         selctedFile: null,
         title: null,
@@ -89,6 +98,12 @@ export default {
     },
     mounted: function(){
       this.getData()
+      const iddd = localStorage.getItem('user_id')
+      console.log(iddd)
+      document.getElementById("data-merchantid").value =  iddd;
+      const a = localStorage.getItem('a')
+      this.a = a;
+
     },
     methods: {
       chooseImage () {
