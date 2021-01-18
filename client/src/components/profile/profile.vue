@@ -3,7 +3,6 @@
     <div>
         <Navbar></Navbar>
     </div>
-   <!-- <h1>This is profile page.</h1> -->
     <v-container>
         <div class="padding">
         <div id="borderbox1" class="row container d-flex justify-content-center">
