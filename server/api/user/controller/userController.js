@@ -156,22 +156,3 @@ exports.changePassword = async (req,res) => {
     console.log(err);
   }
 };
-
-exports.AddCoin = async (req,res) =>{
-  // const id = window.localStorage.getItem('user_id')
-  // Meteor.methods({
-  //   someUserRelatedMethod: function(){
-  //     var user = currentUserId;
-  //     console.log(user); // Logs "123456" on the server side. Neat!
-  //   }
-  // });
-  // User.findByIdAndUpdate(id,  function(err,update){
-  //   if(err){
-  //     console.log(err);
-  //   } else{
-  //     res.json(true);
-  //   }
-  // });
-
-  
-};

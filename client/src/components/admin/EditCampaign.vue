@@ -115,7 +115,7 @@ export default {
     async Editcampaign(){
         try {
             var formData = new FormData();
-            formData.append('name', this.campaign.title)
+            formData.append('name', this.campaign.name)
             formData.append('content', this.campaign.content)
             formData.append('date', this.campaign.date)
             formData.append('amount', this.campaign.amount)
@@ -135,7 +135,7 @@ export default {
             
             console.log('formData')
             console.log(formData)
-            console.log(this.campaign.title)
+            console.log(this.campaign.name)
             console.log(this.campaign.content)
             console.log(this.campaign.image)
             console.log(this.campaign.image.name)

@@ -2,10 +2,6 @@ const Campaign = require("../model/Campaign");
 const multer = require('multer');
 const fs = require('fs');
 
-
-
-  
-  
 exports.addnewcampaign = async(req,res) => {
   try{     
     console.log(req.body)
@@ -134,6 +130,8 @@ exports.EditCampaign = async(req,res) =>{
         console.log(err)
       } else {
         console.log('success')
+        console.log(campaign)
+        console.log(dataEdit)
         res.status(201).json({ campaign });
       }
     })
