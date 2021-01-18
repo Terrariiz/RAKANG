@@ -10,14 +10,17 @@
                 </b-navbar-nav>
 
               
-
-               
-
-                <!-- Right aligned nav items -->
-                <b-navbar-nav class="ml-auto">
-                  <b-nav-item href='/profile'>Profile</b-nav-item>
-                  <b-nav-item v-on:click="sign_out()">Log out</b-nav-item>
-                </b-navbar-nav>
+              <b-navbar-nav class="ml-auto">
+                <b-nav-item href='/coin'>Coin</b-nav-item>
+               <b-nav-item-dropdown right>
+                <!-- Using 'button-content' slot -->
+                  <template #button-content>
+                    <a>User</a>
+                  </template>
+                   <b-dropdown-item href="/profile">Profile</b-dropdown-item>
+                   <b-dropdown-item v-on:click='sign_out()'>Sign Out</b-dropdown-item>
+                </b-nav-item-dropdown>
+              </b-navbar-nav>
               </b-collapse>
         </b-navbar>
     </div>
