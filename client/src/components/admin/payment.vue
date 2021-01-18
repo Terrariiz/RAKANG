@@ -11,7 +11,7 @@ data-description="Test Payment" data-apikey="Z5O4ARB0wikPpsSwpjXwmeuVCdD2zVV27Sd
 </form>
 </v-container>
 <div>
-  <center><v-btn href='/home'>get da fak out to home</v-btn></center>
+  <center><v-btn href='/home'>back to homepage</v-btn></center>
 </div>
 </div>
 </template>
