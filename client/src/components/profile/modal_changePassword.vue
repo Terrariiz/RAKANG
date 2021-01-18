@@ -133,6 +133,7 @@ export default {
             let response = await this.$http.post("/user/"+id+"/reset-password", this.dataPassword);
             let check = response.data
             if (check == true) {
+                this.$refs.form.reset()
                 this.$modal.hide('change-password')
                 swal("Success", "Change your password Was successful", "success");
                 console.log('success')

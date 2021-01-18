@@ -134,6 +134,9 @@ export default {
             localStorage.removeItem('user_id')
 			localStorage.removeItem('user_token')
 			await this.$router.push('/login')
+        },
+        async changePassword() {
+            
         }
 	},
 }

@@ -45,23 +45,23 @@
                                         
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600">ชื่อ</p>
-                                            <v-text-field single-line solo  v-model="dataUser.firstname"></v-text-field>
+                                            <v-text-field single-line solo :rules="firstnameRules" required v-model="dataUser.firstname"></v-text-field>
                                         </div>
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600">นามสกุล</p>
-                                            <v-text-field single-line solo  v-model="dataUser.lastname"></v-text-field>
+                                            <v-text-field single-line solo :rules="lastnameRules" v-model="dataUser.lastname" required></v-text-field>
                                         </div>
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600">อายุ(ปี)</p>
-                                            <v-text-field single-line solo  v-model="dataUser.age"></v-text-field>
+                                            <v-text-field single-line solo :rules="ageRules" v-model="dataUser.age" required></v-text-field>
                                         </div>
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600">เบอร์โทรติดต่อ</p>
-                                            <v-text-field single-line solo  v-model="dataUser.phone"></v-text-field>
+                                            <v-text-field single-line solo :rules="phoneRules" v-model="dataUser.phone" :counter="10" required></v-text-field>
                                         </div>
                                         <div class="col-md-6">
-                                            <v-btn type="submit" style="margin:1%; text-align:center;" to="/profile" color="error" dark>Cancel</v-btn>
-                                            <v-btn type="submit" style="margin:1% text-align:center;"  color="primary" dark>Edit</v-btn>
+                                            <v-btn class="mr-4" style="margin:1%; text-align:center;" to="/profile" color="error" dark>Cancel</v-btn>
+                                            <v-btn :disabled="!valid" @click="validate" class="mr-4" type="submit" color="success">Edit</v-btn>
                                         </div>
                                     </div>
                                     
@@ -97,18 +97,32 @@ export default {
     },
     data() {
         return {
+            valid: false,
             imageData:null,
             dataUser: {},
             dataEdit:{
-                firstname: "",
-                lastname: "",
-                age: "",
-                phone: "",
                 image: null,
                 imagepath: "" ,
                 newimage: null,
                 oldimage: ""
-            }
+            },
+            firstnameRules:[
+                v => !!v || 'Firstname is required!',
+                v => v.length <= 50 || 'Firstname must be less than 50 characters',
+            ],
+            lastnameRules:[
+                v => !!v || 'Lastname is required!',
+                v => v.length <= 50 || 'lastname must be less than 50 characters',
+            ],
+            ageRules:[
+                v => !!v || 'Age is required!',
+                v => v >= 0 || 'Age must be more than 0 years',
+                v => v <= 120 || 'Age must be less than 120 years',
+            ],
+            phoneRules:[
+                v => !!v || 'Phone is required',
+                v => v.length == 10 || 'Name must be 10 numbers',
+            ]
         }
     },
     // get data of user
@@ -153,25 +167,16 @@ export default {
             this.$emit('input', files[0])
             }
         },
+        validate () {
+            this.$refs.form.validate()
+        },
         async EditProfile() {
-            if(this.dataEdit.firstname == ""){
-                this.dataEdit.firstname = this.dataUser.firstname
-            }
-            if(this.dataEdit.lastname == ""){
-                this.dataEdit.lastname = this.dataUser.lastname
-            }
-            if(this.dataEdit.age == ""){
-                this.dataEdit.age = this.dataUser.age
-            }
-            if(this.dataEdit.phone == ""){
-                this.dataEdit.phone = this.dataUser.phone
-            }
             try {
                 var formData = new FormData();
-                formData.append('firstname', this.dataEdit.firstname)
-                formData.append('lastname', this.dataEdit.lastname)
-                formData.append('age', this.dataEdit.age)
-                formData.append('phone', this.dataEdit.phone)
+                formData.append('firstname', this.dataUser.firstname)
+                formData.append('lastname', this.dataUser.lastname)
+                formData.append('age', this.dataUser.age)
+                formData.append('phone', this.dataUser.phone)
             
                 if(this.dataEdit.newimage == null){
                     formData.append('imagepath', this.dataUser.image)
