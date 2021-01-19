@@ -81,21 +81,22 @@ export default {
         }
     },
     mounted: function mounted(){
-      const id = window.localStorage.getItem('user_id')
-      console.log(id)
-      this.$http.get("/user/"+id)
-      .then((res) => {
-        this.dataUser = res.data;
-      })
-      .catch(function(err){
-        console.log(err)
-      })
+         if(window.localStorage.getItem('user_id')){
+            const id = window.localStorage.getItem('user_id')
+            console.log(id)
+            this.$http.get("/user/"+id)
+            .then((res) => {
+              this.dataUser = res.data;
+            })
+            .catch(function(err){
+              console.log(err)
+            })
+          }
     },
     methods:{
       async sign_out () {
       localStorage.removeItem('user_id')
       localStorage.removeItem('user_token')
-      localStorage.removeItem('user_id')
       localStorage.removeItem("top-up-amount");
       this.$store.dispatch('UserLoggedOut')
       await this.$router.push('/home')

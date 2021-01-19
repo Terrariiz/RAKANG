@@ -108,7 +108,8 @@ const routes = [
     }
   },
   {
-    path: '/admin/editnews',
+    // path: '/admin/editnews',
+    path: '/admin/listnews/:id/edit',
     name: 'editnews',
     component: editnews,
     meta: {
@@ -156,7 +157,8 @@ const routes = [
     }
   },
   {
-    path: '/admin/editCampaign',
+    // path: '/admin/editCampaign',
+    path: '/admin/listCampaign/:id/edit',
     name: 'editCampaign',
     component: editCampaign,
     meta: {
