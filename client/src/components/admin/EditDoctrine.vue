@@ -89,7 +89,8 @@ export default {
                 image: null,
                 imagepath: "" ,
                 newimage: null,
-                oldimage: ""
+                oldimage: "",
+                imagedata:null
 
             },
             editorConfig: {
@@ -152,6 +153,16 @@ export default {
             },
     async onFileSelected(event){
             this.doctrine.newimage = event.target.files[0]
+            const input = this.$refs.fileInput
+            const files = input.files
+            if (files && files[0]) {
+                const reader = new FileReader
+                reader.onload = e => {
+                    this.imageData = e.target.result
+                }
+            reader.readAsDataURL(files[0])
+            // this.$emit('input', files[0])
+            }
         },
     async getData(){
         var that = this;
