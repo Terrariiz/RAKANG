@@ -12,7 +12,7 @@ exports.addnews = async(req,res) => {
     const add = new News({
       title: req.body.title,
       content: req.body.content,
-      image: req.body.imagepath
+      image: req.file.filename
     });
     console.log(add)
     let data = await add.save()
@@ -79,24 +79,51 @@ exports.DeleteNews = function(req,res){
 
 exports.EditNews = async(req,res) =>{
   try{
+    var dataEdit
     console.log(req.params.id)
     console.log(req.body.title)
     console.log(req.body.content)
     console.log(req.body.imagepath)
     console.log(req.body.oldimage)
-    if(req.body.imagepath != req.body.oldimage){
-      const image  = './public/uploads/' + req.body.oldimage;
-      fs.unlink(image , function(err){
-          if(err){
-              console.log(err);
-          } else {
-            console.log("deleted")
-          } 
-      })
+    if(req.file){
+      if(req.file.filename != req.body.oldimage){
+        const image  = './public/uploads/' + req.body.oldimage;
+        fs.unlink(image , function(err){
+            if(err){
+                console.log(err);
+            } else {
+              console.log("deleted")
+            } 
+        })
+        dataEdit = {
+          title: req.body.title,
+          content: req.body.content,
+          image: req.file.filename
+        }
+
+      } else {
+        console.log("not delete")
+      }
     } else {
-      console.log("not delete")
+      dataEdit = {
+          title: req.body.title,
+          content: req.body.content,
+          image: req.body.oldimage
+        }
     }
-    News.findOneAndUpdate({_id : req.params.id},{title : req.body.title , content : req.body.content , image : req.body.imagepath},function(err, news){
+    // if(req.file.filename != req.body.oldimage){
+    //   const image  = './public/uploads/' + req.body.oldimage;
+    //   fs.unlink(image , function(err){
+    //       if(err){
+    //           console.log(err);
+    //       } else {
+    //         console.log("deleted")
+    //       } 
+    //   })
+    // } else {
+    //   console.log("not delete")
+    // }
+    News.findOneAndUpdate({_id : req.params.id},dataEdit,function(err, news){
       if(err){
         console.log(err)
       } else {

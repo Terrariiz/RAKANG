@@ -95,18 +95,32 @@ export default {
     },
     data() {
         return {
+            valid: false,
             imageData:null,
             dataUser: {},
             dataEdit:{
-                firstname: "",
-                lastname: "",
-                age: "",
-                phone: "",
                 image: null,
                 imagepath: "" ,
                 newimage: null,
                 oldimage: ""
-            }
+            },
+            firstnameRules:[
+                v => !!v || 'Firstname is required!',
+                v => v.length <= 50 || 'Firstname must be less than 50 characters',
+            ],
+            lastnameRules:[
+                v => !!v || 'Lastname is required!',
+                v => v.length <= 50 || 'lastname must be less than 50 characters',
+            ],
+            ageRules:[
+                v => !!v || 'Age is required!',
+                v => v >= 0 || 'Age must be more than 0 years',
+                v => v <= 120 || 'Age must be less than 120 years',
+            ],
+            phoneRules:[
+                v => !!v || 'Phone is required',
+                v => v.length == 10 || 'Name must be 10 numbers',
+            ]
         }
     },
     // get data of user
@@ -129,6 +143,7 @@ export default {
 				}catch(err){
                     console.log(err)
                     localStorage.removeItem('user_token')
+                    localStorage.removeItem('user_id')
 				}
 			}
     },
@@ -150,27 +165,16 @@ export default {
             this.$emit('input', files[0])
             }
         },
-        async EditImage() {
+        validate () {
+            this.$refs.form.validate()
         },
         async EditProfile() {
-            if(this.dataEdit.firstname == ""){
-                this.dataEdit.firstname = this.dataUser.firstname
-            }
-            if(this.dataEdit.lastname == ""){
-                this.dataEdit.lastname = this.dataUser.lastname
-            }
-            if(this.dataEdit.age == ""){
-                this.dataEdit.age = this.dataUser.age
-            }
-            if(this.dataEdit.phone == ""){
-                this.dataEdit.phone = this.dataUser.phone
-            }
             try {
                 var formData = new FormData();
-                formData.append('firstname', this.dataEdit.firstname)
-                formData.append('lastname', this.dataEdit.lastname)
-                formData.append('age', this.dataEdit.age)
-                formData.append('phone', this.dataEdit.phone)
+                formData.append('firstname', this.dataUser.firstname)
+                formData.append('lastname', this.dataUser.lastname)
+                formData.append('age', this.dataUser.age)
+                formData.append('phone', this.dataUser.phone)
             
                 if(this.dataEdit.newimage == null){
                     formData.append('imagepath', this.dataUser.image)

@@ -18,7 +18,8 @@ exports.registerNewUser = async (req, res) => {
         lastname: req.body.lastname,
         phone: req.body.phone,
         age: req.body.age,
-        image: "user.png"
+        image: "user.png",
+        coin: 0
       });
       let data = await user.save();
       const token = await user.generateAuthToken(); // here it is calling the method that we created in the model
@@ -64,34 +65,92 @@ exports.getUserDetails = async (req, res) => {
 
 exports.editProfile = async (req,res) => {
   try{
-    if(req.body.imagepath != req.body.oldimage){
-      const image  = './public/image/profile/' + req.body.oldimage;
-      if(req.body.oldimage != "user.png"){
-        fs.unlink(image , function(err){
-          if(err){
-              console.log(err);
-          } else {
-            console.log("deleted")
-          } 
-        })
+    var dataEdit
+    if(req.file){
+      if(req.file.filename != req.body.oldimage){
+        const image  = './public/image/profile/' + req.body.oldimage;
+        if(req.body.oldimage != "user.png"){
+          fs.unlink(image , function(err){
+            if(err){
+                console.log(err);
+            } else {
+              console.log("deleted")
+            } 
+          })
+        }
+        dataEdit = {
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            phone: req.body.phone,
+            age: req.body.age,
+            image: req.file.filename
+          }
+      } else {
+        console.log("not delete")
       }
-    } else {
-      console.log("not delete")
     }
-    const dataEdit = {
-      firstname: req.body.firstname,
-      lastname: req.body.lastname,
-      phone: req.body.phone,
-      age: req.body.age,
-      image: req.body.imagepath
+    else{
+      dataEdit = {
+          firstname: req.body.firstname,
+          lastname: req.body.lastname,
+          phone: req.body.phone,
+          age: req.body.age,
+          image: req.body.oldimage
+        }
     }
-    User.findByIdAndUpdate(req.params.id, dataEdit, function(err,update){
+    // if(req.body.imagepath != req.body.oldimage){
+    //   const image  = './public/image/profile/' + req.body.oldimage;
+    //   if(req.body.oldimage != "user.png"){
+    //     fs.unlink(image , function(err){
+    //       if(err){
+    //           console.log(err);
+    //       } else {
+    //         console.log("deleted")
+    //       } 
+    //     })
+    //   }
+    // } else {
+    //   console.log("not delete")
+    // }
+    // const dataEdit = {
+    //   firstname: req.body.firstname,
+    //   lastname: req.body.lastname,
+    //   phone: req.body.phone,
+    //   age: req.body.age,
+    //   image: req.body.imagepath
+    // }
+    User.findByIdAndUpdate({_id:req.params.id}, dataEdit, function(err,update){
       if(err){
         console.log(err);
       } else{
         res.json(true);
       }
     });
+  } catch (err) {
+    res.status(400).json({ err: err });
+    console.log(err);
+  }
+};
+
+exports.changePassword = async (req,res) => {
+  try{
+    const id = req.params.id;
+    const dataPassword = {
+      old: req.body.oldPassword,
+      new: req.body.newPassword,
+      confirm: req.body.confirmNewPassword
+    }
+    if(dataPassword.old !== dataPassword.new && dataPassword.new == dataPassword.confirm){
+      const check = await User.checkPassword(id, dataPassword.old, dataPassword.new);
+      if(check){
+        res.json(true);
+      } else{
+        console.log("password error.");
+        res.json(false);
+      }
+    } else {
+      res.json(false);
+    }
   } catch (err) {
     res.status(400).json({ err: err });
     console.log(err);

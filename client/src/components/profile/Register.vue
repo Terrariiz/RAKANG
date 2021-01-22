@@ -3,8 +3,7 @@
     <div>
       <Navbar></Navbar>
     </div>
-    <h1>This is register page.</h1>
-
+    <br>
     <v-form
         ref="form"
         v-model="valid"
@@ -48,8 +47,9 @@
           sm="6"
         >
           <v-text-field single-line solo
+            v-model='register.confirmPassword'
             :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
-            :rules="passwordRules"
+            :rules="confirmPasswordRules.concat(passwordConfirmationRule)" 
             :type="show2 ? 'text' : 'password'"
             name="input-10-2"
             label="Confirm password"
@@ -143,20 +143,26 @@ import swal from "sweetalert";
       register: {
         email: "",
         password: '',
+        confirmPassword: '',
         firstname: '',
         lastname: '',
         age: '',
         phone: '',
-        checkbox: false,        
-        show1: false,
-        show2: false,
-      },
+        checkbox: false,
+      },              
+      show1: false,
+      show2: false,
       emailRules:[
           v => !!v || 'Email is required!',
           v => /.+@.+/.test(v) || 'E-mail must be valid',
         ],
         passwordRules:[
           v => !!v || 'Password is required!',
+          v => v.length >= 6 || 'Name must be more than 6 characters',
+          v => v.length <= 12 || 'Name must be less than 12 characters',
+        ],
+        confirmPasswordRules: [
+          v => !!v || "Password is required",
           v => v.length >= 6 || 'Name must be more than 6 characters',
           v => v.length <= 12 || 'Name must be less than 12 characters',
         ],
@@ -174,12 +180,19 @@ import swal from "sweetalert";
         ],
         ageRules:[
           v => !!v || 'Age is required!',
+          v => v >= 0 || 'Age must be more than 0 years',
+          v => v <= 120 || 'Age must be less than 120 years',
         ],
         phoneRules:[
           v => !!v || 'Phone is required',
           v => v.length == 10 || 'Name must be 10 numbers',
         ],
     }
+  },
+  computed: {
+    passwordConfirmationRule() {
+        return () => (this.register.password === this.register.confirmPassword) || 'Password must match'
+    },
   },
     components:{
       Navbar
@@ -189,10 +202,12 @@ import swal from "sweetalert";
       async registerUser() {
       try {
         let response = await this.$http.post("/user/register", this.register);
-        console.log(response);
+        // console.log(response);
         let token = response.data.token;
+        let id = response.data.data._id;
         if (token) {
           localStorage.setItem("user_token", token);
+          localStorage.setItem('user_id', id)
           this.$store.dispatch('UserLoggedIn');
           this.$router.push("/profile");
           swal("Success", "Registration Was successful", "success");

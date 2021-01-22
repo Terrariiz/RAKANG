@@ -3,7 +3,7 @@
         <div>
             <Navbar></Navbar>
         </div>
-        <v-form
+        <form
          @submit.prevent="Editnews">
         <v-container id ='rounded' style="background-color: #F09C0B;">
             <v-container class="my-5">
@@ -36,7 +36,7 @@
             </v-container>
                 <div id="grid-container">
                     <div></div>
-                    <v-btn style="weihgt = 40%" color="primary" dark>cancle</v-btn>
+                    <v-btn style="weihgt = 40%" color="primary" dark @click="reset($route.params.id)">cancle</v-btn>
                     <v-btn type="submit" color="primary" dark>submit</v-btn>
                     <div></div>  
                 </div>
@@ -44,7 +44,7 @@
             <!-- <v-btn style="margin-right= 50%;" color="primary" dark>cancle</v-btn> 
                 <v-btn style="margin-left= 50%;" color="primary" dark>submit</v-btn> -->
         </v-container>
-        </v-form>    
+        </form>    
     </div>
 </template>
 <style >
@@ -167,10 +167,9 @@ export default {
         console.log(err)
         })
     },
-    // reset(){
-    //     this.$refs.myFileInput.value = null;
-    //     this.doctrine.newimage = null;
-    // }
+    reset(){
+        this.$router.push({ name: 'DetailNews' , params: {id : this.$route.params.id}})
+    }
     },
 }
 </script>

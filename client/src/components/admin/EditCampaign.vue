@@ -41,7 +41,7 @@
             </v-container>
                 <div id="grid-container">
                     <div></div>
-                    <v-btn style="weihgt = 40%" color="primary" dark>cancle</v-btn>
+                    <v-btn style="weihgt = 40%" color="primary" dark @click="reset($route.params.id)">cancle</v-btn>
                     <v-btn  type ='submit' color="primary" dark>submit</v-btn>
                     <div></div>  
                 </div>
@@ -79,9 +79,8 @@
 </style>
 
 <script>
-
-import swal from "sweetalert";
 const Navbar = () => import('@/components/navbar/navbar')
+import swal from "sweetalert";
 export default {
     name : "EditCampaign",
 
@@ -106,17 +105,17 @@ export default {
                 }
         }
     },
+     components:{
+            Navbar
+        },
     mounted: function(){
         this.getData()
-    },
-    components:{
-        Navbar
     },
     methods: {
     async Editcampaign(){
         try {
             var formData = new FormData();
-            formData.append('name', this.campaign.title)
+            formData.append('name', this.campaign.name)
             formData.append('content', this.campaign.content)
             formData.append('date', this.campaign.date)
             formData.append('amount', this.campaign.amount)
@@ -136,7 +135,7 @@ export default {
             
             console.log('formData')
             console.log(formData)
-            console.log(this.campaign.title)
+            console.log(this.campaign.name)
             console.log(this.campaign.content)
             console.log(this.campaign.image)
             console.log(this.campaign.image.name)
@@ -177,10 +176,9 @@ export default {
         console.log(err)
         })
     },
-    // reset(){
-    //     this.$refs.myFileInput.value = null;
-    //     this.doctrine.newimage = null;
-    // }
+    reset(){
+        this.$router.push({ name: 'DetailCampaign' , params: {id : this.$route.params.id}})
+    }
     },
 }
 </script>

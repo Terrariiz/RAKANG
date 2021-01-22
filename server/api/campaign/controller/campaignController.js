@@ -2,17 +2,13 @@ const Campaign = require("../model/Campaign");
 const multer = require('multer');
 const fs = require('fs');
 
-
-
-  
-  
 exports.addnewcampaign = async(req,res) => {
   try{     
     console.log(req.body)
     const add = new Campaign({
       name: req.body.name,
       content: req.body.content,
-      image: req.body.imagepath,
+      image: req.file.filename,
       date: req.body.date,
       amount: req.body.amount,
     });
@@ -81,28 +77,61 @@ exports.DeleteCampaign = function(req,res){
 
 exports.EditCampaign = async(req,res) =>{
   try{
+    var dataEdit
     console.log(req.params.id)
     console.log(req.body.name)
     console.log(req.body.content)
     console.log(req.body.imagepath)
     console.log(req.body.oldimage)
-    if(req.body.imagepath != req.body.oldimage){
-      const image  = './public/uploads/' + req.body.imagepath;
-      fs.unlink(image , function(err){
-          if(err){
-              console.log(err);
-          } else {
-            console.log("deleted")
-          } 
-      })
+    if(req.file){
+      if(req.file.filename != req.body.oldimage){
+        const image  = './public/uploads/' + req.body.oldimage;
+        fs.unlink(image , function(err){
+            if(err){
+                console.log(err);
+            } else {
+              console.log("deleted")
+            } 
+        })
+        dataEdit = {
+          name: req.body.name,
+          content: req.body.content,
+          image: req.file.filename,
+          amount : req.body.amount,
+          date : req.body.date
+        }
+
+      } else {
+        console.log("not delete")
+      }
     } else {
-      console.log("not delete")
+      dataEdit = {
+          name: req.body.name,
+          content: req.body.content,
+          image: req.body.oldimage,
+          amount : req.body.amount,
+          date : req.body.date
+        }
     }
-    Campaign.findOneAndUpdate({_id : req.params.id},{name : req.body.name , content : req.body.content , image : req.body.imagepath , date : req.body.date , amount : req.body.amount},function(err, campaign){
+    // if(req.body.imagepath != req.body.oldimage){
+    //   const image  = './public/uploads/' + req.body.imagepath;
+    //   fs.unlink(image , function(err){
+    //       if(err){
+    //           console.log(err);
+    //       } else {
+    //         console.log("deleted")
+    //       } 
+    //   })
+    // } else {
+    //   console.log("not delete")
+    // }
+    Campaign.findOneAndUpdate({_id : req.params.id},dataEdit,function(err, campaign){
       if(err){
         console.log(err)
       } else {
         console.log('success')
+        console.log(campaign)
+        console.log(dataEdit)
         res.status(201).json({ campaign });
       }
     })

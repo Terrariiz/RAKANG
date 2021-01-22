@@ -3,7 +3,7 @@
     <div>
       <Navbar></Navbar>
     </div>
-    <h1>This is add campaign page.</h1>
+    <br>
     <div id ='headaddnews'>
         <div class="text-center">
           
