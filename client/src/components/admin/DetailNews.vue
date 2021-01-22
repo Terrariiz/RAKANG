@@ -40,7 +40,7 @@
 
 <script>
 const Navbar = () => import('@/components/navbar/navbar')
-import swal from "sweetalert";
+import swal from "sweetalert2";
 export default {
     name : "DetailNews",
     data (){
@@ -73,9 +73,32 @@ export default {
         this.$router.push({ name: 'editnews' , params: {id : newsid}})
       },
        DeleteNews(){
-        this.$http.delete("/news/DeleteNews/"+this.$route.params.id)
-        this.$router.push({ name: 'Listnews'})
-        swal("Success", "Delete News Success", "success");
+        const swalWithBootstrapButtons = swal.mixin({
+          customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+          },
+          buttonsStyling: false
+        })
+        swalWithBootstrapButtons.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Yes, delete it!',
+          cancelButtonText: 'No, cancel!',
+          reverseButtons: true
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.$http.delete("/news/DeleteNews/"+this.$route.params.id)
+            this.$router.push({ name: 'Listnews'})
+            swalWithBootstrapButtons.fire(
+              'Deleted!',
+              'Delete News Success.',
+              'success'
+            )
+          } 
+        })
       },
     }
     

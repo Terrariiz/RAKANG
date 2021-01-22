@@ -3,6 +3,9 @@
     <div>
         <Navbar></Navbar>
     </div>
+    <div>
+        <changePassword></changePassword>
+    </div>
     <center><div class="page-content page-container" id="page-content">
     <div class="padding">
         <div  class="row container d-flex justify-content-center">
@@ -78,7 +81,7 @@
 </template>
 
 <script>
-// const changePassword = () => import('@/components/profile/modal_changePassword')
+const changePassword = () => import('@/components/profile/modal_changePassword')
 const token = window.localStorage.getItem('user_token')
 const Navbar = () => import('@/components/navbar/navbar')
 const id = window.localStorage.getItem('user_id')
@@ -91,7 +94,7 @@ export default {
     },
     components:{
         Navbar,
-        // changePassword
+        changePassword
     },
     mounted: async function mounted(){
       await this.$http.get("/user/"+id)

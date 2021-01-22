@@ -28,6 +28,7 @@
     "path": "^0.12.7",
     "swal": "^0.1.0",
     "sweetalert": "^2.1.2",
+    "sweetalert2": "^10.13.0",
     "vue": "^2.6.11",
     "vue-axios": "^3.2.2",
     "vue-js-modal": "^2.0.0-rc.6",
