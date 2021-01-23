@@ -1,41 +1,30 @@
+  
 <template>
 <div>
     <div>
         <Navbar></Navbar>
     </div>
-   <!-- <h1>This is editprofile page.</h1> -->
-   <v-form
-        ref="form"
-        v-model="valid"
-        lazy-validation
-        @submit.prevent="EditProfile"
-    >
-    <v-container >
-        <div class="padding">
-        <div id="borderbox1"  class="row container d-flex justify-content-center ">
-            <!-- กรอบนอกสุด -->
-            <div id="borderbox2">
-                <!-- กรอบชั้นใน -->
-                <div  class="card user-card-full">
-                    <div class="row m-l-0 m-r-0">
-                            <div  class="col-sm-4 bg-c-lite-green user-profile">
-                                <div style="text-align:center;"  class="card-block text-center text-white">
-                                    <div style="text-align:right;"><v-btn  icon ><label style=" cursor: pointer;" for="file-input"><v-icon>mdi-pencil</v-icon></label></v-btn></div>
-                                    <!-- <div class="m-b-25"><img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image"><br></div>
-                                    <div style="text-align:center; display:none;"><input style="visibility:hidden;  width:0;  height:0" id="file-input" type="file" /></div>
-                                    -->
-
+    <center><div class="page-content page-container" id="page-content">
+    <div class="padding">
+        <div  class="row container d-flex justify-content-center">
+            <div  class="col-xl-12 col-md-12">
+                <div class="card user-card-full">
+                    <div  class="row m-l-0 m-r-0">
+                        <div  class="col-sm-4 bg-c-lite-green user-profile">
+                            <div  class="card-block text-center text-white">
+                                 <div style="text-align:right;"><v-btn  icon ><label style=" cursor: pointer;" for="file-input"><v-icon>mdi-pencil</v-icon></label></v-btn></div>
                                     <center><v-div style=""  class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
                                     <span  v-if="!imageData"  class="placeholder">Choose an Image</span>
                                     <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  @input="onSelectFile" >
                                 </v-div></center>
 
                                 <hr>
-                                    
-                                </div>
+                                
+                                
+                                 
                             </div>
-                            
-                            <div class="col-sm-8">
+                        </div>
+                        <div class="col-sm-8">
                                 <div  class="card-block">
                                     <!-- <router-link style=" color:gray;" to="/editprofile"  ><i style="text-align:right;" class="fa fa-edit"></i>Edit</router-link> -->
                                     <!-- <div style="text-align: right;"><router-link style="color:gray; " to="/editprofile"><i class="fa fa-edit"></i>Edit</router-link></div> -->
@@ -45,42 +34,51 @@
                                         
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600">ชื่อ</p>
-                                            <v-text-field single-line solo :rules="firstnameRules" required v-model="dataUser.firstname"></v-text-field>
+                                            <v-text-field single-line solo  v-model="dataUser.firstname"></v-text-field>
                                         </div>
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600">นามสกุล</p>
-                                            <v-text-field single-line solo :rules="lastnameRules" v-model="dataUser.lastname" required></v-text-field>
+                                            <v-text-field single-line solo  v-model="dataUser.lastname"></v-text-field>
                                         </div>
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600">อายุ(ปี)</p>
-                                            <v-text-field single-line solo :rules="ageRules" v-model="dataUser.age" required></v-text-field>
+                                            <v-text-field single-line solo  v-model="dataUser.age"></v-text-field>
                                         </div>
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600">เบอร์โทรติดต่อ</p>
-                                            <v-text-field single-line solo :rules="phoneRules" v-model="dataUser.phone" :counter="10" required></v-text-field>
+                                            <v-text-field single-line solo  v-model="dataUser.phone"></v-text-field>
+                                        </div>
+                                        <!-- <div class="col-md-6">
+                                            <v-btn type="submit" style="margin:1%; text-align:center;" to="/profile" color="error" dark>Cancel</v-btn>
+                                            
                                         </div>
                                         <div class="col-md-6">
-                                            <v-btn class="mr-4" style="margin:1%; text-align:center;" to="/profile" color="error" dark>Cancel</v-btn>
-                                            <v-btn :disabled="!valid" @click="validate" class="mr-4" type="submit" color="success">Edit</v-btn>
-                                        </div>
+                                            
+                                            <v-btn type="submit" style="margin:1% text-align:center;"  color="primary" dark>Edit</v-btn>
+                                        </div> -->
+
+                                        <v-row>
+                                            <v-col cols="3" ></v-col>
+                                            <v-col cols="3" >
+                                                <v-btn type="submit" style="margin:1%; text-align:center;" to="/profile" color="error" dark>Cancel</v-btn>
+                                            </v-col>
+                                             <v-col cols="3" >
+                                                <v-btn type="submit" style="margin:1% text-align:center;"  color="primary" dark>Edit</v-btn>
+                                            </v-col>
+                                            <v-col cols="3" ></v-col>
+                                        </v-row>
                                     </div>
                                     
                                 </div>
                             </div>
-
-                        
-                        
                     </div>
                 </div>
-               
             </div>
         </div>
-        </div>
-        
-    </v-container>
-   </v-form>
-</div>
+    </div>
+</div></center>
 
+</div>
 
 </template>
 
@@ -212,16 +210,21 @@ export default {
 </script>
 
 <style>
-       
-       body {
+  body {
     background-color: #f9f9fa
+}
+img{
+    width: 200px;
+    height: 200px;
 }
 
 .padding {
     padding: 3rem !important
 }
 
+
 .user-card-full {
+    /* width: 700px; */
     overflow: hidden
 }
 
@@ -231,12 +234,10 @@ export default {
     box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
     border: none;
     margin-bottom: 30px
-    
 }
 
 .m-r-0 {
-    margin-right: 0px;
-    
+    margin-right: 0px
 }
 
 .m-l-0 {
@@ -244,6 +245,7 @@ export default {
 }
 
 .user-card-full .user-profile {
+    
     border-radius: 5px 0 0 5px
 }
 
@@ -253,10 +255,12 @@ export default {
 }
 
 .user-profile {
+    
     padding: 20px 0
 }
 
 .card-block {
+    
     padding: 1.25rem
 }
 
@@ -276,23 +280,28 @@ h6 {
     line-height: 25px
 }
 
-
 @media only screen and (min-width: 1400px) {
     p {
         font-size: 14px
     }
-    
 }
-@media only screen and (max-width: 820px) {
-    p {
-        font-size: 14px
-    }
-    #borderbox1{
-        width:300px;
-    }
-    #borderbox2{
-        width:600px;
-    }
+@media only screen and (max-width: 991px) {
+   img{
+    width: 150px;
+    height: 150px;
+}
+}
+@media only screen and (max-width: 770px) {
+   img{
+    width: 100px;
+    height: 100px;
+}
+}
+@media only screen and (max-width: 576px) {
+   img{
+    width: 200px;
+    height: 200px;
+}
 }
 
 
@@ -350,7 +359,6 @@ h6 {
 
 .m-t-40 {
     margin-top: 20px
-     
 }
 
 .user-card-full .social-link li {
@@ -363,9 +371,7 @@ h6 {
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out
 }
-
 /* previewsimage */
-
  .base-image-input {
   display: block;
   width: 200px;

@@ -61,7 +61,7 @@
 
 <script>
 const Navbar = () => import('@/components/navbar/navbar')
-import swal from "sweetalert";
+import swal from "sweetalert2";
 export default {
     name : "DetailCampaign",
     data (){
@@ -94,10 +94,33 @@ export default {
         this.$router.push({ name: 'editCampaign' , params: {id : campaignid}})
       },
        DeleteCampaign(){
-        this.$http.delete("/campaign/DeleteCampaign/"+this.$route.params.id)
-        console.log("delete")
-        this.$router.push({ name: 'ListCampaign'})
-        swal("Success", "Delete Campaign Success", "success");
+        const swalWithBootstrapButtons = swal.mixin({
+          customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+          },
+          buttonsStyling: false
+        })
+        swalWithBootstrapButtons.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Yes, delete it!',
+          cancelButtonText: 'No, cancel!',
+          reverseButtons: true
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.$http.delete("/campaign/DeleteCampaign/"+this.$route.params.id)
+            console.log("delete")
+            this.$router.push({ name: 'ListCampaign'})
+            swalWithBootstrapButtons.fire(
+              'Deleted!',
+              'Delete Campaign Success.',
+              'success'
+            )
+          } 
+        })
       },
     }
     
