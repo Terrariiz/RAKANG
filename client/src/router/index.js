@@ -10,6 +10,8 @@ import news from '@/views/News.vue'
 
 const Login                  = () => import('@/components/profile/Login')
 const Register               = () => import('@/components/profile/Register')
+const Logpayment             = () => import('@/components/profile/Logpayment')
+const Logcoin                = () => import('@/components/profile/Logcoin')
 const Listnews               = () => import('@/components/admin/Listnews')
 const Addnews                = () => import('@/components/admin/Addnews')
 const editnews               = () => import('@/components/admin/editnews')
@@ -89,6 +91,22 @@ const routes = [
     name: 'editprofile',
     component: editprofile,
     meta: {
+      requiresUserAuth: true
+    }
+  },
+  {
+    path: '/profile/logpayment',
+    name: 'Logpayment',
+    component: Logpayment,
+    meta:{
+      requiresUserAuth: true
+    }
+  },
+  {
+    path: '/profile/logcoin',
+    name: 'Logcoin',
+    component: Logcoin,
+    meta:{
       requiresUserAuth: true
     }
   },
