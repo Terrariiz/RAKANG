@@ -4,32 +4,31 @@ import Home from '@/views/Home.vue'
 import Landing from '@/views/Landing.vue'
 import coin from '@/views/coin.vue'
 import detailcoin from '@/views/detailcoin.vue'
+import campaign from '@/views/Campaign.vue'
+import doctrine from '@/views/Doctrine.vue'
+import news from '@/views/News.vue'
 
-
-const Login                     = () => import('@/components/profile/Login')
-const Register                  = () => import('@/components/profile/Register')
+const Login                  = () => import('@/components/profile/Login')
+const Register               = () => import('@/components/profile/Register')
 const Listnews               = () => import('@/components/admin/Listnews')
-const Addnews                   = () => import('@/components/admin/Addnews')
+const Addnews                = () => import('@/components/admin/Addnews')
 const editnews               = () => import('@/components/admin/editnews')
 const Listdoctrine           = () => import('@/components/admin/Listdoctrine')
-const Adddoctrine               = () => import('@/components/admin/Adddoctrine')
-const DetailDoctrine               = () => import('@/components/admin/DetailDoctrine')
-const DetailNews               = () => import('@/components/admin/DetailNews')
-const DetailCampaign               = () => import('@/components/admin/DetailCampaign')
-const EditDoctrine               = () => import('@/components/admin/EditDoctrine')
-const Admin                     = () => import('@/components/admin/Admin')
-const loginAdmin                = () => import('@/components/admin/loginAdmin')
+const Adddoctrine            = () => import('@/components/admin/Adddoctrine')
+const DetailDoctrine         = () => import('@/components/admin/DetailDoctrine')
+const DetailNews             = () => import('@/components/admin/DetailNews')
+const DetailCampaign         = () => import('@/components/admin/DetailCampaign')
+const EditDoctrine           = () => import('@/components/admin/EditDoctrine')
+const Admin                  = () => import('@/components/admin/Admin')
+const loginAdmin             = () => import('@/components/admin/loginAdmin')
 const ListCampaign           = () => import('@/components/admin/ListCampaign')
-const AddCampaign           = () => import('@/components/admin/AddCampaign')
-const editCampaign               = () => import('@/components/admin/EditCampaign')
-const profile                 = () => import('@/components/profile/profile')
-const editprofile                 = () => import('@/components/profile/editprofile')
-const test                    = () => import('@/components/admin/test')
+const AddCampaign            = () => import('@/components/admin/AddCampaign')
+const editCampaign           = () => import('@/components/admin/EditCampaign')
+const profile                = () => import('@/components/profile/profile')
+const editprofile            = () => import('@/components/profile/editprofile')
+const test                   = () => import('@/components/admin/test')
 // const coin                    = () => import('@/views/coin')
-const payment                  = () => import('@/components/admin/payment')
-
-
-
+const payment                = () => import('@/components/admin/payment')
 
 Vue.use(VueRouter)
 
@@ -43,6 +42,21 @@ const routes = [
     path: '/home',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/campaign',
+    name: 'Campaign',
+    component: campaign
+  },
+  {
+    path: '/doctrine',
+    name: 'Doctrine',
+    component: doctrine
+  },
+  {
+    path: '/news',
+    name: 'News',
+    component: news
   },
   {
     path: '/about',
