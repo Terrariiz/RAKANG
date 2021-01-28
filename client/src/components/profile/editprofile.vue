@@ -4,6 +4,7 @@
     <div>
         <Navbar></Navbar>
     </div>
+    <v-form @submit.prevent="EditProfile">
     <center><div class="page-content page-container" id="page-content">
     <div class="padding">
         <div  class="row container d-flex justify-content-center">
@@ -76,14 +77,16 @@
             </div>
         </div>
     </div>
+    
 </div></center>
-
+</v-form>
 </div>
 
 </template>
 
 <script>
 import swal from "sweetalert";
+import Swal from "sweetalert2";
 const Navbar = () => import('@/components/navbar/navbar')
 const token = window.localStorage.getItem('user_token')
 const id = window.localStorage.getItem('user_id')
@@ -184,16 +187,32 @@ export default {
                     formData.append('imagepath', this.dataEdit.newimage.name)
                     formData.append('oldimage', this.dataEdit.oldimage)
                 }
-                let response = await this.$http.put("/user/"+id+"/editProfile", formData);
-                let check = response.data
-                if (check == true) {
-                    this.$router.push("/profile");
-                    swal("Success", "Edit your profile Was successful", "success");
-                    console.log('success')
-                } else {
-                    swal("Error", "Something Went Wrong", "error");
-                    console.log('error')
-                }
+                Swal.fire({
+                    title: 'Do you want to save the changes?',
+                    icon: 'question',
+                    confirmButtonColor: 'green',
+                    cancelButtonColor: 'red',
+                    showCancelButton: true,
+                    confirmButtonText: `Save`,
+                }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                        this.$http.put("/user/"+id+"/editProfile", formData);
+                        this.$router.push("/profile");
+                        Swal.fire('Saved!', 'Edit your profile Was successful.', 'success')
+                        console.log('success')
+                    }
+                })
+                // let response = await this.$http.put("/user/"+id+"/editProfile", formData);
+                // let check = response.data
+                // if (check == true) {
+                //     this.$router.push("/profile");
+                //     swal("Success", "Edit your profile Was successful", "success");
+                //     console.log('success')
+                // } else {
+                //     swal("Error", "Something Went Wrong", "error");
+                //     console.log('error')
+                // }
             } catch (err) {
                 let error = err.response;
                 if (error.status == 409) {
