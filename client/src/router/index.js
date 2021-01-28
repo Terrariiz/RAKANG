@@ -5,7 +5,6 @@ import Landing from '@/views/Landing.vue'
 import coin from '@/views/coin.vue'
 import detailcoin from '@/views/detailcoin.vue'
 import campaign from '@/views/Campaign.vue'
-import donate_campaign from '@/views/Donate_Campaign'
 import doctrine from '@/views/Doctrine.vue'
 import news from '@/views/News.vue'
 
@@ -32,6 +31,8 @@ const editprofile            = () => import('@/components/profile/editprofile')
 const test                   = () => import('@/components/admin/test')
 // const coin                    = () => import('@/views/coin')
 const payment                = () => import('@/components/admin/payment')
+const UserDetailCampaign     = () => import('@/views/Donate_Campaign')
+
 
 Vue.use(VueRouter)
 
@@ -51,10 +52,18 @@ const routes = [
     name: 'Campaign',
     component: campaign
   },
+  // {
+  //   path: '/campaign/:id',
+  //   name: 'DetailCampaign',
+  //   component: DetailCampaign
+  // },
   {
-    path: '/donatecampaign',
-    name: 'donate_campaign',
-    component: donate_campaign
+    path: '/campaign/:id',
+    name: 'UserDetailCampaign',
+    component: UserDetailCampaign,
+    meta: {
+      requiresUserAuth: true
+    }
   },
   {
     path: '/doctrine',
