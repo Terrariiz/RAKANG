@@ -1,4 +1,5 @@
 <template>
+
     <modal name="change-password" transition="pop-out" :width="modalWidth" :focus-trap="true" :height="475">
         <div class="box">
             <div class="box-part" id="bp-left">
@@ -9,18 +10,20 @@
                       <center>
                         <v-form
                           ref="form"
-                          style="width: 70%;"
+                          style="margin:3%;"
                           v-model="valid"
                           lazy-validation
                           @submit.prevent="changePassword"
                         >
                           <v-row>
                             <v-col cols="12" sm="12" >
+                              
                               <v-text-field single-line solo
                                   v-model="dataPassword.oldPassword"
-                                  :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                                  
                                   :rules="oldPasswordRules"
                                   :type="show1 ? 'text' : 'password'"
+                                  :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                                   name="input-10-1"
                                   label="Old password"
                                   hint="At least 6 characters"
@@ -80,6 +83,7 @@
             <div class="box-messages"></div> -->
         </div>
     </modal>
+
 </template>
 
 <script>
