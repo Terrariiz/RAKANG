@@ -1,22 +1,23 @@
 <template>
 <div>
-   <h1>This is profile page.</h1>
-    <v-container>
-        <div class="padding">
-        <div class="row container d-flex justify-content-center">
-            <div class="col-xl-6 col-md-12">
+    <div>
+        <Navbar></Navbar>
+    </div>
+    <div>
+        <changePassword></changePassword>
+    </div>
+    <center><div class="page-content page-container" id="page-content">
+    <div class="padding">
+        <div  class="row container d-flex justify-content-center">
+            <div  class="col-xl-12 col-md-12">
                 <div class="card user-card-full">
-                    <div class="row m-l-0 m-r-0">
-                        <div class="col-sm-4 bg-c-lite-green user-profile">
-                            <div class="card-block text-center text-white">
-
-                                <div class="m-b-25"> <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image"> </div>
-                                
-                                <hr><h6 class="f-w-600">เลทเกม กุเก่ง</h6>
+                    <div  class="row m-l-0 m-r-0">
+                        <div  class="col-sm-4 bg-c-lite-green user-profile">
+                            <div  class="card-block text-center text-white">
+                                <div class="m-b-25"><center><div> <img style="display: flex;" :src="'http://localhost:4000/image/profile/' + dataUser.image" class="img-radius base-image-input" alt="User-Profile-Image"> </div></center>  </div>
+                                 <hr><h6 style="font-size: 20px; color;blue;" class="f-w-600">{{dataUser.firstname}} {{dataUser.lastname}}</h6>
                                 <h6 class="f-w-600">200 Coin</h6>
-                                
-                                <!-- <p>Web Designer</p> <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i> -->
-                                <v-container fluid>
+                                 <v-container fluid>
                                     <v-row >
                                         <!-- <v-cols cols="4" >
                                            
@@ -24,12 +25,17 @@
 
                                         <v-col cols="12" sm ="12" md="12">
                                             
-                                            <v-btn small>ประวัติการบริจาค</v-btn>
+                                            <v-btn small style="width:auto;" href='/profile/logpayment'>ประวัติการบริจาค</v-btn>
                                         </v-col>
 
                                         <v-col cols="12" sm ="12" md="12">
                                             
-                                            <v-btn small  >ประวัติการซื้อ coin</v-btn>
+                                            <v-btn small style="width:auto;" href='/profile/logcoin'>ประวัติการซื้อ coin</v-btn>
+                                        </v-col>
+
+                                        <v-col cols="12" sm ="12" md="12">
+                                            
+                                            <v-btn small @click="$modal.show('change-password')">change password</v-btn>
                                         </v-col>
 
                                         <!-- <v-cols cols="4" >
@@ -43,9 +49,8 @@
                         </div>
                         <div class="col-sm-8">
                             <div style="text-align:right; margin-right:3%;"><router-link style="color:gray; " to="/editprofile"><v-btn color="secondary" icon ><v-icon>mdi-pencil</v-icon></v-btn></router-link></div>
-                            <div class="card-block">       
-                                <!-- <div style="text-align: right;"><router-link style="color:gray; " to="/editprofile"><i class="fa fa-edit"></i>Edit</router-link></div> -->
-                                <h6 class="m-b-20 p-b-5 b-b-default f-w-600" style="font-size:20px;">Profile</h6>
+                            <div class="card-block">
+                                <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Profile</h6>
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <p class="m-b-10 f-w-600">Email</p>
@@ -53,30 +58,15 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <p class="m-b-10 f-w-600">เบอร์โทรติดต่อ</p>
-                                        <h6 class="text-muted f-w-400">08x-xxxxxxx</h6>
+                                        <h6 class="text-muted f-w-400">{{dataUser.phone}}</h6>
                                     </div>
                                     <div class="col-sm-6">
-                                        <p class="m-b-10 f-w-600">อายุ(ปี)</p>
-                                        <h6 class="text-muted f-w-400">34</h6>
+                                        <p  class="m-b-10 f-w-600">อายุ(ปี)</p>
+                                        <h6 class="text-muted f-w-400">{{dataUser.age}}</h6>
                                     </div>
                                 </div>
-                                <a class="nav-link"><button class="btn btn-green" v-on:click="sign_out()">Sign out</button></a>
-                                <!-- <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Projects</h6>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <p class="m-b-10 f-w-600">Recent</p>
-                                        <h6 class="text-muted f-w-400">Sam Disuja</h6>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <p class="m-b-10 f-w-600">Most Viewed</p>
-                                        <h6 class="text-muted f-w-400">Dinoter husainm</h6>
-                                    </div>
-                                </div>
-                                <ul class="social-link list-unstyled m-t-40 m-b-10">
-                                    <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="facebook" data-abc="true"><i class="mdi mdi-facebook feather icon-facebook facebook" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="twitter" data-abc="true"><i class="mdi mdi-twitter feather icon-twitter twitter" aria-hidden="true"></i></a></li>
-                                    <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="instagram" data-abc="true"><i class="mdi mdi-instagram feather icon-instagram instagram" aria-hidden="true"></i></a></li>
-                                </ul> -->
+                                
+                               
                             </div>
                         </div>
                     </div>
@@ -84,21 +74,36 @@
             </div>
         </div>
     </div>
-    </v-container>
+</div></center>
+
 </div>
 
 </template>
 
 <script>
-const jwt = require("jsonwebtoken")
+const changePassword = () => import('@/components/profile/modal_changePassword')
 const token = window.localStorage.getItem('user_token')
-const decoded = jwt.verify(token, "secret")
-console.log(decoded)
+const Navbar = () => import('@/components/navbar/navbar')
+const id = window.localStorage.getItem('user_id')
 export default {
+    name:'Profile',
     data(){
         return{
-            dataUser: decoded
+            dataUser: {},
         }
+    },
+    components:{
+        Navbar,
+        changePassword
+    },
+    mounted: async function mounted(){
+      await this.$http.get("/user/"+id)
+      .then((res) => {
+        this.dataUser = res.data;
+      })
+      .catch(function(err){
+        console.log(err)
+      })
     },
     async created (){
         // const token = window.localStorage.getItem('user_token')
@@ -108,29 +113,38 @@ export default {
 				}catch(err){
                     console.log(err)
                     localStorage.removeItem('user_token')
+                    localStorage.removeItem('user_id')
 				}
 			}
     },
     methods: {
 		async sign_out () {
+            localStorage.removeItem('user_id')
 			localStorage.removeItem('user_token')
 			await this.$router.push('/login')
-		}
+        },
+        // async changePassword() {
+            
+        // }
 	},
 }
 </script>
-
-<style>
-       
-       body {
+<style scoped>
+body {
     background-color: #f9f9fa
+}
+img{
+    width: 200px;
+    height: 200px;
 }
 
 .padding {
     padding: 3rem !important
 }
 
+
 .user-card-full {
+    /* width: 700px; */
     overflow: hidden
 }
 
@@ -143,8 +157,7 @@ export default {
 }
 
 .m-r-0 {
-    margin-right: 0px;
-    
+    margin-right: 0px
 }
 
 .m-l-0 {
@@ -152,6 +165,7 @@ export default {
 }
 
 .user-card-full .user-profile {
+    
     border-radius: 5px 0 0 5px
 }
 
@@ -161,10 +175,12 @@ export default {
 }
 
 .user-profile {
+    
     padding: 20px 0
 }
 
 .card-block {
+    
     padding: 1.25rem
 }
 
@@ -189,6 +205,25 @@ h6 {
         font-size: 14px
     }
 }
+@media only screen and (max-width: 991px) {
+   img{
+    width: 150px;
+    height: 150px;
+}
+}
+@media only screen and (max-width: 770px) {
+   img{
+    width: 100px;
+    height: 100px;
+}
+}
+@media only screen and (max-width: 576px) {
+   img{
+    width: 200px;
+    height: 200px;
+}
+}
+
 
 .card-block {
     padding: 1.25rem
@@ -256,6 +291,4 @@ h6 {
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out
 }
-        
 </style>
-

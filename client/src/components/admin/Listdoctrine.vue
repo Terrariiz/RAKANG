@@ -1,6 +1,9 @@
 <template>
-  <div class='addnews'>
-    <h1>This is doctrine page.</h1>
+  <div class='Listdoctrine'>
+    <div>
+      <Navbar></Navbar>
+    </div>
+    <br>
     <div id ='headaddnews'>
         <div class="text-center">
           
@@ -14,6 +17,9 @@
           <template v-slot:default>
             <thead>
               <tr>
+                 <th class="text-left">
+                 
+                </th>
                 <th class="text-left">
                   Name
                 </th>
@@ -25,13 +31,16 @@
             <tbody>
               <tr  @submit.prevent="editdoctrine" v-for="doctrine in doctrines"  :key="doctrine._id">
                 
-                <td><center><img :src="'http://localhost:4000/uploads/' + doctrine.image" class="img-fluid" style="width: 700px; height: 480px; object-fit: cover;" align="center"></center></td>
+                <td><center><img :src="'http://localhost:4000/uploads/' + doctrine.image" class="img-fluid" style="width: 100px; height: 100px; object-fit: cover;  margin:3%;" align="center"></center></td>
                 <td>{{ doctrine.title }}</td>
-                <td>{{ doctrine.content }}</td>
+                <!-- <td v-html="doctrine.content">{{ doctrine.content }}</td> -->
                 <td>
                   <!-- <router-link :to="`/admin/listdoctrine/${doctrine._id}`">detail</router-link> -->
                   <!-- <router-link :to="{name : 'DetailDoctrine', params: {id:doctrine._id}}">detail</router-link> -->
-                  <button @click="ViewDoctrine(doctrine._id)">view</button>
+                  <v-btn color="succes" @click="ViewDoctrine(doctrine._id)">View</v-btn>
+                  
+                  <!-- <button @click="EditDoctrine(doctrine._id)">Edit</button>
+                  <button @click="DeleteDoctrine(doctrine._id)">Delete</button> -->
                   
                 </td>
                 <!-- <td>
@@ -49,12 +58,16 @@
 </template>
 
 <script>
+const Navbar = () => import('@/components/navbar/navbar')
   export default {
     name : "Listdoctrine",
     data (){
       return {
         doctrines : []
         }
+    },
+    components:{
+      Navbar
     },
     mounted: async function mounted(){
       await this.$http.get("/doctrine/ShowListDoctrine")
@@ -68,17 +81,10 @@
       })
     },
     methods: {
-      // async ViewDoctrine(doctrineid){
-      //   await this.$http.get("/DetailDoctrine/"+doctrineid)
-      //   .then((res)=> {
-
-      //   })
-      // }
       ViewDoctrine(doctrineid){
         this.$router.push({ name: 'DetailDoctrine' , params: {id : doctrineid}})
-          
-        }
-      }
+        },
+    }
     
   }
 

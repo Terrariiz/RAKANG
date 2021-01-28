@@ -1,4 +1,5 @@
 const User = require("../model/User");
+const fs = require('fs');
 
 exports.registerNewUser = async (req, res) => {
     try {
@@ -17,6 +18,8 @@ exports.registerNewUser = async (req, res) => {
         lastname: req.body.lastname,
         phone: req.body.phone,
         age: req.body.age,
+        image: "user.png",
+        coin: 0
       });
       let data = await user.save();
       const token = await user.generateAuthToken(); // here it is calling the method that we created in the model
@@ -31,6 +34,8 @@ exports.registerNewUser = async (req, res) => {
     try {
       const email = req.body.email;
       const password = req.body.password;
+      console.log(email);
+      console.log(password);
       const user = await User.findByCredentials(email, password);
       if (!user) {
         return res.status(401).json({ error: "Login failed! Check authentication credentials" });
@@ -44,5 +49,110 @@ exports.registerNewUser = async (req, res) => {
   };
 
 exports.getUserDetails = async (req, res) => {
-  await res.json(req.userData);
+  try{
+    User.findById(req.params.id, function(err,found){
+      if(err){
+        console.log(err);
+      } else{
+        res.json(found);
+      }
+    })
+  } catch (err) {
+    res.status(400).json({ err: err });
+    console.log(err);
+  }
+};
+
+exports.editProfile = async (req,res) => {
+  try{
+    var dataEdit
+    if(req.file){
+      if(req.file.filename != req.body.oldimage){
+        const image  = './public/image/profile/' + req.body.oldimage;
+        if(req.body.oldimage != "user.png"){
+          fs.unlink(image , function(err){
+            if(err){
+                console.log(err);
+            } else {
+              console.log("deleted")
+            } 
+          })
+        }
+        dataEdit = {
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            phone: req.body.phone,
+            age: req.body.age,
+            image: req.file.filename
+          }
+      } else {
+        console.log("not delete")
+      }
+    }
+    else{
+      dataEdit = {
+          firstname: req.body.firstname,
+          lastname: req.body.lastname,
+          phone: req.body.phone,
+          age: req.body.age,
+          image: req.body.oldimage
+        }
+    }
+    // if(req.body.imagepath != req.body.oldimage){
+    //   const image  = './public/image/profile/' + req.body.oldimage;
+    //   if(req.body.oldimage != "user.png"){
+    //     fs.unlink(image , function(err){
+    //       if(err){
+    //           console.log(err);
+    //       } else {
+    //         console.log("deleted")
+    //       } 
+    //     })
+    //   }
+    // } else {
+    //   console.log("not delete")
+    // }
+    // const dataEdit = {
+    //   firstname: req.body.firstname,
+    //   lastname: req.body.lastname,
+    //   phone: req.body.phone,
+    //   age: req.body.age,
+    //   image: req.body.imagepath
+    // }
+    User.findByIdAndUpdate({_id:req.params.id}, dataEdit, function(err,update){
+      if(err){
+        console.log(err);
+      } else{
+        res.json(true);
+      }
+    });
+  } catch (err) {
+    res.status(400).json({ err: err });
+    console.log(err);
+  }
+};
+
+exports.changePassword = async (req,res) => {
+  try{
+    const id = req.params.id;
+    const dataPassword = {
+      old: req.body.oldPassword,
+      new: req.body.newPassword,
+      confirm: req.body.confirmNewPassword
+    }
+    if(dataPassword.old !== dataPassword.new && dataPassword.new == dataPassword.confirm){
+      const check = await User.checkPassword(id, dataPassword.old, dataPassword.new);
+      if(check){
+        res.json(true);
+      } else{
+        console.log("password error.");
+        res.json(false);
+      }
+    } else {
+      res.json(false);
+    }
+  } catch (err) {
+    res.status(400).json({ err: err });
+    console.log(err);
+  }
 };

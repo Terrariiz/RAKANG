@@ -8,7 +8,7 @@ const storage = multer.diskStorage({
       cb(null, './public/uploads');
     },
     filename: function(req, file, cb) {
-      cb(null, file.originalname);
+      cb(null, Date.now()+".jpg");
     }
   });
 
@@ -17,6 +17,7 @@ const storage = multer.diskStorage({
 router.post("/adddoctrine", upload.single('image'), doctrineController.addnewdoctrine);
 router.get("/ShowListDoctrine", doctrineController.ShowListDoctrine);
 router.get("/DetailDoctrine/:id", doctrineController.DetailDoctrine);
+router.put("/DetailDoctrine/:id/edit",upload.single('image'), doctrineController.EditDoctrine);
 router.delete("/DeleteDoctrine/:id", doctrineController.DeleteDoctrine);
 
 

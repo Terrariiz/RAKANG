@@ -6,6 +6,7 @@ import axios from "axios";
 // import VueAxios from "vue-axios";
 import vuetify from './plugins/vuetify';
 import CKEditor from 'ckeditor4-vue';
+import vmodal from 'vue-js-modal';
 
 
 const base = axios.create({
@@ -26,6 +27,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 // Vue.use(VueAxios, axios);
 Vue.use(BootstrapVue);
 Vue.use( CKEditor );
+Vue.use(vmodal, { dialog: true });
 
 new Vue({
   router,
@@ -33,4 +35,3 @@ new Vue({
   vuetify,
   render: h => h(App)
 }).$mount('#app')
-

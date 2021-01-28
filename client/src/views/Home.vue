@@ -1,5 +1,8 @@
 <template>
   <div class="heroBlock">
+    <div>
+      <Navbar></Navbar>
+    </div>
     <v-carousel cycle hide-delimiters>
       <v-carousel-item href="/"
         v-for="(item,i) in items"
@@ -38,7 +41,7 @@
         </v-col>
          
       </v-row>
-      <a href="/news" style="float:right;">แสดงทั้งหมด >>></a>
+      <a href="/home" style="float:right;">แสดงทั้งหมด >>></a>
     </v-container>
   </div>
   
@@ -68,7 +71,7 @@
         </v-col>
          
       </v-row>
-      <a href="/news" style="float:right;">แสดงทั้งหมด >>></a>
+      <a href="/home" style="float:right;">แสดงทั้งหมด >>></a>
     </v-container>
   </div>
     
@@ -78,23 +81,20 @@
 </template>
 
 <script>
-
+const Navbar = () => import('@/components/navbar/navbar')
 export default {
-  name: "home",
+  name: "Home",
   data() {
     return {
       items: [
         {
-          src: require("../assets/images/img-carousel1.jpg"),
-          title: "We are creative"
+          src: require("../assets/images/tenor2.gif")
         },
         {
-          src: require("../assets/images/img-carousel2.jpg"),
-          title: "We are hard worker"
+          src: require("../assets/images/tenor3.gif")
         },
         {
-          src: require("../assets/images/img-carousel3.jpg"),
-          title: "We are professional"
+          src: require("../assets/images/tenor4.gif")
         }
       ],
 
@@ -106,7 +106,7 @@ export default {
         title: "Top western road trips",
         subtitle: "1,000 miles of wonder",
         description: "His ubique laboramus ne. Expetenda assueverit sed ad. Id nec malis lucilius delicatissimi. Nec assum sonet suscipit ex, diam deterruisset ut usu, ad dicat fabellas aliquando eam.",
-        src: require("../assets/images/img-carousel1.jpg")
+        src: require("../assets/images/tenor.gif")
       },
       {
         id: 2,
@@ -114,7 +114,7 @@ export default {
         title: "Christmas tales to read",
         subtitle: "2,000 miles of wonder",
         description: "Sea ad habemus assueverit, omnes platonem convenire sit et, at integre pericula quo. Facete adolescens definitionem cu qui, in putant aliquid fierent ius.",
-        src: require("../assets/images/img-carousel2.jpg")
+        src: require("../assets/images/tenor.gif")
       },
       {
         id: 3,
@@ -122,11 +122,14 @@ export default {
         title: "20 movies not to miss in 2020",
         subtitle: "3,000 miles of wonder",
         description: "Aliquam albucius mei ei, debitis torquatos et pro, eos natum scribentur no. Putant verear constituto te qui. Adolescens persequeris vim ei. Vel nullam reprimique te.",
-        src: require("../assets/images/img-carousel3.jpg")
+        src: require("../assets/images/tenor.gif")
       }
     ]
     };
   },
+  components:{
+        Navbar
+    },
   
 
 };
