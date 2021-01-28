@@ -22,7 +22,7 @@
               <v-contianer >
                   <div style="float:right; margin-top:5%;">ยอดบริจาค 20000 บาท</div>
                   <v-progress-linear   v-model="power"  color="amber" width="400"  height="25"><strong>{{ Math.ceil(power) }}%</strong></v-progress-linear>
-                  <v-btn color="success" elevation="3" style="margin:3%; float:right;">donate</v-btn>
+                  <v-btn to="/donatecampaign" color="success" elevation="3" style="margin:3%; float:right;">donate</v-btn>
               </v-contianer>
                 </v-col>
             </v-row>
