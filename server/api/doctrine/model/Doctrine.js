@@ -9,6 +9,10 @@ const doctrineSchema = new mongoose.Schema({
   image: {
     type: String,
   },
+  edittime: {
+    type: Date,
+  },
+
 });
 
 const Doctrine = mongoose.model("Doctrine", doctrineSchema);

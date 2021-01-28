@@ -4,26 +4,28 @@
         <Navbar></Navbar>
         </div>
         <h1>Campaign</h1>
-        <v-container>
-            <v-row>
+        <v-container >
+            <v-row v-for="campaign in campaigns"  :key="campaign._id">
                 <v-col>
-                    <div style="margin:3%; font-size:30px;">Name</div>
-                    <v-img
-                    lazy-src="https://picsum.photos/id/11/10/6"
-                    max-height="300"
-                    max-width="500"
-                    src="https://picsum.photos/id/11/500/300">
+                    <div style="margin:3%; font-size:30px;"> {{ campaign.name }} </div>
+                    <v-img 
+                    :src="'http://localhost:4000/uploads/' + campaign.image" 
+                    class="img-fluid" style="width: 500px; height: 400px; object-fit: cover;  margin:3%;" 
+                    align="center">
                     </v-img>
                 </v-col>
                 <v-col>
                     <v-container  rounded-xl style="background-color:white; box-shadow:5px 6px 5px #888888; ">  
-               <div style="margin:5%"></div>
-              </v-container>
-              <v-contianer >
-                  <div style="float:right; margin-top:5%;">ยอดบริจาค 20000 บาท</div>
+               <div style="margin:5%">
+                    <v-contianer >
+                  <div style="float:right; margin-top:5%;">เป้าหมาย {{ campaign.amount }} บาท</div><br>
+                  <div style="float:right; margin-top:5%;">วันสิ้นสุดการรับบริจาค {{ campaign.date }} บาท</div>
                   <v-progress-linear   v-model="power"  color="amber" width="400"  height="25"><strong>{{ Math.ceil(power) }}%</strong></v-progress-linear>
-                  <v-btn color="success" elevation="3" style="margin:3%; float:right;">donate</v-btn>
+                  <v-btn @click="ViewCampaign(campaign._id)" color="success" elevation="3" style="margin:3%; float:right;">รายละเอียด</v-btn>
               </v-contianer>
+               </div>
+              </v-container>
+              
                 </v-col>
             </v-row>
         </v-container>
@@ -37,10 +39,28 @@ export default {
     components:{
         Navbar
     },
-    data: () => ({
-      
-      power: 78,
-    }),
+    data (){
+      return {
+        campaigns : []
+        }
+    },
+    mounted: async function mounted(){
+      await this.$http.get("/campaign/ShowListCampaign")
+      .then((res) => {
+        console.log(res.data)
+        this.campaigns = res.data;
+        console.log(this.campaigns)
+      })
+      .catch(function(err){
+        console.log(err)
+      })
+    },
+    methods: {
+      ViewCampaign(campaignid){
+        this.$router.push({ name: 'DetailCampaign' , params: {id : campaignid}})    
+        }
+      }
+
 }
 </script>
 

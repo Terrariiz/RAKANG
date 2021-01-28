@@ -51,6 +51,11 @@ const routes = [
     component: campaign
   },
   {
+    path: '/campaign/:id',
+    name: 'DetailCampaign',
+    component: DetailCampaign
+  },
+  {
     path: '/doctrine',
     name: 'Doctrine',
     component: doctrine
