@@ -7,6 +7,7 @@ import detailcoin from '@/views/detailcoin.vue'
 import campaign from '@/views/Campaign.vue'
 import doctrine from '@/views/Doctrine.vue'
 import news from '@/views/News.vue'
+import swal from "sweetalert2"
 
 const Login                  = () => import('@/components/profile/Login')
 const Register               = () => import('@/components/profile/Register')
@@ -268,22 +269,24 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if(to.matched.some(record => record.meta.requiresUserAuth)) {
       if (localStorage.getItem('user_token') == null) {
-        window.alert("please sign in!!")
+        // window.alert("please sign in!!")
           next({
               path: '/login',
               params: { nextUrl: to.fullPath }
           })
+          swal.fire('Please sign in!!', '', 'error')
       }  
       else { 
         next()
         }
   } else if(to.matched.some(record => record.meta.requiresAdminAuth)) {
       if(localStorage.getItem('admin_token') == null){
-        window.alert("please sign in!!")
+        // window.alert("please sign in!!")
         next({
           path: '/admin/login',
           params: { nextUrl: to.fullPath }
-      })
+        })
+        swal.fire('Please sign in!!', '', 'error')
       }
       else{
           next()
