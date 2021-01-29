@@ -166,10 +166,9 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style >
 $background_color: #404142;
-$github_color: #dba226;
-$facebook_color: #3880ff;
+
 .box {
   background: white;
   overflow: hidden;
@@ -280,22 +279,8 @@ $facebook_color: #3880ff;
   #signin-btn {
     margin-left: 8px;
   }
-  .facebook-btn {
-    border-color: $facebook_color;
-    color: $facebook_color;
-    &:hover {
-      border-color: $facebook_color;
-      background: $facebook_color;
-    }
-  }
-  .github-btn {
-    border-color: $github_color;
-    color: $github_color;
-    &:hover {
-      border-color: $github_color;
-      background: $github_color;
-    }
-  }
+  
+  
   .autocomplete-fix {
     position: absolute;
     visibility: hidden;
@@ -306,6 +291,7 @@ $facebook_color: #3880ff;
     left: 0;
     top: 0;
   }
+
 }
 .pop-out-enter-active,
 .pop-out-leave-active {
@@ -316,4 +302,5 @@ $facebook_color: #3880ff;
   opacity: 0;
   transform: translateY(24px);
 }
+
 </style>
