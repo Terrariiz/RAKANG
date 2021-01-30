@@ -229,7 +229,7 @@ export default {
 </script>
 
 <style>
-  body {
+body {
     background-color: #f9f9fa
 }
 img{

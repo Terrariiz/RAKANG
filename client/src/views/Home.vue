@@ -4,7 +4,7 @@
       <Navbar></Navbar>
     </div>
     <v-carousel cycle hide-delimiters>
-      <v-carousel-item href="/"
+      <v-carousel-item to="/"
         v-for="(item,i) in items"
         :key="i"
         :src="item.src"

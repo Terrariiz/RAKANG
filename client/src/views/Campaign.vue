@@ -17,14 +17,15 @@
                 <v-col>
                     <v-container  rounded-xl style="background-color:white; box-shadow:5px 6px 5px #888888; ">  
                <div style="margin:5%">
-                    <v-contianer >
+                    
+               </div>
+              </v-container>
+              <v-contianer >
                   <div style="float:right; margin-top:5%;">เป้าหมาย {{ campaign.amount }} บาท</div><br>
                   <div style="float:right; margin-top:5%;">วันสิ้นสุดการรับบริจาค {{ campaign.date }} </div>
                   <v-progress-linear   v-model="power"  color="amber" width="400"  height="25"><strong>{{ Math.ceil(power) }}%</strong></v-progress-linear>
                   <v-btn @click="ViewCampaign(campaign._id)" color="success" elevation="3" style="margin:3%; float:right;">รายละเอียด</v-btn>
               </v-contianer>
-               </div>
-              </v-container>
               
                 </v-col>
             </v-row>
