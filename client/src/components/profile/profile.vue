@@ -19,30 +19,9 @@
                                 <h6 class="f-w-600">200 Coin</h6>
                                  <v-container fluid>
                                     <v-row >
-                                        <!-- <v-cols cols="4" >
-                                           
-                                        </v-cols> -->
-
-                                        <v-col cols="12" sm ="12" md="12">
-                                            
-                                            <v-btn small style="width:auto;" href='/profile/logpayment'>ประวัติการบริจาค</v-btn>
-                                        </v-col>
-
-                                        <v-col cols="12" sm ="12" md="12">
-                                            
-                                            <v-btn small style="width:auto;" href='/profile/logcoin'>ประวัติการซื้อ coin</v-btn>
-                                        </v-col>
-
-                                        <v-col cols="12" sm ="12" md="12">
-                                            
+                                        <v-col cols="12" sm ="12" md="12">                                            
                                             <v-btn small @click="$modal.show('change-password')">change password</v-btn>
                                         </v-col>
-
-                                        <!-- <v-cols cols="4" >
-                                            
-                                        </v-cols> -->
-
-
                                     </v-row>
                                 </v-container>
                             </div>

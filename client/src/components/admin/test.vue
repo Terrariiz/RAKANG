@@ -1,74 +1,46 @@
 <template>
 
     <div class="test">
-      <input id="data-merchantid" type="hidden"> 
         <div>
             <Navbar></Navbar>
         </div>
-        <form @submit.prevent="handleSubmit">
-        <v-container id ='rounded' style="background-color: #F09C0B;">
-            <v-container class="my-5">
-                <v-layout row wrap >
-                    
-                        <v-flex xs12 md6 >
-                            <v-container id = "picturenews"  >
-                                 <!-- preview image -->
-                                <div style="text-align:right;"></div>
+        <v-card
+    class="mx-auto overflow-hidden"
+    height="400"
+    width="344"
+  >
+    <v-app-bar
+      color="deep-purple accent-4"
+      dark
+      prominent
+    >
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
-                                <center><v-div style=""  class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
-                                    <span  v-if="!imageData"  class="placeholder">Choose an Image</span>
-                                    <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  v-on:change="onFileSelected" >
-                                </v-div></center>
+    </v-app-bar>
 
-                                <hr> 
-                                 <!-- preview image -->
-                                <!-- <v-file-input v-model="image" label="File input" filled prepend-icon="mdi-camera"></v-file-input> -->
-                                <!-- <input  type="file" id="file" ref="file" multiple v-on:change="onFileSelected"> -->
-                            </v-container>
-                        
-                        </v-flex>
-                        <v-flex xs12 md6>
-                                <!-- <h1 style="color:black;">หัวข้อเรื่อง</h1> -->
-                                <center><v-text-field v-model="title" style="width:70%; text-align: center;" label="หัวข้อเรื่อง" ></v-text-field></center>
-                                <br><br>
-                                <v-container id ="detailnews"  style="background-color: white ; margin-right:3%;">
-                                    <!-- <v-container fluid>
-                                        <v-textarea name="input-7-1" v-model="content" filledlabel="Label" label="รายละเอียด" auto-grow></v-textarea>
-                                    </v-container> -->
-                                    
-                                    <!-- <v-btn small style="text-align: right;" rounded color="primary" dark  >Add detailnews</v-btn> -->
-                                <!-- <div id="app">
-                                    <ckeditor @input="onEditorInput"></ckeditor>
-                                </div> -->
-                                 <ckeditor 
-                                    id="content"
-                                    
-                                    @input="onEditorInput">
-                                    </ckeditor>
-                                </v-container>
-                                
-                        </v-flex>
-                    
-                </v-layout>
-            </v-container>
-                <div id="grid-container">
-                    <div></div>
-                    <v-btn style="weihgt = 40%" color="primary" dark>cancle</v-btn>
-                    <!-- <button @click="onUploadFile" class="upload-button">Upload file</button> -->
-                    <v-btn type="submit" color="primary" dark>submit</v-btn>
-                    <div></div>  
-                </div>
+    <v-navigation-drawer
+      class="deep-purple accent-4"
+      v-model="drawer"
+      dark
+      right
+      absolute
+      bottom
+      temporary
+    >
+      <v-list
+        nav
+      >
+        <v-list-item-group
+          v-model="group"
+        >
+          <v-list-item>
+            <v-list-item-title>profile</v-list-item-title>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
 
-            <!-- <v-btn style="margin-right= 50%;" color="primary" dark>cancle</v-btn> 
-                <v-btn style="margin-left= 50%;" color="primary" dark>submit</v-btn> -->
-        </v-container>  
-        </form> 
-
-    <div v-html="doctrines.content">
-
-
-
-    </div> 
+  </v-card>
     </div>
     
 </template>
@@ -77,21 +49,15 @@
  const Navbar = () => import('@/components/navbar/navbar')
 export default {
     name : "DetailNews",
-    data (){
-      return {
-        a: null,
-        news: null,
-        selctedFile: null,
-        title: null,
-        content: null,
-        image: null,
-        imagepath: "",
-        editorData: '<p>Content of the editor.</p>',
-        editorConfig: {
-                    // The configuration of the editor.
-        },
-        imageData:null,
-        }
+    data: () => ({
+      drawer: false,
+      group: null,
+    }),
+
+    watch: {
+      group () {
+        this.drawer = false
+      },
     },
     components:{
       Navbar
