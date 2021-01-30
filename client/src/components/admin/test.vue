@@ -10,7 +10,7 @@
         <div class="content">
             <small class="word1">Welcome to</small>
             <h1 class="word2">World's<br>Creative Studio</h1>
-            <v-btn color="white" rounded href='/home'>Enter to website</v-btn>
+            <v-btn color="white" rounded to='/home'>Enter to website</v-btn>
             
         </div>
        <div id="leaves">
