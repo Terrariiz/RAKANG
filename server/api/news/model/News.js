@@ -11,6 +11,9 @@ const newSchema = new mongoose.Schema({
   image: {
     type: String,
   },
+  date: {
+    type: Date
+  }
  
 });
 

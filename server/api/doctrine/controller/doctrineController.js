@@ -7,9 +7,6 @@ exports.addnewdoctrine = async(req,res) => {
     try{     
       console.log(req.body)
       const today = new Date();
-      // const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-      // const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-      // const dateTime = date +' '+ time;
       const doctrine = new Doctrine({
         title: req.body.title,
         content: req.body.content,
@@ -74,7 +71,8 @@ exports.EditDoctrine = async(req,res) =>{
       dataEdit = {
           title: req.body.title,
           content: req.body.content,
-          image: req.body.oldimage
+          image: req.body.oldimage,
+          edittime : today
         }
     }
     // if(req.file.filename != req.body.oldimage){

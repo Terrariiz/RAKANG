@@ -67,8 +67,9 @@
 const Navbar = () => import('@/components/navbar/navbar')
 import {
   } from '@mdi/js'
-
+import moment from "moment";
   export default {
+    
     name : "ListCampaign",
     data (){
       return {
@@ -81,6 +82,10 @@ import {
         console.log(res.data)
         this.campaigns = res.data;
         console.log(this.campaigns)
+        var i = 0
+        for(this.campaigns[i];;i++){
+            this.campaigns[i].date = moment(this.campaigns[i].date).format(" dddd DD-MM-YY  A");
+            } 
       })
       .catch(function(err){
         console.log(err)
