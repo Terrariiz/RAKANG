@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
   phone: {
     type: String,
   },
-  age: {
+  birthdate: {
     type: String,
   },
   image: {
@@ -36,7 +36,25 @@ const userSchema = new mongoose.Schema({
   ],
   coin: {
     type: Number
-  }
+  },
+  donatelog:[
+    {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "DonateLog"
+    }
+  ],
+  coinlog:[
+    {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "CoinLog"
+    }
+  ],
+  minigamelog:[
+    {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "MinigameLog"
+    }
+  ]
 });
 
 //this method will hash the password before saving the user model

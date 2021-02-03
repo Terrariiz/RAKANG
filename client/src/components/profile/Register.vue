@@ -82,11 +82,13 @@
       <v-col cols="6" sm="4" >
          <v-text-field 
          single-line solo  
-         v-model="register.age"
-         label="Age" 
+         v-model="register.birthdate"
+         label="Birthdate" 
          :rules="ageRules" 
+         type="date"
          required ></v-text-field>
       </v-col>
+
 
       <v-col cols="6" sm="4" >
          <v-text-field 
@@ -146,7 +148,7 @@ import swal from "sweetalert";
         confirmPassword: '',
         firstname: '',
         lastname: '',
-        age: '',
+        birthdate: '',
         phone: '',
         checkbox: false,
       },              
@@ -180,8 +182,8 @@ import swal from "sweetalert";
         ],
         ageRules:[
           v => !!v || 'Age is required!',
-          v => v >= 0 || 'Age must be more than 0 years',
-          v => v <= 120 || 'Age must be less than 120 years',
+          // v => v >= 0 || 'Age must be more than 0 years',
+          // v => v <= 120 || 'Age must be less than 120 years',
         ],
         phoneRules:[
           v => !!v || 'Phone is required',

@@ -201,8 +201,8 @@
                           </h6>
                         </div>
                         <div class="col-sm-6">
-                          <p class="m-b-10 f-w-600">อายุ(ปี)</p>
-                          <h6 class="text-muted f-w-400">{{ dataUser.age }}</h6>
+                          <p class="m-b-10 f-w-600">วัน/เดือน/ปีเกิด</p>
+                          <h6 class="text-muted f-w-400">{{ dataUser.birthdate }}</h6>
                         </div>
                       </div>
                     </div>

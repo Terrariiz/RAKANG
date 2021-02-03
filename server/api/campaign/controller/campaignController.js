@@ -1,4 +1,5 @@
 const Campaign = require("../model/Campaign");
+const User = require('../../user/model/User')
 const multer = require('multer');
 const fs = require('fs');
 
@@ -11,6 +12,7 @@ exports.addnewcampaign = async(req,res) => {
       image: req.file.filename,
       date: req.body.date,
       amount: req.body.amount,
+      donate: 0
     });
     console.log(add)
     let data = await add.save()
@@ -139,4 +141,25 @@ exports.EditCampaign = async(req,res) =>{
     res.status(400).json({ err: err });
     console.log(err)
   }
+}
+
+exports.DonateCampaign = async function(req,res){
+  const amount = req.params.amount
+  await Campaign.findOne({_id : req.params.campaign},function(err, campaign){
+    console.log(campaign)
+    if(err){
+      console.log(err)
+    } else {
+      User.findOne({_id : req.params.id}, function(err, user){
+          user.coin = user.coin-amount;
+          campaign.donate = campaign.donate+amount;
+          campaign.save();
+          user.save();
+          console.log(campaign)
+          
+      })
+      res.status(201).json({ campaign });
+    }
+  })
+  res.status(201);
 }
