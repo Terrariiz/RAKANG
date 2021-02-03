@@ -101,7 +101,11 @@ app.post("/test", async function(req,res){
         user.coin = user.coin+(amount/100);
         user.save();
       })
-  })
+     })
+    } else if(req.body.status == 'incomplete'){
+
+    } else if(req.body.status == 'cancle'){
+
     }
     
 

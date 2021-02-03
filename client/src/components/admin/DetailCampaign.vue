@@ -62,6 +62,7 @@
 <script>
 const Navbar = () => import('@/components/navbar/navbar')
 import swal from "sweetalert2";
+import moment from "moment";
 export default {
     name : "DetailCampaign",
     data (){
@@ -83,8 +84,7 @@ export default {
         console.log(res.data)
         that.campaign = res.data;
         console.log(that.campaign)
-        
-      
+        that.campaign.date = moment(that.campaign.date).format(" dddd DD-MM-YY  A");
       })
       .catch(function(err){
         console.log(err)

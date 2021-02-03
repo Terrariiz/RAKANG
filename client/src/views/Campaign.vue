@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import moment from "moment";
 const Navbar = () => import('@/components/navbar/navbar')
 export default {
     name:'Campaign',
@@ -51,6 +52,11 @@ export default {
         console.log(res.data)
         this.campaigns = res.data;
         console.log(this.campaigns)
+        console.log(this.campaigns[0])
+        var i = 0
+        for(this.campaigns[i];;i++){
+            this.campaigns[i].date = moment(this.campaigns[i].date).format(" dddd DD-MM-YY  A");
+            } 
       })
       .catch(function(err){
         console.log(err)

@@ -64,7 +64,7 @@
 </template>
 <script>
 const Navbar = () => import('@/components/navbar/navbar')
-
+import moment from "moment";
 export default {
     name:'Campaign',
     components:{
@@ -87,6 +87,7 @@ export default {
               console.log(res.data)
               that.campaign = res.data;
               console.log(that.campaign)
+              that.campaign.date = moment(that.campaign.date).format(" dddd DD-MM-YY  A");
             })
             .catch(function(err){
               console.log(err)

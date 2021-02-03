@@ -9,10 +9,12 @@ const fs = require('fs');
 exports.addnews = async(req,res) => {
   try{     
     console.log(req.body)
+    const today = new Date();
     const add = new News({
       title: req.body.title,
       content: req.body.content,
-      image: req.file.filename
+      image: req.file.filename,
+      date: today
     });
     console.log(add)
     let data = await add.save()
@@ -40,6 +42,7 @@ exports.ShowListNews = function(req,res){
 }
 
 exports.DetailNews = function(req,res){
+  
   try{
     News.findOne({_id : req.params.id},function(err, news){
       if(err){
@@ -55,6 +58,7 @@ exports.DetailNews = function(req,res){
 }
 
 exports.DeleteNews = function(req,res){
+  
   try{
     News.findOneAndDelete({_id : req.params.id},function(err, news){
       if(err){
@@ -85,6 +89,7 @@ exports.EditNews = async(req,res) =>{
     console.log(req.body.content)
     console.log(req.body.imagepath)
     console.log(req.body.oldimage)
+    const today = new Date();
     if(req.file){
       if(req.file.filename != req.body.oldimage){
         const image  = './public/uploads/' + req.body.oldimage;
@@ -98,7 +103,8 @@ exports.EditNews = async(req,res) =>{
         dataEdit = {
           title: req.body.title,
           content: req.body.content,
-          image: req.file.filename
+          image: req.file.filename,
+          date: today
         }
 
       } else {
@@ -108,21 +114,10 @@ exports.EditNews = async(req,res) =>{
       dataEdit = {
           title: req.body.title,
           content: req.body.content,
-          image: req.body.oldimage
+          image: req.body.oldimage,
+          date: today
         }
     }
-    // if(req.file.filename != req.body.oldimage){
-    //   const image  = './public/uploads/' + req.body.oldimage;
-    //   fs.unlink(image , function(err){
-    //       if(err){
-    //           console.log(err);
-    //       } else {
-    //         console.log("deleted")
-    //       } 
-    //   })
-    // } else {
-    //   console.log("not delete")
-    // }
     News.findOneAndUpdate({_id : req.params.id},dataEdit,function(err, news){
       if(err){
         console.log(err)
