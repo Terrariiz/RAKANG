@@ -43,7 +43,7 @@
           </v-list-item-group>
         </v-list>
         <div class="pa-2">
-          <v-btn block v-on:click="sign_out()">
+          <v-btn block v-on:click="UserSign_out()">
             Logout
           </v-btn>
         </div>
@@ -55,18 +55,50 @@
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
-            <router-link tag='b-nav-item' to='/admin/listcampaign'>Campaign</router-link>
-            <router-link tag='b-nav-item' to='/admin/listdoctrine'>Doctrine</router-link>
-            <router-link tag='b-nav-item' to='/admin/listnews'>News</router-link>
+            <router-link tag='b-nav-item' to='/campaign'>Campaign</router-link>
+            <router-link tag='b-nav-item' to='/doctrine'>Doctrine</router-link>
+            <router-link tag='b-nav-item' to='/news'>News</router-link>
           </b-navbar-nav>
 
           <!-- Right aligned nav items -->
           <b-navbar-nav class="ml-auto">
-            <router-link tag='b-nav-item' to='/admin'>Admin</router-link>
-            <!-- <b-nav-item v-on:click="sign_out()">Log out</b-nav-item> -->
+            <v-app-bar-nav-icon
+              @click.stop="drawer = !drawer"
+            ></v-app-bar-nav-icon>
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
+      <v-navigation-drawer
+        class="dark accent-4"
+        v-model="drawer"
+        dark
+        right
+        absolute
+        bottom
+        temporary
+      >
+        <v-list nav>
+          <v-list-item-group v-model="group">
+            <router-link tag='v-list-item' to='/admin'><v-list-item>
+              <v-list-item-title>แอดมินเพจ</v-list-item-title>
+            </v-list-item></router-link>
+            <router-link tag='v-list-item' to='/admin/listcampaign'><v-list-item>
+              <v-list-item-title>ลิสต์แคมเปญ</v-list-item-title>
+            </v-list-item></router-link>
+            <router-link tag='v-list-item' to='/admin/listdoctrine'><v-list-item>
+              <v-list-item-title>ลิสต์หลักธรรม</v-list-item-title>
+            </v-list-item></router-link>
+            <router-link tag='v-list-item' to='/admin/listnews'><v-list-item>
+              <v-list-item-title>ลิสต์ข่าวประชาสัมพันธ์</v-list-item-title>
+            </v-list-item></router-link>
+          </v-list-item-group>
+        </v-list>
+        <div class="pa-2">
+          <v-btn block v-on:click="AdminSign_out()">
+            Logout
+          </v-btn>
+        </div>
+      </v-navigation-drawer>
     </div>
     <div v-else>
       <b-navbar toggleable="lg" type="light" variant="info">
@@ -122,13 +154,18 @@ export default {
     }
   },
   methods: {
-    async sign_out() {
+    async UserSign_out() {
       localStorage.removeItem("user_id");
       localStorage.removeItem("user_token");
       localStorage.removeItem("top-up-amount");
       this.$store.dispatch("UserLoggedOut");
       await this.$router.push("/home");
     },
+    async AdminSign_out () {
+      localStorage.removeItem('admin_token')
+      this.$store.dispatch('AdminLoggedOut')
+			await this.$router.push('/home')
+		}
   },
 };
 </script>
