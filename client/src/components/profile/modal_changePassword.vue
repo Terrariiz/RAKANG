@@ -95,9 +95,9 @@ export default {
     data() {
         return {
           dataPassword: {
-            oldPassword: "",
-            newPassword: "",
-            confirmNewPassword: ""
+            oldPassword: null,
+            newPassword: null,
+            confirmNewPassword: null
           },
           valid: false,
           show1: false,
@@ -133,18 +133,29 @@ export default {
         this.$refs.form.reset()
       },
       async changePassword(){
-        try {
+        if(this.dataPassword.oldPassword == null || this.dataPassword.newPassword == null || this.dataPassword.confirmNewPassword == null){
+          this.$refs.form.reset()
+          this.show = false
+        } else{
+          try {
             let response = await this.$http.post("/user/"+id+"/reset-password", this.dataPassword);
             let check = response.data
             if (check == true) {
                 this.$refs.form.reset()
-                this.$modal.hide('change-password')
+                this.show = false
                 swal("Success", "Change your password Was successful", "success");
                 console.log('success')
-            } else {
-                this.$modal.hide('change-password')
-                swal("Error", "Something Went Wrong", "error");
-                console.log('error')
+            } else { 
+                if(check == false){
+                  this.$refs.form.reset()
+                  this.show = false
+                  swal("Error", "รหัสผ่านใหม่ที่กรอกเป็นรหัสเดิม", "error");
+                } else {
+                  this.$refs.form.reset()
+                  this.show = false
+                  swal("Error", check, "error");
+                  console.log('error')
+                }
             }
         } catch (err) {
             let error = err.response;
@@ -156,6 +167,8 @@ export default {
                 console.log('error')
             }
         }
+        }
+        
       }
     },
     computed: {
@@ -167,7 +180,7 @@ export default {
 </script>
 
 <style >
-$background_color: #404142;
+/* $background_color: #404142;
 
 .box {
   background: white;
@@ -301,6 +314,6 @@ $background_color: #404142;
 .pop-out-leave-active {
   opacity: 0;
   transform: translateY(24px);
-}
+} */
 
 </style>
