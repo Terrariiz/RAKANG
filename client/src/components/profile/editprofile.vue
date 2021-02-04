@@ -42,8 +42,8 @@
                                             <v-text-field single-line solo  v-model="dataUser.lastname"></v-text-field>
                                         </div>
                                         <div class="col-sm-6">
-                                            <p class="m-b-10 f-w-600">อายุ(ปี)</p>
-                                            <v-text-field single-line solo  v-model="dataUser.age"></v-text-field>
+                                            <p class="m-b-10 f-w-600">วัน/เดือน/ปีเกิด</p>
+                                            <v-text-field type="date" single-line solo  v-model="dataUser.birthdate"></v-text-field>
                                         </div>
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600">เบอร์โทรติดต่อ</p>
@@ -115,10 +115,8 @@ export default {
                 v => !!v || 'Lastname is required!',
                 v => v.length <= 50 || 'lastname must be less than 50 characters',
             ],
-            ageRules:[
+            birthdateRules:[
                 v => !!v || 'Age is required!',
-                v => v >= 0 || 'Age must be more than 0 years',
-                v => v <= 120 || 'Age must be less than 120 years',
             ],
             phoneRules:[
                 v => !!v || 'Phone is required',
@@ -176,7 +174,7 @@ export default {
                 var formData = new FormData();
                 formData.append('firstname', this.dataUser.firstname)
                 formData.append('lastname', this.dataUser.lastname)
-                formData.append('age', this.dataUser.age)
+                formData.append('birthdate', this.dataUser.birthdate)
                 formData.append('phone', this.dataUser.phone)
             
                 if(this.dataEdit.newimage == null){

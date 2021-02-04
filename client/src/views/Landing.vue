@@ -9,7 +9,7 @@
         </div>
         <div class="content">
             <small class="word1">Welcome to</small>
-            <h1 class="word2">World's<br>Creative Studio</h1>
+            <h1 class="word2">RakangThum</h1>
             <v-btn color="white" rounded href='/home'>Enter to website</v-btn>
             
         </div>
@@ -128,6 +128,21 @@ export default {
       font-size: 20px;
     }
 } 
+@media only screen and (max-width: 540px) {
+    .content{
+    top:80%;
+    left:8%;
+    transform: translateY(-50%);
+    z-index: 2;
+    
+}
+    .word1{
+      font-size: 10px;
+    }
+    .word2{
+      font-size: 20px;
+    }
+} 
 @media only screen and (max-width: 769px) {
     .content{
     color:#fbfcfb;
@@ -142,11 +157,17 @@ export default {
     .content{
     color:#fbfcfb;
     position:absolute;
-    top:90%;
+    top:85%;
     left:8%;
     transform: translateY(-50%);
     z-index: 2;
 }
+    .word1{
+      font-size: 15px;
+    }
+    .word2{
+      font-size: 50px;
+    }
 }
 h1{
     font-size:80px;

@@ -17,7 +17,7 @@ exports.registerNewUser = async (req, res) => {
         firstname: req.body.firstname,
         lastname: req.body.lastname,
         phone: req.body.phone,
-        age: req.body.age,
+        birthdate: req.body.birthdate,
         image: "user.png",
         coin: 0
       });
@@ -82,7 +82,7 @@ exports.editProfile = async (req,res) => {
             firstname: req.body.firstname,
             lastname: req.body.lastname,
             phone: req.body.phone,
-            age: req.body.age,
+            birthdate: req.body.birthdate,
             image: req.file.filename
           }
       } else {
@@ -94,7 +94,7 @@ exports.editProfile = async (req,res) => {
           firstname: req.body.firstname,
           lastname: req.body.lastname,
           phone: req.body.phone,
-          age: req.body.age,
+          birthdate: req.body.birthdate,
           image: req.body.oldimage
         }
     }
