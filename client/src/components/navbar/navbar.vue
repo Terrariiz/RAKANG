@@ -49,6 +49,7 @@
         </div>
       </v-navigation-drawer>
     </div>
+
     <div v-else-if="$store.getters.AdminIsLoggedIn">
       <b-navbar toggleable="lg" type="dark" variant="dark">
         <router-link to='/home'><b-navbar-brand>RAKANGTHAM</b-navbar-brand></router-link>
@@ -100,6 +101,7 @@
         </div>
       </v-navigation-drawer>
     </div>
+
     <div v-else>
       <b-navbar toggleable="lg" type="light" variant="info">
         <router-link to='/home'><b-navbar-brand>RAKANGTHAM</b-navbar-brand></router-link>

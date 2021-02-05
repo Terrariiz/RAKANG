@@ -45,7 +45,7 @@
                   <!-- <router-link :to="`/admin/listdoctrine/${doctrine._id}`">detail</router-link> -->
                   <!-- <router-link :to="{name : 'DetailDoctrine', params: {id:doctrine._id}}">detail</router-link> -->
                   <v-btn @click="ViewCampaign(campaign._id)">view</v-btn>
-                  
+                  <v-btn to='/admin/logdonate'>Log</v-btn>
                 </td>
                 <!-- <td>{{ item.name }}</td>
                 <td>
