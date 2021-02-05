@@ -142,12 +142,7 @@ exports.changePassword = async (req,res) => {
     }
     if(dataPassword.old !== dataPassword.new && dataPassword.new == dataPassword.confirm){
       const check = await User.checkPassword(id, dataPassword.old, dataPassword.new);
-      if(check){
-        res.json(true);
-      } else{
-        console.log("password error.");
-        res.json(false);
-      }
+      res.json(check);
     } else {
       res.json(false);
     }

@@ -94,7 +94,7 @@ userSchema.statics.checkPassword = async (id, oldPassword, newPassword) => {
   const user = await User.findById(id);
   const isPasswordMatch = await bcrypt.compare(oldPassword, user.password);
   if (!isPasswordMatch) {
-    throw new Error({ error: "รหัสผ่านเดิมไม่ถูกต้อง" });
+    return "รหัสผ่านเดิมไม่ถูกต้อง";
   } else{
     user.password = newPassword;
     await user.save();
