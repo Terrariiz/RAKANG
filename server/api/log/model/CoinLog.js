@@ -4,7 +4,8 @@ const newSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: '../../user/model/User'
-  }],
+  }
+],
   amount: {
     type: String,
   },

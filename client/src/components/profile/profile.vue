@@ -31,7 +31,7 @@
                       <h6 style="font-size: 20px; color;blue;" class="f-w-600">
                         {{ dataUser.firstname }} {{ dataUser.lastname }}
                       </h6>
-                      <h6 class="f-w-600">200 Coin</h6>
+                      <h6 class="f-w-600">{{dataUser.coin}} Coin</h6>
                       <v-container fluid>
                         <v-row justify="center">
                           <!-- <v-cols cols="4" >
@@ -42,7 +42,7 @@
                             <v-btn
                               small
                               style="width: auto"
-                              href="/profile/logpayment"
+                              to="/profile/logpayment"
                               >ประวัติการบริจาค</v-btn
                             >
                           </v-col>
@@ -51,7 +51,7 @@
                             <v-btn
                               small
                               style="width: auto"
-                              href="/profile/logcoin"
+                              to="/profile/logcoin"
                               >ประวัติการซื้อ coin</v-btn
                             >
                           </v-col>
