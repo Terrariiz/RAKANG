@@ -78,39 +78,25 @@
       <a href="/home" style="float:right;">แสดงทั้งหมด >>></a>
     </v-container>
   </div> -->
-  <section style="background-color:gray;">
-    <v-container style="background-color:black; margin-top:3%; color:white; padding:10vh; ">
-      <v-row>
-        <v-col cols="12" md="6">
-          <img class="img"  src="../../../client/public/image/bubble.png">
+  <!-- ข่าวล่าสุด -->
+  <section id="news">
+    <v-container style=" margin-top:3%;  padding:10vh; ">
+      <v-row class="test"  >
+        <v-col  cols="12" md="6">
+          <img class="img" style="background-color:red;"  src="../../../client/public/image/bubble.png">
         </v-col>
         
-        <v-col cols="12" md="6" style="background-color: green; text-align:center; ">
+        <v-col cols="12" md="6" >
           <div>Title</div>
           <div>detail</div>
 
         </v-col>
-        
+        <div class="btn"><v-btn block style="background-color: #ffdd94; color:#455054;"> ดูเนื้อหา</v-btn></div>
       </v-row>
       
     </v-container>
   </section>
-
-  <section style="background-color:white;">
-    <v-container style="background-color:black;  color:white; padding:10vh; ">
-      <v-row>
-        <v-col cols="12" md="6" style="background-color: green; text-align:center; ">
-          <div>Title</div>
-          <div>detail</div>
-
-        </v-col>
-        <v-col cols="12" md="6">
-          <img class="img"  src="../../../client/public/image/bubble.png">
-        </v-col>
-      </v-row>
-      
-    </v-container>
-  </section>
+  
     
   </div>
 
@@ -172,6 +158,20 @@ export default {
 };
 </script>
 <style >
+.show-res
+{
+  display: none;
+}
+@media only screen and (max-width: 415px) {
+    .show-res{
+    display: initial;
+    
+}
+    .hide-res{
+      display: none;
+    }
+    
+} 
 .img
 {
   width: 200px;
@@ -181,4 +181,19 @@ export default {
   margin-right: auto;
   margin-left: auto;
 }
+.btn{
+  position: relative;
+  left: 50%;
+  
+}
+@media only screen and (max-width: 415px) {
+    .btn{
+    
+      
+      width: 300px;
+  
+}
+    
+} 
+
 </style>
