@@ -23,6 +23,7 @@ const DetailNews             = () => import('@/components/admin/DetailNews')
 const DetailCampaign         = () => import('@/components/admin/DetailCampaign')
 const EditDoctrine           = () => import('@/components/admin/EditDoctrine')
 const Admin                  = () => import('@/components/admin/Admin')
+const LogDonateAdmin         = () => import('@/components/admin/LogDonate')
 const loginAdmin             = () => import('@/components/admin/loginAdmin')
 const ListCampaign           = () => import('@/components/admin/ListCampaign')
 const AddCampaign            = () => import('@/components/admin/AddCampaign')
@@ -138,6 +139,14 @@ const routes = [
     path: '/admin/login',
     name: 'loginAdmin',
     component: loginAdmin
+  },
+  {
+    path: '/admin/logdonate',
+    name: 'LogDonate',
+    component: LogDonateAdmin,
+    meta: {
+      requiresAdminAuth: true
+    }
   },
   {
     path: '/admin/Listnews',

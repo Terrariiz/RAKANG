@@ -40,19 +40,19 @@ const userSchema = new mongoose.Schema({
   donatelog:[
     {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "DonateLog"
+        ref: "../../log/model/DonateLog"
     }
   ],
   coinlog:[
     {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "CoinLog"
+        ref: "../../log/model/CoinLog"
     }
   ],
   minigamelog:[
     {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "MinigameLog"
+        ref: "../../log/model/MinigameLog"
     }
   ]
 });

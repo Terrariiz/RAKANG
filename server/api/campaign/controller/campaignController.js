@@ -1,7 +1,9 @@
 const Campaign = require("../model/Campaign");
 const User = require('../../user/model/User')
+const DonateLog = require('../../log/model/DonateLog')
 const multer = require('multer');
 const fs = require('fs');
+var ObjectID = require('mongodb').ObjectID;
 
 exports.addnewcampaign = async(req,res) => {
   try{     
@@ -144,20 +146,45 @@ exports.EditCampaign = async(req,res) =>{
 }
 
 exports.DonateCampaign = async function(req,res){
-  const amount = req.params.amount
+  const amount = parseInt(req.params.amount, 10);
   await Campaign.findOne({_id : req.params.campaign},function(err, campaign){
     console.log(campaign)
+    console.log('8h49dfghdfgh')
     if(err){
       console.log(err)
     } else {
-      User.findOne({_id : req.params.id}, function(err, user){
-          user.coin = user.coin-amount;
-          campaign.donate = campaign.donate+amount;
-          campaign.save();
-          user.save();
-          console.log(campaign)
+      
+        User.findOne({_id : req.params.id}, function(err, user){
           
+          const now = new Date();
+
+          const donatelog = new DonateLog({
+            amount : amount,
+            date : now
+          });
+
+          DonateLog.create(donatelog,function(err,log){
+            console.log(log)
+
+            log.user.push(user)
+            log.campaign.push(campaign)
+            //////แก้ไขยอด coin user
+            user.coin = user.coin-amount;
+            //////save ข้อมูล log เข้า donate log ของ user 
+            user.donatelog.push(log)
+
+            campaign.donatelist.push(log)
+  
+            campaign.donate = campaign.donate+amount;
+            /////save ข้อมูล
+            campaign.save();
+            log.save();
+            user.save();
+            console.log(campaign)
+
+          })
       })
+      
       res.status(201).json({ campaign });
     }
   })

@@ -1,12 +1,10 @@
 const mongoose = require("mongoose");
 const newSchema = new mongoose.Schema({
-  user: {
-    id:{
+  user:[
+    {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Campaign'
-    },
-    username: String
-  },
+      ref: '../../user/model/User'
+  }],
   amount: {
     type: String,
   },
@@ -16,5 +14,5 @@ const newSchema = new mongoose.Schema({
  
 });
 
-const Campaign = mongoose.model("CoinLog", newSchema);
-module.exports = Campaign;
+const CoinLog = mongoose.model("CoinLog", newSchema);
+module.exports = CoinLog;

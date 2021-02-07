@@ -19,7 +19,14 @@ const newSchema = new mongoose.Schema({
   },
   donate: {
     type: Number
-  }
+  },
+  donatelist:[
+    {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "../../log/model/DonateLog"
+    }
+  ],
+
  
 });
 

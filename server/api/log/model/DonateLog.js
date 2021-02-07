@@ -1,21 +1,19 @@
 const mongoose = require("mongoose");
 const newSchema = new mongoose.Schema({
-  campaign: {
-    id:{
+  campaign:[
+     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Campaign'
-    },
-    name: String
-  },
-  user: {
-    id:{
+      ref: '../../user/model/Campaign'
+      }
+],
+  user:[
+    {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Campaign'
-    },
-    username: String
-  },
+      ref: '../../campaign/model/User'
+    } 
+  ],
   amount: {
-    type: String,
+    type: String, 
   },
   date: {
     type: Date,
@@ -23,5 +21,5 @@ const newSchema = new mongoose.Schema({
  
 });
 
-const Campaign = mongoose.model("DonateLog", newSchema);
-module.exports = Campaign;
+const DonateLog = mongoose.model("DonateLog", newSchema);
+module.exports = DonateLog;
