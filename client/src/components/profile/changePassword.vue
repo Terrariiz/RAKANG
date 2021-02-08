@@ -71,7 +71,7 @@
 </template>
 
 <script>
-import swal from "sweetalert";
+import swal from "sweetalert2";
 const id = window.localStorage.getItem('user_id')
 export default {
   name: "changePassword",
@@ -138,27 +138,27 @@ export default {
               if (check == true) {
                   this.$refs.form.reset()
                   this.show = false
-                  swal("Success", "Change your password Was successful", "success");
+                  swal.fire("Success", "Change your password Was successful", "success");
                   console.log('success')
               } else { 
                   if(check == false){
                     this.$refs.form.reset()
                     this.show = false
-                    swal("Error", "รหัสผ่านใหม่ที่กรอกเป็นรหัสเดิม", "error");
+                    swal.fire("Error", "รหัสผ่านใหม่ที่กรอกเป็นรหัสเดิม", "error");
                   } else {
                     this.$refs.form.reset()
                     this.show = false
-                    swal("Error", check, "error");
+                    swal.fire("Error", check, "error");
                     console.log('error')
                   }
                 }
             } catch (err) {
                 let error = err.response;
                 if (error.status == 409) {
-                    swal("Error", error.data.message, "error");
+                    swal.fire("Error", error.data.message, "error");
                     console.log('success')
                 } else {
-                    swal("Error", error.data.err.message, "error");
+                    swal.fire("Error", error.data.err.message, "error");
                     console.log('error')
                 }
               }
