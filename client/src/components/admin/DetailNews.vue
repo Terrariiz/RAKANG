@@ -55,24 +55,22 @@ export default {
       this.getData()
     },
     methods: {
-         getData(){
-            var that = this;
-       this.$http.get("/news/DetailNews/"+this.$route.params.id)
-      .then((res) => {
-        console.log(res.data)
-        that.news = res.data;
-        console.log(that.news)
-        
-      
-      })
-      .catch(function(err){
-        console.log(err)
-      })
-        },
+      getData(){
+        var that = this;
+        this.$http.get("/news/DetailNews/"+this.$route.params.id)
+        .then((res) => {
+          console.log(res.data)
+          that.news = res.data;
+          console.log(that.news)
+        })
+        .catch(function(err){
+          console.log(err)
+        })
+      },
       EditNews(newsid){
         this.$router.push({ name: 'editnews' , params: {id : newsid}})
       },
-       DeleteNews(){
+      DeleteNews(){
         const swalWithBootstrapButtons = swal.mixin({
           customClass: {
             confirmButton: 'btn btn-success',
