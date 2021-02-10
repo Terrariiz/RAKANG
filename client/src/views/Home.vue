@@ -3,99 +3,75 @@
     <div>
       <Navbar></Navbar>
     </div>
-    <v-carousel cycle hide-delimiters>
-      <v-carousel-item to="/"
-        v-for="(item,i) in items"
-        :key="i"
-        :src="item.src"
-        
-        reverse-transition="fade-transition"
-        transition="fade-transition"
-      >
-        <v-row  class="title fill-height hidden-xs-only" align="center" justify="center">{{ item.title }}</v-row>
-      </v-carousel-item>
-    </v-carousel>
+   
+      <v-carousel cycle hide-delimiters>
+        <v-carousel-item to="/"
+          v-for="(item,i) in items"
+          :key="i"
+          :src="item.src"
+          
+          reverse-transition="fade-transition"
+          transition="fade-transition"
+        >
+          <v-row  class="title fill-height hidden-xs-only" align="center" justify="center">{{ item.title }}</v-row>
+        </v-carousel-item>
+      </v-carousel>
 
-    <div class="block latestPostBlock">
-    <v-container>
-      <h2 class="text-center">แคมเปญ</h2>
-      <v-row>
-        <v-col v-for="news in news" :key="news.id" cols="12" md="4">
-          <v-card outlined class="mx-auto">
-            <v-img
-              class="white--text align-end"
-              height="200px"
-              :src="news.src"
-            >
-              <v-card-title>{{ news.name }}</v-card-title>
-            </v-img>
-            <v-card-subtitle class="pb-0">{{ news.subtitle }}</v-card-subtitle>
-            <v-card-text class="text--primary">
-              <div>{{ news.description }}</div>
-            </v-card-text>
-            <v-card-text>
-              <div style="text-align:right;">ยอดบริจาค xxx / 60000 บาท</div>
-              <v-progress-linear  color="light-green darken-4"  height="10"  value="20"  striped></v-progress-linear>
-            </v-card-text>
-            <v-card-actions>
-              <v-btn color="primary" text>More</v-btn>
-            </v-card-actions>
-          </v-card>
-         
-        </v-col>
-         
-      </v-row>
-      <a href="/home" style="float:right; margin-bottom:3%">แสดงทั้งหมด <i class="fa fa-chevron-right" aria-hidden="true"></i><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
-    </v-container>
-  </div>
-  
-
-   <!-- <div class="block latestPostBlock">
-    <v-container>
-      <h2 class="text-center">หลักธรรม</h2>
-      <v-row>
-        <v-col v-for="news in news" :key="news.id" cols="12" md="4">
-          <v-card outlined class="mx-auto">
-            <v-img
-              class="white--text align-end"
-              height="200px"
-              :src="news.src"
-            >
-              <v-card-title>{{ news.name }}</v-card-title>
-            </v-img>
-            <v-card-subtitle class="pb-0">{{ news.subtitle }}</v-card-subtitle>
-            <v-card-text class="text--primary">
-              <div>{{ news.description }}</div>
-            </v-card-text>
-            <v-card-actions>
-              <v-btn color="primary" text>More</v-btn>
-            </v-card-actions>
-          </v-card>
-         
-        </v-col>
-         
-      </v-row>
-      <a href="/home" style="float:right;">แสดงทั้งหมด >>></a>
-    </v-container>
-  </div> -->
-  <!-- ข่าวล่าสุด -->
-  <section id="news">
-    <v-container style=" margin-top:3%;  padding:10vh; ">
-      <v-row class="test"  >
+      <!-- แคมเปญ -->
+       <section id="news">
+    
+    <v-container class="container-news"   >
+      <v-row class="row-news" >
         <v-col  cols="12" md="6">
-          <img class="img" style="background-color:red;"  src="../../../client/public/image/bubble.png">
+          <img class="img"  src="../../../client/public/image/bubble.png">
         </v-col>
-        
-        <v-col cols="12" md="6" >
+        <v-col class="cols-detail-campaign" cols="12" md="6" >
+          <div>ข่าวประชาสัมพันธ์</div>
           <div>Title</div>
           <div>detail</div>
-
+          <div style="text-align:right;"><span style="text-align:left;">วันที่</span> <span style="text-align:right;">ยอดบริจาค xxx / 60000 บาท</span></div>
+          <v-progress-linear  color="light-green darken-4"  height="10"  value="20"  striped></v-progress-linear>
+          <hr>
+          <div class="btn-news"><v-btn block style="background-color: #ffdd94; color:#455054;"> ดูเนื้อหา</v-btn></div>
         </v-col>
-        <div class="btn"><v-btn block style="background-color: #ffdd94; color:#455054;"> ดูเนื้อหา</v-btn></div>
+        
       </v-row>
       
     </v-container>
+    
   </section>
+  
+
+      <!-- ข่าวล่าสุด -->
+      <div class="block latestPostBlock">
+        <v-container>
+          <h2 class="text-center">ข่าว</h2>
+          <v-row>
+            <v-col v-for="news in news" :key="news.id" cols="12" md="4">
+              <v-card outlined class="mx-auto">
+                <v-img
+                  class="white--text align-end"
+                  height="200px"
+                  :src="news.src"
+                >
+                  <v-card-title>{{ news.name }}</v-card-title>
+                </v-img>
+                <v-card-subtitle class="pb-0">{{ news.subtitle }}</v-card-subtitle>
+                <v-card-text class="text--primary">
+                  <div>{{ news.description }}</div>
+                </v-card-text>
+                <v-card-actions>
+                  <v-btn color="primary" style="margin-left:auto;" text>More</v-btn>
+                </v-card-actions>
+              </v-card>
+            
+            </v-col>
+            
+          </v-row>
+          <a href="/home" style="float:right; margin-bottom:3%">แสดงทั้งหมด <i class="fa fa-chevron-right" aria-hidden="true"></i><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+        </v-container>
+    </div>
+  
   
     
   </div>
@@ -158,12 +134,12 @@ export default {
 };
 </script>
 <style >
-.show-res
+.res-top
 {
   display: none;
 }
 @media only screen and (max-width: 415px) {
-    .show-res{
+    .res-top{
     display: initial;
     
 }
@@ -174,26 +150,83 @@ export default {
 } 
 .img
 {
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  
   background-size: cover;
   display: block;
   margin-right: auto;
   margin-left: auto;
 }
-.btn{
+.btn-news{
   position: relative;
-  left: 50%;
+  width: 40%;
+  /* left: 50%; */
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+.btn-doctrine{
+  position: relative;
+  width: 20%;
+  left: 20%;
+  
+}
+.container-news{
+  margin-top: 3%;
+  padding:20vh;
+  /* background-color: #d8d1d028;
+  padding: 10px 10px; */
   
 }
 @media only screen and (max-width: 415px) {
-    .btn{
-    
-      
-      width: 300px;
+    .img
+{
+  width: 100%;
+  
+  background-size: cover;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+.btn-news{
+  position: relative;
+  
+  width: 100%;
+  
   
 }
-    
+.container-news{
+  
+  padding:0vh;
+}
+.btn-doctrine{
+  position: relative;
+  left:0;
+  width: 100%;
+  margin: 3%;
+  
+}
 } 
 
+#news{
+  
+  
+}
+.container-doctrine{
+  margin-top: 3%;
+  padding:20vh;
+  
+}
+
+.heroBlock{
+  /* background-image: url("../../../client/public/image/bg3.jpg");
+  background-size: cover;
+  background-attachment: fixed; */
+}
+.row-news{
+  margin-bottom:3%
+}
+.cols-detail-campaign{
+  margin-top:5%;
+}
 </style>

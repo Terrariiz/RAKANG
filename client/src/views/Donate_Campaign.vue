@@ -3,15 +3,15 @@
     <div>
         <Navbar></Navbar>
         </div>
-        <h1>donateCampaign</h1>
+        <!-- <h1>donateCampaign</h1> -->
 
-         <v-container rounded-xl style="background:linear-gradient(90deg, hsla(16, 100%, 76%, 1) 0%, hsla(49, 100%, 81%, 1) 100%); 
+         <!-- <v-container rounded-xl style="background:linear-gradient(90deg, hsla(16, 100%, 76%, 1) 0%, hsla(49, 100%, 81%, 1) 100%); 
        box-shadow:5px 6px 5px #888888; margin-top: 3%">
         <v-btn to='/campaign'><i style="float:left;" class="fa fa-arrow-left fa-lg" aria-hidden="true"></i></v-btn>
       <div  v-if="campaign" >
         <center>
               <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                <!-- <div><i style="font-size: 50px; float:left;" class="fa fa-arrow-left" aria-hidden="true"></i></div> -->
+                
               <a href="#"><br>
                 <img class="img-fluid rounded" id="showimage" :src="'http://localhost:4000/uploads/' + campaign.image"/>
               </a>
@@ -28,13 +28,13 @@
                 
                     <v-col cols="4"></v-col>
                     <v-col cols="4"></v-col>
-                    <!-- date -->
+                    date
                     <v-col cols="4">
                       <h3>วันสิ้นสุดการรับบริจาค </h3>
                     <div>{{ campaign.date }} </div>
                     </v-col>
                 
-                    <!-- เงิน -->
+                    เงิน
                     <v-col cols="4"></v-col>
                     <v-col cols="4"></v-col>
                       <v-col cols="4">
@@ -59,7 +59,96 @@
              
       </div>
       
-      </v-container>   
+      </v-container>    -->
+    <div class="project-header">
+    <v-container >
+      <v-row>
+          <h1>{{campaign.name}}</h1>
+          <br>
+      </v-row>
+      <v-row>
+          <v-col  cols="12" md="8" sm="12">
+              <div class="project-content">
+                  <img class="image -fullwidth img-responsive" id="showimage" :src="'http://localhost:4000/uploads/' + campaign.image"/>
+                  <p class="lead">{{campaign.content}}</p>
+                  <p class="details">
+                      <span class="duration">เริ่มวันที่ {{ campaign.date }} </span>
+                      <span class="location">สถานที่</span>
+                  </p>
+              </div>
+          </v-col>
+          <v-col  cols="12" md="4" sm="12">
+            <div class="fund-raising affix-top">
+                <div class="body">
+                    <div class="amount-raised">
+                        <h3 class="title">ยอดบริจาคขณะนี้</h3>
+                        <span class="value">100000 บาท</span>
+                    </div>
+                    <div class="funding-goal">
+                        <h3 class="title">เป้าหมาย</h3>
+                        <span class="value">{{ campaign.amount }} บาท</span>
+                    </div>
+                    <div class="progress-bar">
+                        <span class="percent">
+                            <span class="hide-txt">ดำเนินการไปแล้ว</span>
+                            80%
+                        </span>
+                        <span class="bar" style="width:80%"></span>
+                    </div>
+                    <span class="timeleft">365 วัน</span>
+                    <span class="people">
+                        <span class="hide-txt">จำนวนคนที่บริจาค</span>
+                        <span class="icon-people">43</span>
+                    </span>
+                </div>
+
+            <div class="action">
+                <a><v-btn block></v-btn></a>
+                
+            </div>
+
+            </div>
+          </v-col>
+      </v-row>
+      
+  </v-container>
+    </div>
+  <!-- tablist -->
+  <div class="tab-section">
+      <v-container>
+         <v-tabs
+      v-model="tab"
+      background-color="transparent"
+      color="basil"
+      grow
+    >
+      <v-tab
+        v-for="item in items"
+        :key="item"
+      >
+        {{ item }}
+      </v-tab>
+    </v-tabs>
+
+    <v-tabs-items v-model="tab">
+      <v-tab-item
+        v-for="item in items"
+        :key="item"
+      >
+        <v-card
+          color="basil"
+          flat
+        >
+          <v-card-text>{{ text }}</v-card-text>
+        </v-card>
+      </v-tab-item>
+    </v-tabs-items>
+        
+      </v-container>
+  </div>
+  
+
+
     </div>
 </template>
 <script>
@@ -98,5 +187,47 @@ export default {
 </script>
 
 <style>
-
+.project-header{
+  background-color: #fff8ec;
+}
+.project-content{
+    padding-right: 40px;
+    
+}
+.image .-fullwidth{
+  width: 100%;
+}
+.image{
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 40px;
+}
+.img-responsive{
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+img{
+  vertical-align: middle;
+  border: 0;
+}
+.fund-raising{
+    border-radius: 6px;
+    background-clip: padding-box;
+    color: #666;
+    border: 1px solid #f3d9ab;
+    background-color: #fff;
+    z-index: 999;
+}
+.fund-raising .body{
+   padding: 30px 25px 0  25px;
+}
+.fund-raising .action{
+   padding: 30px 25px 30px 25px;
+}
+@media(max-width: 767px){
+    .project-content {
+    padding-right: 0;
+}
+}
 </style>
