@@ -59,19 +59,18 @@ export default {
       this.getData()
     },
     methods: {
-         getData(){
-            var that = this;
-       this.$http.get("/doctrine/DetailDoctrine/"+this.$route.params.id)
-      .then((res) => {
-        console.log(res.data)
-        that.doctrines = res.data;
-        console.log(that.doctrines)
-        
-      })
-      .catch(function(err){
-        console.log(err)
-      })
-        },
+      getData(){
+          var that = this;
+          this.$http.get("/doctrine/DetailDoctrine/"+this.$route.params.id)
+          .then((res) => {
+          console.log(res.data)
+          that.doctrines = res.data;
+          console.log(that.doctrines)
+        })
+        .catch(function(err){
+          console.log(err)
+        })
+      },
       EditDoctrine(doctrineid){
         this.$router.push({ name: 'EditDoctrine' , params: {id : doctrineid}})
       },

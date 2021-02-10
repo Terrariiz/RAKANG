@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import swal from "sweetalert";
+import swal from "sweetalert2";
 const Navbar = () => import('@/components/navbar/navbar')
 
     export default {
@@ -87,19 +87,19 @@ const Navbar = () => import('@/components/navbar/navbar')
                 console.log(news);
                 if (news) {
                     this.$router.push({ name: 'Listnews'})
-                    swal("Success", "Add News Was successful", "success");
+                    swal.fire("Success", "Add News Was successful", "success");
                     console.log('success')
                 } else {
-                    swal("Error", "Something Went Wrong", "error");
+                    swal.fire("Error", "Something Went Wrong", "error");
                     console.log('error')
                 }
             } catch (err) {
                 let error = err.response;
                 if (error.status == 409) {
-                    swal("Error", error.data.message, "error");
+                    swal.fire("Error", error.data.message, "error");
                     console.log('success')
                 } else {
-                    swal("Error", error.data.err.message, "error");
+                    swal.fire("Error", error.data.err.message, "error");
                     console.log('error')
                     }
                 }

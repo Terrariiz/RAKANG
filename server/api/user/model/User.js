@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
   phone: {
     type: String,
   },
-  age: {
+  birthdate: {
     type: String,
   },
   image: {
@@ -36,7 +36,25 @@ const userSchema = new mongoose.Schema({
   ],
   coin: {
     type: Number
-  }
+  },
+  donatelog:[
+    {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "../../log/model/DonateLog"
+    }
+  ],
+  coinlog:[
+    {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "../../log/model/CoinLog"
+    }
+  ],
+  minigamelog:[
+    {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "../../log/model/MinigameLog"
+    }
+  ]
 });
 
 //this method will hash the password before saving the user model
@@ -76,7 +94,7 @@ userSchema.statics.checkPassword = async (id, oldPassword, newPassword) => {
   const user = await User.findById(id);
   const isPasswordMatch = await bcrypt.compare(oldPassword, user.password);
   if (!isPasswordMatch) {
-    throw new Error({ error: "รหัสผ่านเดิมไม่ถูกต้อง" });
+    return "รหัสผ่านเดิมไม่ถูกต้อง";
   } else{
     user.password = newPassword;
     await user.save();

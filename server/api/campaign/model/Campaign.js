@@ -15,8 +15,18 @@ const newSchema = new mongoose.Schema({
     type: String,
   },
   date: {
-    type: String,
+    type: Date,
   },
+  donate: {
+    type: Number
+  },
+  donatelist:[
+    {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "../../log/model/DonateLog"
+    }
+  ],
+
  
 });
 

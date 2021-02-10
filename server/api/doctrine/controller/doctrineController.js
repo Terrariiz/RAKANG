@@ -6,10 +6,12 @@ const fs = require('fs');
 exports.addnewdoctrine = async(req,res) => {
     try{     
       console.log(req.body)
+      const today = new Date();
       const doctrine = new Doctrine({
         title: req.body.title,
         content: req.body.content,
-        image: req.file.filename
+        image: req.file.filename,
+        edittime : today
       });
       console.log(doctrine)
       let data = await doctrine.save()
@@ -44,6 +46,7 @@ exports.EditDoctrine = async(req,res) =>{
     console.log(req.body.content)
     console.log(req.body.imagepath)
     console.log(req.body.oldimage)
+    const today = new Date();
     if(req.file){
       if(req.file.filename != req.body.oldimage){
         const image  = './public/uploads/' + req.body.oldimage;
@@ -57,7 +60,8 @@ exports.EditDoctrine = async(req,res) =>{
         dataEdit = {
           title: req.body.title,
           content: req.body.content,
-          image: req.file.filename
+          image: req.file.filename,
+          edittime : today
         }
 
       } else {
@@ -67,7 +71,8 @@ exports.EditDoctrine = async(req,res) =>{
       dataEdit = {
           title: req.body.title,
           content: req.body.content,
-          image: req.body.oldimage
+          image: req.body.oldimage,
+          edittime : today
         }
     }
     // if(req.file.filename != req.body.oldimage){

@@ -73,7 +73,7 @@
 
 <script>
 const Navbar = () => import('@/components/navbar/navbar')
-import swal from "sweetalert";
+import swal from "sweetalert2";
 export default {
     name : "EditDoctrine",
 
@@ -123,31 +123,50 @@ export default {
                 formData.append('oldimage', this.doctrine.oldimage)
                 console.log('else')
             }
-            
-            console.log('formData')
-            console.log(formData)
-            console.log(this.doctrine.title)
-            console.log(this.doctrine.content)
-            console.log(this.doctrine.image)
-            console.log(this.doctrine.image.name)
-            console.log(this.doctrine.imagepath)
-            await this.$http.put("/doctrine/DetailDoctrine/"+this.$route.params.id+"/edit/", formData)
-            .then(() => {
-                this.$router.push({ name: 'DetailDoctrine' , params: {id : this.$route.params.id}})
+            // console.log('formData')
+            // console.log(formData)
+            // console.log(this.doctrine.title)
+            // console.log(this.doctrine.content)
+            // console.log(this.doctrine.image)
+            // console.log(this.doctrine.image.name)
+            // console.log(this.doctrine.imagepath)
+            swal.fire({
+                title: 'Do you want to save the changes?',
+                icon: 'question',
+                confirmButtonColor: 'green',
+                cancelButtonColor: 'red',
+                showCancelButton: true,
+                confirmButtonText: `Save`,
+            }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    this.$http.put("/doctrine/DetailDoctrine/"+this.$route.params.id+"/edit/", formData)
+                    .then(() => {
+                        this.$router.push({ name: 'DetailDoctrine' , params: {id : this.$route.params.id}})
+                        swal.fire('Saved!', 'Edit this doctrine was successful.', 'success')
+                    })
+                    .catch(function(err){
+                        console.log(err)
+                    })
+                }
             })
-            .catch(function(err){
-                console.log(err)
-            })
+            // await this.$http.put("/doctrine/DetailDoctrine/"+this.$route.params.id+"/edit/", formData)
+            // .then(() => {
+            //     this.$router.push({ name: 'DetailDoctrine' , params: {id : this.$route.params.id}})
+            // })
+            // .catch(function(err){
+            //     console.log(err)
+            // })
            
             
         } catch (err) {
             let error = err.response;
             if (error.status == 409) {
-            swal("Error", error.data.message, "error");
-            console.log('success')
+                swal.fire("Error", error.data.message, "error");
+                console.log('success')
             } else {
-            swal("Error", error.data.err.message, "error");
-            console.log('error')
+                swal.fire("Error", error.data.err.message, "error");
+                console.log('error')
             }
         }
             },

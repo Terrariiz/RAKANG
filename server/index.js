@@ -13,6 +13,7 @@ var FormData = require('form-data');
 // const URLSearchParams = require('url-search-params-polyfill');
 const { URLSearchParams } = require('url');
 const User = require("./api/user/model/User");
+const Coin = require("./api/log/model/CoinLog");
 
 
 //configure database and mongoose
@@ -90,18 +91,37 @@ app.post("/test", async function(req,res){
     if(req.body.status == "complete"){
     await axios.post("https://sandbox-appsrv2.chillpay.co/api/v2/PaymentStatus/",form)
     .then((res) => {
-      console.log('จงดูวววววว')
-      console.log(res.data)
+
       var amount = res.data.Amount; 
       var user_id = res.data.CustomerId;
-      console.log(amount)
-      console.log(user_id)
-      User.findById(user_id,function(err,user){
-        console.log(user._id);
-        user.coin = user.coin+(amount/100);
-        user.save();
-      })
-  })
+
+      const now = new Date();
+      const coin = new Coin({
+          amount : amount/100,
+          date : now
+        });
+      ////สร้าง coinlog
+      Coin.create(coin, function(err,newcoinlog){
+        User.findById(user_id,function(err,user){
+          console.log(user._id);
+          user.coin = user.coin+(amount/100);
+          //แอด coinlog///////////////////////////////////////
+          
+          user.coinlog.push(newcoinlog)
+          newcoinlog.user.push(user)
+
+
+          newcoinlog.save();
+          user.save();
+        })
+
+        })
+      
+     })
+    } else if(req.body.status == 'incomplete'){
+
+    } else if(req.body.status == 'cancle'){
+
     }
     
 

@@ -4,6 +4,7 @@
     <div>
         <Navbar></Navbar>
     </div>
+    <v-form @submit.prevent="EditProfile">
     <center><div class="page-content page-container" id="page-content">
     <div class="padding">
         <div  class="row container d-flex justify-content-center">
@@ -41,8 +42,8 @@
                                             <v-text-field single-line solo  v-model="dataUser.lastname"></v-text-field>
                                         </div>
                                         <div class="col-sm-6">
-                                            <p class="m-b-10 f-w-600">อายุ(ปี)</p>
-                                            <v-text-field single-line solo  v-model="dataUser.age"></v-text-field>
+                                            <p class="m-b-10 f-w-600">วัน/เดือน/ปีเกิด</p>
+                                            <v-text-field type="date" single-line solo  v-model="dataUser.birthdate"></v-text-field>
                                         </div>
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600">เบอร์โทรติดต่อ</p>
@@ -76,14 +77,15 @@
             </div>
         </div>
     </div>
+    
 </div></center>
-
+</v-form>
 </div>
 
 </template>
 
 <script>
-import swal from "sweetalert";
+import swal from "sweetalert2";
 const Navbar = () => import('@/components/navbar/navbar')
 const token = window.localStorage.getItem('user_token')
 const id = window.localStorage.getItem('user_id')
@@ -112,10 +114,8 @@ export default {
                 v => !!v || 'Lastname is required!',
                 v => v.length <= 50 || 'lastname must be less than 50 characters',
             ],
-            ageRules:[
+            birthdateRules:[
                 v => !!v || 'Age is required!',
-                v => v >= 0 || 'Age must be more than 0 years',
-                v => v <= 120 || 'Age must be less than 120 years',
             ],
             phoneRules:[
                 v => !!v || 'Phone is required',
@@ -173,7 +173,7 @@ export default {
                 var formData = new FormData();
                 formData.append('firstname', this.dataUser.firstname)
                 formData.append('lastname', this.dataUser.lastname)
-                formData.append('age', this.dataUser.age)
+                formData.append('birthdate', this.dataUser.birthdate)
                 formData.append('phone', this.dataUser.phone)
             
                 if(this.dataEdit.newimage == null){
@@ -184,23 +184,39 @@ export default {
                     formData.append('imagepath', this.dataEdit.newimage.name)
                     formData.append('oldimage', this.dataEdit.oldimage)
                 }
-                let response = await this.$http.put("/user/"+id+"/editProfile", formData);
-                let check = response.data
-                if (check == true) {
-                    this.$router.push("/profile");
-                    swal("Success", "Edit your profile Was successful", "success");
-                    console.log('success')
-                } else {
-                    swal("Error", "Something Went Wrong", "error");
-                    console.log('error')
-                }
+                swal.fire({
+                    title: 'Do you want to save the changes?',
+                    icon: 'question',
+                    confirmButtonColor: 'green',
+                    cancelButtonColor: 'red',
+                    showCancelButton: true,
+                    confirmButtonText: `Save`,
+                }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                        this.$http.put("/user/"+id+"/editProfile", formData);
+                        this.$router.push("/profile");
+                        swal.fire('Saved!', 'Edit your profile Was successful.', 'success')
+                        console.log('success')
+                    }
+                })
+                // let response = await this.$http.put("/user/"+id+"/editProfile", formData);
+                // let check = response.data
+                // if (check == true) {
+                //     this.$router.push("/profile");
+                //     swal("Success", "Edit your profile Was successful", "success");
+                //     console.log('success')
+                // } else {
+                //     swal("Error", "Something Went Wrong", "error");
+                //     console.log('error')
+                // }
             } catch (err) {
                 let error = err.response;
                 if (error.status == 409) {
-                    swal("Error", error.data.message, "error");
+                    swal.fire("Error", error.data.message, "error");
                     console.log('success')
                 } else {
-                    swal("Error", error.data.err.message, "error");
+                    swal.fire("Error", error.data.err.message, "error");
                     console.log('error')
                 }
             }
@@ -210,7 +226,7 @@ export default {
 </script>
 
 <style>
-  body {
+body {
     background-color: #f9f9fa
 }
 img{

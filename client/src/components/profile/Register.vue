@@ -82,11 +82,13 @@
       <v-col cols="6" sm="4" >
          <v-text-field 
          single-line solo  
-         v-model="register.age"
-         label="Age" 
+         v-model="register.birthdate"
+         label="Birthdate" 
          :rules="ageRules" 
+         type="date"
          required ></v-text-field>
       </v-col>
+
 
       <v-col cols="6" sm="4" >
          <v-text-field 
@@ -134,7 +136,7 @@
 
 <script>
 const Navbar = () => import('@/components/navbar/navbar')
-import swal from "sweetalert";
+import swal from "sweetalert2";
   export default {
     name: 'Register',
   data() {
@@ -146,7 +148,7 @@ import swal from "sweetalert";
         confirmPassword: '',
         firstname: '',
         lastname: '',
-        age: '',
+        birthdate: '',
         phone: '',
         checkbox: false,
       },              
@@ -180,8 +182,8 @@ import swal from "sweetalert";
         ],
         ageRules:[
           v => !!v || 'Age is required!',
-          v => v >= 0 || 'Age must be more than 0 years',
-          v => v <= 120 || 'Age must be less than 120 years',
+          // v => v >= 0 || 'Age must be more than 0 years',
+          // v => v <= 120 || 'Age must be less than 120 years',
         ],
         phoneRules:[
           v => !!v || 'Phone is required',
@@ -210,20 +212,20 @@ import swal from "sweetalert";
           localStorage.setItem('user_id', id)
           this.$store.dispatch('UserLoggedIn');
           this.$router.push("/profile");
-          swal("Success", "Registration Was successful", "success");
+          swal.fire("Success", "Registration Was successful", "success");
           console.log('success')
         } else {
-          swal("Error", "Something Went Wrong", "error");
+          swal.fire("Error", "Something Went Wrong", "error");
           console.log('error')
         }
       } catch (err) {
         let error = err.response;
         if (error.status == 409) {
-          swal("Error", error.data.message, "error");
-        console.log('success')
+          swal.fire("Error", error.data.message, "error");
+          console.log('success')
         } else {
-          swal("Error", error.data.err.message, "error");
-        console.log('error')
+          swal.fire("Error", error.data.err.message, "error");
+          console.log('error')
         }
       }
     },

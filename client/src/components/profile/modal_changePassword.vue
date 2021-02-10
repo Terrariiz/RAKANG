@@ -95,9 +95,9 @@ export default {
     data() {
         return {
           dataPassword: {
-            oldPassword: "",
-            newPassword: "",
-            confirmNewPassword: ""
+            oldPassword: null,
+            newPassword: null,
+            confirmNewPassword: null
           },
           valid: false,
           show1: false,
@@ -133,18 +133,29 @@ export default {
         this.$refs.form.reset()
       },
       async changePassword(){
-        try {
+        if(this.dataPassword.oldPassword == null || this.dataPassword.newPassword == null || this.dataPassword.confirmNewPassword == null){
+          this.$refs.form.reset()
+          this.show = false
+        } else{
+          try {
             let response = await this.$http.post("/user/"+id+"/reset-password", this.dataPassword);
             let check = response.data
             if (check == true) {
                 this.$refs.form.reset()
-                this.$modal.hide('change-password')
+                this.show = false
                 swal("Success", "Change your password Was successful", "success");
                 console.log('success')
-            } else {
-                this.$modal.hide('change-password')
-                swal("Error", "Something Went Wrong", "error");
-                console.log('error')
+            } else { 
+                if(check == false){
+                  this.$refs.form.reset()
+                  this.show = false
+                  swal("Error", "รหัสผ่านใหม่ที่กรอกเป็นรหัสเดิม", "error");
+                } else {
+                  this.$refs.form.reset()
+                  this.show = false
+                  swal("Error", check, "error");
+                  console.log('error')
+                }
             }
         } catch (err) {
             let error = err.response;
@@ -156,6 +167,8 @@ export default {
                 console.log('error')
             }
         }
+        }
+        
       }
     },
     computed: {
@@ -166,10 +179,9 @@ export default {
 }
 </script>
 
-<style lang="scss">
-$background_color: #404142;
-$github_color: #dba226;
-$facebook_color: #3880ff;
+<style >
+/* $background_color: #404142;
+
 .box {
   background: white;
   overflow: hidden;
@@ -280,22 +292,8 @@ $facebook_color: #3880ff;
   #signin-btn {
     margin-left: 8px;
   }
-  .facebook-btn {
-    border-color: $facebook_color;
-    color: $facebook_color;
-    &:hover {
-      border-color: $facebook_color;
-      background: $facebook_color;
-    }
-  }
-  .github-btn {
-    border-color: $github_color;
-    color: $github_color;
-    &:hover {
-      border-color: $github_color;
-      background: $github_color;
-    }
-  }
+  
+  
   .autocomplete-fix {
     position: absolute;
     visibility: hidden;
@@ -306,6 +304,7 @@ $facebook_color: #3880ff;
     left: 0;
     top: 0;
   }
+
 }
 .pop-out-enter-active,
 .pop-out-leave-active {
@@ -315,5 +314,6 @@ $facebook_color: #3880ff;
 .pop-out-leave-active {
   opacity: 0;
   transform: translateY(24px);
-}
+} */
+
 </style>

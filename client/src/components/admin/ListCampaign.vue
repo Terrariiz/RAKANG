@@ -45,7 +45,7 @@
                   <!-- <router-link :to="`/admin/listdoctrine/${doctrine._id}`">detail</router-link> -->
                   <!-- <router-link :to="{name : 'DetailDoctrine', params: {id:doctrine._id}}">detail</router-link> -->
                   <v-btn @click="ViewCampaign(campaign._id)">view</v-btn>
-                  
+                  <v-btn to='/admin/logdonate'>Log</v-btn>
                 </td>
                 <!-- <td>{{ item.name }}</td>
                 <td>
@@ -67,8 +67,9 @@
 const Navbar = () => import('@/components/navbar/navbar')
 import {
   } from '@mdi/js'
-
+import moment from "moment";
   export default {
+    
     name : "ListCampaign",
     data (){
       return {
@@ -81,6 +82,10 @@ import {
         console.log(res.data)
         this.campaigns = res.data;
         console.log(this.campaigns)
+        var i = 0
+        for(this.campaigns[i];;i++){
+            this.campaigns[i].date = moment(this.campaigns[i].date).format(" dddd DD-MM-YY  A");
+            } 
       })
       .catch(function(err){
         console.log(err)

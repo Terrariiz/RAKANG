@@ -4,7 +4,7 @@
       <Navbar></Navbar>
     </div>
     <v-carousel cycle hide-delimiters>
-      <v-carousel-item href="/"
+      <v-carousel-item to="/"
         v-for="(item,i) in items"
         :key="i"
         :src="item.src"
@@ -18,7 +18,7 @@
 
     <div class="block latestPostBlock">
     <v-container>
-      <h2 class="text-center">ข่าวประชาสัมพันธ์</h2>
+      <h2 class="text-center">แคมเปญ</h2>
       <v-row>
         <v-col v-for="news in news" :key="news.id" cols="12" md="4">
           <v-card outlined class="mx-auto">
@@ -33,6 +33,10 @@
             <v-card-text class="text--primary">
               <div>{{ news.description }}</div>
             </v-card-text>
+            <v-card-text>
+              <div style="text-align:right;">ยอดบริจาค xxx / 60000 บาท</div>
+              <v-progress-linear  color="light-green darken-4"  height="10"  value="20"  striped></v-progress-linear>
+            </v-card-text>
             <v-card-actions>
               <v-btn color="primary" text>More</v-btn>
             </v-card-actions>
@@ -41,12 +45,12 @@
         </v-col>
          
       </v-row>
-      <a href="/home" style="float:right;">แสดงทั้งหมด >>></a>
+      <a href="/home" style="float:right; margin-bottom:3%">แสดงทั้งหมด <i class="fa fa-chevron-right" aria-hidden="true"></i><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
     </v-container>
   </div>
   
 
-   <div class="block latestPostBlock">
+   <!-- <div class="block latestPostBlock">
     <v-container>
       <h2 class="text-center">หลักธรรม</h2>
       <v-row>
@@ -73,7 +77,40 @@
       </v-row>
       <a href="/home" style="float:right;">แสดงทั้งหมด >>></a>
     </v-container>
-  </div>
+  </div> -->
+  <section style="background-color:gray;">
+    <v-container style="background-color:black; margin-top:3%; color:white; padding:10vh; ">
+      <v-row>
+        <v-col cols="12" md="6">
+          <img class="img"  src="../../../client/public/image/bubble.png">
+        </v-col>
+        
+        <v-col cols="12" md="6" style="background-color: green; text-align:center; ">
+          <div>Title</div>
+          <div>detail</div>
+
+        </v-col>
+        
+      </v-row>
+      
+    </v-container>
+  </section>
+
+  <section style="background-color:white;">
+    <v-container style="background-color:black;  color:white; padding:10vh; ">
+      <v-row>
+        <v-col cols="12" md="6" style="background-color: green; text-align:center; ">
+          <div>Title</div>
+          <div>detail</div>
+
+        </v-col>
+        <v-col cols="12" md="6">
+          <img class="img"  src="../../../client/public/image/bubble.png">
+        </v-col>
+      </v-row>
+      
+    </v-container>
+  </section>
     
   </div>
 
@@ -134,3 +171,14 @@ export default {
 
 };
 </script>
+<style >
+.img
+{
+  width: 200px;
+  height: 200px;
+  background-size: cover;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+</style>

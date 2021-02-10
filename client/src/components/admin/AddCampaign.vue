@@ -106,7 +106,7 @@
 
 <script>
 const Navbar = () => import('@/components/navbar/navbar')
-import swal from "sweetalert";
+import swal from "sweetalert2";
 
 export default {
     
@@ -142,21 +142,21 @@ export default {
         console.log(campaign);
         if (campaign) {
           this.$router.push({ name: 'ListCampaign'})
-          swal("Success", "Add campaign Was successful", "success");
+          swal.fire("Success", "Add campaign Was successful", "success");
           console.log('success')
           
         } else {
-          swal("Error", "Something Went Wrong", "error");
+          swal.fire("Error", "Something Went Wrong", "error");
           console.log('error')
         }
       } catch (err) {
         let error = err.response;
         if (error.status == 409) {
-          swal("Error", error.data.message, "error");
-        console.log('success')
+          swal.fire("Error", error.data.message, "error");
+          console.log('success')
         } else {
-          swal("Error", error.data.err.message, "error");
-        console.log('error')
+          swal.fire("Error", error.data.err.message, "error");
+          console.log('error')
         }
       }
         },

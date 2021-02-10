@@ -17,7 +17,7 @@ exports.registerNewUser = async (req, res) => {
         firstname: req.body.firstname,
         lastname: req.body.lastname,
         phone: req.body.phone,
-        age: req.body.age,
+        birthdate: req.body.birthdate,
         image: "user.png",
         coin: 0
       });
@@ -82,7 +82,7 @@ exports.editProfile = async (req,res) => {
             firstname: req.body.firstname,
             lastname: req.body.lastname,
             phone: req.body.phone,
-            age: req.body.age,
+            birthdate: req.body.birthdate,
             image: req.file.filename
           }
       } else {
@@ -94,7 +94,7 @@ exports.editProfile = async (req,res) => {
           firstname: req.body.firstname,
           lastname: req.body.lastname,
           phone: req.body.phone,
-          age: req.body.age,
+          birthdate: req.body.birthdate,
           image: req.body.oldimage
         }
     }
@@ -142,12 +142,7 @@ exports.changePassword = async (req,res) => {
     }
     if(dataPassword.old !== dataPassword.new && dataPassword.new == dataPassword.confirm){
       const check = await User.checkPassword(id, dataPassword.old, dataPassword.new);
-      if(check){
-        res.json(true);
-      } else{
-        console.log("password error.");
-        res.json(false);
-      }
+      res.json(check);
     } else {
       res.json(false);
     }
