@@ -73,8 +73,7 @@
 
 <script>
 const Navbar = () => import('@/components/navbar/navbar')
-import swal from "sweetalert";
-import Swal from "sweetalert2";
+import swal from "sweetalert2";
 export default {
     name : "EditDoctrine",
 
@@ -131,7 +130,7 @@ export default {
             // console.log(this.doctrine.image)
             // console.log(this.doctrine.image.name)
             // console.log(this.doctrine.imagepath)
-            Swal.fire({
+            swal.fire({
                 title: 'Do you want to save the changes?',
                 icon: 'question',
                 confirmButtonColor: 'green',
@@ -144,7 +143,7 @@ export default {
                     this.$http.put("/doctrine/DetailDoctrine/"+this.$route.params.id+"/edit/", formData)
                     .then(() => {
                         this.$router.push({ name: 'DetailDoctrine' , params: {id : this.$route.params.id}})
-                        Swal.fire('Saved!', 'Edit this doctrine was successful.', 'success')
+                        swal.fire('Saved!', 'Edit this doctrine was successful.', 'success')
                     })
                     .catch(function(err){
                         console.log(err)
@@ -163,11 +162,11 @@ export default {
         } catch (err) {
             let error = err.response;
             if (error.status == 409) {
-            swal("Error", error.data.message, "error");
-            console.log('success')
+                swal.fire("Error", error.data.message, "error");
+                console.log('success')
             } else {
-            swal("Error", error.data.err.message, "error");
-            console.log('error')
+                swal.fire("Error", error.data.err.message, "error");
+                console.log('error')
             }
         }
             },

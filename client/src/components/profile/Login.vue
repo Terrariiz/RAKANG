@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import swal from "sweetalert";
+import swal from "sweetalert2";
 const Navbar = () => import('@/components/navbar/navbar')
 export default {
     data() {
@@ -90,12 +90,12 @@ export default {
         localStorage.setItem("user_token", token);
         localStorage.setItem("user_id", idUser);
         if (token) {
-          swal("Success", "Login Successful", "success");
+          swal.fire("Success", "Login Successful", "success");
           this.$store.dispatch('UserLoggedIn');
           this.$router.push("/profile");
         }
       } catch (err) {
-        swal("Error", "Email or Password Went Wrong", "error");
+        swal.fire("Error", "Email or Password Went Wrong", "error");
         console.log(err.response);
       }
     },

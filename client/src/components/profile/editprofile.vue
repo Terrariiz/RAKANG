@@ -85,8 +85,7 @@
 </template>
 
 <script>
-import swal from "sweetalert";
-import Swal from "sweetalert2";
+import swal from "sweetalert2";
 const Navbar = () => import('@/components/navbar/navbar')
 const token = window.localStorage.getItem('user_token')
 const id = window.localStorage.getItem('user_id')
@@ -185,7 +184,7 @@ export default {
                     formData.append('imagepath', this.dataEdit.newimage.name)
                     formData.append('oldimage', this.dataEdit.oldimage)
                 }
-                Swal.fire({
+                swal.fire({
                     title: 'Do you want to save the changes?',
                     icon: 'question',
                     confirmButtonColor: 'green',
@@ -197,7 +196,7 @@ export default {
                     if (result.isConfirmed) {
                         this.$http.put("/user/"+id+"/editProfile", formData);
                         this.$router.push("/profile");
-                        Swal.fire('Saved!', 'Edit your profile Was successful.', 'success')
+                        swal.fire('Saved!', 'Edit your profile Was successful.', 'success')
                         console.log('success')
                     }
                 })
@@ -214,10 +213,10 @@ export default {
             } catch (err) {
                 let error = err.response;
                 if (error.status == 409) {
-                    swal("Error", error.data.message, "error");
+                    swal.fire("Error", error.data.message, "error");
                     console.log('success')
                 } else {
-                    swal("Error", error.data.err.message, "error");
+                    swal.fire("Error", error.data.err.message, "error");
                     console.log('error')
                 }
             }
