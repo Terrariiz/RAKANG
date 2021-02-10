@@ -77,19 +77,19 @@ export default {
       this.getData()
     },
     methods: {
-         getData(){
-            var that = this;
-       this.$http.get("/campaign/DetailCampaign/"+this.$route.params.id)
-      .then((res) => {
-        console.log(res.data)
-        that.campaign = res.data;
-        console.log(that.campaign)
-        that.campaign.date = moment(that.campaign.date).format(" dddd DD-MM-YY  A");
-      })
-      .catch(function(err){
-        console.log(err)
-      })
-        },
+      getData(){
+        var that = this;
+        this.$http.get("/campaign/DetailCampaign/"+this.$route.params.id)
+        .then((res) => {
+          console.log(res.data)
+          that.campaign = res.data;
+          console.log(that.campaign)
+          that.campaign.date = moment(that.campaign.date).format(" dddd DD-MM-YY  A");
+        })
+        .catch(function(err){
+          console.log(err)
+        })
+      },
       EditCampaign(campaignid){
         this.$router.push({ name: 'editCampaign' , params: {id : campaignid}})
       },
@@ -122,8 +122,7 @@ export default {
           } 
         })
       },
-    }
-    
+    },
 }
 </script>
 
