@@ -19,7 +19,7 @@
         <v-spacer></v-spacer>
         <v-toolbar-items class="hidden-sm-and-down">
           <v-btn text to="/coin"> 
-            coin:{{ dataUser.coin }}
+            <i class="fa fa-contao" aria-hidden="true"></i> :{{ dataUser.coin }}
           </v-btn>          
         </v-toolbar-items>
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
