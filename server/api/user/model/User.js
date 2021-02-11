@@ -37,6 +37,9 @@ const userSchema = new mongoose.Schema({
   coin: {
     type: Number
   },
+  point:{
+    type: Number
+  },
   donatelog:[
     {
         type: mongoose.Schema.Types.ObjectId,

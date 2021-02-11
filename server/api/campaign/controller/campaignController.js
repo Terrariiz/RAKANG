@@ -170,6 +170,7 @@ exports.DonateCampaign = async function(req,res){
             log.campaign.push(campaign)
             //////แก้ไขยอด coin user
             user.coin = user.coin-amount;
+            user.point = user.point+amount/10
             //////save ข้อมูล log เข้า donate log ของ user 
             user.donatelog.push(log)
 

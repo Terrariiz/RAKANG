@@ -1,9 +1,6 @@
 const express = require("express");
 const router = express.Router();
 
-
-
-
 router.post("/", function(res,req){
 
     console.log(req.body)
