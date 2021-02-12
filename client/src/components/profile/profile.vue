@@ -40,11 +40,16 @@
                               >change password</v-btn
                             >
                           </v-col> -->
-
-                          <v-col cols="12" sm="12" md="12">
-                            <v-btn small @click.stop="dialog=true">change password</v-btn>
-                            <ChangePassword :visible="dialog" @close="dialog=false" />
+                           <v-col cols="12" sm="12" md="12">
+                            <v-btn small @click.stop="dialog_Logcoin=true">Logcoin</v-btn>
+                            <Logcoin :visible="dialog_Logcoin" @close="dialog_Logcoin=false" />
                           </v-col>
+                          
+                          <v-col cols="12" sm="12" md="12">
+                            <v-btn small @click.stop="dialog_ChangePassword=true">change password</v-btn>
+                            <ChangePassword :visible="dialog_ChangePassword" @close="dialog_ChangePassword=false" />
+                          </v-col>
+                         
 
                         </v-row>
                       </v-container>
@@ -92,6 +97,7 @@
 
 <script>
 import ChangePassword from '@/components/profile/changePassword'
+import Logcoin from '@/components/profile/Logcoin'
 const token = window.localStorage.getItem("user_token");
 const Navbar = () => import("@/components/navbar/navbar");
 const id = window.localStorage.getItem("user_id");
@@ -100,12 +106,14 @@ export default {
   data() {
     return {
       dataUser: {},
-      dialog: false,
+      dialog_ChangePassword: false,
+      dialog_Logcoin: false,
     };
   },
   components: {
     Navbar,
-    ChangePassword
+    ChangePassword,
+    Logcoin
   },
   mounted: async function mounted() {
     await this.$http
