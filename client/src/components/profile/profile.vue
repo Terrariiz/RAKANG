@@ -64,8 +64,31 @@
                       >
                     </div>
                     <div class="card-block">
-                      <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Profile</h6>
-                      <div class="row">
+                      <!-- <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Profile</h6> -->
+                      <!-- tablist -->
+  <div class="tab-section">
+      <v-container>
+         <v-tabs
+      v-model="tab"
+      background-color="transparent"
+      color="basil"
+      grow
+    >
+      <v-tab>
+        รายละเอียดโปรไฟล์
+      </v-tab>
+      <v-tab>
+        ประวัติการบริจาค
+      </v-tab>
+      <v-tabs-items v-model="tab">
+      <v-tab-item
+       
+      >
+        <v-card
+          color="basil"
+          flat
+        >
+          <v-card-text><div class="row">
                         <div class="col-sm-6">
                           <p class="m-b-10 f-w-600">Email</p>
                           <h6 class="text-muted f-w-400">
@@ -82,7 +105,38 @@
                           <p class="m-b-10 f-w-600">วัน/เดือน/ปีเกิด</p>
                           <h6 class="text-muted f-w-400">{{ dataUser.birthdate }}</h6>
                         </div>
-                      </div>
+                      </div></v-card-text>
+        </v-card>
+      </v-tab-item>
+      <v-tab-item>
+           <v-card>
+    <v-card-title>
+      <v-text-field
+        v-model="search"
+        append-icon="mdi-magnify"
+        label="Search"
+        single-line
+        hide-details
+      ></v-text-field>
+    </v-card-title>
+    <v-data-table
+      :headers="headers"
+      :items="desserts"
+      :search="search"
+    ></v-data-table>
+  </v-card>
+      </v-tab-item>
+    </v-tabs-items>
+    
+      
+    
+      
+    </v-tabs>
+
+    
+        
+      </v-container>
+  </div>
                     </div>
                   </div>
                 </div>
@@ -108,6 +162,18 @@ export default {
       dataUser: {},
       dialog_ChangePassword: false,
       dialog_Logcoin: false,
+      tab: null,
+        items: [
+          'รายละเอียดโปรไฟล์', 'ประวัติการบริจาค',
+        ],
+        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+     search: '',
+        headers: [
+          {text: 'ชื่อแคมเปญ',value: 'Campaign',},
+          { text: 'จำนวนเงินที่บริจาค(บาท)', value: 'amonut' },
+          { text: 'วัน-เดือน-ปี', value: 'date' },
+          
+        ],
     };
   },
   components: {
