@@ -11,15 +11,25 @@
                 <v-layout row wrap >
                     
                         <v-flex xs12 md6 >
-                            <v-container v-model = "doctrine.image"  >
+                            <v-container id = "picturedoctrine"  >
+                                <center><v-div style=""  class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
+                                    <span  v-if="!imageData"  class="placeholder">Choose an Image</span>
+                                    <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  v-on:change="onFileSelected" >
+                                </v-div></center>
+
+                                <hr>
+                               <p>*if don't submit new picture we just use previous picture</p>
+                            </v-container>
+                            <!-- <v-container v-model = "doctrine.image"  > -->
+                                
                                 <!-- <v-file-input v-model="doctrine.image" label="File input" filled prepend-icon="mdi-camera"></v-file-input> -->
-                                <input type="file"  @change="onFileSelected">
+                                <!-- <input type="file"  @change="onFileSelected"> -->
 
                                 <!-- <v-btn @click="reset" style="weihgt = 40%" color="red" dark>Clear</v-btn> -->
-                                <p>*if don't submit new picture we just use previous picture</p>
-                            </v-container>
-                            <v-container>
-                            </v-container>
+                                <!-- <p>*if don't submit new picture we just use previous picture</p> -->
+                            <!-- </v-container> -->
+                            <!-- <v-container>
+                            </v-container> -->
                         </v-flex>
                         <v-flex xs12 md6>
                                 <center><v-text-field  v-model="doctrine.title" style="width:70%; text-align: center;" label="หัวข้อเรื่อง" required></v-text-field></center>
@@ -69,6 +79,31 @@
     grid-template-columns: auto 10% 10% auto;
     grid-column-gap: 10%;
 }
+.base-image-input {
+  display: block;
+  width: 300px;
+  height: 300px;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center center;
+}
+.placeholder {
+  background: #F0F0F0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+  font-size: 20px;
+  font-family: Helvetica;
+}
+.placeholder:hover {
+  background: #E0E0E0;
+}
+.file-input {
+  display: none;
+}
 </style>
 
 <script>
@@ -90,12 +125,13 @@ export default {
                 imagepath: "" ,
                 newimage: null,
                 oldimage: "",
-                imagedata:null
+                imagedata:null,
 
             },
             editorConfig: {
                     // The configuration of the editor.
-                }
+                },
+                imageData:null,
         }
     },
     components:{
@@ -182,6 +218,9 @@ export default {
             reader.readAsDataURL(files[0])
             // this.$emit('input', files[0])
             }
+        },
+        chooseImage () {
+            this.$refs.fileInput.click();
         },
     async getData(){
         var that = this;
