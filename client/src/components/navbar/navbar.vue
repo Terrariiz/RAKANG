@@ -15,13 +15,11 @@
           <v-btn text to="/news">
             News
           </v-btn>
+          <v-btn text to='/rank'>
+            Ranking
+          </v-btn>
         </v-toolbar-items>
         <v-spacer></v-spacer>
-        <v-toolbar-items class="hidden-sm-and-down">
-          <v-btn text to="/coin"> 
-            <i class="fa fa-contao" aria-hidden="true"></i> :{{ dataUser.coin }}
-          </v-btn>          
-        </v-toolbar-items>
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       </v-toolbar>
       <v-navigation-drawer
@@ -74,6 +72,9 @@
           <v-btn text to="/news">
             News
           </v-btn>
+          <v-btn text to='/rank'>
+            Ranking
+          </v-btn>
         </v-toolbar-items>
         <v-spacer></v-spacer>
           <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
@@ -104,9 +105,16 @@
                 <v-list-item-title>ลิสต์หลักธรรม</v-list-item-title>
               </v-list-item></router-link
             >
+            
             <router-link tag="v-list-item" to="/admin/listnews"
               ><v-list-item>
                 <v-list-item-title>ลิสต์ข่าวประชาสัมพันธ์</v-list-item-title>
+              </v-list-item></router-link
+            >
+
+            <router-link tag="v-list-item" to="/admin/logdonate"
+              ><v-list-item>
+                <v-list-item-title>ประวัติการบริจาคทั้งหมด</v-list-item-title>
               </v-list-item></router-link
             >
           </v-list-item-group>
@@ -134,11 +142,14 @@
           <v-btn text to="/news">
             News
           </v-btn>
+          <v-btn text to='/rank'>
+            Ranking
+          </v-btn>
         </v-toolbar-items>
         <v-spacer></v-spacer>
         <v-toolbar-items class="hidden-sm-and-down">
           <v-btn text to="/login">
-            log in
+            Log in
           </v-btn>
           <v-btn text to="/admin/login">
             Admin site

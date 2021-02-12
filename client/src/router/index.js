@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/Home.vue'
 import Landing from '@/views/Landing.vue'
-import coin from '@/views/coin.vue'
+import rank from '@/views/Rank.vue'
 import detailcoin from '@/views/detailcoin.vue'
 import campaign from '@/views/Campaign.vue'
 import doctrine from '@/views/Doctrine.vue'
@@ -31,7 +31,6 @@ const editCampaign           = () => import('@/components/admin/EditCampaign')
 const profile                = () => import('@/components/profile/profile')
 const editprofile            = () => import('@/components/profile/editprofile')
 const test                   = () => import('@/components/admin/test')
-// const coin                    = () => import('@/views/coin')
 const payment                = () => import('@/components/admin/payment')
 const UserDetailCampaign     = () => import('@/views/Donate_Campaign')
 
@@ -253,9 +252,9 @@ const routes = [
     component: test
   },
   {
-    path: '/coin',
-    name: 'coin',
-    component: coin
+    path: '/rank',
+    name: 'rank',
+    component: rank
   },
   {
     path: '/detailcoin',
