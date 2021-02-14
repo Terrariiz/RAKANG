@@ -23,7 +23,7 @@
     </v-carousel>
 
     <!-- แคมเปญ -->
-    <v-card>
+    
       <v-container class="container-news">
         <v-row class="row-news">
           <v-col cols="12" md="6">
@@ -52,7 +52,7 @@
           </v-col>
         </v-row>
       </v-container>
-    </v-card>
+    
 
     <!-- ข่าวล่าสุด -->
     <div class="block latestPostBlock">
@@ -60,7 +60,7 @@
         <h2 class="text-center">ข่าว</h2>
         <v-row>
           <v-col v-for="news in news" :key="news.id" cols="12" md="4">
-            <v-card outlined class="mx-auto">
+            <v-card  outlined class="mx-auto">
               <v-img
                 class="white--text align-end"
                 height="200px"
@@ -118,7 +118,7 @@ export default {
           subtitle: "1,000 miles of wonder",
           description:
             "His ubique laboramus ne. Expetenda assueverit sed ad. Id nec malis lucilius delicatissimi. Nec assum sonet suscipit ex, diam deterruisset ut usu, ad dicat fabellas aliquando eam.",
-          src: require("../assets/images/tenor.gif"),
+          // src: require("../assets/images/tenor.gif"),
         },
         {
           id: 2,
@@ -127,7 +127,7 @@ export default {
           subtitle: "2,000 miles of wonder",
           description:
             "Sea ad habemus assueverit, omnes platonem convenire sit et, at integre pericula quo. Facete adolescens definitionem cu qui, in putant aliquid fierent ius.",
-          src: require("../assets/images/tenor.gif"),
+          // src: require("../assets/images/tenor.gif"),
         },
         {
           id: 3,
@@ -136,7 +136,7 @@ export default {
           subtitle: "3,000 miles of wonder",
           description:
             "Aliquam albucius mei ei, debitis torquatos et pro, eos natum scribentur no. Putant verear constituto te qui. Adolescens persequeris vim ei. Vel nullam reprimique te.",
-          src: require("../assets/images/tenor.gif"),
+          // src: require("../assets/images/tenor.gif"),
         },
       ],
     };
