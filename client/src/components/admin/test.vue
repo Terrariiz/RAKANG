@@ -1,171 +1,144 @@
 <template class="body">
   <div  >
-      <!-- <div class="container">
-          <div class="row">
-              <div class="col-md-12">
-                  <div class="campaign-content">
-                      <h1>ชื่อแคมเปญ</h1>
-                  </div>
-                    <div class="col-md-8 col-sm-7">
-                        <div class="campaign-content">
-                            <img class="image -fullwidth img-responsive" src="" alt="">
-                            <p class="lead">dwadadwdadadadadadawdadawd</p>
-                            <p class="details">
-                                <span class="duration">ระยะเวลา</span>
-                                <span class="location">พื้นที่ดำเนินโครงการ</span>
-                            </p>
-                        </div>
-                    </div> -->
-                    <!-- ยอดบริจาค -->
-                    <!-- <div class="col-md-4 col-sm-5">
-                        <div class="fund-raising affix-top" style="position:relative;">
-                            <div class="body">
-                                <div class="amount-raised">
-                                    <h3 class="title">ยอดบริจาค</h3>
-                                    <span class="value">600000 บาท</span>
-                                </div>
-                                <div class="funding-goal">
-                                    <h3 class="title">เป้าหมาย</h3>
-                                    <span class="value">600000 บาท</span>
-                                </div>
-                                <div class="process-bar">
-                                    <span class="percent">
-                                        <span class="hide-txt">ดำเนินการไปแล้ว</span>
-                                    </span>
-                                    <span class="bar" style="width:84%"></span>
-                            </div>
-                            <span class="timeleft"> 100 วัน </span>
-                            <span class="people">
-                                <span class="hide-txt">จำนวนคนที่บริจาค</span>
-                            </span>
-                        </div>
-                        <div class="action">
-                            <a class="btn-donate js-btn-anchor-donate"></a>
-                        </div>
-                    </div>
-              </div>
-              
+    <v-container>
+      <v-row>
+        <v-col style="background-color:red;" cols="12" md="4" sm="12">
+          <div style="text-align:right;"><v-btn  icon ><label style=" cursor: pointer;" for="file-input"><v-icon>mdi-pencil</v-icon></label></v-btn></div>
+                                    <center><v-div style=""  class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
+                                    <span  v-if="!imageData"  class="placeholder">Choose an Image</span>
+                                    <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  @input="onSelectFile" >
+                                </v-div></center>
+          <div  class="img-profile">
+            <img
+                              style="display: flex"
+                              :src="
+                                'http://localhost:4000/image/profile/' +
+                                dataUser.image
+                              "
+                              class="img-radius base-image-input"
+                              alt="User-Profile-Image"
+                            />
           </div>
-      </div>
-  </div> -->
-  <v-container>
-      <v-row>
-          <h1>title</h1>
-          <br>
-      </v-row>
-      <v-row>
-          <v-col  cols="12" md="8" sm="12">
-              <div class="project-content">
-                  <img>
-                  <p class="lead">ทำอย่่างนู้นอย่างนี้บลาๆ</p>
-                  <p class="details">
-                      <span class="duration">ระยะเวลา </span>
-                      <span class="location">สถานที่</span>
-                  </p>
-              </div>
-          </v-col>
-          <v-col  cols="12" md="4" sm="12">
-            <div class="fund-raising affix-top">
-                <div class="body">
-                    <div class="amount-raised">
-                        <h3 class="title">ยอดบริจาคขณะนี้</h3>
-                        <span class="value">100000 บาท</span>
+          <hr>
+                    <div class="name-sur">
+                        <h6 style="font-size: 20px; color;blue;" class="f-w-600">
+                           {{ dataUser.firstname }} {{ dataUser.lastname }}
+                        </h6>
+                        <h6 class="f-w-600">{{ dataUser.coin }} Coin</h6>
                     </div>
-                    <div class="funding-goal">
-                        <h3 class="title">เป้าหมาย</h3>
-                        <span class="value">5000000 บาท</span>
+                    <!-- <div class="btn-log">
+                        <v-btn small @click.stop="dialog_Logcoin=true">ประวัติการบริจาค</v-btn>
+                        <Logcoin :visible="dialog_Logcoin" @close="dialog_Logcoin=false" />                     
                     </div>
-                    <div class="progress-bar">
-                        <span class="percent">
-                            <span class="hide-txt">ดำเนินการไปแล้ว</span>
-                            80%
-                        </span>
-                        <span class="bar" style="width:80%"></span>
-                    </div>
-                    <span class="timeleft">365 วัน</span>
-                    <span class="people">
-                        <span class="hide-txt">จำนวนคนที่บริจาค</span>
-                        <span class="icon-people">43</span>
-                    </span>
-                </div>
-
-            <div class="action">
-                <a><v-btn block></v-btn></a>
-                
-            </div>
-
-            </div>
-          </v-col>
-      </v-row>
-      
-  </v-container>
-  <!-- tablist -->
-  <div class="tab-section">
+                    <div class="btn-cpass">
+                        <v-btn small @click.stop="dialog_ChangePassword=true">เปลี่ยนรหัสผ่าน</v-btn>
+                        <ChangePassword :visible="dialog_ChangePassword" @close="dialog_ChangePassword=false" />                     
+                    </div> -->
+        </v-col>
+        <v-col cols="12" md="8" sm="12">
+          
+          <div class="tab-section">
       <v-container>
-         <v-tabs
-      v-model="tab"
-      background-color="transparent"
-      color="basil"
-      grow
-    >
-      <v-tab
-        v-for="item in items"
-        :key="item"
-      >
-        {{ item }}
-      </v-tab>
-    </v-tabs>
+        <h6 class="m-b-20 p-b-5 b-b-default f-w-600" style="font-size:20px;">Edit Profile</h6>
+                                    
+                                    <div class="row">
+                                        
+                                        <div class="col-sm-6">
+                                            <p class="m-b-10 f-w-600">ชื่อ</p>
+                                            <v-text-field single-line solo  v-model="dataUser.firstname"></v-text-field>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p class="m-b-10 f-w-600">นามสกุล</p>
+                                            <v-text-field single-line solo  v-model="dataUser.lastname"></v-text-field>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p class="m-b-10 f-w-600">วัน/เดือน/ปีเกิด</p>
+                                            <v-text-field type="date" single-line solo  v-model="dataUser.birthdate"></v-text-field>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p class="m-b-10 f-w-600">เบอร์โทรติดต่อ</p>
+                                            <v-text-field single-line solo  v-model="dataUser.phone"></v-text-field>
+                                        </div>
+                                        <!-- <div class="col-md-6">
+                                            <v-btn type="submit" style="margin:1%; text-align:center;" to="/profile" color="error" dark>Cancel</v-btn>
+                                            
+                                        </div>
+                                        <div class="col-md-6">
+                                            
+                                            <v-btn type="submit" style="margin:1% text-align:center;"  color="primary" dark>Edit</v-btn>
+                                        </div> -->
 
-    <v-tabs-items v-model="tab">
-      <v-tab-item
-        v-for="item in items"
-        :key="item"
-      >
-        <v-card
-          color="basil"
-          flat
-        >
-          <v-card-text>{{ text }}</v-card-text>
-        </v-card>
-      </v-tab-item>
-    </v-tabs-items>
+                                        <v-row>
+                                            <v-col cols="3" ></v-col>
+                                            <v-col cols="3" >
+                                                <v-btn type="submit" style="margin:1%; text-align:center;" to="/profile" color="error" dark>Cancel</v-btn>
+                                            </v-col>
+                                             <v-col cols="3" >
+                                                <v-btn type="submit" style="margin:1% text-align:center;"  color="primary" dark>Edit</v-btn>
+                                            </v-col>
+                                            <v-col cols="3" ></v-col>
+                                        </v-row>
+                                    </div>
+
+    
         
       </v-container>
   </div>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
 <script>
+
+//  import x from "../../../public/image/2.jpg"
 export default {
-    data () {
-      return {
-        tab: null,
+  name: "Profile",
+  data() {
+    return {
+      dataUser: {},
+      dialog_ChangePassword: false,
+      dialog_Logcoin: false,
+      tab: null,
         items: [
-          'Appetizers', 'Entrees', 'Deserts', 'Cocktails',
+          'รายละเอียดโปรไฟล์', 'ประวัติการบริจาค',
         ],
         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      }
-    },
+     search: '',
+        headers: [
+          {text: 'ชื่อแคมเปญ',value: 'Campaign',},
+          { text: 'จำนวนเงินที่บริจาค(บาท)', value: 'amonut' },
+          { text: 'วัน-เดือน-ปี', value: 'date' },
+          
+        ],
+    }
   }
-//  import x from "../../../public/image/2.jpg"
+}
+  
 </script>
 
 <style>
-.project-content{
-    padding-right: 40px;
+.img-profile{
+  margin: 20px auto;
+  width: 300px;
+  height: 200px;
 }
-.fund-raising{
-    border-radius: 6px;
-    background-clip: padding-box;
-    color: #666;
-    border: 1px solid #f3d9ab;
-    background-color: #fff;
-    z-index: 999;
-}
-.fund-raising .body{
-   padding: 30px 25px 0  25px;
-}
-.fund-raising .action{
-   padding: 30px 25px 30px 25px;
-}
+  .img-profile img{
+    width:100%; 
+    height:100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .name-sur{
+    text-align: center;
+  }
+  .btn-log{
+    margin: 20px auto;
+    text-align: center;
+  }
+  .btn-cpass{
+    margin: 20px auto;
+    text-align: center;
+  }
 </style>
