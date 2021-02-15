@@ -19,7 +19,6 @@ exports.registerNewUser = async (req, res) => {
         phone: req.body.phone,
         birthdate: req.body.birthdate,
         image: "user.png",
-        coin: 0,
         point: 0
       });
       let data = await user.save();

@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import moment from "moment";
+const id = window.localStorage.getItem("user_id");
 const Navbar = () => import('@/components/navbar/navbar')
 export default {
   name: 'Admin',
@@ -34,6 +36,7 @@ export default {
   },
   data () {
       return {
+        loguser: [],
         search: '',
         headers: [
           {text: 'ชื่อแคมเปญ',value: 'Campaign',},
@@ -42,7 +45,22 @@ export default {
           
         ],
       }
-  }
+  },
+  mounted: async function mounted() {
+    await this.$http
+      .get("donatelog/donateloglist/" + id)
+      .then((res) => {
+        
+        this.donatelog = res.data;
+        var i = 0
+        for(this.donatelog[i];;i++){
+            this.donatelog[i].date = moment(this.donatelog[i].date).format(" dddd DD-MM-YY  A");
+            } 
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  },
       
 }
 
