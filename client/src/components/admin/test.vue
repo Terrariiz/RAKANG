@@ -1,144 +1,137 @@
 <template class="body">
   <div  >
-    <v-container>
-      <v-row>
-        <v-col style="background-color:red;" cols="12" md="4" sm="12">
-          <div style="text-align:right;"><v-btn  icon ><label style=" cursor: pointer;" for="file-input"><v-icon>mdi-pencil</v-icon></label></v-btn></div>
-                                    <center><v-div style=""  class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
-                                    <span  v-if="!imageData"  class="placeholder">Choose an Image</span>
-                                    <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  @input="onSelectFile" >
-                                </v-div></center>
-          <div  class="img-profile">
-            <img
-                              style="display: flex"
-                              :src="
-                                'http://localhost:4000/image/profile/' +
-                                dataUser.image
-                              "
-                              class="img-radius base-image-input"
-                              alt="User-Profile-Image"
-                            />
-          </div>
-          <hr>
-                    <div class="name-sur">
-                        <h6 style="font-size: 20px; color;blue;" class="f-w-600">
-                           {{ dataUser.firstname }} {{ dataUser.lastname }}
-                        </h6>
-                        <!-- <h6 class="f-w-600">{{ dataUser.coin }} Coin</h6> -->
-                    </div>
-                    <!-- <div class="btn-log">
-                        <v-btn small @click.stop="dialog_Logcoin=true">ประวัติการบริจาค</v-btn>
-                        <Logcoin :visible="dialog_Logcoin" @close="dialog_Logcoin=false" />                     
-                    </div>
-                    <div class="btn-cpass">
-                        <v-btn small @click.stop="dialog_ChangePassword=true">เปลี่ยนรหัสผ่าน</v-btn>
-                        <ChangePassword :visible="dialog_ChangePassword" @close="dialog_ChangePassword=false" />                     
-                    </div> -->
-        </v-col>
-        <v-col cols="12" md="8" sm="12">
-          
-          <div class="tab-section">
+    <!-- ข่าวล่าสุด -->
+    <div class="block latestPostBlock">
       <v-container>
-        <h6 class="m-b-20 p-b-5 b-b-default f-w-600" style="font-size:20px;">Edit Profile</h6>
-                                    
-                                    <div class="row">
-                                        
-                                        <div class="col-sm-6">
-                                            <p class="m-b-10 f-w-600">ชื่อ</p>
-                                            <v-text-field single-line solo  v-model="dataUser.firstname"></v-text-field>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <p class="m-b-10 f-w-600">นามสกุล</p>
-                                            <v-text-field single-line solo  v-model="dataUser.lastname"></v-text-field>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <p class="m-b-10 f-w-600">วัน/เดือน/ปีเกิด</p>
-                                            <v-text-field type="date" single-line solo  v-model="dataUser.birthdate"></v-text-field>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <p class="m-b-10 f-w-600">เบอร์โทรติดต่อ</p>
-                                            <v-text-field single-line solo  v-model="dataUser.phone"></v-text-field>
-                                        </div>
-                                        <!-- <div class="col-md-6">
-                                            <v-btn type="submit" style="margin:1%; text-align:center;" to="/profile" color="error" dark>Cancel</v-btn>
-                                            
-                                        </div>
-                                        <div class="col-md-6">
-                                            
-                                            <v-btn type="submit" style="margin:1% text-align:center;"  color="primary" dark>Edit</v-btn>
-                                        </div> -->
-
-                                        <v-row>
-                                            <v-col cols="3" ></v-col>
-                                            <v-col cols="3" >
-                                                <v-btn type="submit" style="margin:1%; text-align:center;" to="/profile" color="error" dark>Cancel</v-btn>
-                                            </v-col>
-                                             <v-col cols="3" >
-                                                <v-btn type="submit" style="margin:1% text-align:center;"  color="primary" dark>Edit</v-btn>
-                                            </v-col>
-                                            <v-col cols="3" ></v-col>
-                                        </v-row>
-                                    </div>
-
-    
-        
+        <h2 class="text-center">ข่าว</h2>
+        <v-row>
+          <v-col v-for="news in news" :key="news.id" cols="12" md="4">
+            <v-card
+      class="mx-auto"
+      max-width="344"
+      outlined
+    >
+     <v-img :src="news.src"></v-img>
+      <v-list-item three-line>
+        <v-list-item-content>
+          <div class="overline mb-4">
+           {{ news.name }}
+          </div>
+          <v-list-item-title class="headline mb-1">
+            {{news.subtitle}}
+          </v-list-item-title>
+          <v-list-item-subtitle>{{ news.description }}</v-list-item-subtitle>
+        </v-list-item-content>
+  
+      
+      </v-list-item>
+  
+      <v-card-actions>
+                <v-btn color="primary" style="margin-left:auto;" text
+                  >More</v-btn
+                >
+              </v-card-actions>
+    </v-card>
+          </v-col>
+        </v-row>
+        <a href="/home" style="float:right; margin-bottom:3%"
+          >แสดงทั้งหมด <i class="fa fa-chevron-right" aria-hidden="true"></i
+          ><i class="fa fa-chevron-right" aria-hidden="true"></i
+        ></a>
       </v-container>
-  </div>
-        </v-col>
-      </v-row>
-    </v-container>
+    </div>
+
+    <!-- text -->
+     <!-- <v-card
+      class="mx-auto"
+      max-width="344"
+      outlined
+    >
+     <v-img src="../../../public/image/2.jpg"></v-img>
+      <v-list-item three-line>
+        <v-list-item-content>
+          <div class="overline mb-4">
+            OVERLINE
+          </div>
+          <v-list-item-title class="headline mb-1">
+            Headline 5
+          </v-list-item-title>
+          <v-list-item-subtitle>Greyjgkgkkjhkhkhkjhound divisely heกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกllo coldly fonwderfully</v-list-item-subtitle>
+        </v-list-item-content>
+  
+      
+      </v-list-item>
+  
+      <v-card-actions>
+                <v-btn color="primary" style="margin-left:auto;" text
+                  >More</v-btn
+                >
+              </v-card-actions>
+    </v-card> -->
+
   </div>
 </template>
 
 <script>
 
 //  import x from "../../../public/image/2.jpg"
+
+
 export default {
-  name: "Profile",
+  name: "Home",
   data() {
     return {
-      dataUser: {},
-      dialog_ChangePassword: false,
-      dialog_Logcoin: false,
-      tab: null,
-        items: [
-          'รายละเอียดโปรไฟล์', 'ประวัติการบริจาค',
-        ],
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-     search: '',
-        headers: [
-          {text: 'ชื่อแคมเปญ',value: 'Campaign',},
-          { text: 'จำนวนเงินที่บริจาค(บาท)', value: 'amonut' },
-          { text: 'วัน-เดือน-ปี', value: 'date' },
-          
-        ],
-    }
-  }
-}
+      // items: [
+      //   {
+      //     src: require("../assets/images/tenor2.gif"),
+      //   },
+      //   {
+      //     src: require("../assets/images/tenor3.gif"),
+      //   },
+      //   {
+      //     src: require("../assets/images/tenor4.gif"),
+      //   },
+      // ],
+
+      show: false,
+      news: [
+        {
+          id: 1,
+          name: "No.1",
+          title: "Top western road trips",
+          subtitle: "1,000 miles of wonder",
+          description:
+            "His ubique laboramus ne. Expetenda assueverit sed ad. Id nec malis lucilius delicatissimi. Nec assum sonet suscipit ex, diam deterruisset ut usu, ad dicat fabellas aliquando eam.",
+          // src: require("../assets/images/tenor.gif"),
+        },
+        {
+          id: 2,
+          name: "No.2",
+          title: "Christmas tales to read",
+          subtitle: "2,000 miles of wonder",
+          description:
+            "Sea ad habemus assueverit, omnes platonem convenire sit et, at integre pericula quo. Facete adolescens definitionem cu qui, in putant aliquid fierent ius.",
+          // src: require("../assets/images/tenor.gif"),
+        },
+        {
+          id: 3,
+          name: "No.3",
+          title: "20 movies not to miss in 2020",
+          subtitle: "3,000 miles of wonder",
+          description:
+            "Aliquam albucius mei ei, debitis torquatos et pro, eos natum scribentur no. Putant verear constituto te qui. Adolescens persequeris vim ei. Vel nullam reprimique te.",
+          // src: require("../assets/images/tenor.gif"),
+        },
+      ],
+    };
+  },
+  components: {
+   
+  },
+};
   
 </script>
 
 <style>
-.img-profile{
-  margin: 20px auto;
-  width: 300px;
-  height: 200px;
-}
-  .img-profile img{
-    width:100%; 
-    height:100%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .name-sur{
-    text-align: center;
-  }
-  .btn-log{
-    margin: 20px auto;
-    text-align: center;
-  }
-  .btn-cpass{
-    margin: 20px auto;
-    text-align: center;
-  }
+
 </style>
