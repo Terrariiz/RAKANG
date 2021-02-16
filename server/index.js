@@ -13,7 +13,8 @@ const axios = require("Axios")
 // const URLSearchParams = require('url-search-params-polyfill');
 const { URLSearchParams } = require('url');
 const User = require("./api/user/model/User");
-const Donate = require("./api/log/model/DonateLog")
+const DonateLog = require("./api/log/model/DonateLog")
+const Campaign = require("./api/campaign/model/Campaign")
 
 
 
@@ -113,24 +114,25 @@ app.post("/test", async function(req,res){
       console.log(fuckingid)
       console.log(fuckingcampaign)
 
-      const now = new Date();
+      // const now = new Date();
       // const coin = new Coin({
       //     amount : amount/100,
       //     date : now
       //   });
         ////////////ของใหม่/////////////////
         // const amount = parseInt(req.params.amount, 10);
-        Campaign.findOne({_id : req.params.campaign},function(err, campaign){
+        Campaign.findOne({_id : fuckingcampaign},function(err, campaign){
           console.log(campaign)
           console.log('8h49dfghdfgh')
           if(err){
             console.log(err)
           } else {
-              User.findOne({_id : req.params.id}, function(err, user){
+              User.findOne({_id : fuckingid}, function(err, user){
                 
                 const now = new Date();
-      
                 const donatelog = new DonateLog({
+                  campaign : null,
+                  user : null ,
                   amount : amount,
                   date : now
                 });
@@ -138,10 +140,9 @@ app.post("/test", async function(req,res){
                 DonateLog.create(donatelog,function(err,log){
                   
                   console.log(log)
-      
-                  log.user.push(user)
-                  log.campaign.push(campaign)
-                  //////แก้ไขยอด coin user
+                  log.user = user
+                  log.campaign = campaign
+                  //////แก้ไขแต้มบุญ user
                   user.point = user.point+amount/10
                   //////save ข้อมูล log เข้า donate log ของ user 
                   user.donatelog.push(log)
@@ -149,19 +150,21 @@ app.post("/test", async function(req,res){
                   campaign.donatelist.push(log)
         
                   campaign.donate = campaign.donate+amount;
+                  
                   /////save ข้อมูล
+
                   campaign.save();
                   log.save();
                   user.save();
-                  console.log(campaign)
-      
+                  
+                
                 })
             })
             
-            res.status(201).json({ campaign });
+            // res.status(201).json({ campaign });
           }
         })
-        res.status(201);
+        // res.status(201);
         /////////ของใหม่///////////
       
       //   ////สร้าง coinlog

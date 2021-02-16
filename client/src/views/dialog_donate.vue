@@ -205,6 +205,7 @@ export default {
     methods: {
         pay(amount){
             localStorage.setItem("top-up-amount", amount*100);
+            localStorage.setItem("donate-campaign", this.$route.params.id);
             this.$router.push({ name: 'payment' })
         },
         cancel(){

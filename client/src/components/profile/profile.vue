@@ -170,6 +170,7 @@ export default {
       .then((res) => {
         
         this.donatelog = res.data;
+        console.log("🚀 ~ file: profile.vue ~ line 173 ~ .then ~ res.data", res.data)
         var i = 0
         for(this.donatelog[i];;i++){
             this.donatelog[i].date = moment(this.donatelog[i].date).format(" dddd DD-MM-YY  A");

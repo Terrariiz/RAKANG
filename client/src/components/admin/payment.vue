@@ -34,7 +34,7 @@
 export default {
   data() {
     return {
-      id: localStorage.getItem("user_id")+'#ควย',
+      id: localStorage.getItem("user_id")+"#"+localStorage.getItem("donate-campaign"),
 
       top: localStorage.getItem("top-up-amount"),
     };

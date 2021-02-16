@@ -8,7 +8,6 @@ const newSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Campaign'
     },
-    username: String
   },
   amount: {
     type: String,
