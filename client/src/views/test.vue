@@ -6,7 +6,7 @@
             </v-card-title>
             <v-divider></v-divider>
             <v-card-text>
-                <v-item-group>
+                <v-item-group v-model="amounts" mandatory>
                     <v-row>
                         <v-col
                             cols="12"
@@ -23,7 +23,7 @@
                                     class="mx-auto"
                                     height="auto"
                                     max-width="350"
-                                    @click="amounts=50"
+                                    @click="onClick(50)"
                                 >
                                     <v-card-text  class="font-weight-medium mt-12 text-center subtitle-1">
                                         50 บาท
@@ -48,7 +48,7 @@
                                     class="mx-auto"
                                     height="auto"
                                     max-width="350"
-                                    @click="amounts=100"
+                                    @click="onClick(100)"
                                 >
                                     <v-card-text  class="font-weight-medium mt-12 text-center subtitle-1">
                                         100 บาท
@@ -73,7 +73,7 @@
                                     class="mx-auto"
                                     height="auto"
                                     max-width="350"
-                                    @click="amounts=300"
+                                    @click="onClick(300)"
                                 >
                                     <v-card-text   class="font-weight-medium mt-12 text-center subtitle-1">
                                         300 บาท
@@ -98,7 +98,7 @@
                                     class="mx-auto"
                                     height="auto"
                                     max-width="350"
-                                    @click="amounts=500"
+                                    @click="onClick(500)"
                                 >
                                     <v-card-text   class="font-weight-medium mt-12 text-center subtitle-1">
                                         500 บาท
@@ -123,7 +123,7 @@
                                     class="mx-auto"
                                     height="auto"
                                     max-width="350"
-                                    @click="amounts=1000"
+                                    @click="onClick(1000)"
                                 >
                                     <v-card-text   class="font-weight-medium mt-12 text-center subtitle-1">
                                         1,000 บาท
@@ -148,7 +148,7 @@
                                     class="mx-auto"
                                     height="auto"
                                     max-width="350"
-                                    @click="amounts=amounts2"
+                                    @click="onClick(amounts2)"
                                 >
                                     <v-card-text class="font-weight-medium mt-12 text-center subtitle-1">
                                         <h5>ระบุจำนวน</h5>
@@ -156,7 +156,7 @@
                                             v-model="amounts2"
                                             type="number"
                                             min="1"
-                                            @keyup="amounts=amounts2"
+                                            @keyup="onClick2(amounts2)"
                                             :rules="amountsRules"
                                             outlined
                                         ></v-text-field>
@@ -171,7 +171,7 @@
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="red darken-1" text @click="cancel"> ปิด </v-btn>
-                <v-btn color="green darken-1" text type='submit' @click="pay(amounts)"> ถัดไป </v-btn>
+                <v-btn color="green darken-1" text :disabled="!valid" @click="pay"> ถัดไป </v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>
@@ -185,6 +185,7 @@ export default {
         return {
             amounts: null,
             amounts2: null,
+            valid: false,
             amountsRules:[
                 v => v >= 0
             ],
@@ -203,14 +204,30 @@ export default {
         }
     },
     methods: {
-        pay(amount){
-            localStorage.setItem("top-up-amount", amount*100);
-            this.$router.push({ name: 'payment' })
+        pay(){
+            console.log(this.amounts)
+            localStorage.setItem("top-up-amount", this.amounts*100);
+            var t = localStorage.getItem("top-up-amount")
+            t = t/100
+            console.log(t)
+            // this.$router.push({ name: 'payment' })
         },
         cancel(){
             this.amounts = null
             this.amounts2 = null
+            this.valid = false
             this.show = false
+        },
+        onClick(v){
+            console.log("v : " + v)
+            this.amounts = v
+            console.log("this.amounts : " + this.amounts)
+            if(this.valid == false){
+                this.valid = !this.valid
+            }
+        },
+        onClick2(v){
+            this.amounts = v
         },
     },
 }
