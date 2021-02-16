@@ -34,21 +34,21 @@ const userSchema = new mongoose.Schema({
       }
     }
   ],
-  coin: {
+  point:{
     type: Number
   },
   donatelog:[
     {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "../../log/model/DonateLog"
+        ref: "DonateLog"
     }
   ],
-  coinlog:[
-    {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "../../log/model/CoinLog"
-    }
-  ],
+  // coinlog:[
+  //   {
+  //       type: mongoose.Schema.Types.ObjectId,
+  //       ref: "../../log/model/CoinLog"
+  //   }
+  // ],
   minigamelog:[
     {
         type: mongoose.Schema.Types.ObjectId,

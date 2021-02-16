@@ -50,6 +50,14 @@
 <script>
 // const Navbar = () => import('@/components/navbar/navbar')
 export default {
+    data(){
+      return{
+        log:[]
+      }
+    },
+    mounted: function mounted() {
+      this.getCoinLog()
+    },
     name:'LogCoin',
     props: ['visible'],
     components:{

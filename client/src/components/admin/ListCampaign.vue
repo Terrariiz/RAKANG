@@ -84,7 +84,7 @@ import moment from "moment";
         console.log(this.campaigns)
         var i = 0
         for(this.campaigns[i];;i++){
-            this.campaigns[i].date = moment(this.campaigns[i].date).format(" dddd DD-MM-YY  A");
+            this.campaigns[i].date = moment(this.campaigns[i].date).format(" DD-MM-YY A");
             } 
       })
       .catch(function(err){
