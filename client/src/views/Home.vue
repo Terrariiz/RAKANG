@@ -23,16 +23,15 @@
     </v-carousel>
 
     <!-- แคมเปญ -->
-    <v-card>
       <v-container class="container-news">
+        <v-card elevation="5" outlined shaped >
         <v-row class="row-news">
           <v-col cols="12" md="6">
             <img class="img" src="../../../client/public/image/bubble.png" />
           </v-col>
           <v-col class="cols-detail-campaign" cols="12" md="6">
-            <div>แคมเปญ</div>
-            <div>Title</div>
-            <div>detail</div>
+            <h1>แคมเปญ</h1>
+            <h4>detail</h4>
             <div style="text-align:right;">
               <span style="text-align:left;">วันที่</span>
               <span style="text-align:right;">ยอดบริจาค xxx / 60000 บาท</span>
@@ -51,8 +50,8 @@
             </div>
           </v-col>
         </v-row>
+        </v-card>
       </v-container>
-    </v-card>
 
     <!-- ข่าวล่าสุด -->
     <div class="block latestPostBlock">
@@ -223,6 +222,7 @@ export default {
 }
 .row-news {
   margin-bottom: 3%;
+  margin-top: 3%;
 }
 .cols-detail-campaign {
   margin-top: 5%;

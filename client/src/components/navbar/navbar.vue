@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="$store.getters.UserIsLoggedIn">
-      <v-toolbar color="cyan accent-4">
+      <v-app-bar color="cyan accent-4">
         <v-toolbar-items class="hidden-sm-and-down">
           <v-btn text to="/home">
             RAKANGTHAM
@@ -21,7 +21,7 @@
         </v-toolbar-items>
         <v-spacer></v-spacer>
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      </v-toolbar>
+      </v-app-bar>
       <v-navigation-drawer
         class="cyan accent-4"
         v-model="drawer"
@@ -58,7 +58,7 @@
     </div>
 
     <div v-else-if="$store.getters.AdminIsLoggedIn">
-      <v-toolbar color="gray accent-4" dark>
+      <v-app-bar color="gray accent-4" dark>
         <v-toolbar-items class="hidden-sm-and-down">
           <v-btn text to="/home">
             RAKANGTHAM
@@ -78,7 +78,7 @@
         </v-toolbar-items>
         <v-spacer></v-spacer>
           <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      </v-toolbar>
+      </v-app-bar>
       <v-navigation-drawer
         class="dark accent-4"
         v-model="drawer"
@@ -128,7 +128,7 @@
     </div>
 
     <div v-else>
-      <v-toolbar color="cyan accent-4">
+      <v-app-bar color="cyan accent-4">
         <v-toolbar-items class="hidden-sm-and-down">
           <v-btn text to="/home">
             RAKANGTHAM
@@ -147,15 +147,30 @@
           </v-btn>
         </v-toolbar-items>
         <v-spacer></v-spacer>
-        <v-toolbar-items class="hidden-sm-and-down">
-          <v-btn text to="/login">
-            Log in
-          </v-btn>
-          <v-btn text to="/admin/login">
-            Admin site
-          </v-btn>
-        </v-toolbar-items>
-      </v-toolbar>
+        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      </v-app-bar>
+      <v-navigation-drawer
+        class="cyan accent-4"
+        v-model="drawer"
+        right
+        absolute
+        temporary
+      >
+        <v-list nav>
+          <v-list-item-group v-model="group">
+            <router-link tag="v-list-item" to="/login"
+              ><v-list-item>
+                <v-list-item-title>Log in</v-list-item-title>
+              </v-list-item></router-link
+            >
+            <router-link tag="v-list-item" to="/admin/login"
+              ><v-list-item>
+                <v-list-item-title>Admin Site</v-list-item-title>
+              </v-list-item></router-link
+            >
+          </v-list-item-group>
+        </v-list>
+      </v-navigation-drawer>
     </div>
   </div>
 </template>
@@ -208,7 +223,4 @@ export default {
 </script>
 
 <style>
-b-navbar-nav {
-  text-decoration-color: black;
-}
 </style>
