@@ -23,7 +23,7 @@ const newSchema = new mongoose.Schema({
   donatelist:[
     {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "../../log/model/DonateLog"
+        ref: "DonateLog"
     }
   ],
 

@@ -1,16 +1,19 @@
 const mongoose = require("mongoose");
+
 const newSchema = new mongoose.Schema({
-  campaign:[{
+  campaign:{
       type: mongoose.Schema.Types.ObjectId,
-      ref: '../../user/model/Campaign',
+      ref: 'Campaign',
   
-  }]
-,
+  },
+  CampaignName:{
+    type:String
+  },
   user:
-    [{
+    {
       type: mongoose.Schema.Types.ObjectId,
-      ref: '../../campaign/model/User'
-    }]
+      ref: 'User'
+    }
   ,
   amount: {
     type: String, 
