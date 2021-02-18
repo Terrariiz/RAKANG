@@ -280,6 +280,9 @@ export default {
                 oldimage: "",
                 date: "",
                 amount: "",
+                overview: null,
+                done: null,
+                location: null,
             },
             editorConfig: {
                     // The configuration of the editor.
@@ -301,6 +304,9 @@ export default {
             formData.append('content', this.campaign.content)
             formData.append('date', this.campaign.date)
             formData.append('amount', this.campaign.amount)
+            formData.append('overview', this.campaign.overview)
+            formData.append('done', this.campaign.done)
+            formData.append('location', this.campaign.location)
             
             if(this.campaign.newimage == null){
                 console.log('true')

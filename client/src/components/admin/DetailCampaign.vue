@@ -26,8 +26,8 @@
                   <img class="image -fullwidth img-responsive" id="showimage" :src="'http://localhost:4000/uploads/' + campaign.image"/>
                   <p class="lead">{{campaign.content }}</p>
                   <p class="details">
-                      <span class="duration">เริ่มวันที่ {{ campaign.date }} </span>
-                      <span class="location">สถานที่</span>
+                      <span class="duration">เริ่มวันที่ {{ campaign.date }} </span><br>
+                      <span class="location">สถานที่ {{campaign.location}}</span>
                   </p>
               </div>
           </v-col>
@@ -77,39 +77,28 @@
       grow
     >
       <v-tab>
-        test1
+        ภาพรวม
       </v-tab>
       <v-tab>
-        test2
+        ความคืบหน้า
       </v-tab>
     </v-tabs>
 
     <v-tabs-items v-model="tab">
-<<<<<<< HEAD
-      <v-tab-item
-        v-for="text in text"
-        :key="text"
-      >
-=======
       <v-tab-item>
         <v-card
           color="basil"
           flat
         >
-          <v-card-text>1</v-card-text>
+          <v-card-text v-html="campaign.overview">{{campaign.overview}}</v-card-text>
         </v-card>
       </v-tab-item>
       <v-tab-item>
->>>>>>> 109cfe93409c811e8802ffe68967d954e9999ac3
         <v-card
           color="basil"
           flat
         >
-<<<<<<< HEAD
-          <v-card-text v-html="campaign.overview">{{ campaign.overview }}</v-card-text>
-=======
-          <v-card-text>2</v-card-text>
->>>>>>> 109cfe93409c811e8802ffe68967d954e9999ac3
+          <v-card-text v-html="campaign.done">{{campaign.done}}</v-card-text>
         </v-card>
       </v-tab-item>
     </v-tabs-items>
