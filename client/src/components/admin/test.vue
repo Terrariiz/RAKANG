@@ -92,12 +92,16 @@
       </v-row>
       
   </v-container>
-   <div id="grid-container">
-                    <div></div>
-                    <v-btn style="weidth = 40%" color="primary" dark href='/admin/listnews'>cancle</v-btn>
-                    <v-btn type="submit" color="primary" dark>submit</v-btn>
-                    <div></div>  
-                </div>
+    <v-row style="margin-top:3%;">
+                <v-col  cols = "3"></v-col>
+                <v-col  cols = "3">
+                  <v-btn color="error" style="float:right;" dark to='/admin/listcampaign'>Cancle</v-btn>
+                </v-col>
+                <v-col  cols = "3">
+                  <v-btn color="primary" style="float:left;" type="submit">Submit</v-btn>
+                </v-col>
+                  <v-col  cols = "3"></v-col>
+              </v-row>
     </div>
     
  

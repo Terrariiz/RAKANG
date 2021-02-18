@@ -108,13 +108,13 @@ export default {
     return {
       items: [
         {
-          src: require("../assets/images/tenor2.gif"),
+          src: require("../assets/images/ศีล5 5.jpg"),
         },
         {
-          src: require("../assets/images/tenor3.gif"),
+          src: require("../assets/images/อิทธิบาท4.jpg"),
         },
         {
-          src: require("../assets/images/tenor4.gif"),
+          src: require("../assets/images/ธรรมะ.jpg"),
         },
       ],
 

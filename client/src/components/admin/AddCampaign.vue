@@ -55,25 +55,25 @@
          @submit.prevent="Addcampaign">
          <div class="project-header">
     <v-container >
-      <v-row >
+          <v-row >
                <h1>Add new campaign</h1>
-              </v-row>
-      <v-row class="headname" >
+          </v-row>
+      <center><v-row class="headname" >
           <v-text-field v-model="campaign.name"  solo label="Name"  required></v-text-field>
           <br>
-      </v-row>
+      </v-row></center>
       <v-row>
-          <v-col  cols="12" md="8" sm="12">
+          <v-col  cols="12" md="12" sm="12">
               <div class="project-content">
                   <!-- <img class="image -fullwidth img-responsive" id="showimage" :src="'http://localhost:4000/uploads/' + campaign.image"/> -->
-                   <v-container id = "picturenews">
-                                <center><v-div required style=""  class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
+                   <center><v-container id = "picturenews">
+                                <v-div required style=""  class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
                                     <span  v-if="!imageData"  class="placeholder">Choose an Image</span>
                                     <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  v-on:change="onFileSelected" >
-                                </v-div></center>
+                                </v-div>
 
                                 <hr>
-                            </v-container>
+                            </v-container></center>
                   <v-textarea solo
                     clearable
                     v-model="campaign.content"
@@ -88,19 +88,24 @@
                       <!-- <span class="location">สถานที่</span> -->
                   </p>
               </div>
-          </v-col>
-          <v-col  cols="12" md="4" sm="12">
-            <div class="fund-raising affix-top">
-                <div class="body">
-                    <!-- <div class="amount-raised">
-                        <h3 class="title">ยอดบริจาคขณะนี้</h3>
-                        <span class="value">100000 บาท</span>
-                    </div> -->
-                    <div class="funding-goal">
+              <div class="details funding-goal">
                         <h3 class="title">เป้าหมาย</h3>
                          <v-text-field v-model="campaign.amount" class="value" solo label="จำนวนเงิน" required ></v-text-field>
                         
                     </div>
+          </v-col>
+          <!-- <v-col  cols="12" md="4" sm="12">
+            <div class="fund-raising affix-top">
+                <div class="body"> -->
+                    <!-- <div class="amount-raised">
+                        <h3 class="title">ยอดบริจาคขณะนี้</h3>
+                        <span class="value">100000 บาท</span>
+                    </div> -->
+                    <!-- <div class="funding-goal">
+                        <h3 class="title">เป้าหมาย</h3>
+                         <v-text-field v-model="campaign.amount" class="value" solo label="จำนวนเงิน" required ></v-text-field>
+                        
+                    </div> -->
                     <!-- <div class="progress-bar">
                         <span class="percent">
                             <span class="hide-txt">ดำเนินการไปแล้ว</span>
@@ -114,15 +119,15 @@
                         <span class="icon-people">43</span>
                     </span> -->
                     
-                </div>
+                <!-- </div> -->
                     
             <!-- <div class="action">
                 <a><v-btn block> </v-btn></a>
                 
             </div> -->
-
+<!-- 
             </div>
-          </v-col>
+          </v-col> -->
       </v-row>
       <v-row>
          <v-col  cols="12" md="8" sm="12">
@@ -134,23 +139,38 @@
               @input="onEditorInput" required> 
             </ckeditor>
             <hr>
-            <h3>ความคืบหน้า</h3>
+            <!-- <h3>ความคืบหน้า</h3>
             <br>
               <ckeditor 
                 id="content"
                 v-model="campaign.done"
+<<<<<<< HEAD
                 @input="onEditorInput" required>
             </ckeditor>
+=======
+                @input="onEditorInput">
+            </ckeditor> -->
+>>>>>>> 109cfe93409c811e8802ffe68967d954e9999ac3
          </v-col>
       </v-row>
       
   </v-container>
-   <div id="grid-container">
+   <!-- <div id="grid-container">
                     <div></div>
                     <v-btn style="weidth = 40%" color="error" dark href='/admin/listcampaign'>cancle</v-btn>
                     <v-btn type="submit" color="primary" dark>submit</v-btn>
                     <div></div>  
-                </div>
+                </div> -->
+                <v-row style="margin-top:3%;">
+                <v-col  cols = "3"></v-col>
+                <v-col  cols = "3">
+                  <v-btn color="error" style="float:right;" dark to='/admin/listcampaign'>Cancle</v-btn>
+                </v-col>
+                <v-col  cols = "3">
+                  <v-btn color="primary" style="float:left;" type="submit">Submit</v-btn>
+                </v-col>
+                  <v-col  cols = "3"></v-col>
+              </v-row>
     </div>
         </form>
   
@@ -158,6 +178,7 @@
 </template>
 
 <style >
+
 #detailnews{
     text-align: left;
     border-radius:30px;
@@ -248,6 +269,15 @@ img{
 .fund-raising .action{
    padding: 30px 25px 30px 25px;
 }
+.headname{
+  width:40%;
+  margin-right: 5%;
+  
+ 
+}
+.details{
+  width:40%;
+}
 
 #picturenews{
     /* margin-top: 10%; */
@@ -290,13 +320,7 @@ img{
     grid-template-columns: auto 10% 10% auto;
     grid-column-gap: 10%;
 }
-.headname{
-  width:30%;
- 
-}
-.details{
-  width:40%;
-}
+
 @media(max-width: 767px){
     .project-content {
     padding-right: 0;
