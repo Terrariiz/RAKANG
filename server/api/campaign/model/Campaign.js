@@ -26,6 +26,15 @@ const newSchema = new mongoose.Schema({
         ref: "../../log/model/DonateLog"
     }
   ],
+  location:{
+    type: String,
+  },
+  overview:{
+    type: String,
+  },
+  done:{
+    type: String,
+  },
 
  
 });

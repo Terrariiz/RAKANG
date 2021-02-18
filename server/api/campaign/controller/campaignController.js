@@ -14,7 +14,10 @@ exports.addnewcampaign = async(req,res) => {
       image: req.file.filename,
       date: req.body.date,
       amount: req.body.amount,
-      donate: 0
+      donate: 0,
+      location: req.body.location,
+      overview: req.body.overview,
+      done: req.body.done,
     });
     console.log(add)
     let data = await add.save()

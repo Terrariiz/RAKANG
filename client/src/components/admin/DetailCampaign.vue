@@ -5,6 +5,7 @@
     </div>
      <div class="project-header">
     <v-container >
+      <v-btn to='/admin/listcampaign'> <i style="float:left;" class="fa fa-arrow-left fa-lg" aria-hidden="true"></i></v-btn>
       <v-row style="margin-top:3%;">
                 <v-col  cols = "3"></v-col>
                 <v-col  cols = "3">
@@ -85,14 +86,14 @@
 
     <v-tabs-items v-model="tab">
       <v-tab-item
-        v-for="item in items"
-        :key="item"
+        v-for="text in text"
+        :key="text"
       >
         <v-card
           color="basil"
           flat
         >
-          <v-card-text>{{ text }}</v-card-text>
+          <v-card-text v-html="campaign.overview">{{ campaign.overview }}</v-card-text>
         </v-card>
       </v-tab-item>
     </v-tabs-items>
@@ -116,8 +117,8 @@ export default {
         items: [
           'Appetizers', 'Entrees', 'Deserts', 'Cocktails',
         ],
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        
+        text: ['Lorem ipsum dolor sit amet',' consectetur adipiscing elit',' sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', "Ut enim ad minim veniam",
+        ]
         }
     },
     components:{

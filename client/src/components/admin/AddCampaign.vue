@@ -84,7 +84,7 @@
                   <!-- <p class="lead">content</p> -->
                   <p class="details">
                       <v-text-field v-model="campaign.date" type="date" solo label="วันสิ้นสุดแคมเปญ" required></v-text-field>
-                      <v-text-field class="location"  solo label="สถานที่" required></v-text-field>
+                      <v-text-field v-model="campaign.location" class="location"  solo label="สถานที่" required></v-text-field>
                       <!-- <span class="location">สถานที่</span> -->
                   </p>
               </div>
@@ -130,7 +130,7 @@
            <br>
             <ckeditor 
               id="content"
-              v-model="content"
+              v-model="campaign.overview"
               @input="onEditorInput" required> 
             </ckeditor>
             <hr>
@@ -138,7 +138,7 @@
             <br>
               <ckeditor 
                 id="content"
-                v-model="content"
+                v-model="campaign.done"
                 @input="onEditorInput" required>
             </ckeditor>
          </v-col>
@@ -147,7 +147,7 @@
   </v-container>
    <div id="grid-container">
                     <div></div>
-                    <v-btn style="weidth = 40%" color="error" dark href='/admin/listnews'>cancle</v-btn>
+                    <v-btn style="weidth = 40%" color="error" dark href='/admin/listcampaign'>cancle</v-btn>
                     <v-btn type="submit" color="primary" dark>submit</v-btn>
                     <div></div>  
                 </div>
@@ -349,6 +349,9 @@ export default {
                 date: null,
                 amount: null,
                 tab: null,
+                overview: null,
+                done: null,
+                location: null,
         items: [
           'Appetizers', 'Entrees', 'Deserts', 'Cocktails',
         ],
@@ -370,6 +373,9 @@ export default {
         formData.append('imagepath', this.campaign.image.name)
         formData.append('date', this.campaign.date)
         formData.append('amount', this.campaign.amount)
+        formData.append('overview', this.campaign.overview)
+        formData.append('done', this.campaign.done)
+        formData.append('location', this.campaign.location)
         console.log(formData)
         let campaign = await this.$http.post("/campaign/addcampaign", formData);
         console.log(campaign);
