@@ -55,10 +55,10 @@
                     </span>
                 </div>
 
-            <div class="action">
+            <!-- <div class="action">
                 <a><v-btn block></v-btn></a>
                 
-            </div>
+            </div> -->
 
             </div>
           </v-col>
@@ -75,27 +75,33 @@
       color="basil"
       grow
     >
-      <v-tab
-        v-for="item in items"
-        :key="item"
-      >
-        {{ item }}
+      <v-tab>
+        test1
+      </v-tab>
+      <v-tab>
+        test2
       </v-tab>
     </v-tabs>
 
     <v-tabs-items v-model="tab">
-      <v-tab-item
-        v-for="item in items"
-        :key="item"
-      >
+      <v-tab-item>
         <v-card
           color="basil"
           flat
         >
-          <v-card-text>{{ text }}</v-card-text>
+          <v-card-text>1</v-card-text>
+        </v-card>
+      </v-tab-item>
+      <v-tab-item>
+        <v-card
+          color="basil"
+          flat
+        >
+          <v-card-text>2</v-card-text>
         </v-card>
       </v-tab-item>
     </v-tabs-items>
+    
         
       </v-container>
   </div>
