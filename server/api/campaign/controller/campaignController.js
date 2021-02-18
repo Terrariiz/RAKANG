@@ -14,7 +14,10 @@ exports.addnewcampaign = async(req,res) => {
       image: req.file.filename,
       date: req.body.date,
       amount: req.body.amount,
-      donate: 0
+      donate: 0,
+      location: req.body.location,
+      overview: req.body.overview,
+      done: req.body.done,
     });
     console.log(add)
     let data = await add.save()
@@ -70,7 +73,7 @@ exports.DeleteCampaign = function(req,res){
                 console.log("unlink image success")
               } 
           })
-        console.log('delete news completed')
+        console.log('delete campaign completed')
       }
     })
   } catch (err) {
@@ -102,7 +105,10 @@ exports.EditCampaign = async(req,res) =>{
           content: req.body.content,
           image: req.file.filename,
           amount : req.body.amount,
-          date : req.body.date
+          date : req.body.date,
+          location: req.body.location,
+          overview: req.body.overview,
+          done: req.body.done,
         }
 
       } else {
@@ -114,7 +120,10 @@ exports.EditCampaign = async(req,res) =>{
           content: req.body.content,
           image: req.body.oldimage,
           amount : req.body.amount,
-          date : req.body.date
+          date : req.body.date,
+          location: req.body.location,
+          overview: req.body.overview,
+          done: req.body.done,
         }
     }
     // if(req.body.imagepath != req.body.oldimage){
@@ -162,14 +171,15 @@ exports.DonateCampaign = async function(req,res){
             amount : amount,
             date : now
           });
-
+          
           DonateLog.create(donatelog,function(err,log){
+            
             console.log(log)
 
             log.user.push(user)
             log.campaign.push(campaign)
             //////แก้ไขยอด coin user
-            user.coin = user.coin-amount;
+            user.point = user.point+amount/10
             //////save ข้อมูล log เข้า donate log ของ user 
             user.donatelog.push(log)
 

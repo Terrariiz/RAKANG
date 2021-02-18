@@ -24,7 +24,7 @@
                         <h6 style="font-size: 20px; color;blue;" class="f-w-600">
                            {{ dataUser.firstname }} {{ dataUser.lastname }}
                         </h6>
-                        <h6 class="f-w-600">{{ dataUser.coin }} Coin</h6>
+                        <!-- <h6 class="f-w-600">{{ dataUser.coin }} Coin</h6> -->
                     </div>
                     <div class="btn-log">
                         <v-btn small @click.stop="dialog_Logcoin=true">ประวัติการบริจาค</v-btn>
@@ -98,7 +98,7 @@
             </v-card-title>
             <v-data-table
               :headers="headers"
-              :items="desserts"
+              :items="donatelog"
               :search="search"
             ></v-data-table>
           </v-card>
@@ -125,6 +125,7 @@
 <script>
 import ChangePassword from '@/components/profile/changePassword'
 import Logcoin from '@/components/profile/Logcoin'
+import moment from "moment";
 const token = window.localStorage.getItem("user_token");
 const Navbar = () => import("@/components/navbar/navbar");
 const id = window.localStorage.getItem("user_id");
@@ -133,6 +134,7 @@ export default {
   data() {
     return {
       dataUser: {},
+      donatelog:[],
       dialog_ChangePassword: false,
       dialog_Logcoin: false,
       tab: null,
@@ -142,8 +144,8 @@ export default {
         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
      search: '',
         headers: [
-          {text: 'ชื่อแคมเปญ',value: 'Campaign',},
-          { text: 'จำนวนเงินที่บริจาค(บาท)', value: 'amonut' },
+          { text: 'ชื่อแคมเปญ',value: 'CampaignName',},
+          { text: 'จำนวนเงินที่บริจาค(บาท)', value: 'amount' },
           { text: 'วัน-เดือน-ปี', value: 'date' },
           
         ],
@@ -159,6 +161,22 @@ export default {
       .get("/user/" + id)
       .then((res) => {
         this.dataUser = res.data;
+        console.log("get user data")
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+    await this.$http
+      .get("donatelog/donateloguser/" + id)
+      .then((res) => {
+        console.log("get log")
+        
+        this.donatelog = res.data.donatelog;
+
+        var i = 0
+        for(this.donatelog[i];;i++){
+            this.donatelog[i].date = moment(this.donatelog[i].date).format(" DD-MM-YYYY HH:mm A");
+            } 
       })
       .catch(function (err) {
         console.log(err);

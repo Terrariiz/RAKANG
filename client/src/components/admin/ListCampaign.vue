@@ -45,7 +45,7 @@
                   <!-- <router-link :to="`/admin/listdoctrine/${doctrine._id}`">detail</router-link> -->
                   <!-- <router-link :to="{name : 'DetailDoctrine', params: {id:doctrine._id}}">detail</router-link> -->
                   <v-btn @click="ViewCampaign(campaign._id)">view</v-btn>
-                  <v-btn to='/admin/logdonate'>Log</v-btn>
+                  <v-btn @click="ViewLogCampaign(campaign._id)">Log</v-btn>
                 </td>
                 <!-- <td>{{ item.name }}</td>
                 <td>
@@ -84,7 +84,7 @@ import moment from "moment";
         console.log(this.campaigns)
         var i = 0
         for(this.campaigns[i];;i++){
-            this.campaigns[i].date = moment(this.campaigns[i].date).format(" dddd DD-MM-YY  A");
+            this.campaigns[i].date = moment(this.campaigns[i].date).format(" DD-MM-YY A");
             } 
       })
       .catch(function(err){
@@ -96,15 +96,11 @@ import moment from "moment";
       Navbar
     },
     methods: {
-      // async ViewDoctrine(doctrineid){
-      //   await this.$http.get("/DetailDoctrine/"+doctrineid)
-      //   .then((res)=> {
-
-      //   })
-      // }
       ViewCampaign(campaignid){
         this.$router.push({ name: 'DetailCampaign' , params: {id : campaignid}})
-          
+        },
+      ViewLogCampaign(campaignid){
+        this.$router.push({ name: 'LogDonate' , params: {id : campaignid}})
         }
       }
     

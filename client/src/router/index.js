@@ -140,7 +140,7 @@ const routes = [
     component: loginAdmin
   },
   {
-    path: '/admin/logdonate',
+    path: '/admin/logdonate/:id',
     name: 'LogDonate',
     component: LogDonateAdmin,
     meta: {

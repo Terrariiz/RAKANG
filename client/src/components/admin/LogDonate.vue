@@ -17,7 +17,7 @@
     </v-card-title>
     <v-data-table
       :headers="headers"
-      :items="desserts"
+      :items="loguser"
       :search="search"
     ></v-data-table>
   </v-card>
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import moment from "moment";
 const Navbar = () => import('@/components/navbar/navbar')
 export default {
   name: 'Admin',
@@ -34,18 +35,30 @@ export default {
   },
   data () {
       return {
+        loguser: [],
         search: '',
         headers: [
-          {text: 'ชื่อแคมเปญ',value: 'Campaign',},
-          { text: 'จำนวนเงินที่บริจาค(บาท)', value: 'amonut' },
+          {text: 'ชื่อแคมเปญ',value: 'CampaignName',},
+          { text: 'จำนวนเงินที่บริจาค(บาท)', value: 'amount' },
           { text: 'วัน-เดือน-ปี', value: 'date' },
           
         ],
       }
-  }
-      
+  },
+  mounted: async function mounted() {
+    const id = this.$route.params.id;
+    await this.$http
+      .get("donatelog/donatelogcampaign/" + id)
+      .then((res) => {
+        this.loguser = res.data.donatelist;
+        var i = 0
+        for(this.loguser[i];;i++){
+            this.loguser[i].date = moment(this.loguser[i].date).format(" DD-MM-YY HH:mm A");
+            } 
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  }, 
 }
-
-
-
 </script>

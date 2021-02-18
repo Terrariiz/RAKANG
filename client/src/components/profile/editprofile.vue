@@ -20,7 +20,7 @@
                         <h6 style="font-size: 20px; color;blue;" class="f-w-600">
                            {{ dataUser.firstname }} {{ dataUser.lastname }}
                         </h6>
-                        <h6 class="f-w-600">{{ dataUser.coin }} Coin</h6>
+                        <!-- <h6 class="f-w-600">{{ dataUser.coin }} Coin</h6> -->
                     </div>
                     <!-- <div class="btn-log">
                         <v-btn small @click.stop="dialog_Logcoin=true">ประวัติการบริจาค</v-btn>
