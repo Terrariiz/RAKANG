@@ -52,7 +52,7 @@ const userSchema = new mongoose.Schema({
   minigamelog:[
     {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "../../log/model/MinigameLog"
+        ref: "MinigameLog"
     }
   ]
 });

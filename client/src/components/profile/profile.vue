@@ -144,7 +144,7 @@ export default {
         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
      search: '',
         headers: [
-          { text: 'ชื่อแคมเปญ',value: 'campaign',},
+          { text: 'ชื่อแคมเปญ',value: 'CampaignName',},
           { text: 'จำนวนเงินที่บริจาค(บาท)', value: 'amount' },
           { text: 'วัน-เดือน-ปี', value: 'date' },
           
@@ -161,19 +161,21 @@ export default {
       .get("/user/" + id)
       .then((res) => {
         this.dataUser = res.data;
+        console.log("get user data")
       })
       .catch(function (err) {
         console.log(err);
       });
     await this.$http
-      .get("donatelog/donateloglist/" + id)
+      .get("donatelog/donateloguser/" + id)
       .then((res) => {
+        console.log("get log")
         
-        this.donatelog = res.data;
-        console.log("🚀 ~ file: profile.vue ~ line 173 ~ .then ~ res.data", res.data)
+        this.donatelog = res.data.donatelog;
+
         var i = 0
         for(this.donatelog[i];;i++){
-            this.donatelog[i].date = moment(this.donatelog[i].date).format(" dddd DD-MM-YY  A");
+            this.donatelog[i].date = moment(this.donatelog[i].date).format(" DD-MM-YYYY HH:mm A");
             } 
       })
       .catch(function (err) {
