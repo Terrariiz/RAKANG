@@ -103,8 +103,8 @@
                 </div>
 
             <div class="action">
-                <a><v-btn block></v-btn></a>
-                
+                <a><v-btn color="green" @click.stop="dialogDonate=true" block>บริจาค</v-btn></a>
+                <DialogDonate :visible="dialogDonate" @close="dialogDonate=false" />
             </div>
 
             </div>
@@ -153,16 +153,19 @@
 </template>
 <script>
 const Navbar = () => import('@/components/navbar/navbar')
+import DialogDonate from "./dialog_donate";
 import moment from "moment";
 export default {
     name:'Campaign',
     components:{
-        Navbar
+        Navbar,
+        DialogDonate,
     },
     data (){
       return {
         campaign: null,
         tab: null,
+        dialogDonate: false,
         items: [
           'Appetizers', 'Entrees', 'Deserts', 'Cocktails',
         ],

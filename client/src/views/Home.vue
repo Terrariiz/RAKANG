@@ -23,6 +23,7 @@
     </v-carousel>
 
     <!-- แคมเปญ -->
+    
       <v-container class="container-news">
         <v-card elevation="5" outlined shaped >
         <v-row class="row-news">
@@ -52,33 +53,40 @@
         </v-row>
         </v-card>
       </v-container>
+    
 
-    <!-- ข่าวล่าสุด -->
+     <!-- ข่าวล่าสุด -->
     <div class="block latestPostBlock">
       <v-container>
         <h2 class="text-center">ข่าว</h2>
         <v-row>
           <v-col v-for="news in news" :key="news.id" cols="12" md="4">
-            <v-card outlined class="mx-auto">
-              <v-img
-                class="white--text align-end"
-                height="200px"
-                :src="news.src"
-              >
-                <v-card-title>{{ news.name }}</v-card-title>
-              </v-img>
-              <v-card-subtitle class="pb-0">{{
-                news.subtitle
-              }}</v-card-subtitle>
-              <v-card-text class="text--primary">
-                <div>{{ news.description }}</div>
-              </v-card-text>
-              <v-card-actions>
-                <v-btn color="primary" style="margin-left:auto;" text
+            <v-card
+      class="mx-auto"
+      max-width="344"
+      outlined
+    >
+     <v-img :src="news.src"></v-img>
+      <v-list-item three-line>
+        <v-list-item-content>
+          <div class="overline mb-4">
+           {{ news.name }}
+          </div>
+          <v-list-item-title class="headline mb-1">
+            {{news.subtitle}}
+          </v-list-item-title>
+          <v-list-item-subtitle>{{ news.description }}</v-list-item-subtitle>
+        </v-list-item-content>
+  
+      
+      </v-list-item>
+  
+      <v-card-actions>
+                <v-btn to="/test" color="primary" style="margin-left:auto;" text
                   >More</v-btn
                 >
               </v-card-actions>
-            </v-card>
+    </v-card>
           </v-col>
         </v-row>
         <a href="/home" style="float:right; margin-bottom:3%"
@@ -87,6 +95,9 @@
         ></a>
       </v-container>
     </div>
+
+
+    
   </div>
 </template>
 

@@ -166,7 +166,7 @@ export default {
       font-size: 15px;
     }
     .word2{
-      font-size: 50px;
+      font-size: 40px;
     }
 }
 h1{

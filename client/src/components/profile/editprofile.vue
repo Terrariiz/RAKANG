@@ -5,31 +5,37 @@
         <Navbar></Navbar>
     </div>
     <v-form @submit.prevent="EditProfile">
-    <center><div class="page-content page-container" id="page-content">
-    <div class="padding">
-        <div  class="row container d-flex justify-content-center">
-            <div  class="col-xl-12 col-md-12">
-                <div class="card user-card-full">
-                    <div  class="row m-l-0 m-r-0">
-                        <div  class="col-sm-4 bg-c-lite-green user-profile">
-                            <div  class="card-block text-center text-white">
-                                 <div style="text-align:right;"><v-btn  icon ><label style=" cursor: pointer;" for="file-input"><v-icon>mdi-pencil</v-icon></label></v-btn></div>
+    <div  >
+    <v-container>
+      <v-row>
+        <v-col style="background-color:red;" cols="12" md="4" sm="12">
+          <div style="text-align:right;"><v-btn  icon ><label style=" cursor: pointer;" for="file-input"><v-icon>mdi-pencil</v-icon></label></v-btn></div>
                                     <center><v-div style=""  class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
                                     <span  v-if="!imageData"  class="placeholder">Choose an Image</span>
                                     <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  @input="onSelectFile" >
                                 </v-div></center>
-
-                                <hr>
-                                
-                                
-                                 
-                            </div>
-                        </div>
-                        <div class="col-sm-8">
-                                <div  class="card-block">
-                                    <!-- <router-link style=" color:gray;" to="/editprofile"  ><i style="text-align:right;" class="fa fa-edit"></i>Edit</router-link> -->
-                                    <!-- <div style="text-align: right;"><router-link style="color:gray; " to="/editprofile"><i class="fa fa-edit"></i>Edit</router-link></div> -->
-                                    <h6 class="m-b-20 p-b-5 b-b-default f-w-600" style="font-size:20px;">Edit Profile</h6>
+          
+          <hr>
+                    <div class="name-sur">
+                        <h6 style="font-size: 20px; color;blue;" class="f-w-600">
+                           {{ dataUser.firstname }} {{ dataUser.lastname }}
+                        </h6>
+                        <h6 class="f-w-600">{{ dataUser.coin }} Coin</h6>
+                    </div>
+                    <!-- <div class="btn-log">
+                        <v-btn small @click.stop="dialog_Logcoin=true">ประวัติการบริจาค</v-btn>
+                        <Logcoin :visible="dialog_Logcoin" @close="dialog_Logcoin=false" />                     
+                    </div>
+                    <div class="btn-cpass">
+                        <v-btn small @click.stop="dialog_ChangePassword=true">เปลี่ยนรหัสผ่าน</v-btn>
+                        <ChangePassword :visible="dialog_ChangePassword" @close="dialog_ChangePassword=false" />                     
+                    </div> -->
+        </v-col>
+        <v-col cols="12" md="8" sm="12">
+          
+          <div class="tab-section">
+      <v-container>
+        <h6 class="m-b-20 p-b-5 b-b-default f-w-600" style="font-size:20px;">Edit Profile</h6>
                                     
                                     <div class="row">
                                         
@@ -69,16 +75,15 @@
                                             <v-col cols="3" ></v-col>
                                         </v-row>
                                     </div>
-                                    
-                                </div>
-                            </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
     
-</div></center>
+        
+      </v-container>
+  </div>
+        </v-col>
+      </v-row>
+    </v-container>
+  </div>
 </v-form>
 </div>
 
@@ -413,4 +418,27 @@ h6 {
 .file-input {
   display: none;
 }
+
+.img-profile{
+  margin: 20px auto;
+  width: 300px;
+  height: 200px;
+}
+  .img-profile img{
+    width:100%; 
+    height:100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .name-sur{
+    text-align: center;
+  }
+  .btn-log{
+    margin: 20px auto;
+    text-align: center;
+  }
+  .btn-cpass{
+    margin: 20px auto;
+    text-align: center;
+  }
 </style>
