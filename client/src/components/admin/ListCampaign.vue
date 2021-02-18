@@ -7,7 +7,7 @@
     <div id ='headaddnews'>
         <div class="text-center">
           
-            <v-btn rounded color="primary" dark to = "/admin/addCampaign">Add CAMPAIGN</v-btn>
+            <v-btn rounded color="primary" dark to = "/admin/addCampaign">เพิ่มแคมเปญ</v-btn>
   
             <!-- <v-btn rounded color="primary"  to = "/addnews" >Add NEWS</v-btn> -->
         </div>

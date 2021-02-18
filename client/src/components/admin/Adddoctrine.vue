@@ -40,7 +40,7 @@
             </v-container>
                 <div id="grid-container">
                     <div></div>
-                    <v-btn style="weidth = 40%" color="primary" dark href='/admin/listdoctrine'>cancle</v-btn>
+                    <v-btn style="weidth = 40%" color="primary" dark to='/admin/listdoctrine'>cancle</v-btn>
                     <v-btn type="submit" color="primary" dark>submit</v-btn>
                     <div></div>  
                 </div>

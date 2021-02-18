@@ -89,10 +89,10 @@
     </v-card>
           </v-col>
         </v-row>
-        <a href="/home" style="float:right; margin-bottom:3%"
+        <router-link to='/news' style="float:right; margin-bottom:3%"
           >แสดงทั้งหมด <i class="fa fa-chevron-right" aria-hidden="true"></i
           ><i class="fa fa-chevron-right" aria-hidden="true"></i
-        ></a>
+        ></router-link>
       </v-container>
     </div>
 

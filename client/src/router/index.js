@@ -61,10 +61,7 @@ const routes = [
   {
     path: '/campaign/:id',
     name: 'UserDetailCampaign',
-    component: UserDetailCampaign,
-    meta: {
-      requiresUserAuth: true
-    }
+    component: UserDetailCampaign
   },
   {
     path: '/doctrine',

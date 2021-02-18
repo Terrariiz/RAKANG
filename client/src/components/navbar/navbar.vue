@@ -7,16 +7,16 @@
             RAKANGTHAM
           </v-btn>
           <v-btn text to="/campaign">
-            Campaign
+            แคมเปญ
           </v-btn>
           <v-btn text to="/doctrine">
-            Doctrine
+            หลักธรรมคำสอน
           </v-btn>
           <v-btn text to="/news">
-            News
+            ข่าวประชาสัมพันธ์
           </v-btn>
           <v-btn text to='/rank'>
-            Ranking
+            อันดับ
           </v-btn>
         </v-toolbar-items>
         <v-spacer></v-spacer>
@@ -37,21 +37,11 @@
                 <v-list-item-title>หน้าโปรไฟล์</v-list-item-title>
               </v-list-item></router-link
             >
-            <router-link tag="v-list-item" to="/profile/logcoin"
-              ><v-list-item>
-                <v-list-item-title>ประวัติการซื้อเหรียญ</v-list-item-title>
-              </v-list-item></router-link
-            >
-            <router-link tag="v-list-item" to="/profile/logpayment"
-              ><v-list-item>
-                <v-list-item-title>ประวัติการบริจาค</v-list-item-title>
-              </v-list-item></router-link
-            >
           </v-list-item-group>
         </v-list>
         <div class="pa-2">
           <v-btn block v-on:click="UserSign_out()">
-            Logout
+            ออกจากระบบ
           </v-btn>
         </div>
       </v-navigation-drawer>
@@ -64,16 +54,16 @@
             RAKANGTHAM
           </v-btn>
           <v-btn text to="/campaign">
-            Campaign
+            แคมเปญ
           </v-btn>
           <v-btn text to="/doctrine">
-            Doctrine
+            หลักธรรมคำสอน
           </v-btn>
           <v-btn text to="/news">
-            News
+            ข่าวประชาสัมพันธ์
           </v-btn>
           <v-btn text to='/rank'>
-            Ranking
+            อันดับ
           </v-btn>
         </v-toolbar-items>
         <v-spacer></v-spacer>
@@ -111,17 +101,11 @@
                 <v-list-item-title>ลิสต์ข่าวประชาสัมพันธ์</v-list-item-title>
               </v-list-item></router-link
             >
-
-            <router-link tag="v-list-item" to="/admin/logdonate"
-              ><v-list-item>
-                <v-list-item-title>ประวัติการบริจาคทั้งหมด</v-list-item-title>
-              </v-list-item></router-link
-            >
           </v-list-item-group>
         </v-list>
         <div class="pa-2">
           <v-btn block v-on:click="AdminSign_out()">
-            Logout
+            ออกจากระบบ
           </v-btn>
         </div>
       </v-navigation-drawer>
@@ -134,16 +118,16 @@
             RAKANGTHAM
           </v-btn>
           <v-btn text to="/campaign">
-            Campaign
+            แคมเปญ
           </v-btn>
           <v-btn text to="/doctrine">
-            Doctrine
+            หลักธรรมคำสอน
           </v-btn>
           <v-btn text to="/news">
-            News
+            ข่าวประชาสัมพันธ์
           </v-btn>
           <v-btn text to='/rank'>
-            Ranking
+            อันดับ
           </v-btn>
         </v-toolbar-items>
         <v-spacer></v-spacer>
@@ -160,12 +144,12 @@
           <v-list-item-group v-model="group">
             <router-link tag="v-list-item" to="/login"
               ><v-list-item>
-                <v-list-item-title>Log in</v-list-item-title>
+                <v-list-item-title>เข้าสู่ระบบ</v-list-item-title>
               </v-list-item></router-link
             >
             <router-link tag="v-list-item" to="/admin/login"
               ><v-list-item>
-                <v-list-item-title>Admin Site</v-list-item-title>
+                <v-list-item-title>หน้าแอดมิน</v-list-item-title>
               </v-list-item></router-link
             >
           </v-list-item-group>
