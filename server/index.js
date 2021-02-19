@@ -133,7 +133,8 @@ app.post("/test", async function(req,res){
                 const donatelog = new DonateLog({
                   campaign : null,
                   user : null ,
-                  amount : amount,
+                  CampaignName : campaign.name,
+                  amount : amount/100,
                   date : now
                 });
                 

@@ -61,10 +61,7 @@ const routes = [
   {
     path: '/campaign/:id',
     name: 'UserDetailCampaign',
-    component: UserDetailCampaign,
-    meta: {
-      requiresUserAuth: true
-    }
+    component: UserDetailCampaign
   },
   {
     path: '/doctrine',
@@ -140,7 +137,7 @@ const routes = [
     component: loginAdmin
   },
   {
-    path: '/admin/logdonate',
+    path: '/admin/logdonate/:id',
     name: 'LogDonate',
     component: LogDonateAdmin,
     meta: {

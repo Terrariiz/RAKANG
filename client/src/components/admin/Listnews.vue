@@ -7,7 +7,7 @@
     <div id ='headaddnews'>
         <div class="text-center">
           
-            <v-btn rounded color="primary" dark to = "/admin/addnews">Add NEWS</v-btn>
+            <v-btn rounded color="primary" dark to = "/admin/addnews">เพิ่มข่าวประชาสัมพันธ์</v-btn>
   
             <!-- <v-btn rounded color="primary"  to = "/addnews" >Add NEWS</v-btn> -->
         </div>
