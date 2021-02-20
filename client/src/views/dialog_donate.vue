@@ -163,10 +163,9 @@ export default {
     },
     methods: {
         pay(amount){
-            console.log(amount)
-            // localStorage.setItem("top-up-amount", amount*100);
-            // localStorage.setItem("donate-campaign", this.$route.params.id);
-            // this.$router.push({ name: 'payment' })
+            localStorage.setItem("top-up-amount", amount*100);
+            localStorage.setItem("donate-campaign", this.$route.params.id);
+            this.$router.push({ name: 'payment' })
         },
         //cancel() เป็น ฟังก์ชั่นของปุ่มปิด
         //การทำงาน รีเซตค่าของตัวแปรทั้งหมดให้กลับเป็นเหมือนเดิม
