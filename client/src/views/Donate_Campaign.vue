@@ -102,15 +102,10 @@
                     </span>
                 </div>
 
-            <div class="action">
-                <a><v-btn color="green" @click.stop="dialogDonate=true" block>บริจาค</v-btn></a>
-                <DialogDonate :visible="dialogDonate" @close="dialogDonate=false" />
-            </div>
-
-            <div class="action">
-                <a><v-btn color="green" @click.stop="test=true" block>test</v-btn></a>
-                <Test :visible="test" @close="test=false" />
-            </div>
+              <div class="action">
+                  <a><v-btn color="green" @click.stop="dialogDonate=true" block>บริจาค</v-btn></a>
+                  <DialogDonate :visible="dialogDonate" @close="dialogDonate=false" />
+              </div>
 
             </div>
           </v-col>
@@ -165,14 +160,12 @@
 <script>
 const Navbar = () => import('@/components/navbar/navbar')
 import DialogDonate from "./dialog_donate";
-import Test from "./test";
 import moment from "moment";
 export default {
     name:'Campaign',
     components:{
         Navbar,
         DialogDonate,
-        Test
     },
     data (){
       return {
