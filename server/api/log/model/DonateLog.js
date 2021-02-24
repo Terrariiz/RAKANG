@@ -9,6 +9,9 @@ const newSchema = new mongoose.Schema({
   CampaignName:{
     type:String
   },
+  UserName:{
+    type:String
+  },
   user:
     {
       type: mongoose.Schema.Types.ObjectId,

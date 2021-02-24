@@ -176,18 +176,18 @@ export default {
     },
   },
   mounted: function mounted() {
-    if (window.localStorage.getItem("user_id")) {
-      const id = window.localStorage.getItem("user_id");
-      console.log(id);
-      this.$http
-        .get("/user/" + id)
-        .then((res) => {
-          this.dataUser = res.data;
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
-    }
+    // if (window.localStorage.getItem("user_id")) {
+    //   const id = window.localStorage.getItem("user_id");
+    //   console.log(id);
+    //   this.$http
+    //     .get("/user/" + id)
+    //     .then((res) => {
+    //       this.dataUser = res.data;
+    //     })
+    //     .catch(function(err) {
+    //       console.log(err);
+    //     });
+    // }
   },
   methods: {
     async UserSign_out() {

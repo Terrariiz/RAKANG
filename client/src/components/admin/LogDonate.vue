@@ -38,7 +38,7 @@ export default {
         loguser: [],
         search: '',
         headers: [
-          {text: 'ชื่อแคมเปญ',value: 'CampaignName',},
+          {text: 'ชื่อผู้บริจาค',value: 'UserName',},
           { text: 'จำนวนเงินที่บริจาค(บาท)', value: 'amount' },
           { text: 'วัน-เดือน-ปี', value: 'date' },
           
