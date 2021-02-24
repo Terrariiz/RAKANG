@@ -6,16 +6,7 @@
      <div class="project-header">
     <v-container >
       <v-btn to='/admin/listcampaign'> <i style="float:left;" class="fa fa-arrow-left fa-lg" aria-hidden="true"></i></v-btn>
-      <v-row style="margin-top:3%;">
-                <v-col  cols = "3"></v-col>
-                <v-col  cols = "3">
-                  <v-btn color="primary" style="float:right;" @click="EditCampaign($route.params.id)">Edit</v-btn>
-                </v-col>
-                <v-col  cols = "3">
-                  <v-btn color="primary" style="float:left;" @click="DeleteCampaign($route.params.id)">Delete</v-btn>
-                </v-col>
-                  <v-col  cols = "3"></v-col>
-              </v-row>
+      
       <v-row>
           <h1>{{ campaign.name }}</h1>
           <br>
@@ -52,8 +43,18 @@
                     <span class="timeleft">365 วัน</span>
                     <span class="people">
                         <span class="hide-txt">จำนวนคนที่บริจาค</span>
-                        <span class="icon-people">43</span>
+                        <span class="icon-people"><i class="fa fa-users" aria-hidden="true"></i> 43</span>
                     </span>
+                    <v-row style="margin-top:3%;">
+                <v-col  cols = "3"></v-col>
+                <v-col  cols = "3">
+                  <v-btn color="error" style="float:right;" @click="DeleteCampaign($route.params.id)">Delete</v-btn>
+                </v-col>
+                <v-col  cols = "3">
+                  <v-btn color="success" style="float:left;" @click="EditCampaign($route.params.id)">Edit</v-btn>
+                </v-col>
+                  <v-col  cols = "3"></v-col>
+              </v-row>
                 </div>
 
             <!-- <div class="action">
@@ -189,5 +190,63 @@ export default {
   width: 700px;
   height: 250px; 
   object-fit: cover;
+}
+.image{
+  width: 100%;
+  /* height: 300px; */
+}
+.people {
+  float: right;
+  font-weight: 100;
+}
+.people .hide-txt{
+  display: none;
+}
+.project-header{
+  background-color: #fff8ec;
+}
+.project-content{
+    padding-right: 40px;
+    
+}
+.image .-fullwidth{
+  width: 100%;
+}
+.image{
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 40px;
+  
+  width: 100%;
+  
+
+}
+.img-responsive{
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+img{
+  vertical-align: middle;
+  border: 0;
+}
+.fund-raising{
+    border-radius: 6px;
+    background-clip: padding-box;
+    color: #666;
+    border: 1px solid #f3d9ab;
+    background-color: #fff;
+    z-index: 999;
+}
+.fund-raising .body{
+   padding: 30px 25px 0  25px;
+}
+.fund-raising .action{
+   padding: 30px 25px 30px 25px;
+}
+@media(max-width: 767px){
+    .project-content {
+    padding-right: 0;
+}
 }
 </style>

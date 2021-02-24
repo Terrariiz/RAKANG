@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div v-if="$store.getters.UserIsLoggedIn">
+  <div class="test">
+    <div  v-if="$store.getters.UserIsLoggedIn">
       <v-toolbar color="cyan accent-4">
         <v-toolbar-items class="hidden-sm-and-down">
           <v-btn text to="/home">
@@ -210,5 +210,8 @@ export default {
 <style>
 b-navbar-nav {
   text-decoration-color: black;
+}
+.test{
+  
 }
 </style>

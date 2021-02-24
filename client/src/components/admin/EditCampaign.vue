@@ -230,6 +230,9 @@ img{
 .details{
   width:40%;
 }
+.project-header{
+  background-color: #fff8ec;
+}
 
 @media(max-width: 767px){
     .project-content {

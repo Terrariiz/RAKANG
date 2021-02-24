@@ -211,6 +211,10 @@ export default {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 40px;
+  
+  width: 100%;
+  
+
 }
 .img-responsive{
   display: block;

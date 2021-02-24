@@ -6,7 +6,7 @@
 
     <v-carousel cycle hide-delimiters>
       <v-carousel-item
-        to="/"
+        to=""
         v-for="(item, i) in items"
         :key="i"
         :src="item.src"
@@ -81,7 +81,7 @@
       </v-list-item>
   
       <v-card-actions>
-                <v-btn to="/test" color="primary" style="margin-left:auto;" text
+                <v-btn to="" color="primary" style="margin-left:auto;" text
                   >More</v-btn
                 >
               </v-card-actions>
