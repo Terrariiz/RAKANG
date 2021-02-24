@@ -102,10 +102,10 @@
                     </span>
                 </div>
 
-            <div class="action">
-                <a><v-btn color="green" @click.stop="dialogDonate=true" block>บริจาค</v-btn></a>
-                <DialogDonate :visible="dialogDonate" @close="dialogDonate=false" />
-            </div>
+              <div class="action">
+                  <a><v-btn color="green" @click.stop="dialogDonate=true" block>บริจาค</v-btn></a>
+                  <DialogDonate :visible="dialogDonate" @close="dialogDonate=false" />
+              </div>
 
             </div>
           </v-col>

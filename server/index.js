@@ -134,6 +134,7 @@ app.post("/test", async function(req,res){
                   campaign : null,
                   user : null ,
                   CampaignName : campaign.name,
+                  UserName : user.firstname,
                   amount : amount/100,
                   date : now
                 });

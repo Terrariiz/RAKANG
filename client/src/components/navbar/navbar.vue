@@ -1,33 +1,36 @@
 <template>
-  <div class="test">
-    <div  v-if="$store.getters.UserIsLoggedIn">
-      <v-toolbar color="cyan accent-4">
+  <div >
+    <div v-if="$store.getters.UserIsLoggedIn">
+      <br>
+        <br>
+        <br>
+      <v-app-bar  fixed app color="cyan accent-4">
+        
         <v-toolbar-items class="hidden-sm-and-down">
           <v-btn text to="/home">
             RAKANGTHAM
           </v-btn>
           <v-btn text to="/campaign">
-            Campaign
+            แคมเปญ
           </v-btn>
           <v-btn text to="/doctrine">
-            Doctrine
+            หลักธรรมคำสอน
           </v-btn>
           <v-btn text to="/news">
-            News
+            ข่าวประชาสัมพันธ์
           </v-btn>
           <v-btn text to='/rank'>
-            Ranking
+            อันดับ
           </v-btn>
         </v-toolbar-items>
         <v-spacer></v-spacer>
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      </v-toolbar>
+      </v-app-bar>
       <v-navigation-drawer
         class="cyan accent-4"
         v-model="drawer"
         right
         absolute
-        bottom
         temporary
       >
         <v-list nav>
@@ -37,55 +40,44 @@
                 <v-list-item-title>หน้าโปรไฟล์</v-list-item-title>
               </v-list-item></router-link
             >
-            <router-link tag="v-list-item" to="/profile/logcoin"
-              ><v-list-item>
-                <v-list-item-title>ประวัติการซื้อเหรียญ</v-list-item-title>
-              </v-list-item></router-link
-            >
-            <router-link tag="v-list-item" to="/profile/logpayment"
-              ><v-list-item>
-                <v-list-item-title>ประวัติการบริจาค</v-list-item-title>
-              </v-list-item></router-link
-            >
           </v-list-item-group>
         </v-list>
         <div class="pa-2">
           <v-btn block v-on:click="UserSign_out()">
-            Logout
+            ออกจากระบบ
           </v-btn>
         </div>
       </v-navigation-drawer>
     </div>
 
     <div v-else-if="$store.getters.AdminIsLoggedIn">
-      <v-toolbar color="gray accent-4" dark>
+      <v-app-bar color="gray accent-4" dark>
         <v-toolbar-items class="hidden-sm-and-down">
           <v-btn text to="/home">
             RAKANGTHAM
           </v-btn>
           <v-btn text to="/campaign">
-            Campaign
+            แคมเปญ
           </v-btn>
           <v-btn text to="/doctrine">
-            Doctrine
+            หลักธรรมคำสอน
           </v-btn>
           <v-btn text to="/news">
-            News
+            ข่าวประชาสัมพันธ์
           </v-btn>
           <v-btn text to='/rank'>
-            Ranking
+            อันดับ
           </v-btn>
         </v-toolbar-items>
         <v-spacer></v-spacer>
           <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      </v-toolbar>
+      </v-app-bar>
       <v-navigation-drawer
         class="dark accent-4"
         v-model="drawer"
         dark
         right
         absolute
-        bottom
         temporary
       >
         <v-list nav>
@@ -111,51 +103,60 @@
                 <v-list-item-title>ลิสต์ข่าวประชาสัมพันธ์</v-list-item-title>
               </v-list-item></router-link
             >
-
-            <router-link tag="v-list-item" to="/admin/logdonate"
-              ><v-list-item>
-                <v-list-item-title>ประวัติการบริจาคทั้งหมด</v-list-item-title>
-              </v-list-item></router-link
-            >
           </v-list-item-group>
         </v-list>
         <div class="pa-2">
           <v-btn block v-on:click="AdminSign_out()">
-            Logout
+            ออกจากระบบ
           </v-btn>
         </div>
       </v-navigation-drawer>
     </div>
 
     <div v-else>
-      <v-toolbar color="cyan accent-4">
+      <v-app-bar color="cyan accent-4">
         <v-toolbar-items class="hidden-sm-and-down">
           <v-btn text to="/home">
             RAKANGTHAM
           </v-btn>
           <v-btn text to="/campaign">
-            Campaign
+            แคมเปญ
           </v-btn>
           <v-btn text to="/doctrine">
-            Doctrine
+            หลักธรรมคำสอน
           </v-btn>
           <v-btn text to="/news">
-            News
+            ข่าวประชาสัมพันธ์
           </v-btn>
           <v-btn text to='/rank'>
-            Ranking
+            อันดับ
           </v-btn>
         </v-toolbar-items>
         <v-spacer></v-spacer>
-        <v-toolbar-items class="hidden-sm-and-down">
-          <v-btn text to="/login">
-            Log in
-          </v-btn>
-          <v-btn text to="/admin/login">
-            Admin site
-          </v-btn>
-        </v-toolbar-items>
-      </v-toolbar>
+        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      </v-app-bar>
+      <v-navigation-drawer
+        class="cyan accent-4"
+        v-model="drawer"
+        right
+        absolute
+        temporary
+      >
+        <v-list nav>
+          <v-list-item-group v-model="group">
+            <router-link tag="v-list-item" to="/login"
+              ><v-list-item>
+                <v-list-item-title>เข้าสู่ระบบ</v-list-item-title>
+              </v-list-item></router-link
+            >
+            <router-link tag="v-list-item" to="/admin/login"
+              ><v-list-item>
+                <v-list-item-title>หน้าแอดมิน</v-list-item-title>
+              </v-list-item></router-link
+            >
+          </v-list-item-group>
+        </v-list>
+      </v-navigation-drawer>
     </div>
   </div>
 </template>
@@ -177,18 +178,18 @@ export default {
     },
   },
   mounted: function mounted() {
-    if (window.localStorage.getItem("user_id")) {
-      const id = window.localStorage.getItem("user_id");
-      console.log(id);
-      this.$http
-        .get("/user/" + id)
-        .then((res) => {
-          this.dataUser = res.data;
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
-    }
+    // if (window.localStorage.getItem("user_id")) {
+    //   const id = window.localStorage.getItem("user_id");
+    //   console.log(id);
+    //   this.$http
+    //     .get("/user/" + id)
+    //     .then((res) => {
+    //       this.dataUser = res.data;
+    //     })
+    //     .catch(function(err) {
+    //       console.log(err);
+    //     });
+    // }
   },
   methods: {
     async UserSign_out() {
@@ -208,10 +209,4 @@ export default {
 </script>
 
 <style>
-b-navbar-nav {
-  text-decoration-color: black;
-}
-.test{
-  
-}
 </style>

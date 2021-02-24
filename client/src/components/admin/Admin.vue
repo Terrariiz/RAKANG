@@ -7,15 +7,15 @@
     <v-container >
       <v-row>      
         <v-col cols="12"   sm="12" md="6">
-          <v-btn block style="margin:3%; float:right;" color="primary" to = "/admin/listcampaign">Campaign</v-btn>    
+          <v-btn block style="margin:3%; float:right;" color="primary" to = "/admin/listcampaign">รวมแคมเปญ</v-btn>    
         </v-col>
       
         <v-col cols="12" sm="12" md="6">
-          <v-btn block style="margin:3%; " color="primary" to = "/admin/listnews">บอร์ดข่าวประชาสัมพันธ์</v-btn>
+          <v-btn block style="margin:3%; " color="primary" to = "/admin/listnews">รวมข่าวประชาสัมพันธ์</v-btn>
         </v-col>
       
         <v-col cols="12"   sm="12" md="6">
-          <v-btn block style="margin:3%; float:right;" color="primary" to = "/admin/listdoctrine">บอร์ดหลักธรรม</v-btn>
+          <v-btn block style="margin:3%; float:right;" color="primary" to = "/admin/listdoctrine">รวมหลักธรรม</v-btn>
         </v-col>
 
         <v-col cols="12"   sm="12" md="6">

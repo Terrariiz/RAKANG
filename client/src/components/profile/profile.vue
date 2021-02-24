@@ -126,9 +126,9 @@
 import ChangePassword from '@/components/profile/changePassword'
 import Logcoin from '@/components/profile/Logcoin'
 import moment from "moment";
-const token = window.localStorage.getItem("user_token");
+
 const Navbar = () => import("@/components/navbar/navbar");
-const id = window.localStorage.getItem("user_id");
+
 export default {
   name: "Profile",
   data() {
@@ -156,12 +156,19 @@ export default {
     ChangePassword,
     Logcoin
   },
-  mounted: async function mounted() {
-    await this.$http
+  // mounted: async function mounted() {
+
+  // },
+  async created() {
+    const token = window.localStorage.getItem("user_token");
+    const id = window.localStorage.getItem("user_id");
+      console.log(id)
+        await this.$http
       .get("/user/" + id)
       .then((res) => {
         this.dataUser = res.data;
         console.log("get user data")
+        console.log(this.dataUser)
       })
       .catch(function (err) {
         console.log(err);
@@ -170,6 +177,7 @@ export default {
       .get("donatelog/donateloguser/" + id)
       .then((res) => {
         console.log("get log")
+        console.log(this.donatelog)
         
         this.donatelog = res.data.donatelog;
 
@@ -181,8 +189,6 @@ export default {
       .catch(function (err) {
         console.log(err);
       });
-  },
-  async created() {
     // const token = window.localStorage.getItem('user_token')
     if (token) {
       try {

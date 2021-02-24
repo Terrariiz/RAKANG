@@ -7,7 +7,7 @@
     <div id ='headaddnews'>
         <div class="text-center">
           
-            <v-btn rounded color="primary" dark to = "/admin/addCampaign">Add CAMPAIGN</v-btn>
+            <v-btn rounded color="primary" dark to = "/admin/addCampaign">เพิ่มแคมเปญ</v-btn>
   
             <!-- <v-btn rounded color="primary"  to = "/addnews" >Add NEWS</v-btn> -->
         </div>
@@ -83,7 +83,7 @@ import moment from "moment";
         this.campaigns = res.data;
         console.log(this.campaigns)
         var i = 0
-        for(this.campaigns[i];;i++){
+        for(this.campaigns[i];i<this.campaigns.length;i++){
             this.campaigns[i].date = moment(this.campaigns[i].date).format(" DD-MM-YY A");
             } 
       })

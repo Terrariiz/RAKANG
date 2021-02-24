@@ -9,7 +9,7 @@
         </div>
         <div class="content">
             <small class="word1">Welcome to</small>
-            <h1 class="word2">RakangThum</h1>
+            <h1 class="word2">RakangTham</h1>
             <v-btn color="white" rounded href='/home'>Enter to website</v-btn>
             
         </div>
