@@ -1,7 +1,11 @@
 <template>
-  <div>
+  <div >
     <div v-if="$store.getters.UserIsLoggedIn">
-      <v-app-bar color="cyan accent-4">
+      <br>
+        <br>
+        <br>
+      <v-app-bar  fixed app color="cyan accent-4">
+        
         <v-toolbar-items class="hidden-sm-and-down">
           <v-btn text to="/home">
             RAKANGTHAM
@@ -27,7 +31,6 @@
         v-model="drawer"
         right
         absolute
-        bottom
         temporary
       >
         <v-list nav>
@@ -75,7 +78,6 @@
         dark
         right
         absolute
-        bottom
         temporary
       >
         <v-list nav>
