@@ -72,6 +72,9 @@ const Navbar = () => import('@/components/navbar/navbar')
     mounted: async function mounted(){
       await this.$http.get("/doctrine/ShowListDoctrine")
       .then((res) => {
+        this.doctrines.sort(function(a, b){
+            return a.date - b.date;
+        });
         console.log(res.data)
         this.doctrines = res.data;
         console.log(this.doctrines)
