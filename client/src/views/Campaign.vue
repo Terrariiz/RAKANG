@@ -92,6 +92,15 @@ export default {
         params: { id: campaignid },
       });
     },
+     percentdonate(){
+          let donate = this.campaign.donate;
+          let amount = this.campaign.amount;
+          let per = (donate/amount)*100;
+          console.log(this.campaign.donate)
+          console.log(amount)
+          console.log(per);
+          this.percent = per;
+        },
   },
 };
 </script>
