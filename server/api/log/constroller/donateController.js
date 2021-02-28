@@ -1,5 +1,6 @@
 const User = require("../../user/model/User");
-const Campaign = require('../../campaign/model/Campaign')
+const Campaign = require('../../campaign/model/Campaign');
+const DonateLog = require("../../log/model/DonateLog")
 
 exports.donateloguser = async function(req,res){
   try{
@@ -33,5 +34,39 @@ exports.donatelogcampaign = async function(req,res){
   } catch (err) {
     res.status(400).json({ err: err });
     console.log(err)
+  }
+}
+
+exports.CheckDonate = async function(req, res){
+  try{
+    var result 
+    await User.findById(req.params.id).populate("donatelog").exec(function(err, list){
+      if(err){
+        console.log(err)
+      }else{
+        var index = list.donatelog.length-1
+        if(list.donatelog[index].result == 'incomplete'){
+          DonateLog.findByIdAndRemove(list.donatelog[index]._id,function(err){
+            if(err){
+              console.log(err)
+            } else {
+              list.donatelog.pop() 
+              list.save()
+              result = 'incomplete'
+              res.send(result);
+            }
+          })
+        }else if(list.donatelog[index].result == 'complete'){
+          list.donatelog[index].result = 'alerted';
+          result = 'complete'
+          list.donatelog[index].save()
+          res.send(result);
+        }
+      }
+      result = false;
+      res.send(result);
+    })
+  } catch(err){
+
   }
 }

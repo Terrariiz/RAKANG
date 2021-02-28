@@ -12,6 +12,9 @@ const newSchema = new mongoose.Schema({
   UserName:{
     type:String
   },
+  result:{
+    type:String
+  },
   user:
     {
       type: mongoose.Schema.Types.ObjectId,
