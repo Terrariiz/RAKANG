@@ -17,6 +17,9 @@ const newSchema = new mongoose.Schema({
   date: {
     type: Date,
   },
+  startdate: {
+    type: Date,
+  },
   donate: {
     type: Number
   },

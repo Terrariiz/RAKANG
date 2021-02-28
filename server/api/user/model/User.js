@@ -43,12 +43,6 @@ const userSchema = new mongoose.Schema({
         ref: "DonateLog"
     }
   ],
-  // coinlog:[
-  //   {
-  //       type: mongoose.Schema.Types.ObjectId,
-  //       ref: "../../log/model/CoinLog"
-  //   }
-  // ],
   minigamelog:[
     {
         type: mongoose.Schema.Types.ObjectId,
@@ -74,6 +68,27 @@ userSchema.methods.generateAuthToken = async function() {
   user.tokens = user.tokens.concat({ token });
   await user.save();
   return token;
+};
+
+//get rank user
+userSchema.methods.getrank = async function(id) {
+    var item
+    await User.find({},function(err, found){
+      if(err){
+        console.log(err);
+      } else{
+        found.sort(function(a, b){
+          return b.point - a.point;
+      });
+      for(i = 0 ; i <= (found.length - 1) ; i++){
+        if(found[i]._id == id){
+          break
+        }
+      }
+      item = i
+      }
+    })
+    return i+1;
 };
 
 //this method search for a user by email and password.

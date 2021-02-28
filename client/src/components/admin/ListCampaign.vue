@@ -69,7 +69,6 @@ import {
   } from '@mdi/js'
 import moment from "moment";
   export default {
-    
     name : "ListCampaign",
     data (){
       return {
@@ -79,8 +78,18 @@ import moment from "moment";
     mounted: async function mounted(){
       await this.$http.get("/campaign/ShowListCampaign")
       .then((res) => {
-        console.log(res.data)
         this.campaigns = res.data;
+        this.campaigns.sort(function(a, b){
+            var dateA = new Date(a.startdate), dateB = new Date(b.startdate);
+            return dateB -dateA;
+        });
+    //     movies.sort(function(a, b) {
+    // var dateA = new Date(a.release), dateB = new Date(b.release);
+    // return dateA - dateB;
+// });
+
+        console.log(res.data)
+        
         console.log(this.campaigns)
         var i = 0
         for(this.campaigns[i];i<this.campaigns.length;i++){

@@ -82,6 +82,18 @@
                           <p class="m-b-10 f-w-600">วัน/เดือน/ปีเกิด</p>
                           <h6 class="text-muted f-w-400">{{ dataUser.birthdate }}</h6>
                         </div>
+                        <div class="col-sm-6">
+                          <p class="m-b-10 f-w-600">Point</p>
+                          <h6 class="text-muted f-w-400">
+                            {{ dataUser.point }}
+                          </h6>
+                        </div>
+                        <div class="col-sm-6">
+                          <p class="m-b-10 f-w-600">Rank</p>
+                          <h6 class="text-muted f-w-400">
+                            {{ rank }}
+                          </h6>
+                        </div>
                       </div></v-card-text>
         </v-card>
       </v-tab-item>
@@ -133,6 +145,7 @@ export default {
   name: "Profile",
   data() {
     return {
+      rank : null,
       dataUser: {},
       donatelog:[],
       dialog_ChangePassword: false,
@@ -142,7 +155,7 @@ export default {
           'รายละเอียดโปรไฟล์', 'ประวัติการบริจาค',
         ],
         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-     search: '',
+      search: '',
         headers: [
           { text: 'ชื่อแคมเปญ',value: 'CampaignName',},
           { text: 'จำนวนเงินที่บริจาค(บาท)', value: 'amount' },
@@ -163,10 +176,11 @@ export default {
     const token = window.localStorage.getItem("user_token");
     const id = window.localStorage.getItem("user_id");
       console.log(id)
-        await this.$http
+    await this.$http
       .get("/user/" + id)
       .then((res) => {
-        this.dataUser = res.data;
+        this.dataUser = res.data.found;
+        this.rank     = res.data.myrank;
         console.log("get user data")
         console.log(this.dataUser)
       })
@@ -189,6 +203,15 @@ export default {
       .catch(function (err) {
         console.log(err);
       });
+      // await this.$http
+      // .get("user/UserRank/" + id)
+      // .then((res) => {
+      //   console.log(res.data)
+      //   this.rank = res.data;
+      // })
+      // .catch(function (err) {
+      //   console.log(err);
+      // });
     // const token = window.localStorage.getItem('user_token')
     if (token) {
       try {

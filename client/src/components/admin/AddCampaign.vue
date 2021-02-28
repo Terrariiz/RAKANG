@@ -144,13 +144,8 @@
               <ckeditor 
                 id="content"
                 v-model="campaign.done"
-<<<<<<< HEAD
-                @input="onEditorInput" required>
-            </ckeditor>
-=======
                 @input="onEditorInput">
             </ckeditor> -->
->>>>>>> 109cfe93409c811e8802ffe68967d954e9999ac3
          </v-col>
       </v-row>
       

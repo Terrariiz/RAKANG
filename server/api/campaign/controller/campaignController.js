@@ -8,11 +8,13 @@ var ObjectID = require('mongodb').ObjectID;
 exports.addnewcampaign = async(req,res) => {
   try{     
     console.log(req.body)
+    const now = new Date();
     const add = new Campaign({
       name: req.body.name,
       content: req.body.content,
       image: req.file.filename,
       date: req.body.date,
+      startdate: now,
       amount: req.body.amount,
       donate: 0,
       location: req.body.location,
@@ -35,7 +37,12 @@ exports.ShowListCampaign = function(req,res){
         console.log(err)
       } else {
         console.log('else')
+        campaign.sort(function(a, b){
+          var dateA = new Date(a.startdate), dateB = new Date(b.startdate);
+          return dateB -dateA;
+      });
         res.json(campaign);
+
       }
     })
   } catch (err) {
@@ -157,7 +164,7 @@ exports.EditCampaign = async(req,res) =>{
 exports.DonateCampaign = async function(req,res){
   const amount = parseInt(req.params.amount, 10);
   await Campaign.findOne({_id : req.params.campaign},function(err, campaign){
-    console.log(campaign)
+    // console.log(campaign)
     console.log('8h49dfghdfgh')
     if(err){
       console.log(err)
@@ -174,7 +181,7 @@ exports.DonateCampaign = async function(req,res){
           
           DonateLog.create(donatelog,function(err,log){
             
-            console.log(log)
+            // console.log(log)
 
             log.user.push(user)
             log.campaign.push(campaign)

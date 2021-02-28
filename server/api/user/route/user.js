@@ -14,11 +14,14 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage: storage }); 
 
+router.get("/RankList", userController.getUserRank);
+router.get("/UserRank/:id", userController.getMyRank);
 router.post("/register", userController.registerNewUser);
 router.post("/login", userController.loginUser);
-router.get("/:id",userController.getUserDetails);
+router.get("/:id", userController.getUserDetails);
 router.post("/:id/reset-password",userController.changePassword);
 router.put("/:id/editProfile", upload.single('image'), userController.editProfile);
+
 
 
 module.exports = router;

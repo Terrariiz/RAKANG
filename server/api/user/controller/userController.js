@@ -50,11 +50,17 @@ exports.registerNewUser = async (req, res) => {
 
 exports.getUserDetails = async (req, res) => {
   try{
-    User.findById(req.params.id, function(err,found){
+    User.findById(req.params.id, async function(err,found){
       if(err){
         console.log(err);
       } else{
-        res.json(found);
+        let myrank = await found.getrank(req.params.id)
+        var somsak = {found , myrank} 
+        console.log("somsak.found")
+        console.log(somsak)
+        console.log("somsak.found")
+
+        res.json(somsak);
       }
     })
   } catch (err) {
@@ -98,27 +104,6 @@ exports.editProfile = async (req,res) => {
           image: req.body.oldimage
         }
     }
-    // if(req.body.imagepath != req.body.oldimage){
-    //   const image  = './public/image/profile/' + req.body.oldimage;
-    //   if(req.body.oldimage != "user.png"){
-    //     fs.unlink(image , function(err){
-    //       if(err){
-    //           console.log(err);
-    //       } else {
-    //         console.log("deleted")
-    //       } 
-    //     })
-    //   }
-    // } else {
-    //   console.log("not delete")
-    // }
-    // const dataEdit = {
-    //   firstname: req.body.firstname,
-    //   lastname: req.body.lastname,
-    //   phone: req.body.phone,
-    //   age: req.body.age,
-    //   image: req.body.imagepath
-    // }
     User.findByIdAndUpdate({_id:req.params.id}, dataEdit, function(err,update){
       if(err){
         console.log(err);
@@ -151,3 +136,56 @@ exports.changePassword = async (req,res) => {
     console.log(err);
   }
 };
+
+exports.getUserRank = async (req, res) => {
+  try{
+    console.log('first')
+    User.find({},function(err, found){
+      if(err){
+        console.log(err);
+      } else{
+        found.sort(function(a, b){
+          return b.point - a.point;
+      });
+        res.json(found);
+      }
+    })
+  } catch (err) {
+    res.status(400).json({ err: err });
+    console.log(err);
+  }
+};
+
+exports.getMyRank = async (req, res) => {
+  try{
+    console.log('first')
+    User.find({},function(err, found){
+      if(err){
+        console.log(err);
+      } else{
+
+        found.sort(function(a, b){
+          return b.point - a.point;
+      });
+
+      // console.log(found)
+
+      for(var i = 0 ; i <= (found.length - 1) ; i++){
+        console.log('****'+i+'****')
+        console.log(found.length)
+        console.log(found[i])
+        console.log('****'+i+'****')
+        if(found[i]._id == req.params.id){
+          break
+        }
+      }
+        res.json(i+1);
+      }
+    })
+  } catch (err) {
+    res.status(400).json({ err: err });
+    console.log(err);
+  }
+};
+
+
