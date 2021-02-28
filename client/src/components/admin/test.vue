@@ -1,59 +1,152 @@
 <template>
 <div>
   
-   <div class="buttons">
-  <button class="button is-primary">Primary</button>
-  <button class="button is-link">Link</button>
-</div>
+   <!-- ข่าวล่าสุด -->
+    <div class="block latestPostBlock">
+      <v-container>
+        <h2 class="text-center">ข่าว</h2>
+        <v-row>
+          <v-col  cols="12" md="4">
+            <v-card
+      class="mx-auto"
+      max-width="344"
+      outlined
+    >
+     <v-img :src="news.src"></v-img>
+      <v-list-item three-line>
+        <v-list-item-content>
+          <div class="overline mb-4">
+           {{ news.name }}
+          </div>
+          <v-list-item-title class="headline mb-1">
+            {{news.subtitle}}
+          </v-list-item-title>
+          <v-list-item-subtitle>{{ news.description }}</v-list-item-subtitle>
+        </v-list-item-content>
+  
+      
+      </v-list-item>
+  
+      <v-card-actions>
+                <v-btn to="" color="primary" style="margin-left:auto;" text
+                  >More</v-btn
+                >
+              </v-card-actions>
+    </v-card>
+          </v-col>
+           <v-col  cols="12" md="4">
+            <v-card
+      class="mx-auto"
+      max-width="344"
+      outlined
+    >
+     <v-img :src="news.src"></v-img>
+      <v-list-item three-line>
+        <v-list-item-content>
+          <div class="overline mb-4">
+           {{ news.name }}
+          </div>
+          <v-list-item-title class="headline mb-1">
+            {{news.subtitle}}
+          </v-list-item-title>
+          <v-list-item-subtitle>{{ news.description }}</v-list-item-subtitle>
+        </v-list-item-content>
+  
+      
+      </v-list-item>
+  
+      <v-card-actions>
+                <v-btn to="" color="primary" style="margin-left:auto;" text
+                  >More</v-btn
+                >
+              </v-card-actions>
+    </v-card>
+          </v-col>
+           <v-col  cols="12" md="4">
+            <v-card
+      class="mx-auto"
+      max-width="344"
+      outlined
+    >
+     <v-img :src="news.src"></v-img>
+      <v-list-item three-line>
+        <v-list-item-content>
+          <div class="overline mb-4">
+           {{ news.name }}
+          </div>
+          <v-list-item-title class="headline mb-1">
+            {{news.subtitle}}
+          </v-list-item-title>
+          <v-list-item-subtitle>{{ news.description }}</v-list-item-subtitle>
+        </v-list-item-content>
+  
+      
+      </v-list-item>
+  
+      <v-card-actions>
+                <v-btn to="" color="primary" style="margin-left:auto;" text
+                  >More</v-btn
+                >
+              </v-card-actions>
+    </v-card>
+          </v-col>
+        </v-row>
 
-<div class="buttons">
-  <button class="button is-info">Info</button>
-  <button class="button is-success">Success</button>
-  <button class="button is-warning">Warning</button>
-  <button class="button is-danger">Danger</button>
-</div>
+        
+
+        
+        
+        
+        <router-link to='/news' style="float:right; margin-bottom:3%"
+          >แสดงทั้งหมด <i class="fa fa-chevron-right" aria-hidden="true"></i
+          ><i class="fa fa-chevron-right" aria-hidden="true"></i
+        ></router-link>
+      </v-container>
+    </div>
     
  
 </div>
 </template>
 <script>
-
-import moment from "moment";
+// import a from "/RAKANG/client/src/assets/images/tenor.gif"
 export default {
-    name:'Campaign',
-    components:{
-        
-    },
-    data (){
-      return {
-        campaign: null,
-        tab: null,
-        items: [
-          'Appetizers', 'Entrees', 'Deserts', 'Cocktails',
-        ],
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        }
-    },
-    mounted: function(){
-      this.getData()
-    },
-    
-    methods: {
-        getData(){
-            var that = this;
-            this.$http.get("/campaign/DetailCampaign/"+this.$route.params.id)
-            .then((res) => {
-              console.log(res.data)
-              that.campaign = res.data;
-              console.log(that.campaign)
-              that.campaign.date = moment(that.campaign.date).format(" dddd DD-MM-YY  A");
-            })
-            .catch(function(err){
-              console.log(err)
-            })
+  
+  data() {
+    return {
+     
+      news: [
+        {
+          id: 1,
+          name: "No.1",
+          title: "Top western road trips",
+          subtitle: "1,000 miles of wonder",
+          description:
+            "His ubique laboramus ne. Expetenda assueverit sed ad. Id nec malis lucilius delicatissimi. Nec assum sonet suscipit ex, diam deterruisset ut usu, ad dicat fabellas aliquando eam.",
+          src: require("/RAKANG/client/src/assets/images/tenor.gif"),
         },
-    }
-}
+        {
+          id: 2,
+          name: "No.2",
+          title: "Christmas tales to read",
+          subtitle: "2,000 miles of wonder",
+          description:
+            "Sea ad habemus assueverit, omnes platonem convenire sit et, at integre pericula quo. Facete adolescens definitionem cu qui, in putant aliquid fierent ius.",
+          src: require("/RAKANG/client/src/assets/images/tenor.gif"),
+        },
+        {
+          id: 3,
+          name: "No.3",
+          title: "20 movies not to miss in 2020",
+          subtitle: "3,000 miles of wonder",
+          description:
+            "Aliquam albucius mei ei, debitis torquatos et pro, eos natum scribentur no. Putant verear constituto te qui. Adolescens persequeris vim ei. Vel nullam reprimique te.",
+          src: require("/RAKANG/client/src/assets/images/tenor.gif"),
+        },
+      ],
+    };
+  },
+  
+};
 </script>
 
 <style>

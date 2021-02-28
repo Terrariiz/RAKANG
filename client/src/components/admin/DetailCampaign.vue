@@ -33,12 +33,8 @@
                         <h3 class="title">เป้าหมาย</h3>
                         <span class="value">{{ campaign.amount }} บาท</span>
                     </div>
-                    <div class="progress-bar">
-                        <span class="percent">
-                            <span class="hide-txt">ดำเนินการไปแล้ว</span>
-                            80%
-                        </span>
-                        <span class="bar" style="width:80%"></span>
+                    <div >
+                       <progress class="progress is-danger" :value=percent max="100">{{percent}}</progress>
                     </div>
                     <span class="timeleft">365 วัน</span>
                     <span class="people">
@@ -135,6 +131,15 @@ export default {
       this.getData()
     },
     methods: {
+       percentdonate(){
+          let donate = this.campaign.donate;
+          let amount = this.campaign.amount;
+          let per = (donate/amount)*100;
+          console.log(this.campaign.donate)
+          console.log(amount)
+          console.log(per);
+          this.percent = per;
+        },
       getData(){
         var that = this;
         this.$http.get("/campaign/DetailCampaign/"+this.$route.params.id)

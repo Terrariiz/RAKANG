@@ -12,7 +12,7 @@ const newSchema = new mongoose.Schema({
     type: String,
   },
   amount: {
-    type: String,
+    type: Number,
   },
   date: {
     type: Date,

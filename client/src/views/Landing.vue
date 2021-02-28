@@ -178,7 +178,7 @@ h1{
 
 /* leaf animations */
 
-#leaves {position:relative;top:-20%;width:100%;text-align: right;}
+#leaves {position:relative;top:-100%;width:100%;text-align: right;}
 
 #leaves i {
     display: inline-block;

@@ -1,7 +1,7 @@
 <template>
   <div >
     <div v-if="$store.getters.UserIsLoggedIn">
-      <br>
+      
         <br>
         <br>
       <v-app-bar  fixed app color="cyan accent-4">

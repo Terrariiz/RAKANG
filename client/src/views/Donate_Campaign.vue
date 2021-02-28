@@ -88,18 +88,24 @@
                         <h3 class="title">เป้าหมาย</h3>
                         <span class="value">{{ campaign.amount }} บาท</span>
                     </div>
-                    <div class="progress-bar">
+                    <div >
                         <span class="percent">
-                            <span class="hide-txt">ดำเนินการไปแล้ว</span>
-                            80%
+                            <!-- <span class="hide-txt">ดำเนินการไปแล้ว</span>
+                            80% -->
                         </span>
-                        <span class="bar" style="width:80%"></span>
+                        <progress class="progress is-danger" :value=percent max="100">{{percent}}</progress>
                     </div>
+                    <v-row>
+                  <v-col style="text-align:left;" cols="12" md="3">
                     <span class="timeleft">365 วัน</span>
-                    <span class="people">
-                        <span class="hide-txt">จำนวนคนที่บริจาค</span>
-                        <span class="icon-people">43</span>
-                    </span>
+                  </v-col>
+                  <v-col style="text-align:right;" cols="12" md="9">  
+                    <span class="hide-txt">จำนวนคนที่บริจาค</span>
+                        <span class="icon-people"> 43</span>
+                  </v-col>
+                </v-row>
+                    
+                    
                 </div>
 
               <div class="action">
@@ -158,6 +164,7 @@
     </div>
 </template>
 <script>
+
 const Navbar = () => import('@/components/navbar/navbar')
 import DialogDonate from "./dialog_donate";
 import moment from "moment";
@@ -172,6 +179,8 @@ export default {
         campaign: null,
         tab: null,
         dialogDonate: false,
+        percent: 0,
+
       }
     },
     mounted: function(){
@@ -179,6 +188,15 @@ export default {
     },
     
     methods: {
+      percentdonate(){
+          let donate = this.campaign.donate;
+          let amount = this.campaign.amount;
+          let per = (donate/amount)*100;
+          console.log(this.campaign.donate)
+          console.log(amount)
+          console.log(per);
+          this.percent = per;
+        },
         getData(){
             var that = this;
             this.$http.get("/campaign/DetailCampaign/"+this.$route.params.id)
@@ -187,11 +205,13 @@ export default {
               that.campaign = res.data;
               console.log(that.campaign)
               that.campaign.date = moment(that.campaign.date).format(" dddd DD-MM-YY  A");
+             this.percentdonate()
             })
             .catch(function(err){
               console.log(err)
             })
         },
+        
     }
 }
 </script>

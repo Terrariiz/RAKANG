@@ -31,24 +31,27 @@
             <img class="img" src="../../../client/public/image/bubble.png" />
           </v-col>
           <v-col class="cols-detail-campaign" cols="12" md="6">
-            <h1>แคมเปญ</h1>
-            <h4>detail</h4>
-            <div style="text-align:right;">
-              <span style="text-align:left;">วันที่</span>
-              <span style="text-align:right;">ยอดบริจาค xxx / 60000 บาท</span>
-            </div>
-            <v-progress-linear
-              color="light-green darken-4"
-              height="10"
-              value="20"
-              striped
-            ></v-progress-linear>
-            <hr />
-            <div class="btn-news">
-              <v-btn block style="background-color: #ffdd94; color:#455054;">
-                ดูเนื้อหา</v-btn
-              >
-            </div>
+            <v-container>
+                <h1>แคมเปญ </h1>
+              <h4>detail</h4>
+              <div >
+                <v-row>
+                  <v-col style="text-align:left;" cols="12" md="3">
+                    <span >วันที่</span>
+                  </v-col>
+                  <v-col style="text-align:right;" cols="12" md="9">  
+                    <span>ยอดบริจาค xxx / 60000 บาท</span>
+                  </v-col>
+                </v-row>
+              </div>
+              <progress class="progress is-danger" value="80" max="100">90%</progress>
+              
+              <div class="btn-news">
+                <v-btn block style="background-color: #ffdd94; color:#455054;">
+                  ดูเนื้อหา</v-btn
+                >
+              </div>
+            </v-container>
           </v-col>
         </v-row>
         </v-card>
@@ -102,6 +105,8 @@
 </template>
 
 <script>
+
+
 const Navbar = () => import("@/components/navbar/navbar");
 export default {
   name: "Home",
@@ -157,6 +162,9 @@ export default {
 };
 </script>
 <style>
+div{
+  display: block;
+}
 .res-top {
   display: none;
 }

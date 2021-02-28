@@ -20,7 +20,8 @@
                   <!-- <img class="image -fullwidth img-responsive" id="showimage" :src="'http://localhost:4000/uploads/' + campaign.image"/> -->
                    <center><v-container id = "picturenews">
                                 <v-div required style=""  class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
-                                    <span  v-if="!imageData"  class="placeholder">Choose an Image</span>
+                                    <img class="image -fullwidth img-responsive" id="showimage" :src="'http://localhost:4000/uploads/' + campaign.image"/>
+                                    <span  v-if="!campaign.image"  class="placeholder">Choose an Image</span>
                                     <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  v-on:change="onFileSelected" >
                                 </v-div>
 
@@ -189,7 +190,7 @@
 .image{
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 40px;
+  /* margin-bottom: 40px; */
 }
 .img-responsive{
   display: block;
