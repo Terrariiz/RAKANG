@@ -82,7 +82,7 @@
                 <div class="body">
                     <div class="amount-raised">
                         <h3 class="title">ยอดบริจาคขณะนี้</h3>
-                        <span class="value">100000 บาท</span>
+                        <span class="value">{{ campaign.donate }} บาท</span>
                     </div>
                     <div class="funding-goal">
                         <h3 class="title">เป้าหมาย</h3>
@@ -100,8 +100,8 @@
                     <span class="timeleft">365 วัน</span>
                   </v-col>
                   <v-col style="text-align:right;" cols="12" md="9">  
-                    <span class="hide-txt">จำนวนคนที่บริจาค</span>
-                        <span class="icon-people"> 43</span>
+                    <!-- <span class="hide-txt">จำนวนคนที่บริจาค</span> -->
+                        <span class="icon-people"><i class="fa fa-users" aria-hidden="true"></i> 43</span>
                   </v-col>
                 </v-row>
                     

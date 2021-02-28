@@ -16,6 +16,7 @@ export default {
     }
   },
 }
+//  import a from '../src/assets/images/bg-temple-2.jpg'
 </script>
 
 <style>
@@ -25,7 +26,11 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   /* text-align: center;
   color: #2c3e50; */
-  background: white;
+  /* background-image: url('../src/assets/images/bg-temple-2.jpg') ; */
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
 }
 
 #nav {

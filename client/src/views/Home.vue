@@ -1,23 +1,24 @@
 <template>
-  <div class="heroBlock">
+  <div class="heroBlock" >
     <div>
       <Navbar></Navbar>
     </div>
 
-    <v-carousel cycle hide-delimiters>
-      <v-carousel-item
+    <v-carousel cycle hide-delimiters show-arrows-on-hover img-width="1024" img-height="480">
+      <v-carousel-item 
         to=""
         v-for="(item, i) in items"
         :key="i"
-        :src="item.src"
+        
         reverse-transition="fade-transition"
-        transition="fade-transition"
+        transition="fade-transition" 
+        
       >
-        <v-row
+        <v-img contain
           class="title fill-height hidden-xs-only"
-          align="center"
-          justify="center"
-          >{{ item.title }}</v-row
+          
+          :src="item.src"
+          ></v-img
         >
       </v-carousel-item>
     </v-carousel>
@@ -105,7 +106,7 @@
 </template>
 
 <script>
-
+// import a from '../assets/images/bg-temple-2.jpg'
 
 const Navbar = () => import("@/components/navbar/navbar");
 export default {
@@ -162,11 +163,26 @@ export default {
 };
 </script>
 <style>
+/* .heroBlock{
+  position: relative;
+}
+.heroBlock:after{
+  background-image: url('../assets/images/bg-temple-2.jpg');
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.2;
+} */
 div{
   display: block;
 }
 .res-top {
   display: none;
+}
+v-img {
+   
+   width: 100%;
+   
 }
 @media only screen and (max-width: 415px) {
   .res-top {
