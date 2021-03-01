@@ -204,7 +204,7 @@ app.post("/test", async function(req,res){
           }
         })
      })
-    } else if(req.body.status == 'cancle'){
+    } else if(req.body.status == 'cancel'){
       
     await axios.post("https://sandbox-appsrv2.chillpay.co/api/v2/PaymentStatus/",form)
     .then((res) => {
@@ -230,7 +230,7 @@ app.post("/test", async function(req,res){
                 const donatelog = new DonateLog({
                   campaign : null,
                   user : null ,
-                  result : 'cancle',
+                  result : 'cancel',
                   CampaignName : campaign.name,
                   UserName : user.firstname,
                   amount : amount/100,

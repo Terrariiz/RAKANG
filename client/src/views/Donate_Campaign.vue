@@ -93,7 +93,7 @@
                             <!-- <span class="hide-txt">ดำเนินการไปแล้ว</span>
                             80% -->
                         </span>
-                        <progress class="progress is-danger" :value=percent max="100">{{percent}}</progress>
+                        <progress class="progress is-danger" :value=percent max="100"></progress>
                     </div>
                     <v-row>
                   <v-col style="text-align:left;" cols="12" md="3">
@@ -193,24 +193,25 @@ export default {
     },
     
     methods: {
-      percentdonate(){
-          let donate = this.campaign.donate;
-          let amount = this.campaign.amount;
-          let per = (donate/amount)*100;
-          console.log(this.campaign.donate)
-          console.log(amount)
-          console.log(per);
-          this.percent = per;
-        },
+      // percentdonate(){
+      //     let donate = this.campaign.donate;
+      //     let amount = this.campaign.amount;
+      //     let per = (donate/amount)*100;
+      //     console.log(this.campaign.donate)
+      //     console.log(amount)
+      //     console.log(per);
+      //     this.percent = per;
+      //   },
         getData(){
             var that = this;
             this.$http.get("/campaign/DetailCampaign/"+this.$route.params.id)
             .then((res) => {
               console.log(res.data)
-              that.campaign = res.data;
+              that.percent = res.data.percentage
+              that.campaign = res.data.campaign;
               console.log(that.campaign)
               that.campaign.date = moment(that.campaign.date).format(" dddd DD-MM-YY  A");
-             this.percentdonate()
+            //  this.percentdonate()
             })
             .catch(function(err){
               console.log(err)
