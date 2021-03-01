@@ -19,7 +19,7 @@ exports.addnewcampaign = async(req,res) => {
       donate: 0,
       location: req.body.location,
       overview: req.body.overview,
-      done: req.body.done,
+      done: "รอความคืบหน้า",
     });
     console.log(add)
     let data = await add.save()

@@ -72,8 +72,8 @@
                   <img class="image -fullwidth img-responsive" id="showimage" :src="'http://localhost:4000/uploads/' + campaign.image"/>
                   <p class="lead">{{campaign.content}}</p>
                   <p class="details">
-                      <span class="duration">เริ่มวันที่ {{ campaign.date }} </span>
-                      <span class="location">สถานที่ {{ campaign.location }}</span>
+                      <span class="duration">สิ้นสุดวันที่ {{ campaign.date }} </span>
+                      <span class="location">สถานที่</span>
                   </p>
               </div>
           </v-col>
@@ -84,9 +84,10 @@
                         <h3 class="title">ยอดบริจาคขณะนี้</h3>
                         <span class="value">{{ campaign.donate }} บาท</span>
                     </div>
+                    <br>
                     <div class="funding-goal">
-                        <h3 class="title">เป้าหมาย</h3>
-                        <span class="value">{{ campaign.amount }} บาท</span>
+                        <h3 class="title"></h3>
+                        <span class="value">เป้าหมาย {{ campaign.amount }} บาท</span>
                     </div>
                     <div >
                         <span class="percent">
@@ -97,11 +98,11 @@
                     </div>
                     <v-row>
                   <v-col style="text-align:left;" cols="12" md="3">
-                    <span class="timeleft">365 วัน</span>
+                    <!-- <span class="timeleft">365 วัน</span>เดี๋ยวกลับมาแก้ -->
                   </v-col>
                   <v-col style="text-align:right;" cols="12" md="9">  
                     <!-- <span class="hide-txt">จำนวนคนที่บริจาค</span> -->
-                        <span class="icon-people"><i class="fa fa-users" aria-hidden="true"></i> 43</span>
+                        <span class="icon-people"><i class="fa fa-users" aria-hidden="true"></i> 0</span>
                   </v-col>
                 </v-row>
                     
@@ -109,9 +110,10 @@
                 </div>
 
               <div class="action">
-                  <a><v-btn color="green" @click.stop="dialogDonate=true" block>บริจาค</v-btn></a>
+                  <v-btn v-if="notend" color="green" @click.stop="dialogDonate=true" block>บริจาค</v-btn><v-btn disabled v-if="end" color="green" depressed block>โครงการนี้สิ้นสุดแล้ว</v-btn>
                   <DialogDonate :visible="dialogDonate" @close="dialogDonate=false" />
               </div>
+              
 
             </div>
           </v-col>
@@ -120,7 +122,7 @@
   </v-container>
     </div>
   <!-- tablist -->
-  <div class="tab-section">
+    <div class="tab-section">
       <v-container>
          <v-tabs
       v-model="tab"
@@ -129,10 +131,10 @@
       grow
     >
       <v-tab>
-        test1
+        ภาพรวม
       </v-tab>
       <v-tab>
-        test2
+        ความคืบหน้า
       </v-tab>
     </v-tabs>
 
@@ -142,7 +144,7 @@
           color="basil"
           flat
         >
-          <v-card-text>1</v-card-text>
+          <v-card-text v-html="campaign.overview">{{campaign.overview}}</v-card-text>
         </v-card>
       </v-tab-item>
       <v-tab-item>
@@ -150,7 +152,7 @@
           color="basil"
           flat
         >
-          <v-card-text>2</v-card-text>
+          <v-card-text v-html="campaign.done">{{campaign.done}}</v-card-text>
         </v-card>
       </v-tab-item>
     </v-tabs-items>
@@ -167,6 +169,7 @@
 
 const Navbar = () => import('@/components/navbar/navbar')
 import DialogDonate from "./dialog_donate";
+import swal from 'sweetalert2'
 import moment from "moment";
 export default {
     name:'Campaign',
@@ -179,7 +182,9 @@ export default {
         campaign: null,
         tab: null,
         dialogDonate: false,
-        // percent: 0,
+        
+        end:null,
+        notend:null,
 
       }
     },
@@ -190,18 +195,14 @@ export default {
         this.AlertDonate()
       }
       
+      
+    },
+    created: function(){
+      
     },
     
     methods: {
-      // percentdonate(){
-      //     let donate = this.campaign.donate;
-      //     let amount = this.campaign.amount;
-      //     let per = (donate/amount)*100;
-      //     console.log(this.campaign.donate)
-      //     console.log(amount)
-      //     console.log(per);
-      //     this.percent = per;
-      //   },
+      
         getData(){
             var that = this;
             this.$http.get("/campaign/DetailCampaign/"+this.$route.params.id)
@@ -211,7 +212,8 @@ export default {
               that.campaign = res.data;
               console.log(that.campaign)
               that.campaign.date = moment(that.campaign.date).format(" dddd DD-MM-YY  A");
-            //  this.percentdonate()
+              
+              this.end_date()
             })
             .catch(function(err){
               console.log(err)
@@ -224,20 +226,46 @@ export default {
               console.log('res')
               console.log(res.data)
               console.log('res')
-              // if(res.data == false){
-
-              // } else if(res.data == 'complete'){
+              if(res.data == false){
                 
-              // } else if(res.data == 'incomplete'){
-                
-              // }
-              
+              } else if(res.data == 'complete'){
+                swal.fire({
+                  icon: 'success',
+                  title: 'ทำรายการเสร็จสิ้น',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+              } else if(res.data == 'incomplete'){
+                swal.fire({
+                  icon: 'error',
+                  title: 'เกิดข้อผิดพลาดบางอย่าง',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+              }
               localStorage.removeItem("donate-campaign")
             })
             .catch(function(err){
               console.log(err)
             })
+        },
+        end_date(){
+          var enddate = this.campaign.date;
+          var now = new Date().toISOString().substr(0, 10);
+          now = moment(now).format(" dddd DD-MM-YY  A");
+          console.log("kuy"+enddate)
+          console.log("kuy"+now)
+          if(enddate == now)
+          { this.end = true;
+           this.notend = false;
+         }
+          else{ this.end = false;
+          this.notend = true;
+           }
+          
         }
+        
+         
         
     }
 }

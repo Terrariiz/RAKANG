@@ -9,16 +9,12 @@
         to=""
         v-for="(item, i) in items"
         :key="i"
-        
+        :src="item.src"
         reverse-transition="fade-transition"
         transition="fade-transition" 
         
       >
-        <v-img contain
-          class="title fill-height hidden-xs-only"
-          
-          :src="item.src"
-          ></v-img
+        
         >
       </v-carousel-item>
     </v-carousel>
@@ -264,18 +260,18 @@ v-img {
   }
 }
 
-#news {
-}
+/* #news {
+} */
 .container-doctrine {
   margin-top: 3%;
   padding: 20vh;
 }
 
-.heroBlock {
-  /* background-image: url("../../../client/public/image/bg3.jpg");
+/* .heroBlock {
+  background-image: url("../../../client/public/image/bg3.jpg");
   background-size: cover;
-  background-attachment: fixed; */
-}
+  background-attachment: fixed;
+} */
 .row-news {
   margin-bottom: 3%;
   margin-top: 3%;

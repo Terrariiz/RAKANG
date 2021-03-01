@@ -83,14 +83,50 @@
                   ></v-textarea>
                   <!-- <p class="lead">content</p> -->
                   <p class="details">
-                      <v-text-field v-model="campaign.date" type="date" solo label="วันสิ้นสุดแคมเปญ" required></v-text-field>
+                      <!-- <v-text-field v-model="campaign.date" type="date" solo label="วันสิ้นสุดแคมเปญ" required></v-text-field> -->
+                       <v-menu
+                              ref="menu"
+                              v-model="menu"
+                              :close-on-content-click="false"
+                              transition="scale-transition"
+                              offset-y
+                              min-width="auto"
+                            >
+                              <template v-slot:activator="{ on, attrs }">
+                                <v-text-field
+                                  solo
+                                  required
+                                  v-model="campaign.date"
+                                  label="วันสิ้นสุด"
+                                  prepend-icon="mdi-calendar"
+                                  readonly
+                                  v-bind="attrs"
+                                  v-on="on"
+                                ></v-text-field>
+                              </template>
+                              <v-date-picker
+                                ref="picker"
+                                v-model="campaign.date"
+                                :min="new Date().toISOString().substr(0, 10)"
+                                @change="save"
+                              ></v-date-picker>
+                            </v-menu>
                       <v-text-field v-model="campaign.location" class="location"  solo label="สถานที่" required></v-text-field>
                       <!-- <span class="location">สถานที่</span> -->
                   </p>
               </div>
               <div class="details funding-goal">
                         <h3 class="title">เป้าหมาย</h3>
-                         <v-text-field v-model="campaign.amount" class="value" solo label="จำนวนเงิน" required ></v-text-field>
+                        <v-text-field 
+                            v-model="campaign.amount"
+                            class="value"
+                            solo
+                            label="จำนวนเงิน"
+                            required
+                            type="number"
+                            onkeypress="return event.charCode >= 48"
+                            min="1"
+                        ></v-text-field>
                         
                     </div>
           </v-col>
@@ -349,6 +385,7 @@ export default {
   data(){
         return{
           tab: null,
+          menu: false,
         items: [
           'Appetizers', 'Entrees', 'Deserts', 'Cocktails',
         ],
@@ -428,6 +465,9 @@ export default {
         chooseImage () {
             this.$refs.fileInput.click()
         },
+        save (date) {
+        this.$refs.menu.save(date)
+      },
         
     }
 }

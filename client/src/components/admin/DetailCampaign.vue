@@ -17,7 +17,7 @@
                   <img class="image -fullwidth img-responsive" id="showimage" :src="'http://localhost:4000/uploads/' + campaign.image"/>
                   <p class="lead">{{campaign.content }}</p>
                   <p class="details">
-                      <span class="duration">เริ่มวันที่ {{ campaign.date }} </span><br>
+                      <span class="duration">สิ้นสุดวันที่ {{ campaign.date }} </span><br>
                       <span class="location">สถานที่ {{campaign.location}}</span>
                   </p>
               </div>
@@ -27,7 +27,7 @@
                 <div class="body">
                     <div class="amount-raised">
                         <h3 class="title">ยอดบริจาคขณะนี้</h3>
-                        <span class="value">100000 บาท</span>
+                        <span class="value">{{campaign.donate}}</span>
                     </div>
                     <div class="funding-goal">
                         <h3 class="title">เป้าหมาย</h3>
@@ -36,10 +36,10 @@
                     <div >
                        <progress class="progress is-danger" :value="(campaign.donate/campaign.amount)*100" max="100"></progress>
                     </div>
-                    <span class="timeleft">365 วัน</span>
+                    <!-- <span class="timeleft">365 วัน</span> -->
                     <span class="people">
-                        <span class="hide-txt">จำนวนคนที่บริจาค</span>
-                        <span class="icon-people"><i class="fa fa-users" aria-hidden="true"></i> 43</span>
+                        <!-- <span class="hide-txt">จำนวนคนที่บริจาค</span> -->
+                        <!-- <span class="icon-people"><i class="fa fa-users" aria-hidden="true"></i> 43</span> -->
                     </span>
                     <v-row style="margin-top:3%;">
                 <v-col  cols = "3"></v-col>
