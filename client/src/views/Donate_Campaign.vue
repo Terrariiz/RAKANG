@@ -167,6 +167,7 @@
 
 const Navbar = () => import('@/components/navbar/navbar')
 import DialogDonate from "./dialog_donate";
+import swal from 'sweetalert2'
 import moment from "moment";
 export default {
     name:'Campaign',
@@ -223,14 +224,28 @@ export default {
               console.log('res')
               console.log(res.data)
               console.log('res')
-              // if(res.data == false){
-
-              // } else if(res.data == 'complete'){
-                
-              // } else if(res.data == 'incomplete'){
-                
-              // }
-              
+              if(res.data == false){
+                swal.fire({
+                  icon: 'success',
+                  title: 'Your work has been saved',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+              } else if(res.data == 'complete'){
+                swal.fire({
+                  icon: 'success',
+                  title: 'Your work has been saved',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+              } else if(res.data == 'incomplete'){
+                swal.fire({
+                  icon: 'success',
+                  title: 'Your work has been saved',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+              }
               localStorage.removeItem("donate-campaign")
             })
             .catch(function(err){

@@ -108,7 +108,7 @@
 </div>
 </template>
 <script>
-// import a from "/RAKANG/client/src/assets/images/tenor.gif"
+// import a from "../../assets"
 export default {
   
   data() {
@@ -122,7 +122,7 @@ export default {
           subtitle: "1,000 miles of wonder",
           description:
             "His ubique laboramus ne. Expetenda assueverit sed ad. Id nec malis lucilius delicatissimi. Nec assum sonet suscipit ex, diam deterruisset ut usu, ad dicat fabellas aliquando eam.",
-          src: require("/RAKANG/client/src/assets/images/tenor.gif"),
+          src: require("../../assets/images/tenor.gif"),
         },
         {
           id: 2,
@@ -131,7 +131,7 @@ export default {
           subtitle: "2,000 miles of wonder",
           description:
             "Sea ad habemus assueverit, omnes platonem convenire sit et, at integre pericula quo. Facete adolescens definitionem cu qui, in putant aliquid fierent ius.",
-          src: require("/RAKANG/client/src/assets/images/tenor.gif"),
+          src: require("../../assets/images/tenor.gif"),
         },
         {
           id: 3,
@@ -140,7 +140,7 @@ export default {
           subtitle: "3,000 miles of wonder",
           description:
             "Aliquam albucius mei ei, debitis torquatos et pro, eos natum scribentur no. Putant verear constituto te qui. Adolescens persequeris vim ei. Vel nullam reprimique te.",
-          src: require("/RAKANG/client/src/assets/images/tenor.gif"),
+          src: require("../../assets/images/tenor.gif"),
         },
       ],
     };
