@@ -49,8 +49,7 @@ exports.CheckDonate = async function(req, res){
         if(index == -1){
           result = false;
           res.send(result);
-        }
-        else if(list.donatelog[index].result == 'incomplete'){
+        }else if(list.donatelog[index].result == 'incomplete'){
           DonateLog.findByIdAndRemove(list.donatelog[index]._id,function(err){
             if(err){
               console.log(err)
@@ -58,6 +57,17 @@ exports.CheckDonate = async function(req, res){
               list.donatelog.pop() 
               list.save()
               result = 'incomplete'
+              res.send(result);
+            }
+          })
+        }else if(list.donatelog[index].result == 'cancel'){
+          DonateLog.findByIdAndRemove(list.donatelog[index]._id,function(err){
+            if(err){
+              console.log(err)
+            } else {
+              list.donatelog.pop() 
+              list.save()
+              result = 'cancel'
               res.send(result);
             }
           })

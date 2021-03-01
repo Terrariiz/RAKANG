@@ -186,12 +186,6 @@
       </v-row>
       
   </v-container>
-   <!-- <div id="grid-container">
-                    <div></div>
-                    <v-btn style="weidth = 40%" color="error" dark href='/admin/listcampaign'>cancle</v-btn>
-                    <v-btn type="submit" color="primary" dark>submit</v-btn>
-                    <div></div>  
-                </div> -->
                 <v-row style="margin-top:3%;">
                 <v-col  cols = "3"></v-col>
                 <v-col  cols = "3">
