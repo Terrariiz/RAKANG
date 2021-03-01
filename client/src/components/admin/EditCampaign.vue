@@ -43,7 +43,16 @@
               </div>
               <div class="details funding-goal">
                         <h3 class="title">เป้าหมาย</h3>
-                         <v-text-field v-model="campaign.amount" class="value" solo label="จำนวนเงิน" required ></v-text-field>
+                        <v-text-field 
+                            v-model="campaign.amount"
+                            class="value"
+                            solo
+                            label="จำนวนเงิน"
+                            required
+                            type="number"
+                            onkeypress="return event.charCode >= 48"
+                            min="1"
+                        ></v-text-field>
                         
                     </div>
           </v-col>

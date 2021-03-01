@@ -113,10 +113,10 @@
                                         <h5>ระบุจำนวน</h5>
                                         <v-text-field
                                             v-model="amounts2"
-                                            type="number"
-                                            onkeypress="return event.charCode >= 48"
-                                            min="1"
+                                            onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                                            min="20"
                                             id="6"
+                                            :rules="balanceRules"
                                             @keyup="onPress(amounts2,'6')"
                                             outlined
                                         ></v-text-field>
@@ -147,6 +147,9 @@ export default {
             amounts2: null,
             valid: false,
             beforeId: null,
+            balanceRules:[
+                v => v >= 20 || 'จำนวนเงินที่จะบริจาคต้องมากกว่า 20 บาท',
+            ],
         }
     },
     computed: {
@@ -223,7 +226,7 @@ export default {
         //onPress() เป็น ฟังก์ชั่นเช็คจำนวนเงินในช่องระบุจำนวนเงิน
         //เช็คทุกครั้งที่พิมพ์จำนวนเงินจะทำฟังก์ชั่นนี้
         onPress(amount,elementId){
-            if(amount == 0){
+            if(amount < 20){
                 this.valid = false
             } else {
                 var element = document.getElementById(elementId)
@@ -252,6 +255,13 @@ export default {
     color: #000
 </style>
 <style scoped>
+.inputPrice v-text-field[type='number'] {
+    -moz-appearance:textfield;
+}
+.inputPrice v-text-field::-webkit-outer-spin-button,
+.inputPrice v-text-field::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
 .selected{
     border-style: solid;
     border-color: #f58851;
