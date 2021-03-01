@@ -19,7 +19,9 @@
       :headers="headers"
       :items="User"
       :search="search"
-    ></v-data-table>
+    >
+    <template User.fullname="{ User }">{{ User.firstname }} {{ User.lastname }}</template>
+    </v-data-table>
   </v-card>
     </v-container>    
   </div>
@@ -34,11 +36,11 @@ export default {
       return {
         User : [],
         search: '',
+
         headers: [
-          { text: 'ชื่อผู้บริจาค',value: 'Username',},
-          { text: 'จำนวนเงินที่บริจาค(บาท)', value: 'amount' },
+          { text: 'ลำดับ' ,value: 'i' },
+          { text: 'ชื่อผู้บริจาค',value: 'firstname'},
           { text: 'Point', value: 'point' },
-          
         ],
         }
     },

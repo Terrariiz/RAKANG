@@ -73,7 +73,7 @@
                   <p class="lead">{{campaign.content}}</p>
                   <p class="details">
                       <span class="duration">เริ่มวันที่ {{ campaign.date }} </span>
-                      <span class="location">สถานที่</span>
+                      <span class="location">สถานที่ {{ campaign.location }}</span>
                   </p>
               </div>
           </v-col>

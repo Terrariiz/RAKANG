@@ -29,23 +29,24 @@
         <v-card elevation="5" outlined shaped >
         <v-row class="row-news">
           <v-col cols="12" md="6">
-            <img class="img" src="../../../client/public/image/bubble.png" />
+            <img class="image -fullwidth img-responsive" id="showimage" :src="'http://localhost:4000/uploads/' + newcampaign.image"/>
           </v-col>
           <v-col class="cols-detail-campaign" cols="12" md="6">
             <v-container>
-                <h1>แคมเปญ </h1>
+                <h1> {{newcampaign.name}} </h1>
               <h4>detail</h4>
               <div >
                 <v-row>
                   <v-col style="text-align:left;" cols="12" md="3">
-                    <span >วันที่</span>
+                    <span >วันสิ้นสุดโครงการ {{newcampaign.date}}</span><br>
+                    <span >สถานที่ {{newcampaign.location}}</span>
                   </v-col>
                   <v-col style="text-align:right;" cols="12" md="9">  
-                    <span>ยอดบริจาค xxx / 60000 บาท</span>
+                    <span>ยอดบริจาค {{newcampaign.donate}} / {{newcampaign.amount}} บาท</span>
                   </v-col>
                 </v-row>
               </div>
-              <progress class="progress is-danger" value="80" max="100">90%</progress>
+              <progress class="progress is-danger" :value="(newcampaign.donate/newcampaign.amount)*100" max="100"></progress>
               
               <div class="btn-news">
                 <v-btn block style="background-color: #ffdd94; color:#455054;">
@@ -107,12 +108,14 @@
 
 <script>
 // import a from '../assets/images/bg-temple-2.jpg'
+import moment from "moment";
 
 const Navbar = () => import("@/components/navbar/navbar");
 export default {
   name: "Home",
   data() {
     return {
+      newcampaign: null,
       items: [
         {
           src: require("../assets/images/ศีล5 5.jpg"),
@@ -156,6 +159,24 @@ export default {
         },
       ],
     };
+  },
+  mounted: async function mounted() {
+    await this.$http
+      .get("/campaign/ShowListCampaign")
+      .then((res) => {
+        console.log(res.data);
+        this.newcampaign = res.data[0];
+        
+        this.newcampaign.date = moment(this.newcampaign.date).format(
+          " dddd DD-MM-YY  A"
+        );
+        
+
+        
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
   },
   components: {
     Navbar,
