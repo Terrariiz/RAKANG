@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const newSchema = new mongoose.Schema({
+const CampaignSchema = new mongoose.Schema({
   name: {
     type: String,
   },
@@ -42,7 +42,9 @@ const newSchema = new mongoose.Schema({
  
 });
 
+// CampaignSchema.methods.percentage = async function(id) {
+//   return (this.donate / this.amount)* 100
+// };
 
-
-const Campaign = mongoose.model("Campaign", newSchema);
+const Campaign = mongoose.model("Campaign", CampaignSchema);
 module.exports = Campaign;

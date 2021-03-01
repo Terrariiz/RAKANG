@@ -34,7 +34,7 @@
                         <span class="value">{{ campaign.amount }} บาท</span>
                     </div>
                     <div >
-                       <progress class="progress is-danger" :value=percent max="100">{{percent}}</progress>
+                       <progress class="progress is-danger" :value="(campaign.donate/campaign.amount)*100" max="100"></progress>
                     </div>
                     <span class="timeleft">365 วัน</span>
                     <span class="people">

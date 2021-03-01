@@ -53,11 +53,14 @@ exports.ShowListCampaign = function(req,res){
 
 exports.DetailCampaign = function(req,res){
   try{
-    Campaign.findOne({_id : req.params.id},function(err, campaign){
+    Campaign.findOne({_id : req.params.id},async function(err, campaign){
       if(err){
         console.log(err)
       } else {
-        res.send(campaign);
+        // var percentage = await campaign.percentage()
+        // var detail = {campaign , percentage}
+        
+        res.json(campaign);
       }
     })
   } catch (err) {
