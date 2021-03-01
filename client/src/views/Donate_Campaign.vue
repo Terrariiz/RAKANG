@@ -93,7 +93,7 @@
                             <!-- <span class="hide-txt">ดำเนินการไปแล้ว</span>
                             80% -->
                         </span>
-                        <progress class="progress is-danger" :value=percent max="100">{{percent}}</progress>
+                        <progress class="progress is-danger" :value="(campaign.donate/campaign.amount)*100" max="100"></progress>
                     </div>
                     <v-row>
                   <v-col style="text-align:left;" cols="12" md="3">
@@ -167,6 +167,7 @@
 
 const Navbar = () => import('@/components/navbar/navbar')
 import DialogDonate from "./dialog_donate";
+import swal from 'sweetalert2'
 import moment from "moment";
 export default {
     name:'Campaign',
@@ -179,7 +180,7 @@ export default {
         campaign: null,
         tab: null,
         dialogDonate: false,
-        percent: 0,
+        // percent: 0,
 
       }
     },
@@ -193,24 +194,25 @@ export default {
     },
     
     methods: {
-      percentdonate(){
-          let donate = this.campaign.donate;
-          let amount = this.campaign.amount;
-          let per = (donate/amount)*100;
-          console.log(this.campaign.donate)
-          console.log(amount)
-          console.log(per);
-          this.percent = per;
-        },
+      // percentdonate(){
+      //     let donate = this.campaign.donate;
+      //     let amount = this.campaign.amount;
+      //     let per = (donate/amount)*100;
+      //     console.log(this.campaign.donate)
+      //     console.log(amount)
+      //     console.log(per);
+      //     this.percent = per;
+      //   },
         getData(){
             var that = this;
             this.$http.get("/campaign/DetailCampaign/"+this.$route.params.id)
             .then((res) => {
               console.log(res.data)
+              // that.percent = res.data.percentage
               that.campaign = res.data;
               console.log(that.campaign)
               that.campaign.date = moment(that.campaign.date).format(" dddd DD-MM-YY  A");
-             this.percentdonate()
+            //  this.percentdonate()
             })
             .catch(function(err){
               console.log(err)
@@ -223,14 +225,28 @@ export default {
               console.log('res')
               console.log(res.data)
               console.log('res')
-              // if(res.data == false){
-
-              // } else if(res.data == 'complete'){
-                
-              // } else if(res.data == 'incomplete'){
-                
-              // }
-              
+              if(res.data == false){
+                swal.fire({
+                  icon: 'success',
+                  title: 'Your work has been saved',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+              } else if(res.data == 'complete'){
+                swal.fire({
+                  icon: 'success',
+                  title: 'ทำรายการเสร็จสิ้น',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+              } else if(res.data == 'incomplete'){
+                swal.fire({
+                  icon: 'error',
+                  title: 'เกิดข้อผิดพลาดบางอย่าง',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+              }
               localStorage.removeItem("donate-campaign")
             })
             .catch(function(err){

@@ -12,7 +12,6 @@ import swal from "sweetalert2"
 const Login                  = () => import('@/components/profile/Login')
 const Register               = () => import('@/components/profile/Register')
 const Logpayment             = () => import('@/components/profile/Logpayment')
-const Logcoin                = () => import('@/components/profile/Logcoin')
 const Listnews               = () => import('@/components/admin/Listnews')
 const Addnews                = () => import('@/components/admin/Addnews')
 const editnews               = () => import('@/components/admin/editnews')
@@ -111,14 +110,6 @@ const routes = [
     path: '/profile/logpayment',
     name: 'Logpayment',
     component: Logpayment,
-    meta:{
-      requiresUserAuth: true
-    }
-  },
-  {
-    path: '/profile/logcoin',
-    name: 'Logcoin',
-    component: Logcoin,
     meta:{
       requiresUserAuth: true
     }
@@ -242,7 +233,6 @@ const routes = [
       requiresAdminAuth: true
     }
   },
-
   {
     path: '/test',
     name: 'test',
@@ -261,7 +251,10 @@ const routes = [
   {
     path: '/payment',
     name: 'payment',
-    component: payment
+    component: payment,
+    meta: {
+      requiresUserAuth: true
+    }
   }
   
 ]
@@ -271,6 +264,8 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 });
+
+
 router.beforeEach((to, from, next) => {
   if(to.matched.some(record => record.meta.requiresUserAuth)) {
       if (localStorage.getItem('user_token') == null) {
