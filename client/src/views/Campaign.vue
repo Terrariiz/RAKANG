@@ -23,13 +23,14 @@
               <h4>detail</h4>
               <div >
                 <v-row>
-                  <v-col style="text-align:left;" cols="12" md="3">
-                    <span >วันที่</span>
+                  <v-col style="text-align:left;" cols="12" md="6">
+                    <!-- <span >วันที่</span> -->
                     <span> เป้าหมาย {{ campaign.amount }}</span>
-                    <div> วันสิ้นสุดการรับบริจาค {{ campaign.date }}</div>
+                    <div> วันที่สิ้นสุด{{ campaign.date }}</div>
                   </v-col>
-                  <v-col style="text-align:right;" cols="12" md="9">  
-                    <span>ยอดบริจาค xxx / 60000 บาท</span>
+                  <v-col style="text-align:right;" cols="12" md="6">
+                    <div>ยอดบริจาค</div>  
+                    <span> {{campaign.donate}} / {{ campaign.amount }} บาท</span>
                   </v-col>
                 </v-row>
               </div>

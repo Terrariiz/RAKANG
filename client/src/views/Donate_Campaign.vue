@@ -109,9 +109,10 @@
                 </div>
 
               <div class="action">
-                  <a><v-btn color="green" @click.stop="dialogDonate=true" block>บริจาค</v-btn></a>
+                  <v-btn v-if="notend" color="green" @click.stop="dialogDonate=true" block>บริจาค</v-btn><v-btn disabled v-if="end" color="green" depressed block>โครงการนี้สิ้นสุดแล้ว</v-btn>
                   <DialogDonate :visible="dialogDonate" @close="dialogDonate=false" />
               </div>
+              
 
             </div>
           </v-col>
@@ -180,6 +181,8 @@ export default {
         tab: null,
         dialogDonate: false,
         percent: 0,
+        end:null,
+        notend:null,
 
       }
     },
@@ -189,6 +192,10 @@ export default {
       if(localStorage.getItem("donate-campaign")){
         this.AlertDonate()
       }
+      
+      
+    },
+    created: function(){
       
     },
     
@@ -210,7 +217,8 @@ export default {
               that.campaign = res.data;
               console.log(that.campaign)
               that.campaign.date = moment(that.campaign.date).format(" dddd DD-MM-YY  A");
-             this.percentdonate()
+              this.percentdonate()
+              this.end_date()
             })
             .catch(function(err){
               console.log(err)
@@ -236,7 +244,24 @@ export default {
             .catch(function(err){
               console.log(err)
             })
+        },
+        end_date(){
+          var enddate = this.campaign.date;
+          var now = new Date().toISOString().substr(0, 10);
+          now = moment(now).format(" dddd DD-MM-YY  A");
+          console.log("kuy"+enddate)
+          console.log("kuy"+now)
+          if(enddate == now)
+          { this.end = true;
+           this.notend = false;
+         }
+          else{ this.end = false;
+          this.notend = true;
+           }
+          
         }
+        
+         
         
     }
 }
