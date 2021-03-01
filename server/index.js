@@ -74,6 +74,7 @@ app.use("/minigamelog", minigameRoutes);
 
 app.post("/test", async function(req,res){
 
+    var result 
     const MerchantCode = 'M031001'
     const Apikey = 'Z5O4ARB0wikPpsSwpjXwmeuVCdD2zVV27Sdbti9gTvYWEOiBo7s7fB6S81LZAE3I'
     const TransactionId = req.body.transNo;
@@ -91,11 +92,14 @@ app.post("/test", async function(req,res){
     var CheckSum = MD5Hash.toString()
 
     var form = new URLSearchParams();
-
+ 
     form.append("TransactionId",TransactionId);
     form.append("CheckSum",CheckSum);
     form.append("ApiKey",Apikey);
     form.append("MerchantCode",MerchantCode);
+    var fuckingid
+    var fuckingcampaign
+    
 
     console.log(form)
     if(req.body.status == "complete"){
@@ -108,31 +112,22 @@ app.post("/test", async function(req,res){
       var str = user_id;
       var fuckingArray = str.split("#");
 
-      const fuckingid = fuckingArray[0]
-      const fuckingcampaign = fuckingArray[1]
+      fuckingid = fuckingArray[0]
+      fuckingcampaign = fuckingArray[1]
 
       console.log(fuckingid)
       console.log(fuckingcampaign)
 
-      // const now = new Date();
-      // const coin = new Coin({
-      //     amount : amount/100,
-      //     date : now
-      //   });
-        ////////////ของใหม่/////////////////
-        // const amount = parseInt(req.params.amount, 10);
         Campaign.findOne({_id : fuckingcampaign},function(err, campaign){
-          console.log(campaign)
-          console.log('8h49dfghdfgh')
           if(err){
             console.log(err)
           } else {
               User.findOne({_id : fuckingid}, function(err, user){
-                
                 const now = new Date();
                 const donatelog = new DonateLog({
                   campaign : null,
                   user : null ,
+                  result : 'complete',
                   CampaignName : campaign.name,
                   UserName : user.firstname,
                   amount : amount/100,
@@ -151,49 +146,158 @@ app.post("/test", async function(req,res){
       
                   campaign.donatelist.push(log)
         
-                  campaign.donate = campaign.donate+amount;
+                  campaign.donate = campaign.donate+amount/100;
                   
                   /////save ข้อมูล
 
                   campaign.save();
                   log.save();
                   user.save();
-                  
-                
                 })
             })
-            
-            // res.status(201).json({ campaign });
           }
         })
-        // res.status(201);
-        /////////ของใหม่///////////
-      
-      //   ////สร้าง coinlog
-      // Donate.create(coin, function(err,newcoinlog){
-      //   User.findById(fuckingid,function(err,user){
-      //     console.log(user._id);
-      //     user.coin = user.coin+(amount/100);
-      //     //แอด coinlog///////////////////////////////////////
-
-      //     user.coinlog.push(newcoinlog)
-      //     newcoinlog.user.push(user)
-
-      //     newcoinlog.save();
-      //     user.save();
-      //   })
-
-      //   })
-      
      })
     } else if(req.body.status == 'incomplete'){
+      
+    await axios.post("https://sandbox-appsrv2.chillpay.co/api/v2/PaymentStatus/",form)
+    .then((res) => {
+      console.log(res.data)
+      var amount = res.data.Amount; 
+      var user_id = res.data.CustomerId;
 
+      var str = user_id;
+      var fuckingArray = str.split("#");
+
+      fuckingid = fuckingArray[0]
+      fuckingcampaign = fuckingArray[1]
+
+      console.log(fuckingid)
+      console.log(fuckingcampaign)
+
+        Campaign.findOne({_id : fuckingcampaign},function(err, campaign){
+          if(err){
+            console.log(err)
+          } else {
+              User.findOne({_id : fuckingid}, function(err, user){
+                const now = new Date();
+                const donatelog = new DonateLog({
+                  campaign : null,
+                  user : null ,
+                  result : 'incomplete',
+                  CampaignName : campaign.name,
+                  UserName : user.firstname,
+                  amount : amount/100,
+                  date : now
+                });
+                
+                DonateLog.create(donatelog,function(err,log){
+                  log.user = user
+                  log.campaign = campaign
+                  //////save ข้อมูล log เข้า donate log ของ user 
+                  user.donatelog.push(log)
+                  /////save ข้อมูล
+                  log.save();
+                  user.save();
+                })
+            })
+          }
+        })
+     })
     } else if(req.body.status == 'cancle'){
+      
+    await axios.post("https://sandbox-appsrv2.chillpay.co/api/v2/PaymentStatus/",form)
+    .then((res) => {
+      console.log(res.data)
+      var amount = res.data.Amount; 
+      var user_id = res.data.CustomerId;
 
+      var str = user_id;
+      var fuckingArray = str.split("#");
+
+      fuckingid = fuckingArray[0]
+      fuckingcampaign = fuckingArray[1]
+
+      console.log(fuckingid)
+      console.log(fuckingcampaign)
+
+        Campaign.findOne({_id : fuckingcampaign},function(err, campaign){
+          if(err){
+            console.log(err)
+          } else {
+              User.findOne({_id : fuckingid}, function(err, user){
+                const now = new Date();
+                const donatelog = new DonateLog({
+                  campaign : null,
+                  user : null ,
+                  result : 'cancle',
+                  CampaignName : campaign.name,
+                  UserName : user.firstname,
+                  amount : amount/100,
+                  date : now
+                });
+                
+                DonateLog.create(donatelog,function(err,log){
+                  log.user = user
+                  log.campaign = campaign
+                  //////save ข้อมูล log เข้า donate log ของ user 
+                  user.donatelog.push(log)
+                  /////save ข้อมูล
+                  log.save();
+                  user.save();
+                })
+            })
+          }
+        })
+     })
+    } else if(req.body.status == 'error'){
+    await axios.post("https://sandbox-appsrv2.chillpay.co/api/v2/PaymentStatus/",form)
+    .then((res) => {
+      console.log(res.data)
+      var amount = res.data.Amount; 
+      var user_id = res.data.CustomerId;
+
+      var str = user_id;
+      var fuckingArray = str.split("#");
+
+      fuckingid = fuckingArray[0]
+      fuckingcampaign = fuckingArray[1]
+
+      console.log(fuckingid)
+      console.log(fuckingcampaign)
+
+        Campaign.findOne({_id : fuckingcampaign},function(err, campaign){
+          if(err){
+            console.log(err)
+          } else {
+              User.findOne({_id : fuckingid}, function(err, user){
+                const now = new Date();
+                const donatelog = new DonateLog({
+                  campaign : null,
+                  user : null ,
+                  result : null,
+                  CampaignName : campaign.name,
+                  UserName : user.firstname,
+                  amount : amount/100,
+                  date : now
+                });
+                
+                DonateLog.create(donatelog,function(err,log){
+                  log.user = user
+                  log.campaign = campaign
+                  log.result = 'error'
+                  //////save ข้อมูล log เข้า donate log ของ user 
+                  user.donatelog.push(log)
+                  /////save ข้อมูล
+                  log.save();
+                  user.save();
+                })
+            })
+          }
+        })
+     })
     }
-    
-
-  res.redirect('http://localhost:8080/home',)
+  res.redirect('http://localhost:8080/campaign/'+fuckingcampaign)
 });
 
 

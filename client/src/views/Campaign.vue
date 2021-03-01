@@ -146,6 +146,9 @@ export default {
           this.percent = per;
         },
   },
+  if(result){
+    console.log(result)
+  }
 };
 </script>
 

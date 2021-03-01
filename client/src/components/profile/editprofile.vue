@@ -132,9 +132,9 @@ export default {
     mounted: async function mounted(){
       await this.$http.get("/user/"+id)
       .then((res) => {
-        this.dataUser = res.data;
+        this.dataUser = res.data.found;
         this.dataEdit.oldimage = res.data.image;
-        this.imageData = "http://localhost:4000/image/profile/" + res.data.image;
+        this.imageData = "http://localhost:4000/image/profile/" + res.data.found.image;
       })
       .catch(function(err){
         console.log(err)

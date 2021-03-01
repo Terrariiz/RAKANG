@@ -184,7 +184,12 @@ export default {
       }
     },
     mounted: function(){
+      
       this.getData()
+      if(localStorage.getItem("donate-campaign")){
+        this.AlertDonate()
+      }
+      
     },
     
     methods: {
@@ -211,6 +216,27 @@ export default {
               console.log(err)
             })
         },
+        AlertDonate(){
+          // var campaign_id = localStorage.getItem("donate-campaign")
+          this.$http.get("/donatelog/CheckDonate/"+localStorage.getItem("user_id"))
+            .then((res) => {
+              console.log('res')
+              console.log(res.data)
+              console.log('res')
+              // if(res.data == false){
+
+              // } else if(res.data == 'complete'){
+                
+              // } else if(res.data == 'incomplete'){
+                
+              // }
+              
+              localStorage.removeItem("donate-campaign")
+            })
+            .catch(function(err){
+              console.log(err)
+            })
+        }
         
     }
 }
