@@ -226,12 +226,7 @@ export default {
               console.log(res.data)
               console.log('res')
               if(res.data == false){
-                swal.fire({
-                  icon: 'success',
-                  title: 'Your work has been saved',
-                  showConfirmButton: false,
-                  timer: 1500
-                })
+                
               } else if(res.data == 'complete'){
                 swal.fire({
                   icon: 'success',
