@@ -227,7 +227,7 @@ export default {
               console.log(res.data)
               console.log('res')
               if(res.data == false){
-                
+                console.log("testtttttt")
               } else if(res.data == 'complete'){
                 swal.fire({
                   icon: 'success',

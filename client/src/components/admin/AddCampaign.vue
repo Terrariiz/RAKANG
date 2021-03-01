@@ -472,7 +472,7 @@ export default {
             this.$refs.fileInput.click()
         },
         save (date) {
-        this.$refs.menu.save(date)
+          this.$refs.menu.save(date)
       },
         
     }
