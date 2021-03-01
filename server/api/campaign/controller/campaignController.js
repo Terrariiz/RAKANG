@@ -57,10 +57,10 @@ exports.DetailCampaign = function(req,res){
       if(err){
         console.log(err)
       } else {
-        var percentage = await campaign.percentage()
-        var detail = {campaign , percentage}
+        // var percentage = await campaign.percentage()
+        // var detail = {campaign , percentage}
         
-        res.json(detail);
+        res.json(campaign);
       }
     })
   } catch (err) {

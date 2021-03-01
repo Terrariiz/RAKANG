@@ -42,9 +42,9 @@ const CampaignSchema = new mongoose.Schema({
  
 });
 
-CampaignSchema.methods.percentage = async function(id) {
-  return (this.donate / this.amount)* 100
-};
+// CampaignSchema.methods.percentage = async function(id) {
+//   return (this.donate / this.amount)* 100
+// };
 
 const Campaign = mongoose.model("Campaign", CampaignSchema);
 module.exports = Campaign;

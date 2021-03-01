@@ -93,7 +93,7 @@
                             <!-- <span class="hide-txt">ดำเนินการไปแล้ว</span>
                             80% -->
                         </span>
-                        <progress class="progress is-danger" :value=percent max="100"></progress>
+                        <progress class="progress is-danger" :value="(campaign.donate/campaign.amount)*100" max="100"></progress>
                     </div>
                     <v-row>
                   <v-col style="text-align:left;" cols="12" md="3">
@@ -179,7 +179,7 @@ export default {
         campaign: null,
         tab: null,
         dialogDonate: false,
-        percent: 0,
+        // percent: 0,
 
       }
     },
@@ -207,8 +207,8 @@ export default {
             this.$http.get("/campaign/DetailCampaign/"+this.$route.params.id)
             .then((res) => {
               console.log(res.data)
-              that.percent = res.data.percentage
-              that.campaign = res.data.campaign;
+              // that.percent = res.data.percentage
+              that.campaign = res.data;
               console.log(that.campaign)
               that.campaign.date = moment(that.campaign.date).format(" dddd DD-MM-YY  A");
             //  this.percentdonate()
