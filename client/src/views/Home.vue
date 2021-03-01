@@ -9,16 +9,12 @@
         to=""
         v-for="(item, i) in items"
         :key="i"
-        
+        :src="item.src"
         reverse-transition="fade-transition"
         transition="fade-transition" 
         
       >
-        <v-img contain
-          class="title fill-height hidden-xs-only"
-          
-          :src="item.src"
-          ></v-img
+        
         >
       </v-carousel-item>
     </v-carousel>

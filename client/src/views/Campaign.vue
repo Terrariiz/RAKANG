@@ -20,7 +20,7 @@
           <v-col class="cols-detail-campaign" cols="12" md="6">
             <v-container>
                 <h1>{{ campaign.name }} </h1>
-              <h4>detail</h4>
+              <div>{{campaign.content}}</div>
               <div >
                 <v-row>
                   <v-col style="text-align:left;" cols="12" md="6">

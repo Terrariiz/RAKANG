@@ -72,7 +72,7 @@
                   <img class="image -fullwidth img-responsive" id="showimage" :src="'http://localhost:4000/uploads/' + campaign.image"/>
                   <p class="lead">{{campaign.content}}</p>
                   <p class="details">
-                      <span class="duration">เริ่มวันที่ {{ campaign.date }} </span>
+                      <span class="duration">สิ้นสุดวันที่ {{ campaign.date }} </span>
                       <span class="location">สถานที่</span>
                   </p>
               </div>
@@ -84,9 +84,10 @@
                         <h3 class="title">ยอดบริจาคขณะนี้</h3>
                         <span class="value">{{ campaign.donate }} บาท</span>
                     </div>
+                    <br>
                     <div class="funding-goal">
-                        <h3 class="title">เป้าหมาย</h3>
-                        <span class="value">{{ campaign.amount }} บาท</span>
+                        <h3 class="title"></h3>
+                        <span class="value">เป้าหมาย {{ campaign.amount }} บาท</span>
                     </div>
                     <div >
                         <span class="percent">
@@ -97,11 +98,11 @@
                     </div>
                     <v-row>
                   <v-col style="text-align:left;" cols="12" md="3">
-                    <span class="timeleft">365 วัน</span>
+                    <!-- <span class="timeleft">365 วัน</span>เดี๋ยวกลับมาแก้ -->
                   </v-col>
                   <v-col style="text-align:right;" cols="12" md="9">  
                     <!-- <span class="hide-txt">จำนวนคนที่บริจาค</span> -->
-                        <span class="icon-people"><i class="fa fa-users" aria-hidden="true"></i> 43</span>
+                        <span class="icon-people"><i class="fa fa-users" aria-hidden="true"></i> 0</span>
                   </v-col>
                 </v-row>
                     
@@ -121,7 +122,7 @@
   </v-container>
     </div>
   <!-- tablist -->
-  <div class="tab-section">
+    <div class="tab-section">
       <v-container>
          <v-tabs
       v-model="tab"
@@ -130,10 +131,10 @@
       grow
     >
       <v-tab>
-        test1
+        ภาพรวม
       </v-tab>
       <v-tab>
-        test2
+        ความคืบหน้า
       </v-tab>
     </v-tabs>
 
@@ -143,7 +144,7 @@
           color="basil"
           flat
         >
-          <v-card-text>1</v-card-text>
+          <v-card-text v-html="campaign.overview">{{campaign.overview}}</v-card-text>
         </v-card>
       </v-tab-item>
       <v-tab-item>
@@ -151,7 +152,7 @@
           color="basil"
           flat
         >
-          <v-card-text>2</v-card-text>
+          <v-card-text v-html="campaign.done">{{campaign.done}}</v-card-text>
         </v-card>
       </v-tab-item>
     </v-tabs-items>
