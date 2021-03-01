@@ -84,7 +84,7 @@
          single-line solo  
          v-model="register.birthdate"
          label="Birthdate" 
-         :rules="ageRules" 
+         :rules="dateRules" 
          type="date"
          required ></v-text-field>
       </v-col>
@@ -180,10 +180,8 @@ import swal from "sweetalert2";
           v => !!v || 'Lastname is required!',
           v => v.length <= 50 || 'lastname must be less than 50 characters',
         ],
-        ageRules:[
-          v => !!v || 'Age is required!',
-          // v => v >= 0 || 'Age must be more than 0 years',
-          // v => v <= 120 || 'Age must be less than 120 years',
+        dateRules:[
+          v => !!v || 'Birthdate is required!',
         ],
         phoneRules:[
           v => !!v || 'Phone is required',

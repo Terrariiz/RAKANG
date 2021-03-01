@@ -26,10 +26,6 @@
                         </h6>
                         <!-- <h6 class="f-w-600">{{ dataUser.coin }} Coin</h6> -->
                     </div>
-                    <div class="btn-log">
-                        <v-btn small @click.stop="dialog_Logcoin=true">ประวัติการบริจาค</v-btn>
-                        <Logcoin :visible="dialog_Logcoin" @close="dialog_Logcoin=false" />                     
-                    </div>
                     <div class="btn-cpass">
                         <v-btn small @click.stop="dialog_ChangePassword=true">เปลี่ยนรหัสผ่าน</v-btn>
                         <ChangePassword :visible="dialog_ChangePassword" @close="dialog_ChangePassword=false" />                     
@@ -136,7 +132,6 @@
 
 <script>
 import ChangePassword from '@/components/profile/changePassword'
-import Logcoin from '@/components/profile/Logcoin'
 import moment from "moment";
 
 const Navbar = () => import("@/components/navbar/navbar");
@@ -166,8 +161,7 @@ export default {
   },
   components: {
     Navbar,
-    ChangePassword,
-    Logcoin
+    ChangePassword
   },
   // mounted: async function mounted() {
 
