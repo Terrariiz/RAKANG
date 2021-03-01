@@ -53,7 +53,7 @@
                                 <v-text-field
                                   solo
                                   required
-                                  v-model="date"
+                                  v-model="campaign.date"
                                   label="วันสิ้นสุด"
                                   prepend-icon="mdi-calendar"
                                   readonly
@@ -63,7 +63,7 @@
                               </template>
                               <v-date-picker
                                 ref="picker"
-                                v-model="date"
+                                v-model="campaign.date"
                                 :min="new Date().toISOString().substr(0, 10)"
                                 @change="save"
                               ></v-date-picker>
@@ -347,7 +347,7 @@ export default {
     methods: {
     async Editcampaign(){
         try {
-            this.campaign.date = this.date;
+            // this.campaign.date = this.date;
             var formData = new FormData();
             formData.append('name', this.campaign.name)
             formData.append('content', this.campaign.content)

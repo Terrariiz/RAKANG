@@ -227,7 +227,11 @@ export default {
               console.log(res.data)
               console.log('res')
               if(res.data == false){
+<<<<<<< HEAD
                 console.log("test1234")
+=======
+                console.log("false")
+>>>>>>> 10d4d2c85b5047e22155b4b9f5c24443da2a1cd9
               } else if(res.data == 'complete'){
                 swal.fire({
                   icon: 'success',
@@ -239,6 +243,13 @@ export default {
                 swal.fire({
                   icon: 'error',
                   title: 'เกิดข้อผิดพลาดบางอย่าง',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+              } else if(res.data == 'cancel'){
+                swal.fire({
+                  icon: 'info',
+                  title: 'ยกเลิกการทำรายการแล้ว',
                   showConfirmButton: false,
                   timer: 1500
                 })
