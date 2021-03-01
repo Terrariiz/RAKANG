@@ -22,7 +22,9 @@
                         
                         </v-flex>
                         <v-flex xs12 md6>
-                                <center><v-text-field v-model="title" style="width:70%; text-align: center;" label="หัวข้อเรื่อง" required></v-text-field></center>
+                                <center>
+                                    <v-text-field v-model="title" style="width:70%; text-align: center;" label="หัวข้อเรื่อง" required></v-text-field>
+                                </center>
                                 <br><br>
                                 <v-container id ="detailnews"  style="background-color: white ; margin-right:3%;">
                                  <ckeditor 

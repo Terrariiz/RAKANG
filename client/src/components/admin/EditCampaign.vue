@@ -34,10 +34,14 @@
                     label="รายละเอียดของแคมเปญ"
                     value="" required
                   ></v-textarea>
-                  <!-- <p class="lead">content</p> -->
-                  <p class="details">
-                      <!-- <v-text-field v-model="campaign.date" type="date" solo label="วันสิ้นสุดแคมเปญ" required></v-text-field> -->
-                       <v-menu
+                 
+                      
+                  
+              </div>
+              <v-row>
+                    <v-col cols="12" md="6" sm="12">
+                      <h3 class="title">วันที่สิ้นสุดแคมเปญ</h3>
+                      <v-menu
                               ref="menu"
                               v-model="menu"
                               :close-on-content-click="false"
@@ -64,10 +68,12 @@
                                 @change="save"
                               ></v-date-picker>
                             </v-menu>
+                    </v-col>
+                    <v-col cols="12" md="6" sm="12">
+                      <h3 class="title">สถานที่</h3>
                       <v-text-field v-model="campaign.location" class="location"  solo label="สถานที่" required></v-text-field>
-                      <!-- <span class="location">สถานที่</span> -->
-                  </p>
-              </div>
+                    </v-col>
+                  </v-row>
               <div class="details funding-goal">
                         <h3 class="title">เป้าหมาย</h3>
                         <v-text-field 
