@@ -79,23 +79,45 @@
          required></v-text-field>
       </v-col>
 
-      <v-col cols="6" sm="4" >
-         <v-text-field 
-         single-line solo  
-         v-model="register.birthdate"
-         label="Birthdate" 
-         :rules="dateRules" 
-         type="date"
-         required ></v-text-field>
+      <v-col cols="12" md="6" sm="4" >
+         <v-menu
+          ref="menu"
+          v-model="menu"
+          :close-on-content-click="false"
+          transition="scale-transition"
+          offset-y
+          min-width="auto"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-text-field
+              single-line solo
+              v-model="register.birthdate"
+              label="Birthday date"
+              prepend-icon="mdi-calendar"
+              :rules="dateRules"
+              readonly
+              required
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </template>
+          <v-date-picker
+            ref="picker"
+            v-model="register.birthdate"
+            :max="new Date().toISOString().substr(0, 10)"
+            min="1950-01-01"
+            @change="save"
+          ></v-date-picker>
+        </v-menu>
       </v-col>
 
-
-      <v-col cols="6" sm="4" >
+      <v-col cols="12" md="6" sm="4" >
          <v-text-field 
          single-line solo 
          v-model="register.phone" 
          :counter="10" 
          label="Phone" 
+         onkeypress="return event.charCode >= 48 && event.charCode <= 57"
          :rules="phoneRules" 
          required></v-text-field>
       </v-col>
@@ -142,6 +164,7 @@ import swal from "sweetalert2";
   data() {
     return {
       valid: false,
+      dateNow: null,
       register: {
         email: "",
         password: '',
@@ -185,9 +208,13 @@ import swal from "sweetalert2";
         ],
         phoneRules:[
           v => !!v || 'Phone is required',
-          v => v.length == 10 || 'Name must be 10 numbers',
+          v => v.length == 10 || 'Phone must be 10 numbers',
         ],
     }
+  },
+  async created() {
+    this.dateNow = new Date();
+    console.log(this.dateNow);
   },
   computed: {
     passwordConfirmationRule() {
@@ -197,7 +224,11 @@ import swal from "sweetalert2";
     components:{
       Navbar
   },
-  
+  watch: {
+      menu (val) {
+        val && setTimeout(() => (this.$refs.picker.activePicker = 'YEAR'))
+      },
+    },
     methods: {
       async registerUser() {
       try {
@@ -232,7 +263,10 @@ import swal from "sweetalert2";
       },
       reset () {
         this.$refs.form.reset()
-      }
+      },
+      save (date) {
+        this.$refs.menu.save(date)
+      },
     },
   }
 </script>

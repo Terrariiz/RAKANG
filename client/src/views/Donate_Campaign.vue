@@ -234,14 +234,14 @@ export default {
               } else if(res.data == 'complete'){
                 swal.fire({
                   icon: 'success',
-                  title: 'Your work has been saved',
+                  title: 'ทำรายการเสร็จสิ้น',
                   showConfirmButton: false,
                   timer: 1500
                 })
               } else if(res.data == 'incomplete'){
                 swal.fire({
-                  icon: 'success',
-                  title: 'Your work has been saved',
+                  icon: 'error',
+                  title: 'เกิดข้อผิดพลาดบางอย่าง',
                   showConfirmButton: false,
                   timer: 1500
                 })
