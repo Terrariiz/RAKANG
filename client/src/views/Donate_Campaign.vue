@@ -97,10 +97,10 @@
                         <progress class="progress is-danger" :value="(campaign.donate/campaign.amount)*100" max="100"></progress>
                     </div>
                     <v-row>
-                  <v-col style="text-align:left;" cols="12" md="9">
+                  <v-col style="text-align:left;" cols="9" md="9">
                     <span class="duration">สิ้นสุดวันที่ {{ campaign.date }} </span>
                   </v-col>
-                  <v-col style="text-align:right;" cols="12" md="3">  
+                  <v-col style="text-align:right;" cols="3" md="3">  
                     <!-- <span class="hide-txt">จำนวนคนที่บริจาค</span> -->
                         <span class="icon-people"><i class="fa fa-users" aria-hidden="true"></i> 0</span>
                   </v-col>
