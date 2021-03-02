@@ -3,7 +3,7 @@ const User = require('../../user/model/User')
 const DonateLog = require('../../log/model/DonateLog')
 const multer = require('multer');
 const fs = require('fs');
-var ObjectID = require('mongodb').ObjectID;
+
 
 exports.addnewcampaign = async(req,res) => {
   try{     
@@ -14,6 +14,7 @@ exports.addnewcampaign = async(req,res) => {
       content: req.body.content,
       image: req.file.filename,
       date: req.body.date,
+      status : 'open',
       startdate: now,
       amount: req.body.amount,
       donate: 0,
@@ -41,6 +42,17 @@ exports.ShowListCampaign = function(req,res){
           var dateA = new Date(a.startdate), dateB = new Date(b.startdate);
           return dateB -dateA;
       });
+      for(var i = 0; i <= (campaign.length - 1) ;i++){
+        if(campaign[i].status != 'close'){
+          var result = campaign[i].expired()
+        }
+        if(result == 'yes'){
+          campaign[i].status = "close"
+          console.log('set close')
+          campaign[i].save()
+        } 
+      }
+        
         res.json(campaign);
 
       }
@@ -57,8 +69,16 @@ exports.DetailCampaign = function(req,res){
       if(err){
         console.log(err)
       } else {
-        // var percentage = await campaign.percentage()
-        // var detail = {campaign , percentage}
+        for(var i = 0; i <= (campaign.length - 1) ;i++){
+          if(campaign[i].status != 'close'){
+            var result = campaign[i].expired()
+          }
+          if(result == 'yes'){
+            campaign[i].status = "close"
+            console.log('set close')
+            campaign[i].save()
+          } 
+        }
         
         res.json(campaign);
       }
