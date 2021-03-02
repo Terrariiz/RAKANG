@@ -211,8 +211,11 @@ export default {
               // that.percent = res.data.percentage
               that.campaign = res.data;
               console.log(that.campaign)
+              
+              
+
               this.end_date()
-              // that.campaign.date = moment(that.campaign.date).format(" DD-MM-YY A");
+
               if(moment(that.campaign.date).format('dddd') == 'Mondey'){
                 that.campaign.date = moment(that.campaign.date).format(" วันจันทร์ DD-MM-YY A");
               } else if(moment(that.campaign.date).format('dddd') == 'Tuesday'){
@@ -274,7 +277,8 @@ export default {
             })
         },
         end_date(){
-          var enddate = this.campaign.date;
+          
+          var enddate = moment(this.campaign.date).format(" DD-MM-YY A");
           var now = new Date().toISOString().substr(0, 10);
           now = moment(now).format(" dddd DD-MM-YY  A");
           console.log("kuy"+enddate)
