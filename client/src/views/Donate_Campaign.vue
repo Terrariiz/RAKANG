@@ -72,7 +72,7 @@
                   <img class="image -fullwidth img-responsive" id="showimage" :src="'http://localhost:4000/uploads/' + campaign.image"/>
                   <p class="lead">{{campaign.content}}</p>
                   <p class="details">
-                      <span class="duration">สิ้นสุดวันที่ {{ campaign.date }} </span>
+                      
                       <span class="location">สถานที่</span>
                   </p>
               </div>
@@ -90,9 +90,9 @@
                         <span class="value">เป้าหมาย {{ campaign.amount }} บาท</span>
                     </div>
                     <div >
-                        <span class="percent">
-                            <!-- <span class="hide-txt">ดำเนินการไปแล้ว</span>
-                            80% -->
+                        <span style="float:right;" class="percent">
+                            <!-- <span class="hide-txt">ดำเนินการไปแล้ว</span> -->
+                            {{Math.round((campaign.donate/campaign.amount)*100)}}%
                         </span>
                         <progress class="progress is-danger" :value="(campaign.donate/campaign.amount)*100" max="100"></progress>
                     </div>
@@ -278,7 +278,7 @@ export default {
           now = moment(now).format(" dddd DD-MM-YY  A");
           console.log("kuy"+enddate)
           console.log("kuy"+now)
-          if(enddate == now)
+          if(enddate == now || now > enddate)
           { this.end = true;
            this.notend = false;
          }
@@ -295,6 +295,13 @@ export default {
 </script>
 
 <style>
+.progress-bar .percent{
+  position: absolute;
+  top:-35px;
+  right: 0;
+  font-size: 1.75em;
+  color: #666;
+}
 .project-header{
   background-color: #fff8ec;
 }

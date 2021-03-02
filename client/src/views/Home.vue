@@ -45,9 +45,7 @@
               <progress class="progress is-danger" :value="(newcampaign.donate/newcampaign.amount)*100" max="100"></progress>
               
               <div class="btn-news">
-                <v-btn block style="background-color: #ffdd94; color:#455054;"
-                @click="ViewCampaign(newcampaign._id) "
-                >
+                <v-btn block style="background-color: #ffdd94; color:#455054;" @click="ViewCampaign(campaign._id)">
                   ดูเนื้อหา</v-btn
                 >
               </div>
@@ -158,6 +156,7 @@ export default {
       ],
     };
   },
+  
   mounted: async function mounted() {
     await this.$http
       .get("/campaign/ShowListCampaign")
@@ -188,7 +187,9 @@ export default {
   components: {
     Navbar,
   },
+  
 };
+
 </script>
 <style>
 /* .heroBlock{
