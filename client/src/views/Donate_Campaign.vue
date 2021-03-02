@@ -182,7 +182,7 @@ export default {
         campaign: null,
         tab: null,
         dialogDonate: false,
-        
+        thaidate : null,
         end:null,
         notend:null,
 
@@ -191,7 +191,7 @@ export default {
     mounted: function(){
       
       this.getData()
-      if(localStorage.getItem("donate-campaign")){
+      if(localStorage.getItem("donate-campaign") != null){
         this.AlertDonate()
       }
       
@@ -211,7 +211,24 @@ export default {
               // that.percent = res.data.percentage
               that.campaign = res.data;
               console.log(that.campaign)
-              that.campaign.date = moment(that.campaign.date).format(" dddd DD-MM-YY  A");
+              // that.campaign.date = moment(that.campaign.date).format(" DD-MM-YY A");
+              if(moment(that.campaign.date).format('dddd') == 'Mondey'){
+                that.campaign.date = moment(that.campaign.date).format(" วันจันทร์ DD-MM-YY A");
+              } else if(moment(that.campaign.date).format('dddd') == 'Tuesday'){
+                that.campaign.date = moment(that.campaign.date).format(" วันอังคาร DD-MM-YY A");
+              } else if(moment(that.campaign.date).format('dddd') == 'Wednesday'){
+                that.campaign.date = moment(that.campaign.date).format(" วันพุธ DD-MM-YY A");
+              } else if(moment(that.campaign.date).format('dddd') == 'Thursday'){
+                that.campaign.date = moment(that.campaign.date).format(" วันพฤหัสบดี DD-MM-YY A");
+              } else if(moment(that.campaign.date).format('dddd') == 'Friday'){
+                that.campaign.date = moment(that.campaign.date).format(" วันศุกร์ DD-MM-YY A");
+              } else if(moment(that.campaign.date).format('dddd') == 'Saturday'){
+                that.campaign.date = moment(that.campaign.date).format(" วันเสาร์ DD-MM-YY A");
+              } else if(moment(that.campaign.date).format('dddd') == 'Sunday'){
+                that.campaign.date = moment(that.campaign.date).format(" วันอาทิตย์ DD-MM-YY A");
+              }
+              
+              
               
               this.end_date()
             })
@@ -220,7 +237,6 @@ export default {
             })
         },
         AlertDonate(){
-          // var campaign_id = localStorage.getItem("donate-campaign")
           this.$http.get("/donatelog/CheckDonate/"+localStorage.getItem("user_id"))
             .then((res) => {
               console.log('res')

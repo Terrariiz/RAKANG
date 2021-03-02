@@ -76,9 +76,24 @@ export default {
         // console.log(this.campaigns[0]);
         var i = 0;
         for (this.campaigns[i]; ; i++) {
-          this.campaigns[i].date = moment(this.campaigns[i].date).format(
-            " dddd DD-MM-YY  A"
-          );
+          // this.campaigns[i].date = moment(this.campaigns[i].date).format(
+          //   " dddd DD-MM-YY  A"
+          // );
+          if(moment(this.campaigns[i].date).format('dddd') == 'Mondey'){
+                this.campaigns[i].date = moment(this.campaigns[i].date).format(" วันจันทร์ DD-MM-YY A");
+              } else if(moment(this.campaigns[i].date).format('dddd') == 'Tuesday'){
+                this.campaigns[i].date = moment(this.campaigns[i].date).format(" วันอังคาร DD-MM-YY A");
+              } else if(moment(this.campaigns[i].date).format('dddd') == 'Wednesday'){
+                this.campaigns[i].date = moment(this.campaigns[i].date).format(" วันพุธ DD-MM-YY A");
+              } else if(moment(this.campaigns[i].date).format('dddd') == 'Thursday'){
+                this.campaigns[i].date = moment(this.campaigns[i].date).format(" วันพฤหัสบดี DD-MM-YY A");
+              } else if(moment(this.campaigns[i].date).format('dddd') == 'Friday'){
+                this.campaigns[i].date = moment(this.campaigns[i].date).format(" วันศุกร์ DD-MM-YY A");
+              } else if(moment(this.campaigns[i].date).format('dddd') == 'Saturday'){
+                this.campaigns[i].date = moment(this.campaigns[i].date).format(" วันเสาร์ DD-MM-YY A");
+              } else if(moment(this.campaigns[i].date).format('dddd') == 'Sunday'){
+                this.campaigns[i].date = moment(this.campaigns[i].date).format(" วันอาทิตย์ DD-MM-YY A");
+              }
           this.percent[i] = (this.campaigns[i].donate / this.campaigns[i].amount)* 100
         }
 

@@ -30,7 +30,7 @@
           <v-col class="cols-detail-campaign" cols="12" md="6">
             <v-container>
                 <h1> {{newcampaign.name}} </h1>
-              <h4>detail</h4>
+              <h4> {{newcampaign.content}} </h4>
               <div >
                 <v-row>
                   <v-col style="text-align:left;" cols="12" md="3">
@@ -45,7 +45,9 @@
               <progress class="progress is-danger" :value="(newcampaign.donate/newcampaign.amount)*100" max="100"></progress>
               
               <div class="btn-news">
-                <v-btn block style="background-color: #ffdd94; color:#455054;">
+                <v-btn block style="background-color: #ffdd94; color:#455054;"
+                @click="ViewCampaign(newcampaign._id) "
+                >
                   ดูเนื้อหา</v-btn
                 >
               </div>
@@ -174,6 +176,15 @@ export default {
         console.log(err);
       });
   },
+  methods: {
+    ViewCampaign(campaignid) {
+      this.$router.push({
+        name: "UserDetailCampaign",
+        params: { id: campaignid },
+      });
+    },
+  },
+  
   components: {
     Navbar,
   },
