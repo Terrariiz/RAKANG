@@ -42,6 +42,9 @@ const CampaignSchema = new mongoose.Schema({
   done:{
     type: String,
   },
+  categories:{
+    type: String
+  },
 
  
 });

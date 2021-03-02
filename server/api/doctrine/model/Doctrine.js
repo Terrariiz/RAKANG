@@ -12,6 +12,9 @@ const doctrineSchema = new mongoose.Schema({
   edittime: {
     type: Date,
   },
+  categories:{
+    type: String
+  }
 
 });
 

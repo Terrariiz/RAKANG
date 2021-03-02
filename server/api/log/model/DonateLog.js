@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const newSchema = new mongoose.Schema({
+const donateSchema = new mongoose.Schema({
   campaign:{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Campaign',
@@ -30,5 +30,5 @@ const newSchema = new mongoose.Schema({
  
 });
 
-const DonateLog = mongoose.model("DonateLog", newSchema);
+const DonateLog = mongoose.model("DonateLog", donateSchema);
 module.exports = DonateLog;

@@ -5,6 +5,7 @@ const newSchema = new mongoose.Schema({
   title: {
     type: String,
   },
+  
   content: {
     type: String,
   },
@@ -13,7 +14,10 @@ const newSchema = new mongoose.Schema({
   },
   date: {
     type: Date
-  }
+  },
+  categories:{
+    type: String
+  },
  
 });
 
