@@ -18,7 +18,7 @@
           data-clientip="124.120.153.53"
           data-routeno="1"
           data-currency="764"
-          data-description="ควาย"
+          data-description="บริจาคผ่านเว็บระฆังธรรม"
           data-apikey="Z5O4ARB0wikPpsSwpjXwmeuVCdD2zVV27Sdbti9gTvYWEOiBo7s7fB6S81LZAE3I"
         >
         </modernpay:widget>

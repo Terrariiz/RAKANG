@@ -211,6 +211,7 @@ export default {
               // that.percent = res.data.percentage
               that.campaign = res.data;
               console.log(that.campaign)
+              this.end_date()
               // that.campaign.date = moment(that.campaign.date).format(" DD-MM-YY A");
               if(moment(that.campaign.date).format('dddd') == 'Mondey'){
                 that.campaign.date = moment(that.campaign.date).format(" วันจันทร์ DD-MM-YY A");
@@ -230,7 +231,7 @@ export default {
               
               
               
-              this.end_date()
+              
             })
             .catch(function(err){
               console.log(err)
