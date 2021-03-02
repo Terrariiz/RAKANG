@@ -45,7 +45,7 @@
               <progress class="progress is-danger" :value="(newcampaign.donate/newcampaign.amount)*100" max="100"></progress>
               
               <div class="btn-news">
-                <v-btn block style="background-color: #ffdd94; color:#455054;" @click="ViewCampaign(campaign._id)">
+                <v-btn block style="background-color: #ffdd94; color:#455054;" @click="ViewCampaign(newcampaign._id)">
                   ดูเนื้อหา</v-btn
                 >
               </div>
@@ -164,9 +164,21 @@ export default {
         console.log(res.data);
         this.newcampaign = res.data[0];
         
-        this.newcampaign.date = moment(this.newcampaign.date).format(
-          " dddd DD-MM-YY  A"
-        );
+        if(moment(this.newcampaign.date).format('dddd') == 'Mondey'){
+                this.newcampaign.date = moment(this.newcampaign.date).format(" วันจันทร์ DD-MM-YY A");
+              } else if(moment(this.newcampaign.date).format('dddd') == 'Tuesday'){
+                this.newcampaigื.date = moment(this.newcampaign.date).format(" วันอังคาร DD-MM-YY A");
+              } else if(moment(this.newcampaign.date).format('dddd') == 'Wednesday'){
+                this.newcampaign.date = moment(this.newcampaign.date).format(" วันพุธ DD-MM-YY A");
+              } else if(moment(this.newcampaign.date).format('dddd') == 'Thursday'){
+                this.newcampaign.date = moment(this.newcampaign.date).format(" วันพฤหัสบดี DD-MM-YY A");
+              } else if(moment(this.newcampaign.date).format('dddd') == 'Friday'){
+                this.newcampaign.date = moment(this.newcampaign.date).format(" วันศุกร์ DD-MM-YY A");
+              } else if(moment(this.newcampaign.date).format('dddd') == 'Saturday'){
+                this.newcampaign.date = moment(this.newcampaign.date).format(" วันเสาร์ DD-MM-YY A");
+              } else if(moment(this.newcampaign.date).format('dddd') == 'Sunday'){
+                this.newcampaigื.date = moment(this.newcampaign.date).format(" วันอาทิตย์ DD-MM-YY A");
+              }
         
 
         
