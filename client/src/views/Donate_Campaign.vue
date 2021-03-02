@@ -97,10 +97,10 @@
                         <progress class="progress is-danger" :value="(campaign.donate/campaign.amount)*100" max="100"></progress>
                     </div>
                     <v-row>
-                  <v-col style="text-align:left;" cols="12" md="3">
-                    <!-- <span class="timeleft">365 วัน</span>เดี๋ยวกลับมาแก้ -->
+                  <v-col style="text-align:left;" cols="9" md="9">
+                    <span class="duration">สิ้นสุดวันที่ {{ campaign.date }} </span>
                   </v-col>
-                  <v-col style="text-align:right;" cols="12" md="9">  
+                  <v-col style="text-align:right;" cols="3" md="3">  
                     <!-- <span class="hide-txt">จำนวนคนที่บริจาค</span> -->
                         <span class="icon-people"><i class="fa fa-users" aria-hidden="true"></i> 0</span>
                   </v-col>
@@ -296,13 +296,18 @@ export default {
 </script>
 
 <style>
-.progress-bar .percent{
+/* .value{
+  font-weight: 100;
+  margin: 0 0 10px;
+  font-size: 1.375em;
+}
+.percent{
   position: absolute;
-  top:-35px;
+  top:35px;
   right: 0;
   font-size: 1.75em;
   color: #666;
-}
+} เดี๋ยวมาแก้ */ 
 .project-header{
   background-color: #fff8ec;
 }
