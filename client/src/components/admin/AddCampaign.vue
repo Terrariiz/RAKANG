@@ -184,7 +184,6 @@
                 v-model="campaign.done"
                 @input="onEditorInput">
             </ckeditor> -->
-<<<<<<< HEAD
             </v-col>
           </v-row>
         </v-container>
@@ -215,26 +214,6 @@
       </div>
     </form>
   </div>
-=======
-         </v-col>
-      </v-row>
-      
-  </v-container>
-                <v-row style="margin-top:3%;">
-                <v-col  cols = "3"></v-col>
-                <v-col  cols = "3">
-                  <v-btn color="error" style="float:right;" dark to='/admin/listcampaign'>Cancle</v-btn>
-                </v-col>
-                <v-col  cols = "3">
-                  <v-btn color="primary" style="float:left;" type="submit">Submit</v-btn>
-                </v-col>
-                  <v-col  cols = "3"></v-col>
-              </v-row>
-    </div>
-        </form>
-  
-    </div>
->>>>>>> 10d4d2c85b5047e22155b4b9f5c24443da2a1cd9
 </template>
 
 <style >
@@ -468,7 +447,6 @@ export default {
           console.log("error");
         }
       }
-<<<<<<< HEAD
     },
     async onFileSelected(event) {
       this.campaign.image = event.target.files[0];
@@ -491,29 +469,4 @@ export default {
     },
   },
 };
-=======
-        },
-        async onFileSelected(event){
-            this.campaign.image = event.target.files[0]
-            const input = this.$refs.fileInput
-            const files = input.files
-            if (files && files[0]) {
-                const reader = new FileReader
-                reader.onload = e => {
-                    this.imageData = e.target.result
-                }
-            reader.readAsDataURL(files[0])
-            // this.$emit('input', files[0])
-            }
-        },
-        chooseImage () {
-            this.$refs.fileInput.click()
-        },
-        save (date) {
-          this.$refs.menu.save(date)
-      },
-        
-    }
-}
->>>>>>> 10d4d2c85b5047e22155b4b9f5c24443da2a1cd9
 </script>
