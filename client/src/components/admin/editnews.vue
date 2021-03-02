@@ -29,6 +29,14 @@
                                 <!-- <h1 style="color:black;">หัวข้อเรื่อง</h1> -->
                                  <center><v-text-field  v-model="news.title" style="width:70%; text-align: center;" label="หัวข้อเรื่อง" required></v-text-field></center>
                                 <br><br>
+                                <v-select
+                                    v-model="news.categories"
+                                    :items="items"
+                                    menu-props="auto"
+                                    label="เลือกหมวดหมู่"
+                                    single-line
+                                ></v-select>
+                                <br><br>
                                 <v-container  style="background-color: white ; margin-right:3%;">
                                     <!-- <v-container fluid>
                                         <v-textarea name="input-7-1" filledlabel="Label" label="รายละเอียด" auto-grow></v-textarea>
@@ -122,13 +130,14 @@ export default {
                 image: null,
                 imagepath: "" ,
                 newimage: null,
-                oldimage: ""
-
+                oldimage: "",
+                categories: null,
             },
+            items:['วัด','โรงพยาบาล','มูลนิธิ','ประชาสัมพันธ์ของเว็บไซค์','อื่นๆ'],
             editorConfig: {
-                    // The configuration of the editor.
-                },
-                imageData:null,
+                // The configuration of the editor.
+            },
+            imageData:null,
         }
     },
     mounted: function(){
@@ -146,7 +155,7 @@ export default {
             var formData = new FormData();
             formData.append('title', this.news.title)
             formData.append('content', this.news.content)
-            
+            formData.append('categories', this.news.categories)
             if(this.news.newimage == null){
                 console.log('true')
                 formData.append('imagepath', this.news.image)

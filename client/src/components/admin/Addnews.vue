@@ -26,6 +26,14 @@
                                     <v-text-field v-model="title" style="width:70%; text-align: center;" label="หัวข้อเรื่อง" required></v-text-field>
                                 </center>
                                 <br><br>
+                                <v-select
+                                    v-model="categories"
+                                    :items="items"
+                                    menu-props="auto"
+                                    label="เลือกหมวดหมู่"
+                                    single-line
+                                ></v-select>
+                                <br><br>
                                 <v-container id ="detailnews"  style="background-color: white ; margin-right:3%;">
                                  <ckeditor 
                                     id="content"
@@ -68,6 +76,8 @@ const Navbar = () => import('@/components/navbar/navbar')
                     // The configuration of the editor.
                 },
                 imageData:null,
+                items:['วัด','โรงพยาบาล','มูลนิธิ','ประชาสัมพันธ์ของเว็บไซค์','อื่นๆ'],
+                categories: null
             };
         },
         components:{
@@ -84,6 +94,7 @@ const Navbar = () => import('@/components/navbar/navbar')
                 formData.append('content', this.content)
                 formData.append('image', this.image)
                 formData.append('imagepath', this.image.name)
+                formData.append('categories', this.categories)
                 console.log(formData)
                 let news = await this.$http.post("/news/addnews", formData);
                 console.log(news);

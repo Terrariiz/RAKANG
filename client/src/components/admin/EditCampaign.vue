@@ -74,7 +74,8 @@
                       <v-text-field v-model="campaign.location" class="location"  solo label="สถานที่" required></v-text-field>
                     </v-col>
                   </v-row>
-              <div class="details funding-goal">
+                  <v-row>
+                    <v-col cols="12" md="6" sm="12">
                         <h3 class="title">เป้าหมาย</h3>
                         <v-text-field 
                             v-model="campaign.amount"
@@ -86,8 +87,19 @@
                             onkeypress="return event.charCode >= 48"
                             min="1"
                         ></v-text-field>
-                        
-                    </div>
+                    </v-col>
+                    <v-col cols="12" md="6" sm="12">
+                      <h3 class="title">หมวดหมู่</h3>
+                      <v-select
+                          v-model="campaign.categories"
+                          :items="items"
+                          menu-props="auto"
+                          label="เลือกหมวดหมู่"
+                          solo
+                          required
+                      ></v-select>
+                    </v-col>
+                  </v-row>    
           </v-col>
           <!-- <v-col  cols="12" md="4" sm="12">
             <div class="fund-raising affix-top">
@@ -318,6 +330,7 @@ export default {
     data(){
         return{ 
             menu: false,
+            items:['วัด','โรงพยาบาล มูลนิธิ'],
             campaign: {
                 name: "",
                 content: "",
@@ -330,6 +343,7 @@ export default {
                 overview: null,
                 done: null,
                 location: null,
+                categories: null
             },
            
             editorConfig: {
@@ -356,7 +370,7 @@ export default {
             formData.append('overview', this.campaign.overview)
             formData.append('done', this.campaign.done)
             formData.append('location', this.campaign.location)
-            
+            formData.append('categories', this.campaign.categories)
             if(this.campaign.newimage == null){
                 console.log('true')
                 formData.append('imagepath', this.campaign.image)

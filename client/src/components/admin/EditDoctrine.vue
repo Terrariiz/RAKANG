@@ -34,6 +34,14 @@
                         <v-flex xs12 md6>
                                 <center><v-text-field  v-model="doctrine.title" style="width:70%; text-align: center;" label="หัวข้อเรื่อง" required></v-text-field></center>
                                 <br><br>
+                                <v-select
+                                    v-model="doctrine.categories"
+                                    :items="items"
+                                    menu-props="auto"
+                                    label="เลือกหมวดหมู่"
+                                    single-line
+                                ></v-select>
+                                <br><br>
                                 <v-container  style="background-color: white ; margin-right:3%;">
                                     <!-- <v-container fluid>
                                         <v-textarea name="input-7-1" filledlabel="Label" label="รายละเอียด" auto-grow></v-textarea>
@@ -126,12 +134,13 @@ export default {
                 newimage: null,
                 oldimage: "",
                 imagedata:null,
-
+                categories: null,
             },
             editorConfig: {
-                    // The configuration of the editor.
-                },
-                imageData:null,
+                // The configuration of the editor.
+            },
+            imageData:null,
+            items:['บทสวดมนต์','หลักธรรม คำสอน','คติสอนใจ','พุทธประวัติ','อื่นๆ'],
         }
     },
     components:{
@@ -146,7 +155,7 @@ export default {
             var formData = new FormData();
             formData.append('title', this.doctrine.title)
             formData.append('content', this.doctrine.content)
-            
+            formData.append('content', this.doctrine.categories)
             if(this.doctrine.newimage == null){
                 console.log('true')
                 formData.append('imagepath', this.doctrine.image)

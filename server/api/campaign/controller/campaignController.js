@@ -21,6 +21,7 @@ exports.addnewcampaign = async(req,res) => {
       location: req.body.location,
       overview: req.body.overview,
       done: "รอความคืบหน้า",
+      categories: req.body.categories,
     });
     console.log(add)
     let data = await add.save()

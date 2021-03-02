@@ -27,6 +27,14 @@
                         <v-flex xs12 md6>
                                 <center><v-text-field  v-model="title" style="width:70%; text-align: center;" label="หัวข้อเรื่อง" required></v-text-field></center>
                                 <br><br>
+                                <v-select
+                                    v-model="categories"
+                                    :items="items"
+                                    menu-props="auto"
+                                    label="เลือกหมวดหมู่"
+                                    single-line
+                                ></v-select>
+                                <br><br>
                                 <v-container id ="detaildoctrine" style="background-color: white ; margin-right:3%;">
                                     <ckeditor 
                                     id="content"
@@ -67,6 +75,8 @@ export default {
                 // The configuration of the editor.
             },
             imageData:null,
+            items:['บทสวดมนต์','หลักธรรม คำสอน','คติสอนใจ','พุทธประวัติ','อื่นๆ'],
+            categories: null
         }
     },
     components:{
@@ -83,6 +93,7 @@ export default {
             formData.append('content', this.content)
             formData.append('image', this.image)
             formData.append('imagepath', this.image.name)
+            formData.append('categories', this.categories)
             console.log(formData)
             let doctrine = await this.$http.post("/doctrine/adddoctrine", formData);
             console.log(doctrine);

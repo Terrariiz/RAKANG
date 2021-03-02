@@ -14,7 +14,8 @@ exports.addnews = async(req,res) => {
       title: req.body.title,
       content: req.body.content,
       image: req.file.filename,
-      date: today
+      date: today,
+      categories: req.body.categories
     });
     console.log(add)
     let data = await add.save()
