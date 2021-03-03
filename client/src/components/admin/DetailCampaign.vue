@@ -14,7 +14,7 @@
       <v-row>
           <v-col  cols="12" md="8" sm="12">
               <div class="project-content">
-                  <img class="image -fullwidth img-responsive" id="showimage" :src="'http://localhost:4000/uploads/' + campaign.image"/>
+                  <img class="image -fullwidth img-responsive" id="showimage" :src="'http://localhost:4000/image/campaign/' + campaign.image"/>
                   <p class="lead">{{campaign.content }}</p>
                   <p class="details">
                       <span class="duration">สิ้นสุดวันที่ {{ campaign.date }} </span><br>

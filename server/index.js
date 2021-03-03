@@ -39,7 +39,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //configure body-parser ends here
 app.use(morgan("dev")); // configire morgan
-app.use(express.static('uploads'));
+app.use(express.static('image'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 

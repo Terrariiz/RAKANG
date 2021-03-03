@@ -96,7 +96,7 @@ exports.DeleteCampaign = function(req,res){
       if(err){
         console.log(err)
       } else {
-          const image  = './public/uploads/' + campaign.image;
+          const image  = './public/image/campaign/' + campaign.image;
           fs.unlink(image , function(err){
               if(err){
                   console.log(err);
@@ -123,7 +123,7 @@ exports.EditCampaign = async(req,res) =>{
     console.log(req.body.oldimage)
     if(req.file){
       if(req.file.filename != req.body.oldimage){
-        const image  = './public/uploads/' + req.body.oldimage;
+        const image  = './public/image/campaign/' + req.body.oldimage;
         fs.unlink(image , function(err){
             if(err){
                 console.log(err);
