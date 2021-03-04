@@ -12,7 +12,7 @@
               <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
                 <!-- <div><i style="font-size: 50px; float:left;" class="fa fa-arrow-left" aria-hidden="true"></i></div> -->
               <a href="#"><br>
-                <img class="img-fluid rounded" id="showimage" :src="'http://localhost:4000/uploads/' + news.image"/>
+                <img class="img-fluid rounded" id="showimage" :src="'http://localhost:4000/image/new/' + news.image"/>
               </a>
               </div>
               </center>
