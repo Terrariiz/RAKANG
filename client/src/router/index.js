@@ -32,7 +32,7 @@ const editprofile            = () => import('@/components/profile/editprofile')
 const test                   = () => import('@/components/admin/test')
 const payment                = () => import('@/components/admin/payment')
 const UserDetailCampaign     = () => import('@/views/Donate_Campaign')
-
+const UserDetailDoctrine     = () => import('@/views/detail_Doctrine')
 
 Vue.use(VueRouter)
 
@@ -66,6 +66,11 @@ const routes = [
     path: '/doctrine',
     name: 'Doctrine',
     component: doctrine
+  },
+  {
+    path: '/doctrine/:id',
+    name: 'UserDetailDoctrine',
+    component: UserDetailDoctrine
   },
   {
     path: '/news',

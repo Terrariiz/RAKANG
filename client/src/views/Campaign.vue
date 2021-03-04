@@ -105,10 +105,11 @@ export default {
   },
   methods: {
     ViewCampaign(campaignid) {
-      this.$router.push({
-        name: "UserDetailCampaign",
-        params: { id: campaignid },
-      });
+      this.$router.push({ path: '/campaign/'+campaignid})
+      // this.$router.push({
+      //   name: "UserDetailCampaign",
+      //   params: { id: campaignid },
+      // });
     },
     //  
   },
