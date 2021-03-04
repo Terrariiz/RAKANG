@@ -38,7 +38,7 @@
               <img
                 class="image -fullwidth img-responsive"
                 id="showimage"
-                :src="'http://localhost:4000/uploads/' + doctrine.image"
+                :src="'http://localhost:4000/image/doctrine/' + doctrine.image"
               />
               <div class="lead" v-html="doctrine.content">{{ doctrine.content }}</div>
             </div>
