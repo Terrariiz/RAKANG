@@ -32,6 +32,7 @@ const editprofile            = () => import('@/components/profile/editprofile')
 const test                   = () => import('@/components/admin/test')
 const payment                = () => import('@/components/admin/payment')
 const UserDetailCampaign     = () => import('@/views/Donate_Campaign')
+const random                 = () => import('@/views/random')
 
 
 Vue.use(VueRouter)
@@ -255,7 +256,12 @@ const routes = [
     meta: {
       requiresUserAuth: true
     }
-  }
+  },
+  {
+    path: '/random',
+    name: 'random',
+    component: random
+  },
   
 ]
 
