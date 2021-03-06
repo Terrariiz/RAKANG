@@ -50,7 +50,7 @@ exports.EditDoctrine = async(req,res) =>{
     const today = new Date();
     if(req.file){
       if(req.file.filename != req.body.oldimage){
-        const image  = './public/uploads/' + req.body.oldimage;
+        const image  = './public/image/doctrine/' + req.body.oldimage;
         fs.unlink(image , function(err){
             if(err){
                 console.log(err);
@@ -123,7 +123,7 @@ exports.DeleteDoctrine = function(req,res){
       if(err){
         console.log(err)
       } else {
-          const image  = './public/uploads/' + doctrine.image;
+          const image  = './public/image/doctrine/' + doctrine.image;
           fs.unlink(image , function(err){
               if(err){
                   console.log(err);

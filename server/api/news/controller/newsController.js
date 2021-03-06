@@ -1,10 +1,6 @@
 const News = require("../model/News");
 const multer = require('multer');
 const fs = require('fs');
-
-
-
-  
   
 exports.addnews = async(req,res) => {
   try{     
@@ -65,7 +61,7 @@ exports.DeleteNews = function(req,res){
       if(err){
         console.log(err)
       } else {
-          const image  = './public/uploads/' + news.image;
+          const image  = './public/image/new/' + news.image;
           fs.unlink(image , function(err){
               if(err){
                   console.log(err);
@@ -93,7 +89,7 @@ exports.EditNews = async(req,res) =>{
     const today = new Date();
     if(req.file){
       if(req.file.filename != req.body.oldimage){
-        const image  = './public/uploads/' + req.body.oldimage;
+        const image  = './public/image/new/' + req.body.oldimage;
         fs.unlink(image , function(err){
             if(err){
                 console.log(err);

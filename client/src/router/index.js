@@ -69,6 +69,11 @@ const routes = [
     component: doctrine
   },
   {
+    path: '/doctrine/:id',
+    name: 'UserDetailDoctrine',
+    component: UserDetailDoctrine
+  },
+  {
     path: '/news',
     name: 'News',
     component: news

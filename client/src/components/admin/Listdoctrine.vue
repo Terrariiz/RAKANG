@@ -31,7 +31,7 @@
             <tbody>
               <tr  @submit.prevent="editdoctrine" v-for="doctrine in doctrines"  :key="doctrine._id">
                 
-                <td><center><img :src="'http://localhost:4000/uploads/' + doctrine.image" class="img-fluid" style="width: 100px; height: 100px; object-fit: cover;  margin:3%;" align="center"></center></td>
+                <td><center><img :src="'http://localhost:4000/image/doctrine/' + doctrine.image" class="img-fluid" style="width: 100px; height: 100px; object-fit: cover;  margin:3%;" align="center"></center></td>
                 <td>{{ doctrine.title }}</td>
                 <!-- <td v-html="doctrine.content">{{ doctrine.content }}</td> -->
                 <td>
@@ -72,11 +72,11 @@ const Navbar = () => import('@/components/navbar/navbar')
     mounted: async function mounted(){
       await this.$http.get("/doctrine/ShowListDoctrine")
       .then((res) => {
-        this.doctrines.sort(function(a, b){
-            return a.date - b.date;
-        });
         console.log(res.data)
         this.doctrines = res.data;
+        this.doctrines.sort(function(a, b){
+            return new Date(b.edittime) - new Date(a.edittime);
+        });
         console.log(this.doctrines)
       })
       .catch(function(err){

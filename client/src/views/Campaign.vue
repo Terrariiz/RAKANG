@@ -10,7 +10,7 @@
         <v-row class="row-news">
           <v-col cols="12" md="6">
             <v-img
-            :src="'http://localhost:4000/uploads/' + campaign.image"
+            :src="'http://localhost:4000/image/campaign/' + campaign.image"
             class="img-fluid"
             style=""
             align="center"
@@ -105,10 +105,11 @@ export default {
   },
   methods: {
     ViewCampaign(campaignid) {
-      this.$router.push({
-        name: "UserDetailCampaign",
-        params: { id: campaignid },
-      });
+      this.$router.push({ path: '/campaign/'+campaignid})
+      // this.$router.push({
+      //   name: "UserDetailCampaign",
+      //   params: { id: campaignid },
+      // });
     },
     //  
   },
