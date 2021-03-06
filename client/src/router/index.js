@@ -33,7 +33,7 @@ const test                   = () => import('@/components/admin/test')
 const payment                = () => import('@/components/admin/payment')
 const UserDetailCampaign     = () => import('@/views/Donate_Campaign')
 const random                 = () => import('@/views/random')
-
+const UserDetailDoctrine     = () => import('@/views/detail_Doctrine')
 
 Vue.use(VueRouter)
 
