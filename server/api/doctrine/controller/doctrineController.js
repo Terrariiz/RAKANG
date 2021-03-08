@@ -30,6 +30,9 @@ exports.ShowListDoctrine = async(req,res) =>{
       if(err){
         console.log(err)
       } else {
+        doctrine.sort(function(a, b){
+            return new Date(b.edittime) - new Date(a.edittime);
+        });
         console.log('else')
         res.json(doctrine);
       }
@@ -139,6 +142,8 @@ exports.DeleteDoctrine = function(req,res){
     console.log(err)
   }
 }
+
+
   
   
 

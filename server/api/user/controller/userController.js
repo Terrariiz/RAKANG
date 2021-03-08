@@ -1,5 +1,6 @@
 const User = require("../model/User");
 const fs = require('fs');
+const Doctrine = require("../../doctrine/model/Doctrine");
 
 exports.registerNewUser = async (req, res) => {
     try {
@@ -187,5 +188,76 @@ exports.getMyRank = async (req, res) => {
     console.log(err);
   }
 };
+
+exports.AddFavouriteDoctrine = async (req, res) => {
+  try{
+    User.findById(req.params.id, function(err,user){
+      if(err){
+        console.log(err);
+      } else{
+        Doctrine.findById(req.params.doctrine, function(err , doctrine){
+          if(err){
+            console.log(err)
+          } else {
+            user.favdoctrinelist.push(doctrine)
+            doctrine.favby.push(user)
+            
+            user.save()
+            doctrine.save()
+          }
+        })
+      }
+    })
+  } catch (err) {
+    res.status(400).json({ err: err });
+    console.log(err);
+  }
+};
+
+exports.RemoveFavouriteDoctrine = async (req, res) => {
+  try{
+    User.findById(req.params.id, function(err,user){
+      if(err){
+        console.log(err);
+      } else{
+        Doctrine.findById(req.params.doctrine, function(err , doctrine){
+          if(err){
+            console.log(err)
+          } else {
+            user.favdoctrinelist.remove(doctrine)
+            doctrine.favby.remove(user)
+            
+            user.save()
+            doctrine.save()
+          }
+        })
+      }
+    })
+  } catch (err) {
+    res.status(400).json({ err: err });
+    console.log(err);
+  }
+};
+
+exports.CheckFav = async(req, res) =>{
+  try{
+    var result = false
+    await User.findById(req.params.id, function(err, user){
+      var i = 0
+      for( i ; i < user.favdoctrinelist.length  ; i++){
+        if(user.favdoctrinelist[i].equals(req.params.doctrine)){
+          result = true
+          break
+        }
+      }
+      res.send({"result": result}) 
+    })
+  } catch (err){
+    res.status(400).json({ err: err });
+    console.log(err);
+  }
+}
+
+
 
 

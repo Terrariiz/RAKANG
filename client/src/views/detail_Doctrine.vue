@@ -68,12 +68,16 @@ export default {
     },
     methods: {
         getData(){
+            var IsFav
+            if(localStorage.getItem("user_id")){
+              var id = localStorage.getItem("user_id")
+            }
             this.$http.get("/doctrine/DetailDoctrine/"+this.$route.params.id)
             .then((res) => {
                 console.log(res.data)
                 this.doctrine = res.data;
                 console.log(this.doctrine)
-                this.bookmark = {doctrinesID: this.doctrine._id, value: false}
+                
                 if(moment(this.doctrine.edittime).format('dddd') == 'Mondey'){
                     this.doctrine.edittime = moment(this.doctrine.edittime).format(" วันจันทร์ DD-MM-YYYY ");
                 } else if(moment(this.doctrine.edittime).format('dddd') == 'Tuesday'){
@@ -89,14 +93,27 @@ export default {
                 } else if(moment(this.doctrine.edittime).format('dddd') == 'Sunday'){
                     this.doctrine.edittime = moment(this.doctrine.edittime).format(" วันอาทิตย์ DD-MM-YYYY ");
                 }
+                this.$http.get("/user/"+id+"/CheckFav/"+this.doctrine._id).then((res) => {
+                console.log(res.data.result)
+                IsFav = res.data.result
+                this.bookmark = {doctrinesID: this.doctrine._id, value: IsFav}
+              })
             })
         .catch(function(err){
           console.log(err)
         })
       },
       //เปลี่ยน value ใน bookmark
+
       clickBookmarks(){
-        this.bookmark.value = !this.bookmark.value
+        var id = localStorage.getItem("user_id")
+          if(this.bookmark.value == false){
+            this.$http.post("/user/"+id+"/AddFavouriteDoctrine/"+this.$route.params.id)
+            this.bookmark.value = !this.bookmark.value
+          } else{
+            this.$http.post("/user/"+id+"/RemoveFavouriteDoctrine/"+this.$route.params.id)
+            this.bookmark.value = !this.bookmark.value
+          }
       }
     },
 };
