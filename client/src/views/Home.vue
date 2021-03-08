@@ -25,7 +25,7 @@
         <v-card elevation="5" outlined shaped >
         <v-row class="row-news">
           <v-col cols="12" md="6">
-            <img class="image -fullwidth img-responsive" id="showimage" :src="'http://localhost:4000/uploads/' + newcampaign.image"/>
+            <img class="image -fullwidth img-responsive" id="showimage" :src="'http://localhost:4000/image/campaign/' + newcampaign.image"/>
           </v-col>
           <v-col class="cols-detail-campaign" cols="12" md="6">
             <v-container>
