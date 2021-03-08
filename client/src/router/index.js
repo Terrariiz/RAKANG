@@ -34,6 +34,7 @@ const payment                = () => import('@/components/admin/payment')
 const UserDetailCampaign     = () => import('@/views/Donate_Campaign')
 const random                 = () => import('@/views/random')
 const UserDetailDoctrine     = () => import('@/views/detail_Doctrine')
+const UserDetailNews         = () => import('@/views/detail_news')
 
 Vue.use(VueRouter)
 
@@ -77,6 +78,11 @@ const routes = [
     path: '/news',
     name: 'News',
     component: news
+  },
+  {
+    path: '/news/:id',
+    name: 'UserDetailNews',
+    component: UserDetailNews
   },
   {
     path: '/about',

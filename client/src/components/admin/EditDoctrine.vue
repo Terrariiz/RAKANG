@@ -13,7 +13,8 @@
                         <v-flex xs12 md6 >
                             <v-container id = "picturedoctrine"  >
                                 <center><v-div style=""  class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
-                                    <span  v-if="!imageData"  class="placeholder">Choose an Image</span>
+                                    <img v-if="!imageData" class="image -fullwidth img-responsive" id="showimage" :src="'http://localhost:4000/image/doctrine/' + doctrine.image"/>
+                                    <span  v-if="!doctrine.image"  class="placeholder">Choose an Image</span>
                                     <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  v-on:change="onFileSelected" >
                                 </v-div></center>
 
