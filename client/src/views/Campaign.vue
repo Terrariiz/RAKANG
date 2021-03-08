@@ -4,6 +4,7 @@
       <Navbar></Navbar>
     </div>
     <h1>Campaign</h1>
+    <!-- Test -->
     <!-- test -->
      <v-container class="container-news">
         <v-card class="margin-card" v-for="(campaign,percent) in campaigns " :key="percent" elevation="5" outlined shaped >
