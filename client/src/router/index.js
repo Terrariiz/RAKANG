@@ -32,7 +32,8 @@ const editprofile            = () => import('@/components/profile/editprofile')
 const test                   = () => import('@/components/admin/test')
 const payment                = () => import('@/components/admin/payment')
 const UserDetailCampaign     = () => import('@/views/Donate_Campaign')
-
+const UserDetailDoctrine     = () => import('@/views/detail_Doctrine')
+const UserDetailNews         = () => import('@/views/detail_news')
 
 Vue.use(VueRouter)
 
@@ -68,9 +69,19 @@ const routes = [
     component: doctrine
   },
   {
+    path: '/doctrine/:id',
+    name: 'UserDetailDoctrine',
+    component: UserDetailDoctrine
+  },
+  {
     path: '/news',
     name: 'News',
     component: news
+  },
+  {
+    path: '/news/:id',
+    name: 'UserDetailNews',
+    component: UserDetailNews
   },
   {
     path: '/about',

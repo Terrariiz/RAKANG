@@ -241,7 +241,8 @@ export default {
             })
         },
         AlertDonate(){
-          this.$http.get("/donatelog/CheckDonate/"+localStorage.getItem("user_id"))
+          if(localStorage.getItem("user_id")){
+            this.$http.get("/donatelog/CheckDonate/"+localStorage.getItem("user_id"))
             .then((res) => {
               console.log('res')
               console.log(res.data)
@@ -275,6 +276,7 @@ export default {
             .catch(function(err){
               console.log(err)
             })
+          }
         },
         end_date(){
           
