@@ -11,10 +11,4 @@ router.get("/ShowCard", ruletController.ShowCard);
 
 
 
-
-
-
-
-  
-
 module.exports = router;

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-// const moment = require('moment');
+const moment = require('moment');
 const CampaignSchema = new mongoose.Schema({
   name: {
     type: String,
