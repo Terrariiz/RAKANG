@@ -5,8 +5,9 @@
         </div>
         <h1>News page</h1>
         <!-- test -->
+        <v-text-field style="width:70%; text-align: center;" append-icon="mdi-text-search" v-model="search" label="ค้นหาหัวข้อ"></v-text-field>
      <v-container class="container-news">
-        <v-card class="margin-card" v-for="(news) in news " :key="news.title" elevation="5" outlined shaped >
+        <v-card class="margin-card" v-for="(news) in filteredList " :key="news.title" elevation="5" outlined shaped >
         <v-row class="row-news">
           <v-col cols="12" md="6">
             <v-img
@@ -54,7 +55,15 @@ export default {
     data() {
     return {
       news : [],
+      search: '',
     };
+  },
+  computed: {
+    filteredList() {
+      return this.news.filter(news => {
+        return news.title.toLowerCase().includes(this.search.toLowerCase())
+      })
+    }
   },
   mounted: async function mounted() {
     await this.$http.get("/news/ShowListNews")
