@@ -282,7 +282,7 @@ export default {
           
           var enddate = moment(this.campaign.date).format(" dddd DD-MM-YY A");
           var now = new Date().toISOString().substr(0, 10);
-          now = moment(now).format(" dddd DD-MM-YY  A");
+          now = moment(now).format(" dddd DD-MM-YY A");
           console.log("kuy"+enddate)
           console.log("kuy"+now)
           if(enddate == now || now > enddate)
