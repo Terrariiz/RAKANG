@@ -5,8 +5,9 @@
         </div>
         <h1>Doctrine page</h1>
         <!-- test -->
+        <v-text-field style="width:70%; text-align: center;" append-icon="mdi-text-search" v-model="search" label="ค้นหาหัวข้อ"></v-text-field>
      <v-container class="container-news">
-        <v-card class="margin-card" v-for="(doctrine, index) in doctrines " :key="doctrine.title" elevation="5" outlined shaped >
+        <v-card class="margin-card" v-for="(doctrine, index) in filteredList " :key="doctrine.title" elevation="5" outlined shaped >
         <v-row class="row-news">
           <v-col cols="12" md="6">
             <v-img
@@ -74,8 +75,16 @@ export default {
     return {
       doctrines : [],
       bookmarks: [],
-      token: null
+      token: null,
+      search: '',
     };
+  },
+  computed: {
+    filteredList() {
+      return this.doctrines.filter(doctrine => {
+        return doctrine.title.toLowerCase().includes(this.search.toLowerCase())
+      })
+    }
   },
   mounted: async function mounted() {
     var IsFav
