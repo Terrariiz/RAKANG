@@ -9,6 +9,7 @@
             <v-col cols="12">
                 <h1>{{ doctrine.title }}</h1>
                 <!-- ปุ่ม bookmark -->
+                <div v-if="$store.getters.UserIsLoggedIn">
                   <v-btn
                     icon
                     v-model="bookmark.value"
@@ -26,6 +27,7 @@
                   >
                     <v-icon>mdi-bookmark</v-icon>
                   </v-btn>
+                </div>
             </v-col>
             <v-col cols="12">
                 <p class="duration">วันที่โพสต์ {{ doctrine.edittime }}</p>
@@ -69,7 +71,7 @@ export default {
     methods: {
         getData(){
             var IsFav
-            if(localStorage.getItem("user_id")){
+            if(this.$store.getters.UserIsLoggedIn){
               var id = localStorage.getItem("user_id")
             }
             this.$http.get("/doctrine/DetailDoctrine/"+this.$route.params.id)
@@ -93,11 +95,13 @@ export default {
                 } else if(moment(this.doctrine.edittime).format('dddd') == 'Sunday'){
                     this.doctrine.edittime = moment(this.doctrine.edittime).format(" วันอาทิตย์ DD-MM-YYYY ");
                 }
-                this.$http.get("/user/"+id+"/CheckFav/"+this.doctrine._id).then((res) => {
-                console.log(res.data.result)
-                IsFav = res.data.result
-                this.bookmark = {doctrinesID: this.doctrine._id, value: IsFav}
-              })
+                if(this.$store.getters.UserIsLoggedIn){
+                  this.$http.get("/user/"+id+"/CheckFav/"+this.doctrine._id).then((res) => {
+                      console.log(res.data.result)
+                      IsFav = res.data.result
+                      this.bookmark = {doctrinesID: this.doctrine._id, value: IsFav}
+                  })
+                } 
             })
         .catch(function(err){
           console.log(err)
