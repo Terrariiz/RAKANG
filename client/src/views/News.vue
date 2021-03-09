@@ -6,7 +6,7 @@
         <h1>News page</h1>
         <!-- test -->
         <center>
-          <v-text-field style="width:70%; text-align: center;" append-icon="mdi-text-search" v-model="search" label="ค้นหาหัวข้อ"></v-text-field>
+          <v-text-field style="width:70%; text-align: center;" append-icon="mdi-magnify" v-model="search" label="ค้นหาหัวข้อ"></v-text-field>
           <v-chip-group
             v-model="selectedCategory"
             active-class="primary--text"

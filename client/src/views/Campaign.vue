@@ -6,7 +6,7 @@
     <h1>Campaign</h1>
     <!-- Test -->
     <!-- test -->
-    <center><v-text-field style="width:70%; text-align: center;" append-icon="mdi-text-search" v-model="search" label="ค้นหาหัวข้อ"></v-text-field></center>
+    <center><v-text-field style="width:70%; text-align: center;" append-icon="mdi-magnify" v-model="search" label="ค้นหาหัวข้อ"></v-text-field></center>
      <v-container class="container-news">
         <v-card class="margin-card" v-for="(campaign,percent) in filteredList " :key="percent" elevation="5" outlined shaped >
         <v-row class="row-news">
