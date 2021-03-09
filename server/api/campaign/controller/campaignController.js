@@ -34,6 +34,7 @@ exports.addnewcampaign = async(req,res) => {
 
 exports.ShowListCampaign = function(req,res){
   try{
+    var result
     Campaign.find({},function(err, campaign){
       if(err){
         console.log(err)
@@ -43,16 +44,16 @@ exports.ShowListCampaign = function(req,res){
           var dateA = new Date(a.startdate), dateB = new Date(b.startdate);
           return dateB -dateA;
       });
-      for(var i = 0; i <= (campaign.length - 1) ;i++){
-        if(campaign[i].status != 'close'){
-          var result = campaign[i].expired()
-        }
-        if(result == 'yes'){
-          campaign[i].status = "close"
-          console.log('set close')
-          campaign[i].save()
-        } 
-      }
+      // for(var i = 0; i <= (campaign.length - 1) ;i++){
+      //   if(campaign[i].status != 'close'){
+      //     result = campaign[i].expired()
+      //   }
+      //   if(result == 'yes'){
+      //     campaign[i].status = "close"
+      //     console.log('set close')
+      //     campaign[i].save()
+      //   } 
+      // }
         
         res.json(campaign);
 
@@ -66,21 +67,21 @@ exports.ShowListCampaign = function(req,res){
 
 exports.DetailCampaign = function(req,res){
   try{
+    var result
     Campaign.findOne({_id : req.params.id},async function(err, campaign){
       if(err){
         console.log(err)
       } else {
-        for(var i = 0; i <= (campaign.length - 1) ;i++){
-          if(campaign[i].status != 'close'){
-            var result = campaign[i].expired()
+        
+          if(campaign.status != 'close'){
+            result = campaign.expired()
           }
           if(result == 'yes'){
-            campaign[i].status = "close"
+            campaign.status = "close"
             console.log('set close')
-            campaign[i].save()
+            campaign.save()
           } 
-        }
-        
+
         res.json(campaign);
       }
     })
