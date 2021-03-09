@@ -51,10 +51,10 @@ const CampaignSchema = new mongoose.Schema({
 
 CampaignSchema.methods.expired  = function() {
   console.log('function')  
-    var expried_date = moment(this.date).format("DD-MM-YY");
+    var expried_date = moment(this.date).format("YYYY-MM-DD");
     var now = new Date().toISOString().substr(0, 10);
     var result;
-    now = moment(now).format("DD-MM-YY");
+    now = moment(now).format("YYYY-MM-DD");
   if(expried_date == now || expried_date < now){
     console.log('1')
     result = 'yes';
