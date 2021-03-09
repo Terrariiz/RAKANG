@@ -5,8 +5,9 @@
         </div>
         <h1>Doctrine page</h1>
         <!-- test -->
+        <v-text-field style="width:70%; text-align: center;" append-icon="mdi-text-search" v-model="search" label="ค้นหาหัวข้อ"></v-text-field>
      <v-container class="container-news">
-        <v-card class="margin-card" v-for="(doctrine, index) in doctrines " :key="doctrine.title" elevation="5" outlined shaped >
+        <v-card class="margin-card" v-for="(doctrine, index) in filteredList " :key="doctrine.title" elevation="5" outlined shaped >
         <v-row class="row-news">
           <v-col cols="12" md="6">
             <v-img
@@ -19,25 +20,26 @@
           </v-col>
           <v-col class="cols-detail-campaign" cols="12" md="6">
             <!-- ปุ่ม bookmark -->
-            <v-btn
-              icon
-              v-model="bookmarks[index].value"
-              v-if="bookmarks[index].value == false"
-              @click="clickBookmarks(doctrine._id,index)"
-            >
-              <v-icon>mdi-bookmark</v-icon>
-            </v-btn>
+            <div v-if="$store.getters.UserIsLoggedIn">
             <v-btn
               icon
               color="pink"
-              v-model="bookmarks[index].value"
+              v-if="bookmarks[index].value"
               @click="clickBookmarks(doctrine._id,index)"
-              v-if="bookmarks[index].value == true"
             >
               <v-icon>mdi-bookmark</v-icon>
             </v-btn>
+            <v-btn
+              icon
+              v-else
+              @click="clickBookmarks(doctrine._id,index)"
+              
+            >
+              <v-icon>mdi-bookmark</v-icon>
+            </v-btn>
+            </div>
             <v-container>
-                <h1>{{ doctrine.title }} </h1>
+                <h1>{{ doctrine.title }}  </h1>
               <!-- <div>{{doctrines.content}}</div> -->
               <div >
                 <v-row>
@@ -73,18 +75,34 @@ export default {
     return {
       doctrines : [],
       bookmarks: [],
+      token: null,
+      search: '',
     };
   },
+  computed: {
+    filteredList() {
+      return this.doctrines.filter(doctrine => {
+        return doctrine.title.toLowerCase().includes(this.search.toLowerCase())
+      })
+    }
+  },
   mounted: async function mounted() {
+    var IsFav
+    this.token = localStorage.getItem("user_token")
+    if(this.$store.getters.UserIsLoggedIn){
+      var id = localStorage.getItem("user_id")
+    }
     await this.$http.get("/doctrine/ShowListDoctrine")
-      .then((res) => {
+      .then(async (res) => {
         console.log(res.data);
         this.doctrines = res.data;
-        this.doctrines.sort(function(a, b){
-            return new Date(b.edittime) - new Date(a.edittime);
-        });
+        // this.doctrines.sort(function(a, b){
+        //     return new Date(b.edittime) - new Date(a.edittime);
+        // });
         var i = 0;
-        for (this.doctrines[i]; i<this.doctrines.length; i++) {
+        var doc
+        for (i; i<this.doctrines.length; i++) {
+          doc = this.doctrines[i]._id
           if(moment(this.doctrines[i].edittime).format('dddd') == 'Mondey'){
                 this.doctrines[i].edittime = moment(this.doctrines[i].edittime).format(" วันจันทร์ DD-MM-YY A");
               } else if(moment(this.doctrines[i].edittime).format('dddd') == 'Tuesday'){
@@ -101,7 +119,18 @@ export default {
                 this.doctrines[i].edittime = moment(this.doctrines[i].edittime).format(" วันอาทิตย์ DD-MM-YY A");
               }
           //bookmarks เก็บไอดีของหลักธรรมและค่าbookmark ว่าหลักธรรมนี้ user ได้เซฟเก็บไว้ไหม
-          this.bookmarks.push({ doctrinesid: this.doctrines[i]._id, value: false})
+          console.log(doc)
+          if(this.$store.getters.UserIsLoggedIn){
+            IsFav = await this.$http.get("/user/"+id+"/CheckFav/"+doc).then((res) => {
+              console.log(res.data.result)
+              // IsFav = res.data.result
+              return res.data.result
+            })
+            this.bookmarks.push({ doctrinesid: doc, value: IsFav})
+          } else {
+            this.bookmarks.push({ doctrinesid: doc, value: false})
+          }
+          
         }
       })
       .catch(function(err) {
@@ -117,16 +146,23 @@ export default {
     },
     //เปลี่ยน value ใน bookmark
     clickBookmarks(doctrinesid,index){
-      if(this.bookmarks[index].doctrinesid == doctrinesid && this.bookmarks[index].value == false){
-        this.bookmarks[index].value = true
-      } else{
-        this.bookmarks[index].value = false
+      if(localStorage.getItem("user_id")){
+        var id = localStorage.getItem("user_id")
+          if(this.bookmarks[index].doctrinesid == doctrinesid && this.bookmarks[index].value == false){
+            this.$http.post("/user/"+id+"/AddFavouriteDoctrine/"+doctrinesid)
+            this.bookmarks[index].value = true
+          } else{
+            this.$http.post("/user/"+id+"/RemoveFavouriteDoctrine/"+doctrinesid)
+            this.bookmarks[index].value = false
+        }
+      } else {
+        console.log("hiuhui")
       }
+      
     }
   },
-  if(result){
-    console.log(result)
-  }
+  
+ 
 }
 </script>
 
