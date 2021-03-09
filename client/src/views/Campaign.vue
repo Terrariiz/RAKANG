@@ -20,6 +20,7 @@
           </v-col>
           <v-col class="cols-detail-campaign" cols="12" md="6">
             <v-container>
+              
                 <h1>{{ campaign.name }} </h1>
               <div>{{campaign.content}}</div>
               <div >
@@ -120,7 +121,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
 .margin-card{
   margin-bottom:5%;
 }
