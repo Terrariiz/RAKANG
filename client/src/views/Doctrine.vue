@@ -5,7 +5,23 @@
         </div>
         <h1>Doctrine page</h1>
         <!-- test -->
-        <v-text-field style="width:70%; text-align: center;" append-icon="mdi-text-search" v-model="search" label="ค้นหาหัวข้อ"></v-text-field>
+        <center>
+          <v-text-field style="width:70%; text-align: center;" append-icon="mdi-magnify" v-model="search" label="ค้นหาหัวข้อ"></v-text-field>
+          <v-chip-group
+            v-model="selectedCategory"
+            active-class="primary--text"
+            mandatory
+          >
+            <h5 style="padding: 7px 0px 0px 0px;">หมวดหมู่ : </h5> 
+            <v-chip
+              v-for="category in categories"
+              :key="category"
+              :value="category"
+            >
+              {{ category }}
+            </v-chip>
+          </v-chip-group>
+        </center>
      <v-container class="container-news">
         <v-card class="margin-card" v-for="(doctrine, index) in filteredList " :key="doctrine.title" elevation="5" outlined shaped >
         <v-row class="row-news">
@@ -77,12 +93,28 @@ export default {
       bookmarks: [],
       token: null,
       search: '',
+      selectedCategory: 'ทั้งหมด',
+      categories:['ทั้งหมด','บทสวดมนต์','หลักธรรม คำสอน','คติสอนใจ','พุทธประวัติ','อื่นๆ']
     };
   },
   computed: {
     filteredList() {
       return this.doctrines.filter(doctrine => {
-        return doctrine.title.toLowerCase().includes(this.search.toLowerCase())
+        var result
+        if(this.selectedCategory == 'ทั้งหมด'){
+          result = doctrine.title.toLowerCase().includes(this.search.toLowerCase())
+          return result
+        } else{
+          result = doctrine.categories.includes(this.selectedCategory)
+          if(this.search == ''){
+            return result
+          } else{
+            if(result == true){
+              result = doctrine.title.toLowerCase().includes(this.search.toLowerCase())
+              return result
+            }
+          }
+        }
       })
     }
   },
