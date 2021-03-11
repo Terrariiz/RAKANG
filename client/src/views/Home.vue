@@ -75,15 +75,24 @@
             <div class="details">
               <v-container>
               <div class="contents">
-                <h4   style="max-width: 450px;"> {{newcampaign.name}} </h4>
+                <div class="name-con" > {{newcampaign.name}} </div>
+                <div class="contents-con">{{newcampaign.content}}</div>
+                
                 <!-- <v-container>
                 <progress class="progress is-danger" :value="(newcampaign.donate/newcampaign.amount)*100" max="100"></progress>
                 </v-container> -->
                 <div class="btn-news">
-                  <v-btn block style="background-color: #ffdd94; color:#455054;" @click="ViewCampaign(newcampaign._id)">
-                    ดูเนื้อหา</v-btn
-                  >
+                  <v-row>
+                    <v-col cols="12" >
+                      <v-btn block style="background-color: #ffdd94; color:#455054;" @click="ViewCampaign(newcampaign._id)">ดูเนื้อหา</v-btn>
+                    </v-col>
+                    <!-- <v-col cols="12" md="6">
+                      <v-btn block color="green" @click.stop="dialogDonate=true" >บริจาค</v-btn>
+                  <DialogDonate :visible="dialogDonate" @close="dialogDonate=false" />
+                    </v-col> -->
+                  </v-row>
                 </div>
+                 
                 <div class="social-icons">
                   <a href="#"></a>
                 </div>
@@ -148,7 +157,7 @@
 <script>
 // import a from '../assets/images/bg-temple-2.jpg'
 import moment from "moment";
-
+// import DialogDonate from "./dialog_donate";
 const Navbar = () => import("@/components/navbar/navbar");
 export default {
   name: "Home",
@@ -241,6 +250,7 @@ export default {
   
   components: {
     Navbar,
+    
   },
   
 };
@@ -343,6 +353,19 @@ transform: rotateY(180deg);
 }
 .headcam{
   text-align: center;
+}
+.arrow{
+  height: 300px;
+  width: 300px;
+  float: right;
+}
+.btn-news{
+  margin: 3%;
+}
+.name-con{
+  font-size: 28px;
+  max-width: 450px;
+  margin-bottom: 3%;
 }
 /* ห้องเทส */
 @media only screen and (max-width: 768px){

@@ -6,15 +6,16 @@
     <h1>Campaign</h1>
     <!-- Test -->
     <!-- test -->
-    <v-text-field style="width:70%; text-align: center;" append-icon="mdi-text-search" v-model="search" label="ค้นหาหัวข้อ"></v-text-field>
      <v-container class="container-news">
+    <center><v-text-field style="width:70%; align-item: center;" append-icon="mdi-text-search" v-model="search" label="ค้นหาหัวข้อ"></v-text-field></center>
         <v-card class="margin-card" v-for="(campaign,percent) in filteredList " :key="percent" elevation="5" outlined shaped >
+          <div class="status_open" v-if="campaign.status =='open'">{{campaign.status}}</div>
+        <div class="status_close" v-if="campaign.status =='close'">{{campaign.status}}</div>
         <v-row class="row-news">
           <v-col cols="12" md="6">
             <v-img
             :src="'http://localhost:4000/image/campaign/' + campaign.image"
             class="img-fluid"
-            style=""
             align="center"
           >
           </v-img>
@@ -130,17 +131,53 @@ export default {
 };
 </script>
 
-<style scoped>
+<style >
+.status_open{
+  text-align: right;
+  padding: 20px;
+  background-color: rgb(114, 231, 114);
+  font-size: 30px;
+}
+.status_close{
+  text-align: right;
+  padding: 20px;
+  background-color: rgb(218, 15, 15);
+  font-size: 30px;
+}
+.container-news {
+    margin-top: 3%;
+    
+}
+.row-news {
+  margin-bottom: 3%;
+  margin-top: 3%;
+}
+.cols-detail-campaign {
+  margin-top: 5%;
+}
+.colxx{
+    margin: auto;
+}
+.image-size{
+    
+    max-width: 90%;
+    height: 300px;
+}
 
+.image{
+    display: block;
+    width: 100%;
+    margin: auto;
+    height: 100%;
+
+}
 .margin-card{
   margin-bottom:5%;
 }
 div{
   display: block;
 }
-.res-top {
-  display: none;
-}
+
 v-img {
    
    width: 100%;
@@ -173,14 +210,7 @@ v-img {
 }
 
 
-@media only screen and (max-width: 415px) {
-  .res-top {
-    display: initial;
-  }
-  .hide-res {
-    display: none;
-  }
-}
+
 @media only screen and (max-width: 415px) {
   .img {
     width: 100%;
