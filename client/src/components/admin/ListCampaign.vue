@@ -46,6 +46,8 @@
                   <!-- <router-link :to="{name : 'DetailDoctrine', params: {id:doctrine._id}}">detail</router-link> -->
                   <v-btn @click="ViewCampaign(campaign._id)">view</v-btn>
                   <v-btn @click="ViewLogCampaign(campaign._id)">Log</v-btn>
+                  <v-btn @click="EditCampaign(campaign._id)">Edit</v-btn>
+                  <v-btn @click="DeleteCampaign(campaign._id)">Delete</v-btn>
                 </td>
                 <!-- <td>{{ item.name }}</td>
                 <td>
@@ -65,6 +67,7 @@
 
 <script>
 const Navbar = () => import('@/components/navbar/navbar')
+import swal from "sweetalert2";
 import {
   } from '@mdi/js'
 import moment from "moment";
@@ -110,7 +113,46 @@ import moment from "moment";
         },
       ViewLogCampaign(campaignid){
         this.$router.push({ name: 'LogDonate' , params: {id : campaignid}})
-        }
+        },
+      Refresh(campaignid){
+        console.log('sdfsdfsddf')
+        this.campaigns = this.campaigns.filter(function(c){
+          return c._id !== campaignid
+        })
+      },
+      EditCampaign(campaignid){
+        this.$router.push({ name: 'editCampaign' , params: {id : campaignid}})
+      },
+      DeleteCampaign(campaignid){
+        const swalWithBootstrapButtons = swal.mixin({
+          customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+          },
+          buttonsStyling: false
+        })
+        swalWithBootstrapButtons.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Yes, delete it!',
+          cancelButtonText: 'No, cancel!',
+          reverseButtons: true
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.$http.delete("/campaign/DeleteCampaign/"+campaignid)
+            console.log("delete")
+            this.$router.push({ name: 'ListCampaign'})
+            this.Refresh(campaignid)
+            swalWithBootstrapButtons.fire(
+              'Deleted!',
+              'Delete Campaign Success.',
+              'success'
+            )
+          } 
+        })
+      },
       }
     
   }
