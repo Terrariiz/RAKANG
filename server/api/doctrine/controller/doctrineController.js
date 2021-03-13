@@ -1,4 +1,5 @@
 const Doctrine = require("../model/Doctrine");
+const User = require('../../user/model/User')
 const multer = require('multer');
 const fs = require('fs');
 
@@ -30,6 +31,9 @@ exports.ShowListDoctrine = async(req,res) =>{
       if(err){
         console.log(err)
       } else {
+        doctrine.sort(function(a, b){
+            return new Date(b.edittime) - new Date(a.edittime);
+        });
         console.log('else')
         res.json(doctrine);
       }
@@ -131,6 +135,22 @@ exports.DeleteDoctrine = function(req,res){
                 console.log("unlink image success")
               } 
           })
+          User.find({favdoctrinelist : doctrine._id}, function(err , user){
+            if(err){
+                console.log(err)
+            } else {
+            console.log(user)
+            for(let j = 0 ; j < user.length ; j++){
+                for(let k = 0 ; k < user[j].favdoctrinelist.length ; k++){
+                    if(user[j].favdoctrinelist[k].equals(doctrine._id)){
+                      user[j].favdoctrinelist.pull(doctrine._id);
+                      user[j].save();
+                      console.log('removed from user favourite list');
+                    }
+                }
+             }
+            }
+        })
         console.log('delete doctrine completed')
       }
     })
@@ -139,6 +159,8 @@ exports.DeleteDoctrine = function(req,res){
     console.log(err)
   }
 }
+
+
   
   
 

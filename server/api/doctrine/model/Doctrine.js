@@ -14,9 +14,17 @@ const doctrineSchema = new mongoose.Schema({
   },
   categories:{
     type: String
-  }
+  },
+  favby:[
+    {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }
+  ]
 
 });
+
+
 
 const Doctrine = mongoose.model("Doctrine", doctrineSchema);
 module.exports = Doctrine;

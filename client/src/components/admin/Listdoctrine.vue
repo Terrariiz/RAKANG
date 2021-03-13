@@ -39,8 +39,8 @@
                   <!-- <router-link :to="{name : 'DetailDoctrine', params: {id:doctrine._id}}">detail</router-link> -->
                   <v-btn color="succes" @click="ViewDoctrine(doctrine._id)">View</v-btn>
                   
-                  <!-- <button @click="EditDoctrine(doctrine._id)">Edit</button>
-                  <button @click="DeleteDoctrine(doctrine._id)">Delete</button> -->
+                  <button @click="EditDoctrine(doctrine._id)">Edit</button>
+                  <button @click="DeleteDoctrine(doctrine._id)">Delete</button>
                   
                 </td>
                 <!-- <td>
@@ -87,6 +87,8 @@ const Navbar = () => import('@/components/navbar/navbar')
       ViewDoctrine(doctrineid){
         this.$router.push({ name: 'DetailDoctrine' , params: {id : doctrineid}})
         },
+      
+      
     }
     
   }

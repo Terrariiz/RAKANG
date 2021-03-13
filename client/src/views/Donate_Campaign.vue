@@ -110,7 +110,7 @@
                 </div>
 
               <div class="action">
-                  <v-btn v-if="notend" color="green" @click.stop="dialogDonate=true" block>บริจาค</v-btn><v-btn disabled v-if="end" color="green" depressed block>โครงการนี้สิ้นสุดแล้ว</v-btn>
+                  <v-btn v-if="campaign.status == 'open'" color="green" @click.stop="dialogDonate=true" block>บริจาค</v-btn><v-btn disabled v-if="campaign.status == 'close'" color="green" depressed block>โครงการนี้สิ้นสุดแล้ว</v-btn>
                   <DialogDonate :visible="dialogDonate" @close="dialogDonate=false" />
               </div>
               
@@ -196,11 +196,7 @@ export default {
       }
       
       
-    },
-    created: function(){
-      
-    },
-    
+    },  
     methods: {
       
         getData(){
@@ -214,7 +210,7 @@ export default {
               
               
 
-              this.end_date()
+              // this.end_date()
 
               if(moment(that.campaign.date).format('dddd') == 'Mondey'){
                 that.campaign.date = moment(that.campaign.date).format(" วันจันทร์ DD-MM-YY A");
@@ -278,22 +274,22 @@ export default {
             })
           }
         },
-        end_date(){
+        // end_date(){
           
-          var enddate = moment(this.campaign.date).format(" dddd DD-MM-YY A");
-          var now = new Date().toISOString().substr(0, 10);
-          now = moment(now).format(" dddd DD-MM-YY  A");
-          console.log("kuy"+enddate)
-          console.log("kuy"+now)
-          if(enddate == now || now > enddate)
-          { this.end = true;
-           this.notend = false;
-         }
-          else{ this.end = false;
-          this.notend = true;
-           }
+        //   var enddate = moment(this.campaign.date).format(" dddd DD-MM-YY A");
+        //   var now = new Date().toISOString().substr(0, 10);
+        //   now = moment(now).format(" dddd DD-MM-YY  A");
+        //   console.log("kuy"+enddate)
+        //   console.log("kuy"+now)
+        //   if(enddate == now || now > enddate)
+        //   { this.end = true;
+        //    this.notend = false;
+        //  }
+        //   else{ this.end = false;
+        //   this.notend = true;
+        //    }
           
-        }
+        // }
         
          
         
