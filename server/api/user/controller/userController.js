@@ -187,5 +187,10 @@ exports.getMyRank = async (req, res) => {
     console.log(err);
   }
 };
+exports.sentEmail = async (req,res) => {
 
+};
 
+exports.resetPassword = async (req,res) => {
+
+};

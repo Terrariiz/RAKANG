@@ -21,6 +21,8 @@ router.post("/login", userController.loginUser);
 router.get("/:id", userController.getUserDetails);
 router.post("/:id/reset-password",userController.changePassword);
 router.put("/:id/editProfile", upload.single('image'), userController.editProfile);
+router.get("/forgotpassword", userController.sentEmail);
+router.post('/resetPassword', userController.resetPassword);
 
 
 
