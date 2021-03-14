@@ -35,10 +35,11 @@ exports.addrulet = async(req,res) => {
 
 exports.ShowCard = function(req,res){
   try{
-    Rulet.findOne({_id : req.params.id},function(err, rulet){
+    Rulet.find({CNumber : req.params.id},function(err, rulet){
       if(err){
         console.log(err)
       } else {
+        console.log(rulet)
         res.send(rulet);
       }
     })

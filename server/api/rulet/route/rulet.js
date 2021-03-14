@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 
 
 router.post("/addrulet", ruletController.addrulet);
-router.get("/ShowCard", ruletController.ShowCard);
+router.get("/ShowCard/:id", ruletController.ShowCard);
 // router.get("/DetailNews/:id", newsController.DetailNews);
 
 

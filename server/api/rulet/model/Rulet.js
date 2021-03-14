@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const ruletSchema = new mongoose.Schema({
   CNumber: {
-    type: Number,
+    type: String,
   },
   content: {
     type: String,
