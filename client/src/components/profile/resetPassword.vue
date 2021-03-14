@@ -31,7 +31,7 @@
                 :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
                 :type="show2 ? 'text' : 'password'"
                 :rules="confirmPasswordRules.concat(passwordConfirmationRule)"
-                label="Password"
+                label="Confirm Password"
                 hint="At least 6 characters"
                 counter
                 @click:append="show2 = !show2"
