@@ -34,7 +34,8 @@ const payment                = () => import('@/components/admin/payment')
 const UserDetailCampaign     = () => import('@/views/Donate_Campaign')
 const UserDetailDoctrine     = () => import('@/views/detail_Doctrine')
 const UserDetailNews         = () => import('@/views/detail_news')
-const SentEmail              = () => import('@/components/profile/inputEmail')
+const forgotPassword         = () => import('@/components/profile/forgotPassword')
+const resetPassword          = () => import('@/components/profile/resetPassword')
 
 Vue.use(VueRouter)
 
@@ -103,9 +104,14 @@ const routes = [
     component: Register
   },
   {
-    path: '/reset-password',
-    name: 'InputEmail',
-    component: SentEmail
+    path: '/forgotPassword',
+    name: 'forgotPassword',
+    component: forgotPassword
+  },
+  {
+    path: '/resetPassword/:token',
+    name: 'resetPassword',
+    component: resetPassword
   },
   {
     path: '/profile',

@@ -267,7 +267,6 @@ exports.sentEmail = async(req,res) =>{
   console.log(req.body)
   asyncs.waterfall([
     function(done){
-       console.log(req.body.email)
         User.findOne({email: req.body.email}, function(err, user){
             if(!user){
                 return res.status(422).send({errors: {title: 'Invalid email!', detail: 'User does not exist'}});
@@ -280,12 +279,10 @@ exports.sentEmail = async(req,res) =>{
 
               user.resetPasswordToken = token;
               user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
-
-              user.save()
-              done(err, token, user);
+              user.save(function(err){
+                done(err, token, user);
+              });
             }
-
-            
         });
     },
 
@@ -297,23 +294,23 @@ exports.sentEmail = async(req,res) =>{
                 pass: 'CSS322project'
             }
         });
-
+        const url = 'http://' + 'localhost:8080' + '/resetPassword/' + token;
         const mailOptions = {
             to: user.email,
             from: 'rakhangtham@gmail.com',
             subject: 'Nodejs password reset',
-            text: 'You are receiving this email. Please click on the email for password reset ' +
-                  'http://' + 'localhost:8080' + '/reset/' + token + '\n\n' + 
-                  'If you did not request this, please ignore this email'
+            text: 'You are receiving this email. Please click on the email for password reset '+ url + '\n\n' + 
+                  'If you did not request this, please ignore this email',
         };
         smtpTransport.sendMail(mailOptions, function(err){
           if(err){
-            console.log(err);
-          }else{
+            return res.json("error");
+          } else{
             console.log('mail sent');
             done(err, 'done');
+            return res.json("mail sent");
           }
-            
+          
         });
     }
 ], function(err){
@@ -325,29 +322,28 @@ exports.checkToken = async (req,res) => {
     if(!user) {
         return res.status(422).send({errors: [{title: 'Invalid token!', detail: 'User does not exist'}]});
     }   
-    res.json('reset', {token: req.params.token});
+    res.json({token: req.params.token});
   });
 };
 
 exports.resetPassword = async (req,res) => {
-  asyncs.waterfall2([
+  asyncs.waterfall([
     function(done) {
         User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user){
-            if(!user){`enter code here`
-                return res.status(422).send({errors: [{title: 'error', detail: 'Password reset token is invalid or has expired'}]});
+            if(!user){
+                return res.status(422).send({errors: {title: 'error', detail: 'Password reset token is invalid or has expired'}});
             } else{
-              if(req.body.password === req.body.confirm){
-                user.password = req.body.password;
-                    user.resetPasswordToken = null;
-                    user.resetPasswordExpires = null;
-                    user.save(function(err){
-                        req.logIn(user, function(err) {
-                            done(err, user);
-                        });
-                    });
-                } else {
-                  return res.status(422).send({errors: [{title: 'error', detail: 'Password do not match'}]});
-                }
+              if(req.body.new === req.body.confirm){
+                user.password = req.body.new;
+                user.resetPasswordToken = null;
+                user.resetPasswordExpires = null;
+                console.log(user)
+                user.save(function(err){
+                  done(err, user);
+                });
+              } else {
+                return res.status(422).send({errors: {title: 'error', detail: 'Password do not match'}});
+              }
             }
         });
     },
@@ -356,7 +352,7 @@ exports.resetPassword = async (req,res) => {
             service: 'Gmail',
             auth: {
                 user: 'rakhangtham@gmail.com',
-                pass: 'rakhang_322'
+                pass: 'CSS322project'
             }
         });
 
@@ -371,7 +367,11 @@ exports.resetPassword = async (req,res) => {
             done(err);
         });
     }
-],   function(err){
-  res.json('reset true');
+], function(err){
+  if(err){
+    res.json("error password");
+  }else{
+    res.json('reset true');
+  }
 });
 };

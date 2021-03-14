@@ -60,23 +60,24 @@ export default {
     methods: {
         async sentEmail(){
             try {
-            console.log(this.email)
-            var formData = new FormData();
-            formData.append("email", this.email);
-            console.log(formData)
-            let response = await this.$http.post("/user/forgotpassword", formData);
-            console.log(response)
+              let response = await this.$http.post("/user/forgotpassword", {email:this.email});
+              console.log(response)
+              if(response.data == 'mail sent'){
+                swal.fire("Success", "ส่งข้อความไปที่อีเมลของคุณแล้ว", "success")
+              } else{
+                swal.fire("Error", "ผิดพลาดบางอย่าง", "error");
+              }
             } catch (err) {
-        let error = err.response;
-        console.log(error)
-        if (error.status == 409) {
-          swal.fire("Error", error.data.errors.title, "error");
-          console.log("success");
-        } else {
-          swal.fire("Error", error.data.errors.title, "error");
-          console.log("error");
-        }
-      }
+              let error = err.response;
+              console.log(error)
+              if (error.status == 409) {
+                swal.fire("Error", error.data.errors.title, "error");
+                console.log("success");
+              } else {
+                swal.fire("Error", error.data.errors.title, "error");
+                console.log("error");
+              }
+            }
         },
         validate () {
             this.$refs.form.validate()
