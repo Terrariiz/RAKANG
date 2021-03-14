@@ -4,9 +4,11 @@
       <Navbar></Navbar>
     </div>
     <h1>Campaign</h1>
+    <!-- Test -->
     <!-- test -->
+    <center><v-text-field style="width:70%; text-align: center;" append-icon="mdi-magnify" v-model="search" label="ค้นหาหัวข้อ"></v-text-field></center>
      <v-container class="container-news">
-        <v-card class="margin-card" v-for="(campaign,percent) in campaigns " :key="percent" elevation="5" outlined shaped >
+        <v-card class="margin-card" v-for="(campaign,percent) in filteredList " :key="percent" elevation="5" outlined shaped >
         <v-row class="row-news">
           <v-col cols="12" md="6">
             <v-img
@@ -63,7 +65,15 @@ export default {
     return {
       campaigns: [],
       percent: [],
+      search: '',
     };
+  },
+  computed: {
+    filteredList() {
+      return this.campaigns.filter(campaign => {
+        return campaign.name.toLowerCase().includes(this.search.toLowerCase())
+      })
+    }
   },
   mounted: async function mounted() {
     await this.$http

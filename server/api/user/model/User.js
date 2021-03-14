@@ -35,6 +35,12 @@ const userSchema = new mongoose.Schema({
       }
     }
   ],
+  resetPasswordToken: {
+    type: String,
+  },
+  resetPasswordExpires: {
+    type: Date,
+  },
   point:{
     type: Number
   },
@@ -48,6 +54,12 @@ const userSchema = new mongoose.Schema({
     {
         type: mongoose.Schema.Types.ObjectId,
         ref: "MinigameLog"
+    }
+  ],
+  favdoctrinelist:[
+    {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Doctrine"
     }
   ]
 });
@@ -117,6 +129,22 @@ userSchema.statics.checkPassword = async (id, oldPassword, newPassword) => {
     return true;
   }
 };
+
+// userSchema.methods.CheckFav = async function(campaign) {
+  
+//   var thisfav = false
+//   for(var i ; i < this.favdoctrinelist.length  ; i++){
+//     if(this.favdoctrinelist[i].equals(campaign)){
+//       thisfav = true;
+//       break;
+//     }
+//   }
+//   if(thisfav == false){
+//     user.favdoctrinelist.push(campaign);
+//     user.save();
+//   }
+//   return thisfav;
+// };
 
 const User = mongoose.model("User", userSchema);
 module.exports = User;

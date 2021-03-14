@@ -5,8 +5,25 @@
         </div>
         <h1>News page</h1>
         <!-- test -->
+        <center>
+          <v-text-field style="width:70%; text-align: center;" append-icon="mdi-magnify" v-model="search" label="ค้นหาหัวข้อ"></v-text-field>
+          <v-chip-group
+            v-model="selectedCategory"
+            active-class="primary--text"
+            mandatory
+          >
+            <h5 style="padding: 7px 0px 0px 0px;">หมวดหมู่ : </h5> 
+            <v-chip
+              v-for="category in categories"
+              :key="category"
+              :value="category"
+            >
+              {{ category }}
+            </v-chip>
+          </v-chip-group>
+        </center>
      <v-container class="container-news">
-        <v-card class="margin-card" v-for="(news) in news " :key="news.title" elevation="5" outlined shaped >
+        <v-card class="margin-card" v-for="(news) in filteredList " :key="news.title" elevation="5" outlined shaped >
         <v-row class="row-news">
           <v-col cols="12" md="6">
             <v-img
@@ -54,7 +71,31 @@ export default {
     data() {
     return {
       news : [],
+      search: '',
+      selectedCategory: 'ทั้งหมด',
+      categories:['ทั้งหมด','วัด','โรงพยาบาล','มูลนิธิ','ประชาสัมพันธ์ของเว็บไซค์','อื่นๆ'],
     };
+  },
+  computed: {
+    filteredList() {
+      return this.news.filter(news => {
+        var result
+        if(this.selectedCategory == 'ทั้งหมด'){
+          result = news.title.toLowerCase().includes(this.search.toLowerCase())
+          return result
+        } else{
+          result = news.categories.includes(this.selectedCategory)
+          if(this.search == ''){
+            return result
+          } else{
+            if(result == true){
+              result = news.title.toLowerCase().includes(this.search.toLowerCase())
+              return result
+            }
+          }
+        }
+      })
+    }
   },
   mounted: async function mounted() {
     await this.$http.get("/news/ShowListNews")

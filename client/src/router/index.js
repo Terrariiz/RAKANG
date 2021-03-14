@@ -35,7 +35,8 @@ const UserDetailCampaign     = () => import('@/views/Donate_Campaign')
 const random                 = () => import('@/views/random')
 const UserDetailDoctrine     = () => import('@/views/detail_Doctrine')
 const UserDetailNews         = () => import('@/views/detail_news')
-// const Card                   = () => import('@/views/Card')
+const SentEmail              = () => import('@/components/profile/inputEmail')
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -101,7 +102,12 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: Register
-  },  
+  },
+  {
+    path: '/reset-password',
+    name: 'InputEmail',
+    component: SentEmail
+  },
   {
     path: '/profile',
     name: 'profile',
@@ -272,13 +278,7 @@ const routes = [
     path: '/random',
     name: 'random',
     component: random
-  },
-  {
-    path: '/Card',
-    name: 'Card',
-    component: random
-  },
-  
+  },  
 ]
 
 const router = new VueRouter({
