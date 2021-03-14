@@ -34,6 +34,7 @@ const payment                = () => import('@/components/admin/payment')
 const UserDetailCampaign     = () => import('@/views/Donate_Campaign')
 const UserDetailDoctrine     = () => import('@/views/detail_Doctrine')
 const UserDetailNews         = () => import('@/views/detail_news')
+const SentEmail              = () => import('@/components/profile/inputEmail')
 
 Vue.use(VueRouter)
 
@@ -100,7 +101,12 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: Register
-  },  
+  },
+  {
+    path: '/reset-password',
+    name: 'InputEmail',
+    component: SentEmail
+  },
   {
     path: '/profile',
     name: 'profile',

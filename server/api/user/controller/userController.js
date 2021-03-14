@@ -1,6 +1,9 @@
 const User = require("../model/User");
 const fs = require('fs');
 const Doctrine = require("../../doctrine/model/Doctrine");
+const asyncs = require('async');
+const jwt = require("jsonwebtoken");
+const nodemailer = require("nodemailer");
 
 exports.registerNewUser = async (req, res) => {
     try {
@@ -19,6 +22,8 @@ exports.registerNewUser = async (req, res) => {
         lastname: req.body.lastname,
         phone: req.body.phone,
         birthdate: req.body.birthdate,
+        resetPasswordToken: null,
+        resetPasswordExpires: null,
         image: "user.png",
         point: 0
       });
@@ -188,13 +193,6 @@ exports.getMyRank = async (req, res) => {
     console.log(err);
   }
 };
-exports.sentEmail = async (req,res) => {
-
-};
-
-exports.resetPassword = async (req,res) => {
-
-};
 
 exports.AddFavouriteDoctrine = async (req, res) => {
   try{
@@ -263,4 +261,117 @@ exports.CheckFav = async(req, res) =>{
     res.status(400).json({ err: err });
     console.log(err);
   }
+};
+
+exports.sentEmail = async(req,res) =>{
+  console.log(req.body)
+  asyncs.waterfall([
+    function(done){
+       console.log(req.body.email)
+        User.findOne({email: req.body.email}, function(err, user){
+            if(!user){
+                return res.status(422).send({errors: {title: 'Invalid email!', detail: 'User does not exist'}});
+            } else{
+              console.log(user);
+              const token = jwt.sign({
+                userId: user._id,
+                resetPasswordToken: user.resetPasswordToken
+              }, "secret" , { expiresIn: '1h' });
+
+              user.resetPasswordToken = token;
+              user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+
+              user.save()
+              done(err, token, user);
+            }
+
+            
+        });
+    },
+
+    function(token, user, done){
+        const smtpTransport = nodemailer.createTransport({
+            service: 'Gmail',
+            auth: {
+                user: 'rakhangtham@gmail.com',
+                pass: 'CSS322project'
+            }
+        });
+
+        const mailOptions = {
+            to: user.email,
+            from: 'rakhangtham@gmail.com',
+            subject: 'Nodejs password reset',
+            text: 'You are receiving this email. Please click on the email for password reset ' +
+                  'http://' + 'localhost:8080' + '/reset/' + token + '\n\n' + 
+                  'If you did not request this, please ignore this email'
+        };
+        smtpTransport.sendMail(mailOptions, function(err){
+          if(err){
+            console.log(err);
+          }else{
+            console.log('mail sent');
+            done(err, 'done');
+          }
+            
+        });
+    }
+], function(err){
+    if(err) res.json("error sent email");
+});
+};
+exports.checkToken = async (req,res) => {
+  User.findOne({resetPasswordToken: req.params.token, resetPasswordExpires: {$gt: Date.now() } }, function(err, user){
+    if(!user) {
+        return res.status(422).send({errors: [{title: 'Invalid token!', detail: 'User does not exist'}]});
+    }   
+    res.json('reset', {token: req.params.token});
+  });
+};
+
+exports.resetPassword = async (req,res) => {
+  asyncs.waterfall2([
+    function(done) {
+        User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user){
+            if(!user){`enter code here`
+                return res.status(422).send({errors: [{title: 'error', detail: 'Password reset token is invalid or has expired'}]});
+            } else{
+              if(req.body.password === req.body.confirm){
+                user.password = req.body.password;
+                    user.resetPasswordToken = null;
+                    user.resetPasswordExpires = null;
+                    user.save(function(err){
+                        req.logIn(user, function(err) {
+                            done(err, user);
+                        });
+                    });
+                } else {
+                  return res.status(422).send({errors: [{title: 'error', detail: 'Password do not match'}]});
+                }
+            }
+        });
+    },
+    function(user, done){
+        var smtpTransport = nodemailer.createTransport({
+            service: 'Gmail',
+            auth: {
+                user: 'rakhangtham@gmail.com',
+                pass: 'rakhang_322'
+            }
+        });
+
+        var mailOptions = {
+            to: user.email,
+            from: 'rakhangtham@gmail.com',
+            subject: 'Your password has been changed',
+            text: 'Hello,\n\n' + 
+                'This is a confirmation that the password for your account ' + user.email + ' has just changed'
+        };
+        smtpTransport.sendMail(mailOptions, function(err){
+            done(err);
+        });
+    }
+],   function(err){
+  res.json('reset true');
+});
 };
