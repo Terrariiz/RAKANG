@@ -8,7 +8,6 @@
     
     <center><v-text-field style="width:70%; text-align: center;" append-icon="mdi-magnify" v-model="search" label="ค้นหาหัวข้อ"></v-text-field></center>
      <v-container class="container-news">
-    <center><v-text-field style="width:70%; align-item: center;" append-icon="mdi-text-search" v-model="search" label="ค้นหาหัวข้อ"></v-text-field></center>
         <v-card class="margin-card" v-for="(campaign,percent) in filteredList " :key="percent" elevation="5" outlined shaped >
           <div class="status_open" v-if="campaign.status =='open'">{{campaign.status}}</div>
         <div class="status_close" v-if="campaign.status =='close'">{{campaign.status}}</div>
@@ -40,13 +39,21 @@
                 </v-row>
               </div>
               <progress class="progress is-danger" :value="(campaign.donate/campaign.amount)*100" max="100"></progress>
-              <p><p>
               
-              <div class="btn-news">
-                <v-btn block style="background-color: #ffdd94; color:#455054;" 
-                @click="ViewCampaign(campaign._id)"
-                elevation="3">
-                ดูเนื้อหา</v-btn>
+              
+              <div class="btn-news" >
+                <v-row>
+                  <v-col cols="12" md="6">
+                    <v-btn class="fontstlye" x-large block style="background-color: #ffdd94; color:#455054;" 
+                    @click="ViewCampaign(campaign._id)"
+                    elevation="3">ดูเนื้อหา</v-btn>
+                  </v-col>
+                  <v-col cols="12" md="6">
+                    <v-btn class="fontstlye" x-large block  color="green" style="background-color: #ffdd94; color:#455054;" 
+                    @click="ViewCampaign(campaign._id)"
+                    elevation="3">บริจาคได้ที่นี่</v-btn>
+                    </v-col>
+                </v-row>
               </div>
             </v-container>
           </v-col>
@@ -197,12 +204,16 @@ v-img {
   object-fit: cover;  
   margin:3%;
 }
+.fontstlye{
+  font-size: 20px;
+  font-weight: bold;
+}
 .btn-news {
   position: relative;
-  width: 40%;
-  /* left: 50%; */
+   width: 40%;
   margin-left: auto;
   margin-right: auto;
+  
 }
 .btn-doctrine {
   position: relative;

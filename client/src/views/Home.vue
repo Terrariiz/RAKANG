@@ -109,7 +109,7 @@
     
 
      <!-- ข่าวล่าสุด -->
-    <div class="block latestPostBlock">
+    <!-- <div class="block latestPostBlock">
       <v-container>
         <h2 class="text-center">ข่าว</h2>
         <v-row>
@@ -147,7 +147,56 @@
           ><i class="fa fa-chevron-right" aria-hidden="true"></i
         ></router-link>
       </v-container>
-    </div>
+    </div> -->
+    <!-- ข่าวล่าสุดtest -->
+    <v-container >
+          <center>
+            <h1>ข่าวล่าสุด</h1>
+            <v-row  no-gutters>
+            <v-col  cols="12" md="6" sm="12">
+              <v-row no-gutters>
+                 <v-col class="vcol" cols="12" md="6" sm="12">
+                  <div class="white">
+                    <img class="img"  src="https://cdn.dnaindia.com/sites/default/files/styles/full/public/2020/12/25/945556-two-penguins-comforting-each-other-viral-picture.jpg">
+                    <div class="cen-text" >fawfwafwfaf</div>
+                  </div>
+                </v-col>
+                
+                <v-col class="vcol"  cols="12" md="6" sm="12">
+                  <div class="white">
+                    <img class="img"  src="https://cdn.dnaindia.com/sites/default/files/styles/full/public/2020/12/25/945556-two-penguins-comforting-each-other-viral-picture.jpg">
+                    <div class="cen-text" >fawfwafwfaf</div>
+                  </div>
+                </v-col>
+              </v-row>
+              
+              <v-row no-gutters>
+                <v-col class="vcol" cols="12" md="6" sm="12">
+                  <div class="white">
+                    <img class="img"  src="https://cdn.dnaindia.com/sites/default/files/styles/full/public/2020/12/25/945556-two-penguins-comforting-each-other-viral-picture.jpg">
+                    <div class="cen-text" >fawfwafwfaf</div>
+                  </div>
+                </v-col>
+                <v-col class="vcol" cols="12" md="6" sm="12">
+                  <div class="white">
+                    <img class="img"  src="https://cdn.dnaindia.com/sites/default/files/styles/full/public/2020/12/25/945556-two-penguins-comforting-each-other-viral-picture.jpg">
+                    <div class="cen-text" >fawfwafwfaf</div>
+                  </div>
+                </v-col>
+              </v-row>
+
+            </v-col>
+           
+            
+            <v-col class="vcol" cols="12" md="6" sm="12">
+                  <div class="white">
+                    <img class="img"  src="https://cdn.dnaindia.com/sites/default/files/styles/full/public/2020/12/25/945556-two-penguins-comforting-each-other-viral-picture.jpg">
+                    <div class="cen-text" >fawfwafwfaf</div>
+                  </div>
+                </v-col>
+          </v-row></center>
+        </v-container>
+
 
 
     
@@ -294,8 +343,8 @@ export default {
 }
 .cards{
   position: relative;
-  width: 500px;
-  height: 400px;
+  width: 700px;
+  height: 600px;
   transform-style: preserve-3d;
   transform: perspective(1000px);
   left: 15%;
@@ -399,5 +448,50 @@ transform: rotateY(180deg);
 }
 }
 
+/* ข่าวล่าสุด */
 
+.img{
+    
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    position: relative;
+    /* margin: 20px; */
+    transition: all 0.25s ease;
+    background-size: cover;
+    background-repeat: repeat;
+    background-position: center;
+    filter: grayscale(100%);
+    background-color: rgb(238, 146, 8);
+    color: #000;
+    transition: all 0.25s ease;
+    position: relative;
+    border:7px solid rgb(238, 146, 8);
+    
+  }
+  
+  .white{
+    height: 100%;
+    width: 100%;
+    
+    
+  }
+  .cen-text {
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    color: #fff;
+    
+  }
+  
+  
+  .img:hover{
+    filter: grayscale(0%);
+    z-index: 1;
+    transform: scale(1.15)
+    
+  }
+  
+ 
+ 
 </style>
