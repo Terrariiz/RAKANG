@@ -82,8 +82,23 @@ export default {
         }
     },
     async created() {
-        let checkToken = await this.$http.get('/user/resetPassword/'+this.$route.params.token)
-        console.log(checkToken.data)
+      await this.$http.get('/user/resetPassword/'+this.$route.params.token).then((res) => {
+        console.log(res)
+        if(res.data.check == "error"){
+          this.$router.push({name: 'Login'})
+          swal.fire(res.data.errors.title, res.data.errors.detail, "error");
+        } else{
+          console.log(res.data.token)
+        }
+      }).catch(function (err) {
+        console.log(err)
+        // let error = err.response;
+        // if (error.status == 409) {
+        //   swal.fire(error.data.errors.title, error.data.errors.detail, "error");
+        // } else {
+        //   swal.fire(error.data.errors.title, error.data.errors.detail, "error");
+        // }
+      });
     },
     computed: {
         passwordConfirmationRule() {
