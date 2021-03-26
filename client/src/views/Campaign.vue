@@ -5,22 +5,24 @@
     </div>
     <h1>Campaign</h1>
     <!-- Test -->
-    <!-- test -->
+    
     <center><v-text-field style="width:70%; text-align: center;" append-icon="mdi-magnify" v-model="search" label="ค้นหาหัวข้อ"></v-text-field></center>
      <v-container class="container-news">
         <v-card class="margin-card" v-for="(campaign,percent) in filteredList " :key="percent" elevation="5" outlined shaped >
+          <div class="status_open" v-if="campaign.status =='open'">{{campaign.status}}</div>
+        <div class="status_close" v-if="campaign.status =='close'">{{campaign.status}}</div>
         <v-row class="row-news">
           <v-col cols="12" md="6">
             <v-img
             :src="'http://localhost:4000/image/campaign/' + campaign.image"
             class="img-fluid"
-            style=""
             align="center"
           >
           </v-img>
           </v-col>
           <v-col class="cols-detail-campaign" cols="12" md="6">
             <v-container>
+              
                 <h1>{{ campaign.name }} </h1>
               <div>{{campaign.content}}</div>
               <div >
@@ -37,13 +39,21 @@
                 </v-row>
               </div>
               <progress class="progress is-danger" :value="(campaign.donate/campaign.amount)*100" max="100"></progress>
-              <p><p>
               
-              <div class="btn-news">
-                <v-btn block style="background-color: #ffdd94; color:#455054;" 
-                @click="ViewCampaign(campaign._id)"
-                elevation="3">
-                ดูเนื้อหา</v-btn>
+              
+              <div class="btn-news" >
+                <v-row>
+                  <v-col cols="12" md="6">
+                    <v-btn class="fontstlye" x-large block style="background-color: #ffdd94; color:#455054;" 
+                    @click="ViewCampaign(campaign._id)"
+                    elevation="3">ดูเนื้อหา</v-btn>
+                  </v-col>
+                  <v-col cols="12" md="6">
+                    <v-btn class="fontstlye" x-large block  color="green" style="background-color: #ffdd94; color:#455054;" 
+                    @click="ViewCampaign(campaign._id)"
+                    elevation="3">บริจาคได้ที่นี่</v-btn>
+                    </v-col>
+                </v-row>
               </div>
             </v-container>
           </v-col>
@@ -129,16 +139,53 @@ export default {
 };
 </script>
 
-<style>
+<style >
+.status_open{
+  text-align: right;
+  padding: 20px;
+  background-color: rgb(114, 231, 114);
+  font-size: 30px;
+}
+.status_close{
+  text-align: right;
+  padding: 20px;
+  background-color: rgb(218, 15, 15);
+  font-size: 30px;
+}
+.container-news {
+    margin-top: 3%;
+    
+}
+.row-news {
+  margin-bottom: 3%;
+  margin-top: 3%;
+}
+.cols-detail-campaign {
+  margin-top: 5%;
+}
+.colxx{
+    margin: auto;
+}
+.image-size{
+    
+    max-width: 90%;
+    height: 300px;
+}
+
+.image{
+    display: block;
+    width: 100%;
+    margin: auto;
+    height: 100%;
+
+}
 .margin-card{
   margin-bottom:5%;
 }
 div{
   display: block;
 }
-.res-top {
-  display: none;
-}
+
 v-img {
    
    width: 100%;
@@ -157,12 +204,16 @@ v-img {
   object-fit: cover;  
   margin:3%;
 }
+.fontstlye{
+  font-size: 20px;
+  font-weight: bold;
+}
 .btn-news {
   position: relative;
-  width: 40%;
-  /* left: 50%; */
+   width: 40%;
   margin-left: auto;
   margin-right: auto;
+  
 }
 .btn-doctrine {
   position: relative;
@@ -171,14 +222,7 @@ v-img {
 }
 
 
-@media only screen and (max-width: 415px) {
-  .res-top {
-    display: initial;
-  }
-  .hide-res {
-    display: none;
-  }
-}
+
 @media only screen and (max-width: 415px) {
   .img {
     width: 100%;

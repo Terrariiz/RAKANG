@@ -15,7 +15,7 @@
         
       >
         
-        >
+        
       </v-carousel-item>
     </v-carousel>
 
@@ -24,10 +24,12 @@
       <v-container class="container-news">
         <v-card elevation="5" outlined shaped >
         <v-row class="row-news">
-          <v-col cols="12" md="6">
-            <img class="image -fullwidth img-responsive" id="showimage" :src="'http://localhost:4000/image/campaign/' + newcampaign.image"/>
+          <v-col class="image-cam" cols="12" md="6">
+            <center><div class="image-size">
+              <img class="image -fullwidth img-responsive" id="showimage" :src="'http://localhost:4000/image/campaign/' + newcampaign.image"/>
+            </div></center>
           </v-col>
-          <v-col class="cols-detail-campaign" cols="12" md="6">
+          <v-col class="colxx" cols="12" md="6">
             <v-container>
                 <h1> {{newcampaign.name}} </h1>
               <h4> {{newcampaign.content}} </h4>
@@ -54,10 +56,60 @@
         </v-row>
         </v-card>
       </v-container>
+
+      <!--  -->
+     
+      <div  class="ytube">
+        <v-row >
+          <v-col class="headcam" cols="12" md="5">
+            <!-- <h1>ลูกศร</h1> -->
+            <img class="arrow" src="https://media2.giphy.com/media/LnhtN5kEFZxTstNJIX/giphy.gif">
+          </v-col>
+          <v-col cols="12" md="7">
+            <div class="cards">
+          <div class="imgBoxs">
+            <img :src="'http://localhost:4000/image/campaign/' + newcampaign.image"/>
+            <img :src="'http://localhost:4000/image/campaign/' + newcampaign.image"/>
+          </div>
+          
+            <div class="details">
+              <v-container>
+              <div class="contents">
+                <div class="name-con" > {{newcampaign.name}} </div>
+                <div class="contents-con">{{newcampaign.content}}</div>
+                
+                <!-- <v-container>
+                <progress class="progress is-danger" :value="(newcampaign.donate/newcampaign.amount)*100" max="100"></progress>
+                </v-container> -->
+                <div class="btn-news">
+                  <v-row>
+                    <v-col cols="12" >
+                      <v-btn block style="background-color: #ffdd94; color:#455054;" @click="ViewCampaign(newcampaign._id)">ดูเนื้อหา</v-btn>
+                    </v-col>
+                    <!-- <v-col cols="12" md="6">
+                      <v-btn block color="green" @click.stop="dialogDonate=true" >บริจาค</v-btn>
+                  <DialogDonate :visible="dialogDonate" @close="dialogDonate=false" />
+                    </v-col> -->
+                  </v-row>
+                </div>
+                 
+                <div class="social-icons">
+                  <a href="#"></a>
+                </div>
+              </div>
+              </v-container>
+            </div>
+          
+        </div>
+          </v-col>
+        </v-row>
+      </div>
+     
+      <!--  -->
     
 
      <!-- ข่าวล่าสุด -->
-    <div class="block latestPostBlock">
+    <!-- <div class="block latestPostBlock">
       <v-container>
         <h2 class="text-center">ข่าว</h2>
         <v-row>
@@ -95,7 +147,56 @@
           ><i class="fa fa-chevron-right" aria-hidden="true"></i
         ></router-link>
       </v-container>
-    </div>
+    </div> -->
+    <!-- ข่าวล่าสุดtest -->
+    <v-container >
+          <center>
+            <h1>ข่าวล่าสุด</h1>
+            <v-row  no-gutters>
+            <v-col  cols="12" md="6" sm="12">
+              <v-row no-gutters>
+                 <v-col class="vcol" cols="12" md="6" sm="12">
+                  <div class="white">
+                    <img class="img"  src="https://cdn.dnaindia.com/sites/default/files/styles/full/public/2020/12/25/945556-two-penguins-comforting-each-other-viral-picture.jpg">
+                    <div class="cen-text" >fawfwafwfaf</div>
+                  </div>
+                </v-col>
+                
+                <v-col class="vcol"  cols="12" md="6" sm="12">
+                  <div class="white">
+                    <img class="img"  src="https://cdn.dnaindia.com/sites/default/files/styles/full/public/2020/12/25/945556-two-penguins-comforting-each-other-viral-picture.jpg">
+                    <div class="cen-text" >fawfwafwfaf</div>
+                  </div>
+                </v-col>
+              </v-row>
+              
+              <v-row no-gutters>
+                <v-col class="vcol" cols="12" md="6" sm="12">
+                  <div class="white">
+                    <img class="img"  src="https://cdn.dnaindia.com/sites/default/files/styles/full/public/2020/12/25/945556-two-penguins-comforting-each-other-viral-picture.jpg">
+                    <div class="cen-text" >fawfwafwfaf</div>
+                  </div>
+                </v-col>
+                <v-col class="vcol" cols="12" md="6" sm="12">
+                  <div class="white">
+                    <img class="img"  src="https://cdn.dnaindia.com/sites/default/files/styles/full/public/2020/12/25/945556-two-penguins-comforting-each-other-viral-picture.jpg">
+                    <div class="cen-text" >fawfwafwfaf</div>
+                  </div>
+                </v-col>
+              </v-row>
+
+            </v-col>
+           
+            
+            <v-col class="vcol" cols="12" md="6" sm="12">
+                  <div class="white">
+                    <img class="img"  src="https://cdn.dnaindia.com/sites/default/files/styles/full/public/2020/12/25/945556-two-penguins-comforting-each-other-viral-picture.jpg">
+                    <div class="cen-text" >fawfwafwfaf</div>
+                  </div>
+                </v-col>
+          </v-row></center>
+        </v-container>
+
 
 
     
@@ -105,7 +206,7 @@
 <script>
 // import a from '../assets/images/bg-temple-2.jpg'
 import moment from "moment";
-
+// import DialogDonate from "./dialog_donate";
 const Navbar = () => import("@/components/navbar/navbar");
 export default {
   name: "Home",
@@ -198,104 +299,17 @@ export default {
   
   components: {
     Navbar,
+    
   },
   
 };
 
 </script>
-<style>
-/* .heroBlock{
-  position: relative;
-}
-.heroBlock:after{
-  background-image: url('../assets/images/bg-temple-2.jpg');
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
-  opacity: 0.2;
-} */
-div{
-  display: block;
-}
-.res-top {
-  display: none;
-}
-v-img {
-   
-   width: 100%;
-   
-}
-@media only screen and (max-width: 415px) {
-  .res-top {
-    display: initial;
-  }
-  .hide-res {
-    display: none;
-  }
-}
-.img {
-  width: 300px;
-
-  background-size: cover;
-  display: block;
-  margin-right: auto;
-  margin-left: auto;
-}
-.btn-news {
-  position: relative;
-  width: 40%;
-  /* left: 50%; */
-  margin-left: auto;
-  margin-right: auto;
-}
-.btn-doctrine {
-  position: relative;
-  width: 20%;
-  left: 20%;
-}
+<style scoped>
 .container-news {
-  margin-top: 3%;
-  padding: 20vh;
-  /* background-color: #d8d1d028;
-  padding: 10px 10px; */
+    margin-top: 3%;
+    display: none;
 }
-@media only screen and (max-width: 415px) {
-  .img {
-    width: 100%;
-
-    background-size: cover;
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
-  }
-  .btn-news {
-    position: relative;
-
-    width: 100%;
-  }
-  .container-news {
-    padding: 0vh;
-  }
-  .btn-doctrine {
-    position: relative;
-    left: 0;
-    width: 100%;
-    margin: 3%;
-  }
-}
-
-/* #news {
-} */
-.container-doctrine {
-  margin-top: 3%;
-  padding: 20vh;
-}
-
-/* .heroBlock {
-  background-image: url("../../../client/public/image/bg3.jpg");
-  background-size: cover;
-  background-attachment: fixed;
-} */
 .row-news {
   margin-bottom: 3%;
   margin-top: 3%;
@@ -303,4 +317,181 @@ v-img {
 .cols-detail-campaign {
   margin-top: 5%;
 }
+.colxx{
+    margin: auto;
+}
+.image-size{
+    
+    max-width: 90%;
+    height: 300px;
+}
+
+.image{
+    display: block;
+    width: 100%;
+    margin: auto;
+    height: 100%;
+
+}
+/* ห้องเทส */
+ .ytube{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background:#fbe9e7;
+}
+.cards{
+  position: relative;
+  width: 700px;
+  height: 600px;
+  transform-style: preserve-3d;
+  transform: perspective(1000px);
+  left: 15%;
+  box-shadow: 10px 20px 40px rgba(0,0, 0, 0.25);
+}
+.cards .imgBoxs{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transform-origin: left;
+  transform-style: preserve-3d;
+  background: #0000;
+  transition: 1.5s;
+  box-shadow: 10px 20px 40px rgba(0,0, 0, 0.25);
+}
+.cards:hover .imgBoxs{
+  transform: rotateY(-180deg);
+  
+}
+.cards .imgBoxs img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+.cards .imgBoxs img:nth-child(2){
+transform: rotateY(180deg);
+}
+.cards .details
+{
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cards .details .contents{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.cards .details .contents h2 span{
+  color:#e21;
+  font-size: 0.8em;
+}
+.headcam{
+  text-align: center;
+}
+.arrow{
+  height: 300px;
+  width: 300px;
+  float: right;
+}
+.btn-news{
+  margin: 3%;
+}
+.name-con{
+  font-size: 28px;
+  max-width: 450px;
+  margin-bottom: 3%;
+}
+/* ห้องเทส */
+@media only screen and (max-width: 768px){
+    .image-size{
+    
+    max-width: 90%;
+    height: 300px;
+}
+}
+@media only screen and (max-width: 415px) {
+  
+  /* ห้องเทส */
+  .container-news {
+  
+  display: block;
+  
+}
+ .ytube{
+   display: none;
+}
+/* ห้องเทส */
+}
+@media only screen and (max-width: 1024px) {
+  .container-news {
+  
+  display: block;
+  
+}
+.ytube{
+   display: none;
+}
+}
+
+/* ข่าวล่าสุด */
+
+.img{
+    
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    position: relative;
+    /* margin: 20px; */
+    transition: all 0.25s ease;
+    background-size: cover;
+    background-repeat: repeat;
+    background-position: center;
+    filter: grayscale(100%);
+    background-color: rgb(238, 146, 8);
+    color: #000;
+    transition: all 0.25s ease;
+    position: relative;
+    border:7px solid rgb(238, 146, 8);
+    
+  }
+  
+  .white{
+    height: 100%;
+    width: 100%;
+    
+    
+  }
+  .cen-text {
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    color: #fff;
+    
+  }
+  
+  
+  .img:hover{
+    filter: grayscale(0%);
+    z-index: 1;
+    transform: scale(1.15)
+    
+  }
+  
+ 
+ 
 </style>

@@ -32,8 +32,11 @@ const editprofile            = () => import('@/components/profile/editprofile')
 const test                   = () => import('@/components/admin/test')
 const payment                = () => import('@/components/admin/payment')
 const UserDetailCampaign     = () => import('@/views/Donate_Campaign')
+const random                 = () => import('@/views/random')
 const UserDetailDoctrine     = () => import('@/views/detail_Doctrine')
 const UserDetailNews         = () => import('@/views/detail_news')
+const forgotPassword         = () => import('@/components/profile/forgotPassword')
+const resetPassword          = () => import('@/components/profile/resetPassword')
 
 Vue.use(VueRouter)
 
@@ -100,7 +103,17 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: Register
-  },  
+  },
+  {
+    path: '/forgotPassword',
+    name: 'forgotPassword',
+    component: forgotPassword
+  },
+  {
+    path: '/resetPassword/:token',
+    name: 'resetPassword',
+    component: resetPassword
+  },
   {
     path: '/profile',
     name: 'profile',
@@ -266,8 +279,12 @@ const routes = [
     meta: {
       requiresUserAuth: true
     }
-  }
-  
+  },
+  {
+    path: '/random',
+    name: 'random',
+    component: random
+  },  
 ]
 
 const router = new VueRouter({

@@ -55,6 +55,7 @@ const campaignRoutes = require('./api/campaign/route/campaign');
 
 const donateRoutes = require('./api/log/route/donatelog');
 const minigameRoutes = require('./api/log/route/minigamelog');
+const ruletRoutes = require('./api/rulet/route/rulet');
 // const testroute = require('./api/test/test');
 
 // app.use("/user", userRoutes);
@@ -69,6 +70,7 @@ app.use("/campaign", campaignRoutes);
 
 app.use("/donatelog", donateRoutes);
 app.use("/minigamelog", minigameRoutes);
+app.use("/rulet", ruletRoutes);
 
 
 
