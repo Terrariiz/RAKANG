@@ -108,14 +108,26 @@ export default {
     methods: {
         async resetPassword(){
             try {
+              swal.fire({
+                title: 'โปรดรอสักครู่',
+                text: 'กำลังดำเนินการเปลี่ยนรหัสผ่าน...',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                allowEnterKey: false,
+                onOpen: () => {
+                    swal.showLoading()
+                }
+              })
               let response = await this.$http.post("/user/resetPassword/"+this.$route.params.token, this.password);
               console.log(response)
               //ยังมีบัคอยู่ถ้าให้มันรีไปหน้า login หลังจากเปลี่ยนรหัสแล้วจะล็อคอินไม่ได้
               if(response.data == 'reset true'){
+                swal.hideLoading()
                 this.$router.push({name: 'Home'})
-                swal.fire("Success", "รหัสผ่านของคุณได้ถูกเปลี่ยนแล้ว", "success")
+                swal.fire("สำเร็จ", "รหัสผ่านของคุณได้ถูกเปลี่ยนแล้ว", "success")
               } else{
-                swal.fire("Error", "ผิดพลาดบางอย่าง", "error");
+                swal.hideLoading()
+                swal.fire("ผิดพลาด", "มีกระบวนการบางอย่างผิดพลาด", "error");
               }
             } catch (err) {
               let error = err.response;

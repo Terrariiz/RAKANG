@@ -299,9 +299,9 @@ exports.sentEmail = async(req,res) =>{
         const mailOptions = {
             to: user.email,
             from: 'rakhangtham@gmail.com',
-            subject: 'Nodejs password reset',
-            html: 'You are receiving this email. Please click on the email for password reset '+ clickURL + '\n\n' + 
-                  'If you did not request this, please ignore this email',
+            subject: 'แจ้งเตือนการเปลี่ยนรหัสผ่าน',
+            html: 'คลิกที่ลิงค์เพื่อตั้งค่ารหัสผ่านใหม่ '+ clickURL + '<br>' + 
+                  'ถ้าคุณไม่ได้เรียกร้องทำรายการนี้โปรดติดต่อกลับมาที่ rakhangtham@gmail.com'+'<br>'+'ขอบคุณ,'+'<br>'+'Rakhangtham',
         };
         smtpTransport.sendMail(mailOptions, function(err){
           if(err){
@@ -360,9 +360,9 @@ exports.resetPassword = async (req,res) => {
         var mailOptions = {
             to: user.email,
             from: 'rakhangtham@gmail.com',
-            subject: 'Your password has been changed',
-            text: 'Hello,\n\n' + 
-                'This is a confirmation that the password for your account ' + user.email + ' has just changed'
+            subject: 'รหัสผ่านของคุณถูกเปลี่ยนแล้ว',
+            text: 'สวัสดี,\n\n' + 
+                'อีเมลนี้เป็นการยืนยันว่ารหัสผ่านของ ' + user.email + ' ที่ใช้สำหรับเว็บ Rakhangtham ได้ถูกเปลี่ยนเป็นที่เรียบร้อยแล้ว'
         };
         smtpTransport.sendMail(mailOptions, function(err){
             done(err);
