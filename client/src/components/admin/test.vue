@@ -8,7 +8,9 @@
           link: '/home',
           dropdown: false,
         },
+
 { name: 'About', link: '/about', dropdown: false },
+
 {
           name: 'Contacts',
           link: '/contact',

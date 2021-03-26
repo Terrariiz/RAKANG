@@ -295,11 +295,12 @@ exports.sentEmail = async(req,res) =>{
             }
         });
         const url = 'http://' + 'localhost:8080' + '/resetPassword/' + token;
+        const clickURL = '<a href="'+ url +'">link</a>';
         const mailOptions = {
             to: user.email,
             from: 'rakhangtham@gmail.com',
             subject: 'Nodejs password reset',
-            text: 'You are receiving this email. Please click on the email for password reset '+ url + '\n\n' + 
+            html: 'You are receiving this email. Please click on the email for password reset '+ clickURL + '\n\n' + 
                   'If you did not request this, please ignore this email',
         };
         smtpTransport.sendMail(mailOptions, function(err){
@@ -320,9 +321,9 @@ exports.sentEmail = async(req,res) =>{
 exports.checkToken = async (req,res) => {
   User.findOne({resetPasswordToken: req.params.token, resetPasswordExpires: {$gt: Date.now() } }, function(err, user){
     if(!user) {
-        return res.status(422).send({errors: [{title: 'Invalid token!', detail: 'User does not exist'}]});
+        return res.json({check: "error",errors: {title: 'Invalid token!', detail: 'User does not exist'}});
     }   
-    res.json({token: req.params.token});
+    res.json({check: "success",token: req.params.token});
   });
 };
 
