@@ -60,11 +60,23 @@ export default {
     methods: {
         async sentEmail(){
             try {
+              swal.fire({
+                title: 'โปรดรอสักครู่',
+                text: 'กำลังส่งอีเมลยืนยัน...',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                allowEnterKey: false,
+                onOpen: () => {
+                    swal.showLoading()
+                }
+              })
               let response = await this.$http.post("/user/forgotpassword", {email:this.email});
               console.log(response)
               if(response.data == 'mail sent'){
-                swal.fire("Success", "ส่งข้อความไปที่อีเมลของคุณแล้ว", "success")
+                swal.hideLoading()
+                swal.fire("ส่งอีเมลสำเร็จ", "ข้อความถูกส่งไปที่อีเมลของคุณแล้ว", "success")
               } else{
+                swal.hideLoading()
                 swal.fire("Error", "ผิดพลาดบางอย่าง", "error");
               }
             } catch (err) {
