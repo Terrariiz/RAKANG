@@ -1,10 +1,6 @@
 <template>
-  <div >
+  <div>
     <div v-if="$store.getters.UserIsLoggedIn">
-      
-        
-        <br>
-        <br>
       <v-app-bar  fixed app color="cyan accent-4">
         
         <v-toolbar-items class="hidden-sm-and-down">
@@ -178,7 +174,9 @@ export default {
       this.drawer = false;
     },
   },
-  mounted: function mounted() {
+  mounted(){
+    const DeviceType = this.getDeviceType();
+    console.log(DeviceType);
     // if (window.localStorage.getItem("user_id")) {
     //   const id = window.localStorage.getItem("user_id");
     //   console.log(id);
@@ -193,6 +191,21 @@ export default {
     // }
   },
   methods: {
+  async getDeviceType(){
+  const ua = navigator.userAgent;
+  if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
+    return "tablet";
+  }
+  if (
+    /Mobile|iP(hone|od)|Android|BlackBerry|IEMobile|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(
+      ua
+    )
+  ) {
+    return "mobile";
+  }
+  return "desktop";
+},
+
     async UserSign_out() {
       localStorage.removeItem("user_id");
       localStorage.removeItem("user_token");
@@ -206,6 +219,7 @@ export default {
       await this.$router.push("/home");
     },
   },
+  
 };
 </script>
 

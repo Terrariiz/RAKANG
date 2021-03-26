@@ -8752,10 +8752,10 @@
     "es6-object-assign" "^1.1.0"
     "promise-polyfill" "^6.0.2"
 
-"sweetalert2@^10.13.3":
-  "integrity" "sha512-kSvTkXvc59+vPf9CfZ/wc/uvFkccxoOMLK1aUibN0mXU4hbYg/NylBTlmfvuUjJQ5SWL3X6s8w7AG5croH8U1w=="
-  "resolved" "https://registry.npmjs.org/sweetalert2/-/sweetalert2-10.13.3.tgz"
-  "version" "10.13.3"
+"sweetalert2@^10.15.5":
+  "integrity" "sha512-zHZqVpsEyfBVy/O25D7RMYyh+/h0jbmHXGK9DWEDnkPvsl4JlMueJRSEidAFS+mtYDLI8fFkGKltgHRvDPRV1g=="
+  "resolved" "https://registry.npmjs.org/sweetalert2/-/sweetalert2-10.15.5.tgz"
+  "version" "10.15.5"
 
 "table@^5.2.3":
   "integrity" "sha512-wmEc8m4fjnob4gt5riFRtTu/6+4rSe12TpAELNSqHMfF3IqnA+CH37USM6/YR3qRZv7e56kAEAtd6nKZaxe0Ug=="
