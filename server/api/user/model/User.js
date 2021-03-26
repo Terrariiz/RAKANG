@@ -12,6 +12,9 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
   },
+  username:{
+    type: String
+  },
   firstname: {
     type: String,
   },
@@ -25,6 +28,12 @@ const userSchema = new mongoose.Schema({
     type: String,
   },
   image: {
+    type: String,
+  },
+  Rank: {
+    type: String,
+  },
+  Badge:{
     type: String,
   },
   tokens: [
@@ -129,22 +138,42 @@ userSchema.statics.checkPassword = async (id, oldPassword, newPassword) => {
     return true;
   }
 };
+//เลื่อนระดับของ user เมื่อ point ถึงค่าที่กำหนด
+userSchema.methods.checkRank =  function() {
+  if(this.point >= 2000 || this.Rank != "Daimond"){
+    this.Rank = "Daimond"
+    this.Badge = ""
 
-// userSchema.methods.CheckFav = async function(campaign) {
+  } else if(this.point >= 1000 ||this.Rank == "Platinum"){
+    this.Rank = "Platinum"
+    this.Badge = ""
+  } else if(this.point >= 500 || this.Rank == "Gold"){
+    this.Rank = "Gold"
+    this.Badge = ""
+  } else if(this.point >= 100 || this.Rank == "Sliver"){
+    this.Rank = "Sliver"
+    this.Badge = ""
+  } else if(this.point >= 0 || this.Rank == "Bronze"){
+    this.Rank = "Bronze"
+    this.Badge = ""
+  }
+}
+
+userSchema.methods.CheckFav = async function(campaign) {
   
-//   var thisfav = false
-//   for(var i ; i < this.favdoctrinelist.length  ; i++){
-//     if(this.favdoctrinelist[i].equals(campaign)){
-//       thisfav = true;
-//       break;
-//     }
-//   }
-//   if(thisfav == false){
-//     user.favdoctrinelist.push(campaign);
-//     user.save();
-//   }
-//   return thisfav;
-// };
+  var thisfav = false
+  for(var i ; i < this.favdoctrinelist.length  ; i++){
+    if(this.favdoctrinelist[i].equals(campaign)){
+      thisfav = true;
+      break;
+    }
+  }
+  if(thisfav == false){
+    user.favdoctrinelist.push(campaign);
+    user.save();
+  }
+  return thisfav;
+};
 
 const User = mongoose.model("User", userSchema);
 module.exports = User;
