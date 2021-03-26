@@ -51,12 +51,12 @@ exports.registerNewUser = async (req, res) => {
 
 exports.getUserDetails = async (req, res) => {
   try{
-    User.findById(req.params.id, async function(err,found){
+    User.findById(req.params.id).populate("favdoctrinelist").exec(async function(err, userdetail){
       if(err){
         console.log(err);
       } else{
-        let myrank = await found.getrank(req.params.id)
-        var somsak = {found , myrank} 
+        let myrank = await userdetail.getrank(req.params.id)
+        var somsak = {userdetail , myrank} 
         console.log("somsak.found")
         console.log(somsak)
         console.log("somsak.found")
@@ -258,6 +258,23 @@ exports.CheckFav = async(req, res) =>{
   }
 }
 
+// exports.ShowFavDoctrine = async(req,res) =>{
+//   try{
+//     User.findById(req.params.id).populate("favdoctrinelist").exec(function(err, userdetail){
+//       if(err){
+//         console.log(err)
+//       }else{
+//         console.log('getuserfavlog')
+//         console.log(userdetail)
+//         res.json(userdetail)
+//       }
+//     }) 
+    
+//   } catch (err) {
+//     res.status(400).json({ err: err });
+//     console.log(err)
+//   }
+// }
 
 
 

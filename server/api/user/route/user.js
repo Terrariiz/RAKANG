@@ -22,6 +22,7 @@ router.get("/:id", userController.getUserDetails);
 router.post("/:id/reset-password",userController.changePassword);
 router.put("/:id/editProfile", upload.single('image'), userController.editProfile);
 router.get("/:id/CheckFav/:doctrine", userController.CheckFav);
+// router.get("/:id/ShowFavDoctrine", userController.ShowFavDoctrine);
 router.post("/:id/AddFavouriteDoctrine/:doctrine", userController.AddFavouriteDoctrine);
 router.post("/:id/RemoveFavouriteDoctrine/:doctrine", userController.RemoveFavouriteDoctrine);
 

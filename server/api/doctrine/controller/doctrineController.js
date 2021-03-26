@@ -160,6 +160,25 @@ exports.DeleteDoctrine = function(req,res){
   }
 }
 
+exports.ShowFavDoctrine = async(req,res) =>{
+  try{
+    User.findById(req.params.id).populate("favdoctrinelist").exec(function(err, userdetail){
+      if(err){
+        console.log(err)
+      }else{
+        console.log('getuserfavlog')
+        console.log(userdetail)
+        res.json(userdetail)
+      }
+    }) 
+    
+  } catch (err) {
+    res.status(400).json({ err: err });
+    console.log(err)
+  }
+}
+
+
 
   
   

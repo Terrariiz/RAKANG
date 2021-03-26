@@ -186,49 +186,48 @@ exports.EditCampaign = async(req,res) =>{
   }
 }
 
-exports.DonateCampaign = async function(req,res){
-  const amount = parseInt(req.params.amount, 10);
-  await Campaign.findOne({_id : req.params.campaign},function(err, campaign){
-    // console.log(campaign)
-    console.log('8h49dfghdfgh')
-    if(err){
-      console.log(err)
-    } else {
+// exports.DonateCampaign = async function(req,res){
+//   const amount = parseInt(req.params.amount, 10);
+//   await Campaign.findOne({_id : req.params.campaign},function(err, campaign){
+//     // console.log(campaign)
+//     console.log('8h49dfghdfgh')
+//     if(err){
+//       console.log(err)
+//     } else {
       
-        User.findOne({_id : req.params.id}, function(err, user){
+//         User.findOne({_id : req.params.id}, function(err, user){
           
-          const now = new Date();
+//           const now = new Date();
 
-          const donatelog = new DonateLog({
-            amount : amount,
-            date : now
-          });
+//           const donatelog = new DonateLog({
+//             amount : amount,
+//             date : now
+//           });
           
-          DonateLog.create(donatelog,function(err,log){
+//           DonateLog.create(donatelog,function(err,log){
             
-            // console.log(log)
+//             // console.log(log)
 
-            log.user.push(user)
-            log.campaign.push(campaign)
-            //////แก้ไขยอด coin user
-            user.point = user.point+amount/10
-            //////save ข้อมูล log เข้า donate log ของ user 
-            user.donatelog.push(log)
-
-            campaign.donatelist.push(log)
+//             log.user.push(user)
+//             log.campaign.push(campaign)
+//             //////แก้ไขยอด coin user
+//             user.point = user.point+amount/10
+//             //////save ข้อมูล log เข้า donate log ของ user 
+            
+            
   
-            campaign.donate = campaign.donate+amount;
-            /////save ข้อมูล
-            campaign.save();
-            log.save();
-            user.save();
-            console.log(campaign)
+//             campaign.donate = campaign.donate+amount;
+//             /////save ข้อมูล
+//             campaign.save();
+//             log.save();
+//             user.save();
+//             console.log(campaign)
 
-          })
-      })
+//           })
+//       })
       
-      res.status(201).json({ campaign });
-    }
-  })
-  res.status(201);
-}
+//       res.status(201).json({ campaign });
+//     }
+//   })
+//   res.status(201);
+// }
