@@ -1,8 +1,7 @@
 <template>
   <div>
     <div v-if="$store.getters.UserIsLoggedIn">
-      <v-app-bar  fixed app color="cyan accent-4">
-        
+      <v-app-bar  fixed app color="cyan accent-4">        
         <v-toolbar-items class="hidden-sm-and-down">
           <v-btn text to="/home">
             RAKANGTHAM
@@ -30,6 +29,7 @@
         absolute
         temporary
       >
+      <div v-if='$store.getters.IsDesk'>
         <v-list nav>
           <v-list-item-group v-model="group">
             <router-link tag="v-list-item" to="/profile"
@@ -44,6 +44,49 @@
             ออกจากระบบ
           </v-btn>
         </div>
+      </div>
+      <div v-else>
+        <v-list nav>
+          <v-list-item-group v-model="group">
+            <router-link tag="v-list-item" to="/home"
+              ><v-list-item>
+                <v-list-item-title>RAKANGTHAM</v-list-item-title>
+              </v-list-item></router-link
+            >
+            <router-link tag="v-list-item" to="/campaign"
+              ><v-list-item>
+                <v-list-item-title>แคมเปญ</v-list-item-title>
+              </v-list-item></router-link
+            >
+            <router-link tag="v-list-item" to="/doctrine"
+              ><v-list-item>
+                <v-list-item-title>หลักธรรมคำสอน</v-list-item-title>
+              </v-list-item></router-link
+            >
+            <router-link tag="v-list-item" to="/news"
+              ><v-list-item>
+                <v-list-item-title>ข่าวประชาสัมพันธ์</v-list-item-title>
+              </v-list-item></router-link
+            >
+            <router-link tag="v-list-item" to="/rank"
+              ><v-list-item>
+                <v-list-item-title>อันดับ</v-list-item-title>
+              </v-list-item></router-link
+            >
+            <hr>
+            <router-link tag="v-list-item" to="/profile"
+              ><v-list-item>
+                <v-list-item-title>หน้าโปรไฟล์</v-list-item-title>
+              </v-list-item></router-link
+            >
+          </v-list-item-group>
+        </v-list>
+        <div class="pa-2">
+          <v-btn block v-on:click="UserSign_out()">
+            ออกจากระบบ
+          </v-btn>
+        </div>
+      </div>
       </v-navigation-drawer>
     </div>
 
@@ -77,6 +120,7 @@
         absolute
         temporary
       >
+      <div v-if='$store.getters.IsDesk'>
         <v-list nav>
           <v-list-item-group v-model="group">
             <router-link tag="v-list-item" to="/admin"
@@ -107,6 +151,66 @@
             ออกจากระบบ
           </v-btn>
         </div>
+      </div>
+
+      <div v-else>
+        <v-list nav>
+          <v-list-item-group v-model="group">
+            <router-link tag="v-list-item" to="/home"
+              ><v-list-item>
+                <v-list-item-title>RAKANGTHAM</v-list-item-title>
+              </v-list-item></router-link
+            >
+            <router-link tag="v-list-item" to="/campaign"
+              ><v-list-item>
+                <v-list-item-title>แคมเปญ</v-list-item-title>
+              </v-list-item></router-link
+            >
+            <router-link tag="v-list-item" to="/doctrine"
+              ><v-list-item>
+                <v-list-item-title>หลักธรรมคำสอน</v-list-item-title>
+              </v-list-item></router-link
+            >
+            <router-link tag="v-list-item" to="/news"
+              ><v-list-item>
+                <v-list-item-title>ข่าวประชาสัมพันธ์</v-list-item-title>
+              </v-list-item></router-link
+            >
+            <router-link tag="v-list-item" to="/rank"
+              ><v-list-item>
+                <v-list-item-title>อันดับ</v-list-item-title>
+              </v-list-item></router-link
+            >
+            <hr>
+            <router-link tag="v-list-item" to="/admin"
+              ><v-list-item>
+                <v-list-item-title>แอดมินเพจ</v-list-item-title>
+              </v-list-item></router-link
+            >
+            <router-link tag="v-list-item" to="/admin/listcampaign"
+              ><v-list-item>
+                <v-list-item-title>ลิสต์แคมเปญ</v-list-item-title>
+              </v-list-item></router-link
+            >
+            <router-link tag="v-list-item" to="/admin/listdoctrine"
+              ><v-list-item>
+                <v-list-item-title>ลิสต์หลักธรรม</v-list-item-title>
+              </v-list-item></router-link
+            >
+            
+            <router-link tag="v-list-item" to="/admin/listnews"
+              ><v-list-item>
+                <v-list-item-title>ลิสต์ข่าวประชาสัมพันธ์</v-list-item-title>
+              </v-list-item></router-link
+            >
+          </v-list-item-group>
+        </v-list>
+        <div class="pa-2">
+          <v-btn block v-on:click="AdminSign_out()">
+            ออกจากระบบ
+          </v-btn>
+        </div>
+      </div>
       </v-navigation-drawer>
     </div>
 
@@ -139,6 +243,7 @@
         absolute
         temporary
       >
+      <div v-if='$store.getters.IsDesk'>
         <v-list nav>
           <v-list-item-group v-model="group">
             <router-link tag="v-list-item" to="/login"
@@ -153,6 +258,49 @@
             >
           </v-list-item-group>
         </v-list>
+      </div>
+      <div v-else>
+        <v-list nav>
+          <v-list-item-group v-model="group">
+            <router-link tag="v-list-item" to="/home"
+              ><v-list-item>
+                <v-list-item-title>RAKANGTHAM</v-list-item-title>
+              </v-list-item></router-link
+            >
+            <router-link tag="v-list-item" to="/campaign"
+              ><v-list-item>
+                <v-list-item-title>แคมเปญ</v-list-item-title>
+              </v-list-item></router-link
+            >
+            <router-link tag="v-list-item" to="/doctrine"
+              ><v-list-item>
+                <v-list-item-title>หลักธรรมคำสอน</v-list-item-title>
+              </v-list-item></router-link
+            >
+            <router-link tag="v-list-item" to="/news"
+              ><v-list-item>
+                <v-list-item-title>ข่าวประชาสัมพันธ์</v-list-item-title>
+              </v-list-item></router-link
+            >
+            <router-link tag="v-list-item" to="/rank"
+              ><v-list-item>
+                <v-list-item-title>อันดับ</v-list-item-title>
+              </v-list-item></router-link
+            >
+            <hr>
+            <router-link tag="v-list-item" to="/login"
+              ><v-list-item>
+                <v-list-item-title>เข้าสู่ระบบ</v-list-item-title>
+              </v-list-item></router-link
+            >
+            <router-link tag="v-list-item" to="/admin/login"
+              ><v-list-item>
+                <v-list-item-title>หน้าแอดมิน</v-list-item-title>
+              </v-list-item></router-link
+            >
+          </v-list-item-group>
+        </v-list>
+      </div>
       </v-navigation-drawer>
     </div>
   </div>
@@ -175,8 +323,7 @@ export default {
     },
   },
   mounted(){
-    const DeviceType = this.getDeviceType();
-    console.log(DeviceType);
+    this.getDeviceType();
     // if (window.localStorage.getItem("user_id")) {
     //   const id = window.localStorage.getItem("user_id");
     //   console.log(id);
@@ -194,16 +341,16 @@ export default {
   async getDeviceType(){
   const ua = navigator.userAgent;
   if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
-    return "tablet";
+    return this.$store.dispatch('DeviceIsMobile');
   }
   if (
     /Mobile|iP(hone|od)|Android|BlackBerry|IEMobile|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(
       ua
     )
   ) {
-    return "mobile";
+    return this.$store.dispatch('DeviceIsMobile');
   }
-  return "desktop";
+  return this.$store.dispatch('DeviceIsDesktop');
 },
 
     async UserSign_out() {

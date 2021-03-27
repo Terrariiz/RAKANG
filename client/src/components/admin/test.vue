@@ -34,7 +34,7 @@
   </div>
 </template>
 <script>
-const Navbar = () => import('@/components/navbar/admin_navbar')
+const Navbar = () => import('@/components/navbar/navbar')
 export default {
   name: 'App',
   components: {
