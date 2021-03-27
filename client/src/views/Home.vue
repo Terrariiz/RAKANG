@@ -4,7 +4,7 @@
       <Navbar></Navbar>
     </div>
 
-    <v-carousel cycle hide-delimiters show-arrows-on-hover img-width="1024" img-height="480">
+    <!-- <v-carousel cycle hide-delimiters show-arrows-on-hover img-width="1024" img-height="480">
       <v-carousel-item 
         to=""
         v-for="(item, i) in items"
@@ -17,9 +17,12 @@
         
         
       </v-carousel-item>
-    </v-carousel>
+    </v-carousel> -->
 
     <!-- แคมเปญ -->
+    <div class="home">
+
+    </div>
     
       <v-container class="container-news">
         <v-card elevation="5" outlined shaped >
@@ -306,6 +309,9 @@ export default {
 
 </script>
 <style scoped>
+.home {
+  height: 100vh;
+}
 .container-news {
     margin-top: 3%;
     display: none;
@@ -461,12 +467,12 @@ transform: rotateY(180deg);
     background-size: cover;
     background-repeat: repeat;
     background-position: center;
-    filter: grayscale(100%);
-    background-color: rgb(238, 146, 8);
+    /* filter: grayscale(100%); */
+    /* background-color: rgb(238, 146, 8); */
     color: #000;
     transition: all 0.25s ease;
     position: relative;
-    border:7px solid rgb(238, 146, 8);
+    border:7px solid rgb(255, 255, 255);
     
   }
   
