@@ -8,19 +8,14 @@
     
     <center><v-text-field style="width:70%; text-align: center;" append-icon="mdi-magnify" v-model="search" label="ค้นหาหัวข้อ"></v-text-field></center>
      <v-container class="container-news">
-        <v-card class="margin-card" v-for="(campaign,percent) in filteredList " :key="percent" elevation="5" outlined shaped >
+        <v-card class="margin-card" v-for="(campaign,percent) in filteredList " :key="percent" elevation="5" outlined  >
           <div class="status_open" v-if="campaign.status =='open'">{{campaign.status}}</div>
         <div class="status_close" v-if="campaign.status =='close'">{{campaign.status}}</div>
-        <v-row class="row-news">
+        <v-row no-gutters class="row-news">
           <v-col cols="12" md="6">
-            <v-img
-            :src="'http://localhost:4000/image/campaign/' + campaign.image"
-            class="img-fluid"
-            align="center"
-          >
-          </v-img>
+            <img  :src="'http://localhost:4000/image/campaign/' + campaign.image">
           </v-col>
-          <v-col class="cols-detail-campaign" cols="12" md="6">
+          <v-col  cols="12" md="6">
             <v-container>
               
                 <h1>{{ campaign.name }} </h1>
@@ -157,8 +152,8 @@ export default {
     
 }
 .row-news {
-  margin-bottom: 3%;
-  margin-top: 3%;
+  /* margin-bottom: 3%;
+  margin-top: 3%; */
 }
 .cols-detail-campaign {
   margin-top: 5%;

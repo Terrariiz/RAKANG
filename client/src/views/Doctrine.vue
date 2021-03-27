@@ -5,23 +5,24 @@
         </div>
         <h1>Doctrine page</h1>
         <!-- test -->
-        <center>
-          <v-text-field style="width:70%; text-align: center;" append-icon="mdi-magnify" v-model="search" label="ค้นหาหัวข้อ"></v-text-field>
-          <v-chip-group
-            v-model="selectedCategory"
-            active-class="primary--text"
-            mandatory
-          >
-            <h5 style="padding: 7px 0px 0px 0px;">หมวดหมู่ : </h5> 
-            <v-chip
-              v-for="category in categories"
-              :key="category"
-              :value="category"
-            >
-              {{ category }}
-            </v-chip>
-          </v-chip-group>
-        </center>
+        
+            <center>
+              <v-text-field style="width:70%; justify-content:center; margin-top:3%;" append-icon="mdi-magnify" v-model="search" label="ค้นหาหัวข้อ"></v-text-field>
+            </center>
+            <v-chip-group
+              v-model="selectedCategory"
+              active-class="primary--text"
+              mandatory>
+              <h5 style="padding: 7px 0px 0px 0px;">หมวดหมู่ : </h5>
+              <v-chip 
+                v-for="category in categories"
+                :key="category"
+                :value="category"
+              >
+                {{ category }}
+              </v-chip>
+            </v-chip-group>
+          
      <v-container class="container-news">
         <v-card class="margin-card" v-for="(doctrine, index) in filteredList " :key="doctrine.title" elevation="5" outlined shaped >
         <v-row class="row-news">
@@ -199,6 +200,10 @@ export default {
 </script>
 
 <style>
+
+.v-slide-group__content{
+  justify-content: center;
+}
 .margin-card{
   margin-bottom:5%;
 }

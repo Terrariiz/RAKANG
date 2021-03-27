@@ -36,14 +36,20 @@
       <v-container>
         <v-row class="rows"  style="background-color:rgb(68,68,68,.4);">
           <v-col class="name-picture" cols="12" md="4" sm="12">
+              <div class="edit-profile">
+                <router-link style="color: gray" to="/editprofile"><v-btn color="secondary" icon><v-icon>mdi-pencil</v-icon></v-btn></router-link>
+              </div>
             <div class="image-profile">
               <img src="https://media.wired.com/photos/598e35fb99d76447c4eb1f28/master/pass/phonepicutres-TA.jpg">
             </div>
             <hr>
             <div class="name">
+              
               <h3>pitpagon chinanupagon</h3>
               <div>แต้มบุญ: </div>
+              <br>
               <v-btn >แก้ไข</v-btn>
+              
             </div>
              <div class="selectboxs">
               <div class="setting-proflie2">
@@ -100,110 +106,6 @@
                             dd
                           </h6>
                         </div>
-                        <div class="col-sm-6">
-                          <p class="m-b-10 f-w-600">Rank</p>
-                          <h6 class="text-muted f-w-400">
-                            dd
-                          </h6>
-                        </div>
-                        <div class="col-sm-6">
-                          <p class="m-b-10 f-w-600">Rank</p>
-                          <h6 class="text-muted f-w-400">
-                            dd
-                          </h6>
-                        </div>
-                        <div class="col-sm-6">
-                          <p class="m-b-10 f-w-600">Rank</p>
-                          <h6 class="text-muted f-w-400">
-                            dd
-                          </h6>
-                        </div>
-                        <div class="col-sm-6">
-                          <p class="m-b-10 f-w-600">Rank</p>
-                          <h6 class="text-muted f-w-400">
-                            dd
-                          </h6>
-                        </div>
-
-                        <div class="col-sm-6">
-                          <p class="m-b-10 f-w-600">Rank</p>
-                          <h6 class="text-muted f-w-400">
-                            dd
-                          </h6>
-                        </div>
-                        <div class="col-sm-6">
-                          <p class="m-b-10 f-w-600">Rank</p>
-                          <h6 class="text-muted f-w-400">
-                            dd
-                          </h6>
-                        </div>
-                        <div class="col-sm-6">
-                          <p class="m-b-10 f-w-600">Rank</p>
-                          <h6 class="text-muted f-w-400">
-                            dd
-                          </h6>
-                        </div>
-                        <div class="col-sm-6">
-                          <p class="m-b-10 f-w-600">Rank</p>
-                          <h6 class="text-muted f-w-400">
-                            dd
-                          </h6>
-                        </div>
-                        <div class="col-sm-6">
-                          <p class="m-b-10 f-w-600">Rank</p>
-                          <h6 class="text-muted f-w-400">
-                            dd
-                          </h6>
-                        </div>
-                        <div class="col-sm-6">
-                          <p class="m-b-10 f-w-600">Rank</p>
-                          <h6 class="text-muted f-w-400">
-                            dd
-                          </h6>
-                        </div>
-                        <div class="col-sm-6">
-                          <p class="m-b-10 f-w-600">Rank</p>
-                          <h6 class="text-muted f-w-400">
-                            dd
-                          </h6>
-                        </div>
-                        <div class="col-sm-6">
-                          <p class="m-b-10 f-w-600">Rank</p>
-                          <h6 class="text-muted f-w-400">
-                            dd
-                          </h6>
-                        </div>
-                        <div class="col-sm-6">
-                          <p class="m-b-10 f-w-600">Rank</p>
-                          <h6 class="text-muted f-w-400">
-                            dd
-                          </h6>
-                        </div>
-
-                        <div class="col-sm-6">
-                          <p class="m-b-10 f-w-600">Rank</p>
-                          <h6 class="text-muted f-w-400">
-                            dd
-                          </h6>
-                        </div>
-                        <div class="col-sm-6">
-                          <p class="m-b-10 f-w-600">Rank</p>
-                          <h6 class="text-muted f-w-400">
-                            dd
-                          </h6>
-                        </div>
-                        <div class="col-sm-6">
-                          <p class="m-b-10 f-w-600">Rank</p>
-                          <h6 class="text-muted f-w-400">
-                            dd
-                          </h6>
-                        </div>
-                        <div class="col-sm-6">
-                          <p class="m-b-10 f-w-600">Rank</p>
-                          <h6 class="text-muted f-w-400">
-                            dd
-                          </h6>
-                        </div>
                         
                       </div></v-card-text>
             </v-container>
@@ -212,6 +114,7 @@
           <!-- ประวัติการบริจาค -->
            <v-col v-else-if="selected == 'ประวัติการบริจาค'"  class="table-profile" cols="12" md="8" sm="12">
             <v-container>
+              <div class="head-details">ประวัติการบริจาค</div>
                <table class="table">
                 <thead>
                   <tr>
@@ -226,13 +129,43 @@
                     <td data-label="จำนวนเงิน(บาท)">name</td>
                     <td data-label="วัน-เดือน-ปี">name</td>
                   </tr>
+                  <tr>
+                    <td data-label="ชื่อแคมเปญ">name</td>
+                    <td data-label="จำนวนเงิน(บาท)">name</td>
+                    <td data-label="วัน-เดือน-ปี">name</td>
+                  </tr>
+                  <tr>
+                    <td data-label="ชื่อแคมเปญ">name</td>
+                    <td data-label="จำนวนเงิน(บาท)">name</td>
+                    <td data-label="วัน-เดือน-ปี">name</td>
+                  </tr>
+                  <tr>
+                    <td data-label="ชื่อแคมเปญ">name</td>
+                    <td data-label="จำนวนเงิน(บาท)">name</td>
+                    <td data-label="วัน-เดือน-ปี">name</td>
+                  </tr>
+                  <tr>
+                    <td data-label="ชื่อแคมเปญ">name</td>
+                    <td data-label="จำนวนเงิน(บาท)">name</td>
+                    <td data-label="วัน-เดือน-ปี">name</td>
+                  </tr>
+                  <tr>
+                    <td data-label="ชื่อแคมเปญ">name</td>
+                    <td data-label="จำนวนเงิน(บาท)">name</td>
+                    <td data-label="วัน-เดือน-ปี">name</td>
+                  </tr>
+                  <tr>
+                    <td data-label="ชื่อแคมเปญ">name</td>
+                    <td data-label="จำนวนเงิน(บาท)">name</td>
+                    <td data-label="วัน-เดือน-ปี">name</td>
+                  </tr>
                 </tbody>
                </table>
             </v-container>
           </v-col>
           
           <!-- bookmark -->
-          <v-col v-else-if="selected == 'บุ๊คมาค'"  class="table-profile" cols="12" md="8" sm="12">
+          <v-col v-else-if="selected == 'บุ๊คมาค'"  class="bookmark-profile" cols="12" md="8" sm="12">
             <v-container>
                <div class="block latestPostBlock">
       <v-container>
@@ -291,28 +224,7 @@
     </div>
 </template>
 
-{
-          name: 'Contacts',
-          link: '/contact',
-          dropdown: true,
-          dropdownLinks: [ 
-            { name: 'A', link: '/pA', dropdown: false },
-            { name: 'B', link: '/pB', dropdown: false },
-          ],
-        },
-        {
-          name: 'Projects',
-          link: '/projects',
-          dropdown: true,
-          dropdownLinks: [ 
-            { name: 'C', link: '/pA', dropdown: false },
-            { name: 'D', link: '/pB', dropdown: false },
-          ],
-        },
-      ]"
-    />
-  </div>
-</template>
+
 <script>
 // const Navbar = () => import('@/components/navbar/navbar')
 
@@ -360,6 +272,34 @@ export default {
             "Aliquam albucius mei ei, debitis torquatos et pro, eos natum scribentur no. Putant verear constituto te qui. Adolescens persequeris vim ei. Vel nullam reprimique te.",
           src: "https://media.macphun.com/img/uploads/customer/how-to/579/15531840725c93b5489d84e9.43781620.jpg?q=85&w=1340",
         },
+        {
+          id: 4,
+          name: "No.3",
+          title: "20 movies not to miss in 2020",
+          subtitle: "3,000 miles of wonder",
+          description:
+            "Aliquam albucius mei ei, debitis torquatos et pro, eos natum scribentur no. Putant verear constituto te qui. Adolescens persequeris vim ei. Vel nullam reprimique te.",
+          src: "https://media.macphun.com/img/uploads/customer/how-to/579/15531840725c93b5489d84e9.43781620.jpg?q=85&w=1340",
+        },
+        {
+          id: 5,
+          name: "No.3",
+          title: "20 movies not to miss in 2020",
+          subtitle: "3,000 miles of wonder",
+          description:
+            "Aliquam albucius mei ei, debitis torquatos et pro, eos natum scribentur no. Putant verear constituto te qui. Adolescens persequeris vim ei. Vel nullam reprimique te.",
+          src: "https://media.macphun.com/img/uploads/customer/how-to/579/15531840725c93b5489d84e9.43781620.jpg?q=85&w=1340",
+        },
+        {
+          id: 6,
+          name: "No.3",
+          title: "20 movies not to miss in 2020",
+          subtitle: "3,000 miles of wonder",
+          description:
+            "Aliquam albucius mei ei, debitis torquatos et pro, eos natum scribentur no. Putant verear constituto te qui. Adolescens persequeris vim ei. Vel nullam reprimique te.",
+          src: "https://media.macphun.com/img/uploads/customer/how-to/579/15531840725c93b5489d84e9.43781620.jpg?q=85&w=1340",
+        },
+
       ],
       
     }),
@@ -439,7 +379,18 @@ export default {
   transition: 2s ease;
   z-index: -1;
 } */
-
+.head-details{
+  text-align: center;
+  font-size: 32px;
+  font-weight: 300;
+  margin: 2%;
+}
+.edit-profile{
+  position: absolute;
+  right: 0;
+  top:0;
+  
+}
 .image-profile{
   
   /* padding: 100px 200px; */
@@ -464,6 +415,14 @@ export default {
 }
 .details-profile{
   /* border: black solid 0.8px; */
+  height: 80vh;
+  overflow-y: scroll;
+}
+.table-profile{
+  height: 80vh;
+  overflow-y: scroll;
+}
+.bookmark-profile{
   height: 80vh;
   overflow-y: scroll;
 }

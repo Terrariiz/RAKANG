@@ -33,7 +33,7 @@
             </div></center>
           </v-col>
           <v-col class="colxx" cols="12" md="6">
-            <v-container>
+            <v-container class="box-content">
                 <h1> {{newcampaign.name}} </h1>
               <h4> {{newcampaign.content}} </h4>
               <div >
@@ -68,18 +68,18 @@
             <!-- <h1>ลูกศร</h1> -->
             <img class="arrow" src="https://media2.giphy.com/media/LnhtN5kEFZxTstNJIX/giphy.gif">
           </v-col>
-          <v-col cols="12" md="7">
-            <div class="cards">
-          <div class="imgBoxs">
-            <img :src="'http://localhost:4000/image/campaign/' + newcampaign.image"/>
-            <img :src="'http://localhost:4000/image/campaign/' + newcampaign.image"/>
-          </div>
+          <v-col  cols="12" md="7">
+            <div @click="Clickpicture" id="cardsopens"  class="cards">
+              <div class="imgBoxs">
+                <img :src="'http://localhost:4000/image/campaign/' + newcampaign.image"/>
+                <img :src="'http://localhost:4000/image/campaign/' + newcampaign.image"/>
+              </div>
           
-            <div class="details">
-              <v-container>
-              <div class="contents">
-                <div class="name-con" > {{newcampaign.name}} </div>
-                <div class="contents-con">{{newcampaign.content}}</div>
+              <div class="details">
+                <v-container>
+                <div class="contents">
+                  <div class="name-con" > {{newcampaign.name}} </div>
+                  <div class="contents-con">{{newcampaign.content}}</div>
                 
                 <!-- <v-container>
                 <progress class="progress is-danger" :value="(newcampaign.donate/newcampaign.amount)*100" max="100"></progress>
@@ -103,7 +103,7 @@
               </v-container>
             </div>
           
-        </div>
+          </div>
           </v-col>
         </v-row>
       </div>
@@ -298,6 +298,11 @@ export default {
         params: { id: campaignid },
       });
     },
+    Clickpicture(){
+      let click = document.getElementById("cardsopens")
+        click.classList.toggle("opencards");
+        // alert("123")
+    }
   },
   
   components: {
@@ -309,6 +314,9 @@ export default {
 
 </script>
 <style scoped>
+.box-content{
+  background-color: #fff;
+}
 .home {
   height: 100vh;
 }
@@ -349,8 +357,8 @@ export default {
 }
 .cards{
   position: relative;
-  width: 700px;
-  height: 600px;
+  width: 600px;
+  height: 500px;
   transform-style: preserve-3d;
   transform: perspective(1000px);
   left: 15%;
@@ -363,14 +371,19 @@ export default {
   z-index: 1;
   transform-origin: left;
   transform-style: preserve-3d;
-  background: #0000;
+  background: rgba(255, 255, 255, 0);
   transition: 1.5s;
   box-shadow: 10px 20px 40px rgba(0,0, 0, 0.25);
 }
-.cards:hover .imgBoxs{
+/* .cards:hover .imgBoxs{
   transform: rotateY(-180deg);
   
-}
+} */
+.opencards .imgBoxs{
+  transition: 2s;
+  transform: rotateY(-180deg);
+  
+} 
 .cards .imgBoxs img{
   position: absolute;
   top: 0;
