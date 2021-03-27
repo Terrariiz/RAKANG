@@ -75,7 +75,6 @@ export default {
         v => v.length <= 12 || 'Name must be less than 12 characters',
       ],
     }
-
   },
   components:{
         Navbar

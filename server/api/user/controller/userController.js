@@ -56,12 +56,12 @@ exports.registerNewUser = async (req, res) => {
 
 exports.getUserDetails = async (req, res) => {
   try{
-    User.findById(req.params.id, async function(err,found){
+    User.findById(req.params.id).populate("favdoctrinelist").exec(async function(err, userdetail){
       if(err){
         console.log(err);
       } else{
-        let myrank = await found.getrank(req.params.id)
-        var somsak = {found , myrank} 
+        let myrank = await userdetail.getrank(req.params.id)
+        var somsak = {userdetail , myrank} 
         console.log("somsak.found")
         console.log(somsak)
         console.log("somsak.found")
@@ -295,12 +295,13 @@ exports.sentEmail = async(req,res) =>{
             }
         });
         const url = 'http://' + 'localhost:8080' + '/resetPassword/' + token;
+        const clickURL = '<a href="'+ url +'">link</a>';
         const mailOptions = {
             to: user.email,
             from: 'rakhangtham@gmail.com',
-            subject: 'Nodejs password reset',
-            text: 'You are receiving this email. Please click on the email for password reset '+ url + '\n\n' + 
-                  'If you did not request this, please ignore this email',
+            subject: 'แจ้งเตือนการเปลี่ยนรหัสผ่าน',
+            html: 'คลิกที่ลิงค์เพื่อตั้งค่ารหัสผ่านใหม่ '+ clickURL + '<br>' + 
+                  'ถ้าคุณไม่ได้เรียกร้องทำรายการนี้โปรดติดต่อกลับมาที่ rakhangtham@gmail.com'+'<br>'+'ขอบคุณ,'+'<br>'+'Rakhangtham',
         };
         smtpTransport.sendMail(mailOptions, function(err){
           if(err){
@@ -320,9 +321,9 @@ exports.sentEmail = async(req,res) =>{
 exports.checkToken = async (req,res) => {
   User.findOne({resetPasswordToken: req.params.token, resetPasswordExpires: {$gt: Date.now() } }, function(err, user){
     if(!user) {
-        return res.status(422).send({errors: [{title: 'Invalid token!', detail: 'User does not exist'}]});
+        return res.json({check: "error",errors: {title: 'Invalid token!', detail: 'User does not exist'}});
     }   
-    res.json({token: req.params.token});
+    res.json({check: "success",token: req.params.token});
   });
 };
 
@@ -359,9 +360,9 @@ exports.resetPassword = async (req,res) => {
         var mailOptions = {
             to: user.email,
             from: 'rakhangtham@gmail.com',
-            subject: 'Your password has been changed',
-            text: 'Hello,\n\n' + 
-                'This is a confirmation that the password for your account ' + user.email + ' has just changed'
+            subject: 'รหัสผ่านของคุณถูกเปลี่ยนแล้ว',
+            text: 'สวัสดี,\n\n' + 
+                'อีเมลนี้เป็นการยืนยันว่ารหัสผ่านของ ' + user.email + ' ที่ใช้สำหรับเว็บ Rakhangtham ได้ถูกเปลี่ยนเป็นที่เรียบร้อยแล้ว'
         };
         smtpTransport.sendMail(mailOptions, function(err){
             done(err);

@@ -283,6 +283,8 @@ app.post("/test", async function(req,res){
                   amount : amount/100,
                   date : now
                 });
+                // ตรวจสอบและเปลี่ยน rank ของ user 
+                // user.checkRank()
                 
                 DonateLog.create(donatelog,function(err,log){
                   log.user = user

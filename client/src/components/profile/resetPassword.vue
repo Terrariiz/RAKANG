@@ -82,8 +82,23 @@ export default {
         }
     },
     async created() {
-        let checkToken = await this.$http.get('/user/resetPassword/'+this.$route.params.token)
-        console.log(checkToken.data)
+      await this.$http.get('/user/resetPassword/'+this.$route.params.token).then((res) => {
+        console.log(res)
+        if(res.data.check == "error"){
+          this.$router.push({name: 'Login'})
+          swal.fire(res.data.errors.title, res.data.errors.detail, "error");
+        } else{
+          console.log(res.data.token)
+        }
+      }).catch(function (err) {
+        console.log(err)
+        // let error = err.response;
+        // if (error.status == 409) {
+        //   swal.fire(error.data.errors.title, error.data.errors.detail, "error");
+        // } else {
+        //   swal.fire(error.data.errors.title, error.data.errors.detail, "error");
+        // }
+      });
     },
     computed: {
         passwordConfirmationRule() {
@@ -93,14 +108,26 @@ export default {
     methods: {
         async resetPassword(){
             try {
+              swal.fire({
+                title: 'โปรดรอสักครู่',
+                text: 'กำลังดำเนินการเปลี่ยนรหัสผ่าน...',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                allowEnterKey: false,
+                onOpen: () => {
+                    swal.showLoading()
+                }
+              })
               let response = await this.$http.post("/user/resetPassword/"+this.$route.params.token, this.password);
               console.log(response)
               //ยังมีบัคอยู่ถ้าให้มันรีไปหน้า login หลังจากเปลี่ยนรหัสแล้วจะล็อคอินไม่ได้
               if(response.data == 'reset true'){
+                swal.hideLoading()
                 this.$router.push({name: 'Home'})
-                swal.fire("Success", "รหัสผ่านของคุณได้ถูกเปลี่ยนแล้ว", "success")
+                swal.fire("สำเร็จ", "รหัสผ่านของคุณได้ถูกเปลี่ยนแล้ว", "success")
               } else{
-                swal.fire("Error", "ผิดพลาดบางอย่าง", "error");
+                swal.hideLoading()
+                swal.fire("ผิดพลาด", "มีกระบวนการบางอย่างผิดพลาด", "error");
               }
             } catch (err) {
               let error = err.response;

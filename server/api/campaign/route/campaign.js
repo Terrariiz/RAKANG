@@ -20,7 +20,7 @@ router.get("/ShowListCampaign", campaignController.ShowListCampaign);
 router.get("/DetailCampaign/:id", campaignController.DetailCampaign);
 router.put("/DetailCampaign/:id/edit",upload.single('image'), campaignController.EditCampaign);
 router.delete("/DeleteCampaign/:id", campaignController.DeleteCampaign);
-router.put('/DonateCampaign/:campaign/:id/:amount', campaignController.DonateCampaign);
+// router.put('/DonateCampaign/:campaign/:id/:amount', campaignController.DonateCampaign);
 
 
 module.exports = router;

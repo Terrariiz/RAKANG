@@ -19,6 +19,7 @@ router.get("/ShowListDoctrine", doctrineController.ShowListDoctrine);
 router.get("/DetailDoctrine/:id", doctrineController.DetailDoctrine);
 router.put("/DetailDoctrine/:id/edit",upload.single('image'), doctrineController.EditDoctrine);
 router.delete("/DeleteDoctrine/:id", doctrineController.DeleteDoctrine);
+router.get("/ShowFavDoctrine/:id", doctrineController.ShowFavDoctrine);
 
 
 module.exports = router;
