@@ -5,7 +5,7 @@ const multer = require('multer');
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-      cb(null, './public/uploads');
+      cb(null, './public/image/doctrine');
     },
     filename: function(req, file, cb) {
       cb(null, Date.now()+".jpg");
@@ -19,6 +19,7 @@ router.get("/ShowListDoctrine", doctrineController.ShowListDoctrine);
 router.get("/DetailDoctrine/:id", doctrineController.DetailDoctrine);
 router.put("/DetailDoctrine/:id/edit",upload.single('image'), doctrineController.EditDoctrine);
 router.delete("/DeleteDoctrine/:id", doctrineController.DeleteDoctrine);
+router.get("/ShowFavDoctrine/:id", doctrineController.ShowFavDoctrine);
 
 
 module.exports = router;

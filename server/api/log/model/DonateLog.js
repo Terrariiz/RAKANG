@@ -1,17 +1,26 @@
 const mongoose = require("mongoose");
-const newSchema = new mongoose.Schema({
-  campaign:[
-     {
+
+const donateSchema = new mongoose.Schema({
+  campaign:{
       type: mongoose.Schema.Types.ObjectId,
-      ref: '../../user/model/Campaign'
-      }
-],
-  user:[
+      ref: 'Campaign',
+  
+  },
+  CampaignName:{
+    type:String
+  },
+  UserName:{
+    type:String
+  },
+  result:{
+    type:String
+  },
+  user:
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: '../../campaign/model/User'
-    } 
-  ],
+      ref: 'User'
+    }
+  ,
   amount: {
     type: String, 
   },
@@ -21,5 +30,5 @@ const newSchema = new mongoose.Schema({
  
 });
 
-const DonateLog = mongoose.model("DonateLog", newSchema);
+const DonateLog = mongoose.model("DonateLog", donateSchema);
 module.exports = DonateLog;

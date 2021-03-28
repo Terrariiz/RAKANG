@@ -46,7 +46,7 @@
           Log in
         </v-btn><br>
         <v-btn text><router-link  to='/register'>Register ?</router-link></v-btn>
-        
+        <v-btn text><router-link  to='/forgotPassword'>ลืมรหัสผ่าน</router-link></v-btn>
       </v-form>
       </v-container>
     </v-container>
@@ -75,7 +75,6 @@ export default {
         v => v.length <= 12 || 'Name must be less than 12 characters',
       ],
     }
-
   },
   components:{
         Navbar

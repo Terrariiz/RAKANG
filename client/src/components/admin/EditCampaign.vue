@@ -5,51 +5,180 @@
         </div>
          <v-form
          @submit.prevent="Editcampaign">
-        <v-container id ='rounded' style="background-color: #F09C0B;">
-            <center><h1>Edit Campaign</h1></center>
-            <v-container class="my-5">
-                <v-layout row wrap >
-                    
-                        <v-flex xs12 md6 >
-                            <v-container v-model = "campaign.image"  >
-                                <!-- <v-file-input v-model="doctrine.image" label="File input" filled prepend-icon="mdi-camera"></v-file-input> -->
-                                <input type="file"  @change="onFileSelected">
+       <div class="project-header">
+    <v-container >
+          <v-row >
+               <h1>Edit campaign</h1>
+          </v-row>
+      <center><v-row class="headname" >
+          <v-text-field v-model="campaign.name"  solo label="Name"  required></v-text-field>
+          <br>
+      </v-row></center>
+      <v-row>
+          <v-col  cols="12" md="12" sm="12">
+              <div class="project-content">
+                  <!-- <img class="image -fullwidth img-responsive" id="showimage" :src="'http://localhost:4000/uploads/' + campaign.image"/> -->
+                   <center><v-container id = "picturenews">
+                                <v-div required style=""  class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
+                                    <img v-if="!imageData" class="image -fullwidth img-responsive" id="showimage" :src="'http://localhost:4000/image/campaign/' + campaign.image"/>
+                                    <span  v-if="!campaign.image"  class="placeholder">Choose an Image</span>
+                                    <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  v-on:change="onFileSelected" >
+                                </v-div>
 
-                                <!-- <v-btn @click="reset" style="weihgt = 40%" color="red" dark>Clear</v-btn> -->
-                                <p>*if don't submit new picture we just use previous picture</p>
-                            </v-container>
-                        </v-flex>
-                        <v-flex xs12 md6>
-                                <!-- <h1 style="color:black;">หัวข้อเรื่อง</h1> -->
-                                <center><v-text-field v-model="campaign.name" style="width:70%; text-align: center;" label="ชื่อแคมเปญ"></v-text-field></center>
-                                <br><br>
-                                <center><v-text-field v-model="campaign.date" type="date" style="width:70%;" label="วันสิ้นสุดแคมเปญ"></v-text-field></center>
-                                <br><br>
-                                 <center><v-text-field v-model="campaign.amount" style="width:70%;" label="ยอดสุทธิ"></v-text-field></center>
-                                <br><br>
-                                <v-container id ="detailnews" style="background-color: white ; margin-right:3%;">
-                                    <v-container fluid>
-                                        <v-textarea v-model="campaign.content" name="input-7-1" filledlabel="Label" label="รายละเอียด" auto-grow></v-textarea>
-                                    </v-container>
-                                    <!-- <v-btn small style="text-align: right;" rounded color="primary" dark  >Add detailnews</v-btn> -->
-                                
-                                </v-container>
-                                
-                        </v-flex>
+                                <hr>
+                            </v-container></center>
+                  <v-textarea solo
+                    clearable
+                    v-model="campaign.content"
+                    clear-icon="mdi-close-circle"
+                    label="รายละเอียดของแคมเปญ"
+                    value="" required
+                  ></v-textarea>
+                 
+                      
+                  
+              </div>
+              <v-row>
+                    <v-col cols="12" md="6" sm="12">
+                      <h3 class="title">วันที่สิ้นสุดแคมเปญ</h3>
+                      <v-menu
+                              ref="menu"
+                              v-model="menu"
+                              :close-on-content-click="false"
+                              transition="scale-transition"
+                              offset-y
+                              min-width="auto"
+                            >
+                              <template v-slot:activator="{ on, attrs }">
+                                <v-text-field
+                                  solo
+                                  required
+                                  v-model="campaign.date"
+                                  label="วันสิ้นสุด"
+                                  prepend-icon="mdi-calendar"
+                                  readonly
+                                  v-bind="attrs"
+                                  v-on="on"
+                                ></v-text-field>
+                              </template>
+                              <v-date-picker
+                                ref="picker"
+                                v-model="campaign.date"
+                                :min="new Date().toISOString().substr(0, 10)"
+                                @change="save"
+                              ></v-date-picker>
+                            </v-menu>
+                    </v-col>
+                    <v-col cols="12" md="6" sm="12">
+                      <h3 class="title">สถานที่</h3>
+                      <v-text-field v-model="campaign.location" class="location"  solo label="สถานที่" required></v-text-field>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col cols="12" md="6" sm="12">
+                        <h3 class="title">เป้าหมาย</h3>
+                        <v-text-field 
+                            v-model="campaign.amount"
+                            class="value"
+                            solo
+                            label="จำนวนเงิน"
+                            required
+                            type="number"
+                            onkeypress="return event.charCode >= 48"
+                            min="1"
+                        ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" md="6" sm="12">
+                      <h3 class="title">หมวดหมู่</h3>
+                      <v-select
+                          v-model="campaign.categories"
+                          :items="items"
+                          menu-props="auto"
+                          label="เลือกหมวดหมู่"
+                          solo
+                          required
+                      ></v-select>
+                    </v-col>
+                  </v-row>    
+          </v-col>
+          <!-- <v-col  cols="12" md="4" sm="12">
+            <div class="fund-raising affix-top">
+                <div class="body"> -->
+                    <!-- <div class="amount-raised">
+                        <h3 class="title">ยอดบริจาคขณะนี้</h3>
+                        <span class="value">100000 บาท</span>
+                    </div> -->
+                    <!-- <div class="funding-goal">
+                        <h3 class="title">เป้าหมาย</h3>
+                         <v-text-field v-model="campaign.amount" class="value" solo label="จำนวนเงิน" required ></v-text-field>
+                        
+                    </div> -->
+                    <!-- <div class="progress-bar">
+                        <span class="percent">
+                            <span class="hide-txt">ดำเนินการไปแล้ว</span>
+                            80%
+                        </span>
+                        <span class="bar" style="width:80%"></span>
+                    </div> -->
+                    <!-- <span class="timeleft">365 วัน</span>
+                    <span class="people">
+                        <span class="hide-txt">จำนวนคนที่บริจาค</span>
+                        <span class="icon-people">43</span>
+                    </span> -->
                     
-                </v-layout>
-            </v-container>
-                <div id="grid-container">
+                <!-- </div> -->
+                    
+            <!-- <div class="action">
+                <a><v-btn block> </v-btn></a>
+                
+            </div> -->
+<!-- 
+            </div>
+          </v-col> -->
+      </v-row>
+      <v-row>
+         <v-col  cols="12" md="8" sm="12">
+           <h3>ภาพรวม</h3>
+           <br>
+            <ckeditor 
+              id="content"
+              v-model="campaign.overview"
+              @input="onEditorInput" required> 
+            </ckeditor>
+            <hr>
+            <h3>ความคืบหน้า</h3>
+            <br>
+              <ckeditor 
+                id="content"
+                v-model="campaign.done"
+                @input="onEditorInput">
+            </ckeditor>
+         </v-col>
+      </v-row>
+      
+  </v-container>
+   <!-- <div id="grid-container">
                     <div></div>
-                    <v-btn style="weihgt = 40%" color="primary" dark @click="reset($route.params.id)">cancle</v-btn>
-                    <v-btn  type ='submit' color="primary" dark>submit</v-btn>
+                    <v-btn style="weidth = 40%" color="error" dark href='/admin/listcampaign'>cancle</v-btn>
+                    <v-btn type="submit" color="primary" dark>submit</v-btn>
                     <div></div>  
-                </div>
-
-            <!-- <v-btn style="margin-right= 50%;" color="primary" dark>cancle</v-btn> 
-                <v-btn style="margin-left= 50%;" color="primary" dark>submit</v-btn> -->
-        </v-container>
-        </v-form>      
+                </div> -->
+                <v-row style="margin-top:3%;">
+                <v-col  cols = "3"></v-col>
+                <v-col  cols = "3">
+                  <v-btn color="error" style="float:right;" dark @click="reset($route.params.id)">Cancle</v-btn>
+                </v-col>
+                <v-col  cols = "3">
+                  <v-btn color="primary" style="float:left;" type="submit">Submit</v-btn>
+                </v-col>
+                  <v-col  cols = "3"></v-col>
+              </v-row>
+                
+               
+    </div>
+    
+        </v-form>     
+         
     </div>
 </template>
 
@@ -76,6 +205,116 @@
     grid-template-columns: auto 10% 10% auto;
     grid-column-gap: 10%;
 }
+.base-image-input {
+  display: block;
+  width: 300px;
+  height: 300px;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center center;
+}
+.placeholder {
+  background: #F0F0F0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+  font-size: 20px;
+  font-family: Helvetica;
+}
+.placeholder:hover {
+  background: #E0E0E0;
+}
+.file-input {
+  display: none;
+}
+/* ฟอมอันใหม่ */
+.project-header{
+  background-color: #fff8ec;
+}
+.project-content{
+    padding-right: 40px;
+    
+}
+.image .-fullwidth{
+  width: 100%;
+}
+.image{
+  margin-left: auto;
+  margin-right: auto;
+  /* margin-bottom: 40px; */
+}
+.img-responsive{
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+img{
+  vertical-align: middle;
+  border: 0;
+}
+.fund-raising{
+    border-radius: 6px;
+    background-clip: padding-box;
+    color: #666;
+    border: 1px solid #f3d9ab;
+    background-color: #fff;
+    z-index: 999;
+}
+.fund-raising .body{
+   padding: 30px 25px 0  25px;
+}
+.fund-raising .action{
+   padding: 30px 25px 30px 25px;
+}
+
+#picturenews{
+    /* margin-top: 10%; */
+    /* margin-bottom: 10%; */
+    height:70% ;
+    width: 70% ;
+}
+.headname{
+  width:40%;
+  margin-right: 5%;
+  
+ 
+}
+.details{
+  width:40%;
+}
+.project-header{
+  background-color: #fff8ec;
+}
+
+@media(max-width: 767px){
+    .project-content {
+    padding-right: 0;
+  }
+ 
+}
+@media(max-width: 321px){
+    
+ .base-image-input {
+  
+  width: 100px;
+  height: 100px;
+  }
+  .placeholder{
+    font-size: 10px;
+  }
+  .headname{
+  width:100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.details{
+  width:100%;
+}
+}
+
 </style>
 
 <script>
@@ -89,7 +328,9 @@ export default {
   },
 
     data(){
-        return{
+        return{ 
+            menu: false,
+            items:['วัด','โรงพยาบาล มูลนิธิ'],
             campaign: {
                 name: "",
                 content: "",
@@ -99,10 +340,16 @@ export default {
                 oldimage: "",
                 date: "",
                 amount: "",
+                overview: null,
+                done: null,
+                location: null,
+                categories: null
             },
+           
             editorConfig: {
                     // The configuration of the editor.
-                }
+                },
+            imageData:null,
         }
     },
      components:{
@@ -114,12 +361,16 @@ export default {
     methods: {
     async Editcampaign(){
         try {
+            // this.campaign.date = this.date;
             var formData = new FormData();
             formData.append('name', this.campaign.name)
             formData.append('content', this.campaign.content)
             formData.append('date', this.campaign.date)
             formData.append('amount', this.campaign.amount)
-            
+            formData.append('overview', this.campaign.overview)
+            formData.append('done', this.campaign.done)
+            formData.append('location', this.campaign.location)
+            formData.append('categories', this.campaign.categories)
             if(this.campaign.newimage == null){
                 console.log('true')
                 formData.append('imagepath', this.campaign.image)
@@ -182,6 +433,19 @@ export default {
             },
     async onFileSelected(event){
             this.campaign.newimage = event.target.files[0]
+            const input = this.$refs.fileInput
+            const files = input.files
+            if (files && files[0]) {
+                const reader = new FileReader
+                reader.onload = e => {
+                    this.imageData = e.target.result
+                }
+            reader.readAsDataURL(files[0])
+            // this.$emit('input', files[0])
+            }
+        },
+        chooseImage () {
+            this.$refs.fileInput.click();
         },
     async getData(){
         var that = this;
@@ -198,7 +462,10 @@ export default {
     },
     reset(){
         this.$router.push({ name: 'DetailCampaign' , params: {id : this.$route.params.id}})
-    }
+    },
+    save (date) {
+        this.$refs.menu.save(date)
+      },
     },
 }
 </script>

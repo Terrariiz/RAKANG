@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const coinController = require("../controller/userController");
+const coinController = require("../constroller/coinlogController");
 
-router.get("/coinlog", coinController.coinlog);
+router.get("/coinloglist/:id", coinController.coinloglist);
+
 
 
 module.exports = router;

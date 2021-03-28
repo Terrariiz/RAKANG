@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/Home.vue'
 import Landing from '@/views/Landing.vue'
-import coin from '@/views/coin.vue'
+import rank from '@/views/Rank.vue'
 import detailcoin from '@/views/detailcoin.vue'
 import campaign from '@/views/Campaign.vue'
 import doctrine from '@/views/Doctrine.vue'
@@ -12,7 +12,6 @@ import swal from "sweetalert2"
 const Login                  = () => import('@/components/profile/Login')
 const Register               = () => import('@/components/profile/Register')
 const Logpayment             = () => import('@/components/profile/Logpayment')
-const Logcoin                = () => import('@/components/profile/Logcoin')
 const Listnews               = () => import('@/components/admin/Listnews')
 const Addnews                = () => import('@/components/admin/Addnews')
 const editnews               = () => import('@/components/admin/editnews')
@@ -31,10 +30,13 @@ const editCampaign           = () => import('@/components/admin/EditCampaign')
 const profile                = () => import('@/components/profile/profile')
 const editprofile            = () => import('@/components/profile/editprofile')
 const test                   = () => import('@/components/admin/test')
-// const coin                    = () => import('@/views/coin')
 const payment                = () => import('@/components/admin/payment')
 const UserDetailCampaign     = () => import('@/views/Donate_Campaign')
-
+const random                 = () => import('@/views/random')
+const UserDetailDoctrine     = () => import('@/views/detail_Doctrine')
+const UserDetailNews         = () => import('@/views/detail_news')
+const forgotPassword         = () => import('@/components/profile/forgotPassword')
+const resetPassword          = () => import('@/components/profile/resetPassword')
 
 Vue.use(VueRouter)
 
@@ -62,10 +64,7 @@ const routes = [
   {
     path: '/campaign/:id',
     name: 'UserDetailCampaign',
-    component: UserDetailCampaign,
-    meta: {
-      requiresUserAuth: true
-    }
+    component: UserDetailCampaign
   },
   {
     path: '/doctrine',
@@ -73,9 +72,19 @@ const routes = [
     component: doctrine
   },
   {
+    path: '/doctrine/:id',
+    name: 'UserDetailDoctrine',
+    component: UserDetailDoctrine
+  },
+  {
     path: '/news',
     name: 'News',
     component: news
+  },
+  {
+    path: '/news/:id',
+    name: 'UserDetailNews',
+    component: UserDetailNews
   },
   {
     path: '/about',
@@ -94,7 +103,17 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: Register
-  },  
+  },
+  {
+    path: '/forgotPassword',
+    name: 'forgotPassword',
+    component: forgotPassword
+  },
+  {
+    path: '/resetPassword/:token',
+    name: 'resetPassword',
+    component: resetPassword
+  },
   {
     path: '/profile',
     name: 'profile',
@@ -120,14 +139,6 @@ const routes = [
     }
   },
   {
-    path: '/profile/logcoin',
-    name: 'Logcoin',
-    component: Logcoin,
-    meta:{
-      requiresUserAuth: true
-    }
-  },
-  {
     path: '/admin',
     name: 'Admin',
     component: Admin,
@@ -141,7 +152,7 @@ const routes = [
     component: loginAdmin
   },
   {
-    path: '/admin/logdonate',
+    path: '/admin/logdonate/:id',
     name: 'LogDonate',
     component: LogDonateAdmin,
     meta: {
@@ -246,16 +257,15 @@ const routes = [
       requiresAdminAuth: true
     }
   },
-
   {
     path: '/test',
     name: 'test',
     component: test
   },
   {
-    path: '/coin',
-    name: 'coin',
-    component: coin
+    path: '/rank',
+    name: 'rank',
+    component: rank
   },
   {
     path: '/detailcoin',
@@ -265,9 +275,16 @@ const routes = [
   {
     path: '/payment',
     name: 'payment',
-    component: payment
-  }
-  
+    component: payment,
+    meta: {
+      requiresUserAuth: true
+    }
+  },
+  {
+    path: '/random',
+    name: 'random',
+    component: random
+  },  
 ]
 
 const router = new VueRouter({
@@ -275,6 +292,8 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 });
+
+
 router.beforeEach((to, from, next) => {
   if(to.matched.some(record => record.meta.requiresUserAuth)) {
       if (localStorage.getItem('user_token') == null) {

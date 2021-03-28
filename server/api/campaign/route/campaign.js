@@ -3,9 +3,10 @@ const router = express.Router();
 const campaignController = require("../controller/campaignController");
 const multer = require('multer');
 
+
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-      cb(null, './public/uploads');
+      cb(null, './public/image/campaign');
     },
     filename: function(req, file, cb) {
       cb(null, Date.now()+".jpg");
@@ -19,7 +20,7 @@ router.get("/ShowListCampaign", campaignController.ShowListCampaign);
 router.get("/DetailCampaign/:id", campaignController.DetailCampaign);
 router.put("/DetailCampaign/:id/edit",upload.single('image'), campaignController.EditCampaign);
 router.delete("/DeleteCampaign/:id", campaignController.DeleteCampaign);
-router.put('/DonateCampaign/:campaign/:id/:amount', campaignController.DonateCampaign);
+// router.put('/DonateCampaign/:campaign/:id/:amount', campaignController.DonateCampaign);
 
 
 module.exports = router;

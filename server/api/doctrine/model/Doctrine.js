@@ -12,8 +12,19 @@ const doctrineSchema = new mongoose.Schema({
   edittime: {
     type: Date,
   },
+  categories:{
+    type: String
+  },
+  favby:[
+    {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }
+  ]
 
 });
+
+
 
 const Doctrine = mongoose.model("Doctrine", doctrineSchema);
 module.exports = Doctrine;

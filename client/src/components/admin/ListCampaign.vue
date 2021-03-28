@@ -7,7 +7,7 @@
     <div id ='headaddnews'>
         <div class="text-center">
           
-            <v-btn rounded color="primary" dark to = "/admin/addCampaign">Add CAMPAIGN</v-btn>
+            <v-btn rounded color="primary" dark to = "/admin/addCampaign">เพิ่มแคมเปญ</v-btn>
   
             <!-- <v-btn rounded color="primary"  to = "/addnews" >Add NEWS</v-btn> -->
         </div>
@@ -36,7 +36,7 @@
             </thead>
             <tbody>
               <tr   @submit.prevent="editcampaign" v-for="campaign in campaigns"  :key="campaign._id">
-                <td><center><img :src="'http://localhost:4000/uploads/' + campaign.image" class="img-fluid" style="width: 100px; height: 100px; object-fit: cover;  margin:3%;" align="center"></center></td>
+                <td><center><img :src="'http://localhost:4000/image/campaign/' + campaign.image" class="img-fluid" style="width: 100px; height: 100px; object-fit: cover;  margin:3%;" align="center"></center></td>
                 <td>{{ campaign.name }}</td>
                 <td>{{ campaign.date }}</td>
                 <td>{{ campaign.amount }}</td>
@@ -45,7 +45,9 @@
                   <!-- <router-link :to="`/admin/listdoctrine/${doctrine._id}`">detail</router-link> -->
                   <!-- <router-link :to="{name : 'DetailDoctrine', params: {id:doctrine._id}}">detail</router-link> -->
                   <v-btn @click="ViewCampaign(campaign._id)">view</v-btn>
-                  <v-btn to='/admin/logdonate'>Log</v-btn>
+                  <v-btn @click="ViewLogCampaign(campaign._id)">Log</v-btn>
+                  <v-btn @click="EditCampaign(campaign._id)">Edit</v-btn>
+                  <v-btn @click="DeleteCampaign(campaign._id)">Delete</v-btn>
                 </td>
                 <!-- <td>{{ item.name }}</td>
                 <td>
@@ -65,11 +67,11 @@
 
 <script>
 const Navbar = () => import('@/components/navbar/navbar')
+import swal from "sweetalert2";
 import {
   } from '@mdi/js'
 import moment from "moment";
   export default {
-    
     name : "ListCampaign",
     data (){
       return {
@@ -79,12 +81,22 @@ import moment from "moment";
     mounted: async function mounted(){
       await this.$http.get("/campaign/ShowListCampaign")
       .then((res) => {
-        console.log(res.data)
         this.campaigns = res.data;
+        this.campaigns.sort(function(a, b){
+            var dateA = new Date(a.startdate), dateB = new Date(b.startdate);
+            return dateB -dateA;
+        });
+    //     movies.sort(function(a, b) {
+    // var dateA = new Date(a.release), dateB = new Date(b.release);
+    // return dateA - dateB;
+// });
+
+        console.log(res.data)
+        
         console.log(this.campaigns)
         var i = 0
-        for(this.campaigns[i];;i++){
-            this.campaigns[i].date = moment(this.campaigns[i].date).format(" dddd DD-MM-YY  A");
+        for(this.campaigns[i];i<this.campaigns.length;i++){
+            this.campaigns[i].date = moment(this.campaigns[i].date).format(" DD-MM-YY A");
             } 
       })
       .catch(function(err){
@@ -96,16 +108,51 @@ import moment from "moment";
       Navbar
     },
     methods: {
-      // async ViewDoctrine(doctrineid){
-      //   await this.$http.get("/DetailDoctrine/"+doctrineid)
-      //   .then((res)=> {
-
-      //   })
-      // }
       ViewCampaign(campaignid){
         this.$router.push({ name: 'DetailCampaign' , params: {id : campaignid}})
-          
-        }
+        },
+      ViewLogCampaign(campaignid){
+        this.$router.push({ name: 'LogDonate' , params: {id : campaignid}})
+        },
+      Refresh(campaignid){
+        console.log('sdfsdfsddf')
+        this.campaigns = this.campaigns.filter(function(c){
+          return c._id !== campaignid
+        })
+      },
+      EditCampaign(campaignid){
+        this.$router.push({ name: 'editCampaign' , params: {id : campaignid}})
+      },
+      DeleteCampaign(campaignid){
+        const swalWithBootstrapButtons = swal.mixin({
+          customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+          },
+          buttonsStyling: false
+        })
+        swalWithBootstrapButtons.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Yes, delete it!',
+          cancelButtonText: 'No, cancel!',
+          reverseButtons: true
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.$http.delete("/campaign/DeleteCampaign/"+campaignid)
+            console.log("delete")
+            this.$router.push({ name: 'ListCampaign'})
+            this.Refresh(campaignid)
+            swalWithBootstrapButtons.fire(
+              'Deleted!',
+              'Delete Campaign Success.',
+              'success'
+            )
+          } 
+        })
+      },
       }
     
   }

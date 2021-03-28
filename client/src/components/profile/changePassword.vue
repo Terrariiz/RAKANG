@@ -6,12 +6,12 @@
       </v-card-title>
       <v-card-text>
         <v-form
-                          ref="form"
-                          style="margin:3%;"
-                          v-model="valid"
-                          lazy-validation
-                          @submit.prevent="changePassword"
-                        >
+          ref="form"
+          style="margin:3%;"
+          v-model="valid"
+          lazy-validation
+          @submit.prevent="changePassword"
+        >
         <v-container>
           <v-row>
             <v-col cols="12">

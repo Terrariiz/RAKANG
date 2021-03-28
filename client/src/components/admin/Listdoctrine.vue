@@ -31,7 +31,7 @@
             <tbody>
               <tr  @submit.prevent="editdoctrine" v-for="doctrine in doctrines"  :key="doctrine._id">
                 
-                <td><center><img :src="'http://localhost:4000/uploads/' + doctrine.image" class="img-fluid" style="width: 100px; height: 100px; object-fit: cover;  margin:3%;" align="center"></center></td>
+                <td><center><img :src="'http://localhost:4000/image/doctrine/' + doctrine.image" class="img-fluid" style="width: 100px; height: 100px; object-fit: cover;  margin:3%;" align="center"></center></td>
                 <td>{{ doctrine.title }}</td>
                 <!-- <td v-html="doctrine.content">{{ doctrine.content }}</td> -->
                 <td>
@@ -39,8 +39,8 @@
                   <!-- <router-link :to="{name : 'DetailDoctrine', params: {id:doctrine._id}}">detail</router-link> -->
                   <v-btn color="succes" @click="ViewDoctrine(doctrine._id)">View</v-btn>
                   
-                  <!-- <button @click="EditDoctrine(doctrine._id)">Edit</button>
-                  <button @click="DeleteDoctrine(doctrine._id)">Delete</button> -->
+                  <button @click="EditDoctrine(doctrine._id)">Edit</button>
+                  <button @click="DeleteDoctrine(doctrine._id)">Delete</button>
                   
                 </td>
                 <!-- <td>
@@ -74,6 +74,9 @@ const Navbar = () => import('@/components/navbar/navbar')
       .then((res) => {
         console.log(res.data)
         this.doctrines = res.data;
+        this.doctrines.sort(function(a, b){
+            return new Date(b.edittime) - new Date(a.edittime);
+        });
         console.log(this.doctrines)
       })
       .catch(function(err){
@@ -84,6 +87,8 @@ const Navbar = () => import('@/components/navbar/navbar')
       ViewDoctrine(doctrineid){
         this.$router.push({ name: 'DetailDoctrine' , params: {id : doctrineid}})
         },
+      
+      
     }
     
   }

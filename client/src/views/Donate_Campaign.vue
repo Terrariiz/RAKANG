@@ -3,63 +3,7 @@
     <div>
         <Navbar></Navbar>
         </div>
-        <!-- <h1>donateCampaign</h1> -->
-
-         <!-- <v-container rounded-xl style="background:linear-gradient(90deg, hsla(16, 100%, 76%, 1) 0%, hsla(49, 100%, 81%, 1) 100%); 
-       box-shadow:5px 6px 5px #888888; margin-top: 3%">
-        <v-btn to='/campaign'><i style="float:left;" class="fa fa-arrow-left fa-lg" aria-hidden="true"></i></v-btn>
-      <div  v-if="campaign" >
-        <center>
-              <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
-                
-              <a href="#"><br>
-                <img class="img-fluid rounded" id="showimage" :src="'http://localhost:4000/uploads/' + campaign.image"/>
-              </a>
-              </div>
-              </center>
-              <v-container>
-                <div style="text-align:center; font-size:40px;"> {{campaign.name}} </div>
-              </v-container>
-              <v-container  rounded-xl style="background-color:white; box-shadow:5px 6px 5px #888888; width:70%;">  
-               <div style="margin:5%" v-html="campaign.content"> {{campaign.content}}  </div>
-              </v-container>
-
-              <v-row>
-                
-                    <v-col cols="4"></v-col>
-                    <v-col cols="4"></v-col>
-                    date
-                    <v-col cols="4">
-                      <h3>วันสิ้นสุดการรับบริจาค </h3>
-                    <div>{{ campaign.date }} </div>
-                    </v-col>
-                
-                    เงิน
-                    <v-col cols="4"></v-col>
-                    <v-col cols="4"></v-col>
-                      <v-col cols="4">
-                        <h3>เป้าหมาย</h3>
-                    <div>{{ campaign.amount }} บาท</div>
-                      </v-col>
-                
-               </v-row>
-
-               <v-row style="margin-top:3%;">
-                <v-col  cols = "4"></v-col>
-                <v-col  cols = "4"></v-col>
-
-                <v-col  cols = "4">
-                  <v-btn color="primary" style="float:left;" 
-                  @click="donate($route.params.id)"
-                  >บริจาค</v-btn>
-                </v-col>
-                  
-              </v-row>
-
-             
-      </div>
       
-      </v-container>    -->
     <div class="project-header">
     <v-container >
       <v-row>
@@ -69,10 +13,10 @@
       <v-row>
           <v-col  cols="12" md="8" sm="12">
               <div class="project-content">
-                  <img class="image -fullwidth img-responsive" id="showimage" :src="'http://localhost:4000/uploads/' + campaign.image"/>
+                  <img class="image -fullwidth img-responsive" id="showimage" :src="'http://localhost:4000/image/campaign/' + campaign.image"/>
                   <p class="lead">{{campaign.content}}</p>
                   <p class="details">
-                      <span class="duration">เริ่มวันที่ {{ campaign.date }} </span>
+                      
                       <span class="location">สถานที่</span>
                   </p>
               </div>
@@ -82,30 +26,38 @@
                 <div class="body">
                     <div class="amount-raised">
                         <h3 class="title">ยอดบริจาคขณะนี้</h3>
-                        <span class="value">100000 บาท</span>
+                        <span class="value">{{ campaign.donate }} บาท</span>
                     </div>
+                    <br>
                     <div class="funding-goal">
-                        <h3 class="title">เป้าหมาย</h3>
-                        <span class="value">{{ campaign.amount }} บาท</span>
+                        <h3 class="title"></h3>
+                        <span class="value">เป้าหมาย {{ campaign.amount }} บาท</span>
                     </div>
-                    <div class="progress-bar">
-                        <span class="percent">
-                            <span class="hide-txt">ดำเนินการไปแล้ว</span>
-                            80%
+                    <div >
+                        <span style="float:right;" class="percent">
+                            <!-- <span class="hide-txt">ดำเนินการไปแล้ว</span> -->
+                            {{Math.round((campaign.donate/campaign.amount)*100)}}%
                         </span>
-                        <span class="bar" style="width:80%"></span>
+                        <progress class="progress is-danger" :value="(campaign.donate/campaign.amount)*100" max="100"></progress>
                     </div>
-                    <span class="timeleft">365 วัน</span>
-                    <span class="people">
-                        <span class="hide-txt">จำนวนคนที่บริจาค</span>
-                        <span class="icon-people">43</span>
-                    </span>
+                    <v-row>
+                  <v-col style="text-align:left;" cols="9" md="9">
+                    <span class="duration">สิ้นสุดวันที่ {{ campaign.date }} </span>
+                  </v-col>
+                  <v-col style="text-align:right;" cols="3" md="3">  
+                    <!-- <span class="hide-txt">จำนวนคนที่บริจาค</span> -->
+                        <span class="icon-people"><i class="fa fa-users" aria-hidden="true"></i> 0</span>
+                  </v-col>
+                </v-row>
+                    
+                    
                 </div>
 
-            <div class="action">
-                <a><v-btn block></v-btn></a>
-                
-            </div>
+              <div class="action">
+                  <v-btn v-if="campaign.status == 'open'" color="green" @click.stop="dialogDonate=true" block>บริจาค</v-btn><v-btn disabled v-if="campaign.status == 'close'" color="green" depressed block>โครงการนี้สิ้นสุดแล้ว</v-btn>
+                  <DialogDonate :visible="dialogDonate" @close="dialogDonate=false" />
+              </div>
+              
 
             </div>
           </v-col>
@@ -114,7 +66,7 @@
   </v-container>
     </div>
   <!-- tablist -->
-  <div class="tab-section">
+    <div class="tab-section">
       <v-container>
          <v-tabs
       v-model="tab"
@@ -122,27 +74,33 @@
       color="basil"
       grow
     >
-      <v-tab
-        v-for="item in items"
-        :key="item"
-      >
-        {{ item }}
+      <v-tab>
+        ภาพรวม
+      </v-tab>
+      <v-tab>
+        ความคืบหน้า
       </v-tab>
     </v-tabs>
 
     <v-tabs-items v-model="tab">
-      <v-tab-item
-        v-for="item in items"
-        :key="item"
-      >
+      <v-tab-item>
         <v-card
           color="basil"
           flat
         >
-          <v-card-text>{{ text }}</v-card-text>
+          <v-card-text v-html="campaign.overview">{{campaign.overview}}</v-card-text>
+        </v-card>
+      </v-tab-item>
+      <v-tab-item>
+        <v-card
+          color="basil"
+          flat
+        >
+          <v-card-text v-html="campaign.done">{{campaign.done}}</v-card-text>
         </v-card>
       </v-tab-item>
     </v-tabs-items>
+    
         
       </v-container>
   </div>
@@ -152,46 +110,150 @@
     </div>
 </template>
 <script>
+
 const Navbar = () => import('@/components/navbar/navbar')
+import DialogDonate from "./dialog_donate";
+import swal from 'sweetalert2'
 import moment from "moment";
 export default {
     name:'Campaign',
     components:{
-        Navbar
+        Navbar,
+        DialogDonate,
     },
     data (){
       return {
         campaign: null,
         tab: null,
-        items: [
-          'Appetizers', 'Entrees', 'Deserts', 'Cocktails',
-        ],
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        }
+        dialogDonate: false,
+        thaidate : null,
+        end:null,
+        notend:null,
+
+      }
     },
     mounted: function(){
+      
       this.getData()
-    },
-    
+      if(localStorage.getItem("donate-campaign") != null){
+        this.AlertDonate()
+      }
+      
+      
+    },  
     methods: {
+      
         getData(){
             var that = this;
             this.$http.get("/campaign/DetailCampaign/"+this.$route.params.id)
             .then((res) => {
               console.log(res.data)
+              // that.percent = res.data.percentage
               that.campaign = res.data;
               console.log(that.campaign)
-              that.campaign.date = moment(that.campaign.date).format(" dddd DD-MM-YY  A");
+              
+              
+
+              // this.end_date()
+
+              if(moment(that.campaign.date).format('dddd') == 'Mondey'){
+                that.campaign.date = moment(that.campaign.date).format(" วันจันทร์ DD-MM-YY A");
+              } else if(moment(that.campaign.date).format('dddd') == 'Tuesday'){
+                that.campaign.date = moment(that.campaign.date).format(" วันอังคาร DD-MM-YY A");
+              } else if(moment(that.campaign.date).format('dddd') == 'Wednesday'){
+                that.campaign.date = moment(that.campaign.date).format(" วันพุธ DD-MM-YY A");
+              } else if(moment(that.campaign.date).format('dddd') == 'Thursday'){
+                that.campaign.date = moment(that.campaign.date).format(" วันพฤหัสบดี DD-MM-YY A");
+              } else if(moment(that.campaign.date).format('dddd') == 'Friday'){
+                that.campaign.date = moment(that.campaign.date).format(" วันศุกร์ DD-MM-YY A");
+              } else if(moment(that.campaign.date).format('dddd') == 'Saturday'){
+                that.campaign.date = moment(that.campaign.date).format(" วันเสาร์ DD-MM-YY A");
+              } else if(moment(that.campaign.date).format('dddd') == 'Sunday'){
+                that.campaign.date = moment(that.campaign.date).format(" วันอาทิตย์ DD-MM-YY A");
+              }
+              
+              
+              
+              
             })
             .catch(function(err){
               console.log(err)
             })
         },
+        AlertDonate(){
+          if(localStorage.getItem("user_id")){
+            this.$http.get("/donatelog/CheckDonate/"+localStorage.getItem("user_id"))
+            .then((res) => {
+              console.log('res')
+              console.log(res.data)
+              console.log('res')
+              if(res.data == false){
+                console.log("false")
+              } else if(res.data == 'complete'){
+                swal.fire({
+                  icon: 'success',
+                  title: 'ทำรายการเสร็จสิ้น',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+              } else if(res.data == 'incomplete'){
+                swal.fire({
+                  icon: 'error',
+                  title: 'เกิดข้อผิดพลาดบางอย่าง',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+              } else if(res.data == 'cancel'){
+                swal.fire({
+                  icon: 'info',
+                  title: 'ยกเลิกการทำรายการแล้ว',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+              }
+              localStorage.removeItem("donate-campaign")
+            })
+            .catch(function(err){
+              console.log(err)
+            })
+          }
+        },
+        // end_date(){
+          
+        //   var enddate = moment(this.campaign.date).format(" dddd DD-MM-YY A");
+        //   var now = new Date().toISOString().substr(0, 10);
+        //   now = moment(now).format(" dddd DD-MM-YY  A");
+        //   console.log("kuy"+enddate)
+        //   console.log("kuy"+now)
+        //   if(enddate == now || now > enddate)
+        //   { this.end = true;
+        //    this.notend = false;
+        //  }
+        //   else{ this.end = false;
+        //   this.notend = true;
+        //    }
+          
+        // }
+        
+         
+        
     }
 }
 </script>
 
-<style>
+<style scoped>
+/* .value{
+  font-weight: 100;
+  margin: 0 0 10px;
+  font-size: 1.375em;
+}
+.percent{
+  position: absolute;
+  top:35px;
+  right: 0;
+  font-size: 1.75em;
+  color: #666;
+} เดี๋ยวมาแก้ */ 
 .project-header{
   background-color: #fff8ec;
 }
@@ -206,6 +268,10 @@ export default {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 40px;
+  
+  width: 100%;
+  
+
 }
 .img-responsive{
   display: block;

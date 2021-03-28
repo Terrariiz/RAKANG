@@ -1,171 +1,504 @@
-<template class="body">
-  <div  >
-      <!-- <div class="container">
-          <div class="row">
-              <div class="col-md-12">
-                  <div class="campaign-content">
-                      <h1>ชื่อแคมเปญ</h1>
-                  </div>
-                    <div class="col-md-8 col-sm-7">
-                        <div class="campaign-content">
-                            <img class="image -fullwidth img-responsive" src="" alt="">
-                            <p class="lead">dwadadwdadadadadadawdadawd</p>
-                            <p class="details">
-                                <span class="duration">ระยะเวลา</span>
-                                <span class="location">พื้นที่ดำเนินโครงการ</span>
-                            </p>
-                        </div>
-                    </div> -->
-                    <!-- ยอดบริจาค -->
-                    <!-- <div class="col-md-4 col-sm-5">
-                        <div class="fund-raising affix-top" style="position:relative;">
-                            <div class="body">
-                                <div class="amount-raised">
-                                    <h3 class="title">ยอดบริจาค</h3>
-                                    <span class="value">600000 บาท</span>
-                                </div>
-                                <div class="funding-goal">
-                                    <h3 class="title">เป้าหมาย</h3>
-                                    <span class="value">600000 บาท</span>
-                                </div>
-                                <div class="process-bar">
-                                    <span class="percent">
-                                        <span class="hide-txt">ดำเนินการไปแล้ว</span>
-                                    </span>
-                                    <span class="bar" style="width:84%"></span>
-                            </div>
-                            <span class="timeleft"> 100 วัน </span>
-                            <span class="people">
-                                <span class="hide-txt">จำนวนคนที่บริจาค</span>
-                            </span>
-                        </div>
-                        <div class="action">
-                            <a class="btn-donate js-btn-anchor-donate"></a>
-                        </div>
-                    </div>
+<template>
+    <div >
+        <!-- <div>
+            <Navbar></Navbar>
+        </div> -->
+        <!-- <h1>test</h1>
+        <v-container class="con">
+          <div class="image-box">
+            <div class="contents">
+                <img src="https://media.wired.com/photos/598e35fb99d76447c4eb1f28/master/pass/phonepicutres-TA.jpg" width="250px" height="350px">
+                <div class="content-txtx">
+                  <h2>Name</h2>
+                  <h5> afffafsdadadawd</h5>
+                </div>
+            </div>
+          </div>
+          <div class="image-box">
+            <div class="contents">
+                <img src="https://media.wired.com/photos/598e35fb99d76447c4eb1f28/master/pass/phonepicutres-TA.jpg" width="250px" height="350px">
+                <div class="content-txtx">
+                  <h2>Name2</h2>
+                  <h5> afffafsdadadawd</h5>
+                </div>
+            </div>
+          </div>
+          <div class="image-box">
+            <div class="contents">
+                <img src="https://media.wired.com/photos/598e35fb99d76447c4eb1f28/master/pass/phonepicutres-TA.jpg" width="250px" height="350px">
+                <div class="content-txtx">
+                  <h2>Name3</h2>
+                  <h5> afffafsdadadawd</h5>
+                </div>
+            </div>
+          </div>
+        </v-container> -->
+      <v-container>
+        <v-row class="rows"  style="background-color:rgb(68,68,68,.4);">
+          <v-col class="name-picture" cols="12" md="4" sm="12">
+              <div class="edit-profile">
+                <router-link style="color: gray" to="/editprofile"><v-btn color="secondary" icon><v-icon>mdi-pencil</v-icon></v-btn></router-link>
+              </div>
+            <div class="image-profile">
+              <img src="https://media.wired.com/photos/598e35fb99d76447c4eb1f28/master/pass/phonepicutres-TA.jpg">
+            </div>
+            <hr>
+            <div class="name">
+              
+              <h3>pitpagon chinanupagon</h3>
+              <div>แต้มบุญ: </div>
+              <br>
+              <v-btn >แก้ไข</v-btn>
+              
+            </div>
+             <div class="selectboxs">
+              <div class="setting-proflie2">
+                 <v-select
+                 v-model="selected"
+                :items="items"
+                label="Solo field"
+                solo
+                @change="onChange()"
+                ></v-select>
               </div>
               
-          </div>
-      </div>
-  </div> -->
-  <v-container>
-      <v-row>
-          <h1>title</h1>
-          <br>
-      </v-row>
-      <v-row>
-          <v-col  cols="12" md="8" sm="12">
-              <div class="project-content">
-                  <img>
-                  <p class="lead">ทำอย่่างนู้นอย่างนี้บลาๆ</p>
-                  <p class="details">
-                      <span class="duration">ระยะเวลา </span>
-                      <span class="location">สถานที่</span>
-                  </p>
+            </div>
+          </v-col>
+          
+          <v-col class="setting-proflie" cols="12" md="4" sm="12">
+            <div class="selectboxs">
+              <div>
+                 <v-select
+                 v-model="selected"
+                :items="items"
+                label="Solo field"
+                solo
+                @change="onChange()"
+                ></v-select>
               </div>
-          </v-col>
-          <v-col  cols="12" md="4" sm="12">
-            <div class="fund-raising affix-top">
-                <div class="body">
-                    <div class="amount-raised">
-                        <h3 class="title">ยอดบริจาคขณะนี้</h3>
-                        <span class="value">100000 บาท</span>
-                    </div>
-                    <div class="funding-goal">
-                        <h3 class="title">เป้าหมาย</h3>
-                        <span class="value">5000000 บาท</span>
-                    </div>
-                    <div class="progress-bar">
-                        <span class="percent">
-                            <span class="hide-txt">ดำเนินการไปแล้ว</span>
-                            80%
-                        </span>
-                        <span class="bar" style="width:80%"></span>
-                    </div>
-                    <span class="timeleft">365 วัน</span>
-                    <span class="people">
-                        <span class="hide-txt">จำนวนคนที่บริจาค</span>
-                        <span class="icon-people">43</span>
-                    </span>
-                </div>
-
-            <div class="action">
-                <a><v-btn block></v-btn></a>
-                
+              
             </div>
-
-            </div>
+            
           </v-col>
-      </v-row>
-      
-  </v-container>
-  <!-- tablist -->
-  <div class="tab-section">
+          <!-- โปรไฟล์ -->
+          <v-col  v-if="selected == 'โปรไฟล์'" class="details-profile" cols="12" md="8" sm="12">
+            <v-container>
+               <v-card-text><div class="row">
+                        <div class="col-sm-6">
+                          <p class="m-b-10 f-w-600">Email</p>
+                          <h6 class="text-muted f-w-400">
+                            dd
+                          </h6>
+                        </div>
+                        <div class="col-sm-6">
+                          <p class="m-b-10 f-w-600">เบอร์โทรติดต่อ</p>
+                          <h6 class="text-muted f-w-400">
+                           dd
+                          </h6>
+                        </div>
+                        <div class="col-sm-6">
+                          <p class="m-b-10 f-w-600">วัน/เดือน/ปีเกิด</p>
+                          <h6 class="text-muted f-w-400">dd</h6>
+                        </div>
+                        <div class="col-sm-6">
+                          <p class="m-b-10 f-w-600">Point</p>
+                          <h6 class="text-muted f-w-400">
+                            dd
+                          </h6>
+                        </div>
+                        
+                      </div></v-card-text>
+            </v-container>
+          </v-col>
+
+          <!-- ประวัติการบริจาค -->
+           <v-col v-else-if="selected == 'ประวัติการบริจาค'"  class="table-profile" cols="12" md="8" sm="12">
+            <v-container>
+              <div class="head-details">ประวัติการบริจาค</div>
+               <table class="table">
+                <thead>
+                  <tr>
+                    <th>ชื่อแคมเปญ</th>
+                    <th>จำนวนเงิน(บาท)</th>
+                    <th>วัน-เดือน-ปี</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td data-label="ชื่อแคมเปญ">name</td>
+                    <td data-label="จำนวนเงิน(บาท)">name</td>
+                    <td data-label="วัน-เดือน-ปี">name</td>
+                  </tr>
+                  <tr>
+                    <td data-label="ชื่อแคมเปญ">name</td>
+                    <td data-label="จำนวนเงิน(บาท)">name</td>
+                    <td data-label="วัน-เดือน-ปี">name</td>
+                  </tr>
+                  <tr>
+                    <td data-label="ชื่อแคมเปญ">name</td>
+                    <td data-label="จำนวนเงิน(บาท)">name</td>
+                    <td data-label="วัน-เดือน-ปี">name</td>
+                  </tr>
+                  <tr>
+                    <td data-label="ชื่อแคมเปญ">name</td>
+                    <td data-label="จำนวนเงิน(บาท)">name</td>
+                    <td data-label="วัน-เดือน-ปี">name</td>
+                  </tr>
+                  <tr>
+                    <td data-label="ชื่อแคมเปญ">name</td>
+                    <td data-label="จำนวนเงิน(บาท)">name</td>
+                    <td data-label="วัน-เดือน-ปี">name</td>
+                  </tr>
+                  <tr>
+                    <td data-label="ชื่อแคมเปญ">name</td>
+                    <td data-label="จำนวนเงิน(บาท)">name</td>
+                    <td data-label="วัน-เดือน-ปี">name</td>
+                  </tr>
+                  <tr>
+                    <td data-label="ชื่อแคมเปญ">name</td>
+                    <td data-label="จำนวนเงิน(บาท)">name</td>
+                    <td data-label="วัน-เดือน-ปี">name</td>
+                  </tr>
+                </tbody>
+               </table>
+            </v-container>
+          </v-col>
+          
+          <!-- bookmark -->
+          <v-col v-else-if="selected == 'บุ๊คมาค'"  class="bookmark-profile" cols="12" md="8" sm="12">
+            <v-container>
+               <div class="block latestPostBlock">
       <v-container>
-         <v-tabs
-      v-model="tab"
-      background-color="transparent"
-      color="basil"
-      grow
+        <h2 class="text-center">ข่าว</h2>
+        <v-row>
+          <v-col v-for="news in news" :key="news.id" cols="12" md="4">
+            <v-card
+     
+      max-width="344"
+      outlined
     >
-      <v-tab
-        v-for="item in items"
-        :key="item"
-      >
-        {{ item }}
-      </v-tab>
-    </v-tabs>
+     <v-img  class="mx-auto" :src="news.src"></v-img>
+      <v-list-item three-line>
+        <v-list-item-content>
+          <div class="overline mb-4">
+           {{ news.name }}
+          </div>
+          <v-list-item-title class="headline mb-1">
+            {{news.subtitle}}
+          </v-list-item-title>
+          <v-list-item-subtitle>{{ news.description }}</v-list-item-subtitle>
+        </v-list-item-content>
+  
+      
+      </v-list-item>
+  
+            <v-card-actions>
+                      <v-btn to="" color="primary" style="margin-left:auto;" text
+                        >More</v-btn
+                      >
+                    </v-card-actions>
+          </v-card>
+                </v-col>
+              </v-row>
+              <router-link to='/news' style="float:right; margin-bottom:3%"
+                >แสดงทั้งหมด <i class="fa fa-chevron-right" aria-hidden="true"></i
+                ><i class="fa fa-chevron-right" aria-hidden="true"></i
+              ></router-link>
+            </v-container>
+          </div>
 
-    <v-tabs-items v-model="tab">
-      <v-tab-item
-        v-for="item in items"
-        :key="item"
-      >
-        <v-card
-          color="basil"
-          flat
-        >
-          <v-card-text>{{ text }}</v-card-text>
-        </v-card>
-      </v-tab-item>
-    </v-tabs-items>
+          
+            </v-container>
+          </v-col>
+          <!-- bookmark -->
+
         
+           
+            
+          
+          
+          
+        </v-row>
+      
       </v-container>
-  </div>
-  </div>
+    </div>
 </template>
 
+
 <script>
+// const Navbar = () => import('@/components/navbar/navbar')
+
 export default {
-    data () {
-      return {
-        tab: null,
-        items: [
-          'Appetizers', 'Entrees', 'Deserts', 'Cocktails',
-        ],
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    name : "test",
+   
+    components:{
+        // Navbar,
+        
+    },
+    methods: {
+      onChange() {
+        console.log(this.selected);
       }
     },
-  }
-//  import x from "../../../public/image/2.jpg"
+    
+      data: () => ({
+      items: ['โปรไฟล์', 'ประวัติการบริจาค', 'บุ๊คมาค', 'Buzz'],
+      selected: 'โปรไฟล์',
+      news: [
+        {
+          id: 1,
+          name: "No.1",
+          title: "Top western road trips",
+          subtitle: "1,000 miles of wonder",
+          description:
+            "His ubique laboramus ne. Expetenda assueverit sed ad. Id nec malis lucilius delicatissimi. Nec assum sonet suscipit ex, diam deterruisset ut usu, ad dicat fabellas aliquando eam.",
+          src: "https://media.macphun.com/img/uploads/customer/how-to/579/15531840725c93b5489d84e9.43781620.jpg?q=85&w=1340",
+        },
+        {
+          id: 2,
+          name: "No.2",
+          title: "Christmas tales to read",
+          subtitle: "2,000 miles of wonder",
+          description:
+            "Sea ad habemus assueverit, omnes platonem convenire sit et, at integre pericula quo. Facete adolescens definitionem cu qui, in putant aliquid fierent ius.",
+          src: "https://media.macphun.com/img/uploads/customer/how-to/579/15531840725c93b5489d84e9.43781620.jpg?q=85&w=1340",
+        },
+        {
+          id: 3,
+          name: "No.3",
+          title: "20 movies not to miss in 2020",
+          subtitle: "3,000 miles of wonder",
+          description:
+            "Aliquam albucius mei ei, debitis torquatos et pro, eos natum scribentur no. Putant verear constituto te qui. Adolescens persequeris vim ei. Vel nullam reprimique te.",
+          src: "https://media.macphun.com/img/uploads/customer/how-to/579/15531840725c93b5489d84e9.43781620.jpg?q=85&w=1340",
+        },
+        {
+          id: 4,
+          name: "No.3",
+          title: "20 movies not to miss in 2020",
+          subtitle: "3,000 miles of wonder",
+          description:
+            "Aliquam albucius mei ei, debitis torquatos et pro, eos natum scribentur no. Putant verear constituto te qui. Adolescens persequeris vim ei. Vel nullam reprimique te.",
+          src: "https://media.macphun.com/img/uploads/customer/how-to/579/15531840725c93b5489d84e9.43781620.jpg?q=85&w=1340",
+        },
+        {
+          id: 5,
+          name: "No.3",
+          title: "20 movies not to miss in 2020",
+          subtitle: "3,000 miles of wonder",
+          description:
+            "Aliquam albucius mei ei, debitis torquatos et pro, eos natum scribentur no. Putant verear constituto te qui. Adolescens persequeris vim ei. Vel nullam reprimique te.",
+          src: "https://media.macphun.com/img/uploads/customer/how-to/579/15531840725c93b5489d84e9.43781620.jpg?q=85&w=1340",
+        },
+        {
+          id: 6,
+          name: "No.3",
+          title: "20 movies not to miss in 2020",
+          subtitle: "3,000 miles of wonder",
+          description:
+            "Aliquam albucius mei ei, debitis torquatos et pro, eos natum scribentur no. Putant verear constituto te qui. Adolescens persequeris vim ei. Vel nullam reprimique te.",
+          src: "https://media.macphun.com/img/uploads/customer/how-to/579/15531840725c93b5489d84e9.43781620.jpg?q=85&w=1340",
+        },
+
+      ],
+      
+    }),
+    };
+ 
+
+
 </script>
 
-<style>
-.project-content{
-    padding-right: 40px;
+<style scoped>
+  /* *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  } */
+/* .con{
+  
+  position: absolute;
+  left: 50%;
+  top:50%;
+  transform: translate(-50%,-50%);
+  width: 1000px;
 }
-.fund-raising{
-    border-radius: 6px;
-    background-clip: padding-box;
-    color: #666;
-    border: 1px solid #f3d9ab;
-    background-color: #fff;
-    z-index: 999;
+.image-box{
+  position: relative;
+  display: inline-block;
+  width: 250px;
+  height: 350px;
+  margin: 15px;
+  border-radius: 40px;
+  box-shadow: 5px 5px 5px rgba(68, 68, 68,.6),
+              5px 5px 5px 3px rgba(68, 68, 68,.6);
 }
-.fund-raising .body{
-   padding: 30px 25px 0  25px;
+.image-box::before{
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(255, 251, 251, 0.4);
+  transform: skew(-35deg);
+  transform-origin: top left;
+  transform: translate(350px,0);
+  transition: 3s linear;
+  z-index: 3;
 }
-.fund-raising .action{
-   padding: 30px 25px 30px 25px;
+.image-box:hover::before{
+  transform: translate(-350px,0);
 }
+.image-box:hover img{
+  transform: scale(1.3);
+  overflow: hidden;
+}
+.contents .content-textx{
+  position: absolute;
+  bottom:0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: rgb(220, 20, 60);
+  padding-top: 10px;
+  text-align: center;
+  color: white;
+  transition: .3s cubic-bezier(.52,-0.30,.45,1.6);
+  text-transform: uppercase;
+  z-index: 4;
+}
+.image-box:hover .contents .content-textx{
+  height: 65%;
+}
+.contents img{
+  position: relative;
+  display: inline;
+  transition: 2s ease;
+  z-index: -1;
+} */
+.head-details{
+  text-align: center;
+  font-size: 32px;
+  font-weight: 300;
+  margin: 2%;
+}
+.edit-profile{
+  position: absolute;
+  right: 0;
+  top:0;
+  
+}
+.image-profile{
+  
+  /* padding: 100px 200px; */
+  /* height: 100px;
+  width: 200px; */
+  display: flex;
+  align-items: center;
+}
+.name-picture{
+  background-color: cornflowerblue;
+  align-items: center;
+  justify-content: center;
+  border: black solid 0.8px;
+  padding: 50px 50px;
+  height: 80vh; 
+  
+}
+.setting-proflie{
+  display: none;
+  margin-top: 3%;
+  /* border: black solid 0.8px; */
+}
+.details-profile{
+  /* border: black solid 0.8px; */
+  height: 80vh;
+  overflow-y: scroll;
+}
+.table-profile{
+  height: 80vh;
+  overflow-y: scroll;
+}
+.bookmark-profile{
+  height: 80vh;
+  overflow-y: scroll;
+}
+
+
+/* ประวัติการบริจาค */
+.table{
+  width: 100%;
+  border-collapse: collapse;
+}
+.table thead{
+  background-color: #ee2828;
+}
+.table thead tr th{
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.35px;
+  color:#ffffff;
+  opacity: 1;
+  padding: 12px;
+  vertical-align: top;
+  border:1px solid #dee2e685;
+}
+.table tbody tr td{
+  font-size: 14px;
+  letter-spacing: 0.35px;
+  font-weight: normal;
+  color: #f1f1f1;
+  background-color: #3c3f44;
+  padding: 8px;
+  text-align: left;
+  border: 1px solid #dee2e685;
+}
+.mx-auto{
+      height:200px;
+
+}
+@media (max-width:768px){
+  .details-profile{
+  
+  max-height:auto;
+  
+}
+.setting-proflie2{
+  display: none;
+}
+  .setting-proflie{
+  display: block;
+  margin-top: 3%;
+  
+}
+  .table thead{
+    display: none;
+  }
+  .table, .table tbody,.table tr,.table td{
+    display: block;
+    width: 100%;
+  }
+  .table tr{
+    margin-bottom:15px;
+  }
+  .table tbody tr td{
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+  }
+  .table td:before{
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding-left: 15px;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: left;
+  }
+}
+/* ประวัติการบริจาค */
 </style>

@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -10,6 +11,9 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
+  },
+  username:{
+    type: String
   },
   firstname: {
     type: String,
@@ -26,6 +30,12 @@ const userSchema = new mongoose.Schema({
   image: {
     type: String,
   },
+  Rank: {
+    type: String,
+  },
+  Badge:{
+    type: String,
+  },
   tokens: [
     {
       token: {
@@ -34,25 +44,31 @@ const userSchema = new mongoose.Schema({
       }
     }
   ],
-  coin: {
+  resetPasswordToken: {
+    type: String,
+  },
+  resetPasswordExpires: {
+    type: String,
+  },
+  point:{
     type: Number
   },
   donatelog:[
     {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "../../log/model/DonateLog"
-    }
-  ],
-  coinlog:[
-    {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "../../log/model/CoinLog"
+        ref: "DonateLog"
     }
   ],
   minigamelog:[
     {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "../../log/model/MinigameLog"
+        ref: "MinigameLog"
+    }
+  ],
+  favdoctrinelist:[
+    {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Doctrine"
     }
   ]
 });
@@ -74,6 +90,27 @@ userSchema.methods.generateAuthToken = async function() {
   user.tokens = user.tokens.concat({ token });
   await user.save();
   return token;
+};
+
+//get rank user
+userSchema.methods.getrank = async function(id) {
+    var item
+    await User.find({},function(err, found){
+      if(err){
+        console.log(err);
+      } else{
+        found.sort(function(a, b){
+          return b.point - a.point;
+      });
+      for(i = 0 ; i <= (found.length - 1) ; i++){
+        if(found[i]._id == id){
+          break
+        }
+      }
+      item = i
+      }
+    })
+    return i+1;
 };
 
 //this method search for a user by email and password.
@@ -100,6 +137,42 @@ userSchema.statics.checkPassword = async (id, oldPassword, newPassword) => {
     await user.save();
     return true;
   }
+};
+//เลื่อนระดับของ user เมื่อ point ถึงค่าที่กำหนด
+userSchema.methods.checkRank =  function() {
+  if(this.point >= 2000 || this.Rank != "Daimond"){
+    this.Rank = "Daimond"
+    this.Badge = ""
+
+  } else if(this.point >= 1000 ||this.Rank == "Platinum"){
+    this.Rank = "Platinum"
+    this.Badge = ""
+  } else if(this.point >= 500 || this.Rank == "Gold"){
+    this.Rank = "Gold"
+    this.Badge = ""
+  } else if(this.point >= 100 || this.Rank == "Sliver"){
+    this.Rank = "Sliver"
+    this.Badge = ""
+  } else if(this.point >= 0 || this.Rank == "Bronze"){
+    this.Rank = "Bronze"
+    this.Badge = ""
+  }
+}
+
+userSchema.methods.CheckFav = async function(campaign) {
+  
+  var thisfav = false
+  for(var i ; i < this.favdoctrinelist.length  ; i++){
+    if(this.favdoctrinelist[i].equals(campaign)){
+      thisfav = true;
+      break;
+    }
+  }
+  if(thisfav == false){
+    user.favdoctrinelist.push(campaign);
+    user.save();
+  }
+  return thisfav;
 };
 
 const User = mongoose.model("User", userSchema);

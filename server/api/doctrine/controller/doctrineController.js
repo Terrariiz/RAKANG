@@ -1,4 +1,5 @@
 const Doctrine = require("../model/Doctrine");
+const User = require('../../user/model/User')
 const multer = require('multer');
 const fs = require('fs');
 
@@ -11,7 +12,8 @@ exports.addnewdoctrine = async(req,res) => {
         title: req.body.title,
         content: req.body.content,
         image: req.file.filename,
-        edittime : today
+        edittime : today,
+        categories: req.body.categories,
       });
       console.log(doctrine)
       let data = await doctrine.save()
@@ -29,6 +31,9 @@ exports.ShowListDoctrine = async(req,res) =>{
       if(err){
         console.log(err)
       } else {
+        doctrine.sort(function(a, b){
+            return new Date(b.edittime) - new Date(a.edittime);
+        });
         console.log('else')
         res.json(doctrine);
       }
@@ -49,7 +54,7 @@ exports.EditDoctrine = async(req,res) =>{
     const today = new Date();
     if(req.file){
       if(req.file.filename != req.body.oldimage){
-        const image  = './public/uploads/' + req.body.oldimage;
+        const image  = './public/image/doctrine/' + req.body.oldimage;
         fs.unlink(image , function(err){
             if(err){
                 console.log(err);
@@ -122,7 +127,7 @@ exports.DeleteDoctrine = function(req,res){
       if(err){
         console.log(err)
       } else {
-          const image  = './public/uploads/' + doctrine.image;
+          const image  = './public/image/doctrine/' + doctrine.image;
           fs.unlink(image , function(err){
               if(err){
                   console.log(err);
@@ -130,6 +135,22 @@ exports.DeleteDoctrine = function(req,res){
                 console.log("unlink image success")
               } 
           })
+          User.find({favdoctrinelist : doctrine._id}, function(err , user){
+            if(err){
+                console.log(err)
+            } else {
+            console.log(user)
+            for(let j = 0 ; j < user.length ; j++){
+                for(let k = 0 ; k < user[j].favdoctrinelist.length ; k++){
+                    if(user[j].favdoctrinelist[k].equals(doctrine._id)){
+                      user[j].favdoctrinelist.pull(doctrine._id);
+                      user[j].save();
+                      console.log('removed from user favourite list');
+                    }
+                }
+             }
+            }
+        })
         console.log('delete doctrine completed')
       }
     })
@@ -138,6 +159,27 @@ exports.DeleteDoctrine = function(req,res){
     console.log(err)
   }
 }
+
+exports.ShowFavDoctrine = async(req,res) =>{
+  try{
+    User.findById(req.params.id).populate("favdoctrinelist").exec(function(err, userdetail){
+      if(err){
+        console.log(err)
+      }else{
+        console.log('getuserfavlog')
+        console.log(userdetail)
+        res.json(userdetail)
+      }
+    }) 
+    
+  } catch (err) {
+    res.status(400).json({ err: err });
+    console.log(err)
+  }
+}
+
+
+
   
   
 

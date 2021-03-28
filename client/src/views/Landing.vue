@@ -9,7 +9,7 @@
         </div>
         <div class="content">
             <small class="word1">Welcome to</small>
-            <h1 class="word2">RakangThum</h1>
+            <h1 class="word2">RakangTham</h1>
             <v-btn color="white" rounded href='/home'>Enter to website</v-btn>
             
         </div>
@@ -60,7 +60,7 @@ export default {
  
     width: 85%;
     height: 15%;
-    margin: auto;
+    /* margin: auto; */
     display: flex;
     align-items: center;
     justify-content:space-between;
@@ -166,7 +166,7 @@ export default {
       font-size: 15px;
     }
     .word2{
-      font-size: 50px;
+      font-size: 40px;
     }
 }
 h1{
@@ -178,7 +178,7 @@ h1{
 
 /* leaf animations */
 
-#leaves {position:relative;top:-20%;width:100%;text-align: right;}
+#leaves {position:relative;top:-100%;width:100%;text-align: right;}
 
 #leaves i {
     display: inline-block;

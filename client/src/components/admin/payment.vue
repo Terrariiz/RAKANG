@@ -13,12 +13,12 @@
           data-merchantid="M031001"
           :data-amount="top"
           data-orderno="00000001"
-          :data-customerid="id"
+          :data-customerid="id"  
           data-mobileno="0889999999"
           data-clientip="124.120.153.53"
           data-routeno="1"
           data-currency="764"
-          data-description="Test Payment"
+          data-description="บริจาคผ่านเว็บระฆังธรรม"
           data-apikey="Z5O4ARB0wikPpsSwpjXwmeuVCdD2zVV27Sdbti9gTvYWEOiBo7s7fB6S81LZAE3I"
         >
         </modernpay:widget>
@@ -34,7 +34,7 @@
 export default {
   data() {
     return {
-      id: localStorage.getItem("user_id"),
+      id: localStorage.getItem("user_id")+"#"+localStorage.getItem("donate-campaign"),
       top: localStorage.getItem("top-up-amount"),
     };
   },

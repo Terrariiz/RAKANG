@@ -6,6 +6,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    DeviceDesk: true,
     Admintoken: localStorage.getItem('admin_token'),
     Usertoken: localStorage.getItem('user_token'),
     AdminIsLog: localStorage.getItem('admin_token') || false,
@@ -17,9 +18,18 @@ export default new Vuex.Store({
     },
     UserIsLoggedIn(state){
       return state.UserIsLog
+    },
+    IsDesk(state){
+      return state.DeviceDesk
     }
   },
   mutations: {
+    DeviceIsMob(state){
+      state.DeviceDesk = false
+    },
+    DeviceIsDesk(state){
+      state.DeviceDesk = true
+    },
     AdminLogin(state){
       state.AdminIsLog = true      
     },
@@ -48,7 +58,13 @@ export default new Vuex.Store({
     },
     UserLoggedOut(context){
       context.commit('UserLogout')
-    }
+    },
+    DeviceIsMobile(context){
+      context.commit('DeviceIsMob')
+    },
+    DeviceIsDesktop(context){
+      context.commit('DeviceIsDesk')
+    },
   },
   modules: {
   }

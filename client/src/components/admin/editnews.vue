@@ -11,16 +11,32 @@
                     
                         <v-flex xs12 md6 >
                              <v-container v-model = "news.image"  >
+                                 <center><v-div style=""  class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
+                                    <img v-if="!imageData" class="image -fullwidth img-responsive" id="showimage" :src="'http://localhost:4000/image/new/' + news.image"/>
+                                    <span  v-if="!news.image"  class="placeholder">Choose an Image</span>
+                                    <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  v-on:change="onFileSelected" >
+                                </v-div></center>
+
+                                <hr>
+                               <p>*if don't submit new picture we just use previous picture</p>
                                 <!-- <v-file-input v-model="doctrine.image" label="File input" filled prepend-icon="mdi-camera"></v-file-input> -->
-                                <input type="file"  @change="onFileSelected">
+                                <!-- <input type="file"  @change="onFileSelected"> -->
                                 
                                 <!-- <v-btn @click="reset" style="weihgt = 40%" color="red" dark>Clear</v-btn> -->
-                                <p>*if don't submit new picture we just use previous picture</p>
+                                <!-- <p>*if don't submit new picture we just use previous picture</p> -->
                             </v-container>
                         </v-flex>
                         <v-flex xs12 md6>
                                 <!-- <h1 style="color:black;">หัวข้อเรื่อง</h1> -->
                                  <center><v-text-field  v-model="news.title" style="width:70%; text-align: center;" label="หัวข้อเรื่อง" required></v-text-field></center>
+                                <br><br>
+                                <v-select
+                                    v-model="news.categories"
+                                    :items="items"
+                                    menu-props="auto"
+                                    label="เลือกหมวดหมู่"
+                                    single-line
+                                ></v-select>
                                 <br><br>
                                 <v-container  style="background-color: white ; margin-right:3%;">
                                     <!-- <v-container fluid>
@@ -70,6 +86,31 @@
     grid-template-columns: auto 10% 10% auto;
     grid-column-gap: 10%;
 }
+.base-image-input {
+  display: block;
+  width: 300px;
+  height: 300px;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center center;
+}
+.placeholder {
+  background: #F0F0F0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+  font-size: 20px;
+  font-family: Helvetica;
+}
+.placeholder:hover {
+  background: #E0E0E0;
+}
+.file-input {
+  display: none;
+}
 </style>
 
 <script>
@@ -90,12 +131,14 @@ export default {
                 image: null,
                 imagepath: "" ,
                 newimage: null,
-                oldimage: ""
-
+                oldimage: "",
+                categories: null,
             },
+            items:['วัด','โรงพยาบาล','มูลนิธิ','ประชาสัมพันธ์ของเว็บไซค์','อื่นๆ'],
             editorConfig: {
-                    // The configuration of the editor.
-                }
+                // The configuration of the editor.
+            },
+            imageData:null,
         }
     },
     mounted: function(){
@@ -105,12 +148,15 @@ export default {
         Navbar
     },
     methods: {
+        chooseImage () {
+            this.$refs.fileInput.click();
+        },
     async Editnews(){
         try {
             var formData = new FormData();
             formData.append('title', this.news.title)
             formData.append('content', this.news.content)
-            
+            formData.append('categories', this.news.categories)
             if(this.news.newimage == null){
                 console.log('true')
                 formData.append('imagepath', this.news.image)
@@ -173,6 +219,16 @@ export default {
             },
     async onFileSelected(event){
             this.news.newimage = event.target.files[0]
+            const input = this.$refs.fileInput
+            const files = input.files
+            if (files && files[0]) {
+                const reader = new FileReader
+                reader.onload = e => {
+                    this.imageData = e.target.result
+                }
+            reader.readAsDataURL(files[0])
+            // this.$emit('input', files[0])
+            }
         },
     async getData(){
         var that = this;
