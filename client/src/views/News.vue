@@ -3,7 +3,7 @@
         <div>
         <Navbar></Navbar>
         </div>
-        <h1>News page</h1>
+        <h1>News</h1>
         <!-- test -->
         <center>
           <v-text-field style="width:70%; text-align: center;" append-icon="mdi-magnify" v-model="search" label="ค้นหาหัวข้อ"></v-text-field>

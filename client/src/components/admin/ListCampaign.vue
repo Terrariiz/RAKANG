@@ -44,9 +44,9 @@
                 <td>
                   <!-- <router-link :to="`/admin/listdoctrine/${doctrine._id}`">detail</router-link> -->
                   <!-- <router-link :to="{name : 'DetailDoctrine', params: {id:doctrine._id}}">detail</router-link> -->
-                  <v-btn @click="ViewCampaign(campaign._id)">view</v-btn>
-                  <v-btn @click="ViewLogCampaign(campaign._id)">Log</v-btn>
-                  <v-btn @click="EditCampaign(campaign._id)">Edit</v-btn>
+                  <v-btn style="margin-right:3%;" @click="ViewCampaign(campaign._id)">view</v-btn>
+                  <v-btn style="margin-right:3%;" @click="ViewLogCampaign(campaign._id)">Log</v-btn>
+                  <v-btn style="margin-right:3%;" @click="EditCampaign(campaign._id)">Edit</v-btn>
                   <v-btn @click="DeleteCampaign(campaign._id)">Delete</v-btn>
                 </td>
                 <!-- <td>{{ item.name }}</td>

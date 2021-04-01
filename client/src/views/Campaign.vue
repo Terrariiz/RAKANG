@@ -38,16 +38,11 @@
               
               <div class="btn-news" >
                 <v-row>
-                  <v-col cols="12" md="6">
+                  <v-col >
                     <v-btn class="fontstlye" x-large block style="background-color: #ffdd94; color:#455054;" 
                     @click="ViewCampaign(campaign._id)"
                     elevation="3">ดูเนื้อหา</v-btn>
                   </v-col>
-                  <v-col cols="12" md="6">
-                    <v-btn class="fontstlye" x-large block  color="green" style="background-color: #ffdd94; color:#455054;" 
-                    @click="ViewCampaign(campaign._id)"
-                    elevation="3">บริจาคได้ที่นี่</v-btn>
-                    </v-col>
                 </v-row>
               </div>
             </v-container>
