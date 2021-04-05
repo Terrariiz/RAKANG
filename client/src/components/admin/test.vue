@@ -34,36 +34,57 @@
           </div>
         </v-container> -->
       <v-container>
-        <v-row class="rows"  style="background-color:rgb(68,68,68,.4);">
-          <v-col class="name-picture" cols="12" md="4" sm="12">
-              <div class="edit-profile">
-                <router-link style="color: gray" to="/editprofile"><v-btn color="secondary" icon><v-icon>mdi-pencil</v-icon></v-btn></router-link>
+        <v-row class="rows">
+            <v-col  cols="12" md="4" sm="12"> <!-- class="name-picture" -->
+               <v-row>
+                 <v-col class="name-pic-pro"  cols="12" md="12" sm="12">
+                    <div class="edit-profile">
+                  <router-link style="color: gray" to="/editprofile"><v-btn color="secondary" icon><v-icon>mdi-pencil</v-icon></v-btn></router-link>
+                </div>
+              <center><div class="image-profile">
+                <img src="https://media.wired.com/photos/598e35fb99d76447c4eb1f28/master/pass/phonepicutres-TA.jpg">
+              </div></center>
+              <hr>
+              <div class="name">
+                
+                <h3>pitpagon chinanupagon</h3>
+                <div>แต้มบุญ: </div>
+                <br>
+                <div class="btn-cpass">
+                        <v-btn small @click.stop="dialog_ChangePassword=true">เปลี่ยนรหัสผ่าน</v-btn>
+                        <ChangePassword :visible="dialog_ChangePassword" @close="dialog_ChangePassword=false" />                     
+                    </div>
+                
               </div>
-            <div class="image-profile">
-              <img src="https://media.wired.com/photos/598e35fb99d76447c4eb1f28/master/pass/phonepicutres-TA.jpg">
-            </div>
-            <hr>
-            <div class="name">
               
-              <h3>pitpagon chinanupagon</h3>
-              <div>แต้มบุญ: </div>
-              <br>
-              <v-btn >แก้ไข</v-btn>
-              
-            </div>
-             <div class="selectboxs">
-              <div class="setting-proflie2">
+                 </v-col>
+                 <v-col class="select-head"  cols="12" md="12" sm="12">
+                  <div class="selectboxs">
+                <div class="setting-proflie2">
+                  <div class="hover-setting" @click="onChange('โปรไฟล์')">โปรไฟล์</div>
+                  <div class="hover-setting" @click="onChange('ประวัติการบริจาค')">ประวัติการบริจาค</div>
+                  <div class="hover-setting" @click="onChange('บุ๊คมาค')">บุ๊คมาค</div>
+                </div>
+               
+            <!-- <div class="selectboxs">
+              <div>
                  <v-select
                  v-model="selected"
                 :items="items"
                 label="Solo field"
                 solo
-                @change="onChange()"
+                
                 ></v-select>
               </div>
               
-            </div>
-          </v-col>
+            </div> -->
+            
+         
+                
+              </div>
+                 </v-col>
+               </v-row>
+            </v-col>
           
           <v-col class="setting-proflie" cols="12" md="4" sm="12">
             <div class="selectboxs">
@@ -82,6 +103,37 @@
           </v-col>
           <!-- โปรไฟล์ -->
           <v-col  v-if="selected == 'โปรไฟล์'" class="details-profile" cols="12" md="8" sm="12">
+            <v-container>
+               <v-card-text><div class="row">
+                        <div class="col-sm-6">
+                          <p class="m-b-10 f-w-600">Email</p>
+                          <h6 class="text-muted f-w-400">
+                            dd
+                          </h6>
+                        </div>
+                        <div class="col-sm-6">
+                          <p class="m-b-10 f-w-600">เบอร์โทรติดต่อ</p>
+                          <h6 class="text-muted f-w-400">
+                           dd
+                          </h6>
+                        </div>
+                        <div class="col-sm-6">
+                          <p class="m-b-10 f-w-600">วัน/เดือน/ปีเกิด</p>
+                          <h6 class="text-muted f-w-400">dd</h6>
+                        </div>
+                        <div class="col-sm-6">
+                          <p class="m-b-10 f-w-600">Point</p>
+                          <h6 class="text-muted f-w-400">
+                            dd
+                          </h6>
+                        </div>
+                        
+                      </div></v-card-text>
+            </v-container>
+          </v-col>
+
+           <!-- editโปรไฟล์ -->
+           <v-col  v-if="selected == 'แก้ไขโปรไฟล์'" class="details-profile" cols="12" md="8" sm="12">
             <v-container>
                <v-card-text><div class="row">
                         <div class="col-sm-6">
@@ -236,13 +288,15 @@ export default {
         
     },
     methods: {
-      onChange() {
+      onChange(value) {
+        this.selected = value;
         console.log(this.selected);
       }
+      
     },
     
       data: () => ({
-      items: ['โปรไฟล์', 'ประวัติการบริจาค', 'บุ๊คมาค', 'Buzz'],
+      items: ['โปรไฟล์', 'ประวัติการบริจาค', 'บุ๊คมาค', 'แก้ไขโปรไฟล์'],
       selected: 'โปรไฟล์',
       news: [
         {
@@ -379,6 +433,10 @@ export default {
   transition: 2s ease;
   z-index: -1;
 } */
+.hover-setting:hover{
+  color: red;
+  cursor: pointer;
+}
 .head-details{
   text-align: center;
   font-size: 32px;
@@ -391,13 +449,19 @@ export default {
   top:0;
   
 }
+.btn-cpass{
+    margin: 20px auto;
+    text-align: center;
+  }
 .image-profile{
-  
-  /* padding: 100px 200px; */
-  /* height: 100px;
-  width: 200px; */
   display: flex;
+  justify-content: center;
+  text-align: center;
   align-items: center;
+}
+img{
+  clip-path: circle();
+  background-size: cover;
 }
 .name-picture{
   background-color: cornflowerblue;
@@ -405,7 +469,17 @@ export default {
   justify-content: center;
   border: black solid 0.8px;
   padding: 50px 50px;
-  height: 80vh; 
+  /* height: 80vh;  */
+  
+}
+
+.name-pic-pro{
+  border: black solid 0.8px;
+  
+}
+.select-head{
+  margin-top: 3% ;
+  border: black solid 0.8px;
   
 }
 .setting-proflie{
