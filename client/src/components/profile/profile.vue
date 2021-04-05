@@ -173,8 +173,7 @@ export default {
     await this.$http
       .get("/user/" + id)
       .then((res) => {
-        this.dataUser = res.data.found;
-        this.rank     = res.data.myrank;
+        this.dataUser = res.data;
         console.log("get user data")
         console.log(this.dataUser)
       })

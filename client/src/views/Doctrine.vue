@@ -3,7 +3,7 @@
         <div>
         <Navbar></Navbar>
         </div>
-        <h1>Doctrine page</h1>
+        <h1>Doctrine</h1>
         <!-- test -->
         
             <center>

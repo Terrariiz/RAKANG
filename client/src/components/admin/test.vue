@@ -108,23 +108,23 @@
                         <div class="col-sm-6">
                           <p class="m-b-10 f-w-600">Email</p>
                           <h6 class="text-muted f-w-400">
-                            dd
+                            {{Profile.email}}
                           </h6>
                         </div>
                         <div class="col-sm-6">
                           <p class="m-b-10 f-w-600">เบอร์โทรติดต่อ</p>
                           <h6 class="text-muted f-w-400">
-                           dd
+                           {{Profile.phone}}
                           </h6>
                         </div>
                         <div class="col-sm-6">
                           <p class="m-b-10 f-w-600">วัน/เดือน/ปีเกิด</p>
-                          <h6 class="text-muted f-w-400">dd</h6>
+                          <h6 class="text-muted f-w-400">{{Profile.birthdate}}</h6>
                         </div>
                         <div class="col-sm-6">
                           <p class="m-b-10 f-w-600">Point</p>
                           <h6 class="text-muted f-w-400">
-                            dd
+                            {{Profile.point}}
                           </h6>
                         </div>
                         
@@ -165,7 +165,7 @@
 
           <!-- ประวัติการบริจาค -->
            <v-col v-else-if="selected == 'ประวัติการบริจาค'"  class="table-profile" cols="12" md="8" sm="12">
-            <v-container>
+            <v-container > 
               <div class="head-details">ประวัติการบริจาค</div>
                <table class="table">
                 <thead>
@@ -223,22 +223,22 @@
       <v-container>
         <h2 class="text-center">ข่าว</h2>
         <v-row>
-          <v-col v-for="news in news" :key="news.id" cols="12" md="4">
+          <v-col v-for="Bookmark in Bookmarks" :key="Bookmark.id" cols="12" md="4">
             <v-card
      
       max-width="344"
       outlined
     >
-     <v-img  class="mx-auto" :src="news.src"></v-img>
+     <v-img  class="mx-auto" :src="'http://localhost:4000/image/doctrine/' + Bookmark.image"></v-img>
       <v-list-item three-line>
         <v-list-item-content>
           <div class="overline mb-4">
-           {{ news.name }}
+           {{ Bookmark.categories }}
           </div>
           <v-list-item-title class="headline mb-1">
-            {{news.subtitle}}
+            {{Bookmark.title}}
           </v-list-item-title>
-          <v-list-item-subtitle>{{ news.description }}</v-list-item-subtitle>
+          <v-list-item-subtitle v-html="Bookmark.content" >{{ Bookmark.content }}</v-list-item-subtitle>
         </v-list-item-content>
   
       
@@ -279,13 +279,65 @@
 
 <script>
 // const Navbar = () => import('@/components/navbar/navbar')
-
+import moment from 'moment'
 export default {
     name : "test",
    
     components:{
         // Navbar,
         
+    },
+    async mounted(){
+      const token = window.localStorage.getItem("user_token");
+      const id = window.localStorage.getItem("user_id");
+      if (token) {
+      try {
+        // this.$router.push("/profile");
+      } catch (err) {
+        console.log(err);
+        localStorage.removeItem("user_token");
+        localStorage.removeItem("user_id");
+      }
+    }
+      console.log(id)
+    await this.$http
+      .get("/user/" + id)
+      .then((res) => {
+        this.Profile = res.data;
+        console.log("get user data")
+        console.log(this.Profile)
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+    await this.$http
+      .get("donatelog/donateloguser/" + id)
+      .then((res) => {
+        console.log("get log")
+        console.log(this.donatelog)
+        
+        this.Log = res.data.donatelog;
+
+        var i = 0
+        for(this.donatelog[i];;i++){
+            this.donatelog[i].date = moment(this.donatelog[i].date).format(" DD-MM-YYYY HH:mm A");
+            } 
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+      await this.$http
+      .get("/doctrine/ShowFavDoctrine/" + id)
+      .then((res) => {
+
+        this.Bookmarks = res.data.favdoctrinelist;
+        console.log("get user Bookmark")
+        console.log(this.Bookmarks)
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+    
     },
     methods: {
       onChange(value) {
@@ -298,6 +350,9 @@ export default {
       data: () => ({
       items: ['โปรไฟล์', 'ประวัติการบริจาค', 'บุ๊คมาค', 'แก้ไขโปรไฟล์'],
       selected: 'โปรไฟล์',
+      Bookmarks:[],
+      Log:[],
+      Profile:{},
       news: [
         {
           id: 1,
