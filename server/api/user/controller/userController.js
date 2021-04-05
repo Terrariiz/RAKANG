@@ -60,13 +60,14 @@ exports.getUserDetails = async (req, res) => {
       if(err){
         console.log(err);
       } else{
-        let myrank = await userdetail.getrank(req.params.id)
-        var somsak = {userdetail , myrank} 
-        console.log("somsak.found")
-        console.log(somsak)
-        console.log("somsak.found")
+        // let myrank = await userdetail.getrank(req.params.id)
+        // var somsak = {userdetail , myrank} 
+        // console.log("somsak.found")
+        // console.log(somsak)
+        // console.log("somsak.found")
 
-        res.json(somsak);
+        // res.json(somsak);
+        res.json(userdetail);
       }
     })
   } catch (err) {
