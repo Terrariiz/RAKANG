@@ -186,6 +186,7 @@
                 id="content"
                 v-model="campaign.overview"
                 @input="onEditorInput"
+                :config="editorConfig"
                 required
               >
               </ckeditor>
@@ -416,6 +417,11 @@ export default {
         done: null,
         location: null,
         categories: null,
+      },
+      editorConfig: {
+        // The configuration of the editor.
+        filebrowserBrowseUrl: 'browser.js',
+        filebrowserUploadUrl: 'upload.js',
       },
     };
   },

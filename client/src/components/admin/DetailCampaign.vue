@@ -5,7 +5,8 @@
     </div>
      <div class="project-header">
     <v-container >
-      <v-btn to='/admin/listcampaign'> <i style="float:left;" class="fa fa-arrow-left fa-lg" aria-hidden="true"></i></v-btn>
+      <!-- this.$router.back(); -->
+      <v-btn @click="$router.back()"> <i style="float:left;" class="fa fa-arrow-left fa-lg" aria-hidden="true"></i></v-btn>
       
       <v-row>
           <h1>{{ campaign.name }}</h1>

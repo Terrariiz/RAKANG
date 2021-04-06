@@ -37,6 +37,7 @@
                                 <v-container id ="detailnews"  style="background-color: white ; margin-right:3%;">
                                  <ckeditor 
                                     id="content"
+                                    :config="editorConfig"
                                     v-model="content"
                                     @input="onEditorInput">
                                     </ckeditor>
@@ -74,6 +75,8 @@ const Navbar = () => import('@/components/navbar/navbar')
                 editorData: '<p>Content of the editor.</p>',
                 editorConfig: {
                     // The configuration of the editor.
+                    filebrowserBrowseUrl: 'browser.js',
+                    filebrowserUploadUrl: 'upload.js',
                 },
                 imageData:null,
                 items:['วัด','โรงพยาบาล','มูลนิธิ','ประชาสัมพันธ์ของเว็บไซค์','อื่นๆ'],

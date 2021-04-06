@@ -39,6 +39,7 @@
                                     <ckeditor 
                                     id="content"
                                     v-model="content"
+                                    :config="editorConfig"
                                     @input="onEditorInput">
                                     </ckeditor>
                                 </v-container>
@@ -73,6 +74,8 @@ export default {
             editorData: '<p>Content of the editor.</p>',
             editorConfig: {
                 // The configuration of the editor.
+                filebrowserBrowseUrl: 'browser.js',
+                filebrowserUploadUrl: 'upload.js',
             },
             imageData:null,
             items:['บทสวดมนต์','หลักธรรม คำสอน','คติสอนใจ','พุทธประวัติ','อื่นๆ'],
