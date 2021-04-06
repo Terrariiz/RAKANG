@@ -42,7 +42,10 @@
                   <v-btn v-if="selected == 'โปรไฟล์' || selected == 'ประวัติการบริจาค' || selected =='บุ๊คมาค'" @click="onChange('แก้ไขโปรไฟล์')" color="secondary" icon><v-icon>mdi-pencil</v-icon></v-btn>
                 </div>
               <center><div v-if="selected == 'โปรไฟล์' || selected == 'ประวัติการบริจาค' || selected =='บุ๊คมาค'" class="image-profile">
-                <img src="https://media.wired.com/photos/598e35fb99d76447c4eb1f28/master/pass/phonepicutres-TA.jpg">
+                <img :src="
+                                'http://localhost:4000/image/profile/' +
+                                Profile.image
+                              ">
               </div></center>
 
               <center><div v-if="selected == 'แก้ไขโปรไฟล์'" class="image-profile">
@@ -70,8 +73,8 @@
               <hr>
               <div class="name">
                 
-                <h3>pitpagon chinanupagon</h3>
-                <div>แต้มบุญ: </div>
+                <h3>{{Profile.firstname}} {{Profile.lastname}}</h3>
+                <div>แต้มบุญ: {{Profile.point}}</div>
                 <br>
                 <div class="btn-cpass">
                         <v-btn small @click.stop="dialog_ChangePassword=true">เปลี่ยนรหัสผ่าน</v-btn>
@@ -156,7 +159,13 @@
           </v-col>
 
            <!-- editโปรไฟล์ -->
+           
            <v-col v-else-if="selected == 'แก้ไขโปรไฟล์'" class="details-profile" cols="12" md="8" sm="12">
+            <v-form 
+    ref="form"
+    v-model="valid"
+    lazy-validation
+    @submit.prevent="EditProfile">
             <v-container>
                   <h6
                     class="m-b-20 p-b-5 b-b-default f-w-600"
@@ -171,7 +180,7 @@
                       <v-text-field
                         single-line
                         solo
-                        
+                        v-model="Profile.firstname"
                         :rules="firstnameRules"
                         required
                       ></v-text-field>
@@ -181,7 +190,7 @@
                       <v-text-field
                         single-line
                         solo
-                        
+                        v-model="Profile.lastname"
                         :rules="lastnameRules"
                         required
                       ></v-text-field>
@@ -190,7 +199,7 @@
                       <p class="m-b-10 f-w-600">วัน/เดือน/ปีเกิด</p>
                       <v-menu
                         ref="menu"
-                        
+                        v-model="menu"
                         :close-on-content-click="false"
                         transition="scale-transition"
                         offset-y
@@ -199,7 +208,7 @@
                         <template v-slot:activator="{ on, attrs }">
                           <v-text-field
                             single-line solo
-                            
+                            v-model="Profile.birthdate"
                             prepend-icon="mdi-calendar"
                             :rules="dateRules"
                             readonly
@@ -210,7 +219,7 @@
                         </template>
                         <v-date-picker
                           ref="picker"
-                          
+                          v-model="Profile.birthdate"
                           :max="new Date().toISOString().substr(0, 10)"
                           min="1950-01-01"
                           @change="save"
@@ -223,7 +232,7 @@
                         single-line
                         solo
                         onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                        
+                        v-model="Profile.phone"
                         :rules="phoneRules"
                         required
                       ></v-text-field>
@@ -255,7 +264,10 @@
                       <v-col cols="3"></v-col>
                     </v-row>
                   </div>
+                  
                 </v-container>
+          </v-form>
+
           </v-col>
 
           <!-- ประวัติการบริจาค -->
@@ -373,12 +385,63 @@
 <script>
 // const Navbar = () => import('@/components/navbar/navbar')
 import moment from 'moment'
+const id = window.localStorage.getItem("user_id");
+import swal from "sweetalert2";
 export default {
     name : "test",
    
     components:{
         // Navbar,
         
+    },
+    data ()  {
+      return{
+      items: ['โปรไฟล์', 'ประวัติการบริจาค', 'บุ๊คมาค', 'แก้ไขโปรไฟล์'],
+      selected: 'โปรไฟล์',
+      Bookmarks:[],
+      Log:[],
+      Profile:{},
+      imageData: null,
+      valid: false,
+      dataEdit: {
+        image: null,
+        imagepath: "",
+        newimage: null,
+        oldimage: "",
+      },
+      emailRules: [
+        (v) => !!v || "Email is required!",
+        (v) => /.+@.+/.test(v) || "E-mail must be valid",
+      ],
+      passwordRules: [
+        (v) => !!v || "Password is required!",
+        (v) => v.length >= 6 || "Name must be more than 6 characters",
+        (v) => v.length <= 12 || "Name must be less than 12 characters",
+      ],
+      confirmPasswordRules: [
+        (v) => !!v || "Password is required",
+        (v) => v.length >= 6 || "Name must be more than 6 characters",
+        (v) => v.length <= 12 || "Name must be less than 12 characters",
+      ],
+      nameRules: [
+        (v) => !!v || "Name is required!",
+        (v) => v.length <= 50 || "Name must be less than 50 characters",
+      ],
+      firstnameRules: [
+        (v) => !!v || "Firstname is required!",
+        (v) => v.length <= 50 || "Firstname must be less than 50 characters",
+      ],
+      lastnameRules: [
+        (v) => !!v || "Lastname is required!",
+        (v) => v.length <= 50 || "lastname must be less than 50 characters",
+      ],
+      dateRules: [(v) => !!v || "Birthdate is required!"],
+      phoneRules: [
+        (v) => !!v || "Phone is required",
+        (v) => v.length == 10 || "Phone must be 10 numbers",
+      ],
+      }
+
     },
     async mounted(){
       const token = window.localStorage.getItem("user_token");
@@ -397,6 +460,10 @@ export default {
       .get("/user/" + id)
       .then((res) => {
         this.Profile = res.data;
+        this.dataEdit.oldimage = res.data.image;
+        this.imageData =
+          "http://localhost:4000/image/profile/" + res.data.image;
+      
         console.log("get user data")
         console.log(this.Profile)
       })
@@ -432,11 +499,22 @@ export default {
       });
     
     },
+    watch: {
+      menu (val) {
+        val && setTimeout(() => (this.$refs.picker.activePicker = 'YEAR'))
+      },
+    },
     methods: {
+          save (date) {
+        this.$refs.menu.save(date)
+    },
       onChange(value) {
         this.selected = value;
         console.log(this.selected);
       },
+      validate() {
+      this.$refs.form.validate();
+    },
       chooseImage() {
       this.$refs.fileInput.click();
     },
@@ -454,81 +532,59 @@ export default {
         this.$emit("input", files[0]);
       }
     },
+    async EditProfile() {
+      try {
+        var formData = new FormData();
+        formData.append("firstname", this.Profile.firstname);
+        formData.append("lastname", this.Profile.lastname);
+        formData.append("birthdate", this.Profile.birthdate);
+        formData.append("phone", this.Profile.phone);
+
+        if (this.dataEdit.newimage == null) {
+          formData.append("imagepath", this.Profile.image);
+          formData.append("oldimage", this.Profile.image);
+        } else {
+          formData.append("image", this.dataEdit.newimage);
+          formData.append("imagepath", this.dataEdit.newimage.name);
+          formData.append("oldimage", this.dataEdit.oldimage);
+        }
+        swal
+          .fire({
+            title: "Do you want to save the changes?",
+            icon: "question",
+            confirmButtonColor: "green",
+            cancelButtonColor: "red",
+            showCancelButton: true,
+            confirmButtonText: `Save`,
+          })
+          .then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+              this.$http.put("/user/" + id + "/editProfile", formData);
+              this.$router.push("/profile");
+              swal.fire(
+                "Saved!",
+                "Edit your profile Was successful.",
+                "success"
+              );
+              console.log("success");
+            }
+          });
+      } catch (err) {
+        let error = err.response;
+        if (error.status == 409) {
+          swal.fire("Error", error.data.message, "error");
+          console.log("success");
+        } else {
+          swal.fire("Error", error.data.err.message, "error");
+          console.log("error");
+        }
+      }
+    },
       
     },
     
-      data: () => ({
-      items: ['โปรไฟล์', 'ประวัติการบริจาค', 'บุ๊คมาค', 'แก้ไขโปรไฟล์'],
-      selected: 'โปรไฟล์',
-      Bookmarks:[],
-      Log:[],
-      Profile:{},
-      imageData: null,
-      dataEdit: {
-        image: null,
-        imagepath: "",
-        newimage: null,
-        oldimage: "",
-      },
-      news: [
-        {
-          id: 1,
-          name: "No.1",
-          title: "Top western road trips",
-          subtitle: "1,000 miles of wonder",
-          description:
-            "His ubique laboramus ne. Expetenda assueverit sed ad. Id nec malis lucilius delicatissimi. Nec assum sonet suscipit ex, diam deterruisset ut usu, ad dicat fabellas aliquando eam.",
-          src: "https://media.macphun.com/img/uploads/customer/how-to/579/15531840725c93b5489d84e9.43781620.jpg?q=85&w=1340",
-        },
-        {
-          id: 2,
-          name: "No.2",
-          title: "Christmas tales to read",
-          subtitle: "2,000 miles of wonder",
-          description:
-            "Sea ad habemus assueverit, omnes platonem convenire sit et, at integre pericula quo. Facete adolescens definitionem cu qui, in putant aliquid fierent ius.",
-          src: "https://media.macphun.com/img/uploads/customer/how-to/579/15531840725c93b5489d84e9.43781620.jpg?q=85&w=1340",
-        },
-        {
-          id: 3,
-          name: "No.3",
-          title: "20 movies not to miss in 2020",
-          subtitle: "3,000 miles of wonder",
-          description:
-            "Aliquam albucius mei ei, debitis torquatos et pro, eos natum scribentur no. Putant verear constituto te qui. Adolescens persequeris vim ei. Vel nullam reprimique te.",
-          src: "https://media.macphun.com/img/uploads/customer/how-to/579/15531840725c93b5489d84e9.43781620.jpg?q=85&w=1340",
-        },
-        {
-          id: 4,
-          name: "No.3",
-          title: "20 movies not to miss in 2020",
-          subtitle: "3,000 miles of wonder",
-          description:
-            "Aliquam albucius mei ei, debitis torquatos et pro, eos natum scribentur no. Putant verear constituto te qui. Adolescens persequeris vim ei. Vel nullam reprimique te.",
-          src: "https://media.macphun.com/img/uploads/customer/how-to/579/15531840725c93b5489d84e9.43781620.jpg?q=85&w=1340",
-        },
-        {
-          id: 5,
-          name: "No.3",
-          title: "20 movies not to miss in 2020",
-          subtitle: "3,000 miles of wonder",
-          description:
-            "Aliquam albucius mei ei, debitis torquatos et pro, eos natum scribentur no. Putant verear constituto te qui. Adolescens persequeris vim ei. Vel nullam reprimique te.",
-          src: "https://media.macphun.com/img/uploads/customer/how-to/579/15531840725c93b5489d84e9.43781620.jpg?q=85&w=1340",
-        },
-        {
-          id: 6,
-          name: "No.3",
-          title: "20 movies not to miss in 2020",
-          subtitle: "3,000 miles of wonder",
-          description:
-            "Aliquam albucius mei ei, debitis torquatos et pro, eos natum scribentur no. Putant verear constituto te qui. Adolescens persequeris vim ei. Vel nullam reprimique te.",
-          src: "https://media.macphun.com/img/uploads/customer/how-to/579/15531840725c93b5489d84e9.43781620.jpg?q=85&w=1340",
-        },
-
-      ],
-      
-    }),
+ 
     };
  
 
