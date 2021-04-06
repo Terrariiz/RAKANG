@@ -39,10 +39,33 @@
                <v-row>
                  <v-col class="name-pic-pro"  cols="12" md="12" sm="12">
                     <div class="edit-profile">
-                  <router-link style="color: gray" to="/editprofile"><v-btn color="secondary" icon><v-icon>mdi-pencil</v-icon></v-btn></router-link>
+                  <v-btn v-if="selected == 'โปรไฟล์' || selected == 'ประวัติการบริจาค' || selected =='บุ๊คมาค'" @click="onChange('แก้ไขโปรไฟล์')" color="secondary" icon><v-icon>mdi-pencil</v-icon></v-btn>
                 </div>
-              <center><div class="image-profile">
+              <center><div v-if="selected == 'โปรไฟล์' || selected == 'ประวัติการบริจาค' || selected =='บุ๊คมาค'" class="image-profile">
                 <img src="https://media.wired.com/photos/598e35fb99d76447c4eb1f28/master/pass/phonepicutres-TA.jpg">
+              </div></center>
+
+              <center><div v-if="selected == 'แก้ไขโปรไฟล์'" class="image-profile">
+                <!-- <img src="https://media.wired.com/photos/598e35fb99d76447c4eb1f28/master/pass/phonepicutres-TA.jpg"> -->
+                 <center>
+                <v-div
+                  style=""
+                  class="base-image-input"
+                  :style="{ 'background-image': `url(${imageData})` }"
+                  @click="chooseImage"
+                >
+                  <span v-if="!imageData" class="placeholder"
+                    >Choose an Image</span
+                  >
+                  <input
+                    class="file-input"
+                    id="file-input"
+                    ref="fileInput"
+                    type="file"
+                    @input="onSelectFile"
+                  />
+                </v-div>
+              </center>
               </div></center>
               <hr>
               <div class="name">
@@ -133,34 +156,106 @@
           </v-col>
 
            <!-- editโปรไฟล์ -->
-           <v-col  v-if="selected == 'แก้ไขโปรไฟล์'" class="details-profile" cols="12" md="8" sm="12">
+           <v-col v-else-if="selected == 'แก้ไขโปรไฟล์'" class="details-profile" cols="12" md="8" sm="12">
             <v-container>
-               <v-card-text><div class="row">
-                        <div class="col-sm-6">
-                          <p class="m-b-10 f-w-600">Email</p>
-                          <h6 class="text-muted f-w-400">
-                            dd
-                          </h6>
-                        </div>
-                        <div class="col-sm-6">
-                          <p class="m-b-10 f-w-600">เบอร์โทรติดต่อ</p>
-                          <h6 class="text-muted f-w-400">
-                           dd
-                          </h6>
-                        </div>
-                        <div class="col-sm-6">
-                          <p class="m-b-10 f-w-600">วัน/เดือน/ปีเกิด</p>
-                          <h6 class="text-muted f-w-400">dd</h6>
-                        </div>
-                        <div class="col-sm-6">
-                          <p class="m-b-10 f-w-600">Point</p>
-                          <h6 class="text-muted f-w-400">
-                            dd
-                          </h6>
-                        </div>
+                  <h6
+                    class="m-b-20 p-b-5 b-b-default f-w-600"
+                    style="font-size:20px;"
+                  >
+                    Edit Profile
+                  </h6>
+
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <p class="m-b-10 f-w-600">ชื่อ</p>
+                      <v-text-field
+                        single-line
+                        solo
                         
-                      </div></v-card-text>
-            </v-container>
+                        :rules="firstnameRules"
+                        required
+                      ></v-text-field>
+                    </div>
+                    <div class="col-sm-6">
+                      <p class="m-b-10 f-w-600">นามสกุล</p>
+                      <v-text-field
+                        single-line
+                        solo
+                        
+                        :rules="lastnameRules"
+                        required
+                      ></v-text-field>
+                    </div>
+                    <div class="col-sm-6">
+                      <p class="m-b-10 f-w-600">วัน/เดือน/ปีเกิด</p>
+                      <v-menu
+                        ref="menu"
+                        
+                        :close-on-content-click="false"
+                        transition="scale-transition"
+                        offset-y
+                        min-width="auto"
+                      >
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-text-field
+                            single-line solo
+                            
+                            prepend-icon="mdi-calendar"
+                            :rules="dateRules"
+                            readonly
+                            required
+                            v-bind="attrs"
+                            v-on="on"
+                          ></v-text-field>
+                        </template>
+                        <v-date-picker
+                          ref="picker"
+                          
+                          :max="new Date().toISOString().substr(0, 10)"
+                          min="1950-01-01"
+                          @change="save"
+                        ></v-date-picker>
+                      </v-menu>
+                    </div>
+                    <div class="col-sm-6">
+                      <p class="m-b-10 f-w-600">เบอร์โทรติดต่อ</p>
+                      <v-text-field
+                        single-line
+                        solo
+                        onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                        
+                        :rules="phoneRules"
+                        required
+                      ></v-text-field>
+                    </div>
+                   
+                    <v-row>
+                      <v-col cols="3"></v-col>
+                      <v-col cols="3">
+                        <v-btn
+                          type="submit"
+                          style="margin:1%; text-align:center;"
+                          @click="onChange('โปรไฟล์')"
+                          color="error"
+                          dark
+                          >Cancel</v-btn
+                        >
+                      </v-col>
+                      <v-col cols="3">
+                        <v-btn
+                          :disabled="!valid"
+                          type="submit"
+                          style="margin:1% text-align:center;"
+                          color="primary"
+                          @click="validate"
+                        >
+                          Edit
+                        </v-btn>
+                      </v-col>
+                      <v-col cols="3"></v-col>
+                    </v-row>
+                  </div>
+                </v-container>
           </v-col>
 
           <!-- ประวัติการบริจาค -->
@@ -343,7 +438,24 @@ export default {
       onChange(value) {
         this.selected = value;
         console.log(this.selected);
+      },
+      chooseImage() {
+      this.$refs.fileInput.click();
+    },
+      onSelectFile() {
+      const input = this.$refs.fileInput;
+      const files = input.files;
+      this.dataEdit.newimage = event.target.files[0];
+      console.log(this.dataEdit.newimage);
+      if (files && files[0]) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.imageData = e.target.result;
+        };
+        reader.readAsDataURL(files[0]);
+        this.$emit("input", files[0]);
       }
+    },
       
     },
     
@@ -353,6 +465,13 @@ export default {
       Bookmarks:[],
       Log:[],
       Profile:{},
+      imageData: null,
+      dataEdit: {
+        image: null,
+        imagepath: "",
+        newimage: null,
+        oldimage: "",
+      },
       news: [
         {
           id: 1,
@@ -488,6 +607,46 @@ export default {
   transition: 2s ease;
   z-index: -1;
 } */
+/* previewsimage */
+.base-image-input {
+  display: block;
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center center;
+  clip-path: circle();
+}
+.placeholder {
+  clip-path: circle();
+  background: #f0f0f0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+  font-size: 8px;
+  font-family: Helvetica;
+}
+.placeholder:hover {
+  background: #e0e0e0;
+}
+.file-input {
+  display: none;
+}
+
+.img-profile {
+  margin: 20px auto;
+  width: 300px;
+  height: 200px;
+}
+.img-profile img {
+  width: 100%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
 .hover-setting:hover{
   color: red;
   cursor: pointer;

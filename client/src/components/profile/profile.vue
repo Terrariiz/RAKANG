@@ -4,7 +4,7 @@
       <Navbar></Navbar>
     </div>
     <center>
-     
+     <br><br><br>
     <v-container>
       <v-row>
         <v-col style="background-color:red;" cols="12" md="4" sm="12">
