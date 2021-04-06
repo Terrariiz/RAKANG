@@ -233,10 +233,10 @@ export default {
     await this.$http
       .get("/user/" + id)
       .then((res) => {
-        this.dataUser = res.data.found;
+        this.dataUser = res.data;
         this.dataEdit.oldimage = res.data.image;
         this.imageData =
-          "http://localhost:4000/image/profile/" + res.data.found.image;
+          "http://localhost:4000/image/profile/" + res.dataimage;
       })
       .catch(function(err) {
         console.log(err);
