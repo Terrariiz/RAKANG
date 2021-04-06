@@ -3,27 +3,26 @@
         <div>
         <Navbar></Navbar>
         </div>
-        <h1>Doctrine</h1>
-        <!-- test -->
-        
-            <center>
-              <v-text-field style="width:70%; justify-content:center; margin-top:3%;" append-icon="mdi-magnify" v-model="search" label="ค้นหาหัวข้อ"></v-text-field>
-            </center>
-            <v-chip-group
-              v-model="selectedCategory"
-              active-class="primary--text"
-              mandatory>
-              <h5 style="padding: 7px 0px 0px 0px;">หมวดหมู่ : </h5>
-              <v-chip 
-                v-for="category in categories"
-                :key="category"
-                :value="category"
-              >
-                {{ category }}
-              </v-chip>
-            </v-chip-group>
-          
+        <h1>Doctrine</h1>       
+        <v-chip-group
+        v-model="selectedCategory"
+        active-class="primary--text"
+        mandatory>
+        <h5 style="padding: 7px 0px 0px 0px;">หมวดหมู่ : </h5>
+        <v-chip 
+          v-for="category in categories"
+          :key="category"
+          :value="category"
+        >
+          {{ category }}
+        </v-chip>
+       </v-chip-group>
      <v-container class="container-news">
+       <div>
+         <v-text-field style="width:30%;" prepend-inner-icon="mdi-magnify" v-model="search" label="ค้นหาหัวข้อ"></v-text-field>
+       </div>
+       <p class="notfound" v-if="filteredList.length == 0 && search !== ''">ไม่พบ "{{search}}"</p>
+       <p class="notfound" v-if="filteredList.length == 0 && search == ''">ไม่มีเนื้อหาในส่วนนี้</p>
         <v-card class="margin-card" v-for="(doctrine, index) in filteredList " :key="doctrine.title" elevation="5" outlined shaped >
         <v-row class="row-news">
           <v-col cols="12" md="6">
@@ -200,7 +199,12 @@ export default {
 </script>
 
 <style>
-
+.notfound{
+  text-align: center;
+  font-size: 2.5em;
+  font-weight: bolder;
+  color: #4d4d4d;
+}
 .v-slide-group__content{
   justify-content: center;
 }

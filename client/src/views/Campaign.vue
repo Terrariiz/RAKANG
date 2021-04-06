@@ -5,9 +5,9 @@
     </div>
     <h1>Campaign</h1>
     <!-- Test -->
-    
-    <center><v-text-field style="width:70%; text-align: center;" append-icon="mdi-magnify" v-model="search" label="ค้นหาหัวข้อ"></v-text-field></center>
      <v-container class="container-news">
+       <v-text-field style="width:30%; text-align: center;" prepend-inner-icon="mdi-magnify" v-model="search" label="ค้นหาหัวข้อ"></v-text-field>
+       <p class="notfound" v-if="filteredList.length == 0 && search !== ''">ไม่พบ "{{search}}"</p>
         <v-card class="margin-card" v-for="(campaign,percent) in filteredList " :key="percent" elevation="5" outlined  >
           <div class="status_open" v-if="campaign.status =='open'">{{campaign.status}}</div>
         <div class="status_close" v-if="campaign.status =='close'">{{campaign.status}}</div>
@@ -145,10 +145,6 @@ export default {
 .container-news {
     margin-top: 3%;
     
-}
-.row-news {
-  /* margin-bottom: 3%;
-  margin-top: 3%; */
 }
 .cols-detail-campaign {
   margin-top: 5%;
