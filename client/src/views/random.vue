@@ -5,13 +5,20 @@
         </div>
         <h1>mini page</h1>
         <v-text id="demo"> </v-text><br>
-        <button @click="random(test)">test</button>
+        <!-- <div id="acab"> -->
+        <img @click="random(test)" src="../assets/images/SEE.gif"><br><br>
+        <!-- </div> -->
+        <!-- <button @click="random(test)">test</button> -->
         <p id='CNumber'> </p>
         <div id='content'> </div>
     </div>
 </template>
 
 <script>
+// document.addEventListener('mousemove', function(ev){
+// document.getElementById('acab').style.transform = 'translateY('+(ev.clientY-80)+'px)';
+// document.getElementById('acab').style.transform += 'translateX('+(ev.clientX-100)+'px)';            
+// },false);
 const Navbar = () => import('@/components/navbar/navbar')
 export default {
     name:'random',
@@ -60,5 +67,9 @@ export default {
 </script>
 
 <style>
-
+/* #acab {
+  position: fixed; 
+  transition: transform 0.1s; 
+  pointer-events: none 
+} */
 </style>
