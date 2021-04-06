@@ -133,11 +133,9 @@ export default {
               let error = err.response;
               console.log(error)
               if (error.status == 409) {
-                swal.fire("Error", error.data.errors.detail, error.data.errors.title);
-                console.log("success");
+                swal.fire(error.data.errors.title, error.data.errors.detail, "error");
               } else {
-                swal.fire("Error", error.data.errors.detail, error.data.errors.title);
-                console.log("error");
+                swal.fire(error.data.errors.title, error.data.errors.detail, "error");
               }
             }
         },
