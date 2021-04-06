@@ -86,8 +86,9 @@ const Navbar = () => import('@/components/navbar/navbar')
       ViewDoctrine(doctrineid){
         this.$router.push({ name: 'DetailDoctrine' , params: {id : doctrineid}})
       },
-        
-      
+      EditDoctrine(doctrineid){
+        this.$router.push({ name: 'EditDoctrine' , params: {id : doctrineid}})
+      }
       
     }
     

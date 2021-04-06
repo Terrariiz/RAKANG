@@ -178,7 +178,7 @@ const routes = [
   {
     // path: '/admin/editnews',
     path: '/admin/listnews/:id/edit',
-    name: 'editnews',
+    name: 'EditNews',
     component: editnews,
     meta: {
       requiresAdminAuth: true
