@@ -68,7 +68,7 @@ export default {
         })
       },
       EditNews(newsid){
-        this.$router.push({ name: 'editnews' , params: {id : newsid}})
+        this.$router.push({ name: 'EditNews' , params: {id : newsid}})
       },
       DeleteNews(){
         const swalWithBootstrapButtons = swal.mixin({

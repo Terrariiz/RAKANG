@@ -52,7 +52,7 @@
             </v-container>
                 <div id="grid-container">
                     <div></div>
-                    <v-btn style="weihgt = 40%" color="primary" dark @click="reset($route.params.id)">cancle</v-btn>
+                    <v-btn style="weihgt = 40%" color="primary" dark @click="$router.back()">cancle</v-btn>
                     <v-btn type="submit" color="primary" dark>submit</v-btn>
                     <div></div>  
                 </div>
@@ -137,6 +137,8 @@ export default {
             items:['วัด','โรงพยาบาล','มูลนิธิ','ประชาสัมพันธ์ของเว็บไซค์','อื่นๆ'],
             editorConfig: {
                 // The configuration of the editor.
+                filebrowserBrowseUrl: 'browser.js',
+                filebrowserUploadUrl: 'upload.js',
             },
             imageData:null,
         }
@@ -243,9 +245,9 @@ export default {
         console.log(err)
         })
     },
-    reset(){
-        this.$router.push({ name: 'DetailNews' , params: {id : this.$route.params.id}})
-    }
+    // reset(){
+    //     this.$router.push({ name: 'DetailNews' , params: {id : this.$route.params.id}})
+    // }
     },
 }
 </script>

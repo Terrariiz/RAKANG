@@ -58,6 +58,7 @@
 
 <script>
 const Navbar = () => import('@/components/navbar/navbar')
+import swal from "sweetalert2";
   export default {
     name : "Listdoctrine",
     data (){
@@ -86,9 +87,45 @@ const Navbar = () => import('@/components/navbar/navbar')
       ViewDoctrine(doctrineid){
         this.$router.push({ name: 'DetailDoctrine' , params: {id : doctrineid}})
       },
-        
-      
-      
+      EditDoctrine(doctrineid){
+        this.$router.push({ name: 'EditDoctrine' , params: {id : doctrineid}})
+      },
+      Refresh(doctrineid){
+        console.log('sdfsdfsddf')
+        this.doctrines = this.doctrines.filter(function(c){
+          return c._id !== doctrineid
+        })
+      },
+      DeleteDoctrine(doctrineid){
+        const swalWithBootstrapButtons = swal.mixin({
+          customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+          },
+          buttonsStyling: false
+        })
+        swalWithBootstrapButtons.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Yes, delete it!',
+          cancelButtonText: 'No, cancel!',
+          reverseButtons: true
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.$http.delete("/doctrine/DeleteDoctrine/"+doctrineid)
+            console.log("delete")
+            this.$router.push({ name: 'Listdoctrine'})
+            this.Refresh(doctrineid)
+            swalWithBootstrapButtons.fire(
+              'Deleted!',
+              'Delete Doctrine Success.',
+              'success'
+            )
+          } 
+        })
+      },
     }
     
   }

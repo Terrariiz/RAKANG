@@ -29,15 +29,17 @@
               </tr>
             </thead>
             <tbody>
-              <tr   @submit.prevent="editnews" v-for="news in doctrines"  :key="news._id">
+              <tr   @submit.prevent="editnews" v-for="news in news"  :key="news._id">
                 <td><center><img :src="'http://localhost:4000/image/new/' + news.image" class="img-fluid" style="width: 100px; height: 100px; object-fit: cover; margin:3%;" align="center"></center></td>
                 <td>{{ news.title }}</td>
                 <!-- <td v-html="news.content">{{ news.content }}</td> -->
                 <td>
                   <!-- <router-link :to="`/admin/listdoctrine/${doctrine._id}`">detail</router-link> -->
                   <!-- <router-link :to="{name : 'DetailDoctrine', params: {id:doctrine._id}}">detail</router-link> -->
-                  <v-btn color="succes" @click="ViewDoctrine(news._id)">view</v-btn>
-                  
+                  <v-btn style="margin-right:3%;" @click="ViewNews(news._id)">view</v-btn>
+                  <v-btn style="margin-right:3%;" @click="EditNews(news._id)">Edit</v-btn>
+                  <v-btn @click="DeleteNews(news._id)">Delete</v-btn>
+
                 </td>
                 <!-- <td>{{ item.name }}</td>
                 <td>
@@ -57,6 +59,7 @@
 
 <script>
 const Navbar = () => import('@/components/navbar/navbar')
+import swal from "sweetalert2";
 import {
   } from '@mdi/js'
 
@@ -64,15 +67,15 @@ import {
     name : "Listnews",
     data (){
       return {
-        doctrines : []
+        news : []
         }
     },
     mounted: async function mounted(){
       await this.$http.get("/news/ShowListNews")
       .then((res) => {
         console.log(res.data)
-        this.doctrines = res.data;
-        console.log(this.doctrines)
+        this.news = res.data;
+        console.log(this.news)
       })
       .catch(function(err){
         console.log(err)
@@ -89,11 +92,49 @@ import {
 
       //   })
       // }
-      ViewDoctrine(doctrineid){
-        this.$router.push({ name: 'DetailNews' , params: {id : doctrineid}})
-          
-        }
-      }
+      ViewNews(newsid){
+        this.$router.push({ name: 'DetailNews' , params: {id : newsid}})
+        },
+      EditNews(newsid){
+        console.log(newsid);
+        this.$router.push({ name: 'EditNews' , params: {id : newsid}})
+      },
+      Refresh(newsid){
+        console.log('sdfsdfsddf')
+        this.news = this.news.filter(function(c){
+          return c._id !== newsid
+        })
+      },
+      DeleteNews(newsid){
+        const swalWithBootstrapButtons = swal.mixin({
+          customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+          },
+          buttonsStyling: false
+        })
+        swalWithBootstrapButtons.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Yes, delete it!',
+          cancelButtonText: 'No, cancel!',
+          reverseButtons: true
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.$http.delete("/news/DeleteNews/"+newsid)
+            this.$router.push({ name: 'Listnews'})
+            this.Refresh(newsid)
+            swalWithBootstrapButtons.fire(
+              'Deleted!',
+              'Delete News Success.',
+              'success'
+            )
+          } 
+        })
+      },
+    }
     
   }
 

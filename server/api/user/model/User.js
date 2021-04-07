@@ -76,7 +76,7 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Doctrine"
     }
-  ]
+  ],
 });
 
 //this method will hash the password before saving the user model

@@ -6,7 +6,6 @@
         <h1>News</h1>
         <!-- test -->
         <center>
-          <v-text-field style="width:70%; text-align: center;" append-icon="mdi-magnify" v-model="search" label="ค้นหาหัวข้อ"></v-text-field>
           <v-chip-group
             v-model="selectedCategory"
             active-class="primary--text"
@@ -23,6 +22,9 @@
           </v-chip-group>
         </center>
      <v-container class="container-news">
+       <v-text-field style="width:30%; text-align: center;" prepend-inner-icon="mdi-magnify" v-model="search" label="ค้นหาหัวข้อ"></v-text-field>
+       <p class="notfound" v-if="filteredList.length == 0 && search !== ''">ไม่พบ "{{search}}"</p>
+       <p class="notfound" v-if="filteredList.length == 0 && search == ''">ไม่มีเนื้อหาในส่วนนี้</p>
         <v-card class="margin-card" v-for="(news) in filteredList " :key="news.title" elevation="5" outlined shaped >
         <v-row class="row-news">
           <v-col cols="12" md="6">
