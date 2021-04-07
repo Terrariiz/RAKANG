@@ -184,11 +184,11 @@
               <br />
               <ckeditor
                 id="content"
+                :editor="editor"
                 v-model="campaign.overview"
                 @input="onEditorInput"
                 :config="editorConfig"
                 required
-                
               >
               </ckeditor>
               <hr />
@@ -396,6 +396,7 @@ img {
 
 <script>
 const Navbar = () => import("@/components/navbar/navbar");
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import swal from "sweetalert2";
 
 export default {
@@ -419,10 +420,40 @@ export default {
         location: null,
         categories: null,
       },
+      editor: ClassicEditor,
+      
       editorConfig: {
+        ckfinder: {
+      //     options: {
+			// 	resourceType: 'Images'
+			// }
+		},
+    
+      toolbar: [ 'ckfinder', '|',
+        'heading', '|',
+        'alignment', '|',
+        'bold', 
+        'italic', 'strikethrough', 'underline', 'subscript', 'superscript', '|',
+        'link', '|',
+        'bulletedList', 'numberedList', 'todoList',
+        '-', // break point
+        'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor', '|',
+        'code', 'codeBlock', '|',
+        'insertTable', '|',
+        'outdent', 'indent', '|',
+        'uploadImage', 'blockQuote', '|',
+        'undo', 'redo']
+
         // The configuration of the editor.
-        filebrowserBrowseUrl: 'browser.js',
-        filebrowserUploadUrl: 'upload.js',
+        // imageBrowser_listUrl: 'http://localhost:4000/campaign/files',
+        // filebrowserBrowseUrl: 'http://localhost:4000/campaign/files',
+        // filebrowserUploadUrl: 'http://localhost:4000/campaign/addcampaignimage',
+      // filebrowserBrowseUrl: '/ckfinder/ckfinder.html',
+      // filebrowserImageBrowseUrl: '/ckfinder/ckfinder.html?type=Images',
+      // filebrowserFlashBrowseUrl: '/ckfinder/ckfinder.html?type=Flash',
+      // filebrowserUploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+      // filebrowserImageUploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+      // filebrowserFlashUploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
       },
     };
   },
