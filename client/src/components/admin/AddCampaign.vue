@@ -187,6 +187,7 @@
                 v-model="campaign.overview"
                 @input="onEditorInput"
                 required
+                
               >
               </ckeditor>
               <hr />

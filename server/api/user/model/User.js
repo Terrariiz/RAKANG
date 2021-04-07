@@ -3,9 +3,6 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const userSchema = new mongoose.Schema({
-  username: {
-    type: String,
-  },
   email: {
     type: String,
   },
@@ -53,6 +50,15 @@ const userSchema = new mongoose.Schema({
   point:{
     type: Number
   },
+  seamsi:{
+    Playable: Boolean,
+    Detail:  String
+  },
+  lantern:{
+    Playable: Boolean,
+    Detail:  String
+  },
+  
   donatelog:[
     {
         type: mongoose.Schema.Types.ObjectId,
