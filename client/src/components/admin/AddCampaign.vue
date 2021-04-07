@@ -421,14 +421,9 @@ export default {
         categories: null,
       },
       editor: ClassicEditor,
-      
       editorConfig: {
         ckfinder: {
-      //     options: {
-			// 	resourceType: 'Images'
-			// }
 		},
-    
       toolbar: [ 'ckfinder', '|',
         'heading', '|',
         'alignment', '|',
@@ -443,17 +438,6 @@ export default {
         'outdent', 'indent', '|',
         'uploadImage', 'blockQuote', '|',
         'undo', 'redo']
-
-        // The configuration of the editor.
-        // imageBrowser_listUrl: 'http://localhost:4000/campaign/files',
-        // filebrowserBrowseUrl: 'http://localhost:4000/campaign/files',
-        // filebrowserUploadUrl: 'http://localhost:4000/campaign/addcampaignimage',
-      // filebrowserBrowseUrl: '/ckfinder/ckfinder.html',
-      // filebrowserImageBrowseUrl: '/ckfinder/ckfinder.html?type=Images',
-      // filebrowserFlashBrowseUrl: '/ckfinder/ckfinder.html?type=Flash',
-      // filebrowserUploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
-      // filebrowserImageUploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
-      // filebrowserFlashUploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
       },
     };
   },

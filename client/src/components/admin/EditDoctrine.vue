@@ -47,7 +47,8 @@
                                     <!-- <v-container fluid>
                                         <v-textarea name="input-7-1" filledlabel="Label" label="รายละเอียด" auto-grow></v-textarea>
                                     </v-container> -->
-                                    <ckeditor v-model="doctrine.content" :config="editorConfig"></ckeditor>
+                                    <ckeditor v-model="doctrine.content" :editor="editor"
+                                    :config="editorConfig"></ckeditor>
                                     <!-- <v-btn small style="text-align: right;" rounded color="primary" dark  >Add detailnews</v-btn> -->
                                 </v-container>
                         </v-flex>
@@ -117,6 +118,7 @@
 
 <script>
 const Navbar = () => import('@/components/navbar/navbar')
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import swal from "sweetalert2";
 export default {
     name : "EditDoctrine",
@@ -137,11 +139,25 @@ export default {
                 imagedata:null,
                 categories: null,
             },
-            editorConfig: {
-                // The configuration of the editor.
-                filebrowserBrowseUrl: 'browser.js',
-                filebrowserUploadUrl: 'upload.js',
-            },
+            editor: ClassicEditor,
+      editorConfig: {
+        ckfinder: {
+		},
+      toolbar: [ 'ckfinder', '|',
+        'heading', '|',
+        'alignment', '|',
+        'bold', 
+        'italic', 'strikethrough', 'underline', 'subscript', 'superscript', '|',
+        'link', '|',
+        'bulletedList', 'numberedList', 'todoList',
+        '-', // break point
+        'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor', '|',
+        'code', 'codeBlock', '|',
+        'insertTable', '|',
+        'outdent', 'indent', '|',
+        'uploadImage', 'blockQuote', '|',
+        'undo', 'redo']
+      },
             imageData:null,
             items:['บทสวดมนต์','หลักธรรม คำสอน','คติสอนใจ','พุทธประวัติ','อื่นๆ'],
         }

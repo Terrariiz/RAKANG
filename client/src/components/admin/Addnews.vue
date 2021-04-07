@@ -37,6 +37,7 @@
                                 <v-container id ="detailnews"  style="background-color: white ; margin-right:3%;">
                                  <ckeditor 
                                     id="content"
+                                    :editor="editor"
                                     :config="editorConfig"
                                     v-model="content"
                                     @input="onEditorInput">
@@ -61,6 +62,7 @@
 
 <script>
 import swal from "sweetalert2";
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 const Navbar = () => import('@/components/navbar/navbar')
 
     export default {
@@ -73,10 +75,24 @@ const Navbar = () => import('@/components/navbar/navbar')
                 image: null,
                 imagepath: "",
                 editorData: '<p>Content of the editor.</p>',
+                editor: ClassicEditor,
                 editorConfig: {
-                    // The configuration of the editor.
-                    filebrowserBrowseUrl: 'browser.js',
-                    filebrowserUploadUrl: 'upload.js',
+                    ckfinder: {
+                    },
+                toolbar: [ 'ckfinder', '|',
+                    'heading', '|',
+                    'alignment', '|',
+                    'bold', 
+                    'italic', 'strikethrough', 'underline', 'subscript', 'superscript', '|',
+                    'link', '|',
+                    'bulletedList', 'numberedList', 'todoList',
+                    '-', // break point
+                    'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor', '|',
+                    'code', 'codeBlock', '|',
+                    'insertTable', '|',
+                    'outdent', 'indent', '|',
+                    'uploadImage', 'blockQuote', '|',
+                    'undo', 'redo']
                 },
                 imageData:null,
                 items:['วัด','โรงพยาบาล','มูลนิธิ','ประชาสัมพันธ์ของเว็บไซค์','อื่นๆ'],
