@@ -1,7 +1,8 @@
 <template>
   <div>
+    <go-top></go-top>
     <div v-if="$store.getters.UserIsLoggedIn">
-      <v-app-bar  fixed app color="cyan accent-4">        
+      <v-app-bar fixed color="#F8C471">
         <v-toolbar-items class="hidden-sm-and-down">
           <v-btn text to="/home">
             RAKANGTHAM
@@ -23,11 +24,12 @@
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       </v-app-bar>
       <v-navigation-drawer
-        class="cyan accent-4"
+        color='#F8C471'
         v-model="drawer"
         right
         absolute
         temporary
+        style='position: fixed; top: 0;'
       >
       <div v-if='$store.getters.IsDesk'>
         <v-list nav>
@@ -91,7 +93,7 @@
     </div>
 
     <div v-else-if="$store.getters.AdminIsLoggedIn">
-      <v-app-bar color="gray accent-4" dark>
+      <v-app-bar fixed color="gray accent-4" dark>
         <v-toolbar-items class="hidden-sm-and-down">
           <v-btn text to="/home">
             RAKANGTHAM
@@ -119,6 +121,7 @@
         right
         absolute
         temporary
+        style='position: fixed; top: 0;'
       >
       <div v-if='$store.getters.IsDesk'>
         <v-list nav>
@@ -215,7 +218,7 @@
     </div>
 
     <div v-else>
-      <v-app-bar color="cyan accent-4">
+      <v-app-bar fixed color='#FAD7A0'>
         <v-toolbar-items class="hidden-sm-and-down">
           <v-btn text to="/home">
             RAKANGTHAM
@@ -237,11 +240,12 @@
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       </v-app-bar>
       <v-navigation-drawer
-        class="cyan accent-4"
+        color='#FAD7A0'
         v-model="drawer"
         right
         absolute
         temporary
+        style='position: fixed; top: 0;'
       >
       <div v-if='$store.getters.IsDesk'>
         <v-list nav>
@@ -307,9 +311,12 @@
 </template>
 
 <script>
+import GoTop from '@inotom/vue-go-top';
 export default {
   name: "Navbar",
-
+  components:{
+    GoTop
+  },
   data() {
     return {
       drawer: false,
