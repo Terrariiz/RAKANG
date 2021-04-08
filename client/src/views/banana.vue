@@ -27,9 +27,8 @@ export default {
         return{
             pagination:{
                 data: this.$store.getters.banana,
-                rowsPerPage: 4,
+                rowsPerPage: 1,
                 page: 1,
-                previous_firstIndex: 0
             },
             totalNumberOfItems: this.$store.getters.banana.length,
             headers: [
@@ -49,52 +48,21 @@ export default {
     },
     computed: {
         pages () {
-            return this.pagination.rowsPerPage ? Math.round(this.pagination.data.length / this.pagination.rowsPerPage) : 0
+            return this.pagination.rowsPerPage ? Math.ceil(this.pagination.data.length / this.pagination.rowsPerPage) : 0
         },
         filteredList() {
             var firstIndex;
             if (this.pagination.page == 1) {
                 firstIndex = 0;
             } else{
-                firstIndex = this.pagination.previous_firstIndex + this.pagination.rowsPerPage;
+                firstIndex = (this.pagination.page-1) * this.pagination.rowsPerPage;
             }
             console.log(firstIndex + " firstIndex");
-            this.addPreviousIndex(firstIndex);
             var showData = this.pagination.data.slice(firstIndex, firstIndex + this.pagination.rowsPerPage);
             console.log(showData);
             return showData
         }
     },
-    methods: {
-        addPreviousIndex(index){
-            this.pagination.previous_firstIndex = index
-        }
-        // fetchData(){
-        //     var index;
-        //     this.totalNumberOfItems = this.dataset.length;
-        //     if (this.pagination.page == 1) {
-        //         index = 0;
-        //     } else{
-        //         index = this.pagination.page * this.pagination.rowsPerPage;
-        //     }
-        //     console.log(index + " index");
-        //     this.showData = this.dataset.slice(index, index + this.pagination.rowsPerPage);
-        //     console.log(this.showData);
-        // },
-    },
-    // filters: {
-    //     paginate: function(){
-    //         var index;
-    //         this.totalNumberOfItems = this.pagination.data.length;
-    //         if (this.pagination.page == 1) {
-    //             index = 0;
-    //         } else{
-    //             index = this.pagination.page * this.pagination.rowsPerPage;
-    //         }
-    //         console.log(index + " index");
-    //         return this.pagination.data.slice(index, index + this.pagination.rowsPerPage);
-    //     }
-    // }
 }
 </script>
 
