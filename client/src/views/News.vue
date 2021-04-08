@@ -5,7 +5,8 @@
         </div>
         <h1>News</h1>
         <!-- test -->
-        <center>
+     <v-container class="container-news">
+       <center>
           <v-chip-group
             v-model="selectedCategory"
             active-class="primary--text"
@@ -21,7 +22,6 @@
             </v-chip>
           </v-chip-group>
         </center>
-     <v-container class="container-news">
        <v-text-field style="width:30%; text-align: center;" prepend-inner-icon="mdi-magnify" v-model="search" label="ค้นหาหัวข้อ"></v-text-field>
        <p class="notfound" v-if="filteredList.length == 0 && search !== ''">ไม่พบ "{{search}}"</p>
        <p class="notfound" v-if="filteredList.length == 0 && search == ''">ไม่มีเนื้อหาในส่วนนี้</p>

@@ -4,7 +4,8 @@
         <Navbar></Navbar>
         </div>
         <h1>Doctrine</h1>       
-        <v-chip-group
+     <v-container class="container-news">
+       <v-chip-group
         v-model="selectedCategory"
         active-class="primary--text"
         mandatory>
@@ -17,7 +18,6 @@
           {{ category }}
         </v-chip>
        </v-chip-group>
-     <v-container class="container-news">
        <div>
          <v-text-field style="width:30%;" prepend-inner-icon="mdi-magnify" v-model="search" label="ค้นหาหัวข้อ"></v-text-field>
        </div>
