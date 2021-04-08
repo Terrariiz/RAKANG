@@ -1,4 +1,5 @@
 <template>
+
     <div>
         <div>
         <Navbar></Navbar>
@@ -23,7 +24,7 @@
        </div>
        <p class="notfound" v-if="filteredList.length == 0 && search !== ''">ไม่พบ "{{search}}"</p>
        <p class="notfound" v-if="filteredList.length == 0 && search == ''">ไม่มีเนื้อหาในส่วนนี้</p>
-        <v-card class="margin-card" v-for="(doctrine, index) in filteredList " :key="doctrine.title" elevation="5" outlined shaped >
+        <v-card class="margin-card" v-for="(doctrine) in filteredList " :key="doctrine.title" elevation="5" outlined shaped >
         <v-row class="row-news">
           <v-col cols="12" md="6">
             <v-img
@@ -40,15 +41,15 @@
             <v-btn
               icon
               color="pink"
-              v-if="bookmarks[index].value"
-              @click="clickBookmarks(doctrine._id,index)"
+              v-if="doctrine.fav"
+              @click="clickBookmarks(doctrine)"
             >
               <v-icon>mdi-bookmark</v-icon>
             </v-btn>
             <v-btn
               icon
               v-else
-              @click="clickBookmarks(doctrine._id,index)"
+              @click="clickBookmarks(doctrine)"
               
             >
               <v-icon>mdi-bookmark</v-icon>
@@ -76,7 +77,9 @@
         </v-row>
         </v-card>
       </v-container>
+      <component-to-re-render :key="componentKey" />
     </div>
+    
 </template>
 
 <script>
@@ -89,8 +92,8 @@ export default {
     },
     data() {
     return {
+      componentKey: 0,
       doctrines : [],
-      bookmarks: [],
       token: null,
       search: '',
       selectedCategory: 'ทั้งหมด',
@@ -99,7 +102,7 @@ export default {
   },
   computed: {
     filteredList() {
-      return this.doctrines.filter(doctrine => {
+      var newlist = this.doctrines.filter(doctrine => {
         var result
         if(this.selectedCategory == 'ทั้งหมด'){
           result = doctrine.title.toLowerCase().includes(this.search.toLowerCase())
@@ -116,9 +119,11 @@ export default {
           }
         }
       })
+      // this.checkfav(newlist)
+      return newlist
     }
   },
-  mounted: async function mounted() {
+  created: async function created() {
     var IsFav
     this.token = localStorage.getItem("user_token")
     if(this.$store.getters.UserIsLoggedIn){
@@ -158,10 +163,9 @@ export default {
               // IsFav = res.data.result
               return res.data.result
             })
-            this.bookmarks.push({ doctrinesid: doc, value: IsFav})
-          } else {
-            this.bookmarks.push({ doctrinesid: doc, value: false})
-          }
+            this.doctrines[i]["fav"] = IsFav;
+            this.forceRerender()
+          } 
           
         }
       })
@@ -176,21 +180,41 @@ export default {
         params: { id: doctrinesid },
       });
     },
+    forceRerender() {
+      this.componentKey += 1;
+    },
     //เปลี่ยน value ใน bookmark
-    clickBookmarks(doctrinesid,index){
+    clickBookmarks(doctrine){
+      console.log(doctrine)
       if(localStorage.getItem("user_id")){
         var id = localStorage.getItem("user_id")
-          if(this.bookmarks[index].doctrinesid == doctrinesid && this.bookmarks[index].value == false){
-            this.$http.post("/user/"+id+"/AddFavouriteDoctrine/"+doctrinesid)
-            this.bookmarks[index].value = true
+        var index = -1
+          if(doctrine.fav == false){
+            this.$http.post("/user/"+id+"/AddFavouriteDoctrine/"+doctrine._id)
+            this.doctrines.find(function(item, i){
+            if(item._id === doctrine._id){
+              index = i;
+              return i;
+            }
+            });
+            console.log(index)
+            this.doctrines[index].fav = true
+            this.forceRerender()
           } else{
-            this.$http.post("/user/"+id+"/RemoveFavouriteDoctrine/"+doctrinesid)
-            this.bookmarks[index].value = false
+            this.$http.post("/user/"+id+"/RemoveFavouriteDoctrine/"+doctrine._id)
+            this.doctrines.find(function(item, i){
+            if(item._id === doctrine._id){
+              index = i;
+              return i;
+            }
+            });
+            console.log(index)
+            this.doctrines[index].fav = false
+            this.forceRerender()
         }
       } else {
         console.log("hiuhui")
       }
-      
     }
   },
   
