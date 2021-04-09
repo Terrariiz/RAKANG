@@ -5,15 +5,17 @@
         </div>
         <div class= 'bg'>
         <br><br><br><br>
-        <h1>mini page</h1> 
+        <h1>sky lantern</h1> 
     <center>
 				<div id="test1" class="controller">
 					<img src="../assets/images/360.png">
 				</div>
 				<br><br><br><br><br><br><br><br>
-				<label id="test" for="fname" >Prayer:</label>
+				<div class="box" id="box"> 
+				<label id="test" for="fname" >คำอธิฐาน</label>
 				<input id="test3" type="text" name="fname"><br><br>
-				<button id="test2" @click="lantern()">test</button>
+				<button id="test2" @click="lantern()">ส่ง</button>
+				</div>
     </center>
 		</div>
     </div>
@@ -36,6 +38,8 @@ export default {
 			y.style.display = "none";
 			var z = document.getElementById("test3");
 			z.style.display = "none";
+			var a = document.getElementById("box");
+			a.style.display = "none";
 			var element = document.getElementById("test1");
 			element.classList.remove("controller");
 			element.classList.add("example");
@@ -64,13 +68,6 @@ export default {
 }
 
 .controller {
-        /* position: absolute;
-        width: 150px;
-        height: 150px;
-        z-index: 100;
-        bottom: 20px;
-        left: 50%;
-        margin-left: -12px; */
         -webkit-animation: bounce-down 1.6s linear infinite;
         animation: bounce-down 1.6s linear infinite;
 }
@@ -113,137 +110,12 @@ h1{
 #test2{
     background-color: white;
 }
-/* @keyframes shake {
-	0% {
-		transform : rotate(10deg) scale(1);
-	}
-	50% {
-		transform : rotate(-10deg) scale(1);
-	}
-	100% {
-		transform : rotate(10deg) scale(1);
-	}
+.box{
+  background-color: lightgrey;
+  width: 300px;
+  border: 10px solid black;
+  padding: 50px;
+  margin-bottom: 100px;
 }
-@keyframes innerlightbreathe {
-	0% {
-		height : 30px;
-		width : 30px;
-		opacity : 0.1;
-		top : 35px;
-		left : 10px;
-	}
-	20% {
-		-webkit-clip-path : inset(0px 0px 0px 0px);
-		clip-path : inset(0px 0px 0px 0px);
-	}
-	50% {
-		height : 60px;
-		width : 60px;
-		opacity : 0.5;
-		top : 5px;
-		left : -5px;
-		-webkit-clip-path : inset(0px 5px 0px 5px);
-		clip-path : inset(0px 5px 0px 5px);
-	}
-	80% {
-		-webkit-clip-path : inset(0px 0px 0px 0px);
-		clip-path : inset(0px 0px 0px 0px);
-	}
-	100% {
-		height : 30px;
-		width : 30px;
-		opacity : 0.1;
-		top : 35px;
-		left : 10px;
-	}
-}
-@keyframes outerlightbreathe {
-	0% {
-		height : 100px;
-		width : 100px;
-		top : -10px;
-		left : -20px;
-	}
-	50% {
-		height : 200px;
-		width : 200px;
-		top : -60px;
-		left : -70px;
-	}
-	100% {
-		height : 100px;
-		width : 100px;
-		top : -10px;
-		left : -20px;
-	}
-}
-.lantern {
-	z-index : 999;
-	position : absolute;
-	height : 70px;
-	width : 50px;
-	transform-origin : top center;
-	animation : shake 4s ease-in-out infinite;
-    
-}
-.lanternBody {
-	position : absolute;
-	background-color : #756b3c;
-	height : 70px;
-	width : 50px;
-	border-radius : 15px 15px 25px 25px;
-}
-.outerLight {
-	z-index : -1;
-	position : absolute;
-	background-image:
-		radial-gradient(rgba(117, 107, 60, 1.0), rgba(117, 107, 60, 0.0), rgba(117, 107, 60, 0.0));
-	opacity : 0.5;
-	border-radius : 50%;
-	animation : outerlightbreathe 3s ease-in-out infinite;
-}
-.innerLight {
-	position : absolute;
-	background-image:
-		radial-gradient(rgba(255, 241, 181, 1.0), rgba(255, 241, 181, 1.0), rgba(255, 241, 181, 0.0));
-	border-radius : 50%;
-	animation : innerlightbreathe 3s ease-in-out infinite;
-}
-center {
-	position : absolute;
-	top : 50%;
-	left : 50%;
-}
-.example2 {
- height: 250px;	
- overflow: hidden;
- position: relative;
-}
-.example2 h3 {
- position: absolute;
- width: 100%;
- height: 100%;
- margin: 0;
- line-height: 50px;
- text-align: left; */
 
- /* Apply animation to this element */	
- /* animation: example2 10s ease-out;
-} */
-/* Move it (define the animation) */
-/* @keyframes example2 {
- 0%   { 
- transform: translateY(200%); 		
- }
- 100% { 
- transform: translateY(0%); 
- }
-} */
-/* #test {
-  width: 100%;
-  padding: 50px 0;
-  text-align: center;
-  background-color: lightblue;
-  margin-top: 20px;
-} */
 </style>

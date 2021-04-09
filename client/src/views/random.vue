@@ -6,7 +6,7 @@
         </div> 
         <div class="bg"></div>
         <div class='bg-text'>
-        <h1>mini page</h1>
+        <h1>seamsi</h1>
         <v-text id="demo"> </v-text><br>
         <!-- <div id="acab"> -->
         <img @click="random(test)" src="../assets/images/SEE.gif"><br><br>
