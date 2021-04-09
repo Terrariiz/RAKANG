@@ -5,12 +5,13 @@
         <Navbar></Navbar>
         </div> 
         <div class="bg"></div>
+        <br><br>
         <div class='bg-text'>
         <h1>seamsi</h1>
         <v-text id="demo"> </v-text><br>
         <!-- <div id="acab"> -->
-        <img id="seam" @click="random(test)" src="../assets/images/seamsi.png">
-        <img id="seam1"  src="../assets/images/seamsi.gif">
+        <center><img id="seam" @click="random(test)" src="../assets/images/seamsi2.png"></center>
+        <center><img id="seam1"  src="../assets/images/ezgif.com-gif-maker.gif"></center>
         
         <br><br>
         <!-- </div> -->
@@ -45,7 +46,7 @@ export default {
            var x = document.getElementById("seam");
            x.style.display = "none";
            var y = document.getElementById("seam1");
-           y.style.display = "block";
+           y.style.display = "flex";
         //    document.getElementById("demo").innerHTML = test;
          //this.$router.push({path: '/Card' , params: {test}})
             this.$http.get("/rulet/ShowCard/"+test)
@@ -93,16 +94,24 @@ export default {
 <style>
 .bg {
     height: 100vh;
-    background-image: url("../assets/images/san.jpg");
+    background-image: url("../assets/images/Omikuji-5.jpg");
     background-size: cover;
     background-position: center;
-    filter: blur(8px);
+    filter: blur(3px);
 }
 .bg-text{
-position: absolute;
+background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+  color: white;
+  font-weight: bold;
+  border: 3px solid #f1f1f1;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 40%;
+  text-align: center;
 
 }
 img{
@@ -112,11 +121,26 @@ img{
     position: center;
 }
 #seam1{
-    display:none;
+    
+    display: none;
+    
+    
+}
+#seam{
+    
+    width: 100px;
+    height: 300px;
 }
 /* #acab {
   position: fixed; 
   transition: transform 0.1s; 
   pointer-events: none 
 } */
+h1{
+    margin-top: 50px;
+    font-size: 72px;
+    text-align: center;
+    color: honeydew;
+    text-transform: uppercase;
+}
 </style>
