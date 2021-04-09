@@ -92,12 +92,12 @@ exports.DetailCampaign = function(req,res){
 
 exports.DeleteCampaign = function(req,res){
   try{
-    Campaign.findOneAndDelete({_id : req.params.id}, function(err, campaign){
+    Campaign.findOneAndDelete({_id : req.params.id}, async function(err, campaign){
       if(err){
         console.log(err)
       } else {
           const image  = './public/image/campaign/' + campaign.image;
-          fs.unlinkSync(image , function(err){
+          await fs.unlinkSync(image , function(err){
               if(err){
                   console.log(err);
               } else {
