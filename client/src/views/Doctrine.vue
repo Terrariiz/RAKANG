@@ -165,8 +165,7 @@ export default {
             })
             this.doctrines[i]["fav"] = IsFav;
             this.forceRerender()
-          } 
-          
+          }  
         }
       })
       .catch(function(err) {
@@ -183,6 +182,7 @@ export default {
     forceRerender() {
       this.componentKey += 1;
     },
+    
     //เปลี่ยน value ใน bookmark
     clickBookmarks(doctrine){
       console.log(doctrine)
@@ -217,6 +217,7 @@ export default {
       }
     }
   },
+  
   
  
 }
