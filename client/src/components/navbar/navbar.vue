@@ -39,6 +39,17 @@
                 <v-list-item-title>หน้าโปรไฟล์</v-list-item-title>
               </v-list-item></router-link
             >
+            <hr>
+            <router-link tag="v-list-item" to="/seamsi"
+              ><v-list-item>
+                <v-list-item-title>เสี่ยงเซียมซี</v-list-item-title>
+              </v-list-item></router-link
+            >
+            <router-link tag="v-list-item" to="/lantern"
+              ><v-list-item>
+                <v-list-item-title>ลอยโคมอธิษฐาน</v-list-item-title>
+              </v-list-item></router-link
+            >
           </v-list-item-group>
         </v-list>
         <div class="pa-2">
@@ -79,6 +90,17 @@
             <router-link tag="v-list-item" to="/profile"
               ><v-list-item>
                 <v-list-item-title>หน้าโปรไฟล์</v-list-item-title>
+              </v-list-item></router-link
+            >
+            <hr>
+            <router-link tag="v-list-item" to="/seamsi"
+              ><v-list-item>
+                <v-list-item-title>เสี่ยงเซียมซี</v-list-item-title>
+              </v-list-item></router-link
+            >
+            <router-link tag="v-list-item" to="/lantern"
+              ><v-list-item>
+                <v-list-item-title>ลอยโคมอธิษฐาน</v-list-item-title>
               </v-list-item></router-link
             >
           </v-list-item-group>

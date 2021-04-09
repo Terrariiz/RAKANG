@@ -4,8 +4,7 @@
         <Navbar></Navbar>
         </div>
         <div class= 'bg'>
-          <br><br><br><br>
-          <h1>sky lantern</h1> 
+          <br><br><br><br> 
           <center>
               <div id="test1" class="controller">
                 <img src="../assets/images/360.png">
@@ -30,7 +29,7 @@
               </div>
           
           <div class="box" id="box"> 
-            <label id="test" for="fname" >คำอธิฐาน</label>
+            <label id="test" for="fname" >คำอธิษฐาน</label>
             <v-text-field
               id="test3"
               single-line
@@ -39,7 +38,7 @@
             >
             </v-text-field>
             <!-- <input id="test3" type="text" name="fname"><br><br> -->
-            <v-btn color="primary" id="test2" @click="lantern()">ส่ง</v-btn>
+            <v-btn color="primary" id="test2" @click="lantern()">ส่งคำอธิษฐาน</v-btn>
 				</div>
         </center>
 		</div>

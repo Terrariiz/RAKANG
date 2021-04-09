@@ -32,7 +32,7 @@ const editprofile            = () => import('@/components/profile/editprofile')
 const test                   = () => import('@/components/admin/test')
 const payment                = () => import('@/components/admin/payment')
 const UserDetailCampaign     = () => import('@/views/Donate_Campaign')
-const random                 = () => import('@/views/random')
+const seamsi                 = () => import('@/views/random')
 const Lantern                 = () => import('@/views/Lantern')
 const UserDetailDoctrine     = () => import('@/views/detail_Doctrine')
 const UserDetailNews         = () => import('@/views/detail_news')
@@ -288,9 +288,9 @@ const routes = [
     }
   },
   {
-    path: '/random',
-    name: 'random',
-    component: random,
+    path: '/seamsi',
+    name: 'seamsi',
+    component: seamsi,
     meta: {
       requiresUserAuth: true
     }
