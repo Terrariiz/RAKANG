@@ -107,8 +107,8 @@ export default {
 
 }
 .controller2 {
-        -webkit-animation: bounce-down 1.6s linear infinite;
-        animation: bounce-down 1.6s linear infinite;
+        -webkit-animation: bounce-down 1.3s linear infinite;
+        animation: bounce-down 2s linear infinite;
         position: absolute;
         left: 0%;
         top: 20%;
@@ -116,7 +116,7 @@ export default {
         width: 200px;
 }
 .controller3 {
-        -webkit-animation: bounce-down 1.6s linear infinite;
+        -webkit-animation: bounce-down 1s linear infinite;
         animation: bounce-down 1.6s linear infinite;
         position: absolute;
         left: 20;
@@ -134,7 +134,7 @@ export default {
         width: 100px;
 }
 .controller5 {
-        -webkit-animation: bounce-down 1.6s linear infinite;
+        -webkit-animation: bounce-down 1.3s linear infinite;
         animation: bounce-down 1.6s linear infinite;
         position: absolute;
         left: 80%;
@@ -144,7 +144,7 @@ export default {
 }
 .controller6 {
         -webkit-animation: bounce-down 1.6s linear infinite;
-        animation: bounce-down 1.6s linear infinite;
+        animation: bounce-down 1.9s linear infinite;
         position: absolute;
         left: 20%;
         top: 30%;
