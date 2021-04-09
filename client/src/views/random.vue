@@ -1,9 +1,12 @@
-<template>
-    <div>
+<template >
+    <div >
+       
         <div>
         <Navbar></Navbar>
-        </div>
-        <h1>mini page</h1>
+        </div> 
+        <div class="bg"></div>
+        <div class='bg-text'>
+        <h1>seamsi</h1>
         <v-text id="demo"> </v-text><br>
         <!-- <div id="acab"> -->
         <img @click="random(test)" src="../assets/images/SEE.gif"><br><br>
@@ -11,6 +14,7 @@
         <!-- <button @click="random(test)">test</button> -->
         <p id='CNumber'> </p>
         <div id='content'> </div>
+        </div>
     </div>
 </template>
 
@@ -19,6 +23,7 @@
 // document.getElementById('acab').style.transform = 'translateY('+(ev.clientY-80)+'px)';
 // document.getElementById('acab').style.transform += 'translateX('+(ev.clientX-100)+'px)';            
 // },false);
+import swal from "sweetalert2";
 const Navbar = () => import('@/components/navbar/navbar')
 export default {
     name:'random',
@@ -34,21 +39,33 @@ export default {
     methods: {
         random(){
            var test = Math.floor(Math.random() * 28)+1;
-           document.getElementById("demo").innerHTML = test;
+        //    document.getElementById("demo").innerHTML = test;
          //this.$router.push({path: '/Card' , params: {test}})
-           console.log(test)
             this.$http.get("/rulet/ShowCard/"+test)
             .then((res) => {
-            console.log(res.data)
             this.rulet = res.data;
-            console.log(this.rulet)
-            document.getElementById("CNumber").innerHTML = this.rulet[0].CNumber;
-            document.getElementById("content").innerHTML = this.rulet[0].content;
+            setTimeout(() =>    
+        swal.fire({
+          title: 'ใบที่'+ this.rulet[0].CNumber,
+          text: this.rulet[0].content,
+          showCancelButton: false,
+          confirmButtonText: 'OK',
+          reverseButtons: true
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.$router.push({ name: 'Home'})
+          } 
+        }), 1000);
+                
+            // document.getElementById("CNumber").innerHTML = this.rulet[0].CNumber;
+            // document.getElementById("content").innerHTML = this.rulet[0].content;
             })
             .catch(function(err){
             console.log(err)
             })
+            
         },
+        
     //     getData(){
     //     var that = this;
     //     this.$http.get("/rulet/ShowCard/")
@@ -67,6 +84,23 @@ export default {
 </script>
 
 <style>
+.bg {
+    height: 100vh;
+    background-image: url("../assets/images/san.jpg");
+    background-size: cover;
+    background-position: center;
+    filter: blur(8px);
+}
+.bg-text{
+position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+}
+img{
+    cursor: pointer
+}
 /* #acab {
   position: fixed; 
   transition: transform 0.1s; 
