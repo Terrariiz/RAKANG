@@ -691,6 +691,10 @@ hr{
 img{
   clip-path: circle();
   background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
 }
 .name-picture{
   background-color: cornflowerblue;
