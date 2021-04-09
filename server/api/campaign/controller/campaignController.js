@@ -92,12 +92,12 @@ exports.DetailCampaign = function(req,res){
 
 exports.DeleteCampaign = function(req,res){
   try{
-    Campaign.findOneAndDelete({_id : req.params.id},function(err, campaign){
+    Campaign.findOneAndDelete({_id : req.params.id}, function(err, campaign){
       if(err){
         console.log(err)
       } else {
           const image  = './public/image/campaign/' + campaign.image;
-          fs.unlink(image , function(err){
+          fs.unlinkSync(image , function(err){
               if(err){
                   console.log(err);
               } else {
@@ -124,7 +124,7 @@ exports.EditCampaign = async(req,res) =>{
     if(req.file){
       if(req.file.filename != req.body.oldimage){
         const image  = './public/image/campaign/' + req.body.oldimage;
-        fs.unlink(image , function(err){
+        fs.unlinkSync(image , function(err){
             if(err){
                 console.log(err);
             } else {
