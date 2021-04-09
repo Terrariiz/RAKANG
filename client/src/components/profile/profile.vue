@@ -595,6 +595,7 @@ hr{
   font-size: 32px;
   display: inline-block;
   font-weight: bold;
+  margin-bottom: 20px;
 }
 .sub-head{
   font-size: 20px;

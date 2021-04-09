@@ -3,6 +3,7 @@
     <div>
       <Navbar></Navbar>
     </div>
+    <br><br>
      <div class="project-header">
     <v-container >
       <!-- this.$router.back(); -->

@@ -3,6 +3,7 @@
         <div>
             <Navbar></Navbar>
         </div>
+        <br><br>
          <v-form
          @submit.prevent="Editdoctrine">
         <v-container id ='rounded' style="background-color: #F09C0B;">

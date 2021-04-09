@@ -20,7 +20,7 @@
       <p>โครงการรวบรวมเงินทุนบริจาค</p>
 
       <v-container v-if="newcampaign != null" class="container-news">
-        <v-card   elevation="5" outlined shaped >
+        <v-card   elevation="5" outlined >
         <v-row class="row-news">
           <v-col class="image-cam" cols="12" md="6">
             <center><div class="image-size">
@@ -30,17 +30,17 @@
           </v-col>
           <v-col class="colxx" cols="12" md="6">
             <v-container class="box-content">
-                <h1> {{newcampaign.name}} </h1>
+                <h1 class="text-align-left"> {{newcampaign.name}} </h1>
                 
-              <h4> {{newcampaign.content}} </h4>
+              <div class="text-align-left">{{newcampaign.content}}</div>
               <div >
                 <v-row>
                   <v-col style="text-align:left;" cols="12" md="3">
-                    <span >วันสิ้นสุดโครงการ {{newcampaign.date}}</span><br>
-                    <span >สถานที่ {{newcampaign.location}}</span>
+                    <span class="amount">วันสิ้นสุดโครงการ: </span><span>{{newcampaign.date}}</span><br>
+                    <span class="amount">สถานที่:</span><span> {{newcampaign.location}}</span>
                   </v-col>
                   <v-col style="text-align:right;" cols="12" md="9">  
-                    <span>ยอดบริจาค {{newcampaign.donate}} / {{newcampaign.amount}} บาท</span>
+                    <span class="amount">ยอดบริจาค:</span><span> {{newcampaign.donate}} / {{newcampaign.amount}} บาท</span>
                   </v-col>
                 </v-row>
               </div>
@@ -164,7 +164,13 @@
           <div @click="ViewDoctrine(doctrine._id)" class="doctrine-col" v-for="doctrine in filteredListdoctrine " :key="doctrine.title">
             <img :src="'http://localhost:4000/image/doctrine/' + doctrine.image">
             <h3>{{doctrine.title}}</h3>
-            <p v-html="doctrine.content">{{doctrine.content}}</p> 
+            <v-list-item three-line>
+                <v-list-item-content  >
+                    <v-list-item-subtitle v-html="doctrine.content">
+                          {{doctrine.content}} 
+                      </v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
           </div>
         
       </div>
@@ -289,6 +295,9 @@ export default {
 // import a from '../../public/image/background.png'
 </script>
 <style scoped>
+.amount{
+  font-weight: 600;
+}
 /* new */
 .header{
   min-height: 100vh;
@@ -303,7 +312,7 @@ export default {
   width: 90%;
   color: #fff;
   position: absolute;
-  top: 15%;
+  top: 10%;
   left: 50%;
   transform: translate(-50%,-50%);
   text-align: center;
@@ -684,10 +693,13 @@ transform: rotateY(180deg);
  .campaign{
    background:#fbe9e7;
   margin: auto;
+  padding-top: 50px;
   text-align: center;
-  padding-top: 50px
  }
  .campaign p{
    margin: 0;
+ }
+ .text-align-left{
+   text-align: left;
  }
 </style>

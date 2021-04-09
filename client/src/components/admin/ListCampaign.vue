@@ -3,7 +3,7 @@
     <div>
       <Navbar></Navbar>
     </div>
-    <br>
+    <br><br>
     <div id ='headaddnews'>
         <div class="text-center">
           
