@@ -290,12 +290,18 @@ const routes = [
   {
     path: '/random',
     name: 'random',
-    component: random
+    component: random,
+    meta: {
+      requiresUserAuth: true
+    }
   },
   {
     path: '/lantern',
     name: 'lantern',
-    component: Lantern
+    component: Lantern,
+    meta: {
+      requiresUserAuth: true
+    }
   },  
 ]
 

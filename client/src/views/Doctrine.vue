@@ -4,7 +4,8 @@
         <div>
         <Navbar></Navbar>
         </div>
-        <h1>Doctrine</h1>       
+        <!-- <h1>Doctrine</h1>        -->
+        <br>
      <v-container class="container-news">
        <v-chip-group
         v-model="selectedCategory"
@@ -54,17 +55,19 @@
                     <h3>
                      {{ doctrine.title }}
                     </h3>
-                    <p v-html="doctrine.content">
-                     {{ doctrine.content }}
-                    </p>
-                    <span class="datex">วันที่โพสต์ {{ doctrine.edittime }}</span>
+                    <v-list-item three-line>
+                      <v-list-item-content  >
+                        <v-list-item-subtitle v-html="doctrine.content">
+                        {{ doctrine.content }}
+                        </v-list-item-subtitle>
+                      </v-list-item-content>
+                    </v-list-item>
+                    <span class="datex">{{ doctrine.edittime }}</span>
                     <p>
-                     หมวดหมู่ {{ doctrine.categories }}
+                     {{ doctrine.categories }}
                     </p>
                     
-                    <a class="btn-detail" @click="ViewDoctrine(doctrine._id)">Know <i class="fa fa-chevron-right" aria-hidden="true"></i
-                ><i class="fa fa-chevron-right" aria-hidden="true"></i
-              ></a>
+                    
                   </div>
                 </div>
               </v-col>
@@ -296,6 +299,7 @@ export default {
 }
 .cardx{
   cursor: pointer;
+
 }
 .cardx:hover{
 	box-shadow: 0 0 20px 0px rgb(0,0,0,0.2);
@@ -308,6 +312,8 @@ export default {
 	padding: 5%;
 	box-shadow: 0px 6px 18px -8px rgba(118,130,183,1);
 	border-radius: 10px;
+  height: 250px;
+  
 }
 span.datex {
     font-weight: 700;

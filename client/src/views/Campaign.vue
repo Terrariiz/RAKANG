@@ -22,13 +22,13 @@
               <div>{{campaign.content}}</div>
               <div >
                 <v-row>
-                  <v-col style="text-align:left;" cols="12" md="6">
+                  <v-col  style="text-align:left;" cols="12" md="6">
                     <!-- <span >วันที่</span> -->
-                    <span> เป้าหมาย {{ campaign.amount }}</span>
-                    <div> วันที่สิ้นสุด{{ campaign.date }}</div>
+                    <span class="amount"> เป้าหมาย:</span><span> {{ campaign.amount }}</span>
+                    <div><span class="amount"> วันที่สิ้นสุด:</span> {{ campaign.date }}</div>
                   </v-col>
                   <v-col style="text-align:right;" cols="12" md="6">
-                    <div>ยอดบริจาค</div>  
+                    <div class="amount">ยอดบริจาค</div>  
                     <span> {{campaign.donate}} / {{ campaign.amount }} บาท</span>
                   </v-col>
                 </v-row>
@@ -130,6 +130,9 @@ export default {
 </script>
 
 <style >
+.amount{
+  font-weight: 600;
+}
 .status_open{
   text-align: right;
   padding: 20px;

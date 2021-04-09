@@ -3,6 +3,7 @@
     <div>
       <Navbar></Navbar>
     </div>
+    <br><br>
     <h1>Log Donate Admin</h1>
     <v-container >
       <v-card>

@@ -3,7 +3,7 @@
     <div>
       <Navbar></Navbar>
     </div>
-    <br>
+    <br><br>
     <div id ='headaddnews'>
         <div class="text-center">
           
@@ -111,7 +111,7 @@ import swal from "sweetalert2";
           showCancelButton: true,
           confirmButtonText: 'Yes, delete it!',
           cancelButtonText: 'No, cancel!',
-          reverseButtons: true
+          reverseButtons: false
         }).then((result) => {
           if (result.isConfirmed) {
             this.$http.delete("/doctrine/DeleteDoctrine/"+doctrineid)

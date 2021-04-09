@@ -3,6 +3,7 @@
     <div>
       <Navbar></Navbar>
     </div>
+    <br><br>
      <div class="project-header">
     <v-container >
       <!-- this.$router.back(); -->
@@ -172,7 +173,7 @@ export default {
           showCancelButton: true,
           confirmButtonText: 'Yes, delete it!',
           cancelButtonText: 'No, cancel!',
-          reverseButtons: true
+          reverseButtons: false
         }).then((result) => {
           if (result.isConfirmed) {
             this.$http.delete("/campaign/DeleteCampaign/"+this.$route.params.id)

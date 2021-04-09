@@ -3,7 +3,7 @@
     <div>
       <Navbar></Navbar>
     </div>
-    <br>
+    <br><br><br>
     <v-form
         ref="form"
         v-model="valid"

@@ -3,6 +3,7 @@
         <div>
             <Navbar></Navbar>
         </div>
+        <br><br>
          <v-form
          @submit.prevent="Editcampaign">
        <div class="project-header">

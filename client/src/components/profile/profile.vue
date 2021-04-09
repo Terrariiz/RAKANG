@@ -57,7 +57,7 @@
               </div>
               
                  </v-col>
-                 <hr>
+                 <hr class="hr-hide">
                  <v-col class="select-head"  cols="12" md="12" sm="12">
                   <div class="selectboxs">
                 <div class="setting-proflie2">
@@ -79,9 +79,9 @@
                  <v-select
                  v-model="selected"
                 :items="items"
-                label="Solo field"
+                label="เลือกหัวข้อ"
                 solo
-                @change="onChange()"
+               
                 ></v-select>
               </div>
               
@@ -572,6 +572,7 @@ export default {
 </script>
 
 <style scoped>
+
 hr{
   border-top: 1px solid black;
 }
@@ -597,6 +598,7 @@ hr{
   font-size: 32px;
   display: inline-block;
   font-weight: bold;
+  margin-bottom: 20px;
 }
 .sub-head{
   font-size: 20px;
@@ -769,6 +771,9 @@ img{
   
   max-height:auto;
   
+}
+.hr-hide{
+  display: none;
 }
 .setting-proflie2{
   display: none;

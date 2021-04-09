@@ -3,8 +3,9 @@
         <div>
         <Navbar></Navbar>
         </div>
-        <h1>News</h1>
-        <h1>Doctrine</h1>       
+        <!-- <h1>News</h1>
+        <h1>Doctrine</h1>        -->
+        <br>
      <v-container class="container-news">
        <v-chip-group
         v-model="selectedCategory"
@@ -51,20 +52,26 @@
                 <v-icon x-large>mdi-bookmark</v-icon>
               </v-btn>
             </div>
-                    <h3>
+                    <v-list-item three-line class="title-font-size">
+                      
+                        
                      {{ news.title }}
-                    </h3>
-                    <p v-html="news.content">
-                     {{ news.content }}
-                    </p>
-                    <span class="datex">วันที่โพสต์ {{ news.date }}</span>
+                    
+                      
+                    </v-list-item>
+                     <v-list-item three-line>
+                      <v-list-item-content  >
+                        <v-list-item-subtitle v-html="news.content">
+                            {{ news.content }}
+                        </v-list-item-subtitle>
+                      </v-list-item-content>
+                    </v-list-item>
+                    <span class="datex">{{ news.date }}</span>
                     <p>
-                     หมวดหมู่ {{ news.categories }}
+                     {{ news.categories }}
                     </p>
                     
-                    <a class="btn-detail" @click="ViewNews(news._id)">Know <i class="fa fa-chevron-right" aria-hidden="true"></i
-                ><i class="fa fa-chevron-right" aria-hidden="true"></i
-              ></a>
+                    
                   </div>
                 </div>
               </v-col>
@@ -266,6 +273,9 @@ export default {
 </script>
 
 <style>
+.title-font-size{
+  font-size: 21px;
+}
 .btn-bookmark{
   position: absolute;
   right: 5%;
@@ -288,9 +298,11 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    
 }
 .cardx{
   cursor: pointer;
+  
 }
 .cardx:hover{
 	box-shadow: 0 0 20px 0px rgb(0,0,0,0.2);
@@ -303,6 +315,7 @@ export default {
 	padding: 5%;
 	box-shadow: 0px 6px 18px -8px rgba(118,130,183,1);
 	border-radius: 10px;
+  height: 250px;
 }
 span.datex {
     font-weight: 700;

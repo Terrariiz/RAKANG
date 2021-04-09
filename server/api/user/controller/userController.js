@@ -386,3 +386,53 @@ exports.resetPassword = async (req,res) => {
   }
 });
 };
+
+exports.seamsi = async (req,res) => {  
+  try{     
+  const add = {
+    seamsi:{
+      Playable: false,
+      Detail:  req.body.content
+    }
+  };
+  console.log(add)
+  User.findById({_id : req.params.id},add,function(err, sam){
+    if(err){
+      console.log(err)
+    } else {
+      console.log('success')
+      console.log(sam)
+      console.log(add)
+      res.status(201).json({ sam });
+    }
+  })
+ } catch (err) {
+  res.status(400).json({ err: err });
+  console.log(err)
+}
+}
+
+exports.lantern = async (req,res) => {  
+  try{     
+  const add = {
+    lantern:{
+      Playable: false,
+      Detail:  req.body.Detail
+    }
+  };
+  console.log(add)
+  User.findById({_id : req.params.id},add,function(err, lan){
+    if(err){
+      console.log(err)
+    } else {
+      console.log('success')
+      console.log(lan)
+      console.log(add)
+      res.status(201).json({ lan });
+    }
+  })
+ } catch (err) {
+  res.status(400).json({ err: err });
+  console.log(err)
+}
+}

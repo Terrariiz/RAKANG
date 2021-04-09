@@ -3,8 +3,9 @@
      <div>
       <Navbar></Navbar>
     </div>
-    <br>
+    <br><br><br>
     <v-container id="border-login" rounded-xl style="text-align:center;  margin-top:5%; box-shadow: 5px 6px 5px #888888; ">
+      
       <h1>Login</h1>
       <v-container :elevation="11" style="">
      
@@ -45,7 +46,7 @@
         >
           Log in
         </v-btn><br>
-        <v-btn text><router-link  to='/register'>Register ?</router-link></v-btn>
+        <v-btn text><router-link  to='/register'>สมัครสมาชิก</router-link></v-btn>
         <v-btn text><router-link  to='/forgotPassword'>ลืมรหัสผ่าน</router-link></v-btn>
       </v-form>
       </v-container>

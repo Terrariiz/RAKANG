@@ -4,19 +4,44 @@
         <Navbar></Navbar>
         </div>
         <div class= 'bg'>
-        <br><br><br><br>
-        <h1>sky lantern</h1> 
-    <center>
-				<div id="test1" class="controller">
-					<img src="../assets/images/360.png">
+          <br><br><br><br>
+          <h1>sky lantern</h1> 
+          <center>
+              <div id="test1" class="controller">
+                <img src="../assets/images/360.png">
+              </div>
+              <div class="controller2">
+                <img src="../assets/images/360.png">
+              </div>
+              <div class="controller3">
+                <img src="../assets/images/360.png">
+              </div>
+              <div class="controller4">
+                <img src="../assets/images/360.png">
+              </div>
+              <div class="controller5">
+                <img src="../assets/images/360.png">
+              </div>
+              <div class="controller6">
+                <img src="../assets/images/360.png">
+              </div>
+              <div class="controller7">
+                <img src="../assets/images/360.png">
+              </div>
+          
+          <div class="box" id="box"> 
+            <label id="test" for="fname" >คำอธิฐาน</label>
+            <v-text-field
+              id="test3"
+              single-line
+              solo
+              required
+            >
+            </v-text-field>
+            <!-- <input id="test3" type="text" name="fname"><br><br> -->
+            <v-btn color="primary" id="test2" @click="lantern()">ส่ง</v-btn>
 				</div>
-				<br><br><br><br><br><br><br><br>
-				<div class="box" id="box"> 
-				<label id="test" for="fname" >คำอธิฐาน</label>
-				<input id="test3" type="text" name="fname"><br><br>
-				<button id="test2" @click="lantern()">ส่ง</button>
-				</div>
-    </center>
+        </center>
 		</div>
     </div>
 
@@ -44,7 +69,7 @@ export default {
 			element.classList.remove("controller");
 			element.classList.add("example");
 			setTimeout(() =>  swal.fire({
-          text: "Thank you",
+          text: "ขอให้ผลบุญส่งเสริมให้คุณสมดังความปรารถนา",
           showCancelButton: false,
           confirmButtonText: 'OK',
           reverseButtons: true
@@ -79,6 +104,61 @@ export default {
 .controller {
         -webkit-animation: bounce-down 1.6s linear infinite;
         animation: bounce-down 1.6s linear infinite;
+
+}
+.controller2 {
+        -webkit-animation: bounce-down 1.3s linear infinite;
+        animation: bounce-down 2s linear infinite;
+        position: absolute;
+        left: 0%;
+        top: 20%;
+        height: 200px;
+        width: 200px;
+}
+.controller3 {
+        -webkit-animation: bounce-down 1s linear infinite;
+        animation: bounce-down 1.6s linear infinite;
+        position: absolute;
+        left: 20;
+        top: 10;
+        height: 100px;
+        width: 100px;
+}
+.controller4 {
+        -webkit-animation: bounce-down 1.6s linear infinite;
+        animation: bounce-down 1.6s linear infinite;
+        position: absolute;
+        left: 70%;
+        top: 10%;
+        height: 100px;
+        width: 100px;
+}
+.controller5 {
+        -webkit-animation: bounce-down 1.3s linear infinite;
+        animation: bounce-down 1.6s linear infinite;
+        position: absolute;
+        left: 80%;
+        top: 60%;
+        height: 100px;
+        width: 100px;
+}
+.controller6 {
+        -webkit-animation: bounce-down 1.6s linear infinite;
+        animation: bounce-down 1.9s linear infinite;
+        position: absolute;
+        left: 20%;
+        top: 30%;
+        height: 100px;
+        width: 100px;
+}
+.controller7 {
+        -webkit-animation: bounce-down 1.6s linear infinite;
+        animation: bounce-down 1.6s linear infinite;
+        position: absolute;
+        left: 50%;
+        top: 20%;
+        height: 100px;
+        width: 100px;
 }
  
 @-webkit-keyframes bounce-down {
@@ -112,6 +192,9 @@ export default {
     background-image: url("../assets/images/lantern.jpg");
     background-size: cover;
     background-position: center;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
 }
 h1{
     color: aliceblue;
@@ -123,8 +206,11 @@ h1{
   background-color: lightgrey;
   width: 300px;
   border: 10px solid black;
-  padding: 50px;
+  padding: 20px;
   margin-bottom: 100px;
+}
+#test3{
+  background-color: red;
 }
 
 </style>
