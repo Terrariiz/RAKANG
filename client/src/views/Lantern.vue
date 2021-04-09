@@ -43,7 +43,16 @@ export default {
 			var element = document.getElementById("test1");
 			element.classList.remove("controller");
 			element.classList.add("example");
-			setTimeout(() =>  swal.fire("Thank You"), 6000);
+			setTimeout(() =>  swal.fire({
+          text: "Thank you",
+          showCancelButton: false,
+          confirmButtonText: 'OK',
+          reverseButtons: true
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.$router.push({ name: 'Home'})
+          } 
+        }), 6000);
         },
     }
 

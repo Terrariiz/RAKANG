@@ -44,10 +44,19 @@ export default {
             this.$http.get("/rulet/ShowCard/"+test)
             .then((res) => {
             this.rulet = res.data;
-            setTimeout(() =>   swal.fire({
-                title: "ใบที่"+this.rulet[0].CNumber,
-                text: this.rulet[0].content, 
-                }), 1000);
+            setTimeout(() =>    
+        swal.fire({
+          title: 'ใบที่'+ this.rulet[0].CNumber,
+          text: this.rulet[0].content,
+          showCancelButton: false,
+          confirmButtonText: 'OK',
+          reverseButtons: true
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.$router.push({ name: 'Home'})
+          } 
+        }), 1000);
+                
             // document.getElementById("CNumber").innerHTML = this.rulet[0].CNumber;
             // document.getElementById("content").innerHTML = this.rulet[0].content;
             })
