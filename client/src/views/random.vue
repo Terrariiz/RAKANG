@@ -38,12 +38,16 @@ export default {
     },
     methods: {
         random(){
+           var id = window.localStorage.getItem("user_id");
            var test = Math.floor(Math.random() * 28)+1;
         //    document.getElementById("demo").innerHTML = test;
          //this.$router.push({path: '/Card' , params: {test}})
             this.$http.get("/rulet/ShowCard/"+test)
             .then((res) => {
             this.rulet = res.data;
+            var formData = new URLSearchParams();
+            formData.append("Detail", this.rulet[0].content);
+            this.$http.post("/user/random/" + id, formData);
             setTimeout(() =>    
         swal.fire({
           title: 'ใบที่'+ this.rulet[0].CNumber,

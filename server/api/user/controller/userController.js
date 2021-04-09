@@ -392,11 +392,11 @@ exports.seamsi = async (req,res) => {
   const add = {
     seamsi:{
       Playable: false,
-      Detail:  req.body.content
+      Detail:  req.body.Detail
     }
   };
   console.log(add)
-  User.findById({_id : req.params.id},add,function(err, sam){
+  User.findByIdAndUpdate({_id : req.params.id},add,function(err, sam){
     if(err){
       console.log(err)
     } else {
@@ -420,8 +420,9 @@ exports.lantern = async (req,res) => {
       Detail:  req.body.Detail
     }
   };
+  console.log(req.body)
   console.log(add)
-  User.findById({_id : req.params.id},add,function(err, lan){
+  User.findByIdAndUpdate({_id : req.params.id},add,function(err, lan){
     if(err){
       console.log(err)
     } else {

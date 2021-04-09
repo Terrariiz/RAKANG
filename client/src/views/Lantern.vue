@@ -36,6 +36,7 @@
               single-line
               solo
               required
+              v-model="Detail"
             >
             </v-text-field>
             <!-- <input id="test3" type="text" name="fname"><br><br> -->
@@ -49,35 +50,45 @@
 
 <script>
 import swal from "sweetalert2";
+var id = window.localStorage.getItem("user_id");
 const Navbar = () => import('@/components/navbar/navbar')
 export default {
     name:'lantern',
     components:{
         Navbar
     },
+    data(){
+      return {
+        Detail : null
+      }
+    },
     methods: { 
         lantern(){
-            var x = document.getElementById("test");
-			x.style.display = "none";
-			var y = document.getElementById("test2");
-			y.style.display = "none";
-			var z = document.getElementById("test3");
-			z.style.display = "none";
-			var a = document.getElementById("box");
-			a.style.display = "none";
-			var element = document.getElementById("test1");
-			element.classList.remove("controller");
-			element.classList.add("example");
-			setTimeout(() =>  swal.fire({
-          text: "ขอให้ผลบุญส่งเสริมให้คุณสมดังความปรารถนา",
-          showCancelButton: false,
-          confirmButtonText: 'OK',
-          reverseButtons: true
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.$router.push({ name: 'Home'})
-          } 
-        }), 6000);
+          var x = document.getElementById("test");
+          x.style.display = "none";
+          var y = document.getElementById("test2");
+          y.style.display = "none";
+          var z = document.getElementById("test3");
+          z.style.display = "none";
+          var a = document.getElementById("box");
+          a.style.display = "none";
+          var element = document.getElementById("test1");
+          element.classList.remove("controller");
+          element.classList.add("example");
+          var formData = new URLSearchParams();
+          formData.append("Detail", this.Detail);
+          console.log(this.Detail)
+          this.$http.post("/user/lantern/" + id, formData);
+          setTimeout(() =>  swal.fire({
+              text: "ขอให้ผลบุญส่งเสริมให้คุณสมดังความปรารถนา",
+              showCancelButton: false,
+              confirmButtonText: 'OK',
+              reverseButtons: true
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.$router.push({ name: 'Home'})
+              } 
+            }), 6000);
         },
     }
 
