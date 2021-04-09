@@ -236,9 +236,13 @@ import swal from "sweetalert2";
         // console.log(response);
         let token = response.data.token;
         let id = response.data.data._id;
+        let userrank = response.data.Rank;
+        let userpoint = response.data.userpoint;
         if (token) {
+          localStorage.setItem("user_exp", userpoint);
           localStorage.setItem("user_token", token);
           localStorage.setItem('user_id', id)
+          localStorage.setItem("user_rank", userrank);
           this.$store.dispatch('UserLoggedIn');
           this.$router.push("/profile");
           swal.fire("Success", "Registration Was successful", "success");

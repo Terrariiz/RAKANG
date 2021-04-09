@@ -17,7 +17,7 @@
                   <p class="lead">{{campaign.content}}</p>
                   <p class="details">
                       
-                      <span class="location">สถานที่</span>
+                      <span class="location">สถานที่ {{campaign.location}}</span>
                   </p>
               </div>
           </v-col>
@@ -129,7 +129,6 @@ export default {
         thaidate : null,
         end:null,
         notend:null,
-
       }
     },
     mounted: function(){
@@ -138,6 +137,9 @@ export default {
       if(localStorage.getItem("donate-campaign") != null){
         this.AlertDonate()
       }
+      // if(this.$route.query != null){
+      //   this.$route.query[result]
+      // }
       
       
     },  
@@ -171,10 +173,6 @@ export default {
               } else if(moment(that.campaign.date).format('dddd') == 'Sunday'){
                 that.campaign.date = moment(that.campaign.date).format(" วันอาทิตย์ DD-MM-YY A");
               }
-              
-              
-              
-              
             })
             .catch(function(err){
               console.log(err)
@@ -196,6 +194,22 @@ export default {
                   showConfirmButton: false,
                   timer: 1500
                 })
+                if(res.data.ChangeRank != null){
+                  let rankchanged = res.data.ChangeRank
+                    swal.fire({
+                      title: 'ท่านได้รับเหรียญตราระดับ '+rankchanged,
+                      imageUrl: 'http://localhost:4000/image/rank/'+rankchanged+'.png',
+                      imageWidth: 400,
+                      imageHeight: 200,
+                      showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                      },
+                      hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                      },
+                      timer: 2000
+                    })
+                }
               } else if(res.data == 'incomplete'){
                 swal.fire({
                   icon: 'error',

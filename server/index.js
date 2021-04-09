@@ -76,7 +76,7 @@ app.use("/rulet", ruletRoutes);
 
 app.post("/test", async function(req,res){
 
-    var result 
+    var result = null
     const MerchantCode = 'M031001'
     const Apikey = 'Z5O4ARB0wikPpsSwpjXwmeuVCdD2zVV27Sdbti9gTvYWEOiBo7s7fB6S81LZAE3I'
     const TransactionId = req.body.transNo;
@@ -151,6 +151,8 @@ app.post("/test", async function(req,res){
                   campaign.donate = campaign.donate+amount/100;
                   
                   /////save ข้อมูล
+                  result = user.ChangeRank()
+                  console.log(result)
 
                   campaign.save();
                   log.save();
@@ -301,7 +303,8 @@ app.post("/test", async function(req,res){
         })
      })
     }
-  res.redirect('http://localhost:8080/campaign/'+fuckingcampaign)
+    console.log(result)
+  res.redirect('http://localhost:8080/campaign/'+fuckingcampaign+"?result="+result)
 });
 
 

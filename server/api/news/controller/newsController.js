@@ -28,6 +28,9 @@ exports.ShowListNews = function(req,res){
       if(err){
         console.log(err)
       } else {
+        news.sort(function(a, b){
+          return new Date(b.edittime) - new Date(a.edittime);
+      });
         console.log('else')
         res.json(news);
       }

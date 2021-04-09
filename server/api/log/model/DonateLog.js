@@ -4,7 +4,6 @@ const donateSchema = new mongoose.Schema({
   campaign:{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Campaign',
-  
   },
   CampaignName:{
     type:String
@@ -13,6 +12,9 @@ const donateSchema = new mongoose.Schema({
     type:String
   },
   result:{
+    type:String
+  },
+  ChangeRank:{
     type:String
   },
   user:

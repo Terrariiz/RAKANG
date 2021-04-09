@@ -145,24 +145,29 @@ userSchema.statics.checkPassword = async (id, oldPassword, newPassword) => {
   }
 };
 //เลื่อนระดับของ user เมื่อ point ถึงค่าที่กำหนด
-userSchema.methods.checkRank =  function() {
-  if(this.point >= 2000 || this.Rank != "Daimond"){
-    this.Rank = "Daimond"
-    this.Badge = ""
-
-  } else if(this.point >= 1000 ||this.Rank == "Platinum"){
+userSchema.methods.ChangeRank =  function() {
+  if(this.point >= 100000 && this.Rank != "Diamond"){
+    this.Rank = "Diamond"
+    this.Badge = "Diamond_Badge.png" 
+    return "Daimond"
+  } else if(this.point >= 30000 && this.Rank != "Platinum"){
     this.Rank = "Platinum"
-    this.Badge = ""
-  } else if(this.point >= 500 || this.Rank == "Gold"){
+    this.Badge = "Platinum_Badge.png"
+    return "Platinum"
+  } else if(this.point >= 10000 && this.Rank != "Gold"){
     this.Rank = "Gold"
-    this.Badge = ""
-  } else if(this.point >= 100 || this.Rank == "Sliver"){
+    this.Badge = "Gold_Badge.png"
+    return "Gold"
+  } else if(this.point >= 5000 && this.Rank != "Sliver"){
     this.Rank = "Sliver"
-    this.Badge = ""
-  } else if(this.point >= 0 || this.Rank == "Bronze"){
+    this.Badge = "Sliver_Badge.png"
+    return "Sliver"
+  } else if(this.point >= 0 && this.Rank != "Bronze"){
     this.Rank = "Bronze"
-    this.Badge = ""
+    this.Badge = "Bronze_Badge.png"
+    return "Bronze"
   }
+  return false
 }
 
 userSchema.methods.CheckFav = async function(campaign) {

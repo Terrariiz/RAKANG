@@ -86,8 +86,12 @@ export default {
         let response = await this.$http.post("/user/login", this.login);
         let token = response.data.token;
         let idUser = response.data.user._id;
+        let userrank = response.data.Rank;
+        let userpoint = response.data.userpoint;
         localStorage.setItem("user_token", token);
         localStorage.setItem("user_id", idUser);
+        localStorage.setItem("user_rank", userrank);
+        localStorage.setItem("user_exp", userpoint);
         if (token) {
           swal.fire("Success", "Login Successful", "success");
           this.$store.dispatch('UserLoggedIn');
