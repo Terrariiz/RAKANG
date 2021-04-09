@@ -4,7 +4,8 @@
         <div>
         <Navbar></Navbar>
         </div>
-        <h1>Doctrine</h1>       
+        <!-- <h1>Doctrine</h1>        -->
+        <br>
      <v-container class="container-news">
        <v-chip-group
         v-model="selectedCategory"

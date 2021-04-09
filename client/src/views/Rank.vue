@@ -3,7 +3,8 @@
     <div>
       <Navbar></Navbar>
     </div>
-    <h1>Ranking Board</h1>
+    <br><br><br><br>
+    <h1 style="text-align:center;">Ranking Board</h1>
     <v-container >
       <v-card>
     <v-card-title>
