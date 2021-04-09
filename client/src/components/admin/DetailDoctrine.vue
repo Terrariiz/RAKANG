@@ -89,7 +89,7 @@ export default {
           showCancelButton: true,
           confirmButtonText: 'Yes, delete it!',
           cancelButtonText: 'No, cancel!',
-          reverseButtons: true
+          reverseButtons: false
         }).then((result) => {
           if (result.isConfirmed) {
             this.$http.delete("/doctrine/DeleteDoctrine/"+this.$route.params.id)

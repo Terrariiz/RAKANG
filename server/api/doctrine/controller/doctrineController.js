@@ -123,12 +123,12 @@ exports.DetailDoctrine = function(req,res){
 
 exports.DeleteDoctrine = function(req,res){
   try{
-    Doctrine.findOneAndDelete({_id : req.params.id},function(err, doctrine){
+    Doctrine.findOneAndDelete({_id : req.params.id}, async function(err, doctrine){
       if(err){
         console.log(err)
       } else {
           const image  = './public/image/doctrine/' + doctrine.image;
-          fs.unlinkSync(image , function(err){
+          await fs.unlinkSync(image , function(err){
               if(err){
                   console.log(err);
               } else {

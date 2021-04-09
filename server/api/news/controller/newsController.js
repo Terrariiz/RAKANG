@@ -57,12 +57,12 @@ exports.DetailNews = function(req,res){
 exports.DeleteNews = function(req,res){
   
   try{
-    News.findOneAndDelete({_id : req.params.id},function(err, news){
+    News.findOneAndDelete({_id : req.params.id}, async function(err, news){
       if(err){
         console.log(err)
       } else {
           const image  = './public/image/new/' + news.image;
-          fs.unlinkSync(image , function(err){
+          await fs.unlinkSync(image , function(err){
               if(err){
                   console.log(err);
               } else {
