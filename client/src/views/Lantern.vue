@@ -4,19 +4,26 @@
         <Navbar></Navbar>
         </div>
         <div class= 'bg'>
-        <br><br><br><br>
-        <h1>sky lantern</h1> 
-    <center>
-				<div id="test1" class="controller">
-					<img src="../assets/images/360.png">
+          <br><br><br><br>
+          <h1>sky lantern</h1> 
+          <center>
+              <div id="test1" class="controller">
+                <img src="../assets/images/360.png">
+              </div>
+          
+          <div class="box" id="box"> 
+            <label id="test" for="fname" >คำอธิฐาน</label>
+            <v-text-field
+              id="test3"
+              single-line
+              solo
+              required
+            >
+            </v-text-field>
+            <!-- <input id="test3" type="text" name="fname"><br><br> -->
+            <v-btn color="primary" id="test2" @click="lantern()">ส่ง</v-btn>
 				</div>
-				<br><br><br><br><br><br><br><br>
-				<div class="box" id="box"> 
-				<label id="test" for="fname" >คำอธิฐาน</label>
-				<input id="test3" type="text" name="fname"><br><br>
-				<button id="test2" @click="lantern()">ส่ง</button>
-				</div>
-    </center>
+        </center>
 		</div>
     </div>
 
@@ -44,7 +51,7 @@ export default {
 			element.classList.remove("controller");
 			element.classList.add("example");
 			setTimeout(() =>  swal.fire({
-          text: "Thank you",
+          text: "ขอให้ผลบุญส่งเสริมให้คุณสมดังความปรารถนา",
           showCancelButton: false,
           confirmButtonText: 'OK',
           reverseButtons: true
@@ -112,6 +119,9 @@ export default {
     background-image: url("../assets/images/lantern.jpg");
     background-size: cover;
     background-position: center;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
 }
 h1{
     color: aliceblue;
@@ -123,8 +133,11 @@ h1{
   background-color: lightgrey;
   width: 300px;
   border: 10px solid black;
-  padding: 50px;
+  padding: 20px;
   margin-bottom: 100px;
+}
+#test3{
+  background-color: red;
 }
 
 </style>
