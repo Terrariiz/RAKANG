@@ -1,9 +1,15 @@
 <template>
-    <div >   
+    <div>
+      <div>
+      <Navbar></Navbar>
+    </div>   
+    <br><br><br>
+    
       <v-container>
-        <v-row class="rows">
-            <v-col  cols="12" md="4" sm="12"> <!-- class="name-picture" -->
-               <v-row>
+        <v-row>
+            <v-col class="pad0"  cols="12" md="4" sm="12"> <!-- class="name-picture" -->
+               <v-row >
+                 <v-card-text  class="border-cardtext" >
                  <v-col class="name-pic-pro"  cols="12" md="12" sm="12">
                     <div class="edit-profile">
                   <v-btn v-if="selected == 'โปรไฟล์' || selected == 'ประวัติการบริจาค' || selected =='บุ๊คมาค'" @click="onChange('แก้ไขโปรไฟล์')" color="secondary" icon><v-icon>mdi-pencil</v-icon></v-btn>
@@ -51,6 +57,7 @@
               </div>
               
                  </v-col>
+                 <hr>
                  <v-col class="select-head"  cols="12" md="12" sm="12">
                   <div class="selectboxs">
                 <div class="setting-proflie2">
@@ -62,6 +69,7 @@
                 
               </div>
                  </v-col>
+                 </v-card-text>
                </v-row>
             </v-col>
           
@@ -83,10 +91,12 @@
           <!-- โปรไฟล์ -->
           <v-col  v-if="selected == 'โปรไฟล์'" class="details-profile" cols="12" md="8" sm="12">
             <v-container>
+              
               <div class="head-profile">บัญชีของฉัน</div>
               <div class="sub-profile">ดูและแก้ไขข้อมูลส่วนบุคคลของคุณที่นี่</div>
               <hr>
-               <v-card-text><div class="row">
+             
+                 <div class="row">
                         <div class="col-sm-6">
                           <p class="m-b-10 f-w-600 sub-head">อีเมลสำหรับล็อกอิน</p>
                           <h6 class="text-muted f-w-400">
@@ -110,7 +120,8 @@
                           </h6>
                         </div>
                         
-                      </div></v-card-text>
+                      </div>
+                
             </v-container>
           </v-col>
 
@@ -229,7 +240,7 @@
           <!-- ประวัติการบริจาค -->
            <v-col v-else-if="selected == 'ประวัติการบริจาค'"  class="table-profile" cols="12" md="8" sm="12">
             <v-container > 
-            
+            <h2 class="text-center">ประวัติการบริจาค</h2>
                <v-card>
                 
                 <v-data-table
@@ -301,15 +312,17 @@
         </v-row>
       
       </v-container>
+    
     </div>
 </template>
 
 
 <script>
 // const Navbar = () => import('@/components/navbar/navbar')
-import ChangePassword from '@/components/profile/changePassword'
-import moment from 'moment'
-// import Pagination from './pagination.vue';
+import ChangePassword from '@/components/profile/changePassword';
+const Navbar = () => import("@/components/navbar/navbar");
+import moment from 'moment';
+// import a from '../../../public/image/outline_add_photo_alternate_black_24dp.png'
 const id = window.localStorage.getItem("user_id");
 import swal from "sweetalert2";
 export default {
@@ -317,13 +330,13 @@ export default {
    
     components:{
       ChangePassword,
-        // Navbar,
+        Navbar,
         // Pagination,
         
     },
     data ()  {
       return{
-      items: ['โปรไฟล์', 'ประวัติการบริจาค', 'บุ๊คมาค', 'แก้ไขโปรไฟล์'],
+      items: ['โปรไฟล์', 'ประวัติการบริจาค', 'บุ๊คมาค'],
       selected: 'โปรไฟล์',
       Bookmarks:[],
       dialog_ChangePassword: false,
@@ -556,7 +569,25 @@ export default {
 </script>
 
 <style scoped>
-  
+hr{
+  border-top: 1px solid black;
+}
+.border-cardtext{
+  background-color: #e5e5e5;
+  border: black solid 0.8px ;
+}
+/* .pad0{
+  padding: 0;
+}
+.container{
+  padding: 0;
+}
+.row{
+  padding: 0;
+} */
+.rows{
+  background-color: #e5e5e5;
+}
 .name-profile{
   text-align: center;
   justify-content: center;
@@ -641,13 +672,15 @@ export default {
   justify-content: center;
   text-align: center;
   align-items: center;
+  height: 300px;
+  width: 300px;
 }
 .edit-pic{
   padding: 20px;
-  background-color: white;
+  background-color: #C0C5C1;
   position: absolute;
-  left: 45.5%;
-  top: 53%;
+  left: 65%;
+  top: 5%;
 }
 .edit-pic:hover{
   background-color:rgb(230, 230, 154) ;
@@ -668,12 +701,11 @@ img{
 }
 
 .name-pic-pro{
-  border: black solid 0.8px;
-  
+  /* border: black solid 0.8px; */
 }
 .select-head{
-  margin-top: 3% ;
-  border: black solid 0.8px;
+  /* margin-top: 3% ; */
+  /* border: black solid 0.8px ; */
   
 }
 .setting-proflie{
@@ -684,6 +716,7 @@ img{
 .details-profile{
   /* border: black solid 0.8px; */
   height: 80vh;
+  /* padding: 12px; */
   overflow-y: scroll;
 }
 .table-profile{

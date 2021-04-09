@@ -55,7 +55,7 @@ exports.EditDoctrine = async(req,res) =>{
     if(req.file){
       if(req.file.filename != req.body.oldimage){
         const image  = './public/image/doctrine/' + req.body.oldimage;
-        fs.unlink(image , function(err){
+        fs.unlinkSync(image , function(err){
             if(err){
                 console.log(err);
             } else {
@@ -128,7 +128,7 @@ exports.DeleteDoctrine = function(req,res){
         console.log(err)
       } else {
           const image  = './public/image/doctrine/' + doctrine.image;
-          fs.unlink(image , function(err){
+          fs.unlinkSync(image , function(err){
               if(err){
                   console.log(err);
               } else {

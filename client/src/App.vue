@@ -34,7 +34,7 @@ export default {
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
-  
+  overflow-x: hidden;
 }
 
 #nav {
