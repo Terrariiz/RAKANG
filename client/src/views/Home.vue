@@ -1,28 +1,21 @@
 <template>
-  <div class="heroBlock" >
+  <div >
     <div>
       <Navbar></Navbar>
     </div>
 
-    <!-- <v-carousel cycle hide-delimiters show-arrows-on-hover img-width="1024" img-height="480">
-      <v-carousel-item 
-        to=""
-        v-for="(item, i) in items"
-        :key="i"
-        :src="item.src"
-        reverse-transition="fade-transition"
-        transition="fade-transition" 
+    
+    <section >
+      <div class="header"></div>
+      <div class="text-box">
+        <br><br><br><br>
+        <h1>ยินดีต้อนรับเข้าสู่เว็บระฆังธรรม</h1>
+        <p>เว็บที่รวบรวมหลักธรรมคำสอนของพระพุทธเจ้าและยังส่งเสริมการทำบุญออนไลน์ด้วยการบริจาค</p>
         
-      >
-        
-        
-      </v-carousel-item>
-    </v-carousel> -->
-
-    <!-- แคมเปญ -->
-    <div class="home">
-
-    </div>
+      </div>
+    </section>
+    
+    
     
       <v-container class="container-news">
         <v-card elevation="5" outlined shaped >
@@ -109,105 +102,76 @@
       </div>
      
       <!--  -->
-    
+    <!-- เก็บไว้ -->
+    <!-- <section class="course">
+      <h1>ข่าวล่าสุด</h1>
+      <p>เป็นข่าวที่ใหม่ที่สุดของเว็บของเรา</p>
+      <div class="rowx">
+        <div class="course-col">
+          <h3>Intermediate</h3>
+          <p>loadwwadajnadajdajdbajdabjdajdajdawdd.
+            dawdadadadwad
+            dawddawdawdad
+          </p>
+        </div>
+        <div class="course-col">
+          <h3>Intermediate</h3>
+          <p>loadwwadajnadajdajdbajdabjdajdajdawdd.
+            dawdadadadwad
+            dawddawdawdad
+          </p>
+        </div>
+        <div class="course-col">
+          <h3>Intermediate</h3>
+          <p>loadwwadajnadajdajdbajdabjdajdajdawdd.
+            dawdadadadwad
+            dawddawdawdad
+          </p>
+        </div>
+      </div>
+    </section> -->
+    <!-- เก็บไว้ -->
 
-     <!-- ข่าวล่าสุด -->
-    <!-- <div class="block latestPostBlock">
-      <v-container>
-        <h2 class="text-center">ข่าว</h2>
-        <v-row>
-          <v-col v-for="news in news" :key="news.id" cols="12" md="4">
-            <v-card
-      class="mx-auto"
-      max-width="344"
-      outlined
-    >
-     <v-img :src="news.src"></v-img>
-      <v-list-item three-line>
-        <v-list-item-content>
-          <div class="overline mb-4">
-           {{ news.name }}
+    <!-- hotnews -->
+    <section class="hotnews">
+      <h1>ข่าวสารล่าสุด</h1>
+      <p>รวบรวมข่าวสารใหม่ล่าสุดที่คอยอัพเดตตลอด ๒๔ ชั่วโมง</p>
+
+      <div class="rowx">
+          <div @click="ViewNews(news._id)" class="hotnews-col" v-for="news in filteredListnews " :key="news.title">
+            <img :src="'http://localhost:4000/image/new/' + news.image">
+            <div class="layer">
+              <h3>{{news.title}}</h3>
+            </div>
           </div>
-          <v-list-item-title class="headline mb-1">
-            {{news.subtitle}}
-          </v-list-item-title>
-          <v-list-item-subtitle>{{ news.description }}</v-list-item-subtitle>
-        </v-list-item-content>
-  
-      
-      </v-list-item>
-  
-      <v-card-actions>
-                <v-btn to="" color="primary" style="margin-left:auto;" text
-                  >More</v-btn
-                >
-              </v-card-actions>
-    </v-card>
-          </v-col>
-        </v-row>
-        <router-link to='/news' style="float:right; margin-bottom:3%"
-          >แสดงทั้งหมด <i class="fa fa-chevron-right" aria-hidden="true"></i
-          ><i class="fa fa-chevron-right" aria-hidden="true"></i
-        ></router-link>
-      </v-container>
-    </div> -->
-    <!-- ข่าวล่าสุดtest -->
-    <v-container >
-          <center>
-            <h1>ข่าวล่าสุด</h1>
-            <v-row  no-gutters>
-            <v-col  cols="12" md="6" sm="12">
-              <v-row no-gutters>
-                 <v-col class="vcol" cols="12" md="6" sm="12">
-                  <div class="white">
-                    <img class="img"  src="https://cdn.dnaindia.com/sites/default/files/styles/full/public/2020/12/25/945556-two-penguins-comforting-each-other-viral-picture.jpg">
-                    <div class="cen-text" >fawfwafwfaf</div>
-                  </div>
-                </v-col>
-                
-                <v-col class="vcol"  cols="12" md="6" sm="12">
-                  <div class="white">
-                    <img class="img"  src="https://cdn.dnaindia.com/sites/default/files/styles/full/public/2020/12/25/945556-two-penguins-comforting-each-other-viral-picture.jpg">
-                    <div class="cen-text" >fawfwafwfaf</div>
-                  </div>
-                </v-col>
-              </v-row>
-              
-              <v-row no-gutters>
-                <v-col class="vcol" cols="12" md="6" sm="12">
-                  <div class="white">
-                    <img class="img"  src="https://cdn.dnaindia.com/sites/default/files/styles/full/public/2020/12/25/945556-two-penguins-comforting-each-other-viral-picture.jpg">
-                    <div class="cen-text" >fawfwafwfaf</div>
-                  </div>
-                </v-col>
-                <v-col class="vcol" cols="12" md="6" sm="12">
-                  <div class="white">
-                    <img class="img"  src="https://cdn.dnaindia.com/sites/default/files/styles/full/public/2020/12/25/945556-two-penguins-comforting-each-other-viral-picture.jpg">
-                    <div class="cen-text" >fawfwafwfaf</div>
-                  </div>
-                </v-col>
-              </v-row>
 
-            </v-col>
-           
-            
-            <v-col class="vcol" cols="12" md="6" sm="12">
-                  <div class="white">
-                    <img class="img"  src="https://cdn.dnaindia.com/sites/default/files/styles/full/public/2020/12/25/945556-two-penguins-comforting-each-other-viral-picture.jpg">
-                    <div class="cen-text" >fawfwafwfaf</div>
-                  </div>
-                </v-col>
-          </v-row></center>
-        </v-container>
+      </div>
+    </section>
+    <!-- hotnews -->
 
-
+    <!-- หลักธรรม -->
+    <section class="doctrine">
+      <h1>หลักธรรมล่าสุด</h1>
+      <p>รวบรวมหลักธรรมต่างๆ ๒๔ ชั่วโมง</p>
+      <div class="rowx" >
+          <div @click="ViewDoctrine(doctrine._id)" class="doctrine-col" v-for="doctrine in filteredListdoctrine " :key="doctrine.title">
+            <img :src="'http://localhost:4000/image/doctrine/' + doctrine.image">
+            <h3>{{doctrine.title}}</h3>
+            <p v-html="doctrine.content">{{doctrine.content}}</p> 
+          </div>
+        
+      </div>
+    </section>
+    <!-- หลักธรรม -->
+    
+        
 
     
   </div>
 </template>
 
 <script>
-// import a from '../assets/images/bg-temple-2.jpg'
+// import a from '../../public/image/lotus.jpg'
 import moment from "moment";
 // import DialogDonate from "./dialog_donate";
 const Navbar = () => import("@/components/navbar/navbar");
@@ -216,6 +180,8 @@ export default {
   data() {
     return {
       newcampaign: null,
+      news:[],
+      doctrine:[],
       items: [
         {
           src: require("../assets/images/ศีล5 5.jpg"),
@@ -229,35 +195,7 @@ export default {
       ],
 
       show: false,
-      news: [
-        {
-          id: 1,
-          name: "No.1",
-          title: "Top western road trips",
-          subtitle: "1,000 miles of wonder",
-          description:
-            "His ubique laboramus ne. Expetenda assueverit sed ad. Id nec malis lucilius delicatissimi. Nec assum sonet suscipit ex, diam deterruisset ut usu, ad dicat fabellas aliquando eam.",
-          src: require("../assets/images/tenor.gif"),
-        },
-        {
-          id: 2,
-          name: "No.2",
-          title: "Christmas tales to read",
-          subtitle: "2,000 miles of wonder",
-          description:
-            "Sea ad habemus assueverit, omnes platonem convenire sit et, at integre pericula quo. Facete adolescens definitionem cu qui, in putant aliquid fierent ius.",
-          src: require("../assets/images/tenor.gif"),
-        },
-        {
-          id: 3,
-          name: "No.3",
-          title: "20 movies not to miss in 2020",
-          subtitle: "3,000 miles of wonder",
-          description:
-            "Aliquam albucius mei ei, debitis torquatos et pro, eos natum scribentur no. Putant verear constituto te qui. Adolescens persequeris vim ei. Vel nullam reprimique te.",
-          src: require("../assets/images/tenor.gif"),
-        },
-      ],
+      
     };
   },
   
@@ -267,7 +205,7 @@ export default {
       .then((res) => {
         console.log(res.data);
         this.newcampaign = res.data[0];
-        
+
         if(moment(this.newcampaign.date).format('dddd') == 'Mondey'){
                 this.newcampaign.date = moment(this.newcampaign.date).format(" วันจันทร์ DD-MM-YY A");
               } else if(moment(this.newcampaign.date).format('dddd') == 'Tuesday'){
@@ -290,7 +228,24 @@ export default {
       .catch(function(err) {
         console.log(err);
       });
+    await this.$http
+      .get("/news/ShowListNews")
+      .then((res) => {
+        this.news = res.data;
+      })
+       .catch(function(err) {
+        console.log(err);
+      });
+    await this.$http
+      .get("/doctrine/ShowListDoctrine")
+      .then((res) =>{
+        this.doctrine = res.data;
+      })
+      .catch(function(err){
+      console.log(err);
+      });
   },
+    
   methods: {
     ViewCampaign(campaignid) {
       this.$router.push({
@@ -302,7 +257,31 @@ export default {
       let click = document.getElementById("cardsopens")
         click.classList.toggle("opencards");
         // alert("123")
+    },
+    ViewDoctrine(doctrineid){
+      this.$router.push({
+        name: "UserDetailDoctrine",
+        params: {id:doctrineid}
+      })
+    },
+    ViewNews(newsid){
+      this.$router.push({
+        name: "UserDetailNews",
+        params: {id:newsid}
+      })
     }
+  },
+  computed:{
+    filteredListdoctrine() {
+           var showData = this.doctrine.slice(0,3);
+            console.log(showData);
+            return showData
+        },
+        filteredListnews() {
+           var showData = this.news.slice(0,3);
+            console.log(showData);
+            return showData
+        }
   },
   
   components: {
@@ -311,15 +290,209 @@ export default {
   },
   
 };
-
+// import a from '../../public/image/background.png'
 </script>
 <style scoped>
+/* new */
+.header{
+  min-height: 100vh;
+  width: 100%;
+  background-image: url(../../public/image/bg1.jpg);
+  filter: blur(4px);
+  background-position: center;
+  background-size: cover;
+  position: relative;
+}
+.text-box{
+  width: 90%;
+  color: #fff;
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  text-align: center;
+  z-index: 1;
+}
+.text-box h1{
+  font-size: 62px;
+}
+.text-box p{
+  margin: 10px 0 40px;
+  font-size: 14px;
+  color: #fff;
+}
+/* ข่าวล่าสุด */
+  .course{
+    width: 80%;
+    margin:auto;
+    text-align: center;
+    padding-top: 100px;
+
+  }
+  h1{
+    font-size: 36px;
+    font-weight: 600;
+  }
+  p{
+    color: #777;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 22px;
+    padding:10px;
+  }
+  .rowx{
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between;
+  }
+  .course-col{
+    flex-basis: 31%;
+    background:#fff3f3 ;
+    border-radius: 10px;
+    margin-bottom:5%;
+    padding: 20px 12px;
+    box-sizing: border-box;
+    transition: 0.5s;
+  }
+  h3{
+    text-align: center;
+    font-weight: 600;
+    margin: 10px 0;
+  }
+  .course-col:hover{
+    box-shadow: 0 0 20px 0px rgb(0,0,0,0.2);
+  }
+  @media(max-width: 700px){
+    .rowx{
+      flex-direction: column;
+    }
+  }
+/* ข่าวล่าสุด */
+
+ /* hotnews */
+.hotnews{
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  padding-top: 50px;
+}
+.hotnews-col{
+  flex-basis: 32%;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  position: relative;
+  overflow: hidden;
+}
+.hotnews-col img{
+  width: 100%;
+  display: block;
+  height: 300px;
+}
+.layer{
+  background: transparent;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: 0.5s;
+}
+.layer:hover{
+   background: rgba(233, 231, 222, 0.7);
+}
+.layer h3{
+  width: 100%;
+  font-weight: 500;
+  color:#000;
+  font-size: 26px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  opacity: 0;
+  transition: 0.5s;
+}
+.layer:hover h3{
+  bottom: 49%;
+  opacity: 1;
+}
+ /* hotnews */
+ /* หลักธรรม */
+ .doctrine{
+   width: 80%;
+   margin: auto;
+   text-align: center;
+   padding-top: 100px;
+ }
+ .doctrine-col{
+   flex-basis: 31%;
+   border-radius: 10px;
+   margin-bottom:5% ;
+   text-align: left;
+  
+ }
+ .doctrine-col:hover{
+   box-shadow: 10px 20px 40px rgba(0,0, 0, 0.25);
+ }
+  
+ .doctrine-col img{
+   width: 100%;
+   height: 300px;
+   border-radius:10px ;
+ }
+ .doctrine-col p{
+  padding: 0;
+  margin: 10px;
+ }
+ .doctrine-col h3{
+   margin: 10px;
+   margin-top: 16px;
+   margin-bottom: 15px;
+   text-align: left;
+ }
+ /* หลักธรรม */
+@media(max-width: 700px){
+  .text-box h1{
+    font-size: 20px;
+  }
+}
+/* new */
+.contrainer-home{
+  height: 100vh;
+  width: 100%;
+  background-image:url(../../public/image/bg3.jpg) ;
+  background-size: cover;
+  /* padding-left:5%;
+  padding-right:5% */
+}
+.content-home h1{
+  font-size: 60px;
+  font-weight: 100;
+  /* margin-top: 20%; */
+  margin-bottom: 15px;
+  color: #232d60;
+}
+.content-home p{
+  font-size: 20px;
+  color: #6a7199;
+}
+.content-home{
+  margin-left: 10%;
+  margin-right: 10% ;
+}
+
+.feature-img{
+ display:flex;
+  width: 100%;
+  height: 100%;
+  
+  
+}
+
 .box-content{
   background-color: #fff;
 }
-.home {
-  height: 100vh;
-}
+
 .container-news {
     margin-top: 3%;
     display: none;
@@ -437,6 +610,7 @@ transform: rotateY(180deg);
 }
 /* ห้องเทส */
 @media only screen and (max-width: 768px){
+  
     .image-size{
     
     max-width: 90%;
