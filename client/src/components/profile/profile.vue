@@ -1,5 +1,9 @@
 <template>
-    <div >   
+    <div>
+      <div>
+      <Navbar></Navbar>
+    </div>   
+    <br><br><br>
       <v-container>
         <v-row class="rows">
             <v-col  cols="12" md="4" sm="12"> <!-- class="name-picture" -->
@@ -307,8 +311,9 @@
 
 <script>
 // const Navbar = () => import('@/components/navbar/navbar')
-import ChangePassword from '@/components/profile/changePassword'
-import moment from 'moment'
+import ChangePassword from '@/components/profile/changePassword';
+const Navbar = () => import("@/components/navbar/navbar");
+import moment from 'moment';
 // import Pagination from './pagination.vue';
 const id = window.localStorage.getItem("user_id");
 import swal from "sweetalert2";
@@ -317,7 +322,7 @@ export default {
    
     components:{
       ChangePassword,
-        // Navbar,
+        Navbar,
         // Pagination,
         
     },
@@ -641,6 +646,8 @@ export default {
   justify-content: center;
   text-align: center;
   align-items: center;
+  height: 300px;
+  width: 300px;
 }
 .edit-pic{
   padding: 20px;
