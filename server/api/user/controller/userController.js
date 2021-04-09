@@ -25,7 +25,16 @@ exports.registerNewUser = async (req, res) => {
         resetPasswordToken: null,
         resetPasswordExpires: null,
         image: "user.png",
-        point: 0
+        point: 0,
+        seamsi:{
+          Playable: true,
+          Detail:  null
+        },
+        lantern:{
+          Playable: true,
+          Detail:  null
+        },
+        
       });
       let data = await user.save();
       const token = await user.generateAuthToken(); // here it is calling the method that we created in the model

@@ -184,6 +184,7 @@
               <br />
               <ckeditor
                 id="content"
+                :editor="editor"
                 v-model="campaign.overview"
                 @input="onEditorInput"
                 :config="editorConfig"
@@ -395,6 +396,7 @@ img {
 
 <script>
 const Navbar = () => import("@/components/navbar/navbar");
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import swal from "sweetalert2";
 
 export default {
@@ -418,10 +420,24 @@ export default {
         location: null,
         categories: null,
       },
+      editor: ClassicEditor,
       editorConfig: {
-        // The configuration of the editor.
-        filebrowserBrowseUrl: 'browser.js',
-        filebrowserUploadUrl: 'upload.js',
+        ckfinder: {
+		},
+      toolbar: [ 'ckfinder', '|',
+        'heading', '|',
+        'alignment', '|',
+        'bold', 
+        'italic', 'strikethrough', 'underline', 'subscript', 'superscript', '|',
+        'link', '|',
+        'bulletedList', 'numberedList', 'todoList',
+        '-', // break point
+        'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor', '|',
+        'code', 'codeBlock', '|',
+        'insertTable', '|',
+        'outdent', 'indent', '|',
+        'uploadImage', 'blockQuote', '|',
+        'undo', 'redo']
       },
     };
   },

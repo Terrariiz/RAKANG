@@ -1,7 +1,6 @@
 const Campaign = require("../model/Campaign");
 const User = require('../../user/model/User')
 const DonateLog = require('../../log/model/DonateLog')
-const multer = require('multer');
 const fs = require('fs');
 
 
@@ -184,6 +183,38 @@ exports.EditCampaign = async(req,res) =>{
     res.status(400).json({ err: err });
     console.log(err)
   }
+}
+
+exports.files = function(req,res){
+  const images = fs.readdirSync('public/image/campaign')
+  var sorted = []
+  console.log(images)
+  for (let item of images){
+    if(item.split('.').pop() === 'png'
+    || item.split('.').pop() === 'jpg'
+    || item.split('.').pop() === 'jpeg'
+    || item.split('.').pop() === 'svg'){
+      var abc = {
+        "image" : "/addcampaignimage/"+item,
+        "folder" : '/'
+      }
+      sorted.push(abc)
+    }
+  }
+  res.send(sorted)
+}
+
+exports.addcampaignimage = function(req,res){
+  res.redirect('back')
+}
+
+exports.deletecampaignimage = function(req,res){
+  var url_del = 'public' + req.body.url_del
+  console.log(url_del)
+  if(fs.existsSync(url_del)){
+    fs.unlinkSync(url_del)
+  }
+  res.redirect('back')
 }
 
 // exports.DonateCampaign = async function(req,res){

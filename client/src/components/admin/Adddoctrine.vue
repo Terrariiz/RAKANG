@@ -39,8 +39,10 @@
                                     <ckeditor 
                                     id="content"
                                     v-model="content"
+                                    :editor="editor"
                                     :config="editorConfig"
                                     @input="onEditorInput">
+                                    
                                     </ckeditor>
                                 </v-container>
                         </v-flex>
@@ -61,6 +63,7 @@
 
 <script>
 const Navbar = () => import('@/components/navbar/navbar')
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import swal from "sweetalert2";
 export default {
     name : "Adddoctrine",
@@ -72,14 +75,29 @@ export default {
             image: null,
             imagepath: "",
             editorData: '<p>Content of the editor.</p>',
-            editorConfig: {
-                // The configuration of the editor.
-                filebrowserBrowseUrl: 'browser.js',
-                filebrowserUploadUrl: 'upload.js',
-            },
+            editor: ClassicEditor,
+      editorConfig: {
+        ckfinder: {
+		},
+      toolbar: [ 'ckfinder', '|',
+        'heading', '|',
+        'alignment', '|',
+        'bold', 
+        'italic', 'strikethrough', 'underline', 'subscript', 'superscript', '|',
+        'link', '|',
+        'bulletedList', 'numberedList', 'todoList',
+        '-', // break point
+        'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor', '|',
+        'code', 'codeBlock', '|',
+        'insertTable', '|',
+        'outdent', 'indent', '|',
+        'uploadImage', 'blockQuote', '|',
+        'undo', 'redo']
+      },
             imageData:null,
             items:['บทสวดมนต์','หลักธรรม คำสอน','คติสอนใจ','พุทธประวัติ','อื่นๆ'],
             categories: null
+            
         }
     },
     components:{

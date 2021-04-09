@@ -38,6 +38,7 @@ const UserDetailDoctrine     = () => import('@/views/detail_Doctrine')
 const UserDetailNews         = () => import('@/views/detail_news')
 const forgotPassword         = () => import('@/components/profile/forgotPassword')
 const resetPassword          = () => import('@/components/profile/resetPassword')
+const banana                 = () => import('@/views/banana')
 
 Vue.use(VueRouter)
 
@@ -51,6 +52,11 @@ const routes = [
     path: '/home',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/banana',
+    name: 'banana',
+    component: banana
   },
   {
     path: '/campaign',
