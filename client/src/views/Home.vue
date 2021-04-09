@@ -30,9 +30,9 @@
           </v-col>
           <v-col class="colxx" cols="12" md="6">
             <v-container class="box-content">
-                <h1> {{newcampaign.name}} </h1>
+                <h1 class="text-align-left"> {{newcampaign.name}} </h1>
                 
-              <div>{{newcampaign.content}}</div>
+              <div class="text-align-left">{{newcampaign.content}}</div>
               <div >
                 <v-row>
                   <v-col style="text-align:left;" cols="12" md="3">
@@ -164,7 +164,13 @@
           <div @click="ViewDoctrine(doctrine._id)" class="doctrine-col" v-for="doctrine in filteredListdoctrine " :key="doctrine.title">
             <img :src="'http://localhost:4000/image/doctrine/' + doctrine.image">
             <h3>{{doctrine.title}}</h3>
-            <p v-html="doctrine.content">{{doctrine.content}}</p> 
+            <v-list-item three-line>
+                <v-list-item-content  >
+                    <v-list-item-subtitle v-html="doctrine.content">
+                          {{doctrine.content}} 
+                      </v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
           </div>
         
       </div>
@@ -306,7 +312,7 @@ export default {
   width: 90%;
   color: #fff;
   position: absolute;
-  top: 15%;
+  top: 10%;
   left: 50%;
   transform: translate(-50%,-50%);
   text-align: center;
@@ -687,9 +693,13 @@ transform: rotateY(180deg);
  .campaign{
    background:#fbe9e7;
   margin: auto;
-  padding-top: 50px
+  padding-top: 50px;
+  text-align: center;
  }
  .campaign p{
    margin: 0;
+ }
+ .text-align-left{
+   text-align: left;
  }
 </style>
