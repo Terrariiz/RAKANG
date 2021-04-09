@@ -15,19 +15,23 @@
       </div>
     </section>
     
-    
-    
-      <v-container class="container-news">
-        <v-card elevation="5" outlined shaped >
+    <section class="campaign">
+      <h1>แคมเปญ</h1>
+      <p>โครงการรวบรวมเงินทุนบริจาค</p>
+
+      <v-container v-if="newcampaign != null" class="container-news">
+        <v-card   elevation="5" outlined shaped >
         <v-row class="row-news">
           <v-col class="image-cam" cols="12" md="6">
             <center><div class="image-size">
-              <img class="image -fullwidth img-responsive" id="showimage" :src="'http://localhost:4000/image/campaign/' + newcampaign.image"/>
+              
+              <img  class="image -fullwidth img-responsive" id="showimage" :src="'http://localhost:4000/image/campaign/' + newcampaign.image"/>
             </div></center>
           </v-col>
           <v-col class="colxx" cols="12" md="6">
             <v-container class="box-content">
                 <h1> {{newcampaign.name}} </h1>
+                
               <h4> {{newcampaign.content}} </h4>
               <div >
                 <v-row>
@@ -52,10 +56,13 @@
         </v-row>
         </v-card>
       </v-container>
+    </section>
+      <!-- <center><div style="background:#fbe9e7; margin-top">Campaign</div></center> -->
+      
 
       <!--  -->
      
-      <div  class="ytube">
+      <div v-if="newcampaign != null" class="ytube">
         <v-row >
           <v-col class="headcam" cols="12" md="5">
             <!-- <h1>ลูกศร</h1> -->
@@ -133,7 +140,7 @@
     <!-- เก็บไว้ -->
 
     <!-- hotnews -->
-    <section class="hotnews">
+    <section v-if="doctrine != null" class="hotnews">
       <h1>ข่าวสารล่าสุด</h1>
       <p>รวบรวมข่าวสารใหม่ล่าสุดที่คอยอัพเดตตลอด ๒๔ ชั่วโมง</p>
 
@@ -150,9 +157,9 @@
     <!-- hotnews -->
 
     <!-- หลักธรรม -->
-    <section class="doctrine">
+    <section v-if="news != null" class="doctrine">
       <h1>หลักธรรมล่าสุด</h1>
-      <p>รวบรวมหลักธรรมต่างๆ ๒๔ ชั่วโมง</p>
+      <p>รวบรวมหลักธรรมต่างๆ</p>
       <div class="rowx" >
           <div @click="ViewDoctrine(doctrine._id)" class="doctrine-col" v-for="doctrine in filteredListdoctrine " :key="doctrine.title">
             <img :src="'http://localhost:4000/image/doctrine/' + doctrine.image">
@@ -180,20 +187,8 @@ export default {
   data() {
     return {
       newcampaign: null,
-      news:[],
-      doctrine:[],
-      items: [
-        {
-          src: require("../assets/images/ศีล5 5.jpg"),
-        },
-        {
-          src: require("../assets/images/อิทธิบาท4.jpg"),
-        },
-        {
-          src: require("../assets/images/ธรรมะ.jpg"),
-        },
-      ],
-
+      news:null,
+      doctrine:null,
       show: false,
       
     };
@@ -203,10 +198,11 @@ export default {
     await this.$http
       .get("/campaign/ShowListCampaign")
       .then((res) => {
-        console.log(res.data);
+        if(res.data != null)
+        {console.log(res.data);
         this.newcampaign = res.data[0];
-
-        if(moment(this.newcampaign.date).format('dddd') == 'Mondey'){
+        if(this.newcampaign != null)
+       { if(moment(this.newcampaign.date).format('dddd') == 'Mondey'){
                 this.newcampaign.date = moment(this.newcampaign.date).format(" วันจันทร์ DD-MM-YY A");
               } else if(moment(this.newcampaign.date).format('dddd') == 'Tuesday'){
                 this.newcampaigื.date = moment(this.newcampaign.date).format(" วันอังคาร DD-MM-YY A");
@@ -219,8 +215,8 @@ export default {
               } else if(moment(this.newcampaign.date).format('dddd') == 'Saturday'){
                 this.newcampaign.date = moment(this.newcampaign.date).format(" วันเสาร์ DD-MM-YY A");
               } else if(moment(this.newcampaign.date).format('dddd') == 'Sunday'){
-                this.newcampaigื.date = moment(this.newcampaign.date).format(" วันอาทิตย์ DD-MM-YY A");
-              }
+                this.newcampaign.date = moment(this.newcampaign.date).format(" วันอาทิตย์ DD-MM-YY A");
+              }}}
         
 
         
@@ -685,6 +681,13 @@ transform: rotateY(180deg);
     
   }
   
- 
- 
+ .campaign{
+   background:#fbe9e7;
+  margin: auto;
+  text-align: center;
+  padding-top: 50px
+ }
+ .campaign p{
+   margin: 0;
+ }
 </style>

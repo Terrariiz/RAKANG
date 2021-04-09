@@ -1,38 +1,9 @@
 <template>
     <div >
-        <!-- <div>
+        <div>
             <Navbar></Navbar>
-        </div> -->
-        <!-- <h1>test</h1>
-        <v-container class="con">
-          <div class="image-box">
-            <div class="contents">
-                <img src="https://media.wired.com/photos/598e35fb99d76447c4eb1f28/master/pass/phonepicutres-TA.jpg" width="250px" height="350px">
-                <div class="content-txtx">
-                  <h2>Name</h2>
-                  <h5> afffafsdadadawd</h5>
-                </div>
-            </div>
-          </div>
-          <div class="image-box">
-            <div class="contents">
-                <img src="https://media.wired.com/photos/598e35fb99d76447c4eb1f28/master/pass/phonepicutres-TA.jpg" width="250px" height="350px">
-                <div class="content-txtx">
-                  <h2>Name2</h2>
-                  <h5> afffafsdadadawd</h5>
-                </div>
-            </div>
-          </div>
-          <div class="image-box">
-            <div class="contents">
-                <img src="https://media.wired.com/photos/598e35fb99d76447c4eb1f28/master/pass/phonepicutres-TA.jpg" width="250px" height="350px">
-                <div class="content-txtx">
-                  <h2>Name3</h2>
-                  <h5> afffafsdadadawd</h5>
-                </div>
-            </div>
-          </div>
-        </v-container> -->
+        </div>
+       
       <v-container>
         <v-row class="rows">
             <v-col  cols="12" md="4" sm="12"> <!-- class="name-picture" -->
@@ -91,22 +62,8 @@
                   <div class="hover-setting" @click="onChange('ประวัติการบริจาค')">ประวัติการบริจาค</div>
                   <div class="hover-setting" @click="onChange('บุ๊คมาค')">บุ๊คมาค</div>
                 </div>
-               
-            <!-- <div class="selectboxs">
-              <div>
-                 <v-select
-                 v-model="selected"
-                :items="items"
-                label="Solo field"
-                solo
-                
-                ></v-select>
-              </div>
               
-            </div> -->
-            
-         
-                
+             
               </div>
                  </v-col>
                </v-row>
@@ -276,53 +233,6 @@
           <!-- ประวัติการบริจาค -->
            <v-col v-else-if="selected == 'ประวัติการบริจาค'"  class="table-profile" cols="12" md="8" sm="12">
             <v-container > 
-              <!-- <div class="head-details">ประวัติการบริจาค</div>
-               <table class="table">
-                <thead>
-                  <tr>
-                    <th>ชื่อแคมเปญ</th>
-                    <th>จำนวนเงิน(บาท)</th>
-                    <th>วัน-เดือน-ปี</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td data-label="ชื่อแคมเปญ">name</td>
-                    <td data-label="จำนวนเงิน(บาท)">name</td>
-                    <td data-label="วัน-เดือน-ปี">name</td>
-                  </tr>
-                  <tr>
-                    <td data-label="ชื่อแคมเปญ">name</td>
-                    <td data-label="จำนวนเงิน(บาท)">name</td>
-                    <td data-label="วัน-เดือน-ปี">name</td>
-                  </tr>
-                  <tr>
-                    <td data-label="ชื่อแคมเปญ">name</td>
-                    <td data-label="จำนวนเงิน(บาท)">name</td>
-                    <td data-label="วัน-เดือน-ปี">name</td>
-                  </tr>
-                  <tr>
-                    <td data-label="ชื่อแคมเปญ">name</td>
-                    <td data-label="จำนวนเงิน(บาท)">name</td>
-                    <td data-label="วัน-เดือน-ปี">name</td>
-                  </tr>
-                  <tr>
-                    <td data-label="ชื่อแคมเปญ">name</td>
-                    <td data-label="จำนวนเงิน(บาท)">name</td>
-                    <td data-label="วัน-เดือน-ปี">name</td>
-                  </tr>
-                  <tr>
-                    <td data-label="ชื่อแคมเปญ">name</td>
-                    <td data-label="จำนวนเงิน(บาท)">name</td>
-                    <td data-label="วัน-เดือน-ปี">name</td>
-                  </tr>
-                  <tr>
-                    <td data-label="ชื่อแคมเปญ">name</td>
-                    <td data-label="จำนวนเงิน(บาท)">name</td>
-                    <td data-label="วัน-เดือน-ปี">name</td>
-                  </tr>
-                </tbody>
-               </table> -->
                <v-card>
                 
                 <v-data-table
@@ -399,7 +309,7 @@
 
 
 <script>
-// const Navbar = () => import('@/components/navbar/navbar')
+const Navbar = () => import('@/components/navbar/navbar')
 import moment from 'moment'
 // import Pagination from './pagination.vue';
 const id = window.localStorage.getItem("user_id");
@@ -408,7 +318,7 @@ export default {
     name : "test",
    
     components:{
-        // Navbar,
+        Navbar,
         // Pagination,
         
     },
