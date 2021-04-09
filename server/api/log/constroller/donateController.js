@@ -48,7 +48,8 @@ exports.CheckDonate = async function(req, res){
         
         if(index == -1){
           result = false;
-          res.send(result);
+          let somchai = {result:result , changeto:list.donatelog[index].ChangeRank}
+            res.send(somchai);
         }else if(list.donatelog[index].result == 'incomplete'){
           DonateLog.findByIdAndRemove(list.donatelog[index]._id,function(err){
             if(err){
@@ -57,7 +58,8 @@ exports.CheckDonate = async function(req, res){
               list.donatelog.pop() 
               list.save()
               result = 'incomplete'
-              res.send(result);
+              let somchai = {result:result , changeto:list.donatelog[index].ChangeRank}
+              res.send(somchai);
             }
           })
         }else if(list.donatelog[index].result == 'cancel'){
@@ -68,14 +70,16 @@ exports.CheckDonate = async function(req, res){
               list.donatelog.pop() 
               list.save()
               result = 'cancel'
-              res.send(result);
+              let somchai = {result:result , changeto:list.donatelog[index].ChangeRank}
+              res.send(somchai);
             }
           })
         }else if(list.donatelog[index].result == 'complete'){
           list.donatelog[index].result = 'alerted';
           result = 'complete'
           list.donatelog[index].save()
-          res.send(result);
+          let somchai = {result:result , changeto:list.donatelog[index].ChangeRank}
+          res.send(somchai);
         }
 
       } 

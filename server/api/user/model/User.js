@@ -149,7 +149,7 @@ userSchema.methods.ChangeRank =  function() {
   if(this.point >= 100000 && this.Rank != "Diamond"){
     this.Rank = "Diamond"
     this.Badge = "Diamond_Badge.png" 
-    return "Daimond"
+    return "Diamond"
   } else if(this.point >= 30000 && this.Rank != "Platinum"){
     this.Rank = "Platinum"
     this.Badge = "Platinum_Badge.png"
@@ -158,16 +158,16 @@ userSchema.methods.ChangeRank =  function() {
     this.Rank = "Gold"
     this.Badge = "Gold_Badge.png"
     return "Gold"
-  } else if(this.point >= 5000 && this.Rank != "Sliver"){
-    this.Rank = "Sliver"
-    this.Badge = "Sliver_Badge.png"
-    return "Sliver"
+  } else if(this.point >= 5000 && this.Rank != "Silver"){
+    this.Rank = "Silver"
+    this.Badge = "Silver_Badge.png"
+    return "Silver"
   } else if(this.point >= 0 && this.Rank != "Bronze"){
     this.Rank = "Bronze"
     this.Badge = "Bronze_Badge.png"
     return "Bronze"
   }
-  return false
+  return null
 }
 
 userSchema.methods.CheckFav = async function(campaign) {

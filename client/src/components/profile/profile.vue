@@ -526,6 +526,7 @@ export default {
                 "success"
               );
               console.log("success");
+              this.selected = 'โปรไฟล์';
             }
           });
       } catch (err) {
@@ -533,9 +534,11 @@ export default {
         if (error.status == 409) {
           swal.fire("Error", error.data.message, "error");
           console.log("success");
+          this.selected = 'โปรไฟล์';
         } else {
           swal.fire("Error", error.data.err.message, "error");
           console.log("error");
+          this.selected = 'โปรไฟล์';
         }
       }
     },

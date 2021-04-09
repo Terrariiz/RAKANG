@@ -185,39 +185,41 @@ export default {
               console.log('res')
               console.log(res.data)
               console.log('res')
-              if(res.data == false){
+              console.log(res.data.changeto)
+              console.log(res.data.result)
+              if(res.data.result == false){
                 console.log("false")
-              } else if(res.data == 'complete'){
+              } else if(res.data.result == 'complete'){
                 swal.fire({
                   icon: 'success',
                   title: 'ทำรายการเสร็จสิ้น',
                   showConfirmButton: false,
                   timer: 1500
                 })
-                if(res.data.ChangeRank != null){
-                  let rankchanged = res.data.ChangeRank
+                if(res.data.changeto != null){
+                  let rankchanged = res.data.changeto
                     swal.fire({
                       title: 'ท่านได้รับเหรียญตราระดับ '+rankchanged,
                       imageUrl: 'http://localhost:4000/image/rank/'+rankchanged+'.png',
-                      imageWidth: 400,
+                      imageWidth: 300,
                       imageHeight: 200,
-                      showClass: {
-                        popup: 'animate__animated animate__fadeInDown'
-                      },
-                      hideClass: {
-                        popup: 'animate__animated animate__fadeOutUp'
-                      },
-                      timer: 2000
+                      // showClass: {
+                      //   popup: 'animate__animated animate__fadeInDown'
+                      // },
+                      // hideClass: {
+                      //   popup: 'animate__animated animate__fadeOutUp'
+                      // },
+                      timer: 10000
                     })
                 }
-              } else if(res.data == 'incomplete'){
+              } else if(res.data.result == 'incomplete'){
                 swal.fire({
                   icon: 'error',
                   title: 'เกิดข้อผิดพลาดบางอย่าง',
                   showConfirmButton: false,
                   timer: 1500
                 })
-              } else if(res.data == 'cancel'){
+              } else if(res.data.result == 'cancel'){
                 swal.fire({
                   icon: 'info',
                   title: 'ยกเลิกการทำรายการแล้ว',
