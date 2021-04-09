@@ -52,7 +52,6 @@
                 <!-- <img src="https://media.wired.com/photos/598e35fb99d76447c4eb1f28/master/pass/phonepicutres-TA.jpg"> -->
                  <center>
                 <v-div
-                  style=""
                   class="base-image-input"
                   :style="{ 'background-image': `url(${imageData})` }"
                   @click="chooseImage"
@@ -68,13 +67,14 @@
                     @input="onSelectFile"
                   />
                 </v-div>
+                 <v-btn class="edit-pic"  color="secondary" icon><label style=" cursor: pointer;" for="file-input"><v-icon>mdi-pencil</v-icon></label></v-btn>
               </center>
               </div></center>
               <hr>
               <div class="name">
                 
-                <h3>{{Profile.firstname}} {{Profile.lastname}}</h3>
-                <div>แต้มบุญ: {{Profile.point}}</div>
+                <center><div class="name-profile">{{Profile.firstname}} {{Profile.lastname}}</div>
+                <div><span class="sub-head">แต้มบุญ:</span> {{Profile.point}}  </div></center>
                 <br>
                 <div class="btn-cpass">
                         <v-btn small @click.stop="dialog_ChangePassword=true">เปลี่ยนรหัสผ่าน</v-btn>
@@ -130,25 +130,28 @@
           <!-- โปรไฟล์ -->
           <v-col  v-if="selected == 'โปรไฟล์'" class="details-profile" cols="12" md="8" sm="12">
             <v-container>
+              <div class="head-profile">บัญชีของฉัน</div>
+              <div class="sub-profile">ดูและแก้ไขข้อมูลส่วนบุคคลของคุณที่นี่</div>
+              <hr>
                <v-card-text><div class="row">
                         <div class="col-sm-6">
-                          <p class="m-b-10 f-w-600">Email</p>
+                          <p class="m-b-10 f-w-600 sub-head">อีเมลสำหรับล็อกอิน</p>
                           <h6 class="text-muted f-w-400">
                             {{Profile.email}}
                           </h6>
                         </div>
                         <div class="col-sm-6">
-                          <p class="m-b-10 f-w-600">เบอร์โทรติดต่อ</p>
+                          <p class="m-b-10 f-w-600 sub-head">เบอร์โทรติดต่อ</p>
                           <h6 class="text-muted f-w-400">
                            {{Profile.phone}}
                           </h6>
                         </div>
                         <div class="col-sm-6">
-                          <p class="m-b-10 f-w-600">วัน/เดือน/ปีเกิด</p>
+                          <p class="m-b-10 f-w-600 sub-head">วัน/เดือน/ปีเกิด</p>
                           <h6 class="text-muted f-w-400">{{Profile.birthdate}}</h6>
                         </div>
                         <div class="col-sm-6">
-                          <p class="m-b-10 f-w-600">Point</p>
+                          <p class="m-b-10 f-w-600 sub-head">แต้มบุญ</p>
                           <h6 class="text-muted f-w-400">
                             {{Profile.point}}
                           </h6>
@@ -273,7 +276,7 @@
           <!-- ประวัติการบริจาค -->
            <v-col v-else-if="selected == 'ประวัติการบริจาค'"  class="table-profile" cols="12" md="8" sm="12">
             <v-container > 
-              <div class="head-details">ประวัติการบริจาค</div>
+              <!-- <div class="head-details">ประวัติการบริจาค</div>
                <table class="table">
                 <thead>
                   <tr>
@@ -319,7 +322,18 @@
                     <td data-label="วัน-เดือน-ปี">name</td>
                   </tr>
                 </tbody>
-               </table>
+               </table> -->
+               <v-card>
+                
+                <v-data-table
+                  :headers="headers"
+            :items="filteredList"
+            :items-per-page="pagination.rowsPerPage" 
+            hide-default-footer
+            class="elevation-1"
+                ></v-data-table>
+                <v-pagination circle :total-visible="7"  v-model="pagination.page" :length="pages"></v-pagination>
+              </v-card>
             </v-container>
           </v-col>
           
@@ -328,7 +342,7 @@
             <v-container>
                <div class="block latestPostBlock">
       <v-container>
-        <h2 class="text-center">ข่าว</h2>
+        <h2 class="text-center">หลักธรรมที่บันทึก</h2>
         <v-row>
           <v-col v-for="Bookmark in Bookmarks" :key="Bookmark.id" cols="12" md="4">
             <v-card
@@ -367,6 +381,8 @@
           
             </v-container>
           </v-col>
+
+           
           <!-- bookmark -->
 
         
@@ -385,6 +401,7 @@
 <script>
 // const Navbar = () => import('@/components/navbar/navbar')
 import moment from 'moment'
+// import Pagination from './pagination.vue';
 const id = window.localStorage.getItem("user_id");
 import swal from "sweetalert2";
 export default {
@@ -392,6 +409,7 @@ export default {
    
     components:{
         // Navbar,
+        // Pagination,
         
     },
     data ()  {
@@ -408,6 +426,7 @@ export default {
         imagepath: "",
         newimage: null,
         oldimage: "",
+        
       },
       emailRules: [
         (v) => !!v || "Email is required!",
@@ -440,6 +459,22 @@ export default {
         (v) => !!v || "Phone is required",
         (v) => v.length == 10 || "Phone must be 10 numbers",
       ],
+      pagination:{
+                data: this.$store.getters.banana,
+                rowsPerPage: 10,
+                page: 1,
+            },
+            totalNumberOfItems: this.$store.getters.banana.length,
+            headers: [
+                {
+                    text: 'ชื่อแคมเปญ',
+                    sortable: false,
+                    value: 'name'
+                },
+                { text: 'จำนวนเงิน', value: 'calories' },
+                { text: 'วัน-เดือน-ปี', value: 'fat' }
+                
+            ]
       }
 
     },
@@ -584,93 +619,63 @@ export default {
       
     },
     
- 
+    computed: {
+        pages () {
+            return this.pagination.rowsPerPage ? Math.ceil(this.pagination.data.length / this.pagination.rowsPerPage) : 0
+        },
+        filteredList() {
+            var firstIndex;
+            if (this.pagination.page == 1) {
+                firstIndex = 0;
+            } else{
+                firstIndex = (this.pagination.page-1) * this.pagination.rowsPerPage;
+            }
+            console.log(firstIndex + " firstIndex");
+            var showData = this.pagination.data.slice(firstIndex, firstIndex + this.pagination.rowsPerPage);
+            console.log(showData);
+            return showData
+        }
+    },
+      
+  
     };
+    
  
 
 
 </script>
 
 <style scoped>
-  /* *{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-  } */
-/* .con{
   
-  position: absolute;
-  left: 50%;
-  top:50%;
-  transform: translate(-50%,-50%);
-  width: 1000px;
-}
-.image-box{
-  position: relative;
-  display: inline-block;
-  width: 250px;
-  height: 350px;
-  margin: 15px;
-  border-radius: 40px;
-  box-shadow: 5px 5px 5px rgba(68, 68, 68,.6),
-              5px 5px 5px 3px rgba(68, 68, 68,.6);
-}
-.image-box::before{
-  position: absolute;
-  content: "";
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 100%;
-  width: 100%;
-  background: rgba(255, 251, 251, 0.4);
-  transform: skew(-35deg);
-  transform-origin: top left;
-  transform: translate(350px,0);
-  transition: 3s linear;
-  z-index: 3;
-}
-.image-box:hover::before{
-  transform: translate(-350px,0);
-}
-.image-box:hover img{
-  transform: scale(1.3);
-  overflow: hidden;
-}
-.contents .content-textx{
-  position: absolute;
-  bottom:0;
-  left: 0;
-  width: 100%;
-  height: 100px;
-  background: rgb(220, 20, 60);
-  padding-top: 10px;
+.name-profile{
   text-align: center;
-  color: white;
-  transition: .3s cubic-bezier(.52,-0.30,.45,1.6);
-  text-transform: uppercase;
-  z-index: 4;
+  justify-content: center;
+  font-size: 32px;
+  display: inline-block;
+  font-weight: bold;
 }
-.image-box:hover .contents .content-textx{
-  height: 65%;
+.sub-head{
+  font-size: 20px;
+  font-weight: bold;
 }
-.contents img{
-  position: relative;
-  display: inline;
-  transition: 2s ease;
-  z-index: -1;
-} */
+.head-profile{
+  font-size: 30px;
+  font-weight: bold;
+}
+.sub-profile{
+  font-size: 14px;
+}
 /* previewsimage */
 .base-image-input {
   display: block;
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 300px;
   cursor: pointer;
   background-size: cover;
   background-position: center center;
   clip-path: circle();
 }
+
 .placeholder {
   clip-path: circle();
   background: #f0f0f0;
@@ -680,7 +685,7 @@ export default {
   justify-content: center;
   align-items: center;
   color: #333;
-  font-size: 8px;
+  font-size: 30px;
   font-family: Helvetica;
 }
 .placeholder:hover {
@@ -727,6 +732,17 @@ export default {
   text-align: center;
   align-items: center;
 }
+.edit-pic{
+  padding: 20px;
+  background-color: white;
+  position: absolute;
+  left: 45.5%;
+  top: 53%;
+}
+.edit-pic:hover{
+  background-color:rgb(230, 230, 154) ;
+}
+
 img{
   clip-path: circle();
   background-size: cover;
@@ -840,6 +856,7 @@ img{
     font-weight: 600;
     font-size: 14px;
     text-align: left;
+    
   }
 }
 /* ประวัติการบริจาค */
