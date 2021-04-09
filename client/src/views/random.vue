@@ -9,7 +9,10 @@
         <h1>seamsi</h1>
         <v-text id="demo"> </v-text><br>
         <!-- <div id="acab"> -->
-        <img @click="random(test)" src="../assets/images/SEE.gif"><br><br>
+        <img id="seam" @click="random(test)" src="../assets/images/seamsi.png">
+        <img id="seam1"  src="../assets/images/seamsi.gif">
+        
+        <br><br>
         <!-- </div> -->
         <!-- <button @click="random(test)">test</button> -->
         <p id='CNumber'> </p>
@@ -39,6 +42,10 @@ export default {
     methods: {
         random(){
            var test = Math.floor(Math.random() * 28)+1;
+           var x = document.getElementById("seam");
+           x.style.display = "none";
+           var y = document.getElementById("seam1");
+           y.style.display = "block";
         //    document.getElementById("demo").innerHTML = test;
          //this.$router.push({path: '/Card' , params: {test}})
             this.$http.get("/rulet/ShowCard/"+test)
@@ -55,7 +62,7 @@ export default {
           if (result.isConfirmed) {
             this.$router.push({ name: 'Home'})
           } 
-        }), 1000);
+        }), 2000);
                 
             // document.getElementById("CNumber").innerHTML = this.rulet[0].CNumber;
             // document.getElementById("content").innerHTML = this.rulet[0].content;
@@ -99,7 +106,13 @@ position: absolute;
 
 }
 img{
-    cursor: pointer
+    cursor: pointer;
+    height: 50%;
+    width: 50%;
+    position: center;
+}
+#seam1{
+    display:none;
 }
 /* #acab {
   position: fixed; 
