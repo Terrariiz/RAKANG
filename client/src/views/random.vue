@@ -95,7 +95,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .bg {
     height: 100vh;
     background-image: url("../assets/images/Omikuji-5.jpg");
@@ -118,7 +118,7 @@ background-color: rgb(0,0,0); /* Fallback color */
   text-align: center;
 
 }
-img{
+.bg-text img{
     cursor: pointer;
     height: 50%;
     width: 50%;
