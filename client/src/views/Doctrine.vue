@@ -29,29 +29,12 @@
           <div class="containerx">
             <v-row >
               <v-col v-for="(doctrine) in filteredList " :key="doctrine.title" cols="12" md="4" sm="12">
-                <div @click="ViewDoctrine(doctrine._id)" class="cardx">
+                <div  class="cardx">
                   
-                  <img  :src="'http://localhost:4000/image/doctrine/' + doctrine.image">
-                  <div class="panelx">
+                  <img @click="ViewDoctrine(doctrine._id)"  :src="'http://localhost:4000/image/doctrine/' + doctrine.image">
+                  <div @click="ViewDoctrine(doctrine._id)" class="panelx">
                      <!-- ปุ่ม bookmark -->
-            <div class="btn-bookmark" v-if="$store.getters.UserIsLoggedIn">
-              <v-btn
-                icon
-                color="#ffb703"
-                v-if="doctrine.fav"
-                @click="clickBookmarks(doctrine)"
-              >
-                <v-icon x-large>mdi-bookmark</v-icon>
-              </v-btn>
-              <v-btn
-                icon
-                color="white"
-                v-else
-                @click="clickBookmarks(doctrine)"  
-              >
-                <v-icon x-large>mdi-bookmark</v-icon>
-              </v-btn>
-            </div>
+           
                     <h3>
                      {{ doctrine.title }}
                     </h3>
@@ -69,6 +52,24 @@
                     
                     
                   </div>
+                   <div class="btn-bookmark" v-if="$store.getters.UserIsLoggedIn">
+              <v-btn
+                icon
+                color="#ffb703"
+                v-if="doctrine.fav"
+                @click="clickBookmarks(doctrine)"
+              >
+                <v-icon x-large>mdi-bookmark</v-icon>
+              </v-btn>
+              <v-btn
+                icon
+                color="white"
+                v-else
+                @click="clickBookmarks(doctrine)"  
+              >
+                <v-icon x-large>mdi-bookmark</v-icon>
+              </v-btn>
+            </div>
                 </div>
               </v-col>
             </v-row>

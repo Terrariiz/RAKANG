@@ -160,20 +160,15 @@
     <section v-if="news != null" class="doctrine">
       <h1>หลักธรรมล่าสุด</h1>
       <p>รวบรวมหลักธรรมต่างๆ</p>
-      <div class="rowx" >
+      <div class="rowx">
           <div @click="ViewDoctrine(doctrine._id)" class="doctrine-col" v-for="doctrine in filteredListdoctrine " :key="doctrine.title">
             <img :src="'http://localhost:4000/image/doctrine/' + doctrine.image">
-            <h3>{{doctrine.title}}</h3>
-            <v-list-item three-line>
-                <v-list-item-content  >
-                    <v-list-item-subtitle v-html="doctrine.content">
-                          {{doctrine.content}} 
-                      </v-list-item-subtitle>
-                </v-list-item-content>
-              </v-list-item>
+              <h3>{{doctrine.title}}</h3>
           </div>
-        
       </div>
+
+      
+        
     </section>
     <!-- หลักธรรม -->
     
@@ -443,7 +438,7 @@ export default {
  .doctrine-col img{
    width: 100%;
    height: 300px;
-   border-radius:10px ;
+   border-radius:10px 10px 0px 0px ;
  }
  .doctrine-col p{
   padding: 0;
