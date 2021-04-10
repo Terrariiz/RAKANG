@@ -34,6 +34,7 @@ exports.registerNewUser = async (req, res) => {
           Playable: true,
           Detail:  null
         },
+        Rank : 'Beginner'
         
       });
       let data = await user.save();

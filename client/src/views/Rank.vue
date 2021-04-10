@@ -39,7 +39,7 @@ export default {
         search: '',
 
         headers: [
-          { text: 'ลำดับ' ,value: 'i' },
+          { text: 'ลำดับ' ,value: 'Rank' },
           { text: 'ชื่อผู้บริจาค',value: 'firstname'},
           { text: 'Point', value: 'point' },
         ],
@@ -48,8 +48,7 @@ export default {
   mounted: async function mounted(){
       await this.$http.get("/user/RankList")
       .then((res) => {
-        this.User = res.data;
-        
+        this.User = res.data;    
         console.log(res.data)
       })
       .catch(function(err){

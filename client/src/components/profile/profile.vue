@@ -15,7 +15,7 @@
                   <v-btn v-if="selected == 'โปรไฟล์' || selected == 'ประวัติการบริจาค' || selected =='บุ๊คมาค'" @click="onChange('แก้ไขโปรไฟล์')" color="secondary" icon><v-icon>mdi-pencil</v-icon></v-btn>
                 </div>
               <center><div v-if="selected == 'โปรไฟล์' || selected == 'ประวัติการบริจาค' || selected =='บุ๊คมาค'" class="image-profile">
-                <img :src="
+                <img  :src="
                                 'http://localhost:4000/image/profile/' +
                                 Profile.image
                               ">
@@ -94,6 +94,10 @@
               
               <div class="head-profile">บัญชีของฉัน</div>
               <div class="sub-profile">ดูและแก้ไขข้อมูลส่วนบุคคลของคุณที่นี่</div>
+              <img class="img-rank" :src="
+                                'http://localhost:4000/image/rank/' +
+                                Profile.Rank+'.png'
+                              ">
               <hr>
              
                  <div class="row">
@@ -282,7 +286,7 @@
       </v-list-item>
   
             <v-card-actions>
-                      <v-btn to="" color="primary" style="margin-left:auto;" text
+                      <v-btn @click="ViewDoctrine(Bookmark._id)" color="primary" style="margin-left:auto;" text
                         >More</v-btn
                       >
                     </v-card-actions>
@@ -472,6 +476,12 @@ export default {
         this.selected = value;
         console.log(this.selected);
       },
+      ViewDoctrine(doctrineid){
+      this.$router.push({
+        name: "UserDetailDoctrine",
+        params: {id:doctrineid}
+      })
+    },
       validate() {
       this.$refs.form.validate();
     },
@@ -693,7 +703,16 @@ hr{
   background-color:rgb(230, 230, 154) ;
 }
 
-img{
+.img-rank{
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 40%;
+  width: 40%;
+}
+
+.image-profile img{
   clip-path: circle();
   background-size: cover;
   background-position: center;
@@ -728,11 +747,10 @@ img{
   /* border: black solid 0.8px; */
   height: 80vh;
   /* padding: 12px; */
-  overflow-y: scroll;
+  
 }
 .table-profile{
   height: 80vh;
-  overflow-y: scroll;
 }
 .bookmark-profile{
   height: 80vh;

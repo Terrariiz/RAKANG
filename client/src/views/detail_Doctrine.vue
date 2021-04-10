@@ -16,17 +16,19 @@
                     v-if="bookmark.value == false"
                     @click="clickBookmarks()"
                   >
-                    <v-icon>mdi-bookmark</v-icon>
+                    <v-icon x-large>mdi-bookmark</v-icon>
                   </v-btn>
                   <v-btn
                     icon
-                    color="pink"
+                    color="#ffb703"
                     v-model="bookmark.value"
                     @click="clickBookmarks()"
                     v-if="bookmark.value == true"
                   >
-                    <v-icon>mdi-bookmark</v-icon>
+                    <v-icon x-large>mdi-bookmark</v-icon>
                   </v-btn>
+                  
+              
                 </div>
             </v-col>
             <v-col cols="12">
