@@ -3,11 +3,11 @@
     <div>
         <Navbar></Navbar>
         </div>
-      
+      <br><br>
     <div class="project-header">
     <v-container >
       <v-row>
-          <h1>{{campaign.name}}</h1>
+          <h1 class="head-name">{{campaign.name}}</h1>
           <br>
       </v-row>
       <v-row>
@@ -270,6 +270,9 @@ export default {
   font-size: 1.75em;
   color: #666;
 } เดี๋ยวมาแก้ */ 
+.head-name{
+  margin-top: 5%;;
+}
 .project-header{
   background-color: #fff8ec;
 }
