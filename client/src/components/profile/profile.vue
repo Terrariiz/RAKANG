@@ -94,10 +94,10 @@
               
               <div class="head-profile">บัญชีของฉัน</div>
               <div class="sub-profile">ดูและแก้ไขข้อมูลส่วนบุคคลของคุณที่นี่</div>
-              <img class="img-rank" :src="
+              <center><img class="img-rank" :src="
                                 'http://localhost:4000/image/rank/' +
                                 Profile.Rank+'.png'
-                              ">
+                              "></center>
               <hr>
              
                  <div class="row">
@@ -665,7 +665,7 @@ hr{
   margin-right: auto;
 }
 .hover-setting:hover{
-  color: red;
+  color: rgb(190, 160, 60);
   cursor: pointer;
 }
 .head-details{
