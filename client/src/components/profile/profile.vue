@@ -383,7 +383,7 @@ export default {
         (v) => v.length == 10 || "Phone must be 10 numbers",
       ],
       pagination:{
-                data: this.$store.getters.banana,
+                data: null,
                 rowsPerPage: 10,
                 page: 1,
             },
@@ -392,10 +392,10 @@ export default {
                 {
                     text: 'ชื่อแคมเปญ',
                     sortable: false,
-                    value: 'name'
+                    value: 'CampaignName'
                 },
-                { text: 'จำนวนเงิน', value: 'calories' },
-                { text: 'วัน-เดือน-ปี', value: 'fat' }
+                { text: 'จำนวนเงิน', value: 'amount' },
+                { text: 'วัน-เดือน-ปี', value: 'date' }
                 
             ]
       }
@@ -434,12 +434,14 @@ export default {
         console.log("get log")
         console.log(this.donatelog)
         
-        this.Log = res.data.donatelog;
+        this.pagination.data = res.data.donatelog;
+        
 
         var i = 0
-        for(this.donatelog[i];;i++){
-            this.donatelog[i].date = moment(this.donatelog[i].date).format(" DD-MM-YYYY HH:mm A");
-            } 
+        for(this.pagination.data[i];;i++){
+            this.pagination.data[i].date = moment(this.pagination.data[i].date).format(" DD-MM-YYYY HH:mm A");
+            }
+             
       })
       .catch(function (err) {
         console.log(err);

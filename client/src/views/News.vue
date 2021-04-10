@@ -34,24 +34,7 @@
                   <img  :src="'http://localhost:4000/image/new/' + news.image">
                   <div class="panelx">
                      <!-- ปุ่ม bookmark -->
-            <div class="btn-bookmark" v-if="$store.getters.UserIsLoggedIn">
-              <v-btn
-                icon
-                color="#ffb703"
-                v-if="doctrine.fav"
-                @click="clickBookmarks(doctrine)"
-              >
-                <v-icon x-large>mdi-bookmark</v-icon>
-              </v-btn>
-              <v-btn
-                icon
-                color="white"
-                v-else
-                @click="clickBookmarks(doctrine)"  
-              >
-                <v-icon x-large>mdi-bookmark</v-icon>
-              </v-btn>
-            </div>
+            
                     <v-list-item three-line class="title-font-size">
                       
                         
