@@ -163,7 +163,7 @@
       <div class="rowx">
           <div @click="ViewDoctrine(doctrine._id)" class="doctrine-col" v-for="doctrine in filteredListdoctrine " :key="doctrine.title">
             <img :src="'http://localhost:4000/image/doctrine/' + doctrine.image">
-              <h3>{{doctrine.title}}</h3>
+              <h3 class="title-color">{{doctrine.title}}</h3>
           </div>
       </div>
 
@@ -418,6 +418,9 @@ export default {
 }
  /* hotnews */
  /* หลักธรรม */
+ .title-color{
+   
+ }
  .doctrine{
    width: 80%;
    margin: auto;
@@ -429,7 +432,7 @@ export default {
    border-radius: 10px;
    margin-bottom:5% ;
    text-align: left;
-  
+  background-color: white;
  }
  .doctrine-col:hover{
    box-shadow: 10px 20px 40px rgba(0,0, 0, 0.25);

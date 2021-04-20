@@ -2,21 +2,22 @@
   <div>
     <go-top></go-top>
     <div v-if="$store.getters.UserIsLoggedIn">
-      <v-app-bar fixed color="#F8C471">
-        <v-toolbar-items class="hidden-sm-and-down">
-          <v-btn text to="/home">
-            RAKANGTHAM
+      <v-app-bar fixed color="#314E30 " class="vapp-bar">
+        <v-toolbar-items class="hidden-sm-and-down" stlye="color: #CFD6EA;">
+          
+          <v-btn color="#CFD6EA" text to="/home">
+            <img style="width:50px; height:50px;" src="../../../public/image/logo.png">
           </v-btn>
-          <v-btn text to="/campaign">
+          <v-btn color="#fff" text to="/campaign">
             แคมเปญ
           </v-btn>
-          <v-btn text to="/doctrine">
+          <v-btn color="#fff" text to="/doctrine">
             หลักธรรมคำสอน
           </v-btn>
-          <v-btn text to="/news">
+          <v-btn color="#fff" text to="/news">
             ข่าวประชาสัมพันธ์
           </v-btn>
-          <v-btn text to='/rank'>
+          <v-btn color="#fff" text to='/rank'>
             อันดับ
           </v-btn>
         </v-toolbar-items>
@@ -24,7 +25,7 @@
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       </v-app-bar>
       <v-navigation-drawer
-        color='#F8C471'
+        color='#314E30'
         v-model="drawer"
         right
         absolute
@@ -36,18 +37,18 @@
           <v-list-item-group v-model="group">
             <router-link tag="v-list-item" to="/profile"
               ><v-list-item>
-                <v-list-item-title>หน้าโปรไฟล์</v-list-item-title>
+                <v-list-item-title style="color:#CFD6EA">หน้าโปรไฟล์</v-list-item-title>
               </v-list-item></router-link
             >
             <hr>
             <router-link tag="v-list-item" to="/seamsi"
               ><v-list-item>
-                <v-list-item-title>เสี่ยงเซียมซี</v-list-item-title>
+                <v-list-item-title style="color:#CFD6EA">เสี่ยงเซียมซี</v-list-item-title>
               </v-list-item></router-link
             >
             <router-link tag="v-list-item" to="/lantern"
               ><v-list-item>
-                <v-list-item-title>ลอยโคมอธิษฐาน</v-list-item-title>
+                <v-list-item-title style="color:#CFD6EA">ลอยโคมอธิษฐาน</v-list-item-title>
               </v-list-item></router-link
             >
           </v-list-item-group>
@@ -333,6 +334,7 @@
 </template>
 
 <script>
+// import a from "../../../public/image/logo.png"
 import GoTop from '@inotom/vue-go-top';
 export default {
   name: "Navbar",
@@ -400,4 +402,7 @@ export default {
 </script>
 
 <style>
+.vapp-bar{
+  color: #CFD6EA;
+}
 </style>

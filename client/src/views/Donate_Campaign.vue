@@ -4,6 +4,8 @@
         <Navbar></Navbar>
         </div>
       <br><br>
+
+      
     <div class="project-header">
     <v-container >
       <v-row>
@@ -67,7 +69,7 @@
     </div>
   <!-- tablist -->
     <div class="tab-section">
-      <v-container>
+      <v-container style="width:75%">
          <v-tabs
       v-model="tab"
       background-color="transparent"
@@ -320,4 +322,6 @@ img{
     padding-right: 0;
 }
 }
+
+
 </style>
