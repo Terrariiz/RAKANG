@@ -413,6 +413,7 @@ export default {
       if (token) {
       try {
         // this.$router.push("/profile");
+        this.forceRerender()
       } catch (err) {
         console.log(err);
         localStorage.removeItem("user_token");
@@ -474,6 +475,9 @@ export default {
           save (date) {
         this.$refs.menu.save(date)
     },
+    forceRerender() {
+            this.componentKey += 1;
+          },
       onChange(value) {
         this.selected = value;
         console.log(this.selected);
@@ -534,13 +538,14 @@ export default {
             if (result.isConfirmed) {
               this.$http.put("/user/" + id + "/editProfile", formData);
               this.$router.push("/profile");
+              location.reload();
               swal.fire(
                 "Saved!",
                 "Edit your profile Was successful.",
                 "success"
               );
               console.log("success");
-              this.selected = 'โปรไฟล์';
+              
             }
           });
       } catch (err) {
@@ -574,7 +579,8 @@ export default {
             var showData = this.pagination.data.slice(firstIndex, firstIndex + this.pagination.rowsPerPage);
             console.log(showData);
             return showData
-        }
+        },
+        
     },
       
   

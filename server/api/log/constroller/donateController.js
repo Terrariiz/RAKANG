@@ -45,7 +45,6 @@ exports.CheckDonate = async function(req, res){
         console.log(err)
       }else{
         var index = list.donatelog.length-1
-        
         if(index == -1){
           result = false;
           let somchai = {result:result , changeto:list.donatelog[index].ChangeRank}

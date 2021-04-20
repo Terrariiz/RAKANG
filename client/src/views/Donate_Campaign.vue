@@ -190,8 +190,10 @@ export default {
               console.log(res.data.changeto)
               console.log(res.data.result)
               if(res.data.result == false){
+                localStorage.removeItem("donate-campaign")
                 console.log("false")
               } else if(res.data.result == 'complete'){
+                localStorage.removeItem("donate-campaign")
                 swal.fire({
                   icon: 'success',
                   title: 'ทำรายการเสร็จสิ้น',
@@ -213,6 +215,7 @@ export default {
                       // },
                       timer: 10000
                     })
+                    localStorage.removeItem("donate-campaign")
                 }
               } else if(res.data.result == 'incomplete'){
                 swal.fire({
@@ -221,6 +224,7 @@ export default {
                   showConfirmButton: false,
                   timer: 1500
                 })
+                localStorage.removeItem("donate-campaign")
               } else if(res.data.result == 'cancel'){
                 swal.fire({
                   icon: 'info',
@@ -228,6 +232,7 @@ export default {
                   showConfirmButton: false,
                   timer: 1500
                 })
+                localStorage.removeItem("donate-campaign")
               }
               localStorage.removeItem("donate-campaign")
             })

@@ -150,19 +150,19 @@ userSchema.methods.ChangeRank =  function() {
     this.Rank = "Diamond"
     this.Badge = "Diamond_Badge.png" 
     return "Diamond"
-  } else if(this.point >= 30000 && this.Rank != "Platinum"){
+  } else if(this.point >= 30000 && this.Rank != "Platinum" && this.Rank != "Diamond"){
     this.Rank = "Platinum"
     this.Badge = "Platinum_Badge.png"
     return "Platinum"
-  } else if(this.point >= 10000 && this.Rank != "Gold"){
+  } else if(this.point >= 10000 &&  this.Rank != "Gold" && this.Rank != "Platinum" && this.Rank != "Diamond"){
     this.Rank = "Gold"
     this.Badge = "Gold_Badge.png"
     return "Gold"
-  } else if(this.point >= 5000 && this.Rank != "Silver"){
+  } else if(this.point >= 5000 && this.Rank != "Silver" && this.Rank != "Gold" && this.Rank != "Platinum" && this.Rank != "Diamond"){
     this.Rank = "Silver"
     this.Badge = "Silver_Badge.png"
     return "Silver"
-  } else if(this.point >= 0 && this.Rank != "Bronze"){
+  } else if(this.point >= 0 && this.Rank != "Bronze" && this.Rank != "Silver" && this.Rank != "Gold" && this.Rank != "Platinum" && this.Rank != "Diamond"){
     this.Rank = "Bronze"
     this.Badge = "Bronze_Badge.png"
     return "Bronze"
