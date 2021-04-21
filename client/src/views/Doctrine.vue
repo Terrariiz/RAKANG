@@ -23,7 +23,7 @@
        <div>
          <v-text-field class="search-doctrine" style="width:30%;" prepend-inner-icon="mdi-magnify" v-model="search" label="ค้นหาหัวข้อ"></v-text-field>
        </div>
-       <p class="notfound" v-if="filteredList.length == 0 && search !== ''">ไม่พบ "{{search}}"</p>
+       <p class="notfound" v-if="filteredList.length == 0 && search !== ''">ไม่พบ "{{search.trim()}}"</p>
        <p class="notfound" v-if="filteredList.length == 0 && search == ''">ไม่มีเนื้อหาในส่วนนี้</p>
         <!-- อันใหม่ -->
           <div class="containerx">
@@ -157,7 +157,7 @@ export default {
       var newlist = this.doctrines.filter(doctrine => {
         var result
         if(this.selectedCategory == 'ทั้งหมด'){
-          result = doctrine.title.toLowerCase().includes(this.search.toLowerCase())
+          result = doctrine.title.toLowerCase().replace(/\s/g, '').includes(this.search.toLowerCase().trim().replace(/\s/g, ''))
           return result
         } else{
           result = doctrine.categories.includes(this.selectedCategory)
@@ -165,7 +165,7 @@ export default {
             return result
           } else{
             if(result == true){
-              result = doctrine.title.toLowerCase().includes(this.search.toLowerCase())
+              result = doctrine.title.toLowerCase().replace(/\s/g, '').includes(this.search.toLowerCase().trim().replace(/\s/g, ''))
               return result
             }
           }

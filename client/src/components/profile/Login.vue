@@ -20,6 +20,7 @@
           v-model="login.email"
           :rules='emailRules'
           label="Email"
+          onkeypress="return event.charCode != 32"
           required
         ></v-text-field>
 
@@ -30,6 +31,7 @@
             :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
             :type="show1 ? 'text' : 'password'"
             :rules='passwordRules'
+            onkeypress="return event.charCode != 32"
             label="Password"
             hint="At least 6 characters"
             counter

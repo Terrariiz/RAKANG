@@ -151,6 +151,7 @@
                       <v-text-field
                         single-line
                         solo
+                        onkeypress="return event.charCode != 32"
                         v-model="Profile.firstname"
                         :rules="firstnameRules"
                         required
@@ -161,6 +162,7 @@
                       <v-text-field
                         single-line
                         solo
+                        onkeypress="return event.charCode != 32"
                         v-model="Profile.lastname"
                         :rules="lastnameRules"
                         required
