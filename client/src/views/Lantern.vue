@@ -165,10 +165,11 @@ export default {
         -webkit-animation: bounce-down 1.6s linear infinite;
         animation: bounce-down 1.6s linear infinite;
         position: absolute;
-        left: 50%;
+        left: 60%;
         top: 20%;
         height: 100px;
         width: 100px;
+
 }
  
 @-webkit-keyframes bounce-down {

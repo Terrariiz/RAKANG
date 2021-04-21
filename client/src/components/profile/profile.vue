@@ -12,7 +12,7 @@
                  <v-card-text  class="border-cardtext" >
                  <v-col class="name-pic-pro"  cols="12" md="12" sm="12">
                     <div class="edit-profile">
-                  <v-btn v-if="selected == 'โปรไฟล์' || selected == 'ประวัติการบริจาค' || selected =='บุ๊คมาค'" @click="onChange('แก้ไขโปรไฟล์')" color="secondary" icon><v-icon>mdi-pencil</v-icon></v-btn>
+                  
                 </div>
               <center><div v-if="selected == 'โปรไฟล์' || selected == 'ประวัติการบริจาค' || selected =='บุ๊คมาค'" class="image-profile">
                 <img  :src="
@@ -40,7 +40,7 @@
                     @input="onSelectFile"
                   />
                 </v-div>
-                 <v-btn class="edit-pic"  color="secondary" icon><label style=" cursor: pointer;" for="file-input"><v-icon>mdi-pencil</v-icon></label></v-btn>
+                
               </center>
               </div></center>
               <hr>
@@ -50,7 +50,9 @@
                 <div><span class="sub-head">แต้มบุญ:</span> {{Profile.point}}  </div></center>
                 <br>
                 <div class="btn-cpass">
-                        <v-btn small @click.stop="dialog_ChangePassword=true">เปลี่ยนรหัสผ่าน</v-btn>
+                        <v-btn class="e-profile" v-if="selected == 'โปรไฟล์' || selected == 'ประวัติการบริจาค' || selected =='บุ๊คมาค'" @click="onChange('แก้ไขโปรไฟล์')" color="secondary" >แก้ไขโปรไฟล์</v-btn>
+                        <br>
+                        <v-btn  @click.stop="dialog_ChangePassword=true">เปลี่ยนรหัสผ่าน</v-btn>
                         <ChangePassword :visible="dialog_ChangePassword" @close="dialog_ChangePassword=false" />                     
                     </div>
                 
@@ -73,7 +75,7 @@
                </v-row>
             </v-col>
           
-          <v-col class="setting-proflie" cols="12" md="4" sm="12">
+          <v-col v-if="selected == 'โปรไฟล์' || selected == 'ประวัติการบริจาค' || selected =='บุ๊คมาค'" class="setting-proflie" cols="12" md="4" sm="12">
             <div class="selectboxs">
               <div>
                  <v-select
@@ -592,13 +594,16 @@ export default {
 </script>
 
 <style scoped>
-
+.e-profile{
+  margin-bottom: 10px;
+}
 hr{
   border-top: 1px solid black;
 }
 .border-cardtext{
-  background-color: #e5e5e5;
-  border: black solid 0.8px ;
+  background-color: #efefef;
+  border: #cfd6ea solid 4px ;
+  border-radius: 10px;
 }
 /* .pad0{
   padding: 0;

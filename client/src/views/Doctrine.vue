@@ -130,17 +130,22 @@
         </v-card> -->
       </v-container>
       <component-to-re-render :key="componentKey" />
+      <div>
+        <Footer></Footer>
+      </div>
     </div>
     
 </template>
 
 <script>
 import moment from "moment";
+const Footer = () => import("@/components/navbar/footer");
 const Navbar = () => import('@/components/navbar/navbar')
 export default {
     name:'Doctrine',
     components:{
-        Navbar
+        Navbar,
+        Footer
     },
     data() {
     return {
