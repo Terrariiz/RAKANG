@@ -170,16 +170,21 @@
         </v-row>
         </v-card>
       </v-container> -->
+      <div>
+        <Footer></Footer>
+      </div>
     </div>
 </template>
 
 <script>
 import moment from "moment";
+const Footer = () => import("@/components/navbar/footer");
 const Navbar = () => import('@/components/navbar/navbar')
 export default {
     name:'News',
     components:{
-        Navbar
+        Navbar,
+        Footer
     },
     data() {
     return {

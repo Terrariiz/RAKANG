@@ -117,11 +117,15 @@
         </v-row>
       </v-container>
     </div> -->
+    <div>
+      <Footer></Footer>
+    </div>
   </div>
 </template>
 
 <script>
 import moment from "moment";
+const Footer = () => import("@/components/navbar/footer");
 const Navbar = () => import('@/components/navbar/navbar')
 export default {
     name : "detail_doctrine",
@@ -135,7 +139,8 @@ export default {
       }
     },
     components:{
-      Navbar
+      Navbar,
+      Footer
     },
     created() {
       this.getData()

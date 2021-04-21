@@ -48,11 +48,15 @@
       </v-form>
       </v-container>
     </v-container>
+    <div>
+      <Footer style="position: absolute;"></Footer>
+    </div>
   </div>
 </template>
 
 <script>
 import swal from "sweetalert2";
+const Footer = () => import('@/components/navbar/footer')
 const Navbar = () => import('@/components/navbar/navbar')
 export default {
     name:'Loginadmin',
@@ -70,7 +74,8 @@ export default {
       }
     },
     components:{
-      Navbar
+      Navbar,
+      Footer
     },    
 
     methods: {
