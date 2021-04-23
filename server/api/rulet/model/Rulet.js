@@ -10,7 +10,5 @@ const ruletSchema = new mongoose.Schema({
   },
 });
 
-
-
 const Rulet = mongoose.model("Rulet", ruletSchema);
 module.exports = Rulet;

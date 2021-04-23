@@ -28,12 +28,8 @@ export default {
   font-family: 'Kanit', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* text-align: center;
-  color: #2c3e50; */
-  /* background-image: url('../src/assets/images/bg-temple-2.jpg') ; */
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-color: #efefef;
+  
   overflow-x: hidden;
 }
 
