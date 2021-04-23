@@ -5,9 +5,9 @@
     </div>
     <h1>Campaign</h1>
     <!-- Test -->
-    
-    <center><v-text-field style="width:70%; text-align: center;" append-icon="mdi-magnify" v-model="search" label="ค้นหาหัวข้อ"></v-text-field></center>
      <v-container class="container-news">
+       <v-text-field style="width:30%; text-align: center;" prepend-inner-icon="mdi-magnify" v-model="search" label="ค้นหาหัวข้อ"></v-text-field>
+       <p class="notfound" v-if="filteredList.length == 0 && search !== ''">ไม่พบ "{{search.trim()}}"</p>
         <v-card class="margin-card" v-for="(campaign,percent) in filteredList " :key="percent" elevation="5" outlined  >
           <div class="status_open" v-if="campaign.status =='open'">{{campaign.status}}</div>
         <div class="status_close" v-if="campaign.status =='close'">{{campaign.status}}</div>
@@ -22,13 +22,13 @@
               <div>{{campaign.content}}</div>
               <div >
                 <v-row>
-                  <v-col style="text-align:left;" cols="12" md="6">
+                  <v-col  style="text-align:left;" cols="12" md="6">
                     <!-- <span >วันที่</span> -->
-                    <span> เป้าหมาย {{ campaign.amount }}</span>
-                    <div> วันที่สิ้นสุด{{ campaign.date }}</div>
+                    <span class="amount"> เป้าหมาย:</span><span> {{ campaign.amount }}</span>
+                    <div><span class="amount"> วันที่สิ้นสุด:</span> {{ campaign.date }}</div>
                   </v-col>
                   <v-col style="text-align:right;" cols="12" md="6">
-                    <div>ยอดบริจาค</div>  
+                    <div class="amount">ยอดบริจาค</div>  
                     <span> {{campaign.donate}} / {{ campaign.amount }} บาท</span>
                   </v-col>
                 </v-row>
@@ -38,16 +38,11 @@
               
               <div class="btn-news" >
                 <v-row>
-                  <v-col cols="12" md="6">
+                  <v-col >
                     <v-btn class="fontstlye" x-large block style="background-color: #ffdd94; color:#455054;" 
                     @click="ViewCampaign(campaign._id)"
                     elevation="3">ดูเนื้อหา</v-btn>
                   </v-col>
-                  <v-col cols="12" md="6">
-                    <v-btn class="fontstlye" x-large block  color="green" style="background-color: #ffdd94; color:#455054;" 
-                    @click="ViewCampaign(campaign._id)"
-                    elevation="3">บริจาคได้ที่นี่</v-btn>
-                    </v-col>
                 </v-row>
               </div>
             </v-container>
@@ -55,16 +50,21 @@
         </v-row>
         </v-card>
       </v-container>
+      <div>
+        <Footer></Footer>
+      </div>
   </div>
 </template>
 
 <script>
 import moment from "moment";
+const Footer = () => import("@/components/navbar/footer");
 const Navbar = () => import("@/components/navbar/navbar");
 export default {
   name: "Campaign",
   components: {
     Navbar,
+    Footer
   },
   data() {
     return {
@@ -76,7 +76,7 @@ export default {
   computed: {
     filteredList() {
       return this.campaigns.filter(campaign => {
-        return campaign.name.toLowerCase().includes(this.search.toLowerCase())
+        return campaign.name.toLowerCase().replace(/\s/g, '').includes(this.search.toLowerCase().replace(/\s/g, '').trim())
       })
     }
   },
@@ -135,6 +135,9 @@ export default {
 </script>
 
 <style >
+.amount{
+  font-weight: 600;
+}
 .status_open{
   text-align: right;
   padding: 20px;
@@ -150,10 +153,6 @@ export default {
 .container-news {
     margin-top: 3%;
     
-}
-.row-news {
-  /* margin-bottom: 3%;
-  margin-top: 3%; */
 }
 .cols-detail-campaign {
   margin-top: 5%;

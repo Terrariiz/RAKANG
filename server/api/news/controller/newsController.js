@@ -28,6 +28,9 @@ exports.ShowListNews = function(req,res){
       if(err){
         console.log(err)
       } else {
+        news.sort(function(a, b){
+          return new Date(b.edittime) - new Date(a.edittime);
+      });
         console.log('else')
         res.json(news);
       }
@@ -57,12 +60,12 @@ exports.DetailNews = function(req,res){
 exports.DeleteNews = function(req,res){
   
   try{
-    News.findOneAndDelete({_id : req.params.id},function(err, news){
+    News.findOneAndDelete({_id : req.params.id}, async function(err, news){
       if(err){
         console.log(err)
       } else {
           const image  = './public/image/new/' + news.image;
-          fs.unlink(image , function(err){
+          await fs.unlinkSync(image , function(err){
               if(err){
                   console.log(err);
               } else {
@@ -90,7 +93,7 @@ exports.EditNews = async(req,res) =>{
     if(req.file){
       if(req.file.filename != req.body.oldimage){
         const image  = './public/image/new/' + req.body.oldimage;
-        fs.unlink(image , function(err){
+        fs.unlinkSync(image , function(err){
             if(err){
                 console.log(err);
             } else {

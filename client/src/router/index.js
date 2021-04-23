@@ -32,11 +32,13 @@ const editprofile            = () => import('@/components/profile/editprofile')
 const test                   = () => import('@/components/admin/test')
 const payment                = () => import('@/components/admin/payment')
 const UserDetailCampaign     = () => import('@/views/Donate_Campaign')
-const random                 = () => import('@/views/random')
+const seamsi                 = () => import('@/views/random')
+const Lantern                 = () => import('@/views/Lantern')
 const UserDetailDoctrine     = () => import('@/views/detail_Doctrine')
 const UserDetailNews         = () => import('@/views/detail_news')
 const forgotPassword         = () => import('@/components/profile/forgotPassword')
 const resetPassword          = () => import('@/components/profile/resetPassword')
+const banana                 = () => import('@/views/banana')
 
 Vue.use(VueRouter)
 
@@ -50,6 +52,11 @@ const routes = [
     path: '/home',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/banana',
+    name: 'banana',
+    component: banana
   },
   {
     path: '/campaign',
@@ -178,7 +185,7 @@ const routes = [
   {
     // path: '/admin/editnews',
     path: '/admin/listnews/:id/edit',
-    name: 'editnews',
+    name: 'EditNews',
     component: editnews,
     meta: {
       requiresAdminAuth: true
@@ -281,9 +288,20 @@ const routes = [
     }
   },
   {
-    path: '/random',
-    name: 'random',
-    component: random
+    path: '/seamsi',
+    name: 'seamsi',
+    component: seamsi,
+    meta: {
+      requiresUserAuth: true
+    }
+  },
+  {
+    path: '/lantern',
+    name: 'lantern',
+    component: Lantern,
+    meta: {
+      requiresUserAuth: true
+    }
   },  
 ]
 

@@ -76,7 +76,7 @@ app.use("/rulet", ruletRoutes);
 
 app.post("/test", async function(req,res){
 
-    var result 
+    var RankChange = null
     const MerchantCode = 'M031001'
     const Apikey = 'Z5O4ARB0wikPpsSwpjXwmeuVCdD2zVV27Sdbti9gTvYWEOiBo7s7fB6S81LZAE3I'
     const TransactionId = req.body.transNo;
@@ -126,11 +126,16 @@ app.post("/test", async function(req,res){
           } else {
               User.findOne({_id : fuckingid}, function(err, user){
                 const now = new Date();
+                //////แก้ไขแต้มบุญ user
+                user.point = user.point+amount/10
+                RankChange = user.ChangeRank()
+                console.log(RankChange)
                 const donatelog = new DonateLog({
                   campaign : null,
                   user : null ,
                   result : 'complete',
                   CampaignName : campaign.name,
+                  ChangeRank: RankChange,
                   UserName : user.firstname,
                   amount : amount/100,
                   date : now
@@ -141,16 +146,18 @@ app.post("/test", async function(req,res){
                   console.log(log)
                   log.user = user
                   log.campaign = campaign
-                  //////แก้ไขแต้มบุญ user
-                  user.point = user.point+amount/10
+                  
                   //////save ข้อมูล log เข้า donate log ของ user 
                   user.donatelog.push(log)
-      
+                  
+
                   campaign.donatelist.push(log)
         
                   campaign.donate = campaign.donate+amount/100;
                   
                   /////save ข้อมูล
+                  
+                  
 
                   campaign.save();
                   log.save();

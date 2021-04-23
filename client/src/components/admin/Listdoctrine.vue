@@ -3,7 +3,7 @@
     <div>
       <Navbar></Navbar>
     </div>
-    <br>
+    <br><br>
     <div id ='headaddnews'>
         <div class="text-center">
           
@@ -37,10 +37,9 @@
                 <td>
                   <!-- <router-link :to="`/admin/listdoctrine/${doctrine._id}`">detail</router-link> -->
                   <!-- <router-link :to="{name : 'DetailDoctrine', params: {id:doctrine._id}}">detail</router-link> -->
-                  <v-btn color="succes" @click="ViewDoctrine(doctrine._id)">View</v-btn>
-                  
-                  <button @click="EditDoctrine(doctrine._id)">Edit</button>
-                  <button @click="DeleteDoctrine(doctrine._id)">Delete</button>
+                  <v-btn style="margin-right:3%;" @click="ViewDoctrine(doctrine._id)">View</v-btn>
+                  <v-btn style="margin-right:3%;" @click="EditDoctrine(doctrine._id)">Edit</v-btn>
+                  <v-btn @click="DeleteDoctrine(doctrine._id)">Delete</v-btn>
                   
                 </td>
                 <!-- <td>
@@ -59,6 +58,7 @@
 
 <script>
 const Navbar = () => import('@/components/navbar/navbar')
+import swal from "sweetalert2";
   export default {
     name : "Listdoctrine",
     data (){
@@ -86,9 +86,46 @@ const Navbar = () => import('@/components/navbar/navbar')
     methods: {
       ViewDoctrine(doctrineid){
         this.$router.push({ name: 'DetailDoctrine' , params: {id : doctrineid}})
-        },
-      
-      
+      },
+      EditDoctrine(doctrineid){
+        this.$router.push({ name: 'EditDoctrine' , params: {id : doctrineid}})
+      },
+      Refresh(doctrineid){
+        console.log('sdfsdfsddf')
+        this.doctrines = this.doctrines.filter(function(c){
+          return c._id !== doctrineid
+        })
+      },
+      DeleteDoctrine(doctrineid){
+        const swalWithBootstrapButtons = swal.mixin({
+          customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+          },
+          buttonsStyling: false
+        })
+        swalWithBootstrapButtons.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Yes, delete it!',
+          cancelButtonText: 'No, cancel!',
+          reverseButtons: false
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.$http.delete("/doctrine/DeleteDoctrine/"+doctrineid)
+            console.log("delete")
+            this.$router.push({ name: 'Listdoctrine'})
+            this.Refresh(doctrineid)
+            swalWithBootstrapButtons.fire(
+              'Deleted!',
+              'Delete Doctrine Success.',
+              'success'
+            )
+          } 
+        })
+      },
     }
     
   }

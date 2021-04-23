@@ -3,9 +3,6 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const userSchema = new mongoose.Schema({
-  username: {
-    type: String,
-  },
   email: {
     type: String,
   },
@@ -53,6 +50,15 @@ const userSchema = new mongoose.Schema({
   point:{
     type: Number
   },
+  seamsi:{
+    Playable: Boolean,
+    Detail:  String,
+  },
+  lantern:{
+    Playable: Boolean,
+    Detail:  String
+  },
+  
   donatelog:[
     {
         type: mongoose.Schema.Types.ObjectId,
@@ -70,7 +76,7 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Doctrine"
     }
-  ]
+  ],
 });
 
 //this method will hash the password before saving the user model
@@ -139,24 +145,29 @@ userSchema.statics.checkPassword = async (id, oldPassword, newPassword) => {
   }
 };
 //เลื่อนระดับของ user เมื่อ point ถึงค่าที่กำหนด
-userSchema.methods.checkRank =  function() {
-  if(this.point >= 2000 || this.Rank != "Daimond"){
-    this.Rank = "Daimond"
-    this.Badge = ""
-
-  } else if(this.point >= 1000 ||this.Rank == "Platinum"){
+userSchema.methods.ChangeRank =  function() {
+  if(this.point >= 100000 && this.Rank != "Diamond"){
+    this.Rank = "Diamond"
+    this.Badge = "Diamond_Badge.png" 
+    return "Diamond"
+  } else if(this.point >= 30000 && this.Rank != "Platinum" && this.Rank != "Diamond"){
     this.Rank = "Platinum"
-    this.Badge = ""
-  } else if(this.point >= 500 || this.Rank == "Gold"){
+    this.Badge = "Platinum_Badge.png"
+    return "Platinum"
+  } else if(this.point >= 10000 &&  this.Rank != "Gold" && this.Rank != "Platinum" && this.Rank != "Diamond"){
     this.Rank = "Gold"
-    this.Badge = ""
-  } else if(this.point >= 100 || this.Rank == "Sliver"){
-    this.Rank = "Sliver"
-    this.Badge = ""
-  } else if(this.point >= 0 || this.Rank == "Bronze"){
+    this.Badge = "Gold_Badge.png"
+    return "Gold"
+  } else if(this.point >= 5000 && this.Rank != "Silver" && this.Rank != "Gold" && this.Rank != "Platinum" && this.Rank != "Diamond"){
+    this.Rank = "Silver"
+    this.Badge = "Silver_Badge.png"
+    return "Silver"
+  } else if(this.point >= 0 && this.Rank != "Bronze" && this.Rank != "Silver" && this.Rank != "Gold" && this.Rank != "Platinum" && this.Rank != "Diamond"){
     this.Rank = "Bronze"
-    this.Badge = ""
+    this.Badge = "Bronze_Badge.png"
+    return "Bronze"
   }
+  return null
 }
 
 userSchema.methods.CheckFav = async function(campaign) {

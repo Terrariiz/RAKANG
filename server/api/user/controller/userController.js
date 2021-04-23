@@ -25,7 +25,17 @@ exports.registerNewUser = async (req, res) => {
         resetPasswordToken: null,
         resetPasswordExpires: null,
         image: "user.png",
-        point: 0
+        point: 0,
+        seamsi:{
+          Playable: true,
+          Detail:  null
+        },
+        lantern:{
+          Playable: true,
+          Detail:  null
+        },
+        Rank : 'Beginner'
+        
       });
       let data = await user.save();
       const token = await user.generateAuthToken(); // here it is calling the method that we created in the model
@@ -60,13 +70,14 @@ exports.getUserDetails = async (req, res) => {
       if(err){
         console.log(err);
       } else{
-        let myrank = await userdetail.getrank(req.params.id)
-        var somsak = {userdetail , myrank} 
-        console.log("somsak.found")
-        console.log(somsak)
-        console.log("somsak.found")
+        // let myrank = await userdetail.getrank(req.params.id)
+        // var somsak = {userdetail , myrank} 
+        // console.log("somsak.found")
+        // console.log(somsak)
+        // console.log("somsak.found")
 
-        res.json(somsak);
+        // res.json(somsak);
+        res.json(userdetail);
       }
     })
   } catch (err) {
@@ -376,3 +387,54 @@ exports.resetPassword = async (req,res) => {
   }
 });
 };
+
+exports.seamsi = async (req,res) => {  
+  try{     
+  const add = {
+    seamsi:{
+      Playable: false,
+      Detail:  req.body.Detail
+    }
+  };
+  console.log(add)
+  User.findByIdAndUpdate({_id : req.params.id},add,function(err, sam){
+    if(err){
+      console.log(err)
+    } else {
+      console.log('success')
+      console.log(sam)
+      console.log(add)
+      res.status(201).json({ sam });
+    }
+  })
+ } catch (err) {
+  res.status(400).json({ err: err });
+  console.log(err)
+}
+}
+
+exports.lantern = async (req,res) => {  
+  try{     
+  const add = {
+    lantern:{
+      Playable: false,
+      Detail:  req.body.Detail
+    }
+  };
+  console.log(req.body)
+  console.log(add)
+  User.findByIdAndUpdate({_id : req.params.id},add,function(err, lan){
+    if(err){
+      console.log(err)
+    } else {
+      console.log('success')
+      console.log(lan)
+      console.log(add)
+      res.status(201).json({ lan });
+    }
+  })
+ } catch (err) {
+  res.status(400).json({ err: err });
+  console.log(err)
+}
+}

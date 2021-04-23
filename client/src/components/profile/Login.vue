@@ -1,10 +1,11 @@
 <template>
-  <div  class='login'>
+  <div class='login'>
      <div>
       <Navbar></Navbar>
     </div>
-    <br>
+    <br><br><br>
     <v-container id="border-login" rounded-xl style="text-align:center;  margin-top:5%; box-shadow: 5px 6px 5px #888888; ">
+      
       <h1>Login</h1>
       <v-container :elevation="11" style="">
      
@@ -19,6 +20,7 @@
           v-model="login.email"
           :rules='emailRules'
           label="Email"
+          onkeypress="return event.charCode != 32"
           required
         ></v-text-field>
 
@@ -29,6 +31,7 @@
             :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
             :type="show1 ? 'text' : 'password'"
             :rules='passwordRules'
+            onkeypress="return event.charCode != 32"
             label="Password"
             hint="At least 6 characters"
             counter
@@ -45,17 +48,21 @@
         >
           Log in
         </v-btn><br>
-        <v-btn text><router-link  to='/register'>Register ?</router-link></v-btn>
+        <v-btn text><router-link  to='/register'>สมัครสมาชิก</router-link></v-btn>
         <v-btn text><router-link  to='/forgotPassword'>ลืมรหัสผ่าน</router-link></v-btn>
       </v-form>
       </v-container>
     </v-container>
-    
+    <div>
+      <Footer style="position: absolute;"></Footer>
+    </div>
+
   </div>
 </template>
 
 <script>
 import swal from "sweetalert2";
+const Footer = () => import("@/components/navbar/footer");
 const Navbar = () => import('@/components/navbar/navbar')
 export default {
     data() {
@@ -77,7 +84,8 @@ export default {
     }
   },
   components:{
-        Navbar
+        Navbar,
+        Footer
     },
 
     methods: {
@@ -86,8 +94,12 @@ export default {
         let response = await this.$http.post("/user/login", this.login);
         let token = response.data.token;
         let idUser = response.data.user._id;
+        let userrank = response.data.Rank;
+        let userpoint = response.data.userpoint;
         localStorage.setItem("user_token", token);
         localStorage.setItem("user_id", idUser);
+        localStorage.setItem("user_rank", userrank);
+        localStorage.setItem("user_exp", userpoint);
         if (token) {
           swal.fire("Success", "Login Successful", "success");
           this.$store.dispatch('UserLoggedIn');

@@ -3,7 +3,7 @@
     <div>
       <Navbar></Navbar>
     </div>
-    <br>
+    <br><br>
     <div id ='headaddnews'>
         <div class="text-center">
           
@@ -44,9 +44,9 @@
                 <td>
                   <!-- <router-link :to="`/admin/listdoctrine/${doctrine._id}`">detail</router-link> -->
                   <!-- <router-link :to="{name : 'DetailDoctrine', params: {id:doctrine._id}}">detail</router-link> -->
-                  <v-btn @click="ViewCampaign(campaign._id)">view</v-btn>
-                  <v-btn @click="ViewLogCampaign(campaign._id)">Log</v-btn>
-                  <v-btn @click="EditCampaign(campaign._id)">Edit</v-btn>
+                  <v-btn style="margin-right:3%;" @click="ViewCampaign(campaign._id)">view</v-btn>
+                  <v-btn style="margin-right:3%;" @click="ViewLogCampaign(campaign._id)">Log</v-btn>
+                  <v-btn style="margin-right:3%;" @click="EditCampaign(campaign._id)">Edit</v-btn>
                   <v-btn @click="DeleteCampaign(campaign._id)">Delete</v-btn>
                 </td>
                 <!-- <td>{{ item.name }}</td>
@@ -138,7 +138,7 @@ import moment from "moment";
           showCancelButton: true,
           confirmButtonText: 'Yes, delete it!',
           cancelButtonText: 'No, cancel!',
-          reverseButtons: true
+          reverseButtons: false
         }).then((result) => {
           if (result.isConfirmed) {
             this.$http.delete("/campaign/DeleteCampaign/"+campaignid)

@@ -16,6 +16,7 @@
             <v-text-field style="text-align:center; "
                 single-line solo
                 v-model="email"
+                onkeypress="return event.charCode != 32"
                 :rules='emailRules'
                 label="Email"
                 required
@@ -77,16 +78,16 @@ export default {
                 swal.fire("ส่งอีเมลสำเร็จ", "ข้อความถูกส่งไปที่อีเมลของคุณแล้ว", "success")
               } else{
                 swal.hideLoading()
-                swal.fire("Error", "ผิดพลาดบางอย่าง", "error");
+                swal.fire("ส่งอีเมลไม่สำเร็จ", "เกิดข้อผิดพลาดบางอย่าง", "error");
               }
             } catch (err) {
               let error = err.response;
               console.log(error)
               if (error.status == 409) {
-                swal.fire("Error", error.data.errors.title, "error");
+                swal.fire(error.data.errors.title, error.data.errors.detail, "error");
                 console.log("success");
               } else {
-                swal.fire("Error", error.data.errors.title, "error");
+                swal.fire(error.data.errors.title, error.data.errors.detail, "error");
                 console.log("error");
               }
             }

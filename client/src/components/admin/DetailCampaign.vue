@@ -3,9 +3,11 @@
     <div>
       <Navbar></Navbar>
     </div>
+    <br><br>
      <div class="project-header">
     <v-container >
-      <v-btn to='/admin/listcampaign'> <i style="float:left;" class="fa fa-arrow-left fa-lg" aria-hidden="true"></i></v-btn>
+      <!-- this.$router.back(); -->
+      <v-btn @click="$router.back()"> <i style="float:left;" class="fa fa-arrow-left fa-lg" aria-hidden="true"></i></v-btn>
       
       <v-row>
           <h1>{{ campaign.name }}</h1>
@@ -171,7 +173,7 @@ export default {
           showCancelButton: true,
           confirmButtonText: 'Yes, delete it!',
           cancelButtonText: 'No, cancel!',
-          reverseButtons: true
+          reverseButtons: false
         }).then((result) => {
           if (result.isConfirmed) {
             this.$http.delete("/campaign/DeleteCampaign/"+this.$route.params.id)

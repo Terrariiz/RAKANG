@@ -3,6 +3,7 @@
         <div>
             <Navbar></Navbar>
         </div>
+        <br><br>
          <v-form
          @submit.prevent="Editdoctrine">
         <v-container id ='rounded' style="background-color: #F09C0B;">
@@ -47,7 +48,8 @@
                                     <!-- <v-container fluid>
                                         <v-textarea name="input-7-1" filledlabel="Label" label="รายละเอียด" auto-grow></v-textarea>
                                     </v-container> -->
-                                    <ckeditor v-model="doctrine.content" :config="editorConfig"></ckeditor>
+                                    <ckeditor v-model="doctrine.content" :editor="editor"
+                                    :config="editorConfig"></ckeditor>
                                     <!-- <v-btn small style="text-align: right;" rounded color="primary" dark  >Add detailnews</v-btn> -->
                                 </v-container>
                         </v-flex>
@@ -56,7 +58,7 @@
             </v-container>
                 <div id="grid-container">
                     <div></div>
-                    <v-btn style="weihgt = 40%" color="primary" dark @click="reset($route.params.id)">cancle</v-btn>
+                    <v-btn style="weihgt = 40%" color="primary" dark @click="$router.back()">cancle</v-btn>
                     <v-btn type="submit" color="primary" dark>submit</v-btn>
                     <div></div>  
                 </div>
@@ -117,6 +119,7 @@
 
 <script>
 const Navbar = () => import('@/components/navbar/navbar')
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import swal from "sweetalert2";
 export default {
     name : "EditDoctrine",
@@ -137,9 +140,25 @@ export default {
                 imagedata:null,
                 categories: null,
             },
-            editorConfig: {
-                // The configuration of the editor.
-            },
+            editor: ClassicEditor,
+      editorConfig: {
+        ckfinder: {
+		},
+      toolbar: [ 'ckfinder', '|',
+        'heading', '|',
+        'alignment', '|',
+        'bold', 
+        'italic', 'strikethrough', 'underline', 'subscript', 'superscript', '|',
+        'link', '|',
+        'bulletedList', 'numberedList', 'todoList',
+        '-', // break point
+        'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor', '|',
+        'code', 'codeBlock', '|',
+        'insertTable', '|',
+        'outdent', 'indent', '|',
+        'uploadImage', 'blockQuote', '|',
+        'undo', 'redo']
+      },
             imageData:null,
             items:['บทสวดมนต์','หลักธรรม คำสอน','คติสอนใจ','พุทธประวัติ','อื่นๆ'],
         }
@@ -245,9 +264,9 @@ export default {
         console.log(err)
         })
     },
-    reset(){
-        this.$router.push({ name: 'DetailDoctrine' , params: {id : this.$route.params.id}})
-    }
+    // reset(){
+    //     this.$router.push({ name: 'DetailDoctrine' , params: {id : this.$route.params.id}})
+    // }
     },
 }
 </script>

@@ -3,6 +3,7 @@
     <div>
       <Navbar></Navbar>
     </div>
+    <br><br><br><br>
     <!-- <form
          @submit.prevent="Addcampaign">
         <v-container id ='rounded' style="background-color: #F09C0B;">
@@ -184,8 +185,10 @@
               <br />
               <ckeditor
                 id="content"
+                :editor="editor"
                 v-model="campaign.overview"
                 @input="onEditorInput"
+                :config="editorConfig"
                 required
               >
               </ckeditor>
@@ -394,6 +397,7 @@ img {
 
 <script>
 const Navbar = () => import("@/components/navbar/navbar");
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import swal from "sweetalert2";
 
 export default {
@@ -416,6 +420,25 @@ export default {
         done: null,
         location: null,
         categories: null,
+      },
+      editor: ClassicEditor,
+      editorConfig: {
+        ckfinder: {
+		},
+      toolbar: [ 'ckfinder', '|',
+        'heading', '|',
+        'alignment', '|',
+        'bold', 
+        'italic', 'strikethrough', 'underline', 'subscript', 'superscript', '|',
+        'link', '|',
+        'bulletedList', 'numberedList', 'todoList',
+        '-', // break point
+        'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor', '|',
+        'code', 'codeBlock', '|',
+        'insertTable', '|',
+        'outdent', 'indent', '|',
+        'uploadImage', 'blockQuote', '|',
+        'undo', 'redo']
       },
     };
   },

@@ -1,9 +1,9 @@
 <template>
-  <div style="" class='register'>
+  <div class='register'>
     <div>
       <Navbar></Navbar>
     </div>
-    <br>
+    <br><br><br><br><br>
     <v-form
         ref="form"
         v-model="valid"
@@ -21,6 +21,7 @@
           single-line solo  
           v-model="register.email"
           label="Mail" 
+          onkeypress="return event.charCode != 32"
           :rules="emailRules"  
           required></v-text-field>
       </v-col>
@@ -38,6 +39,7 @@
             label="Password"
             hint="At least 6 characters"
             counter
+            onkeypress="return event.charCode != 32"
             @click:append="show1 = !show1"
             required
           ></v-text-field>
@@ -55,6 +57,7 @@
             label="Confirm password"
             hint="At least 6 characters"
             value=""
+            onkeypress="return event.charCode != 32"
             class="input-group--focused"
             @click:append="show2 = !show2"
             required
@@ -66,6 +69,7 @@
          single-line solo 
          v-model="register.firstname"
          label="Name" 
+         onkeypress="return event.charCode != 32"
          :rules="firstnameRules"  
          required></v-text-field>
       </v-col>
@@ -75,6 +79,7 @@
          single-line solo  
          v-model="register.lastname" 
          label="Surname" 
+         onkeypress="return event.charCode != 32"
          :rules="lastnameRules"  
          required></v-text-field>
       </v-col>
@@ -236,9 +241,13 @@ import swal from "sweetalert2";
         // console.log(response);
         let token = response.data.token;
         let id = response.data.data._id;
+        let userrank = response.data.Rank;
+        let userpoint = response.data.userpoint;
         if (token) {
+          localStorage.setItem("user_exp", userpoint);
           localStorage.setItem("user_token", token);
           localStorage.setItem('user_id', id)
+          localStorage.setItem("user_rank", userrank);
           this.$store.dispatch('UserLoggedIn');
           this.$router.push("/profile");
           swal.fire("Success", "Registration Was successful", "success");

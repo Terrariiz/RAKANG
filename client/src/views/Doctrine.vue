@@ -1,32 +1,84 @@
 <template>
+
     <div>
         <div>
         <Navbar></Navbar>
         </div>
-        <h1>Doctrine page</h1>
-        <!-- test -->
-        
-            <center>
-              <v-text-field style="width:70%; justify-content:center; margin-top:3%;" append-icon="mdi-magnify" v-model="search" label="ค้นหาหัวข้อ"></v-text-field>
-            </center>
-            <v-chip-group
-              v-model="selectedCategory"
-              active-class="primary--text"
-              mandatory>
-              <h5 style="padding: 7px 0px 0px 0px;">หมวดหมู่ : </h5>
-              <v-chip 
-                v-for="category in categories"
-                :key="category"
-                :value="category"
-              >
-                {{ category }}
-              </v-chip>
-            </v-chip-group>
-          
+        <!-- <h1>Doctrine</h1>        -->
+        <br>
      <v-container class="container-news">
-        <v-card class="margin-card" v-for="(doctrine, index) in filteredList " :key="doctrine.title" elevation="5" outlined shaped >
+       <v-chip-group
+        v-model="selectedCategory"
+        active-class="primary--text"
+        mandatory>
+        <h5 style="padding: 7px 0px 0px 0px;">หมวดหมู่ : </h5>
+        <v-chip 
+          v-for="category in categories"
+          :key="category"
+          :value="category"
+        >
+          {{ category }}
+        </v-chip>
+       </v-chip-group>
+       <div>
+         <v-text-field class="search-doctrine" style="width:30%;" prepend-inner-icon="mdi-magnify" v-model="search" label="ค้นหาหัวข้อ"></v-text-field>
+       </div>
+       <p class="notfound" v-if="filteredList.length == 0 && search !== ''">ไม่พบ "{{search.trim()}}"</p>
+       <p class="notfound" v-if="filteredList.length == 0 && search == ''">ไม่มีเนื้อหาในส่วนนี้</p>
+        <!-- อันใหม่ -->
+          <div class="containerx">
+            <v-row >
+              <v-col v-for="(doctrine) in filteredList " :key="doctrine.title" cols="12" md="4" sm="12">
+                <div  class="cardx">
+                  
+                  <img @click="ViewDoctrine(doctrine._id)"  :src="'http://localhost:4000/image/doctrine/' + doctrine.image">
+                  <div @click="ViewDoctrine(doctrine._id)" class="panelx">
+                     <!-- ปุ่ม bookmark -->
+           
+                    <h3>
+                     {{ doctrine.title }}
+                    </h3>
+                    <v-list-item three-line>
+                      <v-list-item-content  >
+                        <v-list-item-subtitle v-html="doctrine.content">
+                        {{ doctrine.content }}
+                        </v-list-item-subtitle>
+                      </v-list-item-content>
+                    </v-list-item>
+                    <span class="datex">{{ doctrine.edittime }}</span>
+                    <p>
+                     {{ doctrine.categories }}
+                    </p>
+                    
+                    
+                  </div>
+                   <div class="btn-bookmark" v-if="$store.getters.UserIsLoggedIn">
+              <v-btn
+                icon
+                color="#ffb703"
+                v-if="doctrine.fav"
+                @click="clickBookmarks(doctrine)"
+              >
+                <v-icon x-large>mdi-bookmark</v-icon>
+              </v-btn>
+              <v-btn
+                icon
+                color="white"
+                v-else
+                @click="clickBookmarks(doctrine)"  
+              >
+                <v-icon x-large>mdi-bookmark</v-icon>
+              </v-btn>
+            </div>
+                </div>
+              </v-col>
+            </v-row>
+          </div>
+       <!-- อันใหม่ -->
+        <!-- <v-card class="margin-card" v-for="(doctrine) in filteredList " :key="doctrine.title" elevation="5" outlined shaped >
         <v-row class="row-news">
           <v-col cols="12" md="6">
+            
             <v-img
             :src="'http://localhost:4000/image/doctrine/' + doctrine.image"
             class="img-fluid"
@@ -36,20 +88,20 @@
           </v-img>
           </v-col>
           <v-col class="cols-detail-campaign" cols="12" md="6">
-            <!-- ปุ่ม bookmark -->
+            ปุ่ม bookmark
             <div v-if="$store.getters.UserIsLoggedIn">
             <v-btn
               icon
               color="pink"
-              v-if="bookmarks[index].value"
-              @click="clickBookmarks(doctrine._id,index)"
+              v-if="doctrine.fav"
+              @click="clickBookmarks(doctrine)"
             >
               <v-icon>mdi-bookmark</v-icon>
             </v-btn>
             <v-btn
               icon
               v-else
-              @click="clickBookmarks(doctrine._id,index)"
+              @click="clickBookmarks(doctrine)"
               
             >
               <v-icon>mdi-bookmark</v-icon>
@@ -57,7 +109,7 @@
             </div>
             <v-container>
                 <h1>{{ doctrine.title }}  </h1>
-              <!-- <div>{{doctrines.content}}</div> -->
+              <div>{{doctrines.content}}</div>
               <div >
                 <v-row>
                   <v-col style="text-align:left;" cols="12" md="6">
@@ -75,23 +127,30 @@
             </v-container>
           </v-col>
         </v-row>
-        </v-card>
+        </v-card> -->
       </v-container>
+      <component-to-re-render :key="componentKey" />
+      <div>
+        <Footer></Footer>
+      </div>
     </div>
+    
 </template>
 
 <script>
 import moment from "moment";
+const Footer = () => import("@/components/navbar/footer");
 const Navbar = () => import('@/components/navbar/navbar')
 export default {
     name:'Doctrine',
     components:{
-        Navbar
+        Navbar,
+        Footer
     },
     data() {
     return {
+      componentKey: 0,
       doctrines : [],
-      bookmarks: [],
       token: null,
       search: '',
       selectedCategory: 'ทั้งหมด',
@@ -100,10 +159,10 @@ export default {
   },
   computed: {
     filteredList() {
-      return this.doctrines.filter(doctrine => {
+      var newlist = this.doctrines.filter(doctrine => {
         var result
         if(this.selectedCategory == 'ทั้งหมด'){
-          result = doctrine.title.toLowerCase().includes(this.search.toLowerCase())
+          result = doctrine.title.toLowerCase().replace(/\s/g, '').includes(this.search.toLowerCase().trim().replace(/\s/g, ''))
           return result
         } else{
           result = doctrine.categories.includes(this.selectedCategory)
@@ -111,15 +170,17 @@ export default {
             return result
           } else{
             if(result == true){
-              result = doctrine.title.toLowerCase().includes(this.search.toLowerCase())
+              result = doctrine.title.toLowerCase().replace(/\s/g, '').includes(this.search.toLowerCase().trim().replace(/\s/g, ''))
               return result
             }
           }
         }
       })
+      // this.checkfav(newlist)
+      return newlist
     }
   },
-  mounted: async function mounted() {
+  created: async function created() {
     var IsFav
     this.token = localStorage.getItem("user_token")
     if(this.$store.getters.UserIsLoggedIn){
@@ -159,10 +220,9 @@ export default {
               // IsFav = res.data.result
               return res.data.result
             })
-            this.bookmarks.push({ doctrinesid: doc, value: IsFav})
-          } else {
-            this.bookmarks.push({ doctrinesid: doc, value: false})
-          }
+            this.doctrines[i]["fav"] = IsFav;
+            this.forceRerender()
+          } 
           
         }
       })
@@ -171,27 +231,47 @@ export default {
       });
   },
   methods: {
-    ViewDoctrines(doctrinesid) {
+    ViewDoctrine(doctrineid){
       this.$router.push({
         name: "UserDetailDoctrine",
-        params: { id: doctrinesid },
-      });
+        params: {id:doctrineid}
+      })
+    },
+    forceRerender() {
+      this.componentKey += 1;
     },
     //เปลี่ยน value ใน bookmark
-    clickBookmarks(doctrinesid,index){
+    clickBookmarks(doctrine){
+      console.log(doctrine)
       if(localStorage.getItem("user_id")){
         var id = localStorage.getItem("user_id")
-          if(this.bookmarks[index].doctrinesid == doctrinesid && this.bookmarks[index].value == false){
-            this.$http.post("/user/"+id+"/AddFavouriteDoctrine/"+doctrinesid)
-            this.bookmarks[index].value = true
+        var index = -1
+          if(doctrine.fav == false){
+            this.$http.post("/user/"+id+"/AddFavouriteDoctrine/"+doctrine._id)
+            this.doctrines.find(function(item, i){
+            if(item._id === doctrine._id){
+              index = i;
+              return i;
+            }
+            });
+            console.log(index)
+            this.doctrines[index].fav = true
+            this.forceRerender()
           } else{
-            this.$http.post("/user/"+id+"/RemoveFavouriteDoctrine/"+doctrinesid)
-            this.bookmarks[index].value = false
+            this.$http.post("/user/"+id+"/RemoveFavouriteDoctrine/"+doctrine._id)
+            this.doctrines.find(function(item, i){
+            if(item._id === doctrine._id){
+              index = i;
+              return i;
+            }
+            });
+            console.log(index)
+            this.doctrines[index].fav = false
+            this.forceRerender()
         }
       } else {
         console.log("hiuhui")
       }
-      
     }
   },
   
@@ -199,12 +279,62 @@ export default {
 }
 </script>
 
-<style>
+<style >
+.btn-bookmark{
+  position: absolute;
+  right: 5%;
+  top:3%;
+}
+/* อันใหม่ */
+.containerx{
+	width: 80%;
+	margin: 0 auto;
+}
+.titlex {
+    text-align: center;
+    margin: 50px 0;
+}
+.titlex h5{
+	color: var(--primary-color);
+	text-transform: uppercase;
+}
+.column-cardx{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.cardx{
+  cursor: pointer;
 
+}
+.cardx:hover{
+	box-shadow: 0 0 20px 0px rgb(0,0,0,0.2);
+}
+.cardx img{
+    width: 100%;
+    height: 300px;
+}
+.panelx{
+	padding: 5%;
+	box-shadow: 0px 6px 18px -8px rgba(118,130,183,1);
+	border-radius: 10px;
+  height: 250px;
+  
+}
+span.datex {
+    font-weight: 700;
+}
+/* อันใหม่ */
+.notfound{
+  text-align: center;
+  font-size: 2.5em;
+  font-weight: bolder;
+  color: #4d4d4d;
+}
 .v-slide-group__content{
   justify-content: center;
 }
-.margin-card{
+/* .margin-card{
   margin-bottom:5%;
 }
 div{
@@ -234,7 +364,7 @@ v-img {
 .btn-news {
   position: relative;
   width: 40%;
-  /* left: 50%; */
+
   margin-left: auto;
   margin-right: auto;
 }
@@ -276,5 +406,5 @@ v-img {
     width: 100%;
     margin: 3%;
   }
-}
+} */
 </style>

@@ -3,12 +3,16 @@
     <div>
       <Navbar></Navbar>
     </div>
-    <div class="project-header">
-      <v-container>
-        <v-row>
-            <v-col cols="12">
-                <h1>{{ doctrine.title }}</h1>
-                <!-- ปุ่ม bookmark -->
+    <br>
+    <!-- อันใหม่ -->
+      <section class="header">
+        <h1>หลักธรรม</h1>
+        <!-- <h4>ชื่อหัวข้อเรื่อง</h4> -->
+      </section>
+      <hr>
+      <section class="content-container">
+        <div class="left-content">
+         <!-- ปุ่ม bookmark -->
                 <div v-if="$store.getters.UserIsLoggedIn">
                   <v-btn
                     icon
@@ -16,17 +20,82 @@
                     v-if="bookmark.value == false"
                     @click="clickBookmarks()"
                   >
-                    <v-icon>mdi-bookmark</v-icon>
+                    <v-icon x-large>mdi-bookmark</v-icon>
                   </v-btn>
                   <v-btn
                     icon
-                    color="pink"
+                    color="#ffb703"
                     v-model="bookmark.value"
                     @click="clickBookmarks()"
                     v-if="bookmark.value == true"
                   >
-                    <v-icon>mdi-bookmark</v-icon>
+                    <v-icon x-large>mdi-bookmark</v-icon>
                   </v-btn>
+                  
+              
+                </div>
+          <h2>{{ doctrine.title }}</h2>
+          <div class="date-news">
+            วันที่โพสต์: {{ doctrine.edittime }}
+          </div>
+          <div class="date-news">
+            หมวดหมู่: {{ doctrine.categories }}
+          </div>
+          <div class="featured-article">
+            <img  :src="'http://localhost:4000/image/doctrine/' + doctrine.image">
+            <p v-html="doctrine.content">{{ doctrine.content }}</p>
+          </div>
+          <div class="another-article">
+            <h3>another article</h3>
+            <img >
+            <p></p>
+            <button class="btn read-more-btn">อ่านเพิ่มเติม</button>
+          </div>
+        </div>
+        <div class="right-content">
+          <div class="topics">
+              <h5>หัวข้อเพิ่มเติม</h5>
+            </div>
+          <div class="avatar-content">
+            <h5>แคมเปญแนะนำ</h5>
+            <img :src="'http://localhost:4000/image/campaign/' + campaigns[showcampaign].image">
+            <p>{{ campaigns[showcampaign].name }}</p>
+          </div>
+          <div class="avatar-content">
+            <h5>ข่าวแนะนำ</h5>
+            <img :src="'http://localhost:4000/image/new/' + news[shownews].image">
+            <p>{{news[shownews].title}}</p>
+            
+          </div>
+        </div>
+      </section>
+      <!-- อันใหม่ -->
+    <!-- <div class="project-header">
+      <v-container>
+        <v-row>
+            <v-col cols="12">
+                <h1>{{ doctrine.title }}</h1>
+                ปุ่ม bookmark
+                <div v-if="$store.getters.UserIsLoggedIn">
+                  <v-btn
+                    icon
+                    v-model="bookmark.value"
+                    v-if="bookmark.value == false"
+                    @click="clickBookmarks()"
+                  >
+                    <v-icon x-large>mdi-bookmark</v-icon>
+                  </v-btn>
+                  <v-btn
+                    icon
+                    color="#ffb703"
+                    v-model="bookmark.value"
+                    @click="clickBookmarks()"
+                    v-if="bookmark.value == true"
+                  >
+                    <v-icon x-large>mdi-bookmark</v-icon>
+                  </v-btn>
+                  
+              
                 </div>
             </v-col>
             <v-col cols="12">
@@ -47,23 +116,31 @@
           </v-col>
         </v-row>
       </v-container>
+    </div> -->
+    <div>
+      <Footer></Footer>
     </div>
   </div>
 </template>
 
 <script>
 import moment from "moment";
+const Footer = () => import("@/components/navbar/footer");
 const Navbar = () => import('@/components/navbar/navbar')
 export default {
     name : "detail_doctrine",
     data (){
       return {
-        doctrine: null,
-        bookmark: null
+        doctrine: [],
+        bookmark: [],
+        showcampaign:0,
+        shownews:0,
+        news:[],
       }
     },
     components:{
-      Navbar
+      Navbar,
+      Footer
     },
     created() {
       this.getData()
@@ -107,6 +184,10 @@ export default {
           console.log(err)
         })
       },
+       randomcampaign(lengthoflist){
+          var list =  Math.floor(Math.random() * lengthoflist);
+          return list;
+      },
       //เปลี่ยน value ใน bookmark
 
       clickBookmarks(){
@@ -120,6 +201,30 @@ export default {
           }
       }
     },
+     mounted: async function mounted() {
+    await this.$http
+      .get("/campaign/ShowListCampaign")
+      .then((res) => {
+        console.log(res.data);
+        // this.percent = (res.datadonate / this.amount)* 100
+        this.campaigns = res.data;
+        this.showcampaign = this.randomcampaign(this.campaigns.length);
+        
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+       await this.$http
+      .get("/news/ShowListNews")
+      .then((res) => {
+        this.news = res.data;
+        this.shownews = this.randomcampaign(this.news.length);
+        console.log(this.shownews);
+      })
+       .catch(function(err) {
+        console.log(err);
+      });
+  },
 };
 </script>
 
@@ -171,4 +276,90 @@ img{
     padding-right: 0;
 }
 }
+/* อันใหม่ */
+.date-news{
+  color: #a9a9a9;
+  font-size: 13px;
+}
+.header{
+  text-align: center;
+  margin-top:3% ;
+  margin-bottom: 2%;
+}
+h1{
+  font-size: 50px;
+}
+h2,h4,h5{
+  font-weight: 100;
+}
+hr{
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2%;
+}
+.content-container{
+  display: grid;
+  grid-template-areas:'left-content right-content' ;
+  width: 60%;
+  margin: auto;
+  grid-gap:50px;
+  text-align: left;
+}
+.featured-article, .another-article{
+  margin-top: 2%;
+  margin-bottom: 2%;
+
+}
+.another-article h3, p{
+  margin-bottom:10px ;
+}
+img{
+  height:400px;
+  width: 700px;
+}
+.read-more-btn{
+  background-color: black;
+  border: none;
+  color: white;
+  float: right;
+  padding: 10px 20px 10px 20px;
+}
+.read-more-btn:hover{
+  background-color: #a9a9a9;
+}
+.right-content img{
+  height: 200px;
+  width: 300px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2%;
+}
+.topics{
+  margin-bottom: 20%;
+}
+.topics h5{
+  background-color: black;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  margin-bottom: 2%;
+}
+@media(max-width:1299px){
+  .content-container{
+    grid-template-areas:'left-content''right-content' ;
+    width: 70%;
+    margin: auto;
+
+  }
+  hr{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2%;
+  }
+
+}
+/* อันใหม่ */
 </style>

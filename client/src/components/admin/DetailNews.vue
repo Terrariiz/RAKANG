@@ -3,6 +3,7 @@
     <div>
       <Navbar></Navbar>
     </div>
+    <br><br>
       <v-container rounded-xl style="background:linear-gradient(90deg, hsla(16, 100%, 76%, 1) 0%, hsla(49, 100%, 81%, 1) 100%); 
        box-shadow:5px 6px 5px #888888; margin-top: 3%">
       <v-btn to='/admin/listnews'><i style="float:left;" class="fa fa-arrow-left fa-lg" aria-hidden="true"></i></v-btn>
@@ -68,7 +69,7 @@ export default {
         })
       },
       EditNews(newsid){
-        this.$router.push({ name: 'editnews' , params: {id : newsid}})
+        this.$router.push({ name: 'EditNews' , params: {id : newsid}})
       },
       DeleteNews(){
         const swalWithBootstrapButtons = swal.mixin({
@@ -85,7 +86,7 @@ export default {
           showCancelButton: true,
           confirmButtonText: 'Yes, delete it!',
           cancelButtonText: 'No, cancel!',
-          reverseButtons: true
+          reverseButtons: false
         }).then((result) => {
           if (result.isConfirmed) {
             this.$http.delete("/news/DeleteNews/"+this.$route.params.id)

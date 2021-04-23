@@ -1,21 +1,23 @@
 <template>
   <div>
+    <go-top></go-top>
     <div v-if="$store.getters.UserIsLoggedIn">
-      <v-app-bar  fixed app color="cyan accent-4">        
-        <v-toolbar-items class="hidden-sm-and-down">
-          <v-btn text to="/home">
-            RAKANGTHAM
+      <v-app-bar fixed color="#CFD6EA" class="vapp-bar">
+        <v-toolbar-items class="hidden-sm-and-down" stlye="color: #CFD6EA;">
+          
+          <v-btn color="#CFD6EA" text to="/home">
+            <img style="width:50px; height:50px;" src="../../../public/image/logo.png">
           </v-btn>
-          <v-btn text to="/campaign">
+          <v-btn color="#444" text to="/campaign">
             แคมเปญ
           </v-btn>
-          <v-btn text to="/doctrine">
+          <v-btn color="#444" text to="/doctrine">
             หลักธรรมคำสอน
           </v-btn>
-          <v-btn text to="/news">
+          <v-btn color="#444" text to="/news">
             ข่าวประชาสัมพันธ์
           </v-btn>
-          <v-btn text to='/rank'>
+          <v-btn color="#444" text to='/rank'>
             อันดับ
           </v-btn>
         </v-toolbar-items>
@@ -23,18 +25,30 @@
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       </v-app-bar>
       <v-navigation-drawer
-        class="cyan accent-4"
+        color='#CFD6EA'
         v-model="drawer"
         right
         absolute
         temporary
+        style='position: fixed; top: 0;'
       >
       <div v-if='$store.getters.IsDesk'>
         <v-list nav>
           <v-list-item-group v-model="group">
             <router-link tag="v-list-item" to="/profile"
               ><v-list-item>
-                <v-list-item-title>หน้าโปรไฟล์</v-list-item-title>
+                <v-list-item-title style="color:#000">หน้าโปรไฟล์</v-list-item-title>
+              </v-list-item></router-link
+            >
+            <hr>
+            <router-link tag="v-list-item" to="/seamsi"
+              ><v-list-item>
+                <v-list-item-title style="color:#000">เสี่ยงเซียมซี</v-list-item-title>
+              </v-list-item></router-link
+            >
+            <router-link tag="v-list-item" to="/lantern"
+              ><v-list-item>
+                <v-list-item-title style="color:#000">ลอยโคมอธิษฐาน</v-list-item-title>
               </v-list-item></router-link
             >
           </v-list-item-group>
@@ -79,6 +93,17 @@
                 <v-list-item-title>หน้าโปรไฟล์</v-list-item-title>
               </v-list-item></router-link
             >
+            <hr>
+            <router-link tag="v-list-item" to="/seamsi"
+              ><v-list-item>
+                <v-list-item-title>เสี่ยงเซียมซี</v-list-item-title>
+              </v-list-item></router-link
+            >
+            <router-link tag="v-list-item" to="/lantern"
+              ><v-list-item>
+                <v-list-item-title>ลอยโคมอธิษฐาน</v-list-item-title>
+              </v-list-item></router-link
+            >
           </v-list-item-group>
         </v-list>
         <div class="pa-2">
@@ -91,10 +116,10 @@
     </div>
 
     <div v-else-if="$store.getters.AdminIsLoggedIn">
-      <v-app-bar color="gray accent-4" dark>
+      <v-app-bar fixed color="gray accent-4" dark>
         <v-toolbar-items class="hidden-sm-and-down">
-          <v-btn text to="/home">
-            RAKANGTHAM
+          <v-btn color="#CFD6EA" text to="/home">
+            <img style="width:50px; height:50px;" src="../../../public/image/logo.png">
           </v-btn>
           <v-btn text to="/campaign">
             แคมเปญ
@@ -119,6 +144,7 @@
         right
         absolute
         temporary
+        style='position: fixed; top: 0;'
       >
       <div v-if='$store.getters.IsDesk'>
         <v-list nav>
@@ -215,21 +241,21 @@
     </div>
 
     <div v-else>
-      <v-app-bar color="cyan accent-4">
+      <v-app-bar fixed color='#CFD6EA'>
         <v-toolbar-items class="hidden-sm-and-down">
-          <v-btn text to="/home">
-            RAKANGTHAM
+          <v-btn color="#CFD6EA" text to="/home">
+            <img style="width:50px; height:50px;" src="../../../public/image/logo.png">
           </v-btn>
-          <v-btn text to="/campaign">
+          <v-btn color="#444" text to="/campaign">
             แคมเปญ
           </v-btn>
-          <v-btn text to="/doctrine">
+          <v-btn color="#444" text to="/doctrine">
             หลักธรรมคำสอน
           </v-btn>
-          <v-btn text to="/news">
+          <v-btn color="#444" text to="/news">
             ข่าวประชาสัมพันธ์
           </v-btn>
-          <v-btn text to='/rank'>
+          <v-btn color="#444" text to='/rank'>
             อันดับ
           </v-btn>
         </v-toolbar-items>
@@ -237,11 +263,12 @@
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       </v-app-bar>
       <v-navigation-drawer
-        class="cyan accent-4"
+        color='#CFD6EA'
         v-model="drawer"
         right
         absolute
         temporary
+        style='position: fixed; top: 0;'
       >
       <div v-if='$store.getters.IsDesk'>
         <v-list nav>
@@ -287,7 +314,7 @@
                 <v-list-item-title>อันดับ</v-list-item-title>
               </v-list-item></router-link
             >
-            <hr>
+            <hr color='#000'>
             <router-link tag="v-list-item" to="/login"
               ><v-list-item>
                 <v-list-item-title>เข้าสู่ระบบ</v-list-item-title>
@@ -307,9 +334,13 @@
 </template>
 
 <script>
+// import a from "../../../public/image/logo.png"
+import GoTop from '@inotom/vue-go-top';
 export default {
   name: "Navbar",
-
+  components:{
+    GoTop
+  },
   data() {
     return {
       drawer: false,
@@ -371,4 +402,7 @@ export default {
 </script>
 
 <style>
+.vapp-bar{
+  color: #CFD6EA;
+}
 </style>

@@ -3,12 +3,14 @@
     <div>
       <Navbar></Navbar>
     </div>
+    
     <v-form 
     ref="form"
     v-model="valid"
     lazy-validation
     @submit.prevent="EditProfile">
       <div>
+      <br><br><br>
         <v-container>
           <v-row>
             <v-col style="background-color:red;" cols="12" md="4" sm="12">
@@ -19,9 +21,10 @@
                   ></v-btn
                 >
               </div>
+              
               <center>
                 <v-div
-                  style=""
+                  
                   class="base-image-input"
                   :style="{ 'background-image': `url(${imageData})` }"
                   @click="chooseImage"
@@ -233,10 +236,10 @@ export default {
     await this.$http
       .get("/user/" + id)
       .then((res) => {
-        this.dataUser = res.data.found;
+        this.dataUser = res.data;
         this.dataEdit.oldimage = res.data.image;
         this.imageData =
-          "http://localhost:4000/image/profile/" + res.data.found.image;
+          "http://localhost:4000/image/profile/" + res.data.image;
       })
       .catch(function(err) {
         console.log(err);

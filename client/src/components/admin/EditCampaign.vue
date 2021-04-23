@@ -3,6 +3,7 @@
         <div>
             <Navbar></Navbar>
         </div>
+        <br><br>
          <v-form
          @submit.prevent="Editcampaign">
        <div class="project-header">
@@ -143,6 +144,8 @@
             <ckeditor 
               id="content"
               v-model="campaign.overview"
+              :editor="editor"
+              :config="editorConfig"
               @input="onEditorInput" required> 
             </ckeditor>
             <hr>
@@ -150,6 +153,8 @@
             <br>
               <ckeditor 
                 id="content"
+                :editor="editor"
+                :config="editorConfig"
                 v-model="campaign.done"
                 @input="onEditorInput">
             </ckeditor>
@@ -166,7 +171,7 @@
                 <v-row style="margin-top:3%;">
                 <v-col  cols = "3"></v-col>
                 <v-col  cols = "3">
-                  <v-btn color="error" style="float:right;" dark @click="reset($route.params.id)">Cancle</v-btn>
+                  <v-btn color="error" style="float:right;" dark @click="$router.back()">Cancle</v-btn>
                 </v-col>
                 <v-col  cols = "3">
                   <v-btn color="primary" style="float:left;" type="submit">Submit</v-btn>
@@ -319,6 +324,7 @@ img{
 
 <script>
 const Navbar = () => import('@/components/navbar/navbar')
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import swal from "sweetalert2";
 export default {
     name : "EditCampaign",
@@ -346,9 +352,25 @@ export default {
                 categories: null
             },
            
-            editorConfig: {
-                    // The configuration of the editor.
-                },
+            editor: ClassicEditor,
+      editorConfig: {
+        ckfinder: {
+		},
+      toolbar: [ 'ckfinder', '|',
+        'heading', '|',
+        'alignment', '|',
+        'bold', 
+        'italic', 'strikethrough', 'underline', 'subscript', 'superscript', '|',
+        'link', '|',
+        'bulletedList', 'numberedList', 'todoList',
+        '-', // break point
+        'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor', '|',
+        'code', 'codeBlock', '|',
+        'insertTable', '|',
+        'outdent', 'indent', '|',
+        'uploadImage', 'blockQuote', '|',
+        'undo', 'redo']
+      },
             imageData:null,
         }
     },
@@ -460,9 +482,9 @@ export default {
         console.log(err)
         })
     },
-    reset(){
-        this.$router.push({ name: 'DetailCampaign' , params: {id : this.$route.params.id}})
-    },
+    // reset(){
+    //     this.$router.push({ name: 'DetailCampaign' , params: {id : this.$route.params.id}})
+    // },
     save (date) {
         this.$refs.menu.save(date)
       },

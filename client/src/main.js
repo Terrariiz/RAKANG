@@ -5,9 +5,14 @@ import store from './store'
 import axios from "axios";
 // import VueAxios from "vue-axios";
 import vuetify from './plugins/vuetify';
-import CKEditor from 'ckeditor4-vue';
+// import CKEditor from 'ckeditor4-vue';
+// import CKEditor from 'ckeditor/ckeditor5-vue';
 import vmodal from 'vue-js-modal';
+import CKEditor from '@ckeditor/ckeditor5-vue2';
 
+Vue.use( CKEditor );
+// var editor = CKEDITOR.replace( 'editor1' );
+// CKFinder.setupCKEditor( editor );
 
 const base = axios.create({
   baseURL: "http://localhost:4000"
@@ -28,7 +33,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 // Vue.use(VueAxios, axios);
 Vue.use(BootstrapVue);
-Vue.use( CKEditor );
+// Vue.use( CKEditor );
 Vue.use(require('vue-moment'));
 Vue.use(vmodal, { dialog: true });
 

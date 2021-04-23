@@ -21,6 +21,7 @@
                 :rules='passwordRules'
                 label="Password"
                 hint="At least 6 characters"
+                onkeypress="return event.charCode != 32"
                 counter
                 @click:append="show1 = !show1"
                 aria-required=""
@@ -33,6 +34,7 @@
                 :rules="confirmPasswordRules.concat(passwordConfirmationRule)"
                 label="Confirm Password"
                 hint="At least 6 characters"
+                onkeypress="return event.charCode != 32"
                 counter
                 @click:append="show2 = !show2"
                 aria-required=""
@@ -133,11 +135,9 @@ export default {
               let error = err.response;
               console.log(error)
               if (error.status == 409) {
-                swal.fire("Error", error.data.errors.detail, error.data.errors.title);
-                console.log("success");
+                swal.fire(error.data.errors.title, error.data.errors.detail, "error");
               } else {
-                swal.fire("Error", error.data.errors.detail, error.data.errors.title);
-                console.log("error");
+                swal.fire(error.data.errors.title, error.data.errors.detail, "error");
               }
             }
         },
