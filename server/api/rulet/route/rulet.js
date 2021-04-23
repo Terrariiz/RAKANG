@@ -8,7 +8,7 @@ const mongoose = require("mongoose");
 router.post("/addrulet", ruletController.addrulet);
 router.get("/ShowCard/:id", ruletController.ShowCard);
 // router.get("/DetailNews/:id", newsController.DetailNews);
-
+router.post("/test", ruletController.test);
 
 
 module.exports = router;

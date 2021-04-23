@@ -52,7 +52,7 @@ const userSchema = new mongoose.Schema({
   },
   seamsi:{
     Playable: Boolean,
-    Detail:  String
+    Detail:  String,
   },
   lantern:{
     Playable: Boolean,
