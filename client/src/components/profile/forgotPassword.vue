@@ -16,6 +16,7 @@
             <v-text-field style="text-align:center; "
                 single-line solo
                 v-model="email"
+                onkeypress="return event.charCode != 32"
                 :rules='emailRules'
                 label="Email"
                 required

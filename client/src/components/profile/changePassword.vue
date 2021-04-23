@@ -22,6 +22,7 @@
                   :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                   name="input-10-1"
                   label="Old password"
+                  onkeypress="return event.charCode != 32"
                   hint="At least 6 characters"
                   counter
                   @click:append="show1 = !show1"
@@ -37,6 +38,7 @@
                   name="input-10-2"
                   label="New password"
                   hint="At least 6 characters"
+                  onkeypress="return event.charCode != 32"
                   counter
                   @click:append="show2 = !show2"
                   required
@@ -51,6 +53,7 @@
                   name="input-10-3"
                   label="Confirm new password"
                   hint="At least 6 characters"
+                  onkeypress="return event.charCode != 32"
                   counter
                   @click:append="show3 = !show3"
                   required
