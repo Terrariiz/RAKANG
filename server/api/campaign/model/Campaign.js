@@ -33,6 +33,12 @@ const CampaignSchema = new mongoose.Schema({
         ref: "DonateLog"
     }
   ],
+  exchangelog:[
+    {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "ExchangeLog"
+    }
+  ],
   location:{
     type: String,
   },
