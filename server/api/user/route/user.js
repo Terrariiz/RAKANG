@@ -28,7 +28,7 @@ router.get("/:id/CheckFav/:doctrine", userController.CheckFav);
 // router.get("/:id/ShowFavDoctrine", userController.ShowFavDoctrine);
 router.post("/:id/AddFavouriteDoctrine/:doctrine", userController.AddFavouriteDoctrine);
 router.post("/:id/RemoveFavouriteDoctrine/:doctrine", userController.RemoveFavouriteDoctrine);
-router.post("/random/:id", userController.seamsi);
+//router.post("/random/:id", userController.seamsi);
 router.post("/lantern/:id", userController.lantern);
 
 

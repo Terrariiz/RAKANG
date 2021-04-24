@@ -54,8 +54,8 @@ export default {
             .then((res) => {
             this.rulet = res.data;
             var formData = new URLSearchParams();
-            formData.append("Detail", this.rulet[0].content);
-            this.$http.post("/user/random/" + id, formData);
+            formData.append("content", this.rulet[0].content);
+            this.$http.post("/rulet/random/" + id, formData);
             setTimeout(() =>    
         swal.fire({
           title: 'ใบที่'+ this.rulet[0].CNumber,
