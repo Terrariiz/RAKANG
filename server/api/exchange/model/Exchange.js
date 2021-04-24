@@ -18,9 +18,6 @@ const newSchema = new mongoose.Schema({
   cost: {
     type: Number,
   },
-  status: {
-    type: String
-  }, 
   waitingorder: [
     {
       type: mongoose.Schema.Types.ObjectId,

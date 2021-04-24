@@ -54,7 +54,6 @@ const adminRoutes = require('./api/admin/route/admin');
 const campaignRoutes = require('./api/campaign/route/campaign');
 
 const donateRoutes = require('./api/log/route/donatelog');
-const minigameRoutes = require('./api/log/route/minigamelog');
 const ruletRoutes = require('./api/rulet/route/rulet');
 const ExchangeRoute = require("./api/exchange/route/exchange")
 // const testroute = require('./api/test/test');
@@ -71,7 +70,6 @@ app.use("/campaign", campaignRoutes);
 app.use("/exchangeitem", ExchangeRoute);
 
 app.use("/donatelog", donateRoutes);
-app.use("/minigamelog", minigameRoutes);
 app.use("/rulet", ruletRoutes);
 
 

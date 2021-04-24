@@ -217,7 +217,7 @@ exports.AcceptOrder = function(req,res){
     console.log(req.body.AcceptList)
     console.log(Accepted)
     console.log(test)
-    Exchange.findById({_id : req.params.id},async function(err, exchange){
+    Exchange.findById({_id : req.params.id}.populate({path:"waitingorder" , model : ExchangeLog}),async function(err, exchange){
     // Exchange.findById(req.params.id).populate({path:"waitingorder" , model : ExchangeLog}).populate({path:"confirmorder" , model : ExchangeLog}).exec(async function(err, exchange){
       if(err){
         console.log(err)
@@ -228,6 +228,7 @@ exports.AcceptOrder = function(req,res){
             console.log(order)
             if(order == accept){
               console.log('equal')
+              exchange.waitingorder.status = ""
               exchange.waitingorder.remove(order)
               exchange.confirmorder.push(order)
 
@@ -236,6 +237,38 @@ exports.AcceptOrder = function(req,res){
         });
         exchange.save();
         res.json(exchange);
+      }
+    })
+  } catch (err) {
+    res.status(400).json({ err: err });
+    console.log(err)
+  }
+}
+
+exports.GetUserExchangeLog = function(req,res){
+  try{
+    console.log('this')
+    User.findById(req.params.id).populate({path:"exchangelog" , model : ExchangeLog}).exec(async function(err, exchange){
+      if(err){
+        console.log(err)
+      } else {
+        return res.json(exchange);
+      }
+    })
+  } catch (err) {
+    res.status(400).json({ err: err });
+    console.log(err)
+  }
+}
+
+exports.GetExchangeLogItem = function(req,res){
+  try{
+    console.log('this')
+    Exchange.findById(req.params.id).populate({path:"waitingorder" , model : ExchangeLog}).populate({path:"confirmorder" , model : ExchangeLog}).exec(async function(err, exchange){
+      if(err){
+        console.log(err)
+      } else {
+        return res.json(exchange);
       }
     })
   } catch (err) {

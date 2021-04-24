@@ -25,6 +25,9 @@ router.post("/DetailItem/:id/Perchase/:user", exchangeController.Purchase);
 router.get("/DetailItem/:id/ShowOrder", exchangeController.ShowOrder);
 router.post("/DetailItem/:id/AcceptOrder", exchangeController.AcceptOrder);
 
+router.get("/GetUserExchangeLog/:id", exchangeController.GetUserExchangeLog);
+router.get("/GetExchangeLogItem/:id", exchangeController.GetExchangeLogItem);
+
 
 
 module.exports = router;
