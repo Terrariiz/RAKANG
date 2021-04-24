@@ -66,3 +66,25 @@ exports.test = async(req,res) => {
     console.log(err)
   }
 };
+exports.seamsi = async (req,res) => {  
+  try{     
+  const add = {
+    uid:  req.params.id,
+    content: req.body.content
+  }
+  console.log(add)
+  Random.findByIdAndUpdate({_id : req.params.id},add,function(err, sam){
+    if(err){
+      console.log(err)
+    } else {
+      console.log('success')
+      console.log(sam)
+      console.log(add)
+      res.status(201).json({ sam });
+    }
+  })
+ } catch (err) {
+  res.status(400).json({ err: err });
+  console.log(err)
+}
+}
