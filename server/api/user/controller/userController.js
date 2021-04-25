@@ -26,6 +26,7 @@ exports.registerNewUser = async (req, res) => {
         resetPasswordExpires: null,
         image: "user.png",
         point: 0,
+        totalpoint: 0,
         seamsi:{
           Playable: true,
           Detail:  null
@@ -162,7 +163,7 @@ exports.getUserRank = async (req, res) => {
         console.log(err);
       } else{
         found.sort(function(a, b){
-          return b.point - a.point;
+          return b.totalpoint - a.totalpoint;
       });
         res.json(found);
       }
@@ -182,7 +183,7 @@ exports.getMyRank = async (req, res) => {
       } else{
 
         found.sort(function(a, b){
-          return b.point - a.point;
+          return b.totalpoint - a.totalpoint;
       });
 
       // console.log(found)

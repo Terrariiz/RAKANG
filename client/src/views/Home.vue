@@ -3,7 +3,6 @@
     <div>
       <Navbar></Navbar>
     </div>
-
     
     <section >
       <div class="header"></div>
@@ -165,16 +164,12 @@
             <img :src="'http://localhost:4000/image/doctrine/' + doctrine.image">
               <h3 class="title-color">{{doctrine.title}}</h3>
           </div>
-      </div>
-
-      
-        
+      </div>       
     </section>
-    <!-- หลักธรรม -->
-    
-        
-
-    
+    <!-- หลักธรรม --> 
+    <div>
+      <Footer></Footer>
+    </div>    
   </div>
 </template>
 
@@ -183,6 +178,7 @@
 import moment from "moment";
 // import DialogDonate from "./dialog_donate";
 const Navbar = () => import("@/components/navbar/navbar");
+const Footer = () => import("@/components/navbar/footer");
 export default {
   name: "Home",
   data() {
@@ -283,7 +279,7 @@ export default {
   
   components: {
     Navbar,
-    
+    Footer
   },
   
 };

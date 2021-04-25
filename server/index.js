@@ -54,8 +54,8 @@ const adminRoutes = require('./api/admin/route/admin');
 const campaignRoutes = require('./api/campaign/route/campaign');
 
 const donateRoutes = require('./api/log/route/donatelog');
-const minigameRoutes = require('./api/log/route/minigamelog');
 const ruletRoutes = require('./api/rulet/route/rulet');
+const ExchangeRoute = require("./api/exchange/route/exchange")
 // const testroute = require('./api/test/test');
 
 // app.use("/user", userRoutes);
@@ -67,9 +67,9 @@ app.use("/user", userRoutes);
 app.use("/news", newsRoutes);
 app.use("/admin", adminRoutes);
 app.use("/campaign", campaignRoutes);
+app.use("/exchangeitem", ExchangeRoute);
 
 app.use("/donatelog", donateRoutes);
-app.use("/minigamelog", minigameRoutes);
 app.use("/rulet", ruletRoutes);
 
 
@@ -127,6 +127,7 @@ app.post("/test", async function(req,res){
               User.findOne({_id : fuckingid}, function(err, user){
                 const now = new Date();
                 //////แก้ไขแต้มบุญ user
+                user.totalpoint = user.totalpoint+amount/10
                 user.point = user.point+amount/10
                 RankChange = user.ChangeRank()
                 console.log(RankChange)

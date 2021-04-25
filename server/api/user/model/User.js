@@ -47,12 +47,15 @@ const userSchema = new mongoose.Schema({
   resetPasswordExpires: {
     type: String,
   },
+  totalpoint:{
+    type: Number
+  },
   point:{
     type: Number
   },
   seamsi:{
     Playable: Boolean,
-    Detail:  String
+    Detail:  String,
   },
   lantern:{
     Playable: Boolean,
@@ -69,6 +72,12 @@ const userSchema = new mongoose.Schema({
     {
         type: mongoose.Schema.Types.ObjectId,
         ref: "MinigameLog"
+    }
+  ],
+  exchangelog:[
+    {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "ExchangeLog"
     }
   ],
   favdoctrinelist:[
@@ -106,7 +115,7 @@ userSchema.methods.getrank = async function(id) {
         console.log(err);
       } else{
         found.sort(function(a, b){
-          return b.point - a.point;
+          return b.totalpoint - a.totalpoint;
       });
       for(i = 0 ; i <= (found.length - 1) ; i++){
         if(found[i]._id == id){
@@ -146,23 +155,23 @@ userSchema.statics.checkPassword = async (id, oldPassword, newPassword) => {
 };
 //เลื่อนระดับของ user เมื่อ point ถึงค่าที่กำหนด
 userSchema.methods.ChangeRank =  function() {
-  if(this.point >= 100000 && this.Rank != "Diamond"){
+  if(this.totalpoint >= 100000 && this.Rank != "Diamond"){
     this.Rank = "Diamond"
     this.Badge = "Diamond_Badge.png" 
     return "Diamond"
-  } else if(this.point >= 30000 && this.Rank != "Platinum" && this.Rank != "Diamond"){
+  } else if(this.totalpoint >= 30000 && this.Rank != "Platinum" && this.Rank != "Diamond"){
     this.Rank = "Platinum"
     this.Badge = "Platinum_Badge.png"
     return "Platinum"
-  } else if(this.point >= 10000 &&  this.Rank != "Gold" && this.Rank != "Platinum" && this.Rank != "Diamond"){
+  } else if(this.totalpoint >= 10000 &&  this.Rank != "Gold" && this.Rank != "Platinum" && this.Rank != "Diamond"){
     this.Rank = "Gold"
     this.Badge = "Gold_Badge.png"
     return "Gold"
-  } else if(this.point >= 5000 && this.Rank != "Silver" && this.Rank != "Gold" && this.Rank != "Platinum" && this.Rank != "Diamond"){
+  } else if(this.totalpoint >= 5000 && this.Rank != "Silver" && this.Rank != "Gold" && this.Rank != "Platinum" && this.Rank != "Diamond"){
     this.Rank = "Silver"
     this.Badge = "Silver_Badge.png"
     return "Silver"
-  } else if(this.point >= 0 && this.Rank != "Bronze" && this.Rank != "Silver" && this.Rank != "Gold" && this.Rank != "Platinum" && this.Rank != "Diamond"){
+  } else if(this.totalpoint >= 0 && this.Rank != "Bronze" && this.Rank != "Silver" && this.Rank != "Gold" && this.Rank != "Platinum" && this.Rank != "Diamond"){
     this.Rank = "Bronze"
     this.Badge = "Bronze_Badge.png"
     return "Bronze"

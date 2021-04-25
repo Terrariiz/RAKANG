@@ -40,7 +40,36 @@ export default {
     components:{
         Navbar
     },
+     mounted: function(){
+      this.getData()
+    },
     methods: {
+        getData(){
+        var id = window.localStorage.getItem("user_id");
+        var that = this;
+        this.$http.get("/rulet/random/"+id)
+        .then((res) => {
+          console.log(res.data)
+          that.rulet = res.data;
+          console.log(that.rulet)
+          if(that.rulet !== " "){
+              swal.fire({
+          title: 'ใบที่'+ that.rulet[0].CNumber,
+          text: that.rulet[0].content,
+          showCancelButton: false,
+          confirmButtonText: 'OK',
+          reverseButtons: true
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.$router.push({ name: 'Home'})
+          } 
+        });
+          }
+        })
+        .catch(function(err){
+          console.log(err)
+        })
+      },
         random(){
            var id = window.localStorage.getItem("user_id");
            var test = Math.floor(Math.random() * 28)+1;
@@ -54,8 +83,9 @@ export default {
             .then((res) => {
             this.rulet = res.data;
             var formData = new URLSearchParams();
-            formData.append("Detail", this.rulet[0].content);
-            this.$http.post("/user/random/" + id, formData);
+            formData.append("CNumber", this.rulet[0].CNumber);
+            formData.append("content", this.rulet[0].content);
+            this.$http.post("/rulet/random/" + id, formData);
             setTimeout(() =>    
         swal.fire({
           title: 'ใบที่'+ this.rulet[0].CNumber,

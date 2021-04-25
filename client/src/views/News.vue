@@ -23,7 +23,7 @@
        <div>
          <v-text-field class="search-doctrine" style="width:30%;" prepend-inner-icon="mdi-magnify" v-model="search" label="ค้นหาหัวข้อ"></v-text-field>
        </div>
-       <p class="notfound" v-if="filteredList.length == 0 && search !== ''">ไม่พบ "{{search}}"</p>
+       <p class="notfound" v-if="filteredList.length == 0 && search !== ''">ไม่พบ "{{search.trim()}}"</p>
        <p class="notfound" v-if="filteredList.length == 0 && search == ''">ไม่มีเนื้อหาในส่วนนี้</p>
         <!-- อันใหม่ -->
           <div class="containerx">
@@ -170,16 +170,21 @@
         </v-row>
         </v-card>
       </v-container> -->
+      <div>
+        <Footer></Footer>
+      </div>
     </div>
 </template>
 
 <script>
 import moment from "moment";
+const Footer = () => import("@/components/navbar/footer");
 const Navbar = () => import('@/components/navbar/navbar')
 export default {
     name:'News',
     components:{
-        Navbar
+        Navbar,
+        Footer
     },
     data() {
     return {
@@ -194,7 +199,7 @@ export default {
       return this.news.filter(news => {
         var result
         if(this.selectedCategory == 'ทั้งหมด'){
-          result = news.title.toLowerCase().includes(this.search.toLowerCase())
+          result = news.title.toLowerCase().replace(/\s/g, '').includes(this.search.toLowerCase().trim().replace(/\s/g, ''))
           return result
         } else{
           result = news.categories.includes(this.selectedCategory)
@@ -202,7 +207,7 @@ export default {
             return result
           } else{
             if(result == true){
-              result = news.title.toLowerCase().includes(this.search.toLowerCase())
+              result = news.title.toLowerCase().replace(/\s/g, '').includes(this.search.toLowerCase().trim().replace(/\s/g, ''))
               return result
             }
           }

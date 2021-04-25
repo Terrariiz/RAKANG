@@ -21,6 +21,7 @@
                 :rules='passwordRules'
                 label="Password"
                 hint="At least 6 characters"
+                onkeypress="return event.charCode != 32"
                 counter
                 @click:append="show1 = !show1"
                 aria-required=""
@@ -33,6 +34,7 @@
                 :rules="confirmPasswordRules.concat(passwordConfirmationRule)"
                 label="Confirm Password"
                 hint="At least 6 characters"
+                onkeypress="return event.charCode != 32"
                 counter
                 @click:append="show2 = !show2"
                 aria-required=""

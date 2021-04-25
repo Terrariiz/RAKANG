@@ -83,11 +83,14 @@
     <!-- อันใหม่ -->
   </div>
 </template>
+
 <script>
+const Footer = () => import("@/components/navbar/footer");
 const Navbar = () => import("@/components/navbar/navbar");
 export default {
   components: {
     Navbar,
+    Footer
   },
   data (){
       return {
@@ -109,8 +112,8 @@ export default {
   mounted: async function mounted(){
       await this.$http.get("/user/RankList")
       .then((res) => {
-        this.User = res.data;    
-        console.log(res.data)
+        this.User = res.data;
+        console.log(res.data);
       })
       .catch(function(err){
         console.log(err)
@@ -131,4 +134,3 @@ export default {
   },
 }
 </script>
-

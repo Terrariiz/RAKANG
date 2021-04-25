@@ -117,11 +117,15 @@
         </v-row>
       </v-container>
     </div> -->
+    <div>
+      <Footer></Footer>
+    </div>
   </div>
 </template>
 
 <script>
 import moment from "moment";
+const Footer = () => import("@/components/navbar/footer");
 const Navbar = () => import('@/components/navbar/navbar')
 export default {
     name : "detail_doctrine",
@@ -132,15 +136,42 @@ export default {
         showcampaign:0,
         shownews:0,
         news:[],
+        campaigns:[]
       }
     },
     components:{
-      Navbar
+      Navbar,
+      Footer
     },
-    created() {
-      this.getData()
+    created: async function created() {
+      await this.getData()
     },
-    methods: {
+    
+     mounted: async function mounted() {
+    await this.$http
+      .get("/campaign/ShowListCampaign")
+      .then((res) => {
+        console.log(res.data);
+        // this.percent = (res.datadonate / this.amount)* 100
+        this.campaigns = res.data;
+        this.showcampaign = this.randomcampaign(this.campaigns.length);
+        
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+       await this.$http
+      .get("/news/ShowListNews")
+      .then((res) => {
+        this.news = res.data;
+        this.shownews = this.randomcampaign(this.news.length);
+        console.log(this.shownews);
+      })
+       .catch(function(err) {
+        console.log(err);
+      });
+  },
+  methods: {
         getData(){
             var IsFav
             if(this.$store.getters.UserIsLoggedIn){
@@ -196,30 +227,6 @@ export default {
           }
       }
     },
-     mounted: async function mounted() {
-    await this.$http
-      .get("/campaign/ShowListCampaign")
-      .then((res) => {
-        console.log(res.data);
-        // this.percent = (res.datadonate / this.amount)* 100
-        this.campaigns = res.data;
-        this.showcampaign = this.randomcampaign(this.campaigns.length);
-        
-      })
-      .catch(function(err) {
-        console.log(err);
-      });
-       await this.$http
-      .get("/news/ShowListNews")
-      .then((res) => {
-        this.news = res.data;
-        this.shownews = this.randomcampaign(this.news.length);
-        console.log(this.shownews);
-      })
-       .catch(function(err) {
-        console.log(err);
-      });
-  },
 };
 </script>
 

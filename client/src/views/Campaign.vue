@@ -7,7 +7,7 @@
     <!-- Test -->
      <v-container class="container-news">
        <v-text-field style="width:30%; text-align: center;" prepend-inner-icon="mdi-magnify" v-model="search" label="ค้นหาหัวข้อ"></v-text-field>
-       <p class="notfound" v-if="filteredList.length == 0 && search !== ''">ไม่พบ "{{search}}"</p>
+       <p class="notfound" v-if="filteredList.length == 0 && search !== ''">ไม่พบ "{{search.trim()}}"</p>
         <v-card class="margin-card" v-for="(campaign,percent) in filteredList " :key="percent" elevation="5" outlined  >
           <div class="status_open" v-if="campaign.status =='open'">{{campaign.status}}</div>
         <div class="status_close" v-if="campaign.status =='close'">{{campaign.status}}</div>
@@ -50,16 +50,21 @@
         </v-row>
         </v-card>
       </v-container>
+      <div>
+        <Footer></Footer>
+      </div>
   </div>
 </template>
 
 <script>
 import moment from "moment";
+const Footer = () => import("@/components/navbar/footer");
 const Navbar = () => import("@/components/navbar/navbar");
 export default {
   name: "Campaign",
   components: {
     Navbar,
+    Footer
   },
   data() {
     return {
@@ -71,7 +76,7 @@ export default {
   computed: {
     filteredList() {
       return this.campaigns.filter(campaign => {
-        return campaign.name.toLowerCase().includes(this.search.toLowerCase())
+        return campaign.name.toLowerCase().replace(/\s/g, '').includes(this.search.toLowerCase().replace(/\s/g, '').trim())
       })
     }
   },
