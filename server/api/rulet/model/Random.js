@@ -5,6 +5,9 @@ const randomSchema =  new mongoose.Schema({
     uid:{
       type: String
     },
+    CNumber: {
+      type: String,
+    },
     content: {
       type: String,
     },

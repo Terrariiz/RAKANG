@@ -10,6 +10,7 @@ router.get("/ShowCard/:id", ruletController.ShowCard);
 // router.get("/DetailNews/:id", newsController.DetailNews);
 router.post("/test", ruletController.test);
 router.post("/random/:id", ruletController.seamsi);
+router.get("/random/:id", ruletController.ShowRandom);
 
 
 module.exports = router;

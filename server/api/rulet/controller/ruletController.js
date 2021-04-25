@@ -68,23 +68,31 @@ exports.test = async(req,res) => {
 };
 exports.seamsi = async (req,res) => {  
   try{     
-  const add = {
+  const add =  new Random({
     uid:  req.params.id,
+    CNumber: req.body.CNumber,
     content: req.body.content
-  }
+  });
   console.log(add)
-  Random.findByIdAndUpdate({_id : req.params.id},add,function(err, sam){
-    if(err){
-      console.log(err)
-    } else {
-      console.log('success')
-      console.log(sam)
-      console.log(add)
-      res.status(201).json({ sam });
-    }
-  })
- } catch (err) {
+  let data = await add.save()
+  res.status(201).json({ data });
+} catch (err) {
   res.status(400).json({ err: err });
   console.log(err)
 }
+}
+exports.ShowRandom = function(req,res){
+  try{
+    Random.find({uid : req.params.id},function(err, random){
+      if(err){
+        console.log(err)
+      } else {
+        console.log(random)
+        res.send(random);
+      }
+    })
+  } catch (err) {
+    res.status(400).json({ err: err });
+    console.log(err)
+  }
 }
