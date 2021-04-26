@@ -38,7 +38,7 @@ const UserDetailDoctrine     = () => import('@/views/detail_Doctrine')
 const UserDetailNews         = () => import('@/views/detail_news')
 const forgotPassword         = () => import('@/components/profile/forgotPassword')
 const resetPassword          = () => import('@/components/profile/resetPassword')
-const banana                 = () => import('@/views/banana')
+const termuse                 = () => import('@/views/termUse')
 
 Vue.use(VueRouter)
 
@@ -54,9 +54,9 @@ const routes = [
     component: Home
   },
   {
-    path: '/banana',
-    name: 'banana',
-    component: banana
+    path: '/termuse',
+    name: 'termuse',
+    component: termuse
   },
   {
     path: '/campaign',
@@ -104,7 +104,10 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    meta: {
+      requiresUserAuth: false
+    }
   },
   {
     path: '/register',
@@ -321,10 +324,10 @@ router.beforeEach((to, from, next) => {
               params: { nextUrl: to.fullPath }
           })
           swal.fire('Please sign in!!', '', 'error')
-      }  
+      }
       else { 
         next()
-        }
+      }
   } else if(to.matched.some(record => record.meta.requiresAdminAuth)) {
       if(localStorage.getItem('admin_token') == null){
         // window.alert("please sign in!!")
