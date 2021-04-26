@@ -17,20 +17,29 @@
                       @click="chooseImage"
                     >
                       <span v-if="!imageData" class="placeholder"
-                      >เลือกรูปภาพ</span
+                      >เลือกรูปภาพปก</span
                       >
-                      <input
+                      <!-- <input
                         class="file-input"
                         id="file-input"
                         ref="fileInput"
                         type="file"
                         v-on:change="onFileSelected"
-                      />
+                      /> -->
                     </v-div>
 
                     <hr />
                   </v-container>
                 </center>
+                 <div class="head1">ใส่รูปมุมมองอื่นๆ</div>
+                               <div class="img-select">
+                                   <v-file-input
+                                    multiple
+                                    prepend-icon="mdi-camera"
+                                    chips
+                                    label="เลือกรูปที่จะแสดง 4 รูป"
+                                    ></v-file-input>
+                                </div>
                 <div class="items">
                     <div class="name-items">
                         <h1>name</h1>
@@ -66,7 +75,7 @@
                                 ></v-text-field>
                            </v-col>
                            <v-col cols="12" md="6" sm="12">
-                               <div class="head1">ใส่รูปมุมมองอื่นๆ</div>
+                               <!-- <div class="head1">ใส่รูปมุมมองอื่นๆ</div>
                                <div class="img-select">
                                    <v-file-input
                                     multiple
@@ -74,7 +83,7 @@
                                     chips
                                     label="เลือกรูปที่จะแสดง 4 รูป"
                                     ></v-file-input>
-                                </div>
+                                </div> -->
                            </v-col>
 
                        </v-row>
@@ -115,8 +124,16 @@ import swal from "sweetalert2";
   name: "Addcampaign",
   data() {
     return {
-      imageData: null,
-     
+      imageData:null,
+      exchange: {
+        name: null,
+        detail: null,
+        overviewimage: null,
+        imagepath: "",
+        cost: null,
+        remain: null,
+        galleryimage:[],
+      },  
      
     };
   },
@@ -128,7 +145,7 @@ import swal from "sweetalert2";
         try{
             var formData = new FormData();
             formData.append("name", this.exchange.name);
-            formData.append("content", this.exchange.detail);
+            formData.append("detail", this.exchange.detail);
             formData.append("overviewimage", this.exchange.overviewimage);
             formData.append("galleryimage", this.exchange.galleryimage);
             formData.append("remain", this.exchange.remain);
@@ -145,14 +162,14 @@ import swal from "sweetalert2";
           console.log("error");
         }
         }catch (err){
-            let error = err.response;
-        if (error.status == 409) {
-          swal.fire("Error", error.data.message, "error");
-          console.log("success");
-        } else {
-          swal.fire("Error", error.data.err.message, "error");
-          console.log("error");
-        }
+        //     let error = err.response;
+        // if (error.status == 409) {
+        //   swal.fire("Error", error.data.message, "error");
+        //   console.log("success");
+        // } else {
+        //   swal.fire("Error", error.data.err.message, "error");
+        //   console.log("error");
+        // }
         }
 
     },
