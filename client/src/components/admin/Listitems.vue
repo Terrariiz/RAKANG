@@ -6,7 +6,7 @@
     <br><br>
     <div id ='headaddnews'>
         <div class="text-center">
-            <v-btn rounded color="primary" dark to = "/admin/addCampaign">เพิ่มของรางวัล</v-btn>
+            <v-btn rounded color="primary" dark to = "/admin/additems">เพิ่มของรางวัล</v-btn>
         </div>
     </div>
     <v-container>

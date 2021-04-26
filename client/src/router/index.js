@@ -39,6 +39,7 @@ const UserDetailNews         = () => import('@/views/detail_news')
 const forgotPassword         = () => import('@/components/profile/forgotPassword')
 const resetPassword          = () => import('@/components/profile/resetPassword')
 const banana                 = () => import('@/views/banana')
+const Additems               = () => import('@/components/admin/Additems')
 const Listitems              = () => import('@/components/admin/Listitems')
 const Detailitems            = () => import('@/components/admin/Detailitems')
 const Edititems              = () => import('@/components/admin/Edititems')
@@ -332,7 +333,12 @@ const routes = [
     path:'/items/userDetailitems',
     name: 'userDetailitems',
     component: userDetailitems,
-  }
+  },
+  {
+    path: '/admin/additems',
+    name: 'Additems',
+    component: Additems,
+  },
   
 ]
 

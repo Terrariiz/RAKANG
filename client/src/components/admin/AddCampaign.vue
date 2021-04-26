@@ -76,7 +76,6 @@
                   <v-container id="picturenews">
                     <v-div
                       required
-                      style=""
                       class="base-image-input"
                       :style="{ 'background-image': `url(${imageData})` }"
                       @click="chooseImage"

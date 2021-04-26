@@ -85,12 +85,12 @@
 </template>
 
 <script>
-const Footer = () => import("@/components/navbar/footer");
+// const Footer = () => import("@/components/navbar/footer");
 const Navbar = () => import("@/components/navbar/navbar");
 export default {
   components: {
     Navbar,
-    Footer
+    // Footer
   },
   data (){
       return {
