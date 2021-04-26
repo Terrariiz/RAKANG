@@ -58,7 +58,8 @@ export default {
           text: that.rulet[0].content,
           showCancelButton: false,
           confirmButtonText: 'OK',
-          reverseButtons: true
+          reverseButtons: true,
+          backdrop: false, 
         }).then((result) => {
           if (result.isConfirmed) {
             this.$router.push({ name: 'Home'})
@@ -92,7 +93,8 @@ export default {
           text: this.rulet[0].content,
           showCancelButton: false,
           confirmButtonText: 'OK',
-          reverseButtons: true
+          reverseButtons: true,
+          backdrop: false,
         }).then((result) => {
           if (result.isConfirmed) {
             this.$router.push({ name: 'Home'})
