@@ -3,47 +3,73 @@
        <div>
       <Navbar></Navbar>
     </div>
-    <br><br><br><br>
         <div class="container">
-            <!-- zoom container start -->
-            <div class="xzoom-container">
-                <img class="xzoom" xriginal  src="../../public/image/bg1.jpg">
-                <div class="xzoom-thumbs">
+            <div class="small-container single-product">
+                <div class="row">
+                    <div class="col-2">
+                        <img src="../../public/image/bubble.png" width="100%" id="product-img">
+                        <div class="small-img-row">
+                            <div class="small-img-col">
+                                <img src="../../public/image/bubble.png" width="100%" class="small-img">
+                            </div>
 
-                    <a href="#">
-                        <img class="zxoom-gallery" src="../../public/image/bubble.png" xpreviews="../../public/image/bubble.png">
-                    </a>
+                            <div class="small-img-col">
+                                <img src="../../public/image/bubble.png" width="100%" class="small-img">
+                            </div>
 
-                    <a href="#">
-                        <img class="zxoom-gallery" src="../../public/image/bubble.png" xpreviews="../../public/image/bubble.png">
-                    </a>
+                            <div class="small-img-col">
+                                <img src="../../public/image/bubble.png" width="100%" class="small-img"> 
+                            </div>
 
-                    <a href="#">
-                        <img class="zxoom-gallery" src="../../public/image/bubble.png" xpreviews="../../public/image/bubble.png">
-                    </a>
-
-                    <a href="#">
-                        <img class="zxoom-gallery" src="../../public/image/bubble.png" xpreviews="../../public/image/bubble.png">
-                    </a>
-
+                            <div class="small-img-col">
+                                <img src="../../public/image/bubble.png" width="100%" class="small-img">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <p>Items/ชื่อของ</p>
+                        <h1>ชื่อของ</h1>
+                        <h4>ราคา</h4>
+                        <h3>detail</h3>
+                        <p>บอกรายละเอียด</p>
+                        <a href="" class="btn">Buy</a>
+                    </div>
                 </div>
             </div>
-            <!-- zoom container end -->
-
-            <!-- description start  -->
-            <div class="description">
-                <h1>หัวข้อเรื่อง</h1>
-                <p>
-                    ดีเทล
-                </p>
-                <span>
-                    $150
-                </span>
-                <div>
-                    <button class="buy">แลกของ</button>
+            <!-- title  -->
+            <div class="small-container">
+                <div class="row row-2">
+                    <h2>Other Product</h2>
+                    <p>View more</p>
                 </div>
             </div>
-            <!-- description end  -->
+            <br>
+            <!-- featured product  -->
+            <div class="small-container">
+                <div class="row">
+                    <div class="col-4">
+                        <img src="../../public/image/bubble.png">
+                        <h4>ชื่อของ</h4>
+                        <p>ราคา 500 แต้ม</p>
+                    </div>
+                     <div class="col-4">
+                        <img src="../../public/image/bubble.png">
+                        <h4>ชื่อของ</h4>
+                        <p>ราคา 500 แต้ม</p>
+                    </div>
+                     <div class="col-4">
+                        <img src="../../public/image/bubble.png">
+                        <h4>ชื่อของ</h4>
+                        <p>ราคา 500 แต้ม</p>
+                    </div>
+                     <div class="col-4">
+                        <img src="../../public/image/bubble.png">
+                        <h4>ชื่อของ</h4>
+                        <p>ราคา 500 แต้ม</p>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </template>
@@ -69,64 +95,110 @@
 
 
 <style scoped>
-   .container{
-       width: 940px;
-       margin: 50px auto 0;
-       background-color: rgb(150, 110, 110);
-       padding: 15px;
-       border-radius: 5px;
-       display: grid;
-       grid-template-columns:1fr 1fr ;
-   }
-   .description{
-       margin-right: 50px;
-   }
-   .description h1{
-       margin:50px 0 10px 0;
-       font-weight: 300;
-   }
-   .description p{
-       font-size: 15px;
-       
-   }
-   .description span{
-       margin-top: 15px;
-       display: inline-block;
-       font-weight: 600;
-       font-size: 30px;
-       color:#353535
-   }
-   .description button{
-       font-size: 18px;
-       padding: 15px 50px;
-       margin-top: 40px;
-       cursor: pointer;
-       border: 0;
-       outline: none;
-       color: #fff;
-       box-shadow: 0 4px 6px 0 rgba(0,0,0,0.12);
-   }
-   .description .buy{
-       background-color: #ff9f00;
-       margin-left: 10px;
-       border-radius: 10px;
-   }
-   .xzoom-thumbs a{
-       text-decoration: none;
-   }
-   .xzoom-thumbs img{
-       display: inline-block;
-       height: 80px;
-       width: 80px;
-       border: 1px solid #ccc;
-   }
+a{
+    text-decoration: none;
+    color: #555;
+}
+p{
+    color: #555;
+}
+.container{
+    max-width: 1300px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+.row{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.col-2{
+    flex-basis: 50%;
+    min-width: 300px;
+}
+.col-2 img{
+    max-width: 100%;
+    padding: 50px 0;
+}
+/* .col-2 h1{
+    font-size: 50px;
+    line-height: 62;
+    margin: 25px 0;
+    
+} */
+.btn{
+    display: inline-block;
+    background: #ff523b;
+    color: #fff;
+    padding: 8p 30px;
+    margin: 30px 0;
+    border-radius: 30px;
+    transition: background 0.5s;
+}
+.btn:hover{
+    background: #563434;
+}
+.small-container{
+    max-width: 1080px;
+    margin:auto;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-bottom:65px ;
+}
+h4{
+    color: #555;
+    font-weight: normal;
+}
+.col-4 p{
+    font-size: 14px;
+}
+.col-4{
+    flex-basis: 25%;
+    padding: 10px;
+    min-width: 200px;
+    margin-bottom: 50px;
+}
+.col-4 img{
+    width: 100%;
+}
 
-   .xzoom-preview{
-       border: 1px solid #e0e0e0;
-       box-shadow: 0 4px 20px 2px rgba(0,0,0,0.2);
+   .single-product{
+       margin-top:80px;
    }
-   .active{
-       border: 1px solid #4aaad2;
-       box-shadow: 0 0 3px 0 #4aaad2;
+   .single-product .col-2{
+       padding: 20px;
+   }
+   .single-product h4{
+       margin: 20px 0;
+       font-size: 22px;
+       font-weight: bold;
+   }
+   .small-img-row{
+       display: flex;
+       justify-content: space-between;
+   }
+   .small-img-col{
+       flex-basis: 24%;
+       cursor: pointer;
+   }
+   @media only screen and (max-width: 600px){
+       .row{
+           text-align: center;
+       }
+       .col-2{
+           flex-basis:100%;
+       }
+       .single-product .row{
+           text-align:left;
+       }
+       .single-product .col-2{
+           padding: 20px 0;;
+       }
+       .single-product h1{
+           font-size: 26px;
+           line-height: 36px;
+       }
    }
 </style>

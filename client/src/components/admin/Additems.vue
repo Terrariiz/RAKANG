@@ -8,62 +8,34 @@
         <div class="container">
             <h1>เพิ่มรายการของ</h1>
             <center>
-                <v-container id="picturenews">
-                    <v-div
-                      required
-                      style=""
-                      class="base-image-input"
-                      :style="{ 'background-image': `url(${imageData})` }"
-                      @click="chooseImage"
-                    >
-                      <span v-if="!imageData" class="placeholder"
-                      >เลือกรูปภาพปก</span
-                      >
-                      <!-- <input
-                        class="file-input"
-                        id="file-input"
-                        ref="fileInput"
-                        type="file"
-                        v-on:change="onFileSelected"
-                      /> -->
-                    </v-div>
-
-                    <hr />
-                  </v-container>
                 </center>
                  <div class="head1">ใส่รูปมุมมองอื่นๆ</div>
-                               <div class="img-select">
-                                   <v-file-input
-                                    multiple
-                                    prepend-icon="mdi-camera"
-                                    chips
-                                    label="เลือกรูปที่จะแสดง 4 รูป"
-                                    ></v-file-input>
+                    <v-row >
+                        <v-col  md="2" sm="6" >
+                                <div class="preview" >
+                                    <img id="file-ip-1-preview">
                                 </div>
+                        </v-col>
+                        <v-col  md="2" sm="6">
+                            <div class="form-input">
+                                <label for="file-ip-1">เลือกรูปภาพ</label>
+                                <input type="file" id="file-ip-1" accept="image/*" @click="showPreview">
+                            </div>
+                        </v-col>
+                    </v-row>
                 <div class="items">
                     <div class="name-items">
-                        <h1>name</h1>
-                        <v-text-field
-                            solo
-                            label="Name"
-                            required
-                        ></v-text-field>
-                    </div>
-                    <div class="detail-items">
-                        <h1>รายละเอียด</h1>
-                        <v-textarea
-                            solo
-                            clearable
-                            clear-icon="mdi-close-circle"
-                            label="รายละเอียดของแคมเปญ"
-                            value=""
-                            required
-                        ></v-textarea>
-                    </div>
-                    <div class="remain-items">
-                       <v-row>
-                           <v-col cols="12" md="6" sm="12">
-                                <div class="head1">แต้มที่ใช้แลกของ</div>
+                        <v-row>
+                            <v-col cols="12" md="4" sm="12">
+                                <div class="head1">name</div>
+                                <v-text-field
+                                solo
+                                label="Name"
+                                required
+                                ></v-text-field>
+                            </v-col>
+                            <v-col  md="2" sm="6">
+                                <div class="head1">ราคา</div>
                                 <v-text-field
                                 class="value"
                                 solo
@@ -73,20 +45,30 @@
                                 onkeypress="return event.charCode >= 48"
                                 min="1"
                                 ></v-text-field>
-                           </v-col>
-                           <v-col cols="12" md="6" sm="12">
-                               <!-- <div class="head1">ใส่รูปมุมมองอื่นๆ</div>
-                               <div class="img-select">
-                                   <v-file-input
-                                    multiple
-                                    prepend-icon="mdi-camera"
-                                    chips
-                                    label="เลือกรูปที่จะแสดง 4 รูป"
-                                    ></v-file-input>
-                                </div> -->
-                           </v-col>
-
+                            </v-col>
+                            <v-col  md="2" sm="6">
+                                <div class="head1">จำนวน</div>
+                                <v-text-field
+                                class="value"
+                                solo
+                                label="1"
+                                required
+                                type="number"
+                                min="1"
+                                ></v-text-field>
+                            </v-col>
                        </v-row>
+                    </div>
+                    <div class="detail-items">
+                        <div class="head1">รายละเอียด</div>
+                        <v-textarea
+                            solo
+                            clearable
+                            clear-icon="mdi-close-circle"
+                            label="รายละเอียดของแคมเปญ"
+                            value=""
+                            required
+                        ></v-textarea>
                     </div>
                     
                     
@@ -120,6 +102,7 @@
 <script>
 const Navbar = () => import('@/components/navbar/navbar')
 import swal from "sweetalert2";
+
    export default {
   name: "Addcampaign",
   data() {
@@ -172,6 +155,14 @@ import swal from "sweetalert2";
         // }
         }
 
+    },
+    async showPreview(event){
+    if(event.target.files.length > 0){
+    var src = URL.createObjectURL(event.target.files[0]);
+    var preview = document.getElementById("file-ip-1-preview");
+    preview.src = src;
+    preview.style.display = "block";
+        }
     },
     async onFileSelected(event) {
       this.exchange.overviewimage = event.target.files[0];
@@ -228,8 +219,51 @@ import swal from "sweetalert2";
 .file-input {
   display: none;
 }
+.preview{
+    width: 120px;
+  height: 150px;
+}
+.form-input {
+  display: block;
+  width: 120px;
+  height: 150px;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center center;
+}
+.form-input input {
+  display:none;
+}
+.form-input label {
+  
+ background: #f0f0f0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+  font-size: 20px;
+  font-family: Helvetica;
+  cursor: pointer;
+}
+.form-input img {
+  width:200px;
+  height: 200px;
+  display:none;
+  margin-top:10px;
+  text-align: center;
+}
 
 
+
+.preview img {
+  width: 120px;
+  height: 150px;
+  margin-left: 15px;
+  display:none;
+  text-align: center;
+}
 
 @media (max-width: 767px) {
   .project-content {
@@ -244,8 +278,13 @@ import swal from "sweetalert2";
   .placeholder {
     font-size: 10px;
   }
+  .form-input-preview img {
+  margin-left: 0px;
+}
   
   
 }
+    
+
     
 </style>

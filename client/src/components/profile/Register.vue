@@ -57,6 +57,7 @@
             label="Confirm password"
             hint="At least 6 characters"
             value=""
+            counter
             onkeypress="return event.charCode != 32"
             class="input-group--focused"
             @click:append="show2 = !show2"

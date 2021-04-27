@@ -7,14 +7,14 @@
   >
     <v-footer color="#CFD6EA" padless>
       <v-row justify="center" no-gutters>
-        <v-btn color="white" text rounded class="my-2" to="/banana">
-          Banana
+        <v-btn  text rounded class="my-2" to="/termuse">
+          วิธีการใช้งาน
         </v-btn>
-        <v-btn color="white" text rounded class="my-2" to="/test">
+        <v-btn text rounded class="my-2" to="/test">
           Test
         </v-btn>
         <v-col class="py-4 text-center white--text" color="#CFD6EA" cols="12">
-          {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+          {{ new Date().getFullYear() }} — <strong>RAKANGTHAM</strong>
         </v-col>
       </v-row>
     </v-footer>
