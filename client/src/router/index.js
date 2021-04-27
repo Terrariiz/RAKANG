@@ -313,34 +313,52 @@ const routes = [
     }
   },  
   {
-    path:'/admin/Listitems',
-    name: 'Listitems',
-    component: Listitems,
-  },
-  {
-    path:'/admin/Detailitems',
-    name: 'Detailitems',
-    component: Detailitems,
-  }, 
-  {
-    path:'/admin/Edititems',
-    name: 'Edititems',
-    component: Edititems,
-  },
-  {
     path:'/items',
     name: 'items',
     component: items,
+    meta: {
+      requiresUserAuth: true
+    }
   },
   {
     path:'/items/userDetailitems',
     name: 'userDetailitems',
     component: userDetailitems,
+    meta: {
+      requiresUserAuth: true
+    }
+  },
+  {
+    path:'/admin/Listitems',
+    name: 'Listitems',
+    component: Listitems,
+    meta: {
+      requiresAdminAuth: true
+    }
+  },
+  {
+    path:'/admin/Detailitems',
+    name: 'Detailitems',
+    component: Detailitems,
+    meta: {
+      requiresAdminAuth: true
+    }
+  }, 
+  {
+    path:'/admin/Edititems',
+    name: 'Edititems',
+    component: Edititems,
+    meta: {
+      requiresAdminAuth: true
+    }
   },
   {
     path: '/admin/additems',
     name: 'Additems',
     component: Additems,
+    meta: {
+      requiresAdminAuth: true
+    }
   },
   
 ]

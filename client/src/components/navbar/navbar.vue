@@ -40,6 +40,11 @@
                 <v-list-item-title style="color:#000">หน้าโปรไฟล์</v-list-item-title>
               </v-list-item></router-link
             >
+            <router-link tag="v-list-item" to="/items"
+              ><v-list-item>
+                <v-list-item-title style="color:#000">แลกของรางวัล</v-list-item-title>
+              </v-list-item></router-link
+            >
             <hr>
             <router-link tag="v-list-item" to="/seamsi"
               ><v-list-item>
@@ -91,6 +96,11 @@
             <router-link tag="v-list-item" to="/profile"
               ><v-list-item>
                 <v-list-item-title>หน้าโปรไฟล์</v-list-item-title>
+              </v-list-item></router-link
+            >
+            <router-link tag="v-list-item" to="/items"
+              ><v-list-item>
+                <v-list-item-title>แลกของรางวัล</v-list-item-title>
               </v-list-item></router-link
             >
             <hr>
@@ -163,11 +173,15 @@
               ><v-list-item>
                 <v-list-item-title>ลิสต์หลักธรรม</v-list-item-title>
               </v-list-item></router-link
-            >
-            
+            >            
             <router-link tag="v-list-item" to="/admin/listnews"
               ><v-list-item>
                 <v-list-item-title>ลิสต์ข่าวประชาสัมพันธ์</v-list-item-title>
+              </v-list-item></router-link
+            >            
+            <router-link tag="v-list-item" to="/admin/listitems"
+              ><v-list-item>
+                <v-list-item-title>ลิสต์ของรางวัล</v-list-item-title>
               </v-list-item></router-link
             >
           </v-list-item-group>
@@ -222,11 +236,15 @@
               ><v-list-item>
                 <v-list-item-title>ลิสต์หลักธรรม</v-list-item-title>
               </v-list-item></router-link
-            >
-            
+            >            
             <router-link tag="v-list-item" to="/admin/listnews"
               ><v-list-item>
                 <v-list-item-title>ลิสต์ข่าวประชาสัมพันธ์</v-list-item-title>
+              </v-list-item></router-link
+            >
+            <router-link tag="v-list-item" to="/admin/listitems"
+              ><v-list-item>
+                <v-list-item-title>ลิสต์ของรางวัล</v-list-item-title>
               </v-list-item></router-link
             >
           </v-list-item-group>
