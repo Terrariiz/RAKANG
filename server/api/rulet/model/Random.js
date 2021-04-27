@@ -13,7 +13,7 @@ const randomSchema =  new mongoose.Schema({
     },
   }, {timestamps: true});
   
-  randomSchema.index({createdAt: 1},{expireAfterSeconds: 60});
+  randomSchema.index({createdAt: 1},{expireAfterSeconds: 43200});
   
   const Random = mongoose.model("Random", randomSchema);
   module.exports = Random;

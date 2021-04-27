@@ -19,6 +19,10 @@
         </v-col>
 
         <v-col cols="12"   sm="12" md="6">
+          <v-btn block  style="margin:3%; " to = "/admin/listitems" color="primary">listitems</v-btn>
+        </v-col>
+
+         <v-col cols="12"   sm="12" md="6">
           <v-btn block v-on:click="sign_out()" style="margin:3%; " color="error">Logout</v-btn>
         </v-col>        
 

@@ -1,6 +1,10 @@
 <template>
-    <div>   
-      <section id="products" class="products py-5">
+    <div>
+         <div>
+      <Navbar></Navbar>
+    </div>
+        <h1 >items</h1>
+        <section id="products" class="products py-5">
   
     
       <div class="container">
@@ -9,7 +13,7 @@
           <v-col cols="12" md="4" sm="12">
               <div class="card single-item">
           <div class="img-container">
-            <img src="../../../public/image/lotus.jpg" class="card-img-top product-img" alt="">
+            <img src="../../public/image/lotus.jpg" class="card-img-top product-img" alt="">
            </div>
           <div class="card-body">
             <div class="card-text d-flex justify-content-between text-capitalize">
@@ -22,7 +26,7 @@
           <v-col cols="12" md="4" sm="12">
               <div class="card single-item">
           <div class="img-container">
-            <img src="../../../public/image/lotus.jpg" class="card-img-top product-img" alt="">
+            <img src="../../public/image/lotus.jpg" class="card-img-top product-img" alt="">
            </div>
           <div class="card-body">
             <div class="card-text d-flex justify-content-between text-capitalize">
@@ -35,7 +39,7 @@
           <v-col cols="12" md="4" sm="12">
               <div class="card single-item">
           <div class="img-container">
-            <img src="../../../public/image/lotus.jpg" class="card-img-top product-img" alt="">
+            <img src="../../public/image/lotus.jpg" class="card-img-top product-img" alt="">
            </div>
           <div class="card-body">
             <div class="card-text d-flex justify-content-between text-capitalize">
@@ -52,16 +56,20 @@
     
 
     </section>
-  </div>
+    </div>
 </template>
 
-
 <script>
-//  import a from "../../../public/image/lotus.jpg"
+ const Navbar = () => import('@/components/navbar/navbar')
+    export default{
+        components: {
+      Navbar
+    },
+    }
 </script>
+
+
 <style scoped>
-
-
 /* Products section */
   #products{
     background:rgb(255, 255, 255);

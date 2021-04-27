@@ -158,7 +158,7 @@ import moment from "moment";
   }
 
 </script>
-<style>
+<style scoped>
     #table{
         text-align: left;
         

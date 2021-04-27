@@ -33,12 +33,18 @@ const test                   = () => import('@/components/admin/test')
 const payment                = () => import('@/components/admin/payment')
 const UserDetailCampaign     = () => import('@/views/Donate_Campaign')
 const seamsi                 = () => import('@/views/random')
-const Lantern                 = () => import('@/views/Lantern')
+const Lantern                = () => import('@/views/Lantern')
 const UserDetailDoctrine     = () => import('@/views/detail_Doctrine')
 const UserDetailNews         = () => import('@/views/detail_news')
 const forgotPassword         = () => import('@/components/profile/forgotPassword')
 const resetPassword          = () => import('@/components/profile/resetPassword')
-const termuse                 = () => import('@/views/termUse')
+const termuse                = () => import('@/views/termUse')
+const Additems               = () => import('@/components/admin/Additems')
+const Listitems              = () => import('@/components/admin/Listitems')
+const Detailitems            = () => import('@/components/admin/Detailitems')
+const Edititems              = () => import('@/components/admin/Edititems')
+const items                  = () => import('@/views/items')
+const userDetailitems        = () => import('@/views/userDetailitems')
 
 Vue.use(VueRouter)
 
@@ -306,6 +312,37 @@ const routes = [
       requiresUserAuth: true
     }
   },  
+  {
+    path:'/admin/Listitems',
+    name: 'Listitems',
+    component: Listitems,
+  },
+  {
+    path:'/admin/Detailitems',
+    name: 'Detailitems',
+    component: Detailitems,
+  }, 
+  {
+    path:'/admin/Edititems',
+    name: 'Edititems',
+    component: Edititems,
+  },
+  {
+    path:'/items',
+    name: 'items',
+    component: items,
+  },
+  {
+    path:'/items/userDetailitems',
+    name: 'userDetailitems',
+    component: userDetailitems,
+  },
+  {
+    path: '/admin/additems',
+    name: 'Additems',
+    component: Additems,
+  },
+  
 ]
 
 const router = new VueRouter({
