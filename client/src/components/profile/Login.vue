@@ -34,7 +34,6 @@
             onkeypress="return event.charCode != 32"
             label="Password"
             hint="At least 6 characters"
-            counter
             @click:append="show1 = !show1"
             aria-required=""
         ></v-text-field>

@@ -33,12 +33,12 @@ const test                   = () => import('@/components/admin/test')
 const payment                = () => import('@/components/admin/payment')
 const UserDetailCampaign     = () => import('@/views/Donate_Campaign')
 const seamsi                 = () => import('@/views/random')
-const Lantern                 = () => import('@/views/Lantern')
+const Lantern                = () => import('@/views/Lantern')
 const UserDetailDoctrine     = () => import('@/views/detail_Doctrine')
 const UserDetailNews         = () => import('@/views/detail_news')
 const forgotPassword         = () => import('@/components/profile/forgotPassword')
 const resetPassword          = () => import('@/components/profile/resetPassword')
-const banana                 = () => import('@/views/banana')
+const termuse                = () => import('@/views/termUse')
 const Additems               = () => import('@/components/admin/Additems')
 const Listitems              = () => import('@/components/admin/Listitems')
 const Detailitems            = () => import('@/components/admin/Detailitems')
@@ -60,9 +60,9 @@ const routes = [
     component: Home
   },
   {
-    path: '/banana',
-    name: 'banana',
-    component: banana
+    path: '/termuse',
+    name: 'termuse',
+    component: termuse
   },
   {
     path: '/campaign',
@@ -110,7 +110,10 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    meta: {
+      requiresUserAuth: false
+    }
   },
   {
     path: '/register',
@@ -310,34 +313,52 @@ const routes = [
     }
   },  
   {
-    path:'/admin/Listitems',
-    name: 'Listitems',
-    component: Listitems,
-  },
-  {
-    path:'/admin/Detailitems',
-    name: 'Detailitems',
-    component: Detailitems,
-  }, 
-  {
-    path:'/admin/Edititems',
-    name: 'Edititems',
-    component: Edititems,
-  },
-  {
     path:'/items',
     name: 'items',
     component: items,
+    meta: {
+      requiresUserAuth: true
+    }
   },
   {
     path:'/items/userDetailitems',
     name: 'userDetailitems',
     component: userDetailitems,
+    meta: {
+      requiresUserAuth: true
+    }
+  },
+  {
+    path:'/admin/Listitems',
+    name: 'Listitems',
+    component: Listitems,
+    meta: {
+      requiresAdminAuth: true
+    }
+  },
+  {
+    path:'/admin/Detailitems',
+    name: 'Detailitems',
+    component: Detailitems,
+    meta: {
+      requiresAdminAuth: true
+    }
+  }, 
+  {
+    path:'/admin/Edititems',
+    name: 'Edititems',
+    component: Edititems,
+    meta: {
+      requiresAdminAuth: true
+    }
   },
   {
     path: '/admin/additems',
     name: 'Additems',
     component: Additems,
+    meta: {
+      requiresAdminAuth: true
+    }
   },
   
 ]
@@ -358,10 +379,10 @@ router.beforeEach((to, from, next) => {
               params: { nextUrl: to.fullPath }
           })
           swal.fire('Please sign in!!', '', 'error')
-      }  
+      }
       else { 
         next()
-        }
+      }
   } else if(to.matched.some(record => record.meta.requiresAdminAuth)) {
       if(localStorage.getItem('admin_token') == null){
         // window.alert("please sign in!!")
