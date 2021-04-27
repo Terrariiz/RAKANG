@@ -229,6 +229,7 @@ export default {
       .catch(function(err) {
         console.log(err);
       });
+      await this.onbeforeunload()
   },
   methods: {
     ViewDoctrine(doctrineid){
@@ -272,6 +273,9 @@ export default {
       } else {
         console.log("hiuhui")
       }
+    },
+     onbeforeunload() {
+    window.scrollTo(0, 0);
     }
   },
   

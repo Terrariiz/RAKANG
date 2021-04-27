@@ -117,8 +117,8 @@ export default {
       })
       .catch(function(err){
         console.log(err)
-
       })
+      await this.onbeforeunload()
     },
      computed: {
     filteredList() {
@@ -132,5 +132,10 @@ export default {
       return newlist
     }
   },
+  methods:{
+    onbeforeunload() {
+  window.scrollTo(0, 0);
+  }
+  }
 }
 </script>

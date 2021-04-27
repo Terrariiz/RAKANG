@@ -117,6 +117,7 @@ export default {
       .catch(function(err) {
         console.log(err);
       });
+      await this.onbeforeunload()
   },
   methods: {
     ViewCampaign(campaignid) {
@@ -126,7 +127,10 @@ export default {
       //   params: { id: campaignid },
       // });
     },
-    //  
+    // 
+    onbeforeunload() {
+    window.scrollTo(0, 0);
+    }
   },
   if(result){
     console.log(result)

@@ -245,6 +245,7 @@ export default {
       .catch(function(err) {
         console.log(err);
       });
+      await this.onbeforeunload()
   },
   methods: {
     ViewNews(newsid){
@@ -256,6 +257,9 @@ export default {
   },
   if(result){
     console.log(result)
+  },
+  onbeforeunload() {
+  window.scrollTo(0, 0);
   }
 }
 </script>
