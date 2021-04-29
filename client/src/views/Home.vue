@@ -24,7 +24,7 @@
           <v-col class="image-cam" cols="12" md="6">
             <center><div class="image-size">
               
-              <img  class="image -fullwidth img-responsive" id="showimage" :src="'http://localhost:4000/image/campaign/' + newcampaign.image"/>
+              <img  class="image -fullwidth img-responsive" id="showimage" :src="newcampaign.image"/>
             </div></center>
           </v-col>
           <v-col class="colxx" cols="12" md="6">
@@ -70,8 +70,8 @@
           <v-col  cols="12" md="7">
             <div @click="Clickpicture" id="cardsopens"  class="cards">
               <div class="imgBoxs">
-                <img :src="'http://localhost:4000/image/campaign/' + newcampaign.image"/>
-                <img :src="'http://localhost:4000/image/campaign/' + newcampaign.image"/>
+                <img :src="newcampaign.image"/>
+                <img :src="newcampaign.image"/>
               </div>
           
               <div class="details">
@@ -145,7 +145,7 @@
 
       <div class="rowx">
           <div @click="ViewNews(news._id)" class="hotnews-col" v-for="news in filteredListnews " :key="news.title">
-            <img :src="'http://localhost:4000/image/new/' + news.image">
+            <img :src="news.image">
             <div class="layer">
               <h3>{{news.title}}</h3>
             </div>
@@ -161,7 +161,7 @@
       <p>รวบรวมหลักธรรมต่างๆ</p>
       <div class="rowx">
           <div @click="ViewDoctrine(doctrine._id)" class="doctrine-col" v-for="doctrine in filteredListdoctrine " :key="doctrine.title">
-            <img :src="'http://localhost:4000/image/doctrine/' + doctrine.image">
+            <img :src="doctrine.image">
               <h3 class="title-color">{{doctrine.title}}</h3>
           </div>
       </div>       

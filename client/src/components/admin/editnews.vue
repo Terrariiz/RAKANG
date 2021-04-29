@@ -13,7 +13,7 @@
                         <v-flex xs12 md6 >
                              <v-container v-model = "news.image"  >
                                  <center><v-div style=""  class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
-                                    <img v-if="!imageData" class="image -fullwidth img-responsive" id="showimage" :src="'http://localhost:4000/image/new/' + news.image"/>
+                                    <img v-if="!imageData" class="image -fullwidth img-responsive" id="showimage" :src="news.image"/>
                                     <span  v-if="!news.image"  class="placeholder">Choose an Image</span>
                                     <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  v-on:change="onFileSelected" >
                                 </v-div></center>

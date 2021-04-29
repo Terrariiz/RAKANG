@@ -4,6 +4,15 @@ const Doctrine = require("../../doctrine/model/Doctrine");
 const asyncs = require('async');
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
+const cloudinary = require("cloudinary").v2
+
+cloudinary.config({
+    cloud_name: "koladon52",
+    api_key: "413217853994171",
+    api_secret: "DOHByZlRxxocIbvEmAzgnvmnv-E",
+
+})
+
 
 exports.registerNewUser = async (req, res) => {
     try {
@@ -14,6 +23,7 @@ exports.registerNewUser = async (req, res) => {
           message: "email already in use"
         });
       }
+      
       const user = new User({
         username: req.body.username,
         email: req.body.email,
@@ -90,25 +100,40 @@ exports.getUserDetails = async (req, res) => {
 exports.editProfile = async (req,res) => {
   try{
     var dataEdit
+    var changeimage
     if(req.file){
+      console.log(req.file)
       if(req.file.filename != req.body.oldimage){
-        const image  = './public/image/profile/' + req.body.oldimage;
-        if(req.body.oldimage != "user.png"){
-          fs.unlink(image , function(err){
-            if(err){
-                console.log(err);
-            } else {
-              console.log("deleted")
-            } 
-          })
-        }
-        dataEdit = {
+        cloudinary.uploader.upload(req.file.path, function(err, result){
+          changeimage = result.url
+          dataEdit = {
             firstname: req.body.firstname,
             lastname: req.body.lastname,
             phone: req.body.phone,
             birthdate: req.body.birthdate,
-            image: req.file.filename
+            image: result.url
           }
+          const image  = './public/image/profile/' + req.body.oldimage;
+          if(req.body.oldimage != "user.png"){
+            fs.unlink(image , function(err){
+              if(err){
+                  console.log(err);
+              } else {
+                console.log("deleted")
+              } 
+            })
+          }
+          User.findByIdAndUpdate({_id:req.params.id}, dataEdit, function(err,update){
+            if(err){
+              console.log(err);
+            } else{
+              res.json(true);
+            }
+          });
+          
+        })
+        
+        
       } else {
         console.log("not delete")
       }
@@ -121,14 +146,15 @@ exports.editProfile = async (req,res) => {
           birthdate: req.body.birthdate,
           image: req.body.oldimage
         }
+        User.findByIdAndUpdate({_id:req.params.id}, dataEdit, function(err,update){
+          if(err){
+            console.log(err);
+          } else{
+            res.json(true);
+          }
+        });
     }
-    User.findByIdAndUpdate({_id:req.params.id}, dataEdit, function(err,update){
-      if(err){
-        console.log(err);
-      } else{
-        res.json(true);
-      }
-    });
+    
   } catch (err) {
     res.status(400).json({ err: err });
     console.log(err);

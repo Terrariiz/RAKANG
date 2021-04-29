@@ -2,6 +2,14 @@ const Doctrine = require("../model/Doctrine");
 const User = require('../../user/model/User')
 const multer = require('multer');
 const fs = require('fs');
+const cloudinary = require("cloudinary").v2
+
+cloudinary.config({
+    cloud_name: "koladon52",
+    api_key: "413217853994171",
+    api_secret: "DOHByZlRxxocIbvEmAzgnvmnv-E",
+
+})
 
 
 exports.addnewdoctrine = async(req,res) => {
@@ -11,13 +19,19 @@ exports.addnewdoctrine = async(req,res) => {
       const doctrine = new Doctrine({
         title: req.body.title,
         content: req.body.content,
-        image: req.file.filename,
+        image: "",
         edittime : today,
         categories: req.body.categories,
       });
-      console.log(doctrine)
-      let data = await doctrine.save()
-      res.status(201).json({ data });
+      cloudinary.uploader.upload(req.file.path,async function(err, result){
+        doctrine.image = result.url
+        console.log(doctrine)
+        let data =  await doctrine.save()
+        res.status(201).json({ data });
+            
+      })
+      
+      
     } catch (err) {
       res.status(400).json({ err: err });
       console.log(err)
@@ -46,6 +60,7 @@ exports.ShowListDoctrine = async(req,res) =>{
 
 exports.EditDoctrine = async(req,res) =>{
   try{
+    var changeimage
     console.log(req.params.id)
     console.log(req.body.title)
     console.log(req.body.content)
@@ -54,20 +69,34 @@ exports.EditDoctrine = async(req,res) =>{
     const today = new Date();
     if(req.file){
       if(req.file.filename != req.body.oldimage){
-        const image  = './public/image/doctrine/' + req.body.oldimage;
-        fs.unlinkSync(image , function(err){
-            if(err){
-                console.log(err);
-            } else {
-              console.log("deleted")
-            } 
-        })
+        cloudinary.uploader.upload(req.file.path, function(err, result){
+          changeimage = result.url
+          // const image  = './public/image/doctrine/' + req.body.oldimage;
+        // fs.unlinkSync(image , function(err){
+        //     if(err){
+        //         console.log(err);
+        //     } else {
+        //       console.log("deleted")
+        //     } 
+        // })
         dataEdit = {
           title: req.body.title,
-          content: req.body.content,
-          image: req.file.filename,
-          edittime : today
+          content: req.body.content[0],
+          image: changeimage,
+          edittime : today,
+          categories : req.body.content[1]
         }
+        Doctrine.findOneAndUpdate({_id : req.params.id},dataEdit,function(err, doctrine){
+          if(err){
+            console.log(err)
+          } else {
+            console.log('success')
+            res.status(201).json({ doctrine });
+          }
+        })
+
+        })
+        
 
       } else {
         console.log("not delete")
@@ -75,31 +104,21 @@ exports.EditDoctrine = async(req,res) =>{
     } else {
       dataEdit = {
           title: req.body.title,
-          content: req.body.content,
+          content: req.body.content[0],
           image: req.body.oldimage,
-          edittime : today
+          edittime : today,
+          categories : req.body.content[1]
         }
+        Doctrine.findOneAndUpdate({_id : req.params.id},dataEdit,function(err, doctrine){
+          if(err){
+            console.log(err)
+          } else {
+            console.log('success')
+            res.status(201).json({ doctrine });
+          }
+        })
     }
-    // if(req.file.filename != req.body.oldimage){
-    //   const image  = './public/uploads/' + req.body.oldimage;
-    //   fs.unlink(image , function(err){
-    //       if(err){
-    //           console.log(err);
-    //       } else {
-    //         console.log("deleted")
-    //       } 
-    //   })
-    // } else {
-    //   console.log("not delete")
-    // }
-    Doctrine.findOneAndUpdate({_id : req.params.id},dataEdit,function(err, doctrine){
-      if(err){
-        console.log(err)
-      } else {
-        console.log('success')
-        res.status(201).json({ doctrine });
-      }
-    })
+    
   } catch (err) {
     res.status(400).json({ err: err });
     console.log(err)

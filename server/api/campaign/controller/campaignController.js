@@ -2,16 +2,27 @@ const Campaign = require("../model/Campaign");
 const User = require('../../user/model/User')
 const DonateLog = require('../../log/model/DonateLog')
 const fs = require('fs');
+const cloudinary = require("cloudinary").v2
+
+cloudinary.config({
+    cloud_name: "koladon52",
+    api_key: "413217853994171",
+    api_secret: "DOHByZlRxxocIbvEmAzgnvmnv-E",
+
+})
 
 
 exports.addnewcampaign = async(req,res) => {
-  try{     
-    console.log(req.body)
-    const now = new Date();
-    const add = new Campaign({
+  try{   
+    var image  
+    cloudinary.uploader.upload(req.file.path, async function(err, result){
+      image = result.url
+      console.log(req.body)
+      const now = new Date();
+      const add = new Campaign({
       name: req.body.name,
       content: req.body.content,
-      image: req.file.filename,
+      image: image,
       date: req.body.date,
       status : 'open',
       startdate: now,
@@ -25,6 +36,8 @@ exports.addnewcampaign = async(req,res) => {
     console.log(add)
     let data = await add.save()
     res.status(201).json({ data });
+    })
+    
   } catch (err) {
     res.status(400).json({ err: err });
     console.log(err)
@@ -116,6 +129,7 @@ exports.DeleteCampaign = function(req,res){
 exports.EditCampaign = async(req,res) =>{
   try{
     var dataEdit
+    var chancgimage  
     console.log(req.params.id)
     console.log(req.body.name)
     console.log(req.body.content)
@@ -123,24 +137,40 @@ exports.EditCampaign = async(req,res) =>{
     console.log(req.body.oldimage)
     if(req.file){
       if(req.file.filename != req.body.oldimage){
-        const image  = './public/image/campaign/' + req.body.oldimage;
-        fs.unlinkSync(image , function(err){
-            if(err){
-                console.log(err);
-            } else {
-              console.log("deleted")
-            } 
-        })
+        cloudinary.uploader.upload(req.file.path, function(err, result){
+          chancgimage = result.url
+          const image  = './public/image/campaign/' + req.body.oldimage;
+        // fs.unlinkSync(image , function(err){
+        //     if(err){
+        //         console.log(err);
+        //     } else {
+        //       console.log("deleted")
+        //     } 
+        // })
         dataEdit = {
           name: req.body.name,
           content: req.body.content,
-          image: req.file.filename,
+          image: chancgimage,
           amount : req.body.amount,
           date : req.body.date,
           location: req.body.location,
           overview: req.body.overview,
           done: req.body.done,
         }
+        Campaign.findOneAndUpdate({_id : req.params.id},dataEdit,function(err, campaign){
+          if(err){
+            console.log(err)
+          } else {
+            console.log('success')
+            console.log(campaign)
+            console.log(dataEdit)
+            res.status(201).json({ campaign });
+          }
+        })
+
+
+        })
+        
 
       } else {
         console.log("not delete")
@@ -156,6 +186,16 @@ exports.EditCampaign = async(req,res) =>{
           overview: req.body.overview,
           done: req.body.done,
         }
+        Campaign.findOneAndUpdate({_id : req.params.id},dataEdit,function(err, campaign){
+          if(err){
+            console.log(err)
+          } else {
+            console.log('success')
+            console.log(campaign)
+            console.log(dataEdit)
+            res.status(201).json({ campaign });
+          }
+        })
     }
     // if(req.body.imagepath != req.body.oldimage){
     //   const image  = './public/uploads/' + req.body.imagepath;
@@ -169,16 +209,7 @@ exports.EditCampaign = async(req,res) =>{
     // } else {
     //   console.log("not delete")
     // }
-    Campaign.findOneAndUpdate({_id : req.params.id},dataEdit,function(err, campaign){
-      if(err){
-        console.log(err)
-      } else {
-        console.log('success')
-        console.log(campaign)
-        console.log(dataEdit)
-        res.status(201).json({ campaign });
-      }
-    })
+    
   } catch (err) {
     res.status(400).json({ err: err });
     console.log(err)

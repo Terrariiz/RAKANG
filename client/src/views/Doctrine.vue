@@ -31,7 +31,7 @@
               <v-col v-for="(doctrine) in filteredList " :key="doctrine.title" cols="12" md="4" sm="12">
                 <div  class="cardx">
                   
-                  <img @click="ViewDoctrine(doctrine._id)"  :src="'http://localhost:4000/image/doctrine/' + doctrine.image">
+                  <img @click="ViewDoctrine(doctrine._id)"  :src="doctrine.image">
                   <div @click="ViewDoctrine(doctrine._id)" class="panelx">
                      <!-- ปุ่ม bookmark -->
            

@@ -36,7 +36,7 @@
             </thead>
             <tbody>
               <tr   @submit.prevent="editcampaign" v-for="campaign in campaigns"  :key="campaign._id">
-                <td><center><img :src="'http://localhost:4000/image/campaign/' + campaign.image" class="img-fluid" style="width: 100px; height: 100px; object-fit: cover;  margin:3%;" align="center"></center></td>
+                <td><center><img :src="campaign.image" class="img-fluid" style="width: 100px; height: 100px; object-fit: cover;  margin:3%;" align="center"></center></td>
                 <td>{{ campaign.name }}</td>
                 <td>{{ campaign.date }}</td>
                 <td>{{ campaign.amount }}</td>

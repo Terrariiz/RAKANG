@@ -17,7 +17,7 @@
               <img
                 class="image -fullwidth img-responsive"
                 id="showimage"
-                :src="'http://localhost:4000/image/campaign/' + campaign.image"
+                :src="campaign.image"
               />
               <p class="lead">{{ campaign.content }}</p>
               <p class="details">
@@ -228,7 +228,7 @@ export default {
                 swal.fire({
                   title: "ท่านได้รับเหรียญตราระดับ " + rankchanged,
                   imageUrl:
-                    "http://localhost:4000/image/rank/" + rankchanged + ".png",
+                    'http://localhost:8080/image/rank/' + rankchanged + ".png",
                   imageWidth: 300,
                   imageHeight: 200,
                   // showClass: {
