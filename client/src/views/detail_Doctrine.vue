@@ -42,7 +42,7 @@
             หมวดหมู่: {{ doctrine.categories }}
           </div>
           <div class="featured-article">
-            <img  :src="'http://localhost:4000/image/doctrine/' + doctrine.image">
+            <img  :src="doctrine.image">
             <p v-html="doctrine.content">{{ doctrine.content }}</p>
           </div>
           <div class="another-article">
@@ -58,12 +58,12 @@
             </div>
           <div class="avatar-content">
             <h5>แคมเปญแนะนำ</h5>
-            <img :src="'http://localhost:4000/image/campaign/' + campaigns[showcampaign].image">
+            <img :src="campaigns[showcampaign].image">
             <p>{{ campaigns[showcampaign].name }}</p>
           </div>
           <div class="avatar-content">
             <h5>ข่าวแนะนำ</h5>
-            <img :src="'http://localhost:4000/image/new/' + news[shownews].image">
+            <img :src="news[shownews].image">
             <p>{{news[shownews].title}}</p>
             
           </div>

@@ -13,7 +13,7 @@
         <div class="status_close" v-if="campaign.status =='close'">{{campaign.status}}</div>
         <v-row no-gutters class="row-news">
           <v-col cols="12" md="6">
-            <img  :src="'http://localhost:4000/image/campaign/' + campaign.image">
+            <img  :src="campaign.image">
           </v-col>
           <v-col  cols="12" md="6">
             <v-container>

@@ -238,8 +238,7 @@ export default {
       .then((res) => {
         this.dataUser = res.data;
         this.dataEdit.oldimage = res.data.image;
-        this.imageData =
-          "http://localhost:4000/image/profile/" + res.data.image;
+        this.imageData = res.data.image;
       })
       .catch(function(err) {
         console.log(err);
