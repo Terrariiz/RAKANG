@@ -228,7 +228,7 @@ export default {
                 swal.fire({
                   title: "ท่านได้รับเหรียญตราระดับ " + rankchanged,
                   imageUrl:
-                    "http://localhost:4000/image/rank/" + rankchanged + ".png",
+                    'http://localhost:8080/image/rank/' + rankchanged + ".png",
                   imageWidth: 300,
                   imageHeight: 200,
                   // showClass: {

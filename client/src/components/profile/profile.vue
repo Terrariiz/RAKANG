@@ -96,7 +96,7 @@
               <div class="head-profile">บัญชีของฉัน</div>
               <div class="sub-profile">ดูและแก้ไขข้อมูลส่วนบุคคลของคุณที่นี่</div>
               <center><img class="img-rank" :src="
-                                'http://localhost:4000/image/rank/' +
+                                'http://localhost:8080/image/rank/' +
                                 Profile.Rank+'.png'
                               "></center>
               <hr>
