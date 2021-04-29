@@ -1,6 +1,13 @@
 const User = require("../../user/model/User");
 const Campaign = require('../../campaign/model/Campaign');
 const DonateLog = require("../../log/model/DonateLog")
+const cloudinary = require("cloudinary").v2
+
+cloudinary.config({
+    cloud_name: "koladon52",
+    api_key: "413217853994171",
+    api_secret: "DOHByZlRxxocIbvEmAzgnvmnv-E",
+})
 
 exports.donateloguser = async function(req,res){
   try{

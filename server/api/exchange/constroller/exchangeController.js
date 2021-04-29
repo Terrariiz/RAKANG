@@ -3,29 +3,46 @@ const Exchange = require('../../Exchange/model/Exchange');
 const ExchangeLog = require("../../log/model/ExchangeLog");
 const { fdatasync } = require("fs");
 const ExchanceLog = require("../../log/model/ExchangeLog");
+const cloudinary = require("cloudinary").v2;
+const { resolve } = require("path");
+
+cloudinary.config({
+    cloud_name: "koladon52",
+    api_key: "413217853994171",
+    api_secret: "DOHByZlRxxocIbvEmAzgnvmnv-E",
+
+})
 
 
 ////////////////////////////////////ยังไม่เสร็จ//////////////////////////////////
 exports.addnewItem = async(req,res) => {
   try{   
+    var file = req.files
+    const add = new Exchange({
+      name   : req.body.name,
+      remain : req.body.remain,
+      detail : req.body.detail,
+      cost   : req.body.cost,
+      overviewimage: ""
+    });
+    var data = await add.save()
+    var key = 0;
     if(req.files){
-      const add = new Exchange({
-        name   : req.body.name,
-        remain : req.body.remain,
-        detail : req.body.detail,
-        cost   : req.body.cost,
-        overviewimage: req.files[0].filename,
-      });
-      
-      console.log(req.files[3])
-      for(var i = 1 ; i < req.files.length ; i++){
-        console.log(i)
-        console.log(req.files[i].filename)
-        add.galleryimage.push(req.files[i].filename)
-      }
-      var data = await add.save()
-      data.save()
-      
+      console.log(file)
+      file.forEach(element => {
+        console.log(element)
+        cloudinary.uploader.upload(element.path, function(err, result){
+          console.log(result)
+            if(key == 0){
+              data.overviewimage = result.url
+              key = 1
+            }else{
+              data.galleryimage.push(result.url)
+              data.save()
+            }
+            
+        })
+      });  
     }  
     res.status(201).json({ data });
   } catch (err) {

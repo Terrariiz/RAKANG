@@ -17,7 +17,7 @@
               <img
                 class="image -fullwidth img-responsive"
                 id="showimage"
-                :src="'http://localhost:4000/image/campaign/' + campaign.image"
+                :src="campaign.image"
               />
               <p class="lead">{{ campaign.content }}</p>
               <p class="details">
