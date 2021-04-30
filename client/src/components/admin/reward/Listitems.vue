@@ -21,9 +21,6 @@
                   Name
                 </th>
                 <th class="text-left">
-                 Date
-                </th>
-                <th class="text-left">
                  Amount
                 </th>
                 <th class="text-left">
@@ -33,18 +30,13 @@
             </thead>
             <tbody>
                 <tr  v-for="item in items"  :key="item._id">  
-                <!-- :src="'http://localhost:4000/image/campaign/' + campaign.image" -->
-                <td><center><img  class="img-fluid" style="width: 100px; height: 100px; object-fit: cover;  margin:3%;" align="center"></center></td> 
+                <td><center><img :src="item.galleryimage[0].image" class="img-fluid" style="width: 100px; height: 100px; object-fit: cover;  margin:3%;" align="center"></center></td> 
                 <td>
-                    <!-- {{ campaign.name }} -->
+                    {{ item.name }}
                 </td>
                 <td>
-                    <!-- {{ campaign.date }} -->
+                    {{ item.remain }}
                 </td>
-                <td>
-                    <!-- {{ campaign.amount }} -->
-                </td>
-                
                 <td>
                   <v-btn style="margin-right:3%;" @click="Viewitem(item._id)">view</v-btn>
                   <v-btn style="margin-right:3%;" @click="ViewLogitem(item._id)">Log</v-btn>
@@ -92,6 +84,12 @@ export default {
         Edititem(itemsid){
         this.$router.push({ name: 'Edititems' , params: {id : itemsid}})
       },
+      Refresh(itemsid){
+        console.log('sdfsdfsddf')
+        this.items = this.items.filter(function(c){
+          return c._id !== itemsid
+        })
+      },
       Deleteitem(itemsid){
         const swalWithBootstrapButtons = swal.mixin({
           customClass: {
@@ -113,6 +111,7 @@ export default {
             this.$http.delete("/exchangeitem/DeleteItem/"+itemsid)
             console.log("delete")
             this.$router.push({ name: 'Listitems'})
+            this.Refresh(itemsid)
             swalWithBootstrapButtons.fire(
               'Deleted!',
               'Delete Campaign Success.',
