@@ -407,7 +407,7 @@ const routes = [
     }
   },
   {
-    path:'/admin/Detailitems',
+    path:'/admin/Detailitems/:id',
     name: 'Detailitems',
     component: Detailitems,
     meta: {
