@@ -48,7 +48,6 @@ const Edititems              = () => import('@/components/admin/reward/Edititems
 const Admin                  = () => import('@/components/admin/Admin')
 const LogDonateAdmin         = () => import('@/components/admin/LogDonate')
 const loginAdmin             = () => import('@/components/admin/loginAdmin')
-const test                   = () => import('@/components/admin/test')
 const payment                = () => import('@/components/admin/payment')
 
 // ----------------------------หน้าฝั่ง user----------------------------------------------------
@@ -58,6 +57,7 @@ const Lantern                = () => import('@/views/Lantern')
 const UserDetailDoctrine     = () => import('@/views/detail_Doctrine')
 const UserDetailNews         = () => import('@/views/detail_news')
 const termuse                = () => import('@/views/termUse')
+const termservice            = () => import('@/views/termService')
 const items                  = () => import('@/views/items')
 const userDetailitems        = () => import('@/views/userDetailitems')
 
@@ -78,6 +78,11 @@ const routes = [
     path: '/termuse',
     name: 'termuse',
     component: termuse
+  },
+  {
+    path: '/termservice',
+    name: 'termservice',
+    component: termservice
   },
   {
     path: '/campaign',
@@ -287,11 +292,6 @@ const routes = [
     meta: {
       requiresAdminAuth: true
     }
-  },
-  {
-    path: '/test',
-    name: 'test',
-    component: test
   },
   {
     path: '/rank',
