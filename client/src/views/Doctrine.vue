@@ -28,7 +28,7 @@
         <!-- อันใหม่ -->
           <div class="containerx">
             <v-row >
-              <v-col v-for="(doctrine) in filteredList " :key="doctrine.title" cols="12" md="4" sm="12">
+              <v-col v-for="(doctrine) in filteredListx " :key="doctrine.title" cols="12" md="4" sm="12">
                 <div  class="cardx">
                   
                   <img @click="ViewDoctrine(doctrine._id)"  :src="'http://localhost:4000/image/doctrine/' + doctrine.image">
@@ -53,28 +53,31 @@
                     
                   </div>
                    <div class="btn-bookmark" v-if="$store.getters.UserIsLoggedIn">
-              <v-btn
-                icon
-                color="#ffb703"
-                v-if="doctrine.fav"
-                @click="clickBookmarks(doctrine)"
-              >
-                <v-icon x-large>mdi-bookmark</v-icon>
-              </v-btn>
-              <v-btn
-                icon
-                color="white"
-                v-else
-                @click="clickBookmarks(doctrine)"  
-              >
-                <v-icon x-large>mdi-bookmark</v-icon>
-              </v-btn>
-            </div>
+                  <v-btn
+                    icon
+                    color="#ffb703"
+                    v-if="doctrine.fav"
+                    @click="clickBookmarks(doctrine)"
+                  >
+                    <v-icon x-large>mdi-bookmark</v-icon>
+                  </v-btn>
+                  <v-btn
+                    icon
+                    color="white"
+                    v-else
+                    @click="clickBookmarks(doctrine)"  
+                  >
+                    <v-icon x-large>mdi-bookmark</v-icon>
+                  </v-btn>
                 </div>
+                    </div>
               </v-col>
             </v-row>
+              <v-pagination circle :total-visible="7"  v-model="pagination.page" :length="pages"></v-pagination>
+            
           </div>
        <!-- อันใหม่ -->
+       
         
       </v-container>
       <component-to-re-render :key="componentKey" />
@@ -102,7 +105,13 @@ export default {
       token: null,
       search: '',
       selectedCategory: 'ทั้งหมด',
-      categories:['ทั้งหมด','บทสวดมนต์','หลักธรรม คำสอน','คติสอนใจ','พุทธประวัติ','อื่นๆ']
+      categories:['ทั้งหมด','บทสวดมนต์','หลักธรรม คำสอน','คติสอนใจ','พุทธประวัติ','อื่นๆ'],
+      pagination:{
+                data: null,
+                rowsPerPage: 6,
+                page: 1,
+            },
+            
     };
   },
   computed: {
@@ -129,9 +138,9 @@ export default {
     },
     // เปลี่ยนหน้า 
     pages () {
-            return this.pagination.rowsPerPage ? Math.ceil(this.pagination.data.length / this.pagination.rowsPerPage) : 0
+            return this.pagination.rowsPerPage ? Math.ceil(this.doctrines.length / this.pagination.rowsPerPage) : 0
         },
-        filteredList() {
+        filteredListx() {
             var firstIndex;
             if (this.pagination.page == 1) {
                 firstIndex = 0;
@@ -139,7 +148,7 @@ export default {
                 firstIndex = (this.pagination.page-1) * this.pagination.rowsPerPage;
             }
             console.log(firstIndex + " firstIndex");
-            var showData = this.pagination.data.slice(firstIndex, firstIndex + this.pagination.rowsPerPage);
+            var showData = this.doctrines.slice(firstIndex, firstIndex + this.pagination.rowsPerPage);
             console.log(showData);
             return showData
         },
@@ -194,6 +203,7 @@ export default {
       .catch(function(err) {
         console.log(err);
       });
+      
       await this.onbeforeunload()
   },
   methods: {

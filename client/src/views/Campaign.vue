@@ -73,6 +73,7 @@ export default {
       search: '',
     };
   },
+
   computed: {
     filteredList() {
       return this.campaigns.filter(campaign => {
@@ -118,6 +119,7 @@ export default {
         console.log(err);
       });
       await this.onbeforeunload()
+
   },
   methods: {
     ViewCampaign(campaignid) {

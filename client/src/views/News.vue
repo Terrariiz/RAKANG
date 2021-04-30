@@ -28,7 +28,7 @@
         <!-- อันใหม่ -->
           <div class="containerx">
             <v-row >
-              <v-col v-for="(news) in filteredList " :key="news.title" cols="12" md="4" sm="12">
+              <v-col v-for="(news) in filteredListx " :key="news.title" cols="12" md="4" sm="12">
                 <div @click="ViewNews(news._id)" class="cardx">
                   
                   <img  :src="'http://localhost:4000/image/new/' + news.image">
@@ -59,117 +59,12 @@
                 </div>
               </v-col>
             </v-row>
+            <v-pagination circle :total-visible="7"  v-model="pagination.page" :length="pages"></v-pagination>
           </div>
        <!-- อันใหม่ -->
-        <!-- <v-card class="margin-card" v-for="(doctrine) in filteredList " :key="doctrine.title" elevation="5" outlined shaped >
-        <v-row class="row-news">
-          <v-col cols="12" md="6">
-            
-            <v-img
-            :src="'http://localhost:4000/image/doctrine/' + doctrine.image"
-            class="img-fluid"
-            style=""
-            align="center"
-          >
-          </v-img>
-          </v-col>
-          <v-col class="cols-detail-campaign" cols="12" md="6">
-            ปุ่ม bookmark
-            <div v-if="$store.getters.UserIsLoggedIn">
-            <v-btn
-              icon
-              color="pink"
-              v-if="doctrine.fav"
-              @click="clickBookmarks(doctrine)"
-            >
-              <v-icon>mdi-bookmark</v-icon>
-            </v-btn>
-            <v-btn
-              icon
-              v-else
-              @click="clickBookmarks(doctrine)"
-              
-            >
-              <v-icon>mdi-bookmark</v-icon>
-            </v-btn>
-            </div>
-            <v-container>
-                <h1>{{ doctrine.title }}  </h1>
-              <div>{{doctrines.content}}</div>
-              <div >
-                <v-row>
-                  <v-col style="text-align:left;" cols="12" md="6">
-                    <div>วันที่โพสต์ {{ doctrine.edittime }}</div>
-                    <div>หมวดหมู่ {{ doctrine.categories }}</div>
-                  </v-col>
-                </v-row>
-              </div>
-              <div class="btn-news">
-                <v-btn block style="background-color: #ffdd94; color:#455054;" 
-                @click="ViewDoctrines(doctrine._id)"
-                elevation="3">
-                ดูเนื้อหา</v-btn>
-              </div>
-            </v-container>
-          </v-col>
-        </v-row>
-        </v-card> -->
+        
       </v-container>
-        <!-- test -->
-     <!-- <v-container class="container-news">
-       <center>
-          <v-chip-group
-            v-model="selectedCategory"
-            active-class="primary--text"
-            mandatory
-          >
-            <h5 style="padding: 7px 0px 0px 0px;">หมวดหมู่ : </h5> 
-            <v-chip
-              v-for="category in categories"
-              :key="category"
-              :value="category"
-            >
-              {{ category }}
-            </v-chip>
-          </v-chip-group>
-        </center>
-       <v-text-field style="width:30%; text-align: center;" prepend-inner-icon="mdi-magnify" v-model="search" label="ค้นหาหัวข้อ"></v-text-field>
-       <p class="notfound" v-if="filteredList.length == 0 && search !== ''">ไม่พบ "{{search}}"</p>
-       <p class="notfound" v-if="filteredList.length == 0 && search == ''">ไม่มีเนื้อหาในส่วนนี้</p>
-        <v-card class="margin-card" v-for="(news) in filteredList " :key="news.title" elevation="5" outlined shaped >
-        <v-row class="row-news">
-          <v-col cols="12" md="6">
-            <v-img
-            :src="'http://localhost:4000/image/new/' + news.image"
-            class="img-fluid"
-            style=""
-            align="center"
-          >
-          </v-img>
-          </v-col>
-          <v-col class="cols-detail-campaign" cols="12" md="6">
-            <v-container>
-                <h1>{{ news.title }} </h1>
-              <div>{{doctrines.content}}</div>
-              <div >
-                <v-row>
-                  <v-col style="text-align:left;" cols="12" md="6">
-                    <div>วันที่โพสต์ {{ news.date }}</div>
-                    <div>หมวดหมู่ {{ news.categories }}</div>
-                  </v-col>
-                </v-row>
-              </div>
-              <div class="btn-news">
-                <v-btn block style="background-color: #ffdd94; color:#455054;" 
-                @click="ViewNews(news._id)"
-                elevation="3">
-                ดูเนื้อหา</v-btn>
-              </div>
-            </v-container>
-          </v-col>
-        </v-row>
-        </v-card>
-      </v-container> -->
+        
       <div>
         <Footer></Footer>
       </div>
@@ -192,6 +87,11 @@ export default {
       search: '',
       selectedCategory: 'ทั้งหมด',
       categories:['ทั้งหมด','วัด','โรงพยาบาล','มูลนิธิ','ประชาสัมพันธ์ของเว็บไซค์','อื่นๆ'],
+      pagination:{
+                data: null,
+                rowsPerPage: 6,
+                page: 1,
+            },
     };
   },
   computed: {
@@ -213,7 +113,24 @@ export default {
           }
         }
       })
-    }
+    },
+    // เปลี่ยนหน้า 
+    pages () {
+            return this.pagination.rowsPerPage ? Math.ceil(this.news.length / this.pagination.rowsPerPage) : 0
+        },
+        filteredListx() {
+            var firstIndex;
+            if (this.pagination.page == 1) {
+                firstIndex = 0;
+            } else{
+                firstIndex = (this.pagination.page-1) * this.pagination.rowsPerPage;
+            }
+            console.log(firstIndex + " firstIndex");
+            var showData = this.news.slice(firstIndex, firstIndex + this.pagination.rowsPerPage);
+            console.log(showData);
+            return showData
+        },
+        // เปลี่ยนหน้า 
   },
   mounted: async function mounted() {
     await this.$http.get("/news/ShowListNews")

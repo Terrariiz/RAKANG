@@ -89,7 +89,43 @@
             //     Xoffset: 15,
             //     });
             //  },
-        }
+        },
+    //     data ()  {
+    //   return{
+    //         pagination:{data: null,
+    //                     rowsPerPage: 9,
+    //                     page: 1,
+    //                     },
+    //         totalNumberOfItems: this.$store.getters.banana.length,
+    //         headers: [
+    //             { text: 'ชื่อแคมเปญ',sortable: false,value: 'CampaignName'},
+    //             { text: 'จำนวนเงิน', value: 'amount' },
+    //             { text: 'วัน-เดือน-ปี', value: 'date' }
+    //                 ]
+    //         }
+
+    // },
+    // async mounted(){
+   
+    // await this.$http
+    //   .get("donatelog/donateloguser/" + id)
+    //   .then((res) => {
+    //     console.log("get items")
+    //     console.log(this.donatelog)
+        
+    //     this.pagination.data = res.data.donatelog;
+        
+
+    //     var i = 0
+    //     for(this.pagination.data[i];;i++){
+    //         this.pagination.data[i].date = moment(this.pagination.data[i].date).format(" DD-MM-YYYY HH:mm A");
+    //         }
+             
+    //   })
+    //   .catch(function (err) {
+    //     console.log(err);
+    //   });
+    // },
     }
 </script>
 
