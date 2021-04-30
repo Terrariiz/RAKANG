@@ -28,10 +28,10 @@
                     </div>
                     <div class="col-2">
                         <p>Items/ชื่อของ</p>
-                        <h1>ชื่อของ</h1>
-                        <h4>ราคา</h4>
+                        <h1>{{items.name}}</h1>
+                        <h4>{{items.cost}}</h4>
                         <h3>detail</h3>
-                        <p>บอกรายละเอียด</p>
+                        <p>{{items.detail}}</p>
                         <a href="" class="btn">Buy</a>
                     </div>
                 </div>
@@ -78,6 +78,11 @@
     // import a from "../../public/image/bubble.png"
     const Navbar = () => import('@/components/navbar/navbar')
     export default {
+        data (){
+      return {
+        items : []
+        }
+    },
         components: {
       Navbar
         },
@@ -89,7 +94,16 @@
             //     Xoffset: 15,
             //     });
             //  },
-        }
+        },
+        mounted: async function mounted(){
+       await this.$http.get("/exchangeitem/DetailItem" +this.$route.params.id)
+       .then((res) => {
+       this.items = res.data;
+       })
+       .catch(function(err){
+        console.log(err)
+      })
+    },
     }
 </script>
 

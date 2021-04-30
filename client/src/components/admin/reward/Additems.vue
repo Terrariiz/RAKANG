@@ -19,7 +19,7 @@
                         <v-col  md="2" sm="6">
                             <div class="form-input">
                                 <label for="file-ip-1">เลือกรูปภาพ</label>
-                                <input type="file" id="file-ip-1" accept="image/*" @click="onFileSelected">
+                                <input type="file" id="file-ip-1" accept="image/*" @click="showPreview">
                             </div>
                         </v-col>
                     </v-row>
@@ -163,6 +163,7 @@ import swal from "sweetalert2";
     async showPreview(event){
     if(event.target.files.length > 0){
     var src = URL.createObjectURL(event.target.files[0]);
+    this.exchange.galleryimage = src;
     var preview = document.getElementById("file-ip-1-preview");
     preview.src = src;
     preview.style.display = "block";
