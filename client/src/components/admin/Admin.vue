@@ -85,6 +85,21 @@ export default {
       this.$store.dispatch('AdminLoggedOut')
 			await this.$router.push('/home')
 		}
-    }
+    },
+  // mounted: async function mounted() {
+  // const id = this.$route.params.id;
+  // await this.$http
+  //   .get("donatelog/donatelogcampaign/")
+  //   .then((res) => {
+  //   this.loguser = res.data.donatelist;
+  //   var i = 0
+  //   for(this.loguser[i];;i++){
+  //       this.loguser[i].date = moment(this.loguser[i].date).format(" DD-MM-YY HH:mm A");
+  //       } 
+  //     })
+  //     .catch(function (err) {
+  //       console.log(err);
+  //     });
+  // },
 }
 </script>

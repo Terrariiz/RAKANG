@@ -104,6 +104,14 @@ export default {
     Navbar,
     Footer,
   },
+  mounted: async function mounted() {
+  await this.onbeforeunload() 
+  },
+  methods:{
+    onbeforeunload() {
+    window.scrollTo(0, 0);
+    }
+  }
 };
 </script>
 
