@@ -138,14 +138,13 @@ import swal from "sweetalert2";
             this.exchange.galleryimage.forEach( file =>{
               formData.append("multi-files", file);
             })
-            formData.append("galleryimage", this.exchange.galleryimage);
             formData.append("remain", this.exchange.remain);
             formData.append("cost", this.exchange.cost);
             console.log(formData);
             let exchange = await this.$http.post("/exchangeitem/addnewItem", formData);
         console.log(exchange);
         if (exchange) {
-          this.$router.push({ name: "Listiems" });
+          this.$router.push({ name: "Listitems" });
           swal.fire("Success", "Add Items Was successful", "success");
           console.log("success");
         } else {
@@ -171,6 +170,8 @@ import swal from "sweetalert2";
       if (this.file != null) {
           console.log(this.file)
           console.log(typeof this.file)
+          this.exchange.galleryimage = this.file
+          console.log(this.exchange.galleryimage)
           this.file.forEach(f => {var url = URL.createObjectURL(f)
           console.log(f)
           this.imageData.push(url)})
