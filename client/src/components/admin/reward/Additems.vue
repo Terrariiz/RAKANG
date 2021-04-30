@@ -135,6 +135,9 @@ import swal from "sweetalert2";
             var formData = new FormData();
             formData.append("name", this.exchange.name);
             formData.append("detail", this.exchange.detail);
+            this.exchange.galleryimage.forEach( file =>{
+              formData.append("multi-files", file);
+            })
             formData.append("galleryimage", this.exchange.galleryimage);
             formData.append("remain", this.exchange.remain);
             formData.append("cost", this.exchange.cost);
