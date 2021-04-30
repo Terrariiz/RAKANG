@@ -16,7 +16,9 @@ cloudinary.config({
 
 ////////////////////////////////////ยังไม่เสร็จ//////////////////////////////////
 exports.addnewItem = async(req,res) => {
-  try{   
+  try{  
+    var complete = true 
+    console.log(req.body) 
     var file = req.files
     const add = new Exchange({
       name   : req.body.name,
@@ -30,7 +32,7 @@ exports.addnewItem = async(req,res) => {
       file.forEach(element => {
         console.log(element)
         cloudinary.uploader.upload(element.path, function(err, result){
-              var add = {image : result.url, cloudinary : result.public_id}
+              var add = {image : result.url, cloudinary_id : result.public_id}
               data.galleryimage.push(add)
               data.save()
         })

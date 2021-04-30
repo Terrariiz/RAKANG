@@ -94,3 +94,21 @@ exports.CheckDonate = async function(req, res){
 
   }
 }
+
+exports.donate_log_campaign_for_dashboard = async function(req,res){
+  try{
+    console.log('fuck')
+    await Campaign.find().populate("donatelist").exec(function(err, campaignlog){
+      if(err){
+        console.log(err)
+      }else{
+        console.log('getcampaignlog')
+        console.log(campaignlog)
+        res.json(campaignlog);
+      }
+    }) 
+  } catch (err) {
+    res.status(400).json({ err: err });
+    console.log(err)
+  }
+}
