@@ -50,6 +50,7 @@ const LogDonateAdmin         = () => import('@/components/admin/LogDonate')
 const loginAdmin             = () => import('@/components/admin/loginAdmin')
 const payment                = () => import('@/components/admin/payment')
 const dashboard              = () => import('@/components/admin/index')
+const Confirm_order          = () => import('@/components/admin/confirm_order')
 
 // ----------------------------หน้าฝั่ง user----------------------------------------------------
 const UserDetailCampaign     = () => import('@/views/Donate_Campaign')
@@ -402,6 +403,14 @@ const routes = [
     path:'/admin/Listitems',
     name: 'Listitems',
     component: Listitems,
+    meta: {
+      requiresAdminAuth: true
+    }
+  },
+  {
+    path:'/admin/confirm-order',
+    name: 'Confirm_order',
+    component: Confirm_order,
     meta: {
       requiresAdminAuth: true
     }
