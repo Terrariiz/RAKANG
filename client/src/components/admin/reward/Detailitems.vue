@@ -2,122 +2,31 @@
   <div>
     <div>
       <Navbar></Navbar>
-       <!-- <div>
-      <Navbar></Navbar>
     </div>
+    <br><br><br>
         <div class="container">
+            <v-btn class="back-btn" @click="$router.back()"> <i style="float:left;" class="fa fa-arrow-left fa-lg" aria-hidden="true"></i></v-btn>
             <div class="small-container single-product">
                 <div class="row">
                     <div class="col-2">
-                        <img src="" width="100%" id="product-img">
+                        <img :src="item.galleryimage[0].image" width="100%" id="product-img">
                         <div class="small-img-row">
-                            <div class="small-img-col">
-                                <img src="" width="100%" class="small-img">
-                            </div>
-
-                            <div class="small-img-col">
-                                <img src="" width="100%" class="small-img">
-                            </div>
-
-                            <div class="small-img-col">
-                                <img src="" width="100%" class="small-img"> 
-                            </div>
-
-                            <div class="small-img-col">
-                                <img src="" width="100%" class="small-img">
+                            <div v-for="image_item in item.galleryimage" :key="image_item" class="small-img-col">
+                                <img :src="image_item.image" width="100%" class="small-img">
                             </div>
                         </div>
                     </div>
                     <div class="col-2">
-                        <p>Items/ชื่อของ</p>
-                        <h1>ชื่อของ</h1>
-                        <h4>ราคา</h4>
-                        <h3>detail</h3>
-                        <p>บอกรายละเอียด</p>
-                        <a href="" class="btn">Buy</a>
-                    </div>
-                </div>
-            </div> -->
-            <!-- title  -->
-            <!-- <div class="small-container">
-                <div class="row row-2">
-                    <h2>Other Product</h2>
-                    <p>View more</p>
-                </div>
-            </div>
-            <br> -->
-            <!-- featured product  -->
-            <!-- <div class="small-container">
-                <div class="row">
-                    <div class="col-4">
-                        <img src="">
-                        <h4>ชื่อของ</h4>
-                        <p>ราคา 500 แต้ม</p>
-                    </div>
-                     <div class="col-4">
-                        <img src="">
-                        <h4>ชื่อของ</h4>
-                        <p>ราคา 500 แต้ม</p>
-                    </div>
-                     <div class="col-4">
-                        <img src="">
-                        <h4>ชื่อของ</h4>
-                        <p>ราคา 500 แต้ม</p>
-                    </div>
-                     <div class="col-4">
-                        <img src="">
-                        <h4>ชื่อของ</h4>
-                        <p>ราคา 500 แต้ม</p>
+                        <p>ชื่อของ</p>
+                        <h1>{{item.name}}</h1>
+                        <h4>แต้มที่ใช้ :  {{item.cost}}  แต้ม</h4>
+                        <h3>รายละเอียด</h3>
+                        <p v-html="item.detail">{{ item.detail }}</p>
                     </div>
                 </div>
             </div>
-
-        </div> -->
-    </div>
-    <br><br><br>
-    <!-- อันใหม่ -->
-    <v-btn class="back-btn" @click="$router.back()"> <i style="float:left;" class="fa fa-arrow-left fa-lg" aria-hidden="true"></i></v-btn>
-      <section class="header">
-        <!-- <h1>หลักธรรม</h1> -->
-        <!-- <h4>ชื่อหัวข้อเรื่อง</h4> -->
-      </section>
-      <hr>
-      <section class="content-container">
-        <div class="left-content">
-          <h2>{{ item.name }}</h2>
-          <div class="date-news">
-            ยอดคงเหลือ: {{ item.remain }}
-          </div>
-          <div class="date-news">
-            แต้มบุญที่ใช้แลก: {{ item.cost }}
-          </div>
-          <div class="featured-article">
-            <img  :src="item.overviewimage">
-            <p v-html="item.detail">{{ item.detail }}</p>
-          </div>
-          <!-- <div class="another-article">
-            <h3>another article</h3>
-            <img >
-            <p></p>
-            <button class="btn read-more-btn">อ่านเพิ่มเติม</button>
-          </div> -->
+            <br>
         </div>
-        <!-- <div class="right-content">
-          <div class="topics">
-              <h5>หัวข้อเพิ่มเติม</h5>
-            </div>
-          <div class="avatar-content">
-            <h5>แคมเปญแนะนำ</h5>
-            <img :src="campaigns[showcampaign].image">
-            <p>{{ campaigns[showcampaign].name }}</p>
-          </div>
-          <div class="avatar-content">
-            <h5>ข่าวแนะนำ</h5>
-            <img :src="news[shownews].image">
-            <p>{{news[shownews].title}}</p>
-          </div>
-        </div> -->
-      </section>
   </div>
 </template>
 
@@ -158,139 +67,111 @@ export default {
 <style scoped>
 .back-btn{
     position: absolute;
-    left: 15%;
 }
-.project-header{
-  background-color: #fff8ec;
+a{
+    text-decoration: none;
+    color: #555;
 }
-.project-content{
-    padding-right: 40px;
-    
+p{
+    color: #555;
 }
-.image .-fullwidth{
-  width: 100%;
-}
-.image{
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 40px;
-  
-  width: 100%;
-  
-
-}
-.img-responsive{
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-img{
-  vertical-align: middle;
-  border: 0;
-}
-.fund-raising{
-    border-radius: 6px;
-    background-clip: padding-box;
-    color: #666;
-    border: 1px solid #f3d9ab;
-    background-color: #fff;
-    z-index: 999;
-}
-.fund-raising .body{
-   padding: 30px 25px 0  25px;
-}
-.fund-raising .action{
-   padding: 30px 25px 30px 25px;
-}
-@media(max-width: 767px){
-    .project-content {
-    padding-right: 0;
-}
-}
-/* อันใหม่ */
-.date-news{
-  color: #a9a9a9;
-  font-size: 13px;
-}
-.header{
-  text-align: center;
-  margin-top:3% ;
-  margin-bottom: 2%;
-}
-h1{
-  font-size: 50px;
-}
-h2,h4,h5{
-  font-weight: 100;
-}
-hr{
-  width: 70%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 2%;
-}
-.content-container{
-  display: grid;
-  grid-template-areas:'left-content right-content' ;
-  width: 60%;
-  margin: auto;
-  grid-gap:50px;
-  text-align: left;
-}
-.featured-article, .another-article{
-  margin-top: 2%;
-  margin-bottom: 2%;
-
-}
-.another-article h3, p{
-  margin-bottom:10px ;
-}
-img{
-  height:400px;
-  width: 700px;
-}
-.read-more-btn{
-  background-color: black;
-  border: none;
-  color: white;
-  float: right;
-  padding: 10px 20px 10px 20px;
-}
-.read-more-btn:hover{
-  background-color: #a9a9a9;
-}
-.right-content img{
-  height: 200px;
-  width: 300px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 2%;
-}
-.topics{
-  margin-bottom: 20%;
-}
-.topics h5{
-  background-color: black;
-  color: white;
-  padding: 10px;
-  text-align: center;
-  margin-bottom: 2%;
-}
-@media(max-width:1299px){
-  .content-container{
-    grid-template-areas:'left-content''right-content' ;
-    width: 70%;
+.container{
+    max-width: 1300px;
     margin: auto;
-
-  }
-  hr{
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 2%;
-  }
-
+    padding-left: 25px;
+    padding-right: 25px;
 }
-/* อันใหม่ */
+.row{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.col-2{
+    flex-basis: 50%;
+    min-width: 300px;
+}
+.col-2 img{
+    max-width: 100%;
+    padding: 50px 0;
+}
+/* .col-2 h1{
+    font-size: 50px;
+    line-height: 62;
+    margin: 25px 0;
+    
+} */
+.btn{
+    display: inline-block;
+    background: #ff523b;
+    color: #fff;
+    padding: 8p 30px;
+    margin: 30px 0;
+    border-radius: 30px;
+    transition: background 0.5s;
+}
+.btn:hover{
+    background: #563434;
+}
+.small-container{
+    max-width: 1080px;
+    margin:auto;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-bottom:65px ;
+}
+h4{
+    color: #555;
+    font-weight: normal;
+}
+.col-4 p{
+    font-size: 14px;
+}
+.col-4{
+    flex-basis: 25%;
+    padding: 10px;
+    min-width: 200px;
+    margin-bottom: 50px;
+}
+.col-4 img{
+    width: 100%;
+}
+
+   .single-product{
+       margin-top:80px;
+   }
+   .single-product .col-2{
+       padding: 20px;
+   }
+   .single-product h4{
+       margin: 20px 0;
+       font-size: 22px;
+       font-weight: bold;
+   }
+   .small-img-row{
+       display: flex;
+       justify-content: space-between;
+   }
+   .small-img-col{
+       flex-basis: 24%;
+       cursor: pointer;
+   }
+   @media only screen and (max-width: 600px){
+       .row{
+           text-align: center;
+       }
+       .col-2{
+           flex-basis:100%;
+       }
+       .single-product .row{
+           text-align:left;
+       }
+       .single-product .col-2{
+           padding: 20px 0;;
+       }
+       .single-product h1{
+           font-size: 26px;
+           line-height: 36px;
+       }
+   }
 </style>
