@@ -19,7 +19,7 @@
                         <v-col  md="2" sm="6">
                             <div class="form-input">
                                 <label for="file-ip-1">เลือกรูปภาพ</label>
-                                <input type="file" id="file-ip-1" accept="image/*" @click="showPreview">
+                                <input type="file" id="file-ip-1" accept="image/*" @click="onFileSelected">
                             </div>
                         </v-col>
                     </v-row>
@@ -29,6 +29,7 @@
                             <v-col cols="12" md="4" sm="12">
                                 <div class="head1">name</div>
                                 <v-text-field
+                                v-model="exchange.name"
                                 solo
                                 label="Name"
                                 required
@@ -37,6 +38,7 @@
                             <v-col  md="2" sm="6">
                                 <div class="head1">ราคา</div>
                                 <v-text-field
+                                v-model="exchange.cost"
                                 class="value"
                                 solo
                                 label="90"
@@ -49,6 +51,7 @@
                             <v-col  md="2" sm="6">
                                 <div class="head1">จำนวน</div>
                                 <v-text-field
+                                v-model="exchange.name"
                                 class="value"
                                 solo
                                 label="1"
@@ -62,6 +65,7 @@
                     <div class="detail-items">
                         <div class="head1">รายละเอียด</div>
                         <v-textarea
+                            v-model="exchange.detail"
                             solo
                             clearable
                             clear-icon="mdi-close-circle"
