@@ -10,45 +10,21 @@
       <div class="container">
         <h1 class="text-capitalize product-title">Featured Products</h1>
         <v-row>
-          <v-col cols="12" md="4" sm="12">
+
+          <v-col v-for="items in items" :key="items" cols="12" md="4" sm="12">
               <div class="card single-item">
           <div class="img-container">
-            <img src="../../public/image/lotus.jpg" class="card-img-top product-img" alt="">
+            <img :src="items.galleryimage[0]" class="card-img-top product-img" alt="">
            </div>
           <div class="card-body">
             <div class="card-text d-flex justify-content-between text-capitalize">
-              <h5 id="item-name"> Branded Watch</h5>
-              <span><i class="fas fa-dollar-sign"></i>450</span>
+              <h5 id="item-name">{{items.name}}</h5>
+              <span><i class="fas fa-dollar-sign"></i>{{items.cost}}</span>
               </div>
           </div>
         </div>
           </v-col>
-          <v-col cols="12" md="4" sm="12">
-              <div class="card single-item">
-          <div class="img-container">
-            <img src="../../public/image/lotus.jpg" class="card-img-top product-img" alt="">
-           </div>
-          <div class="card-body">
-            <div class="card-text d-flex justify-content-between text-capitalize">
-              <h5 id="item-name"> Branded Watch</h5>
-              <span><i class="fas fa-dollar-sign"></i>450</span>
-              </div>
-          </div>
-        </div>
-          </v-col>
-          <v-col cols="12" md="4" sm="12">
-              <div class="card single-item">
-          <div class="img-container">
-            <img src="../../public/image/lotus.jpg" class="card-img-top product-img" alt="">
-           </div>
-          <div class="card-body">
-            <div class="card-text d-flex justify-content-between text-capitalize">
-              <h5 id="item-name"> Branded Watch</h5>
-              <span><i class="fas fa-dollar-sign"></i>450</span>
-              </div>
-          </div>
-        </div>
-          </v-col>
+
         </v-row>
       </div>
 

@@ -7,22 +7,22 @@
             <div class="small-container single-product">
                 <div class="row">
                     <div class="col-2">
-                        <img src="../../public/image/bubble.png" width="100%" id="product-img">
+                        <img src="" width="100%" id="product-img">
                         <div class="small-img-row">
                             <div class="small-img-col">
-                                <img src="../../public/image/bubble.png" width="100%" class="small-img">
+                                <img src="" width="100%" class="small-img">
                             </div>
 
                             <div class="small-img-col">
-                                <img src="../../public/image/bubble.png" width="100%" class="small-img">
+                                <img src="" width="100%" class="small-img">
                             </div>
 
                             <div class="small-img-col">
-                                <img src="../../public/image/bubble.png" width="100%" class="small-img"> 
+                                <img src="" width="100%" class="small-img"> 
                             </div>
 
                             <div class="small-img-col">
-                                <img src="../../public/image/bubble.png" width="100%" class="small-img">
+                                <img src="" width="100%" class="small-img">
                             </div>
                         </div>
                     </div>
@@ -48,22 +48,22 @@
             <div class="small-container">
                 <div class="row">
                     <div class="col-4">
-                        <img src="../../public/image/bubble.png">
+                        <img src="">
                         <h4>ชื่อของ</h4>
                         <p>ราคา 500 แต้ม</p>
                     </div>
                      <div class="col-4">
-                        <img src="../../public/image/bubble.png">
+                        <img src="">
                         <h4>ชื่อของ</h4>
                         <p>ราคา 500 แต้ม</p>
                     </div>
                      <div class="col-4">
-                        <img src="../../public/image/bubble.png">
+                        <img src="">
                         <h4>ชื่อของ</h4>
                         <p>ราคา 500 แต้ม</p>
                     </div>
                      <div class="col-4">
-                        <img src="../../public/image/bubble.png">
+                        <img src="">
                         <h4>ชื่อของ</h4>
                         <p>ราคา 500 แต้ม</p>
                     </div>

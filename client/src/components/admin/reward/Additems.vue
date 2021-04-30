@@ -13,7 +13,7 @@
                     <v-row >
                         <v-col v-for="(image,index) in imageData" :key="image" md="2" sm="6" >
                                 <div  class="preview" >
-                                  <v-img @click="deletex(index)" class="icon" src="../../../public/image/times-solid.svg"></v-img>
+                                  <v-img @click="deletex(index)" class="icon" src="../../../../public/image/times-solid.svg"></v-img>
                                     <v-img class="img-size" :src="image"></v-img>
                                     
                                 </div>
@@ -53,7 +53,7 @@
                             <v-col  md="2" sm="6">
                                 <div class="head1">จำนวน</div>
                                 <v-text-field
-                                v-model="exchange.name"
+                                v-model="exchange.remain"
                                 class="value"
                                 solo
                                 label="1"
@@ -96,7 +96,7 @@
               >Submit</v-btn
             >
           </v-col>
-          <v-col cols="3"></v-col>
+         
         </v-row>
         </div>
         <br><br>
@@ -108,7 +108,7 @@
 <script>
 const Navbar = () => import('@/components/navbar/navbar')
 import swal from "sweetalert2";
-// import a from "../../../public/image/1.png"
+// import a from "../../../../public/image"
    export default {
   name: "Addcampaign",
   data() {
@@ -117,7 +117,6 @@ import swal from "sweetalert2";
       exchange: {
         name: null,
         detail: null,
-        overviewimage: null,
         imagepath: "",
         cost: null,
         remain: null,
@@ -136,7 +135,6 @@ import swal from "sweetalert2";
             var formData = new FormData();
             formData.append("name", this.exchange.name);
             formData.append("detail", this.exchange.detail);
-            formData.append("overviewimage", this.exchange.overviewimage);
             formData.append("galleryimage", this.exchange.galleryimage);
             formData.append("remain", this.exchange.remain);
             formData.append("cost", this.exchange.cost);
@@ -163,25 +161,18 @@ import swal from "sweetalert2";
         }
 
     },
-    async showPreview(event){
-    if(event.target.files.length > 0){
-    var src = URL.createObjectURL(event.target.files[0]);
-    this.exchange.galleryimage = src;
-    var preview = document.getElementById("file-ip-1-preview");
-    preview.src = src;
-    preview.style.display = "block";
-        }
-    },
-    async onFileSelected(event) {
-      this.exchange.overviewimage = event.target.files[0];
-      const input = this.$refs.fileInput;
-      const files = input.files;
-      if (files && files[0]) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          this.imageData = e.target.result;
-        };
-        reader.readAsDataURL(files[0]);
+    
+    async onFileSelected() {
+      // this.exchange.overviewimage = event.target.files[0];
+      // const input = this.$refs.fileInput;
+      if (this.file != null) {
+          console.log(this.file)
+          console.log(typeof this.file)
+          this.file.forEach(f => {var url = URL.createObjectURL(f)
+          console.log(f)
+          this.imageData.push(url)})
+          
+
         // this.$emit('input', files[0])
       }
     },

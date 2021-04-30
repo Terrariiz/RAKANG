@@ -110,7 +110,7 @@ export default {
           reverseButtons: false
         }).then((result) => {
           if (result.isConfirmed) {
-            this.$http.delete("/exchangeitem/DeleteItem"+itemsid)
+            this.$http.delete("/exchangeitem/DeleteItem/"+itemsid)
             console.log("delete")
             this.$router.push({ name: 'Listitems'})
             swalWithBootstrapButtons.fire(
