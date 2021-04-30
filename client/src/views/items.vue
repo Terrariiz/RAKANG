@@ -61,11 +61,34 @@
 
 <script>
  const Navbar = () => import('@/components/navbar/navbar')
-    export default{
-        components: {
+export default {
+    name : "Listitems",
+     data (){
+      return {
+        items : []
+        }
+    },
+     mounted: async function mounted(){
+      await this.$http.get("/exchangeitem/ShowListItem")
+      .then((res) => {
+      this.items = res.data;
+       })
+      .catch(function(err){
+        console.log(err)
+      })
+    },
+    components: {
       Navbar
     },
+    methods: {
+    ViewItems(itemsid){
+      this.$router.push({
+        name: "UserDetailitems",
+        params: {id:itemsid}
+      })
     }
+      }
+}
 </script>
 
 

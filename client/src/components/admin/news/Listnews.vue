@@ -30,7 +30,7 @@
             </thead>
             <tbody>
               <tr   @submit.prevent="editnews" v-for="news in news"  :key="news._id">
-                <td><center><img :src="'http://localhost:4000/image/new/' + news.image" class="img-fluid" style="width: 100px; height: 100px; object-fit: cover; margin:3%;" align="center"></center></td>
+                <td><center><img :src="news.image" class="img-fluid" style="width: 100px; height: 100px; object-fit: cover; margin:3%;" align="center"></center></td>
                 <td>{{ news.title }}</td>
                 <!-- <td v-html="news.content">{{ news.content }}</td> -->
                 <td>

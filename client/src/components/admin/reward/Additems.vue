@@ -31,6 +31,7 @@
                             <v-col cols="12" md="4" sm="12">
                                 <div class="head1">name</div>
                                 <v-text-field
+                                v-model="exchange.name"
                                 solo
                                 label="Name"
                                 required
@@ -39,6 +40,7 @@
                             <v-col  md="2" sm="6">
                                 <div class="head1">ราคา</div>
                                 <v-text-field
+                                v-model="exchange.cost"
                                 class="value"
                                 solo
                                 label="90"
@@ -51,6 +53,7 @@
                             <v-col  md="2" sm="6">
                                 <div class="head1">จำนวน</div>
                                 <v-text-field
+                                v-model="exchange.name"
                                 class="value"
                                 solo
                                 label="1"
@@ -64,6 +67,7 @@
                     <div class="detail-items">
                         <div class="head1">รายละเอียด</div>
                         <v-textarea
+                            v-model="exchange.detail"
                             solo
                             clearable
                             clear-icon="mdi-close-circle"
@@ -159,29 +163,25 @@ import swal from "sweetalert2";
         }
 
     },
-    //  showPreview(event){
-       
-    // if(event.target.files.length > 0){
-      
-    //       var src = URL.createObjectURL(event.target.files[0]);
-    //       console.log(src)
-    //       var preview = document.getElementById("file-ip-1-preview");
-    //       preview.src = src;
-    //       preview.style.display = "block";
-          
-    //     }
-    // },
-    async onFileSelected() {
-      // this.exchange.overviewimage = event.target.files[0];
-      // const input = this.$refs.fileInput;
-      if (this.file != null) {
-          console.log(this.file)
-          console.log(typeof this.file)
-          this.file.forEach(f => {var url = URL.createObjectURL(f)
-          console.log(f)
-          this.imageData.push(url)})
-          
-
+    async showPreview(event){
+    if(event.target.files.length > 0){
+    var src = URL.createObjectURL(event.target.files[0]);
+    this.exchange.galleryimage = src;
+    var preview = document.getElementById("file-ip-1-preview");
+    preview.src = src;
+    preview.style.display = "block";
+        }
+    },
+    async onFileSelected(event) {
+      this.exchange.overviewimage = event.target.files[0];
+      const input = this.$refs.fileInput;
+      const files = input.files;
+      if (files && files[0]) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.imageData = e.target.result;
+        };
+        reader.readAsDataURL(files[0]);
         // this.$emit('input', files[0])
       }
     },

@@ -10,8 +10,8 @@
         <v-btn  text rounded class="my-2" to="/termuse">
           วิธีการใช้งาน
         </v-btn>
-        <v-btn text rounded class="my-2" to="/test">
-          Test
+        <v-btn text rounded class="my-2" to="/termservice">
+          ข้อตกลงการใช้งานเว็บไซต์
         </v-btn>
         <v-col class="py-4 text-center white--text" color="#CFD6EA" cols="12">
           {{ new Date().getFullYear() }} — <strong>RAKANGTHAM</strong>

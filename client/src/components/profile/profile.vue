@@ -16,7 +16,6 @@
                 </div>
               <center><div v-if="selected == 'โปรไฟล์' || selected == 'ประวัติการบริจาค' || selected =='บุ๊คมาค'" class="image-profile">
                 <img  :src="
-                                'http://localhost:4000/image/profile/' +
                                 Profile.image
                               ">
               </div></center>
@@ -97,7 +96,7 @@
               <div class="head-profile">บัญชีของฉัน</div>
               <div class="sub-profile">ดูและแก้ไขข้อมูลส่วนบุคคลของคุณที่นี่</div>
               <center><img class="img-rank" :src="
-                                'http://localhost:4000/image/rank/' +
+                                'http://localhost:8080/image/rank/' +
                                 Profile.Rank+'.png'
                               "></center>
               <hr>
@@ -276,7 +275,7 @@
       max-width="344"
       outlined
     >
-     <v-img  class="mx-auto" :src="'http://localhost:4000/image/doctrine/' + Bookmark.image"></v-img>
+     <v-img  class="mx-auto" :src="Bookmark.image"></v-img>
       <v-list-item three-line>
         <v-list-item-content>
           <div class="overline mb-4">
@@ -429,8 +428,7 @@ export default {
       .then((res) => {
         this.Profile = res.data;
         this.dataEdit.oldimage = res.data.image;
-        this.imageData =
-          "http://localhost:4000/image/profile/" + res.data.image;
+        this.imageData =res.data.image;
       
         console.log("get user data")
         console.log(this.Profile)

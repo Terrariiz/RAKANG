@@ -1,11 +1,11 @@
 <template>
-  <div class="termuse">
+  <div class="termservice">
     <div>
       <Navbar></Navbar>
     </div>
     <br><br><br><br><br>
     <div style="margin-left: 10%; margin-right: 10%">
-      <h1>วิธีการใช้งานเว็บไซต์</h1>
+      <h1>ข้อตกลงการใช้งานเว็บไซต์</h1>
       <v-row>
         <v-col cols="12" md="8" sm="8">
           <div id='1'>
@@ -104,14 +104,6 @@ export default {
     Navbar,
     Footer,
   },
-  mounted: async function mounted() {
-  await this.onbeforeunload() 
-  },
-  methods:{
-    onbeforeunload() {
-    window.scrollTo(0, 0);
-    }
-  }
 };
 </script>
 

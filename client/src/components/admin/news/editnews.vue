@@ -1,43 +1,38 @@
 <template>
-    <div class="dashboard" >
+    <div class="Editnews">
         <div>
             <Navbar></Navbar>
         </div>
         <br><br>
-         <v-form
-         @submit.prevent="Editdoctrine">
+        <form
+         @submit.prevent="Editnews">
         <v-container id ='rounded' style="background-color: #F09C0B;">
-           
             <v-container class="my-5">
                 <v-layout row wrap >
                     
                         <v-flex xs12 md6 >
-                            <v-container id = "picturedoctrine"  >
-                                <center><v-div style=""  class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
-                                    <img v-if="!imageData" class="image -fullwidth img-responsive" id="showimage" :src="'http://localhost:4000/image/doctrine/' + doctrine.image"/>
-                                    <span  v-if="!doctrine.image"  class="placeholder">Choose an Image</span>
+                             <v-container v-model = "news.image"  >
+                                 <center><v-div style=""  class="base-image-input" :style="{ 'background-image': `url(${imageData})` }" @click="chooseImage">
+                                    <img v-if="!imageData" class="image -fullwidth img-responsive" id="showimage" :src="news.image"/>
+                                    <span  v-if="!news.image"  class="placeholder">Choose an Image</span>
                                     <input  class="file-input" id="file-input"  ref="fileInput"  type="file"  v-on:change="onFileSelected" >
                                 </v-div></center>
 
                                 <hr>
                                <p>*if don't submit new picture we just use previous picture</p>
-                            </v-container>
-                            <!-- <v-container v-model = "doctrine.image"  > -->
-                                
                                 <!-- <v-file-input v-model="doctrine.image" label="File input" filled prepend-icon="mdi-camera"></v-file-input> -->
                                 <!-- <input type="file"  @change="onFileSelected"> -->
-
+                                
                                 <!-- <v-btn @click="reset" style="weihgt = 40%" color="red" dark>Clear</v-btn> -->
                                 <!-- <p>*if don't submit new picture we just use previous picture</p> -->
-                            <!-- </v-container> -->
-                            <!-- <v-container>
-                            </v-container> -->
+                            </v-container>
                         </v-flex>
                         <v-flex xs12 md6>
-                                <center><v-text-field  v-model="doctrine.title" style="width:70%; text-align: center;" label="หัวข้อเรื่อง" required></v-text-field></center>
+                                <!-- <h1 style="color:black;">หัวข้อเรื่อง</h1> -->
+                                 <center><v-text-field  v-model="news.title" style="width:70%; text-align: center;" label="หัวข้อเรื่อง" required></v-text-field></center>
                                 <br><br>
                                 <v-select
-                                    v-model="doctrine.categories"
+                                    v-model="news.categories"
                                     :items="items"
                                     menu-props="auto"
                                     label="เลือกหมวดหมู่"
@@ -48,10 +43,11 @@
                                     <!-- <v-container fluid>
                                         <v-textarea name="input-7-1" filledlabel="Label" label="รายละเอียด" auto-grow></v-textarea>
                                     </v-container> -->
-                                    <ckeditor v-model="doctrine.content" :editor="editor"
+                                    <ckeditor v-model="news.content" :editor="editor"
                                     :config="editorConfig"></ckeditor>
                                     <!-- <v-btn small style="text-align: right;" rounded color="primary" dark  >Add detailnews</v-btn> -->
                                 </v-container>
+                                
                         </v-flex>
                     
                 </v-layout>
@@ -62,9 +58,11 @@
                     <v-btn type="submit" color="primary" dark>submit</v-btn>
                     <div></div>  
                 </div>
-        </v-container>    
-        </v-form>
-    
+
+            <!-- <v-btn style="margin-right= 50%;" color="primary" dark>cancle</v-btn> 
+                <v-btn style="margin-left= 50%;" color="primary" dark>submit</v-btn> -->
+        </v-container>
+        </form>    
     </div>
 </template>
 <style >
@@ -122,7 +120,7 @@ const Navbar = () => import('@/components/navbar/navbar')
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import swal from "sweetalert2";
 export default {
-    name : "EditDoctrine",
+    name : "EditNews",
 
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded'
@@ -130,16 +128,16 @@ export default {
 
     data(){
         return{
-            doctrine: {
+            news: {
                 title: "",
                 content: "",
                 image: null,
                 imagepath: "" ,
                 newimage: null,
                 oldimage: "",
-                imagedata:null,
                 categories: null,
             },
+            items:['วัด','โรงพยาบาล','มูลนิธิ','ประชาสัมพันธ์ของเว็บไซค์','อื่นๆ'],
             editor: ClassicEditor,
       editorConfig: {
         ckfinder: {
@@ -160,41 +158,44 @@ export default {
         'undo', 'redo']
       },
             imageData:null,
-            items:['บทสวดมนต์','หลักธรรม คำสอน','คติสอนใจ','พุทธประวัติ','อื่นๆ'],
         }
-    },
-    components:{
-        Navbar
     },
     mounted: function(){
         this.getData()
     },
+    components:{
+        Navbar
+    },
     methods: {
-    async Editdoctrine(){
+        chooseImage () {
+            this.$refs.fileInput.click();
+        },
+    async Editnews(){
         try {
             var formData = new FormData();
-            formData.append('title', this.doctrine.title)
-            formData.append('content', this.doctrine.content)
-            formData.append('content', this.doctrine.categories)
-            if(this.doctrine.newimage == null){
+            formData.append('title', this.news.title)
+            formData.append('content', this.news.content)
+            formData.append('categories', this.news.categories)
+            if(this.news.newimage == null){
                 console.log('true')
-                formData.append('imagepath', this.doctrine.image)
-                formData.append('oldimage', this.doctrine.image)
+                formData.append('imagepath', this.news.image)
+                formData.append('oldimage', this.news.image)
                 console.log('true')
             }else {
                 console.log('else')
-                formData.append('image', this.doctrine.newimage)
-                formData.append('imagepath', this.doctrine.newimage.name)
-                formData.append('oldimage', this.doctrine.oldimage)
+                formData.append('image', this.news.newimage)
+                formData.append('imagepath', this.news.newimage.name)
+                formData.append('oldimage', this.news.oldimage)
                 console.log('else')
             }
+            
             // console.log('formData')
             // console.log(formData)
-            // console.log(this.doctrine.title)
-            // console.log(this.doctrine.content)
-            // console.log(this.doctrine.image)
-            // console.log(this.doctrine.image.name)
-            // console.log(this.doctrine.imagepath)
+            // console.log(this.news.title)
+            // console.log(this.news.content)
+            // console.log(this.news.image)
+            // console.log(this.news.image.name)
+            // console.log(this.news.imagepath)
             swal.fire({
                 title: 'Do you want to save the changes?',
                 icon: 'question',
@@ -203,21 +204,21 @@ export default {
                 showCancelButton: true,
                 confirmButtonText: `Save`,
             }).then((result) => {
-                    /* Read more about isConfirmed, isDenied below */
+                /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
-                    this.$http.put("/doctrine/DetailDoctrine/"+this.$route.params.id+"/edit/", formData)
+                    this.$http.put("/news/DetailNews/"+this.$route.params.id+"/edit/", formData)
                     .then(() => {
-                        this.$router.push({ name: 'DetailDoctrine' , params: {id : this.$route.params.id}})
-                        swal.fire('Saved!', 'Edit this doctrine was successful.', 'success')
+                        this.$router.push({ name: 'DetailNews' , params: {id : this.$route.params.id}})
+                        swal.fire('Saved!', 'Edit this news was successful.', 'success')
                     })
                     .catch(function(err){
                         console.log(err)
                     })
                 }
             })
-            // await this.$http.put("/doctrine/DetailDoctrine/"+this.$route.params.id+"/edit/", formData)
+            // await this.$http.put("/news/DetailNews/"+this.$route.params.id+"/edit/", formData)
             // .then(() => {
-            //     this.$router.push({ name: 'DetailDoctrine' , params: {id : this.$route.params.id}})
+            //     this.$router.push({ name: 'DetailNews' , params: {id : this.$route.params.id}})
             // })
             // .catch(function(err){
             //     console.log(err)
@@ -236,7 +237,7 @@ export default {
         }
             },
     async onFileSelected(event){
-            this.doctrine.newimage = event.target.files[0]
+            this.news.newimage = event.target.files[0]
             const input = this.$refs.fileInput
             const files = input.files
             if (files && files[0]) {
@@ -248,24 +249,21 @@ export default {
             // this.$emit('input', files[0])
             }
         },
-        chooseImage () {
-            this.$refs.fileInput.click();
-        },
     async getData(){
         var that = this;
-        await this.$http.get("/doctrine/DetailDoctrine/"+this.$route.params.id)
+        await this.$http.get("/news/DetailNews/"+this.$route.params.id)
         .then((res) => {
         console.log(res.data)
-        that.doctrine = res.data;
-        that.doctrine.oldimage = res.data.image;
-        console.log(that.doctrine)
+        that.news = res.data;
+        that.news.oldimage = res.data.image;
+        console.log(that.news)
       })
         .catch(function(err){
         console.log(err)
         })
     },
     // reset(){
-    //     this.$router.push({ name: 'DetailDoctrine' , params: {id : this.$route.params.id}})
+    //     this.$router.push({ name: 'DetailNews' , params: {id : this.$route.params.id}})
     // }
     },
 }

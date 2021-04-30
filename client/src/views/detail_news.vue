@@ -20,7 +20,7 @@
             หมวดหมู่: {{ news.categories }}
           </div>
           <div class="featured-article">
-            <img  :src="'http://localhost:4000/image/new/' + news.image">
+            <img  :src="news.image">
             <p v-html="news.content">{{ news.content }}</p>
           </div>
           <div class="another-article">
@@ -36,12 +36,12 @@
             </div>
           <div class="avatar-content">
             <h5>แคมเปญแนะนำ</h5>
-            <img :src="'http://localhost:4000/image/campaign/' + campaigns[showcampaign].image">
+            <img :src="campaigns[showcampaign].image">
             <p>{{ campaigns[showcampaign].name }}</p>
           </div>
           <div class="avatar-content">
             <h5>หลักธรรมแนะนำ</h5>
-            <img :src="'http://localhost:4000/image/doctrine/' + doctrine[showdoctrine].image">
+            <img :src="doctrine[showdoctrine].image">
             <p>{{doctrine[showdoctrine].title}}</p>
           </div>
         </div>

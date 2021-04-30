@@ -31,7 +31,7 @@
               <v-col v-for="(news) in filteredListx " :key="news.title" cols="12" md="4" sm="12">
                 <div @click="ViewNews(news._id)" class="cardx">
                   
-                  <img  :src="'http://localhost:4000/image/new/' + news.image">
+                  <img  :src="news.image">
                   <div class="panelx">
                      <!-- ปุ่ม bookmark -->
             
