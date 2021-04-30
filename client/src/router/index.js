@@ -9,42 +9,65 @@ import doctrine from '@/views/Doctrine.vue'
 import news from '@/views/News.vue'
 import swal from "sweetalert2"
 
+// ---------------------------หน้าโปรไฟล์----------------------------------------------------
 const Login                  = () => import('@/components/profile/Login')
 const Register               = () => import('@/components/profile/Register')
 const Logpayment             = () => import('@/components/profile/Logpayment')
-const Listnews               = () => import('@/components/admin/Listnews')
-const Addnews                = () => import('@/components/admin/Addnews')
-const editnews               = () => import('@/components/admin/editnews')
-const Listdoctrine           = () => import('@/components/admin/Listdoctrine')
-const Adddoctrine            = () => import('@/components/admin/Adddoctrine')
-const DetailDoctrine         = () => import('@/components/admin/DetailDoctrine')
-const DetailNews             = () => import('@/components/admin/DetailNews')
-const DetailCampaign         = () => import('@/components/admin/DetailCampaign')
-const EditDoctrine           = () => import('@/components/admin/EditDoctrine')
+const profile                = () => import('@/components/profile/profile')
+const editprofile            = () => import('@/components/profile/editprofile')
+const forgotPassword         = () => import('@/components/profile/forgotPassword')
+const resetPassword          = () => import('@/components/profile/resetPassword')
+
+// --------------------------CRUD ฝั่งแอดมิน--------------------------------------------------
+
+// ----------------------------CRUD ข่าวสาร--------------------------------------------------
+const Listnews               = () => import('@/components/admin/news/Listnews')
+const Addnews                = () => import('@/components/admin/news/Addnews')
+const editnews               = () => import('@/components/admin/news/editnews')
+const DetailNews             = () => import('@/components/admin/news/DetailNews')
+
+// ---------------------------CRUD หลักธรรม--------------------------------------------------
+const Listdoctrine           = () => import('@/components/admin/doctrine/Listdoctrine')
+const Adddoctrine            = () => import('@/components/admin/doctrine/Adddoctrine')
+const DetailDoctrine         = () => import('@/components/admin/doctrine/DetailDoctrine')
+const EditDoctrine           = () => import('@/components/admin/doctrine/EditDoctrine')
+
+// ----------------------------CRUD แคมเปญ--------------------------------------------------
+const DetailCampaign         = () => import('@/components/admin/campaign/DetailCampaign')
+const ListCampaign           = () => import('@/components/admin/campaign/ListCampaign')
+const AddCampaign            = () => import('@/components/admin/campaign/AddCampaign')
+const editCampaign           = () => import('@/components/admin/campaign/EditCampaign')
+
+// ----------------------------CRUD ของรางวัล-------------------------------------------------
+const Additems               = () => import('@/components/admin/reward/Additems')
+const Listitems              = () => import('@/components/admin/reward/Listitems')
+const Detailitems            = () => import('@/components/admin/reward/Detailitems')
+const Edititems              = () => import('@/components/admin/reward/Edititems')
+
+// ----------------------------หน้าอื่นๆของแอดมิน-----------------------------------------------
 const Admin                  = () => import('@/components/admin/Admin')
 const LogDonateAdmin         = () => import('@/components/admin/LogDonate')
 const loginAdmin             = () => import('@/components/admin/loginAdmin')
-const ListCampaign           = () => import('@/components/admin/ListCampaign')
-const AddCampaign            = () => import('@/components/admin/AddCampaign')
-const editCampaign           = () => import('@/components/admin/EditCampaign')
-const profile                = () => import('@/components/profile/profile')
-const editprofile            = () => import('@/components/profile/editprofile')
-const test                   = () => import('@/components/admin/test')
 const payment                = () => import('@/components/admin/payment')
+const dashboard              = () => import('@/components/admin/index')
+
+// ----------------------------หน้าฝั่ง user----------------------------------------------------
 const UserDetailCampaign     = () => import('@/views/Donate_Campaign')
 const seamsi                 = () => import('@/views/random')
 const Lantern                = () => import('@/views/Lantern')
 const UserDetailDoctrine     = () => import('@/views/detail_Doctrine')
 const UserDetailNews         = () => import('@/views/detail_news')
-const forgotPassword         = () => import('@/components/profile/forgotPassword')
-const resetPassword          = () => import('@/components/profile/resetPassword')
 const termuse                = () => import('@/views/termUse')
-const Additems               = () => import('@/components/admin/Additems')
-const Listitems              = () => import('@/components/admin/Listitems')
-const Detailitems            = () => import('@/components/admin/Detailitems')
-const Edititems              = () => import('@/components/admin/Edititems')
+const termservice            = () => import('@/views/termService')
 const items                  = () => import('@/views/items')
 const userDetailitems        = () => import('@/views/userDetailitems')
+
+// ----------------------------หน้า dashboard-------------------------------------------------
+const dashboard_home          = () => import('@/components/admin/dashboard/home')
+const dashboard_list_campaign = () => import('@/components/admin/dashboard/list_campaign')
+const dashboard_list_news     = () => import('@/components/admin/dashboard/list_news')
+const dashboard_list_doctrine = () => import('@/components/admin/dashboard/list_doctrine')
+const dashboard_list_reward   = () => import('@/components/admin/dashboard/list_reward')
 
 Vue.use(VueRouter)
 
@@ -63,6 +86,11 @@ const routes = [
     path: '/termuse',
     name: 'termuse',
     component: termuse
+  },
+  {
+    path: '/termservice',
+    name: 'termservice',
+    component: termservice
   },
   {
     path: '/campaign',
@@ -162,6 +190,53 @@ const routes = [
       requiresAdminAuth: true
     }
   },
+
+  {
+    path: '/admin/dashboard',
+    name: 'Dashboard',
+    component: dashboard,
+    meta: {
+      requiresAdminAuth: true
+    },
+    children: [
+      {
+        path: '',
+        component: dashboard_home,
+        meta: {
+          requiresAdminAuth: true
+        }
+      },
+      {
+        path: '/admin/dashboard/list-campaign',
+        component: dashboard_list_campaign,
+        meta: {
+          requiresAdminAuth: true
+        }
+      },
+      {
+        path: '/admin/dashboard/list-news',
+        component: dashboard_list_news,
+        meta: {
+          requiresAdminAuth: true
+        }
+      },
+      {
+        path: '/admin/dashboard/list-doctrine',
+        component: dashboard_list_doctrine,
+        meta: {
+          requiresAdminAuth: true
+        }
+      },
+      {
+        path: '/admin/dashboard/list-reward',
+        component: dashboard_list_reward,
+        meta: {
+          requiresAdminAuth: true
+        }
+      },
+    ]
+  },
+
   {
     path: '/admin/login',
     name: 'loginAdmin',
@@ -274,11 +349,6 @@ const routes = [
     }
   },
   {
-    path: '/test',
-    name: 'test',
-    component: test
-  },
-  {
     path: '/rank',
     name: 'rank',
     component: rank
@@ -337,7 +407,7 @@ const routes = [
     }
   },
   {
-    path:'/admin/Detailitems',
+    path:'/admin/Detailitems/:id',
     name: 'Detailitems',
     component: Detailitems,
     meta: {

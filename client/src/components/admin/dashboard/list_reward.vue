@@ -1,9 +1,6 @@
 <template>
     <div>   
-      <div>
-      <Navbar></Navbar>
-    </div>
-    <br><br>
+    <h1>ลิสต์ของรางวัล</h1>
     <div id ='headaddnews'>
         <div class="text-center">
             <v-btn rounded color="primary" dark to = "/admin/additems">เพิ่มของรางวัล</v-btn>
@@ -61,11 +58,8 @@
 
 
 <script>
-const Navbar = () => import('@/components/navbar/navbar')
     export default{
-        components: {
-      Navbar
-    },
+
     }
 </script>
 <style scoped>

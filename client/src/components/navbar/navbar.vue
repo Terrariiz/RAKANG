@@ -126,7 +126,7 @@
     </div>
 
     <div v-else-if="$store.getters.AdminIsLoggedIn">
-      <v-app-bar fixed color="gray accent-4" dark>
+      <v-app-bar fixed color="gray accent-4" dark style="z-index:99;">
         <v-toolbar-items class="hidden-sm-and-down">
           <v-btn color="#CFD6EA" text to="/home">
             <img style="width:50px; height:50px;" src="../../../public/image/logo.png">
@@ -154,7 +154,7 @@
         right
         absolute
         temporary
-        style='position: fixed; top: 0;'
+        style='position: fixed; top: 0;z-index:99;'
       >
       <div v-if='$store.getters.IsDesk'>
         <v-list nav>
@@ -419,7 +419,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .vapp-bar{
   color: #CFD6EA;
 }

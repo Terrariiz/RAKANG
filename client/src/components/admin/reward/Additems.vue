@@ -11,15 +11,17 @@
                 </center>
                  <div class="head1">ใส่รูปมุมมองอื่นๆ</div>
                     <v-row >
-                        <v-col  md="2" sm="6" >
-                                <div class="preview" >
-                                    <img id="file-ip-1-preview">
+                        <v-col v-for="(image,index) in imageData" :key="image" md="2" sm="6" >
+                                <div  class="preview" >
+                                  <v-img @click="deletex(index)" class="icon" src="../../../../public/image/times-solid.svg"></v-img>
+                                    <v-img class="img-size" :src="image"></v-img>
+                                    
                                 </div>
                         </v-col>
                         <v-col  md="2" sm="6">
                             <div class="form-input">
                                 <label for="file-ip-1">เลือกรูปภาพ</label>
-                                <input type="file" id="file-ip-1" accept="image/*" @click="showPreview">
+                                <v-file-input style="display:none;" multiple v-model="file" type="file" id="file-ip-1" accept="image/*" @change="onFileSelected"></v-file-input>
                             </div>
                         </v-col>
                     </v-row>
@@ -29,6 +31,7 @@
                             <v-col cols="12" md="4" sm="12">
                                 <div class="head1">name</div>
                                 <v-text-field
+                                v-model="exchange.name"
                                 solo
                                 label="Name"
                                 required
@@ -37,6 +40,7 @@
                             <v-col  md="2" sm="6">
                                 <div class="head1">ราคา</div>
                                 <v-text-field
+                                v-model="exchange.cost"
                                 class="value"
                                 solo
                                 label="90"
@@ -49,6 +53,7 @@
                             <v-col  md="2" sm="6">
                                 <div class="head1">จำนวน</div>
                                 <v-text-field
+                                v-model="exchange.remain"
                                 class="value"
                                 solo
                                 label="1"
@@ -62,6 +67,7 @@
                     <div class="detail-items">
                         <div class="head1">รายละเอียด</div>
                         <v-textarea
+                            v-model="exchange.detail"
                             solo
                             clearable
                             clear-icon="mdi-close-circle"
@@ -90,7 +96,7 @@
               >Submit</v-btn
             >
           </v-col>
-          <v-col cols="3"></v-col>
+         
         </v-row>
         </div>
         <br><br>
@@ -102,21 +108,21 @@
 <script>
 const Navbar = () => import('@/components/navbar/navbar')
 import swal from "sweetalert2";
-
+// import a from "../../../../public/image"
    export default {
   name: "Addcampaign",
   data() {
     return {
-      imageData:null,
+      imageData:[],
       exchange: {
         name: null,
         detail: null,
-        overviewimage: null,
         imagepath: "",
         cost: null,
         remain: null,
         galleryimage:[],
-      },  
+      },
+      file:null,  
      
     };
   },
@@ -129,7 +135,6 @@ import swal from "sweetalert2";
             var formData = new FormData();
             formData.append("name", this.exchange.name);
             formData.append("detail", this.exchange.detail);
-            formData.append("overviewimage", this.exchange.overviewimage);
             formData.append("galleryimage", this.exchange.galleryimage);
             formData.append("remain", this.exchange.remain);
             formData.append("cost", this.exchange.cost);
@@ -156,26 +161,23 @@ import swal from "sweetalert2";
         }
 
     },
-    async showPreview(event){
-    if(event.target.files.length > 0){
-    var src = URL.createObjectURL(event.target.files[0]);
-    var preview = document.getElementById("file-ip-1-preview");
-    preview.src = src;
-    preview.style.display = "block";
-        }
-    },
-    async onFileSelected(event) {
-      this.exchange.overviewimage = event.target.files[0];
-      const input = this.$refs.fileInput;
-      const files = input.files;
-      if (files && files[0]) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          this.imageData = e.target.result;
-        };
-        reader.readAsDataURL(files[0]);
+    
+    async onFileSelected() {
+      // this.exchange.overviewimage = event.target.files[0];
+      // const input = this.$refs.fileInput;
+      if (this.file != null) {
+          console.log(this.file)
+          console.log(typeof this.file)
+          this.file.forEach(f => {var url = URL.createObjectURL(f)
+          console.log(f)
+          this.imageData.push(url)})
+          
+
         // this.$emit('input', files[0])
       }
+    },
+    deletex(index){
+      this.imageData.splice(index,1)
     },
     chooseImage() {
       this.$refs.fileInput.click();
@@ -187,6 +189,10 @@ import swal from "sweetalert2";
 };
 </script>
 <style scoped>
+.img-size{
+  height: 150px;
+  width: 120px;
+}
   .container{
       width: 80%;
       background-color: cornflowerblue;
@@ -231,12 +237,16 @@ import swal from "sweetalert2";
   background-size: cover;
   background-position: center center;
 }
+.form-input:hover{
+  box-shadow: 0 0 20px 0px rgb(0,0,0,0.2);
+}
 .form-input input {
   display:none;
 }
 .form-input label {
   
  background: #f0f0f0;
+ border-radius: 5px;
   width: 100%;
   height: 100%;
   display: flex;
@@ -247,6 +257,10 @@ import swal from "sweetalert2";
   font-family: Helvetica;
   cursor: pointer;
 }
+.form-input label:hover{
+  background: #838181;
+  color: #e0e0e0;
+}
 .form-input img {
   width:200px;
   height: 200px;
@@ -254,8 +268,20 @@ import swal from "sweetalert2";
   margin-top:10px;
   text-align: center;
 }
-
-
+.icon{
+  position: absolute;
+  height: 15px;
+  width: 15px;
+  right:60px;
+  top:7px;
+  z-index: 2;
+  background-color: red;
+  padding: 8px;
+  border-radius: 10px;
+}
+.icon:hover{
+  background-color: #e0e0e0;
+}
 
 .preview img {
   width: 120px;
