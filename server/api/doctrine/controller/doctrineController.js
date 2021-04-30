@@ -16,15 +16,16 @@ exports.addnewdoctrine = async(req,res) => {
     try{     
       console.log(req.body)
       const today = new Date();
-      const doctrine = new Doctrine({
-        title: req.body.title,
-        content: req.body.content,
-        image: "",
-        edittime : today,
-        categories: req.body.categories,
-      });
+
       cloudinary.uploader.upload(req.file.path,async function(err, result){
-        doctrine.image = result.url
+        const doctrine = new Doctrine({
+          title: req.body.title,
+          content: req.body.content,
+          image: result.url,
+          cloudinary_id : result.public_id,
+          edittime : today,
+          categories: req.body.categories,
+        });
         console.log(doctrine)
         let data =  await doctrine.save()
         res.status(201).json({ data });
@@ -61,31 +62,26 @@ exports.ShowListDoctrine = async(req,res) =>{
 exports.EditDoctrine = async(req,res) =>{
   try{
     var changeimage
-    console.log(req.params.id)
-    console.log(req.body.title)
-    console.log(req.body.content)
-    console.log(req.body.imagepath)
-    console.log(req.body.oldimage)
     const today = new Date();
     if(req.file){
       if(req.file.filename != req.body.oldimage){
+        
+        let this_doctrine = await Doctrine.findById(req.params.id);
+        await cloudinary.uploader.destroy(this_doctrine.cloudinary_id);
+        this_doctrine.save();
+
         cloudinary.uploader.upload(req.file.path, function(err, result){
           changeimage = result.url
-          // const image  = './public/image/doctrine/' + req.body.oldimage;
-        // fs.unlinkSync(image , function(err){
-        //     if(err){
-        //         console.log(err);
-        //     } else {
-        //       console.log("deleted")
-        //     } 
-        // })
+
         dataEdit = {
           title: req.body.title,
           content: req.body.content[0],
-          image: changeimage,
+          image: result.url,
+          cloudinary_id: result.public_id,
           edittime : today,
           categories : req.body.content[1]
         }
+
         Doctrine.findOneAndUpdate({_id : req.params.id},dataEdit,function(err, doctrine){
           if(err){
             console.log(err)
@@ -146,14 +142,8 @@ exports.DeleteDoctrine = function(req,res){
       if(err){
         console.log(err)
       } else {
-          const image  = './public/image/doctrine/' + doctrine.image;
-          await fs.unlinkSync(image , function(err){
-              if(err){
-                  console.log(err);
-              } else {
-                console.log("unlink image success")
-              } 
-          })
+          await cloudinary.uploader.destroy(doctrine.cloudinary_id);
+
           User.find({favdoctrinelist : doctrine._id}, function(err , user){
             if(err){
                 console.log(err)

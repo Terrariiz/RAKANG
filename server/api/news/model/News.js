@@ -11,6 +11,9 @@ const newSchema = new mongoose.Schema({
   image: {
     type: String,
   },
+  cloudinary_id: {
+    type: String,
+  },
   date: {
     type: Date
   },

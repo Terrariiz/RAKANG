@@ -9,6 +9,9 @@ const doctrineSchema = new mongoose.Schema({
   image: {
     type: String,
   },
+  cloudinary_id: {
+    type: String,
+  },
   edittime: {
     type: Date,
   },

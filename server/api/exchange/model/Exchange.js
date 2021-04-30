@@ -7,7 +7,8 @@ const newSchema = new mongoose.Schema({
     type: String
   },
   galleryimage: [{
-    type: String
+      image: String,
+      cloudinary_id:  String
   }],
   remain: {
     type: Number,
@@ -30,6 +31,9 @@ const newSchema = new mongoose.Schema({
       ref: "ExchangeLog"
     }
   ],
+  cloudinary_id: {
+    type: String,
+  },
   
 });
 

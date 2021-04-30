@@ -8,7 +8,6 @@ cloudinary.config({
     cloud_name: "koladon52",
     api_key: "413217853994171",
     api_secret: "DOHByZlRxxocIbvEmAzgnvmnv-E",
-
 })
 
 
@@ -23,6 +22,7 @@ exports.addnewcampaign = async(req,res) => {
       name: req.body.name,
       content: req.body.content,
       image: image,
+      cloudinary_id : result.public_id,
       date: req.body.date,
       status : 'open',
       startdate: now,
@@ -67,8 +67,7 @@ exports.ShowListCampaign = function(req,res){
       //   } 
       // }
         
-        res.json(campaign);
-
+        res.json(campaign)
       }
     })
   } catch (err) {
@@ -109,14 +108,15 @@ exports.DeleteCampaign = function(req,res){
       if(err){
         console.log(err)
       } else {
-          const image  = './public/image/campaign/' + campaign.image;
-          await fs.unlinkSync(image , function(err){
-              if(err){
-                  console.log(err);
-              } else {
-                console.log("unlink image success")
-              } 
-          })
+        await cloudinary.uploader.destroy(campaign.cloudinary_id);
+          // const image  = './public/image/campaign/' + campaign.image;
+          // await fs.unlinkSync(image , function(err){
+          //     if(err){
+          //         console.log(err);
+          //     } else {
+          //       console.log("unlink image success")
+          //     } 
+          // })
         console.log('delete campaign completed')
       }
     })
@@ -128,35 +128,30 @@ exports.DeleteCampaign = function(req,res){
 
 exports.EditCampaign = async(req,res) =>{
   try{
-    var dataEdit
-    var chancgimage  
-    console.log(req.params.id)
-    console.log(req.body.name)
-    console.log(req.body.content)
-    console.log(req.body.imagepath)
-    console.log(req.body.oldimage)
+    var dataEdit 
     if(req.file){
       if(req.file.filename != req.body.oldimage){
-        cloudinary.uploader.upload(req.file.path, function(err, result){
-          chancgimage = result.url
-          const image  = './public/image/campaign/' + req.body.oldimage;
-        // fs.unlinkSync(image , function(err){
-        //     if(err){
-        //         console.log(err);
-        //     } else {
-        //       console.log("deleted")
-        //     } 
-        // })
+
+        
+        var this_campaign = await Campaign.findById(req.params.id);
+        await cloudinary.uploader.destroy(this_campaign.cloudinary_id);
+        this_campaign.save();
+
+        await cloudinary.uploader.upload(req.file.path, function(err, result){
+
+        
         dataEdit = {
           name: req.body.name,
           content: req.body.content,
-          image: chancgimage,
+          image: result.url,
+          cloudinary_id: result.public_id,
           amount : req.body.amount,
           date : req.body.date,
           location: req.body.location,
           overview: req.body.overview,
           done: req.body.done,
         }
+
         Campaign.findOneAndUpdate({_id : req.params.id},dataEdit,function(err, campaign){
           if(err){
             console.log(err)

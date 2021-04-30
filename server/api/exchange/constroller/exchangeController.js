@@ -23,24 +23,16 @@ exports.addnewItem = async(req,res) => {
       remain : req.body.remain,
       detail : req.body.detail,
       cost   : req.body.cost,
-      overviewimage: ""
     });
     var data = await add.save()
-    var key = 0;
     if(req.files){
       console.log(file)
       file.forEach(element => {
         console.log(element)
         cloudinary.uploader.upload(element.path, function(err, result){
-          console.log(result)
-            if(key == 0){
-              data.overviewimage = result.url
-              key = 1
-            }else{
-              data.galleryimage.push(result.url)
+              var add = {image : result.url, cloudinary : result.public_id}
+              data.galleryimage.push(add)
               data.save()
-            }
-            
         })
       });  
     }  
@@ -96,19 +88,11 @@ exports.DeleteItem = function(req,res){
       if(err){
         console.log(err)
       } else {
-        ////////////////////////////////////ยังไม่เสร็จ//////////////////////////////////
-        Exchange.findById({_id : req.params.id},async function(err, exchange){
-          const image  = './public/image/exchange/' + exchange.image;
-          await fs.unlinkSync(image , function(err){
-              if(err){
-                  console.log(err);
-              } else {
-                console.log("unlink image success")
-              } 
-          })
-        })
-          
-        console.log('delete exchangeitem completed')
+
+        exchange.galleryimage.forEach(element => {
+          cloudinary.uploader.destroy(element.cloudinary_id);
+        }); 
+
       }
     })
   } catch (err) {
@@ -121,16 +105,26 @@ exports.DeleteItem = function(req,res){
 exports.EditItem = async(req,res) =>{
   try{
     var dataEdit
+    var index
+
     if(req.file){
-      if(req.file.filename != req.body.oldimage){
-        const image  = './public/image/campaign/' + req.body.oldimage;
-        fs.unlinkSync(image , function(err){
-            if(err){
-                console.log(err);
-            } else {
-              console.log("deleted")
-            } 
+      if(req.body.deleteimage){
+
+        let this_Item = await Exchange.findById(req.params.id);
+
+        this_Item.galleryimage.forEach(element => {
+          var deleteimage = req.body.deleteimage;
+          deleteimage.forEach(DelImg => {
+            if(element.image == DelImg.image)
+            cloudinary.uploader.destroy(DelImg.cloudinary_id);
+            this_Item.galleryimage.remove(element)
+            this_Item.save()
+          })
         })
+      } 
+
+
+      var  file = req.file
         dataEdit = {
           name: req.body.name,
           ramain: req.body.ramain,
@@ -138,10 +132,24 @@ exports.EditItem = async(req,res) =>{
           detail : req.body.detail,
           cost : req.body.cost,
         }
+        var imagedata
+        file.forEach(element =>{
+          cloudinary.uploader.upload(element.path, function(err, result){
+            imagedata = {
+                image : result.url,
+                cloudinary_id : result.public_id,             
+            }
+                dataEdit.galleryimage.push(imagedata)
+          })
 
-      } else {
-        console.log("not delete")
-      }
+        })
+          Exchange.findOneAndUpdate({_id : req.params.id},dataEdit,function(err, exchange){
+            if(err){
+              console.log(err)
+            } else {
+              res.status(201).json({ exchange });
+            }
+          })
     } else {
       dataEdit = {
           name: req.body.name,
@@ -150,17 +158,18 @@ exports.EditItem = async(req,res) =>{
           detail : req.body.detail,
           cost : req.body.cost,
         }
+        Exchange.findOneAndUpdate({_id : req.params.id},dataEdit,function(err, exchange){
+          if(err){
+            console.log(err)
+          } else {
+            console.log('success')
+            console.log(campaign)
+            console.log(dataEdit)
+            res.status(201).json({ exchange });
+          }
+        })
     }
-    Exchange.findOneAndUpdate({_id : req.params.id},dataEdit,function(err, exchange){
-      if(err){
-        console.log(err)
-      } else {
-        console.log('success')
-        console.log(campaign)
-        console.log(dataEdit)
-        res.status(201).json({ exchange });
-      }
-    })
+    
   } catch (err) {
     res.status(400).json({ err: err });
     console.log(err)

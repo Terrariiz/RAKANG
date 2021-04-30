@@ -34,7 +34,7 @@ exports.registerNewUser = async (req, res) => {
         birthdate: req.body.birthdate,
         resetPasswordToken: null,
         resetPasswordExpires: null,
-        image: "user.png",
+        image: "https://res.cloudinary.com/koladon52/image/upload/v1619799310/user_icon.png",
         point: 0,
         totalpoint: 0,
         seamsi:{
@@ -99,30 +99,30 @@ exports.getUserDetails = async (req, res) => {
 
 exports.editProfile = async (req,res) => {
   try{
+    console.log(req.body)
     var dataEdit
-    var changeimage
     if(req.file){
       console.log(req.file)
-      if(req.file.filename != req.body.oldimage){
+
+        if(req.body.oldimage != 'https://res.cloudinary.com/koladon52/image/upload/v1619799310/user_icon.png'){
+          let this_user = await User.findById(req.params.id);
+          await cloudinary.uploader.destroy(this_user.cloudinary_id);
+          this_user.save();
+        }       
+        
+
         cloudinary.uploader.upload(req.file.path, function(err, result){
-          changeimage = result.url
           dataEdit = {
             firstname: req.body.firstname,
             lastname: req.body.lastname,
             phone: req.body.phone,
             birthdate: req.body.birthdate,
-            image: result.url
+            image: result.url,
+            cloudinary_id: result.public_id
           }
-          const image  = './public/image/profile/' + req.body.oldimage;
-          if(req.body.oldimage != "user.png"){
-            fs.unlink(image , function(err){
-              if(err){
-                  console.log(err);
-              } else {
-                console.log("deleted")
-              } 
-            })
-          }
+          
+          
+
           User.findByIdAndUpdate({_id:req.params.id}, dataEdit, function(err,update){
             if(err){
               console.log(err);
@@ -133,10 +133,7 @@ exports.editProfile = async (req,res) => {
           
         })
         
-        
-      } else {
-        console.log("not delete")
-      }
+
     }
     else{
       dataEdit = {
