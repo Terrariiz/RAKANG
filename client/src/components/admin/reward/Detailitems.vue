@@ -2,6 +2,77 @@
   <div>
     <div>
       <Navbar></Navbar>
+       <!-- <div>
+      <Navbar></Navbar>
+    </div>
+        <div class="container">
+            <div class="small-container single-product">
+                <div class="row">
+                    <div class="col-2">
+                        <img src="" width="100%" id="product-img">
+                        <div class="small-img-row">
+                            <div class="small-img-col">
+                                <img src="" width="100%" class="small-img">
+                            </div>
+
+                            <div class="small-img-col">
+                                <img src="" width="100%" class="small-img">
+                            </div>
+
+                            <div class="small-img-col">
+                                <img src="" width="100%" class="small-img"> 
+                            </div>
+
+                            <div class="small-img-col">
+                                <img src="" width="100%" class="small-img">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <p>Items/ชื่อของ</p>
+                        <h1>ชื่อของ</h1>
+                        <h4>ราคา</h4>
+                        <h3>detail</h3>
+                        <p>บอกรายละเอียด</p>
+                        <a href="" class="btn">Buy</a>
+                    </div>
+                </div>
+            </div> -->
+            <!-- title  -->
+            <!-- <div class="small-container">
+                <div class="row row-2">
+                    <h2>Other Product</h2>
+                    <p>View more</p>
+                </div>
+            </div>
+            <br> -->
+            <!-- featured product  -->
+            <!-- <div class="small-container">
+                <div class="row">
+                    <div class="col-4">
+                        <img src="">
+                        <h4>ชื่อของ</h4>
+                        <p>ราคา 500 แต้ม</p>
+                    </div>
+                     <div class="col-4">
+                        <img src="">
+                        <h4>ชื่อของ</h4>
+                        <p>ราคา 500 แต้ม</p>
+                    </div>
+                     <div class="col-4">
+                        <img src="">
+                        <h4>ชื่อของ</h4>
+                        <p>ราคา 500 แต้ม</p>
+                    </div>
+                     <div class="col-4">
+                        <img src="">
+                        <h4>ชื่อของ</h4>
+                        <p>ราคา 500 แต้ม</p>
+                    </div>
+                </div>
+            </div>
+
+        </div> -->
     </div>
     <br><br><br>
     <!-- อันใหม่ -->

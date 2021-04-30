@@ -287,7 +287,6 @@
           <v-list-item-subtitle v-html="Bookmark.content" >{{ Bookmark.content }}</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
-  
             <v-card-actions>
                       <v-btn @click="ViewDoctrine(Bookmark._id)" color="primary" style="margin-left:auto;" text
                         >More</v-btn
@@ -296,10 +295,12 @@
           </v-card>
                 </v-col>
               </v-row>
-              <router-link to='/news' style="float:right; margin-bottom:3%"
+    <v-pagination circle :total-visible="7"  v-model="pagination.page" :length="pages"></v-pagination>
+
+              <!-- <router-link to='/news' style="float:right; margin-bottom:3%"
                 >แสดงทั้งหมด <i class="fa fa-chevron-right" aria-hidden="true"></i
                 ><i class="fa fa-chevron-right" aria-hidden="true"></i
-              ></router-link>
+              ></router-link> -->
             </v-container>
           </div>
 
@@ -420,7 +421,7 @@ export default {
         localStorage.removeItem("user_token");
         localStorage.removeItem("user_id");
       }
-    }
+      }
       console.log(id)
     await this.$http
       .get("/user/" + id)

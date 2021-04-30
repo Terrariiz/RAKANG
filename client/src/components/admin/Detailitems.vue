@@ -28,10 +28,10 @@
                     </div>
                     <div class="col-2">
                         <p>Items/ชื่อของ</p>
-                        <h1>{{items.name}}</h1>
-                        <h4>{{items.cost}}</h4>
+                        <h1>ชื่อของ</h1>
+                        <h4>ราคา</h4>
                         <h3>detail</h3>
-                        <p>{{items.detail}}</p>
+                        <p>บอกรายละเอียด</p>
                         <a href="" class="btn">Buy</a>
                     </div>
                 </div>
@@ -78,11 +78,6 @@
     // import a from "../../public/image/bubble.png"
     const Navbar = () => import('@/components/navbar/navbar')
     export default {
-        data (){
-      return {
-        items : []
-        }
-    },
         components: {
       Navbar
         },
@@ -95,15 +90,42 @@
             //     });
             //  },
         },
-        mounted: async function mounted(){
-       await this.$http.get("/exchangeitem/DetailItem" +this.$route.params.id)
-       .then((res) => {
-       this.items = res.data;
-       })
-       .catch(function(err){
-        console.log(err)
-      })
-    },
+    //     data ()  {
+    //   return{
+    //         pagination:{data: null,
+    //                     rowsPerPage: 9,
+    //                     page: 1,
+    //                     },
+    //         totalNumberOfItems: this.$store.getters.banana.length,
+    //         headers: [
+    //             { text: 'ชื่อแคมเปญ',sortable: false,value: 'CampaignName'},
+    //             { text: 'จำนวนเงิน', value: 'amount' },
+    //             { text: 'วัน-เดือน-ปี', value: 'date' }
+    //                 ]
+    //         }
+
+    // },
+    // async mounted(){
+   
+    // await this.$http
+    //   .get("donatelog/donateloguser/" + id)
+    //   .then((res) => {
+    //     console.log("get items")
+    //     console.log(this.donatelog)
+        
+    //     this.pagination.data = res.data.donatelog;
+        
+
+    //     var i = 0
+    //     for(this.pagination.data[i];;i++){
+    //         this.pagination.data[i].date = moment(this.pagination.data[i].date).format(" DD-MM-YYYY HH:mm A");
+    //         }
+             
+    //   })
+    //   .catch(function (err) {
+    //     console.log(err);
+    //   });
+    // },
     }
 </script>
 
