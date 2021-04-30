@@ -14,7 +14,7 @@
                         <v-col v-for="(image,index) in imageData" :key="image" md="2" sm="6" >
                                 <div  class="preview" >
                                   <v-img @click="deletex(index)" class="icon" src="../../../../public/image/times-solid.svg"></v-img>
-                                    <v-img class="img-size" :src="image"></v-img>
+                                    <center><v-img class="img-size" :src="image"></v-img></center>
                                     
                                 </div>
                         </v-col>
@@ -192,6 +192,8 @@ import swal from "sweetalert2";
 .img-size{
   height: 150px;
   width: 120px;
+  
+
 }
   .container{
       width: 80%;
@@ -269,11 +271,11 @@ import swal from "sweetalert2";
   text-align: center;
 }
 .icon{
-  position: absolute;
+   position: absolute;
+    top: 0px;
+    right: 0px;
   height: 15px;
   width: 15px;
-  right:60px;
-  top:7px;
   z-index: 2;
   background-color: red;
   padding: 8px;
@@ -281,6 +283,7 @@ import swal from "sweetalert2";
 }
 .icon:hover{
   background-color: #e0e0e0;
+  
 }
 
 .preview img {
@@ -290,6 +293,7 @@ import swal from "sweetalert2";
   display:none;
   text-align: center;
 }
+
 
 @media (max-width: 767px) {
   .project-content {
@@ -307,6 +311,8 @@ import swal from "sweetalert2";
   .form-input-preview img {
   margin-left: 0px;
 }
+
+
   
   
 }
