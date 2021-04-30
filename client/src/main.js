@@ -14,6 +14,10 @@ Vue.use( CKEditor );
 // var editor = CKEDITOR.replace( 'editor1' );
 // CKFinder.setupCKEditor( editor );
 
+import VueApexCharts from 'vue-apexcharts'
+Vue.use(VueApexCharts)
+Vue.component('apexchart', VueApexCharts)
+
 const base = axios.create({
   baseURL: "http://localhost:4000"
 });

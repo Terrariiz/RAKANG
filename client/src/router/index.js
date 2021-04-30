@@ -50,6 +50,7 @@ const LogDonateAdmin         = () => import('@/components/admin/LogDonate')
 const loginAdmin             = () => import('@/components/admin/loginAdmin')
 const test                   = () => import('@/components/admin/test')
 const payment                = () => import('@/components/admin/payment')
+const dashboard              = () => import('@/components/admin/index')
 
 // ----------------------------หน้าฝั่ง user----------------------------------------------------
 const UserDetailCampaign     = () => import('@/views/Donate_Campaign')
@@ -60,6 +61,13 @@ const UserDetailNews         = () => import('@/views/detail_news')
 const termuse                = () => import('@/views/termUse')
 const items                  = () => import('@/views/items')
 const userDetailitems        = () => import('@/views/userDetailitems')
+
+// ----------------------------หน้า dashboard-------------------------------------------------
+const dashboard_home          = () => import('@/components/admin/dashboard/home')
+const dashboard_list_campaign = () => import('@/components/admin/dashboard/list_campaign')
+const dashboard_list_news     = () => import('@/components/admin/dashboard/list_news')
+const dashboard_list_doctrine = () => import('@/components/admin/dashboard/list_doctrine')
+const dashboard_list_reward   = () => import('@/components/admin/dashboard/list_reward')
 
 Vue.use(VueRouter)
 
@@ -177,6 +185,53 @@ const routes = [
       requiresAdminAuth: true
     }
   },
+
+  {
+    path: '/admin/dashboard',
+    name: 'Dashboard',
+    component: dashboard,
+    meta: {
+      requiresAdminAuth: true
+    },
+    children: [
+      {
+        path: '',
+        component: dashboard_home,
+        meta: {
+          requiresAdminAuth: true
+        }
+      },
+      {
+        path: '/admin/dashboard/list-campaign',
+        component: dashboard_list_campaign,
+        meta: {
+          requiresAdminAuth: true
+        }
+      },
+      {
+        path: '/admin/dashboard/list-news',
+        component: dashboard_list_news,
+        meta: {
+          requiresAdminAuth: true
+        }
+      },
+      {
+        path: '/admin/dashboard/list-doctrine',
+        component: dashboard_list_doctrine,
+        meta: {
+          requiresAdminAuth: true
+        }
+      },
+      {
+        path: '/admin/dashboard/list-reward',
+        component: dashboard_list_reward,
+        meta: {
+          requiresAdminAuth: true
+        }
+      },
+    ]
+  },
+
   {
     path: '/admin/login',
     name: 'loginAdmin',
