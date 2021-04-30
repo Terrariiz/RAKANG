@@ -16,7 +16,9 @@ cloudinary.config({
 
 ////////////////////////////////////ยังไม่เสร็จ//////////////////////////////////
 exports.addnewItem = async(req,res) => {
-  try{   
+  try{  
+    var complete = true 
+    console.log(req.body) 
     var file = req.files
     const add = new Exchange({
       name   : req.body.name,
