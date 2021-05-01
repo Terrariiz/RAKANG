@@ -290,6 +290,7 @@
       console.log(JSON.stringify(link))
       this.imageData.splice(index,1)
       this.delcount = true
+      this.test.splice(index,1)
       
     },
     async getData(){

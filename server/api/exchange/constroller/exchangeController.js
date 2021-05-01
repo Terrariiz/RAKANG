@@ -2,16 +2,13 @@ const User = require("../../user/model/User");
 const Exchange = require('../../Exchange/model/Exchange');
 const ExchangeLog = require("../../log/model/ExchangeLog");
 const { fdatasync } = require("fs");
+const cloudinary = require('cloudinary');
 const ExchanceLog = require("../../log/model/ExchangeLog");
-const cloudinary = require("cloudinary").v2;
 const { resolve } = require("path");
+const fs = require("fs")
+const func = require('./cloudinary')
 
-cloudinary.config({
-  cloud_name: "koladon52",
-  api_key: "413217853994171",
-  api_secret: "DOHByZlRxxocIbvEmAzgnvmnv-E",
 
-})
 
 
 ////////////////////////////////////ยังไม่เสร็จ//////////////////////////////////
@@ -25,22 +22,15 @@ exports.addnewItem = async (req, res) => {
       cost: req.body.cost,
     });
     var data = await add.save()
-    if (file) {
-      file.forEach(element => {
-        console.log(element)
-        cloudinary.uploader.upload(element.path, async function (err, result) {
-          var add = { image: result.url, cloudinary_id: result.public_id }
-          data.galleryimage.push(add)
+    const uploader = async (path) => await func.uploads(path);
+        for (const files of file) {
+          const { path } = files;
+          const newPath = await uploader(path)
+          console.log(newPath)
+          data.galleryimage.push(newPath)
           data.save()
-          await res.status(201).json({ data });
-
-        })
-
-
-      });
-
-    }
-
+      }
+        res.send('olkok');
 
   } catch (err) {
     res.status(400).json({ err: err });
@@ -163,26 +153,20 @@ exports.EditItem = async (req, res) => {
         cost: req.body.cost,
       }
       var imagedata
-      Exchange.findOneAndUpdate({ _id: req.params.id }, dataEdit, function (err, exchange) {
-        file.forEach(element => {
-          cloudinary.uploader.upload(element.path,  async function (err, result) {
-            imagedata = {
-              image: result.url,
-              cloudinary_id: result.public_id,
-            }
-            exchange.galleryimage.push(imagedata)
-            await exchange.save()
-            await res.status(201).json({ exchange });
-            
-          })
+      const uploader = async (path) => await func.uploads(path);
 
-        })
-        if (err) {
-          console.log(err)
-        } else {
+      Exchange.findOneAndUpdate({ _id: req.params.id }, dataEdit,async  function (err, exchange) {
+        for (const files of file) {
+          const { path } = files;
+          const newPath = await uploader(path)
+          console.log(newPath)
+          exchange.galleryimage.push(newPath)
+          exchange.save()
+      }
+        res.send('olkok');
 
-        }
       })
+
     } else if(req.body.deleteimage){
       let this_Item = await Exchange.findById(req.params.id);
         console.log(this_Item.galleryimage)
