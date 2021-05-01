@@ -171,11 +171,11 @@ import swal from "sweetalert2";
       // const input = this.$refs.fileInput;
       if (this.file != null) {
         console.log(this.file.length)
-        for(var i=0;i==this.file.length;i++){
+        for(var i=0;i<this.file.length;i++){
           this.test.push(this.file[i])}
           console.log(this.file)
           console.log(typeof this.file)
-          this.exchange.galleryimage = this.file
+          this.exchange.galleryimage = this.test
           console.log(this.exchange.galleryimage)
           this.file.forEach(f => {var url = URL.createObjectURL(f)
           console.log(f)
@@ -186,6 +186,7 @@ import swal from "sweetalert2";
     },
     deletex(index){
       this.imageData.splice(index,1)
+      this.test.splice(index,1)
     },
     chooseImage() {
       this.$refs.fileInput.click();

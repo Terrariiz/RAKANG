@@ -72,7 +72,7 @@
                  <hr>
                  <div class="head1">รูปภาพปก</div>
                     <v-row >
-                        <v-col v-for="(image) in imageData" :key="image" md="2" sm="6" >
+                        <v-col v-for="(image,index) in imageData" :key="image" md="2" sm="6" >
                                 <div  class="preview" >
                                   <v-img @click="deletex(index)" class="icon" src="../../../../public/image/times-solid.svg"></v-img>
                                     <v-img class="img-size" :src="image"></v-img>
@@ -184,7 +184,8 @@
         galleryimage:[],
         deleteimage:[],
       },
-      file:null,  
+      file:null,
+      test:[],  
      
     };
   },
@@ -244,8 +245,11 @@
       // this.exchange.overviewimage = event.target.files[0];
       // const input = this.$refs.fileInput;
       if (this.file != null) {
+        for(var i=0;i<this.file.length;i++){
+          this.test.push(this.file[i])}
           console.log(this.file)
           console.log(typeof this.file)
+          this.exchange.galleryimage = this.test
           this.file.forEach(f => {var url = URL.createObjectURL(f)
           console.log(f)
           this.imageData.push(url)})
