@@ -63,6 +63,7 @@
            
         
         </div> -->
+        <form @submit.prevent="Edititems">
         <div class="container">
             <h1>แก้ไขรายการของ</h1>
             <center>
@@ -71,7 +72,7 @@
                  <hr>
                  <div class="head1">รูปภาพปก</div>
                     <v-row >
-                        <v-col v-for="(image,index) in imageData" :key="image" md="2" sm="6" >
+                        <v-col v-for="(image) in imageData" :key="image" md="2" sm="6" >
                                 <div  class="preview" >
                                   <v-img @click="deletex(index)" class="icon" src="../../../../public/image/times-solid.svg"></v-img>
                                     <v-img class="img-size" :src="image"></v-img>
@@ -93,6 +94,7 @@
                             <v-col cols="12" md="4" sm="12">
                                 <div class="head1">name</div>
                                 <v-text-field
+                                v-model="exchange.name"
                                 solo
                                 label="Name"
                                 required
@@ -101,6 +103,7 @@
                             <v-col  md="2" sm="6">
                                 <div class="head1">ราคา</div>
                                 <v-text-field
+                                 v-model="exchange.cost"
                                 class="value"
                                 solo
                                 label="90"
@@ -113,6 +116,7 @@
                             <v-col  md="2" sm="6">
                                 <div class="head1">จำนวน</div>
                                 <v-text-field
+                                v-model="exchange.remain"
                                 class="value"
                                 solo
                                 label="1"
@@ -126,6 +130,7 @@
                     <div class="detail-items">
                         <div class="head1">รายละเอียด</div>
                         <v-textarea
+                            v-model="exchange.detail"
                             solo
                             clearable
                             clear-icon="mdi-close-circle"
@@ -145,7 +150,7 @@
               color="error"
               style="float: right"
               dark
-              to="/admin/listcampaign"
+              to="/admin/Listitems"
               >Cancle</v-btn
             >
           </v-col>
@@ -157,13 +162,14 @@
           <v-col cols="3"></v-col>
         </v-row>
         </div>
-
+        </form>
     </div>
 </template>
 
 <script>
     // import a from "../../public/image/bubble.png"
     const Navbar = () => import('@/components/navbar/navbar')
+    import swal from "sweetalert2";
     export default {
         data() {
     return {
@@ -184,8 +190,55 @@
         components: {
       Navbar
         },
+        mounted: function(){
+        this.getData()
+    },
         methods: {
-             async onFileSelected() {
+          async Edititems(){
+        try{
+            var formData = new FormData();
+            formData.append("name", this.exchange.name);
+            formData.append("detail", this.exchange.detail);
+            this.exchange.galleryimage.forEach( file =>{
+              formData.append("multi-files", file);
+            })
+            formData.append("remain", this.exchange.remain);
+            formData.append("cost", this.exchange.cost);
+            console.log(formData);
+            // let exchange = await this.$http.post("/exchangeitem/EditItem/"+this.$route.params.id+"/edit/", formData);
+        swal.fire({
+                title: 'Do you want to save the changes?',
+                icon: 'question',
+                confirmButtonColor: 'green',
+                cancelButtonColor: 'red',
+                showCancelButton: true,
+                confirmButtonText: `Save`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    this.$http.post("/exchangeitem/EditItem/"+this.$route.params.id+"/edit/", formData)
+                    .then(() => {
+                        this.$router.push({ name: 'Detailitems' , params: {id : this.$route.params.id}})
+                        swal.fire('Saved!', 'Edit this news was successful.', 'success')
+                    })
+                    .catch(function(err){
+                        console.log(err)
+                    })
+                }
+            })
+        }catch (err){
+        //     let error = err.response;
+        // if (error.status == 409) {
+        //   swal.fire("Error", error.data.message, "error");
+        //   console.log("success");
+        // } else {
+        //   swal.fire("Error", error.data.err.message, "error");
+        //   console.log("error");
+        // }
+        }
+
+    },
+     async onFileSelected() {
       // this.exchange.overviewimage = event.target.files[0];
       // const input = this.$refs.fileInput;
       if (this.file != null) {
@@ -202,6 +255,25 @@
     deletex(index){
       this.imageData.splice(index,1)
     },
+    async getData(){
+        var that = this;
+        await this.$http.get("/exchangeitem/DetailItem/"+this.$route.params.id)
+        .then((res) => {
+        console.log(res.data)
+        that.exchange = res.data;
+        // that.exchange.galleryimage.forEach(image => {this.imageData.push(image)})
+        for(var i=0;i<4;i++){
+        var x = that.exchange.galleryimage[i].image
+        this.imageData.push(x)}
+        // that.news.oldimage = res.data.image;
+        console.log(that.exchange)
+        console.log(this.imageData)
+      })
+        .catch(function(err){
+        console.log(err)
+        })
+    },
+
         },
         
     }

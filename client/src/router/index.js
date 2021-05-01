@@ -415,7 +415,7 @@ const routes = [
     }
   }, 
   {
-    path:'/admin/Edititems',
+    path:'/admin/Edititems/:id',
     name: 'Edititems',
     component: Edititems,
     meta: {
