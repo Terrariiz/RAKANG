@@ -256,6 +256,7 @@
     },
     deletex(index){
       this.exchange.deleteimage = this.imageData.splice(index,1)
+      console.log(this.exchange.deleteimage)
     },
     async getData(){
         var that = this;

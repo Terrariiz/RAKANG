@@ -122,7 +122,8 @@ import swal from "sweetalert2";
         remain: null,
         galleryimage:[],
       },
-      file:null,  
+      file:[],
+      test:[],  
      
     };
   },
@@ -168,6 +169,9 @@ import swal from "sweetalert2";
       // this.exchange.overviewimage = event.target.files[0];
       // const input = this.$refs.fileInput;
       if (this.file != null) {
+        console.log(this.file.length)
+        for(var i=0;i==this.file.length;i++){
+          this.test.push(this.file[i])}
           console.log(this.file)
           console.log(typeof this.file)
           this.exchange.galleryimage = this.file
@@ -175,7 +179,6 @@ import swal from "sweetalert2";
           this.file.forEach(f => {var url = URL.createObjectURL(f)
           console.log(f)
           this.imageData.push(url)})
-          
 
         // this.$emit('input', files[0])
       }
