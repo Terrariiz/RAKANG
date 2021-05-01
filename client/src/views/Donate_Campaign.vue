@@ -57,7 +57,7 @@
                   <v-col style="text-align:right;" cols="3" md="3">
                     <!-- <span class="hide-txt">จำนวนคนที่บริจาค</span> -->
                     <span class="icon-people"
-                      ><i class="fa fa-users" aria-hidden="true"></i> {{ campaign.view }}</span
+                      ><i class="fa fa-eye"></i> {{ campaign.view }}</span
                     >
                   </v-col>
                 </v-row>
