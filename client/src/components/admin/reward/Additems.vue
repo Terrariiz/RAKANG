@@ -8,9 +8,9 @@
         <div class="container">
             <h1>เพิ่มรายการของ</h1>
             
-                 <h3>ใส่รูปของสินค้า</h3>
+                 <h3>ใส่รูปของสินค้าไม่เกิน 5 รูป</h3>
                  <hr>
-                 <div class="head1">รูปภาพปก</div>
+                 <div class="head1">รูปแรกคือภาพปก</div>
                     <v-row >
                         <v-col class="col-vue" v-for="(image,index) in imageData" :key="image" md="2" sm="6" >
                                 <div  class="preview" >

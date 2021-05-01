@@ -65,7 +65,8 @@
         </div> -->
         <div class="container">
             <h1>แก้ไขรายการของ</h1>
-            
+            <center>
+                </center>
                  <h3>ใส่รูปของสินค้า</h3>
                  <hr>
                  <div class="head1">รูปภาพปก</div>
