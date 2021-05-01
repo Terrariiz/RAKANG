@@ -27,7 +27,7 @@
                         </div>
                     </div>
                     <div class="col-2">
-                        <p>Items/ชื่อของ</p>
+                        <p>แลกของรางวัล/ชื่อของ</p>
                         <h1>{{items.name}}</h1>
                         <h4>{{items.cost}}</h4>
                         <h3>detail</h3>

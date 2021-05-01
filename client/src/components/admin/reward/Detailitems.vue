@@ -17,10 +17,11 @@
                         </div>
                     </div>
                     <div class="col-2">
-                        <p>ชื่อของ</p>
                         <h1>{{item.name}}</h1>
-                        <h4>แต้มที่ใช้ :  {{item.cost}}  แต้ม</h4>
-                        <h3>รายละเอียด</h3>
+                        <hr>
+                        <h4>แต้มที่ใช้ </h4><p> {{item.cost}}  แต้ม</p>
+                        <hr>
+                        <h4>รายละเอียด</h4>
                         <p v-html="item.detail">{{ item.detail }}</p>
                     </div>
                 </div>
