@@ -28,7 +28,7 @@
         <!-- อันใหม่ -->
           <div class="containerx">
             <v-row >
-              <v-col v-for="(news) in filteredListx " :key="news.title" cols="12" md="4" sm="12">
+              <v-col v-for="(news) in filteredList " :key="news.title" cols="12" md="4" sm="12">
                 <div @click="ViewNews(news._id,news.count_api_namespace,news.count_api_key)" class="cardx">
                   
                   <img  :src="news.image">
