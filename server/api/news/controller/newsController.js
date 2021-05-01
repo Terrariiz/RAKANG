@@ -2,6 +2,7 @@ const News = require("../model/News");
 const multer = require('multer');
 const fs = require('fs');
 const cloudinary = require("cloudinary").v2
+const countapi = require('countapi-js');
 
 cloudinary.config({
   cloud_name: "koladon52",
@@ -23,12 +24,20 @@ exports.addnews = async (req, res) => {
         image: result.url,
         cloudinary_id: result.public_id,
         date: today,
-        categories: req.body.categories
+        categories: req.body.categories,
       });
-
-      console.log(add)
       let data = await add.save()
-      res.status(201).json({ data });
+      var option = {
+        key: 'NewsView',
+        namespace: "Rakang_News_" + data._id,
+      }
+      countapi.create(option).then((result) => {
+        console.log(result)
+        data.count_api_namespace = result.namespace
+        data.count_api_key = result.key
+        data.save()
+        res.status(201).json({ data });
+      });
 
     })
 

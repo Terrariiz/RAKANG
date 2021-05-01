@@ -23,7 +23,13 @@ const doctrineSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
     }
-  ]
+  ],
+  count_api_namespace:{
+    type: String
+  },
+  count_api_key:{
+    type: String
+  }
 
 });
 
