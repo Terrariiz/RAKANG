@@ -4,6 +4,12 @@
             <Navbar></Navbar>
         </div>
         <br><br><br><br>
+        <v-overlay :value="isloading">
+        <v-progress-circular
+          indeterminate
+          size="64"
+        ></v-progress-circular>
+      </v-overlay>
          <form
          @submit.prevent="Adddoctrine">
         <v-container id ='rounded' style="background-color: #F09C0B;">
@@ -97,7 +103,8 @@ export default {
       },
             imageData:null,
             items:['บทสวดมนต์','หลักธรรม คำสอน','คติสอนใจ','พุทธประวัติ','อื่นๆ'],
-            categories: null
+            categories: null,
+            isloading:false
             
         }
     },
@@ -120,6 +127,7 @@ export default {
             let doctrine = await this.$http.post("/doctrine/adddoctrine", formData);
             console.log(doctrine);
             if (doctrine) {
+                this.isloading = true
                 this.$router.push({ name: 'Listdoctrine'})
                 swal.fire("Success", "Add doctrine Was successful", "success");
                 console.log('success')
