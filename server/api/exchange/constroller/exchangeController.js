@@ -228,7 +228,7 @@ exports.Purchase = function(req,res){
 exports.ShowOrder = function(req,res){
   try{
     console.log('this')
-    Exchange.findById(req.params.id).populate({path:"waitingorder" , model : ExchangeLog}).populate({path:"confirmorder" , model : ExchangeLog}).exec(async function(err, exchange){
+    Exchange.find().populate({path:"waitingorder" , model : ExchangeLog}).populate({path:"confirmorder" , model : ExchangeLog}).exec(async function(err, exchange){
       if(err){
         console.log(err)
       } else {
