@@ -45,12 +45,6 @@
             <img  :src="doctrine.image">
             <p v-html="doctrine.content">{{ doctrine.content }}</p>
           </div>
-          <div class="another-article">
-            <h3>another article</h3>
-            <img >
-            <p></p>
-            <button class="btn read-more-btn">อ่านเพิ่มเติม</button>
-          </div>
         </div>
         <div class="right-content">
           <div class="topics">
