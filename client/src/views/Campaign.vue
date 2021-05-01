@@ -3,9 +3,11 @@
     <div>
       <Navbar></Navbar>
     </div>
-    <h1>Campaign</h1>
-    <!-- Test -->
      <v-container class="container-news">
+       <section class="header">
+        <h1>แคมเปญ</h1>
+      </section>
+      <hr />
        <v-text-field style="width:30%; text-align: center;" prepend-inner-icon="mdi-magnify" v-model="search" label="ค้นหาหัวข้อ"></v-text-field>
        <p class="notfound" v-if="filteredList.length == 0 && search !== ''">ไม่พบ "{{search.trim()}}"</p>
         <v-card class="margin-card" v-for="(campaign,percent) in filteredList " :key="percent" elevation="5" outlined  >
@@ -19,7 +21,11 @@
             <v-container>
               
                 <h1>{{ campaign.name }} </h1>
-              <div>{{campaign.content}}</div>
+              <div>
+                <span class="icon-people"
+                      ><i class="fa fa-eye"></i> {{ campaign.view }}</span
+                    >
+              </div>
               <div >
                 <v-row>
                   <v-col  style="text-align:left;" cols="12" md="6">
@@ -148,6 +154,13 @@ export default {
 </script>
 
 <style >
+.header{
+  text-align: center;
+  margin-top: 3%;
+}
+.header h1 {
+  font-weight: bold;
+}
 .amount{
   font-weight: 600;
 }

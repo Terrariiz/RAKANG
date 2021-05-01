@@ -180,7 +180,7 @@ exports.EditItem = async (req, res) => {
         if (err) {
           console.log(err)
         } else {
-          
+
         }
       })
     } else if(req.body.deleteimage){
@@ -304,8 +304,8 @@ exports.Purchase = function (req, res) {
 exports.ShowOrder = function (req, res) {
   try {
     console.log('this')
-    Exchange.findById(req.params.id).populate({ path: "waitingorder", model: ExchangeLog }).populate({ path: "confirmorder", model: ExchangeLog }).exec(async function (err, exchange) {
-      if (err) {
+    Exchange.find().populate({path:"waitingorder" , model : ExchangeLog}).populate({path:"confirmorder" , model : ExchangeLog}).exec(async function(err, exchange){
+      if(err){
         console.log(err)
       } else {
         return res.json(exchange);

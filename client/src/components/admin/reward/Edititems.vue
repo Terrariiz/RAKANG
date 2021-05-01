@@ -193,7 +193,8 @@
       file:null,  
       delcount: false,
       filecount: false,
-      isloading:false
+      isloading:false,
+      test:[]
      
     };
   },
@@ -262,8 +263,11 @@
       // this.exchange.overviewimage = event.target.files[0];
       // const input = this.$refs.fileInput;
       if (this.file != null) {
+        for(var i=0;i<this.file.length;i++){
+          this.test.push(this.file[i])}
           console.log(this.file)
           console.log(typeof this.file)
+          this.exchange.galleryimage = this.test
           this.file.forEach(f => {var url = URL.createObjectURL(f)
           console.log(f)
           this.imageData.push(url)})
