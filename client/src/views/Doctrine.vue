@@ -22,65 +22,7 @@
         >
           {{ category }}
         </v-chip>
-       </v-chip-group>
-       <div>
-         <v-text-field class="search-doctrine" style="width:30%;" prepend-inner-icon="mdi-magnify" v-model="search" label="ค้นหาหัวข้อ"></v-text-field>
-       </div>
-       <p class="notfound" v-if="filteredList.length == 0 && search !== ''"><br><br>ไม่พบ "{{search.trim()}}"<br><br><br><br><br><br></p>
-       <p class="notfound" v-if="filteredList.length == 0 && search == ''"><br><br>ไม่มีเนื้อหาในส่วนนี้<br><br><br><br><br><br></p>
-        <!-- อันใหม่ -->
-          <div class="containerx">
-            <v-row >
-              <v-col v-for="(doctrine) in filteredList " :key="doctrine.title" cols="12" md="4" sm="12">
-                <div  class="cardx">
-                  
-                  <img @click="ViewDoctrine(doctrine._id,doctrine.count_api_namespace,doctrine.count_api_key)"  :src="doctrine.image">
-                  <div @click="ViewDoctrine(doctrine._id,doctrine.count_api_namespace,doctrine.count_api_key)" class="panelx">
-                     <!-- ปุ่ม bookmark -->
-           
-                    <h3>
-                     {{ doctrine.title }}
-                    </h3>
-                    <v-list-item three-line>
-                      <v-list-item-content  >
-                        <v-list-item-subtitle v-html="doctrine.content">
-                        {{ doctrine.content }}
-                        </v-list-item-subtitle>
-                      </v-list-item-content>
-                    </v-list-item>
-                    <span class="datex">{{ doctrine.edittime }}</span>
-                    <p>
-                     {{ doctrine.categories }}
-                    </p>
-                    
-                    
-                  </div>
-                   <div class="btn-bookmark" v-if="$store.getters.UserIsLoggedIn">
-                  <v-btn
-                    icon
-                    color="#ffb703"
-                    v-if="doctrine.fav"
-                    @click="clickBookmarks(doctrine)"
-                  >
-                    <v-icon x-large>mdi-bookmark</v-icon>
-                  </v-btn>
-                  <v-btn
-                    icon
-                    color="white"
-                    v-else
-                    @click="clickBookmarks(doctrine)"  
-                  >
-                    <v-icon x-large>mdi-bookmark</v-icon>
-                  </v-btn>
-                </div>
-                    </div>
-              </v-col>
-            </v-row>
-              <v-pagination v-if="pagination.lengthPages != 0" circle :total-visible="7"  v-model="pagination.page" :length="pagination.lengthPages"></v-pagination>
-            
-          </div>
-       <!-- อันใหม่ -->
-      <component-to-re-render :key="componentKey" />
+      </v-chip-group>
       <div>
         <v-text-field
           class="search-doctrine"
@@ -91,10 +33,12 @@
         ></v-text-field>
       </div>
       <p class="notfound" v-if="filteredList.length == 0 && search !== ''">
-        <br />ไม่พบ "{{ search.trim() }}"<br /><br /><br /><br /><br />
+        <br />ไม่พบ "{{
+          search.trim()
+        }}"<br /><br /><br /><br /><br /><br />
       </p>
       <p class="notfound" v-if="filteredList.length == 0 && search == ''">
-        <br />ไม่มีเนื้อหาในส่วนนี้<br /><br /><br /><br /><br />
+        <br />ไม่มีเนื้อหาในส่วนนี้<br /><br /><br /><br /><br /><br />
       </p>
       <!-- อันใหม่ -->
       <div class="containerx">
@@ -107,8 +51,26 @@
             sm="12"
           >
             <div class="cardx">
-              <img @click="ViewDoctrine(doctrine._id)" :src="doctrine.image" />
-              <div @click="ViewDoctrine(doctrine._id)" class="panelx">
+              <img
+                @click="
+                  ViewDoctrine(
+                    doctrine._id,
+                    doctrine.count_api_namespace,
+                    doctrine.count_api_key
+                  )
+                "
+                :src="doctrine.image"
+              />
+              <div
+                @click="
+                  ViewDoctrine(
+                    doctrine._id,
+                    doctrine.count_api_namespace,
+                    doctrine.count_api_key
+                  )
+                "
+                class="panelx"
+              >
                 <!-- ปุ่ม bookmark -->
 
                 <h3>
@@ -157,7 +119,6 @@
       </div>
       <!-- อันใหม่ -->
     </v-container>
-    <component-to-re-render :key="componentKey" />
     <div>
       <Footer></Footer>
     </div>
@@ -166,7 +127,7 @@
 
 <script>
 import moment from "moment";
-import countapi from 'countapi-js';
+import countapi from "countapi-js";
 const Footer = () => import("@/components/navbar/footer");
 const Navbar = () => import("@/components/navbar/navbar");
 export default {
@@ -286,9 +247,19 @@ export default {
         this.doctrines = res.data;
 
         var i = 0;
-<<<<<<< HEAD
         var doc;
+
         for (i; i < this.doctrines.length; i++) {
+          await countapi
+            .get(
+              this.doctrines[i].count_api_namespace,
+              this.doctrines[i].count_api_key
+            )
+            .then((result) => {
+              this.doctrines[i]["view"] = result.value;
+              console.log(result.value);
+            });
+
           doc = this.doctrines[i]._id;
           if (moment(this.doctrines[i].edittime).format("dddd") == "Mondey") {
             this.doctrines[i].edittime = moment(
@@ -332,50 +303,15 @@ export default {
             ).format(" วันอาทิตย์ DD-MM-YY A");
           }
           //bookmarks เก็บไอดีของหลักธรรมและค่าbookmark ว่าหลักธรรมนี้ user ได้เซฟเก็บไว้ไหม
-          console.log(doc);
+          // console.log(doc)
           if (this.$store.getters.UserIsLoggedIn) {
             IsFav = await this.$http
               .get("/user/" + id + "/CheckFav/" + doc)
               .then((res) => {
-                console.log(res.data.result);
+                // console.log(res.data.result)
                 // IsFav = res.data.result
                 return res.data.result;
               });
-=======
-        var doc
-
-        for (i; i<this.doctrines.length; i++) {
-
-          await countapi.get(this.doctrines[i].count_api_namespace, this.doctrines[i].count_api_key).then((result) => { 
-              this.doctrines[i]["view"] = result.value
-              console.log(result.value)
-          });
-
-          doc = this.doctrines[i]._id
-          if(moment(this.doctrines[i].edittime).format('dddd') == 'Mondey'){
-                this.doctrines[i].edittime = moment(this.doctrines[i].edittime).format(" วันจันทร์ DD-MM-YY A");
-              } else if(moment(this.doctrines[i].edittime).format('dddd') == 'Tuesday'){
-                this.doctrines[i].edittime = moment(this.doctrines[i].edittime).format(" วันอังคาร DD-MM-YY A");
-              } else if(moment(this.doctrines[i].edittime).format('dddd') == 'Wednesday'){
-                this.doctrines[i].edittime = moment(this.doctrines[i].edittime).format(" วันพุธ DD-MM-YY A");
-              } else if(moment(this.doctrines[i].edittime).format('dddd') == 'Thursday'){
-                this.doctrines[i].edittime = moment(this.doctrines[i].edittime).format(" วันพฤหัสบดี DD-MM-YY A");
-              } else if(moment(this.doctrines[i].edittime).format('dddd') == 'Friday'){
-                this.doctrines[i].edittime = moment(this.doctrines[i].edittime).format(" วันศุกร์ DD-MM-YY A");
-              } else if(moment(this.doctrines[i].edittime).format('dddd') == 'Saturday'){
-                this.doctrines[i].edittime = moment(this.doctrines[i].edittime).format(" วันเสาร์ DD-MM-YY A");
-              } else if(moment(this.doctrines[i].edittime).format('dddd') == 'Sunday'){
-                this.doctrines[i].edittime = moment(this.doctrines[i].edittime).format(" วันอาทิตย์ DD-MM-YY A");
-              }
-          //bookmarks เก็บไอดีของหลักธรรมและค่าbookmark ว่าหลักธรรมนี้ user ได้เซฟเก็บไว้ไหม
-          // console.log(doc)
-          if(this.$store.getters.UserIsLoggedIn){
-            IsFav = await this.$http.get("/user/"+id+"/CheckFav/"+doc).then((res) => {
-              // console.log(res.data.result)
-              // IsFav = res.data.result
-              return res.data.result
-            })
->>>>>>> b4588f6935a4ab4bce12f001837abbc10da34854
             this.doctrines[i]["fav"] = IsFav;
             this.forceRerender();
           }
@@ -388,12 +324,8 @@ export default {
     await this.onbeforeunload();
   },
   methods: {
-<<<<<<< HEAD
-    ViewDoctrine(doctrineid) {
-=======
-    ViewDoctrine(doctrineid,namespace,key){
-      countapi.hit(namespace, key)
->>>>>>> b4588f6935a4ab4bce12f001837abbc10da34854
+    ViewDoctrine(doctrineid, namespace, key) {
+      countapi.hit(namespace, key);
       this.$router.push({
         name: "UserDetailDoctrine",
         params: { id: doctrineid },
@@ -471,7 +403,7 @@ export default {
   text-align: center;
   margin-top: 3%;
 }
-.header h1{
+.header h1 {
   font-weight: bold;
 }
 .btn-bookmark {
