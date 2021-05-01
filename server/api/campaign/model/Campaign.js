@@ -54,6 +54,12 @@ const CampaignSchema = new mongoose.Schema({
   categories:{
     type: String
   },
+  count_api_namespace:{
+    type: String
+  },
+  count_api_key:{
+    type: String
+  }
 
  
 });
