@@ -74,6 +74,7 @@
 
 <script>
 import moment from "moment";
+import countapi from 'countapi-js';
 const Footer = () => import("@/components/navbar/footer");
 const Navbar = () => import('@/components/navbar/navbar')
 export default {
@@ -97,8 +98,12 @@ export default {
     methods: {
         getData(){
             this.$http.get("/news/DetailNews/"+this.$route.params.id)
-            .then((res) => {
+            .then(async (res) => {
+                
                 this.news = res.data;
+                await countapi.get(this.news.count_api_namespace, this.news.count_api_key).then((result) => { 
+                    this.news['view'] = result.value
+                });
                 if(moment(this.news.date).format('dddd') == 'Mondey'){
                     this.news.date = moment(this.news.date).format(" วันจันทร์ DD-MM-YY A");
                 } else if(moment(this.news.date).format('dddd') == 'Tuesday'){

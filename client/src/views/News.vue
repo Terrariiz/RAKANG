@@ -22,7 +22,50 @@
         >
           {{ category }}
         </v-chip>
-      </v-chip-group>
+       </v-chip-group>
+       <div>
+         <v-text-field class="search-doctrine" style="width:30%;" prepend-inner-icon="mdi-magnify" v-model="search" label="ค้นหาหัวข้อ"></v-text-field>
+       </div>
+       <p class="notfound" v-if="filteredList.length == 0 && search !== ''"><br><br>ไม่พบ "{{search.trim()}}"<br><br><br><br></p>
+       <p class="notfound" v-if="filteredList.length == 0 && search == ''"><br><br>ไม่มีเนื้อหาในส่วนนี้<br><br><br><br></p>
+        <!-- อันใหม่ -->
+          <div class="containerx">
+            <v-row >
+              <v-col v-for="(news) in filteredListx " :key="news.title" cols="12" md="4" sm="12">
+                <div @click="ViewNews(news._id,news.count_api_namespace,news.count_api_key)" class="cardx">
+                  
+                  <img  :src="news.image">
+                  <div class="panelx">
+                     <!-- ปุ่ม bookmark -->
+            
+                    <v-list-item three-line class="title-font-size">
+                      
+                        
+                     {{ news.title }}
+                    
+                      
+                    </v-list-item>
+                     <v-list-item three-line>
+                      <v-list-item-content  >
+                        <v-list-item-subtitle v-html="news.content">
+                            {{ news.content }}
+                        </v-list-item-subtitle>
+                      </v-list-item-content>
+                    </v-list-item>
+                    <span class="datex">{{ news.date }}</span>
+                    <p>
+                     {{ news.categories }}
+                    </p>
+                    
+                    
+                  </div>
+                </div>
+              </v-col>
+            </v-row>
+            <v-pagination v-if="pagination.lengthPages != 0" circle :total-visible="7"  v-model="pagination.page" :length="pagination.lengthPages"></v-pagination>
+          </div>
+       <!-- อันใหม่ -->
+        
       <div>
         <v-text-field
           class="search-doctrine"
@@ -90,6 +133,7 @@
 
 <script>
 import moment from "moment";
+import countapi from "countapi-js";
 const Footer = () => import("@/components/navbar/footer");
 const Navbar = () => import("@/components/navbar/navbar");
 export default {
@@ -160,45 +204,33 @@ export default {
     },
   },
   mounted: async function mounted() {
-    await this.$http
-      .get("/news/ShowListNews")
-      .then((res) => {
+    await this.$http.get("/news/ShowListNews")
+      .then(async (res) => {
         console.log(res.data);
         this.news = res.data;
         this.news.sort(function(a, b) {
           return new Date(b.date) - new Date(a.date);
         });
         var i = 0;
-        for (this.news[i]; i < this.news.length; i++) {
-          if (moment(this.news[i].date).format("dddd") == "Mondey") {
-            this.news[i].date = moment(this.news[i].date).format(
-              " วันจันทร์ DD-MM-YY A"
-            );
-          } else if (moment(this.news[i].date).format("dddd") == "Tuesday") {
-            this.news[i].date = moment(this.news[i].date).format(
-              " วันอังคาร DD-MM-YY A"
-            );
-          } else if (moment(this.news[i].date).format("dddd") == "Wednesday") {
-            this.news[i].date = moment(this.news[i].date).format(
-              " วันพุธ DD-MM-YY A"
-            );
-          } else if (moment(this.news[i].date).format("dddd") == "Thursday") {
-            this.news[i].date = moment(this.news[i].date).format(
-              " วันพฤหัสบดี DD-MM-YY A"
-            );
-          } else if (moment(this.news[i].date).format("dddd") == "Friday") {
-            this.news[i].date = moment(this.news[i].date).format(
-              " วันศุกร์ DD-MM-YY A"
-            );
-          } else if (moment(this.news[i].date).format("dddd") == "Saturday") {
-            this.news[i].date = moment(this.news[i].date).format(
-              " วันเสาร์ DD-MM-YY A"
-            );
-          } else if (moment(this.news[i].date).format("dddd") == "Sunday") {
-            this.news[i].date = moment(this.news[i].date).format(
-              " วันอาทิตย์ DD-MM-YY A"
-            );
-          }
+        for (this.news[i]; i<this.news.length; i++) {
+          await countapi.get(this.news[i].count_api_namespace, this.news[i].count_api_key).then((result) => { 
+              this.news[i]['view'] = result.value
+          });
+          if(moment(this.news[i].date).format('dddd') == 'Mondey'){
+                this.news[i].date = moment(this.news[i].date).format(" วันจันทร์ DD-MM-YY A");
+              } else if(moment(this.news[i].date).format('dddd') == 'Tuesday'){
+                this.news[i].date = moment(this.news[i].date).format(" วันอังคาร DD-MM-YY A");
+              } else if(moment(this.news[i].date).format('dddd') == 'Wednesday'){
+                this.news[i].date = moment(this.news[i].date).format(" วันพุธ DD-MM-YY A");
+              } else if(moment(this.news[i].date).format('dddd') == 'Thursday'){
+                this.news[i].date = moment(this.news[i].date).format(" วันพฤหัสบดี DD-MM-YY A");
+              } else if(moment(this.news[i].date).format('dddd') == 'Friday'){
+                this.news[i].date = moment(this.news[i].date).format(" วันศุกร์ DD-MM-YY A");
+              } else if(moment(this.news[i].date).format('dddd') == 'Saturday'){
+                this.news[i].date = moment(this.news[i].date).format(" วันเสาร์ DD-MM-YY A");
+              } else if(moment(this.news[i].date).format('dddd') == 'Sunday'){
+                this.news[i].date = moment(this.news[i].date).format(" วันอาทิตย์ DD-MM-YY A");
+              }
         }
       })
       .catch(function(err) {
@@ -207,7 +239,8 @@ export default {
     await this.onbeforeunload();
   },
   methods: {
-    ViewNews(newsid) {
+    ViewNews(newsid,namespace,key){
+      countapi.hit(namespace, key)
       this.$router.push({
         name: "UserDetailNews",
         params: { id: newsid },
