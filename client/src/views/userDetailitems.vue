@@ -37,9 +37,17 @@
             <div class="small-container">
                 <div class="row">
                     <div v-for="otheritem in otheritems" :key="otheritem" class="col-4">
-                        <img :src="otheritem.galleryimage[0].image">
-                        <h4>{{otheritem.name}}</h4>
-                        <p>ราคา {{otheritem.cost}} แต้ม</p>
+                        <div @click="ViewItems(otheritem._id)" class="pointer card single-item">
+                            <div class="img-container">
+                                <img :src="otheritem.galleryimage[0].image" class="card-img-top product-img" alt="">
+                            </div>
+                            <div class="card-body">
+                                <div class="card-text d-flex justify-content-between text-capitalize">
+                                    <h5 id="item-name">{{otheritem.name}}</h5>
+                                    <span>แต้มที่ใช้  {{otheritem.cost}}  แต้ม</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                      <!-- <div class="col-4">
                         <img :src="otheritems[1].galleryimage[0].image">
@@ -91,13 +99,21 @@
                 var index = this.otheritems.findIndex(this.findSameItem)
                 this.otheritems.splice(index,1)
                 if(this.otheritems.length > 4){
-                    this.otheritems = this.otheritems.slice(4,this.otheritems.length-4)
+                    this.otheritems = this.otheritems.slice(0,4)
+                    console.log(this.otheritems)
                 }
             },
             findSameItem(value){
                 if(value._id == this.items._id){
                     return value
                 }
+            },
+            ViewItems(itemsid){
+                this.$router.push({
+                    name: "userDetailitems",
+                    params: {id:itemsid}
+                })
+                location.reload()
             },
             // function () {
             // zoom(".xzoom, .xzoom-gallery").xzoom({
@@ -129,6 +145,39 @@
 
 
 <style scoped>
+.pointer {cursor: pointer;}
+.single-item {
+  display: inline-block;
+  vertical-align: middle;
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgb(247, 241, 241);
+  position: relative;
+  transition-duration: 0.3s;
+  transition-property: transform;
+  cursor: pointer;
+}
+.single-item:before {
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+  content: '';
+  top: 100%;
+  left: 5%;
+  height: 10px;
+  width: 90%;
+  opacity: 0;
+   background: radial-gradient(ellipse at center, rgba(248, 248, 248, 0.35) 0%, rgba(247, 244, 244, 0) 80%);
+   transition-duration: 0.3s;
+  transition-property: transform, opacity;
+}
+.single-item:hover, .single-item:focus, .single-item:active {
+    transform: translateY(-5px);
+    
+}
+.single-item:hover:before, .single-item:focus:before, .single-item:active:before {
+  opacity: 1;
+  transform: translateY(5px);
+}
 .selected-image{
     border: 5px solid red;
 }
