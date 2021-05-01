@@ -62,7 +62,7 @@ const termuse                = () => import('@/views/termUse')
 const termservice            = () => import('@/views/termService')
 const items                  = () => import('@/views/items')
 const userDetailitems        = () => import('@/views/userDetailitems')
-
+const contact                = () => import('@/views/contact')
 // ----------------------------หน้า dashboard-------------------------------------------------
 const dashboard_home          = () => import('@/components/admin/dashboard/home')
 const dashboard_list_campaign = () => import('@/components/admin/dashboard/list_campaign')
@@ -92,6 +92,11 @@ const routes = [
     path: '/termservice',
     name: 'termservice',
     component: termservice
+  },
+  {
+    path: '/contact',
+    name: 'contact',
+    component: contact
   },
   {
     path: '/campaign',

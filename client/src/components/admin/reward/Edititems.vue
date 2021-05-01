@@ -211,7 +211,7 @@
             formData.append("name", this.exchange.name);
             formData.append("detail", this.exchange.detail);
             if(this.filecount){
-                this.file.forEach( files =>{
+                this.test.forEach( files =>{
               formData.append("multi-files", files);
             })
             }
@@ -289,6 +289,7 @@
       
       console.log(JSON.stringify(link))
       this.imageData.splice(index,1)
+      this.test.splice(index,1)
       this.delcount = true
       this.test.splice(index,1)
       

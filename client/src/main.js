@@ -19,7 +19,7 @@ Vue.use(VueApexCharts)
 Vue.component('apexchart', VueApexCharts)
 
 const base = axios.create({
-  baseURL: "http://localhost:4000"
+  baseURL: "https://rakang-server.herokuapp.com/"
 });
 
 Vue.prototype.$http = base;
