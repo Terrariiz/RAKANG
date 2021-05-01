@@ -182,6 +182,7 @@
         cost: null,
         remain: null,
         galleryimage:[],
+        deleteimage:[],
       },
       file:null,  
      
@@ -204,6 +205,7 @@
             })
             formData.append("remain", this.exchange.remain);
             formData.append("cost", this.exchange.cost);
+            formData.append("deleteimage", this.exchange.deleteimage);
             console.log(formData);
             // let exchange = await this.$http.post("/exchangeitem/EditItem/"+this.$route.params.id+"/edit/", formData);
         swal.fire({
@@ -253,7 +255,7 @@
       }
     },
     deletex(index){
-      this.imageData.splice(index,1)
+      this.exchange.deleteimage = this.imageData.splice(index,1)
     },
     async getData(){
         var that = this;
