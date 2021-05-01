@@ -29,7 +29,7 @@
           <div class="containerx">
             <v-row >
               <v-col v-for="(news) in filteredListx " :key="news.title" cols="12" md="4" sm="12">
-                <div @click="ViewNews(news._id)" class="cardx">
+                <div @click="ViewNews(news._id,news.count_api_namespace,news.count_api_key)" class="cardx">
                   
                   <img  :src="news.image">
                   <div class="panelx">
@@ -73,6 +73,7 @@
 
 <script>
 import moment from "moment";
+import countapi from "countapi-js";
 const Footer = () => import("@/components/navbar/footer");
 const Navbar = () => import('@/components/navbar/navbar')
 export default {
@@ -134,7 +135,7 @@ export default {
   },
   mounted: async function mounted() {
     await this.$http.get("/news/ShowListNews")
-      .then((res) => {
+      .then(async (res) => {
         console.log(res.data);
         this.news = res.data;
         this.news.sort(function(a, b){
@@ -142,6 +143,9 @@ export default {
         });
         var i = 0;
         for (this.news[i]; i<this.news.length; i++) {
+          await countapi.get(this.news[i].count_api_namespace, this.news[i].count_api_key).then((result) => { 
+              this.news[i]['view'] = result.value
+          });
           if(moment(this.news[i].date).format('dddd') == 'Mondey'){
                 this.news[i].date = moment(this.news[i].date).format(" วันจันทร์ DD-MM-YY A");
               } else if(moment(this.news[i].date).format('dddd') == 'Tuesday'){
@@ -165,7 +169,8 @@ export default {
       await this.onbeforeunload()
   },
   methods: {
-    ViewNews(newsid){
+    ViewNews(newsid,namespace,key){
+      countapi.hit(namespace, key)
       this.$router.push({
         name: "UserDetailNews",
         params: {id:newsid}

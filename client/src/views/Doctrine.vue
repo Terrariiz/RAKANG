@@ -31,8 +31,8 @@
               <v-col v-for="(doctrine) in filteredListx " :key="doctrine.title" cols="12" md="4" sm="12">
                 <div  class="cardx">
                   
-                  <img @click="ViewDoctrine(doctrine._id)"  :src="doctrine.image">
-                  <div @click="ViewDoctrine(doctrine._id)" class="panelx">
+                  <img @click="ViewDoctrine(doctrine._id,doctrine.count_api_namespace,doctrine.count_api_key)"  :src="doctrine.image">
+                  <div @click="ViewDoctrine(doctrine._id,doctrine.count_api_namespace,doctrine.count_api_key)" class="panelx">
                      <!-- ปุ่ม bookmark -->
            
                     <h3>
@@ -90,6 +90,7 @@
 
 <script>
 import moment from "moment";
+import countapi from 'countapi-js';
 const Footer = () => import("@/components/navbar/footer");
 const Navbar = () => import('@/components/navbar/navbar')
 export default {
@@ -162,14 +163,18 @@ export default {
     }
     await this.$http.get("/doctrine/ShowListDoctrine")
       .then(async (res) => {
-        console.log(res.data);
         this.doctrines = res.data;
-        // this.doctrines.sort(function(a, b){
-        //     return new Date(b.edittime) - new Date(a.edittime);
-        // });
+
         var i = 0;
         var doc
+
         for (i; i<this.doctrines.length; i++) {
+
+          await countapi.get(this.doctrines[i].count_api_namespace, this.doctrines[i].count_api_key).then((result) => { 
+              this.doctrines[i]["view"] = result.value
+              console.log(result.value)
+          });
+
           doc = this.doctrines[i]._id
           if(moment(this.doctrines[i].edittime).format('dddd') == 'Mondey'){
                 this.doctrines[i].edittime = moment(this.doctrines[i].edittime).format(" วันจันทร์ DD-MM-YY A");
@@ -187,10 +192,10 @@ export default {
                 this.doctrines[i].edittime = moment(this.doctrines[i].edittime).format(" วันอาทิตย์ DD-MM-YY A");
               }
           //bookmarks เก็บไอดีของหลักธรรมและค่าbookmark ว่าหลักธรรมนี้ user ได้เซฟเก็บไว้ไหม
-          console.log(doc)
+          // console.log(doc)
           if(this.$store.getters.UserIsLoggedIn){
             IsFav = await this.$http.get("/user/"+id+"/CheckFav/"+doc).then((res) => {
-              console.log(res.data.result)
+              // console.log(res.data.result)
               // IsFav = res.data.result
               return res.data.result
             })
@@ -207,7 +212,8 @@ export default {
       await this.onbeforeunload()
   },
   methods: {
-    ViewDoctrine(doctrineid){
+    ViewDoctrine(doctrineid,namespace,key){
+      countapi.hit(namespace, key)
       this.$router.push({
         name: "UserDetailDoctrine",
         params: {id:doctrineid}
