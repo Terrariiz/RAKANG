@@ -177,6 +177,7 @@
 // import a from '../../public/image/lotus.jpg'
 import moment from "moment";
 // import DialogDonate from "./dialog_donate";
+import countapi from 'countapi-js';
 const Navbar = () => import("@/components/navbar/navbar");
 const Footer = () => import("@/components/navbar/footer");
 export default {
@@ -194,11 +195,14 @@ export default {
   mounted: async function mounted() {
     await this.$http
       .get("/campaign/ShowListCampaign")
-      .then((res) => {
+      .then(async (res) => {
         if(res.data != null)
         {console.log(res.data);
         this.newcampaign = res.data[0];
         if(this.newcampaign != null)
+        await countapi.get(this.newcampaign.count_api_namespace, this.newcampaign.count_api_key).then((result) => { 
+                    this.newcampaign['view'] = result.value
+                });
        { if(moment(this.newcampaign.date).format('dddd') == 'Mondey'){
                 this.newcampaign.date = moment(this.newcampaign.date).format(" วันจันทร์ DD-MM-YY A");
               } else if(moment(this.newcampaign.date).format('dddd') == 'Tuesday'){
@@ -223,16 +227,31 @@ export default {
       });
     await this.$http
       .get("/news/ShowListNews")
-      .then((res) => {
+      .then(async (res) => {
         this.news = res.data;
+        var i = 0
+        this.news.sort(function(a, b){
+            return new Date(b.date) - new Date(a.date);
+        });
+        for (this.news[i]; i<this.news.length; i++) {
+          await countapi.get(this.news[i].count_api_namespace, this.news[i].count_api_key).then((result) => { 
+              this.news[i]['view'] = result.value
+          });
+        }
       })
        .catch(function(err) {
         console.log(err);
       });
     await this.$http
       .get("/doctrine/ShowListDoctrine")
-      .then((res) =>{
+      .then(async (res) =>{
         this.doctrine = res.data;
+        for (var i = 0; i<this.doctrine.length; i++) {
+        await countapi.get(this.doctrine[i].count_api_namespace, this.doctrine[i].count_api_key).then((result) => { 
+              this.doctrine[i]["view"] = result.value
+              console.log(result.value)
+          });
+        }
       })
       .catch(function(err){
       console.log(err);

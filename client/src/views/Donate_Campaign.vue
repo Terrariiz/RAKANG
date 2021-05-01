@@ -57,7 +57,7 @@
                   <v-col style="text-align:right;" cols="3" md="3">
                     <!-- <span class="hide-txt">จำนวนคนที่บริจาค</span> -->
                     <span class="icon-people"
-                      ><i class="fa fa-users" aria-hidden="true"></i> 0</span
+                      ><i class="fa fa-eye"></i> {{ campaign.view }}</span
                     >
                   </v-col>
                 </v-row>
@@ -129,6 +129,7 @@ const Navbar = () => import("@/components/navbar/navbar");
 import DialogDonate from "./dialog_donate";
 import swal from "sweetalert2";
 import moment from "moment";
+import countapi from 'countapi-js';
 export default {
   name: "Campaign",
   components: {
@@ -160,12 +161,14 @@ export default {
       var that = this;
       this.$http
         .get("/campaign/DetailCampaign/" + this.$route.params.id)
-        .then((res) => {
+        .then(async (res) => {
           console.log(res.data);
           // that.percent = res.data.percentage
           that.campaign = res.data;
           console.log(that.campaign);
-
+          await countapi.get(this.campaign.count_api_namespace, this.campaign.count_api_key).then((result) => { 
+                    this.campaign['view'] = result.value
+                });
           // this.end_date()
 
           if (moment(that.campaign.date).format("dddd") == "Mondey") {

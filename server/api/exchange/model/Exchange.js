@@ -34,6 +34,7 @@ const newSchema = new mongoose.Schema({
   cloudinary_id: {
     type: String,
   },
+
   
 });
 

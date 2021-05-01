@@ -45,12 +45,6 @@
             <img  :src="doctrine.image">
             <p v-html="doctrine.content">{{ doctrine.content }}</p>
           </div>
-          <div class="another-article">
-            <h3>another article</h3>
-            <img >
-            <p></p>
-            <button class="btn read-more-btn">อ่านเพิ่มเติม</button>
-          </div>
         </div>
         <div class="right-content">
           <div class="topics">
@@ -125,6 +119,7 @@
 
 <script>
 import moment from "moment";
+import countapi from 'countapi-js';
 const Footer = () => import("@/components/navbar/footer");
 const Navbar = () => import('@/components/navbar/navbar')
 export default {
@@ -178,11 +173,13 @@ export default {
               var id = localStorage.getItem("user_id")
             }
             this.$http.get("/doctrine/DetailDoctrine/"+this.$route.params.id)
-            .then((res) => {
+            .then(async (res) => {
                 console.log(res.data)
                 this.doctrine = res.data;
                 console.log(this.doctrine)
-                
+                await countapi.get(this.doctrine.count_api_namespace, this.doctrine.count_api_key).then((result) => { 
+                    this.doctrine['view'] = result.value
+                });
                 if(moment(this.doctrine.edittime).format('dddd') == 'Mondey'){
                     this.doctrine.edittime = moment(this.doctrine.edittime).format(" วันจันทร์ DD-MM-YYYY ");
                 } else if(moment(this.doctrine.edittime).format('dddd') == 'Tuesday'){

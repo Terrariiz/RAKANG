@@ -3,9 +3,11 @@
     <div>
       <Navbar></Navbar>
     </div>
-    <h1>Campaign</h1>
-    <!-- Test -->
      <v-container class="container-news">
+       <section class="header">
+        <h1>แคมเปญ</h1>
+      </section>
+      <hr />
        <v-text-field style="width:30%; text-align: center;" prepend-inner-icon="mdi-magnify" v-model="search" label="ค้นหาหัวข้อ"></v-text-field>
        <p class="notfound" v-if="filteredList.length == 0 && search !== ''">ไม่พบ "{{search.trim()}}"</p>
         <v-card class="margin-card" v-for="(campaign,percent) in filteredList " :key="percent" elevation="5" outlined  >
@@ -19,7 +21,11 @@
             <v-container>
               
                 <h1>{{ campaign.name }} </h1>
-              <div>{{campaign.content}}</div>
+              <div>
+                <span class="icon-people"
+                      ><i class="fa fa-eye"></i> {{ campaign.view }}</span
+                    >
+              </div>
               <div >
                 <v-row>
                   <v-col  style="text-align:left;" cols="12" md="6">
@@ -40,7 +46,7 @@
                 <v-row>
                   <v-col >
                     <v-btn class="fontstlye" x-large block style="background-color: #ffdd94; color:#455054;" 
-                    @click="ViewCampaign(campaign._id)"
+                    @click="ViewCampaign(campaign._id,campaign.count_api_namespace,campaign.count_api_key)"
                     elevation="3">ดูเนื้อหา</v-btn>
                   </v-col>
                 </v-row>
@@ -58,6 +64,7 @@
 
 <script>
 import moment from "moment";
+import countapi from 'countapi-js';
 const Footer = () => import("@/components/navbar/footer");
 const Navbar = () => import("@/components/navbar/navbar");
 export default {
@@ -84,7 +91,7 @@ export default {
   mounted: async function mounted() {
     await this.$http
       .get("/campaign/ShowListCampaign")
-      .then((res) => {
+      .then(async (res) => {
         console.log(res.data);
         // this.percent = (res.datadonate / this.amount)* 100
         this.campaigns = res.data;
@@ -95,6 +102,9 @@ export default {
           // this.campaigns[i].date = moment(this.campaigns[i].date).format(
           //   " dddd DD-MM-YY  A"
           // );
+          await countapi.get(this.campaigns[i].count_api_namespace, this.campaigns[i].count_api_key).then((result) => { 
+              this.campaigns[i]['view'] = result.value
+          });
           if(moment(this.campaigns[i].date).format('dddd') == 'Mondey'){
                 this.campaigns[i].date = moment(this.campaigns[i].date).format(" วันจันทร์ DD-MM-YY A");
               } else if(moment(this.campaigns[i].date).format('dddd') == 'Tuesday'){
@@ -122,7 +132,10 @@ export default {
 
   },
   methods: {
-    ViewCampaign(campaignid) {
+    ViewCampaign(campaignid,namespace,key) {
+      countapi.hit(namespace, key).then((result) => { 
+        console.log(result)
+       });
       this.$router.push({ path: '/campaign/'+campaignid})
       // this.$router.push({
       //   name: "UserDetailCampaign",
@@ -141,6 +154,13 @@ export default {
 </script>
 
 <style >
+.header{
+  text-align: center;
+  margin-top: 3%;
+}
+.header h1 {
+  font-weight: bold;
+}
 .amount{
   font-weight: 600;
 }

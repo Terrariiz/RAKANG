@@ -17,12 +17,11 @@ const upload = multer({storage: storage }).array("multi-files",10);
 
 router.post("/addnewItem", upload, exchangeController.addnewItem);
 router.get("/ShowListItem", exchangeController.ShowListItem);
+router.get("/DetailItem/ShowOrder", exchangeController.ShowOrder);
 router.get("/DetailItem/:id", exchangeController.DetailItem);
-router.get("/DetailItem/:id/ShowOrder", exchangeController.ShowOrder);
 router.put("/EditItem/:id/edit",upload, exchangeController.EditItem);
 router.delete("/DeleteItem/:id", exchangeController.DeleteItem);
 router.post("/DetailItem/:id/Perchase/:user", exchangeController.Purchase);
-router.get("/DetailItem/:id/ShowOrder", exchangeController.ShowOrder);
 router.post("/DetailItem/:id/AcceptOrder", exchangeController.AcceptOrder);
 
 router.get("/GetUserExchangeLog/:id", exchangeController.GetUserExchangeLog);
