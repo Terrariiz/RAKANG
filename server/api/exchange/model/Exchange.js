@@ -38,5 +38,8 @@ const newSchema = new mongoose.Schema({
   
 });
 
+
+
+
 const Exchange = mongoose.model("Exchange", newSchema);
 module.exports = Exchange;
