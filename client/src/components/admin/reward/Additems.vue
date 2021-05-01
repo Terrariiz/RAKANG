@@ -7,14 +7,15 @@
     <form @submit.prevent="Additems">
         <div class="container">
             <h1>เพิ่มรายการของ</h1>
-            <center>
-                </center>
-                 <div class="head1">ใส่รูปมุมมองอื่นๆ</div>
+            
+                 <h3>ใส่รูปของสินค้า</h3>
+                 <hr>
+                 <div class="head1">รูปภาพปก</div>
                     <v-row >
-                        <v-col v-for="(image,index) in imageData" :key="image" md="2" sm="6" >
+                        <v-col class="col-vue" v-for="(image,index) in imageData" :key="image" md="2" sm="6" >
                                 <div  class="preview" >
-                                  <v-img @click="deletex(index)" class="icon" src="../../../../public/image/times-solid.svg"></v-img>
-                                    <center><v-img class="img-size" :src="image"></v-img></center>
+                                    <v-img @click="deletex(index)" class="iconx" src="../../../../public/image/times-solid.svg"></v-img>
+                                    <v-img class="img-size" :src="image"></v-img>
                                     
                                 </div>
                         </v-col>
@@ -193,9 +194,17 @@ import swal from "sweetalert2";
 };
 </script>
 <style scoped>
+.col-vue{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .img-size{
-  height: 150px;
-  width: 120px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   
 
 }
@@ -232,7 +241,8 @@ import swal from "sweetalert2";
   display: none;
 }
 .preview{
-    width: 120px;
+  position: relative;
+  width: 120px;
   height: 150px;
 }
 .form-input {
@@ -274,28 +284,20 @@ import swal from "sweetalert2";
   margin-top:10px;
   text-align: center;
 }
-.icon{
-   position: absolute;
-    top: 0px;
-    right: 0px;
+.preview > .iconx{
+position: absolute;
+  top: -5px;
+  right: -5px;
   height: 15px;
   width: 15px;
   z-index: 2;
   background-color: red;
-  padding: 8px;
+  /* padding: 8px; */
   border-radius: 10px;
 }
-.icon:hover{
+.iconx:hover{
   background-color: #e0e0e0;
   
-}
-
-.preview img {
-  width: 120px;
-  height: 150px;
-  margin-left: 15px;
-  display:none;
-  text-align: center;
 }
 
 
