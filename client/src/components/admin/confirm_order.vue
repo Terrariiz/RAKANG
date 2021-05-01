@@ -118,6 +118,20 @@ export default {
   components: {
     Navbar,
   },
+  data(){
+    return {
+      logs:[]
+    }
+  },
+  created: async function created() {
+    await this.$http.get("/exchangeitem/DetailItem/ShowOrder")
+    .then((res) => {
+      this.logs = res.data
+      console.log(this.logs)
+    }).catch(function(err){
+        console.log(err)
+    })
+  },
 };
 </script>
 
