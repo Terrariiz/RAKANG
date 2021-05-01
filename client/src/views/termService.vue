@@ -3,91 +3,61 @@
     <div>
       <Navbar></Navbar>
     </div>
-    <br><br><br><br><br>
+    <br /><br /><br /><br /><br />
     <div style="margin-left: 10%; margin-right: 10%">
       <h1>ข้อตกลงการใช้งานเว็บไซต์</h1>
       <v-row>
         <v-col cols="12" md="8" sm="8">
-          <div id='1'>
-            <h2>Heading1</h2>
+          <div class='textgroup' id="1">
+            <h3>เว็บไซต์ระฆังธรรม</h3>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit
-              amet, consectetur adipisicing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-              veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-              ex ea commodo consequat.
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit
-              amet, consectetur adipisicing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-              veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-              ex ea commodo consequat.
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit
-              amet, consectetur adipisicing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-              veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-              ex ea commodo consequat.
+              'ทีมงานหนองน้ำเต็มบึง'เป็นเจ้าของ ผู้พัฒนา
+              และผู้ดูแลจัดการเว็บไซต์นี้
+              โดยมีวัตถุประสงค์เพื่อเป็นแหล่งรวบรวมโครงการบริจาคต่างๆ
+              เผยแพร่ข้อมูลด้านหลักธรรมคำสอนของศาสนาพุทธ
+              และข่าวสารเกี่ยวกับการโครงการระดมทุนและงานบุญต่างๆ
+              อีกทั้งยังเป็นการอำนวยความสะดวกแก่ท่านในการบริจาคเงินให้โครงการต่างๆ
             </p>
           </div>
-          <div id='2'>
-            <h2>Heading2</h2>
+          <div class='textgroup' id="2">
+            <h3>เครื่องหมายการค้าและลิขสิทธิ์</h3>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit
-              amet, consectetur adipisicing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-              veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-              ex ea commodo consequat.
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit
-              amet, consectetur adipisicing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-              veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-              ex ea commodo consequat.
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit
-              amet, consectetur adipisicing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-              veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-              ex ea commodo consequat.
-
+              ทีมงานหนองน้ำเต็มบึงเป็นเจ้าของลิขสิทธิ์ข้อมูล ภาพ ข้อความ
+              สื่อโฆษณา และส่วนประกอบอื่นๆที่อยู่บนเว็บไซต์นี้ เช่น
+              เครื่องหมายการค้า สัญลักษณ์ เครื่องหมายบริการ และชื่อทางการค้า
+              โดยห้ามมิให้ ทำซ้ำ คัดลอก ถ่ายสำเนา ดัดแปลง เผยแพร่
+              หรือกระทำการอื่นใด เพื่อเผยแพร่ต่อสาธารณชน หรือเพื่อหาประโยชน์
+              โดยไม่ได้รับการยินยอมเป็นลายลักษณ์อักษรล่วงหน้าจากทีมงานหนองน้ำเต็มบึงและทีมงานในเครือข่าย
+              แล้วแต่กรณี
             </p>
           </div>
-          <div id='3'>
-            <h2>Heading3</h2>
+          <div class='textgroup' id="3">
+            <h3>ข้อมูลต่างๆ บนเว็บไซต์</h3>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit
-              amet, consectetur adipisicing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-              veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-              ex ea commodo consequat.
+              ทีมงานหนองน้ำเต็มบึงดูแลจัดการเว็บไซต์นี้ในประเทศไทย
+              และมิได้ให้คำรับรองว่าข้อมูลที่จัดให้มีในหรือผ่านเว็บไซต์นี้ใช้ได้หรือเหมาะสมในการใช้ในประเทศอื่นๆ
+              หากท่านใช้เว็บไซต์นี้ในประเทศอื่นๆ
+              ท่านมีความรับผิดชอบในการปฏิบัติตามกฎหมายที่ใช้บังคับในประเทศนั้น
+              เนื้อหาในส่วนใดส่วนหนึ่งหรือหน้าใดหน้าหนึ่งของเว็บไซต์นี้
+              อาจระบุข้อตกลงและเงื่อนไขการใช้บริการอื่นที่แยกออกไปต่างหาก
+              ในกรณีที่ข้อตกลงและเงื่อนไขการใช้บริการอื่นและข้อตกลงและเงื่อนไขการใช้บริการนี้
+              มีความขัดแย้งกัน
+              ให้ใช้ข้อตกลงและเงื่อนไขในการใช้บริการที่แยกออกไปนั้น
+              โดยทีมงานขอแนะนำให้ท่านอ่านข้อตกลงและเงื่อนไขการใช้บริการอื่นนั้นก่อนใช้บริการนั้นๆ
+              ทีมงานขอสงวนสิทธิในการนำเสนอ
+              ปรับปรุงและแก้ไขข้อมูลที่ปรากฏบนเว็บไซต์
+              ซึ่งข้อมูลดังกล่าวได้ถูกจัดทำขึ้นโดยมิได้มีจุดประสงค์เพื่อการให้คำแนะนำอย่างผู้เชี่ยวชาญ
+              ทั้งนี้ ทีมงานไม่รับรองถึงความถูกต้อง
+              และเป็นปัจจุบันของข้อมูลต่างๆ ในเว็บไซต์นี้
+            </p>
+          </div>
+          <div class='textgroup' id="4">
+            <h3>กฎหมายที่ใช้บังคับ</h3>
+            <p>
+              การใช้บริการเว็บไซต์นี้หรือการตีความข้อตกลงและเงื่อนไขการใช้บริการเว็บไซต์นี้ให้เป็นไปตามกฎหมายไทย
             </p>
           </div>
         </v-col>
-        <template absolute>
-        <v-col cols="12" md="4" sm="4">
-          <a href='#1'>1</a>
-          <a href='#2'>2</a>
-          <a href='#3'>3</a>
-        </v-col>
-        </template>
       </v-row>
     </div>
     <div>
@@ -104,7 +74,26 @@ export default {
     Navbar,
     Footer,
   },
+  mounted: async function mounted() {
+    await this.onbeforeunload();
+  },
+  methods: {
+    onbeforeunload() {
+      window.scrollTo(0, 0);
+    },
+  },
 };
 </script>
 
-<style></style>
+<style scoped>
+h1 {
+  font-weight: bold;
+}
+h3 {
+  font-weight: bold;
+}
+.textgroup {
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+</style>
