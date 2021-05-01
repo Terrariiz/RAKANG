@@ -291,6 +291,7 @@
       this.imageData.splice(index,1)
       this.test.splice(index,1)
       this.delcount = true
+      this.test.splice(index,1)
       
     },
     async getData(){
