@@ -23,12 +23,12 @@
        <div>
          <v-text-field class="search-doctrine" style="width:30%;" prepend-inner-icon="mdi-magnify" v-model="search" label="ค้นหาหัวข้อ"></v-text-field>
        </div>
-       <p class="notfound" v-if="filteredList.length == 0 && search !== ''">ไม่พบ "{{search.trim()}}"</p>
-       <p class="notfound" v-if="filteredList.length == 0 && search == ''">ไม่มีเนื้อหาในส่วนนี้</p>
+       <p class="notfound" v-if="filteredList.length == 0 && search !== ''"><br><br>ไม่พบ "{{search.trim()}}"<br><br><br><br></p>
+       <p class="notfound" v-if="filteredList.length == 0 && search == ''"><br><br>ไม่มีเนื้อหาในส่วนนี้<br><br><br><br></p>
         <!-- อันใหม่ -->
           <div class="containerx">
             <v-row >
-              <v-col v-for="(news) in filteredListx " :key="news.title" cols="12" md="4" sm="12">
+              <v-col v-for="(news) in filteredList " :key="news.title" cols="12" md="4" sm="12">
                 <div @click="ViewNews(news._id)" class="cardx">
                   
                   <img  :src="news.image">
@@ -59,7 +59,7 @@
                 </div>
               </v-col>
             </v-row>
-            <v-pagination circle :total-visible="7"  v-model="pagination.page" :length="pages"></v-pagination>
+            <v-pagination v-if="pagination.lengthPages != 0" circle :total-visible="7"  v-model="pagination.page" :length="pagination.lengthPages"></v-pagination>
           </div>
        <!-- อันใหม่ -->
         
@@ -91,46 +91,33 @@ export default {
                 data: null,
                 rowsPerPage: 6,
                 page: 1,
+                lengthPages: null,
             },
     };
   },
   computed: {
+    // ค้นหา
     filteredList() {
-      return this.news.filter(news => {
-        var result
-        if(this.selectedCategory == 'ทั้งหมด'){
-          result = news.title.toLowerCase().replace(/\s/g, '').includes(this.search.toLowerCase().trim().replace(/\s/g, ''))
-          return result
-        } else{
-          result = news.categories.includes(this.selectedCategory)
-          if(this.search == ''){
-            return result
-          } else{
-            if(result == true){
+      var newlist = this.news.filter(news => {
+            var result
+            if(this.selectedCategory == 'ทั้งหมด'){
               result = news.title.toLowerCase().replace(/\s/g, '').includes(this.search.toLowerCase().trim().replace(/\s/g, ''))
               return result
-            }
-          }
-        }
-      })
-    },
-    // เปลี่ยนหน้า 
-    pages () {
-            return this.pagination.rowsPerPage ? Math.ceil(this.news.length / this.pagination.rowsPerPage) : 0
-        },
-        filteredListx() {
-            var firstIndex;
-            if (this.pagination.page == 1) {
-                firstIndex = 0;
             } else{
-                firstIndex = (this.pagination.page-1) * this.pagination.rowsPerPage;
+              result = news.categories.includes(this.selectedCategory)
+              if(this.search == ''){
+                return result
+              } else{
+                if(result == true){
+                  result = news.title.toLowerCase().replace(/\s/g, '').includes(this.search.toLowerCase().trim().replace(/\s/g, ''))
+                  return result
+                }
+              }
             }
-            console.log(firstIndex + " firstIndex");
-            var showData = this.news.slice(firstIndex, firstIndex + this.pagination.rowsPerPage);
-            console.log(showData);
-            return showData
-        },
-        // เปลี่ยนหน้า 
+          })
+          newlist = this.split_data(newlist)
+          return newlist
+    },
   },
   mounted: async function mounted() {
     await this.$http.get("/news/ShowListNews")
@@ -170,18 +157,52 @@ export default {
         name: "UserDetailNews",
         params: {id:newsid}
       })
-    }
+    },
+    onbeforeunload() {
+      window.scrollTo(0, 0);
+    },
+    // แบ่งหน้าแสดงข้อมูล
+    split_data(data){
+      var firstIndex;
+      if (this.pagination.page == 1) {
+          firstIndex = 0;
+      } else{
+          firstIndex = (this.pagination.page-1) * this.pagination.rowsPerPage;
+      }
+      console.log(firstIndex + " firstIndex");
+      this.pagination.lengthPages = this.pagination.rowsPerPage ? Math.ceil(data.length / this.pagination.rowsPerPage) : 0
+      var showData = data.slice(firstIndex, firstIndex + this.pagination.rowsPerPage);
+      console.log(showData);
+      return showData
+    },
   },
   if(result){
     console.log(result)
   },
   onbeforeunload() {
   window.scrollTo(0, 0);
-  }
+  },
+  // แบ่งหน้าแสดงข้อมูล
+  split_data(data){
+    var firstIndex;
+    if (this.pagination.page == 1) {
+        firstIndex = 0;
+    } else{
+        firstIndex = (this.pagination.page-1) * this.pagination.rowsPerPage;
+    }
+    console.log(firstIndex + " firstIndex");
+    this.pagination.lengthPages = this.pagination.rowsPerPage ? Math.ceil(data.length / this.pagination.rowsPerPage) : 0
+    var showData = data.slice(firstIndex, firstIndex + this.pagination.rowsPerPage);
+    console.log(showData);
+    return showData
+  },
 }
 </script>
 
 <style>
+/* .notfound{
+  padding: 25px 50px 240px;
+} */
 .title-font-size{
   font-size: 21px;
 }

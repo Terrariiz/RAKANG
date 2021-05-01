@@ -6,7 +6,7 @@
         <v-toolbar-items class="hidden-sm-and-down" stlye="color: #CFD6EA;">
           
           <v-btn color="#CFD6EA" text to="/home">
-            <img style="width:50px; height:50px;" src="../../../public/image/logo.png">
+            <img style="width:50px; height:50px;" src="../../../public/image/logo2.png">
           </v-btn>
           <v-btn color="#444" text to="/campaign">
             แคมเปญ
@@ -262,7 +262,7 @@
       <v-app-bar fixed color='#CFD6EA'>
         <v-toolbar-items class="hidden-sm-and-down">
           <v-btn color="#CFD6EA" text to="/home">
-            <img style="width:50px; height:50px;" src="../../../public/image/logo.png">
+            <img style="width:50px; height:50px;" src="../../../public/image/logo2.png">
           </v-btn>
           <v-btn color="#444" text to="/campaign">
             แคมเปญ
