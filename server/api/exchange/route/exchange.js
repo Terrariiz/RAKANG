@@ -17,7 +17,7 @@ const upload = multer({storage: storage }).array("multi-files",10);
 
 router.post("/addnewItem", upload, exchangeController.addnewItem);
 router.get("/ShowListItem", exchangeController.ShowListItem);
-router.get("/DetailItem/ShowOrder", exchangeController.ShowOrder);
+router.get("/ShowOrder", exchangeController.ShowOrder);
 router.get("/DetailItem/:id", exchangeController.DetailItem);
 router.put("/EditItem/:id/edit",upload, exchangeController.EditItem);
 router.delete("/DeleteItem/:id", exchangeController.DeleteItem);

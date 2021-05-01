@@ -7,66 +7,55 @@
             <div class="small-container single-product">
                 <div class="row">
                     <div class="col-2">
-                        <img src="" width="100%" id="product-img">
+                        <img :src="items.galleryimage[index_for_change].image" width="100%" id="product-img">
                         <div class="small-img-row">
-                            <div class="small-img-col">
-                                <img src="" width="100%" class="small-img">
-                            </div>
-
-                            <div class="small-img-col">
-                                <img src="" width="100%" class="small-img">
-                            </div>
-
-                            <div class="small-img-col">
-                                <img src="" width="100%" class="small-img"> 
-                            </div>
-
-                            <div class="small-img-col">
-                                <img src="" width="100%" class="small-img">
+                            <div v-for="(image_item,index) in items.galleryimage" :key="image_item" class="small-img-col">
+                                <img v-if="index == 0" :id="index" @click="changeImage(index)" :src="image_item.image" width="100%" class="small-img selected-image">
+                                <img v-if="index != 0" :id="index" @click="changeImage(index)" :src="image_item.image" width="100%" class="small-img">
                             </div>
                         </div>
                     </div>
                     <div class="col-2">
                         <p>แลกของรางวัล/ชื่อของ</p>
                         <h1>{{items.name}}</h1>
-                        <h4>{{items.cost}}</h4>
-                        <h3>detail</h3>
+                        <h4>แต้มที่ใช้ : {{items.cost}}  แต้ม</h4>
+                        <h3>รายละเอียด</h3>
                         <p>{{items.detail}}</p>
-                        <a href="" class="btn">Buy</a>
+                        <a href="" class="btn">แลก</a>
                     </div>
                 </div>
             </div>
             <!-- title  -->
             <div class="small-container">
                 <div class="row row-2">
-                    <h2>Other Product</h2>
-                    <p>View more</p>
+                    <h2>ของรางวัลอื่นๆ</h2>
+                    <a href="/items">View more</a>
                 </div>
             </div>
             <br>
             <!-- featured product  -->
             <div class="small-container">
                 <div class="row">
+                    <div v-for="otheritem in otheritems" :key="otheritem" class="col-4">
+                        <img :src="otheritem.galleryimage[0].image">
+                        <h4>{{otheritem.name}}</h4>
+                        <p>ราคา {{otheritem.cost}} แต้ม</p>
+                    </div>
+                     <!-- <div class="col-4">
+                        <img :src="otheritems[1].galleryimage[0].image">
+                        <h4>{{otheritems[1].name}}</h4>
+                        <p>ราคา {{otheritems[1].cost}} แต้ม</p>
+                    </div>
                     <div class="col-4">
-                        <img src="">
-                        <h4>ชื่อของ</h4>
-                        <p>ราคา 500 แต้ม</p>
-                    </div>
-                     <div class="col-4">
-                        <img src="">
-                        <h4>ชื่อของ</h4>
-                        <p>ราคา 500 แต้ม</p>
-                    </div>
-                     <div class="col-4">
-                        <img src="">
-                        <h4>ชื่อของ</h4>
-                        <p>ราคา 500 แต้ม</p>
-                    </div>
-                     <div class="col-4">
-                        <img src="">
-                        <h4>ชื่อของ</h4>
-                        <p>ราคา 500 แต้ม</p>
-                    </div>
+                        <img :src="otheritems[2].galleryimage[0].image">
+                        <h4>{{otheritems[2].name}}</h4>
+                        <p>ราคา {{otheritems[2].cost}} แต้ม</p>
+                    </div> -->
+                    <!-- <div class="col-4">
+                        <img :src="otheritems[3].galleryimage[0].image">
+                        <h4>{{otheritems[3].name}}</h4>
+                        <p>ราคา {{otheritems[3].cost}} แต้ม</p>
+                    </div> -->
                 </div>
             </div>
 
@@ -80,13 +69,36 @@
     export default {
         data (){
       return {
-        items : []
+        items : [],
+        otheritems: [],
+        index_for_change: 0,
+        elementIdSelected: 0,
         }
     },
         components: {
       Navbar
         },
         methods: {
+            changeImage(index){
+                var element = document.getElementById(index);
+                var element2 = document.getElementById(this.elementIdSelected)
+                element2.classList.remove("selected-image");
+                element.classList.add("selected-image");
+                this.index_for_change = index
+                this.elementIdSelected = index
+            },
+            randomOtherItem(){
+                var index = this.otheritems.findIndex(this.findSameItem)
+                this.otheritems.splice(index,1)
+                if(this.otheritems.length > 4){
+                    this.otheritems = this.otheritems.slice(4,this.otheritems.length-4)
+                }
+            },
+            findSameItem(value){
+                if(value._id == this.items._id){
+                    return value
+                }
+            },
             // function () {
             // zoom(".xzoom, .xzoom-gallery").xzoom({
             //     zoomWidth: 400,
@@ -96,11 +108,19 @@
             //  },
         },
         mounted: async function mounted(){
-       await this.$http.get("/exchangeitem/DetailItem" +this.$route.params.id)
+       await this.$http.get("/exchangeitem/DetailItem/" +this.$route.params.id)
        .then((res) => {
        this.items = res.data;
        })
        .catch(function(err){
+        console.log(err)
+      })
+      await this.$http.get("/exchangeitem/ShowListItem")
+      .then((res) => {
+      this.otheritems = res.data;
+      this.randomOtherItem()
+       })
+      .catch(function(err){
         console.log(err)
       })
     },
@@ -109,9 +129,16 @@
 
 
 <style scoped>
+.selected-image{
+    border: 5px solid red;
+}
 a{
     text-decoration: none;
     color: #555;
+}
+/* mouse over link */
+a:hover {
+  color: hotpink;
 }
 p{
     color: #555;
