@@ -7,6 +7,7 @@
     <div id ='headaddnews'>
         <div class="text-center">
             <v-btn rounded color="primary" dark to = "/admin/additems">เพิ่มของรางวัล</v-btn>
+            <v-btn rounded color="primary" dark to = "/admin/confirm-order">ยืนยันคำสั่งการแลกของ</v-btn>
         </div>
     </div>
     <v-container>

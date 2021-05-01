@@ -17,8 +17,6 @@ cloudinary.config({
 ////////////////////////////////////ยังไม่เสร็จ//////////////////////////////////
 exports.addnewItem = async(req,res) => {
   try{  
-    var complete = true 
-    console.log(req.body) 
     var file = req.files
     const add = new Exchange({
       name   : req.body.name,
@@ -27,18 +25,23 @@ exports.addnewItem = async(req,res) => {
       cost   : req.body.cost,
     });
     var data = await add.save()
-    if(req.files){
-      console.log(file)
+    if(file){
       file.forEach(element => {
         console.log(element)
-        cloudinary.uploader.upload(element.path, function(err, result){
+         cloudinary.uploader.upload(element.path, async function(err, result){
               var add = {image : result.url, cloudinary_id : result.public_id}
               data.galleryimage.push(add)
               data.save()
+              await res.status(201).json({ data });  
+              
         })
-      });  
+        
+        
+      });
+ 
     }  
-    res.status(201).json({ data });
+
+
   } catch (err) {
     res.status(400).json({ err: err });
     console.log(err)
@@ -181,7 +184,7 @@ exports.EditItem = async(req,res) =>{
 exports.Purchase = function(req,res){
   try{
     console.log(req.body)
-    var NumOfPurchase = req.body.Number
+    var NumOfPurchase = 1
     const NewExchangeLog = new ExchangeLog({
       locationdetail   : req.body.locationdetail,
       District : req.body.District,
