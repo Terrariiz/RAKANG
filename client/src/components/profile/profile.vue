@@ -231,6 +231,7 @@
               </v-tab>
 
               <v-tab-item>
+                <v-card flat>
                 <v-container>
                   <div class="head-profile">โปรไฟล์ของฉัน</div>
                   <center>
@@ -273,9 +274,10 @@
                     </div>
                   </div>
                 </v-container>
+                </v-card>
               </v-tab-item>
               <v-tab-item>
-                <v-card>
+                <v-card flat>
                   <v-container>
                     <div class="head-profile">ประวัติการบริจาค</div>
                     <v-card>
