@@ -35,29 +35,9 @@
           <div class="textgroup" id="2">
             <h3>การใช้แต้มสะสมแลกของรางวัล</h3>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit
-              amet, consectetur adipisicing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-              veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-              ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur
-              adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-              exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat. Lorem ipsum dolor sit amet, consectetur adipisicing
-              elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-              aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-              laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor
-              sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-              veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-              ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur
-              adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-              exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat.
+              ผู้ใช้งานสามารถนำแต้มสะสมที่ได้จากการบริจาคเงินให้แคมเปญต่างๆมาแลกเป็นของรางวัลได้ที่หน้าแลกของรางวัล
+              เมื่อผู้ใช้งานสามารถเลือกของรางวัลได้แล้ว ระบบจะเข้าสู่หน้ากรอกข้อมูลที่อยู่ในการจัดส่งของรางวัล เมื่อผู้ใช้งานกรอกข้อมูลเสร็จสิ้นและกดยืนยัน
+              ระบบจะส่งข้อมูลไปให้ผู้ดูแลทราบ หลังจากให้ผู้ดูแลยืนยันการแลกของรางวัลของผู้ใช้งาน ทางทีมงานก็จะจัดส่งของรางวัลให้ผู้ใช้งานตามที่อยู่ที่ได้รับต่อไป
             </p>
           </div>
           <div class="textgroup" id="3">
