@@ -46,10 +46,29 @@
                     {{ item.remain }}
                 </td>
                 <td>
-                  <v-btn style="margin-right:3%;" @click="Viewitem(item._id)">view</v-btn>
-                  <v-btn style="margin-right:3%;" @click="ViewLogitem(item._id)">Log</v-btn>
-                  <v-btn style="margin-right:3%;" @click="Edititem(item._id)">Edit</v-btn>
-                  <v-btn @click="Deleteitem(item._id)">Delete</v-btn>
+                  <v-row>
+                      <v-col class="ml-auto" md="12" sm="6" >
+                        <div>
+                          <span>
+                            <v-btn style="margin:3%;" @click="Viewitem(item._id)">view</v-btn>
+                          </span>
+                          <span id="noti">
+                            <a :href="'/admin/Detailitems/'+item._id" class="notification">
+                              <span>Order</span>
+                              <span v-if="item.waitingorder.length > 0" class="badge">{{item.waitingorder.length}}</span>
+                            </a>
+                            <!-- <v-btn style="margin:3%;" @click="ViewLogitem(item._id)">Log</v-btn>
+                            <a class='notifi'>3</a> -->
+                          </span>
+                          <span>
+                            <v-btn style="margin:3%;" @click="Edititem(item._id)">Edit</v-btn>
+                          </span>
+                          <span>
+                            <v-btn @click="Deleteitem(item._id)">Delete</v-btn>
+                          </span>
+                        </div>
+                      </v-col>
+                  </v-row>
                 </td>
               </tr>
             </tbody>
@@ -88,9 +107,9 @@ export default {
       Viewitem(itemsid){
         this.$router.push({ name: 'Detailitems' , params: {id : itemsid}})
         },
-        // ViewLogitem(itemsid){
-        // this.$router.push({ name: 'LogDonate' , params: {id : itemsid}})
-        // },
+        ViewLogitem(itemsid){
+        this.$router.push({ name: 'Detailitems' , params: {id : itemsid}})
+        },
         Edititem(itemsid){
         this.$router.push({ name: 'Edititems' , params: {id : itemsid}})
       },
@@ -134,6 +153,40 @@ export default {
 }
 </script>
 <style scoped>
+.notification {
+  background-color: #555;
+  color: white;
+  text-decoration: none;
+  padding: 8px 20px;
+  position: relative;
+  display: inline-block;
+  border-radius: 5px;
+}
+
+.notification:hover {
+  background: red;
+}
+
+.notification .badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  background: red;
+  color: white;
+}
+#noti {
+  display: relative;
+}
+.notifi{
+  position: absolute;
+  top: 18px;
+  right: 375px;
+  background-color: red;
+  color: aliceblue;
+  z-index: 99;
+}
   #table{
         text-align: left;
         

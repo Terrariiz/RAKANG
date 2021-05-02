@@ -9,10 +9,11 @@
             <div class="small-container single-product">
                 <div class="row">
                     <div class="col-2">
-                        <img :src="item.galleryimage[0].image" width="100%" id="product-img">
+                        <img :src="item.galleryimage[elementIdSelected].image" width="100%" id="product-img">
                         <div class="small-img-row">
-                            <div v-for="image_item in item.galleryimage" :key="image_item" class="small-img-col">
-                                <img :src="image_item.image" width="100%" class="small-img">
+                            <div v-for="(image_item,index) in item.galleryimage" :key="image_item" class="small-img-col">
+                                <img v-if="index == 0" :id="index" @click="changeImage(index)" :src="image_item.image" width="100%" class="small-img selected-image">
+                                <img v-if="index != 0" :id="index" @click="changeImage(index)" :src="image_item.image" width="100%" class="small-img">
                             </div>
                         </div>
                     </div>
@@ -38,6 +39,8 @@ export default {
     data (){
       return {
         item: null,
+        index_for_change: 0,
+        elementIdSelected: 0,
       }
     },
     components:{
@@ -60,12 +63,23 @@ export default {
         });
     },
     methods: {
-            
+        changeImage(index){
+                var element = document.getElementById(index);
+                var element2 = document.getElementById(this.elementIdSelected)
+                element2.classList.remove("selected-image");
+                element.classList.add("selected-image");
+                this.index_for_change = index
+                this.elementIdSelected = index
+            },
     },
 };
 </script>
 
 <style scoped>
+.pointer {cursor: pointer;}
+.selected-image{
+    border: 5px solid red;
+}
 .back-btn{
     position: absolute;
 }

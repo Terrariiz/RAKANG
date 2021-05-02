@@ -30,9 +30,9 @@
                 <h1>{{ campaign.name }} </h1>
               <div>
                 <span class="icon-people"
-                      ><i class="fa fa-eye"></i> {{ campaign.view }}</span
-                    >
+                      ><i class="fa fa-eye"></i> {{ campaign.view }}</span>
               </div>
+              
               <div >
                 <v-row>
                   <v-col  style="text-align:left;" cols="12" md="6">
