@@ -4,71 +4,6 @@
       <Navbar></Navbar>
     </div>
     <br><br><br>
-        <!-- <div class="container">
-            <div class="small-container single-product">
-                <div class="row">
-                    <div class="col-2">
-                                
-                        <img src="../../../public/image/bubble.png" width="100%" id="product-img">
-                        <div class="small-img-row">
-
-                            <div class="small-img-col">
-                                <img src="../../../public/image/bubble.png" width="100%" class="small-img">
-                            </div>
-
-                            <div class="form-input">
-                                <label for="file-ip-1">เลือกรูปภาพ</label>
-                                <v-file-input style="display:none;" multiple v-model="file" type="file" id="file-ip-1" accept="image/*" @change="onFileSelected"></v-file-input>
-                            </div>
-
-                            <div class="small-img-col">
-                                <img src="" width="100%" class="small-img"> 
-                            </div>
-
-                            <div class="small-img-col">
-                                <img src="" width="100%" class="small-img">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <p>Items/ชื่อของ</p>
-                        <h4>ชื่อของ</h4>
-                         <v-text-field
-                                solo
-                                label="ชื่อสินค้า"
-                                required
-                                ></v-text-field>
-                        <h4>ราคา</h4>
-                         <v-text-field
-                                solo
-                                label="ราคา"
-                                required
-                                ></v-text-field>
-                        <h4>รายละเอียด</h4>
-                         <v-text-field
-                                solo
-                                label="รายละเอียด"
-                                required
-                                ></v-text-field>
-                        <p>บอกรายละเอียด</p>
-                         <v-text-field
-                                solo
-                                label="ชื่อสินค้า"
-                                required
-                                ></v-text-field>
-                        <a href="" class="btn">ยกเลิก</a><a href="" class="btn greenx">ยืนยัน</a>
-                    </div>
-                </div>
-            </div>
-           
-        
-        </div> -->
-        <v-overlay :value="isloading">
-        <v-progress-circular
-          indeterminate
-          size="64"
-        ></v-progress-circular>
-      </v-overlay>
         <form @submit.prevent="Edititems">
         <div class="container">
             <h1>แก้ไขรายการของ</h1>
@@ -80,7 +15,7 @@
                     <v-row >
                         <v-col v-for="(image,index) in imageData" :key="image" md="2" sm="6" >
                                 <div  class="preview" >
-                                  <v-img @click="deletex(index)" class="icon" src="../../../../public/image/times-solid.svg"></v-img>
+                                  <v-img @click="deletex(index)" class="iconx" src="../../../../public/image/times-solid.svg"></v-img>
                                     <v-img class="img-size" :src="image"></v-img>
                                     
                                 </div>
@@ -321,9 +256,19 @@
 
 
 <style scoped>
+.col-vue{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .img-size{
-  height: 150px;
-  width: 120px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+
 }
   .container{
       width: 80%;
@@ -358,7 +303,8 @@
   display: none;
 }
 .preview{
-    width: 120px;
+  position: relative;
+  width: 120px;
   height: 150px;
 }
 .form-input {
@@ -400,28 +346,22 @@
   margin-top:10px;
   text-align: center;
 }
-.icon{
-  position: absolute;
+.preview > .iconx{
+position: absolute;
+  top: -5px;
+  right: -5px;
   height: 15px;
   width: 15px;
-  right:60px;
-  top:7px;
   z-index: 2;
   background-color: red;
-  padding: 8px;
+  /* padding: 8px; */
   border-radius: 10px;
 }
-.icon:hover{
+.iconx:hover{
   background-color: #e0e0e0;
+  
 }
 
-.preview img {
-  width: 120px;
-  height: 150px;
-  margin-left: 15px;
-  display:none;
-  text-align: center;
-}
 
 @media (max-width: 767px) {
   .project-content {
@@ -439,6 +379,8 @@
   .form-input-preview img {
   margin-left: 0px;
 }
+
+
   
   
 }

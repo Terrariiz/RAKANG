@@ -21,7 +21,7 @@
                         <h4>แต้มที่ใช้ : {{items.cost}}  แต้ม</h4>
                         <h3>รายละเอียด</h3>
                         <p>{{items.detail}}</p>
-                        <a href="" class="btn">แลก</a>
+                        <a :href="'/items/'+ items._id + '/' + userID + '/fill-address'" class="btn">แลก</a>
                     </div>
                 </div>
             </div>
@@ -81,6 +81,7 @@
         otheritems: [],
         index_for_change: 0,
         elementIdSelected: 0,
+        userID: localStorage.getItem('user_id'),
         }
     },
         components: {
@@ -186,7 +187,7 @@ a{
     color: #555;
 }
 /* mouse over link */
-a:hover {
+.row > a:hover {
   color: hotpink;
 }
 p{

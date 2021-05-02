@@ -63,6 +63,8 @@ const termservice            = () => import('@/views/termService')
 const items                  = () => import('@/views/items')
 const userDetailitems        = () => import('@/views/userDetailitems')
 const contact                = () => import('@/views/contact')
+const fill_address           = () => import('@/views/fill_address')
+
 // ----------------------------หน้า dashboard-------------------------------------------------
 const dashboard_home          = () => import('@/components/admin/dashboard/home')
 const dashboard_list_campaign = () => import('@/components/admin/dashboard/list_campaign')
@@ -400,6 +402,14 @@ const routes = [
     path:'/items/:id',
     name: 'userDetailitems',
     component: userDetailitems,
+    meta: {
+      requiresUserAuth: true
+    }
+  },
+  {
+    path:'/items/:id/:userID/fill-address',
+    name: 'fillAddress',
+    component: fill_address,
     meta: {
       requiresUserAuth: true
     }
