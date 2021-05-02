@@ -1,13 +1,19 @@
 const express = require("express");
 const router = express.Router();
-const DashboardController = require("../controller/dashboarddontroller");
+const DashboardController = require("../controller/dashboardcontroller");
 
 
-router.get("/DoctrineGotFav/", DashboardController.DoctrineGotFav);
+router.get("/TotalDonatePerUser/", DashboardController.TotalDonatePerUser);
 router.get("/TotalDonatePerCampaign/", DashboardController.TotalDonatePerCampaign);
-router.get("/TotalExchangePerReward/", DashboardController.TotalExchangePerReward);
-router.get("/TotalView_Campaign/", DashboardController.TotalView_Campaign);
-router.get("/TotalView_Doctrine/", DashboardController.TotalView_Doctrine);
-router.get("/TotalView_News/", DashboardController.TotalView_News);
+router.get("/DonatePerDay/", DashboardController.DonatePerDay);
+router.get("/DoctrineperType/", DashboardController.DoctrineperType);
+router.get("/NewsPerType/", DashboardController.NewsPerType);
+router.get("/CampaignPerType/", DashboardController.CampaignPerType);
+router.get("/ExchangePerDay/", DashboardController.ExchangePerDay);
+router.get("/CountExchange_PerItem/", DashboardController.CountExchange_PerItem);
+
+router.get("/Getdata_Campaign/", DashboardController.Getdata_Campaign);
+router.get("/Getdata_Doctrine", DashboardController.Getdata_Doctrine);
+router.get("/Getdata_News/", DashboardController.Getdata_News);
 
 module.exports = router;

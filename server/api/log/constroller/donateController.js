@@ -47,7 +47,7 @@ exports.donatelogcampaign = async function(req,res){
 exports.CheckDonate = async function(req, res){
   try{
     var result 
-    await User.findById(req.params.id).populate("donatelog").exec(function(err, list){
+    await User.findById(req.params.id).populate("donatelog").exec(async function(err, list){
       if(err){
         console.log(err)
       }else{
