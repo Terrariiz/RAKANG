@@ -2,9 +2,17 @@
   <div>
     <div>
       <Navbar></Navbar>
-    </div>   
-    <br><br><br>
-     <v-overlay :value="isloading">
+    </div>
+    <br /><br /><br />
+    <v-overlay :value="isloading">
+      <v-progress-circular
+      indeterminate
+        size="100"
+        width="7"
+        color="green"
+      ></v-progress-circular>
+    </v-overlay>
+          <v-overlay :value="isupload">
         <v-progress-circular
         indeterminate
          size="100"
@@ -12,39 +20,22 @@
           color="green"
         ></v-progress-circular>
       </v-overlay>
-      <v-overlay :value="isupload">
-        <v-progress-circular
-        indeterminate
-         size="100"
-          width="7"
-          color="green"
-        ></v-progress-circular>
-      </v-overlay>
-      <v-container>
-        <v-row>
-            <v-col class="pad0"  cols="12" md="4" sm="12"> <!-- class="name-picture" -->
-               <v-row >
-                 <v-card-text  class="border-cardtext" >
-                 <v-col class="name-pic-pro"  cols="12" md="12" sm="12">
-                    <div class="edit-profile">
-                  
-                </div>
-              <center><div v-if="selected == 'โปรไฟล์' || selected == 'ประวัติการบริจาค' || selected =='บุ๊คมาค'" class="image-profile">
-                <img  :src="
-                                Profile.image
-                              ">
-              </div></center>
-
-              <center><div v-if="selected == 'แก้ไขโปรไฟล์'" class="image-profile">
-                <!-- <img src="https://media.wired.com/photos/598e35fb99d76447c4eb1f28/master/pass/phonepicutres-TA.jpg"> -->
-                 <center>
-                <v-div
-                  class="base-image-input"
-                  :style="{ 'background-image': `url(${imageData})` }"
-                  @click="chooseImage"
-                >
-                  <span v-if="!imageData" class="placeholder"
-                    >Choose an Image</span
+    <v-container>
+      <v-row>
+        <v-col class="pad0" cols="12" md="4" sm="12">
+          <!-- class="name-picture" -->
+          <v-row>
+            <v-card-text class="border-cardtext">
+              <v-col class="name-pic-pro" cols="12" md="12" sm="12">
+                <div class="edit-profile"></div>
+                <center>
+                  <div
+                    v-if="
+                      selected == 'โปรไฟล์' ||
+                        selected == 'ประวัติการบริจาค' ||
+                        selected == 'บุ๊คมาค'
+                    "
+                    class="image-profile"
                   >
                     <img :src="Profile.image" />
                   </div>
@@ -133,7 +124,7 @@
                         single-line
                         solo
                         onkeypress="return event.charCode != 32"
-                        v-model="Profile.firstname"
+                        v-model="editfirstname"
                         :rules="firstnameRules"
                         required
                       ></v-text-field>
@@ -144,7 +135,7 @@
                         single-line
                         solo
                         onkeypress="return event.charCode != 32"
-                        v-model="Profile.lastname"
+                        v-model="editlastname"
                         :rules="lastnameRules"
                         required
                       ></v-text-field>
@@ -398,6 +389,8 @@ export default {
         newimage: null,
         oldimage: "",
       },
+      editfirstname:"",
+      editlastname:"",
 
       emailRules: [
         (v) => !!v || "Email is required!",
@@ -467,6 +460,8 @@ export default {
       .get("/user/" + id)
       .then((res) => {
         this.Profile = res.data;
+        this.editfirstname = this.Profile.firstname,
+        this.editlastname = this.Profile.lastname,
         this.dataEdit.oldimage = res.data.image;
         this.imageData = res.data.image;
 
@@ -551,8 +546,8 @@ export default {
     async EditProfile() {
       try {
         var formData = new FormData();
-        formData.append("firstname", this.Profile.firstname);
-        formData.append("lastname", this.Profile.lastname);
+        formData.append("firstname", this.editfirstname);
+        formData.append("lastname", this.editlastname);
         formData.append("birthdate", this.Profile.birthdate);
         formData.append("phone", this.Profile.phone);
 
@@ -580,7 +575,8 @@ export default {
               this.isupload = true
               this.$http.put("/user/" + id + "/editProfile", formData, )
               .then(() => {
-                        this.$router.push("/profile");
+                this.isupload = false
+                        // this.$router.push("/profile");
                         location.reload();
                         swal.fire(
                           "Saved!",
