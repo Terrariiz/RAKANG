@@ -4,6 +4,12 @@
       <Navbar></Navbar>
     </div>
     <br><br>
+    <v-overlay :value="isloading">
+        <v-progress-circular
+          indeterminate
+          size="64"
+        ></v-progress-circular>
+      </v-overlay>
     <div id ='headaddnews'>
         <div class="text-center">
             <v-btn rounded color="primary" dark to = "/admin/additems">เพิ่มของรางวัล</v-btn>
@@ -79,13 +85,15 @@ export default {
     name : "Listitems",
      data (){
       return {
-        items : []
+        items : [],
+        isloading:true,
         }
     },
      mounted: async function mounted(){
       await this.$http.get("/exchangeitem/ShowListItem")
       .then((res) => {
       this.items = res.data;
+      this.isloading = false
        })
       .catch(function(err){
         console.log(err)

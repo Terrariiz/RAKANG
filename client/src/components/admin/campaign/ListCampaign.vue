@@ -4,6 +4,12 @@
       <Navbar></Navbar>
     </div>
     <br><br>
+    <v-overlay :value="isloading">
+        <v-progress-circular
+          indeterminate
+          size="64"
+        ></v-progress-circular>
+      </v-overlay>
     <div id ='headaddnews'>
         <div class="text-center">
           
@@ -75,13 +81,15 @@ import moment from "moment";
     name : "ListCampaign",
     data (){
       return {
-        campaigns : []
+        campaigns : [],
+        isloading:true,
         }
     },
     mounted: async function mounted(){
       await this.$http.get("/campaign/ShowListCampaign")
       .then((res) => {
         this.campaigns = res.data;
+        this.isloading = false
         this.campaigns.sort(function(a, b){
             var dateA = new Date(a.startdate), dateB = new Date(b.startdate);
             return dateB -dateA;

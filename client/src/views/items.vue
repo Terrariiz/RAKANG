@@ -3,6 +3,12 @@
          <div>
       <Navbar></Navbar>
     </div>
+    <v-overlay :value="isloading">
+        <v-progress-circular
+          indeterminate
+          size="64"
+        ></v-progress-circular>
+      </v-overlay>
         <h1 >items</h1>
         <section id="products" class="products py-5">
   
@@ -43,13 +49,15 @@ export default {
     name : "Listitems",
      data (){
       return {
-        items : []
+        items : [],
+        isloading:true,
         }
     },
      mounted: async function mounted(){
       await this.$http.get("/exchangeitem/ShowListItem")
       .then((res) => {
       this.items = res.data;
+      this.isloading = false
        })
       .catch(function(err){
         console.log(err)

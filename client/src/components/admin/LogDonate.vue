@@ -4,6 +4,12 @@
       <Navbar></Navbar>
     </div>
     <br><br>
+    <v-overlay :value="isloading">
+        <v-progress-circular
+          indeterminate
+          size="64"
+        ></v-progress-circular>
+      </v-overlay>
     <h1>Log Donate Admin</h1>
     <v-container >
       <v-card>
@@ -38,6 +44,7 @@ export default {
       return {
         loguser: [],
         search: '',
+        isloading:true,
         headers: [
           {text: 'ชื่อผู้บริจาค',value: 'UserName',},
           { text: 'จำนวนเงินที่บริจาค(บาท)', value: 'amount' },
@@ -52,6 +59,7 @@ export default {
       .get("donatelog/donatelogcampaign/" + id)
       .then((res) => {
         this.loguser = res.data.donatelist;
+        this.isloading = false
         var i = 0
         for(this.loguser[i];;i++){
             this.loguser[i].date = moment(this.loguser[i].date).format(" DD-MM-YY HH:mm A");

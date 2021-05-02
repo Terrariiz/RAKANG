@@ -27,7 +27,12 @@
     </v-container>    -->
 
     <!-- อันใหม่  -->
-
+    <v-overlay :value="isloading">
+        <v-progress-circular
+          indeterminate
+          size="64"
+        ></v-progress-circular>
+      </v-overlay>
     <v-container>
       <!-- tablist -->
       <v-card color="basil">
@@ -89,6 +94,7 @@ export default {
       User: [],
       search: "",
       tab: 0,
+      isloading:true,
 
       headers: [
         { text: "ลำดับ", value: "Rank" },
@@ -104,6 +110,7 @@ export default {
       .get("/user/RankList")
       .then((res) => {
         this.User = res.data;
+        this.isloading = false
         console.log(res.data);
       })
       .catch(function(err) {

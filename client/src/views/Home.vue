@@ -3,7 +3,12 @@
     <div>
       <Navbar></Navbar>
     </div>
-    
+     <v-overlay :value="isloading">
+        <v-progress-circular
+          indeterminate
+          size="64"
+        ></v-progress-circular>
+      </v-overlay>
     <section >
       <div class="header"></div>
       <div class="text-box">
@@ -60,7 +65,7 @@
       
 
       <!--  -->
-     
+    
       <div v-if="newcampaign != null" class="ytube">
         <v-row >
           <v-col class="headcam" cols="12" md="5">
@@ -188,6 +193,10 @@ export default {
       news:null,
       doctrine:null,
       show: false,
+      isloading: true,
+      zone1: false,
+      zone2: false,
+      zone3: false,
       
     };
   },
@@ -199,7 +208,8 @@ export default {
         if(res.data != null)
         {console.log(res.data);
         this.newcampaign = res.data[0];
-        if(this.newcampaign != null)
+        this.zone1 = true
+        console.log(this.zone1)
         await countapi.get(this.newcampaign.count_api_namespace, this.newcampaign.count_api_key).then((result) => { 
                     this.newcampaign['view'] = result.value
                 });
@@ -228,7 +238,9 @@ export default {
     await this.$http
       .get("/news/ShowListNews")
       .then(async (res) => {
-        this.news = res.data;
+        this.news = res.data; 
+        this.zone2 = true
+        console.log(this.zone2)
         var i = 0
         this.news.sort(function(a, b){
             return new Date(b.date) - new Date(a.date);
@@ -238,6 +250,7 @@ export default {
               this.news[i]['view'] = result.value
           });
         }
+       
       })
        .catch(function(err) {
         console.log(err);
@@ -246,16 +259,20 @@ export default {
       .get("/doctrine/ShowListDoctrine")
       .then(async (res) =>{
         this.doctrine = res.data;
+        this.zone3 = true
+        console.log(this.zone3)
         for (var i = 0; i<this.doctrine.length; i++) {
         await countapi.get(this.doctrine[i].count_api_namespace, this.doctrine[i].count_api_key).then((result) => { 
               this.doctrine[i]["view"] = result.value
               console.log(result.value)
           });
         }
+        
       })
       .catch(function(err){
       console.log(err);
       });
+    await this.loading()
     await this.onbeforeunload() 
   },
     
@@ -282,6 +299,11 @@ export default {
         name: "UserDetailNews",
         params: {id:newsid}
       })
+    },
+    loading(){
+      if(this.zone1 && this.zone2 && this.zone3){
+        this.isloading = false
+      }
     },
     onbeforeunload() {
     window.scrollTo(0, 0);

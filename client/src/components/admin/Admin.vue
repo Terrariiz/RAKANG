@@ -4,6 +4,12 @@
       <Navbar></Navbar>
     </div>
     <br /><br /><br />
+    <!-- <v-overlay :value="isloading">
+        <v-progress-circular
+          indeterminate
+          size="64"
+        ></v-progress-circular>
+      </v-overlay> -->
     <h1>Dashboard</h1>
     <v-container>
       <v-card flat class="py-12">
@@ -79,6 +85,7 @@ export default {
       stopDate: "2021-05-31",
       date: [],
       dataTest: [],
+      // isloading:true,
       test1: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
       test2: [30, 40, 45, 50, 49, 60, 70, 91],
       options: {
@@ -143,6 +150,7 @@ export default {
   created: async function created() {
     var date_now = new Date();
     this.startDate = date_now.toISOString().substr(0, 10);
+    // this.isloading = false
     for (var i = 0; ; i++) {
       if (this.startDate < this.stopDate) {
         this.date.push(date_now.toISOString().substr(0, 10));

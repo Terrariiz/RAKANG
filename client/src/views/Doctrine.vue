@@ -3,6 +3,12 @@
     <div>
       <Navbar></Navbar>
     </div>
+    <v-overlay :value="isloading">
+        <v-progress-circular
+          indeterminate
+          size="64"
+        ></v-progress-circular>
+      </v-overlay>
     <v-container class="container-news">
       <section class="header">
         <h1>หลักธรรม</h1>
@@ -146,6 +152,7 @@ export default {
       token: null,
       search: "",
       selectedCategory: "ทั้งหมด",
+      isloading:true,
       categories: [
         "ทั้งหมด",
         "บทสวดมนต์",
@@ -248,7 +255,7 @@ export default {
       .get("/doctrine/ShowListDoctrine")
       .then(async (res) => {
         this.doctrines = res.data;
-
+        this.isloading = false
         var i = 0;
         var doc;
 
