@@ -10,7 +10,6 @@ router.get("/DoctrineperType/", DashboardController.DoctrineperType);
 router.get("/NewsPerType/", DashboardController.NewsPerType);
 router.get("/CampaignPerType/", DashboardController.CampaignPerType);
 router.get("/ExchangePerDay/", DashboardController.ExchangePerDay);
-router.get("/CountExchange_PerItem/", DashboardController.CountExchange_PerItem);
 
 router.get("/Getdata_Campaign/", DashboardController.Getdata_Campaign);
 router.get("/Getdata_Doctrine", DashboardController.Getdata_Doctrine);

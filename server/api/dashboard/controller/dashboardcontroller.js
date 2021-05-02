@@ -1,14 +1,8 @@
 const Campaign = require("../../campaign/model/Campaign");
 const News = require("../../news/model/News");
 const Doctrine = require("../../doctrine/model/Doctrine");
-const User = require('../../user/model/User')
 const DonateLog = require('../../log/model/DonateLog')
 const ExchangeLog = require('../../log/model/ExchangeLog')
-// const Exchange = require('../../exchange/model/Exchange')
-const fs = require('fs');
-const cloudinary = require("cloudinary").v2
-const countapi = require('countapi-js');
-const { count } = require("../../campaign/model/Campaign");
 
 
 exports.DoctrineperType = async (req, res) => {
@@ -103,14 +97,19 @@ exports.TotalDonatePerUser = async (req, res) => {
 
 exports.DonatePerDay = async (req, res) => {
   try {
-        let docs = await DonateLog.aggregate([
-          {  
-            $group : {
-              _id: { $dateToString: { format: "%Y-%m-%d", date: "$date" } },
-              total : {
-                $sum : "$amount"
-            }
-        }
+        let docs = await DonateLog.aggregate([{
+          $match: {
+              'date': {'$gte': new Date((new Date().getTime() - (7 * 24 * 60 * 60 * 1000 * 30 )))}
+          },
+      },
+      {
+          $group:
+              {
+                  _id: "$date",
+                  total : {
+                    $sum : "$amount"
+                }
+              },
       }
         ]);
         console.log(docs)
@@ -124,30 +123,23 @@ exports.DonatePerDay = async (req, res) => {
 exports.ExchangePerDay = async (req, res) => {
   try {
         let docs = await ExchangeLog.aggregate([
-          {  
-            $group : {
+          {
+          $match: {
+              'date': {'$gte': new Date((new Date().getTime() - (7 * 24 * 60 * 60 * 1000 * 30)))}
+          },
+      },{
+        $group:
+            {
               _id: { $dateToString: { format: "%Y-%m-%d", date: "$date" } },
               count     :  {$sum: 1}
-        }
-      }
-        ]);
-        console.log(docs)
-        res.json(docs);
-  } catch (err) {
-    res.status(400).json({ err: err });
-    console.log(err)
-  }
-}
-
-exports.CountExchange_PerItem = async (req, res) => {
-  try {
-        let docs = await ExchangeLog.aggregate([
-          {  
-            $group : {
-              _id : '$item',
-              count     :  {$sum: 1}
-        }
-      }
+            },
+    }
+      //     {  
+      //       $group : {
+      //         _id: { $dateToString: { format: "%Y-%m-%d", date: "$date" } },
+      //         count     :  {$sum: 1}
+      //   }
+      // }
         ]);
         console.log(docs)
         res.json(docs);
