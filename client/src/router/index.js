@@ -423,7 +423,7 @@ const routes = [
     }
   },
   {
-    path:'/admin/confirm-order',
+    path:'/admin/confirm-order/:id',
     name: 'Confirm_order',
     component: Confirm_order,
     meta: {

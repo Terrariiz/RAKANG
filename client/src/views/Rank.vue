@@ -162,7 +162,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
   img {
   width: 50px;
   height: 30px;
