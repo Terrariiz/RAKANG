@@ -3,6 +3,12 @@
     <div>
       <Navbar></Navbar>
     </div>
+    <v-overlay :value="isloading">
+        <v-progress-circular
+          indeterminate
+          size="64"
+        ></v-progress-circular>
+      </v-overlay>
     <v-container class="container-news">
       <section class="header">
         <h1>ข่าวประชาสัมพันธ์</h1>
@@ -107,6 +113,7 @@ export default {
       news: [],
       search: "",
       selectedCategory: "ทั้งหมด",
+      isloading:true,
       categories: [
         "ทั้งหมด",
         "วัด",
@@ -168,6 +175,7 @@ export default {
       .then(async (res) => {
         console.log(res.data);
         this.news = res.data;
+        this.isloading = false
         this.news.sort(function(a, b) {
           return new Date(b.date) - new Date(a.date);
         });

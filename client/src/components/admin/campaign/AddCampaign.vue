@@ -51,6 +51,12 @@
         </form> -->
 
     <!-- อันใหม่ยังไม่ใช่ form     -->
+    <v-overlay :value="isloading">
+        <v-progress-circular
+          indeterminate
+          size="64"
+        ></v-progress-circular>
+      </v-overlay>
     <form @submit.prevent="Addcampaign">
       <div class="project-header">
         <v-container>
@@ -406,6 +412,7 @@ export default {
       tab: null,
       menu: false,
       imageData: null,
+      isloading:false,
       items:['วัด','โรงพยาบาล มูลนิธิ'],
       campaign: {
         name: null,
@@ -462,6 +469,7 @@ export default {
         let campaign = await this.$http.post("/campaign/addcampaign", formData);
         console.log(campaign);
         if (campaign) {
+          this.isloading = true
           this.$router.push({ name: "ListCampaign" });
           swal.fire("Success", "Add campaign Was successful", "success");
           console.log("success");

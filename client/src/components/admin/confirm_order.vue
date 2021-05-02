@@ -124,7 +124,7 @@ export default {
     }
   },
   created: async function created() {
-    await this.$http.get("/exchangeitem/DetailItem/ShowOrder")
+    await this.$http.get("/exchangeitem/ShowOrder")
     .then((res) => {
       this.logs = res.data
       console.log(this.logs)

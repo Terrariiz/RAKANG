@@ -4,6 +4,12 @@
       <Navbar></Navbar>
     </div>
     <br><br><br>
+    <v-overlay :value="isloading">
+        <v-progress-circular
+          indeterminate
+          size="64"
+        ></v-progress-circular>
+      </v-overlay>
     <form @submit.prevent="Additems">
         <div class="container">
             <h1>เพิ่มรายการของ</h1>
@@ -124,7 +130,8 @@ import swal from "sweetalert2";
         galleryimage:[],
       },
       file:[],
-      test:[],  
+      test:[],
+      isloading:false  
      
     };
   },
@@ -146,6 +153,7 @@ import swal from "sweetalert2";
             let exchange = await this.$http.post("/exchangeitem/addnewItem", formData);
         console.log(exchange);
         if (exchange) {
+          this.isloading = true
           this.$router.push({ name: "Listitems" });
           swal.fire("Success", "Add Items Was successful", "success");
           console.log("success");

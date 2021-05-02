@@ -4,6 +4,12 @@
             <Navbar></Navbar>
         </div>
         <br><br><br><br>
+        <v-overlay :value="isloading">
+        <v-progress-circular
+          indeterminate
+          size="64"
+        ></v-progress-circular>
+      </v-overlay>
         <form @submit.prevent="handleSubmit">
         <v-container id ='rounded' style="background-color: #F09C0B;">
             <v-container class="my-5">
@@ -97,7 +103,8 @@ const Navbar = () => import('@/components/navbar/navbar')
                 },
                 imageData:null,
                 items:['วัด','โรงพยาบาล','มูลนิธิ','ประชาสัมพันธ์ของเว็บไซค์','อื่นๆ'],
-                categories: null
+                categories: null,
+                isloading:false,
             };
         },
         components:{
@@ -119,6 +126,7 @@ const Navbar = () => import('@/components/navbar/navbar')
                 let news = await this.$http.post("/news/addnews", formData);
                 console.log(news);
                 if (news) {
+                    this.isloading = true
                     this.$router.push({ name: 'Listnews'})
                     swal.fire("Success", "Add News Was successful", "success");
                     console.log('success')

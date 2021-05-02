@@ -4,6 +4,12 @@
             <Navbar></Navbar>
         </div>
         <br><br>
+        <v-overlay :value="isloading">
+        <v-progress-circular
+          indeterminate
+          size="64"
+        ></v-progress-circular>
+      </v-overlay>
          <v-form
          @submit.prevent="Editcampaign">
        <div class="project-header">
@@ -372,6 +378,7 @@ export default {
         'undo', 'redo']
       },
             imageData:null,
+            isloading:false
         }
     },
      components:{
@@ -423,6 +430,7 @@ export default {
             }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
+                  this.isloading = true
                     this.$http.put("/campaign/DetailCampaign/"+this.$route.params.id+"/edit/", formData)
                     .then(() => {
                         this.$router.push({ name: 'DetailCampaign' , params: {id : this.$route.params.id}})
