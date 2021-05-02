@@ -140,7 +140,8 @@ export default {
 }
 .memberimg:hover {
   transition: 0.5s ease;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6), 0 6px 20px 0 rgba(0, 0, 0, 0.6);
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
 }
 .textname {
   color: #000;
