@@ -94,7 +94,7 @@
               color="error"
               style="float: right"
               dark
-              to="/admin/listcampaign"
+              to="/admin/listitems"
               >Cancle</v-btn
             >
           </v-col>
