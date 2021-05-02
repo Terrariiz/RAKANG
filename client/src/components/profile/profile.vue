@@ -4,7 +4,12 @@
       <Navbar></Navbar>
     </div>   
     <br><br><br>
-    
+    <v-overlay :value="isloading">
+        <v-progress-circular
+          indeterminate
+          size="64"
+        ></v-progress-circular>
+      </v-overlay>
       <v-container>
         <v-row>
             <v-col class="pad0"  cols="12" md="4" sm="12"> <!-- class="name-picture" -->
@@ -351,6 +356,7 @@ export default {
       Log:[],
       Profile:{},
       imageData: null,
+      isloading:true,
       valid: false,
       dataEdit: {
         image: null,
@@ -443,7 +449,7 @@ export default {
         console.log(this.donatelog)
         
         this.pagination.data = res.data.donatelog;
-        
+        this.isloading = false;
 
         var i = 0
         for(this.pagination.data[i];;i++){

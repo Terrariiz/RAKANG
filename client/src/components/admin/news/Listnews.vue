@@ -4,6 +4,12 @@
       <Navbar></Navbar>
     </div>
     <br><br>
+    <v-overlay :value="isloading">
+        <v-progress-circular
+          indeterminate
+          size="64"
+        ></v-progress-circular>
+      </v-overlay>
     <div id ='headaddnews'>
         <div class="text-center">
           
@@ -67,7 +73,8 @@ import {
     name : "Listnews",
     data (){
       return {
-        news : []
+        news : [],
+        isloading:true,
         }
     },
     mounted: async function mounted(){
@@ -75,6 +82,7 @@ import {
       .then((res) => {
         console.log(res.data)
         this.news = res.data;
+        this.isloading = false
         console.log(this.news)
       })
       .catch(function(err){

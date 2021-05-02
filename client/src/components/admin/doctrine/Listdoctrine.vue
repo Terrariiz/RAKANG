@@ -4,6 +4,12 @@
       <Navbar></Navbar>
     </div>
     <br><br>
+    <v-overlay :value="isloading">
+        <v-progress-circular
+          indeterminate
+          size="64"
+        ></v-progress-circular>
+      </v-overlay>
     <div id ='headaddnews'>
         <div class="text-center">
           
@@ -63,7 +69,8 @@ import swal from "sweetalert2";
     name : "Listdoctrine",
     data (){
       return {
-        doctrines : []
+        doctrines : [],
+        isloading:true,
         }
     },
     components:{
@@ -74,6 +81,7 @@ import swal from "sweetalert2";
       .then((res) => {
         console.log(res.data)
         this.doctrines = res.data;
+        this.isloading = false
         this.doctrines.sort(function(a, b){
             return new Date(b.edittime) - new Date(a.edittime);
         });

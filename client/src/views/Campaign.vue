@@ -102,9 +102,7 @@ export default {
         console.log(res.data);
         // this.percent = (res.datadonate / this.amount)* 100
         this.campaigns = res.data;
-        if(this.campaigns != " "){
-          this.isloading = false
-        }
+        this.isloading = false
         // console.log(this.campaigns);
         // console.log(this.campaigns[0]);
         var i = 0;
