@@ -14,7 +14,8 @@
   
     
       <div class="container">
-        <h1 class="text-capitalize product-title">แลกของรางวัล</h1>
+        <h1 class="text-capitalize product-title">แลกของรางวัล</h1>        
+        <div class='point'>แต้มสะสม: {{Profile.point}} </div>
         <div class="sub">นำแต้มสะสมที่มีมาแลกของรางวัลต่างๆ</div>
         <hr>
         <v-row>
@@ -51,9 +52,11 @@ export default {
       return {
         items : [],
         isloading:true,
+        Profile:{},
         }
     },
      mounted: async function mounted(){
+      const id = window.localStorage.getItem("user_id");
       await this.$http.get("/exchangeitem/ShowListItem")
       .then((res) => {
       this.items = res.data;
@@ -62,6 +65,17 @@ export default {
       .catch(function(err){
         console.log(err)
       })
+      await this.$http
+      .get("/user/" + id)
+      .then((res) => {
+        this.Profile = res.data;
+      
+        console.log("get user data")
+        console.log(this.Profile)
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
     },
     components: {
       Navbar
@@ -80,6 +94,10 @@ export default {
 
 <style scoped>
 /* Products section */
+.point{
+  font-size: 20px;
+  float: right;
+}
   #products{
     background:rgb(255, 255, 255);
   }

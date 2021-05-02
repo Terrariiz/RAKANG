@@ -124,7 +124,7 @@
                           <h6 class="text-muted f-w-400">{{Profile.birthdate}}</h6>
                         </div>
                         <div class="col-sm-6">
-                          <p class="m-b-10 f-w-600 sub-head">แต้มบุญ</p>
+                          <p class="m-b-10 f-w-600 sub-head">แต้มสะสม</p>
                           <h6 class="text-muted f-w-400">
                             {{Profile.point}}
                           </h6>
