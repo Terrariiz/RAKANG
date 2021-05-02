@@ -4,6 +4,12 @@
       <Navbar></Navbar>
     </div>
     <br><br><br>
+    <v-overlay :value="isloading">
+        <v-progress-circular
+          indeterminate
+          size="64"
+        ></v-progress-circular>
+      </v-overlay>
     <form @submit.prevent="Additems">
         <div class="container">
             <h1>เพิ่มรายการของ</h1>
@@ -123,7 +129,9 @@ import swal from "sweetalert2";
         remain: null,
         galleryimage:[],
       },
-      file:null,  
+      file:[],
+      test:[],
+      isloading:false  
      
     };
   },
@@ -136,8 +144,8 @@ import swal from "sweetalert2";
             var formData = new FormData();
             formData.append("name", this.exchange.name);
             formData.append("detail", this.exchange.detail);
-            this.exchange.galleryimage.forEach( file =>{
-              formData.append("multi-files", file);
+            this.test.forEach( files =>{
+              formData.append("multi-files", files);
             })
             formData.append("remain", this.exchange.remain);
             formData.append("cost", this.exchange.cost);
@@ -145,6 +153,7 @@ import swal from "sweetalert2";
             let exchange = await this.$http.post("/exchangeitem/addnewItem", formData);
         console.log(exchange);
         if (exchange) {
+          this.isloading = true
           this.$router.push({ name: "Listitems" });
           swal.fire("Success", "Add Items Was successful", "success");
           console.log("success");
@@ -169,20 +178,23 @@ import swal from "sweetalert2";
       // this.exchange.overviewimage = event.target.files[0];
       // const input = this.$refs.fileInput;
       if (this.file != null) {
+        console.log(this.file.length)
+        for(var i=0;i<this.file.length;i++){
+          this.test.push(this.file[i])}
           console.log(this.file)
           console.log(typeof this.file)
-          this.exchange.galleryimage = this.file
+          this.exchange.galleryimage = this.test
           console.log(this.exchange.galleryimage)
           this.file.forEach(f => {var url = URL.createObjectURL(f)
           console.log(f)
           this.imageData.push(url)})
-          
 
         // this.$emit('input', files[0])
       }
     },
     deletex(index){
       this.imageData.splice(index,1)
+      this.test.splice(index,1)
     },
     chooseImage() {
       this.$refs.fileInput.click();

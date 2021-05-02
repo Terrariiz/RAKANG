@@ -4,6 +4,12 @@
             <Navbar></Navbar>
         </div>
         <br><br>
+        <v-overlay :value="isloading">
+        <v-progress-circular
+          indeterminate
+          size="64"
+        ></v-progress-circular>
+      </v-overlay>
         <form
          @submit.prevent="Editnews">
         <v-container id ='rounded' style="background-color: #F09C0B;">
@@ -158,6 +164,7 @@ export default {
         'undo', 'redo']
       },
             imageData:null,
+            isloading:false
         }
     },
     mounted: function(){
@@ -206,6 +213,7 @@ export default {
             }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
+                    this.isloading = true
                     this.$http.put("/news/DetailNews/"+this.$route.params.id+"/edit/", formData)
                     .then(() => {
                         this.$router.push({ name: 'DetailNews' , params: {id : this.$route.params.id}})

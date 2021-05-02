@@ -66,6 +66,9 @@
                 <span class="datex">{{ news.date }}</span>
                 <p>
                   {{ news.categories }}
+                  <span class="icon-people" style="float: right;"
+                      ><i class="fa fa-eye"></i> {{ news.view }}</span
+                    >
                 </p>
               </div>
             </div>

@@ -13,7 +13,7 @@
                  <hr>
                  <div class="head1">รูปภาพปก</div>
                     <v-row >
-                        <v-col v-for="(image) in imageData" :key="image" md="2" sm="6" >
+                        <v-col v-for="(image,index) in imageData" :key="image" md="2" sm="6" >
                                 <div  class="preview" >
                                   <v-img @click="deletex(index)" class="iconx" src="../../../../public/image/times-solid.svg"></v-img>
                                     <v-img class="img-size" :src="image"></v-img>
@@ -123,9 +123,13 @@
         cost: null,
         remain: null,
         galleryimage:[],
-        deleteimage:[],
       },
+      deleteimage:[],
       file:null,  
+      delcount: false,
+      filecount: false,
+      isloading:false,
+      test:[]
      
     };
   },
@@ -141,14 +145,20 @@
             var formData = new FormData();
             formData.append("name", this.exchange.name);
             formData.append("detail", this.exchange.detail);
-            this.exchange.galleryimage.forEach( file =>{
-              formData.append("multi-files", file);
+            if(this.filecount){
+                this.test.forEach( files =>{
+              formData.append("multi-files", files);
             })
+            }
+            
             formData.append("remain", this.exchange.remain);
             formData.append("cost", this.exchange.cost);
-            formData.append("deleteimage", this.exchange.deleteimage);
-            console.log(formData);
-            // let exchange = await this.$http.post("/exchangeitem/EditItem/"+this.$route.params.id+"/edit/", formData);
+         
+                this.deleteimage.forEach( del =>{
+              formData.append("deleteimage", del);
+            })
+          
+            
         swal.fire({
                 title: 'Do you want to save the changes?',
                 icon: 'question',
@@ -158,9 +168,12 @@
                 confirmButtonText: `Save`,
             }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
+                
                 if (result.isConfirmed) {
-                    this.$http.post("/exchangeitem/EditItem/"+this.$route.params.id+"/edit/", formData)
+                  this.isloading = true
+                    this.$http.put("/exchangeitem/EditItem/"+this.$route.params.id+"/edit", formData)
                     .then(() => {
+
                         this.$router.push({ name: 'Detailitems' , params: {id : this.$route.params.id}})
                         swal.fire('Saved!', 'Edit this news was successful.', 'success')
                     })
@@ -185,18 +198,36 @@
       // this.exchange.overviewimage = event.target.files[0];
       // const input = this.$refs.fileInput;
       if (this.file != null) {
+        for(var i=0;i<this.file.length;i++){
+          this.test.push(this.file[i])}
           console.log(this.file)
           console.log(typeof this.file)
+          this.exchange.galleryimage = this.test
           this.file.forEach(f => {var url = URL.createObjectURL(f)
           console.log(f)
           this.imageData.push(url)})
+          this.filecount = true
           
 
         // this.$emit('input', files[0])
       }
     },
     deletex(index){
-      this.exchange.deleteimage = this.imageData.splice(index,1)
+      console.log(index)
+      
+      this.imageData.forEach(element => {
+        console.log(element)
+      })
+      var link = this.imageData[index]
+
+      this.deleteimage.push(link)
+      
+      console.log(JSON.stringify(link))
+      this.imageData.splice(index,1)
+      this.test.splice(index,1)
+      this.delcount = true
+      this.test.splice(index,1)
+      
     },
     async getData(){
         var that = this;
@@ -218,6 +249,7 @@
     },
 
         },
+
         
     }
 </script>

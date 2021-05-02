@@ -87,6 +87,9 @@
                 <p>
                   {{ doctrine.categories }}
                 </p>
+                <span class="icon-people" style="float: right;"
+                      ><i class="fa fa-eye"></i> {{ doctrine.view }}</span
+                    >
               </div>
               <div class="btn-bookmark" v-if="$store.getters.UserIsLoggedIn">
                 <v-btn

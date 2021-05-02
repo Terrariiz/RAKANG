@@ -62,6 +62,8 @@ const termuse                = () => import('@/views/termUse')
 const termservice            = () => import('@/views/termService')
 const items                  = () => import('@/views/items')
 const userDetailitems        = () => import('@/views/userDetailitems')
+const contact                = () => import('@/views/contact')
+const fill_address           = () => import('@/views/fill_address')
 
 // ----------------------------หน้า dashboard-------------------------------------------------
 const dashboard_home          = () => import('@/components/admin/dashboard/home')
@@ -92,6 +94,11 @@ const routes = [
     path: '/termservice',
     name: 'termservice',
     component: termservice
+  },
+  {
+    path: '/contact',
+    name: 'contact',
+    component: contact
   },
   {
     path: '/campaign',
@@ -392,9 +399,17 @@ const routes = [
     }
   },
   {
-    path:'/items/userDetailitems',
+    path:'/items/:id',
     name: 'userDetailitems',
     component: userDetailitems,
+    meta: {
+      requiresUserAuth: true
+    }
+  },
+  {
+    path:'/items/:id/:userID/fill-address',
+    name: 'fillAddress',
+    component: fill_address,
     meta: {
       requiresUserAuth: true
     }
