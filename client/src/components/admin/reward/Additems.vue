@@ -6,8 +6,9 @@
     <br><br><br>
     <v-overlay :value="isloading">
         <v-progress-circular
-          indeterminate
-          size="64"
+         size="100"
+          width="7"
+          color="green"
         ></v-progress-circular>
       </v-overlay>
     <form @submit.prevent="Additems">
@@ -94,7 +95,7 @@
               color="error"
               style="float: right"
               dark
-              to="/admin/listcampaign"
+              to="/admin/listitems"
               >Cancle</v-btn
             >
           </v-col>
@@ -141,6 +142,11 @@ import swal from "sweetalert2";
   methods: {
     async Additems(){
         try{
+          if(this.test.length == 0){
+            console.log(this.test.length)
+            swal.fire("เกิดข้อผิดผลาด", "กรุณาเพิ่มรูปภาพของสินค้า", "error");
+          } else {
+            this.isloading = true
             var formData = new FormData();
             formData.append("name", this.exchange.name);
             formData.append("detail", this.exchange.detail);
@@ -151,16 +157,16 @@ import swal from "sweetalert2";
             formData.append("cost", this.exchange.cost);
             console.log(formData);
             let exchange = await this.$http.post("/exchangeitem/addnewItem", formData);
-        console.log(exchange);
-        if (exchange) {
-          this.isloading = true
-          this.$router.push({ name: "Listitems" });
-          swal.fire("Success", "Add Items Was successful", "success");
-          console.log("success");
-        } else {
-          swal.fire("Error", "Something Went Wrong", "error");
-          console.log("error");
-        }
+            console.log(exchange);
+            if (exchange) {
+              this.$router.push({ name: "Listitems" });
+              swal.fire("Success", "Add Items Was successful", "success");
+              console.log("success");
+            } else {
+              swal.fire("Error", "Something Went Wrong", "error");
+              console.log("error");
+            }
+          }
         }catch (err){
         //     let error = err.response;
         // if (error.status == 409) {

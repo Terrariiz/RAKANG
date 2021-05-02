@@ -29,8 +29,9 @@
     <!-- อันใหม่  -->
     <v-overlay :value="isloading">
         <v-progress-circular
-          indeterminate
-          size="64"
+         size="100"
+          width="7"
+          color="green"
         ></v-progress-circular>
       </v-overlay>
     <v-container>
@@ -75,6 +76,7 @@
         </v-tabs-items>
       </v-card>
     </v-container>
+    <br /><br /><br /><br /><br />
     <div>
       <Footer></Footer>
     </div>
