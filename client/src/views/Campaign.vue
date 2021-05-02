@@ -3,6 +3,12 @@
     <div>
       <Navbar></Navbar>
     </div>
+    <v-overlay :value="isloading">
+        <v-progress-circular
+          indeterminate
+          size="64"
+        ></v-progress-circular>
+      </v-overlay>
      <v-container class="container-news">
        <section class="header">
         <h1>แคมเปญ</h1>
@@ -78,6 +84,7 @@ export default {
       campaigns: [],
       percent: [],
       search: '',
+      isloading:true
     };
   },
 
@@ -95,6 +102,9 @@ export default {
         console.log(res.data);
         // this.percent = (res.datadonate / this.amount)* 100
         this.campaigns = res.data;
+        if(this.campaigns != " "){
+          this.isloading = false
+        }
         // console.log(this.campaigns);
         // console.log(this.campaigns[0]);
         var i = 0;

@@ -60,7 +60,12 @@
       
 
       <!--  -->
-     
+     <v-overlay :value="isloading">
+        <v-progress-circular
+          indeterminate
+          size="64"
+        ></v-progress-circular>
+      </v-overlay>
       <div v-if="newcampaign != null" class="ytube">
         <v-row >
           <v-col class="headcam" cols="12" md="5">
@@ -188,6 +193,7 @@ export default {
       news:null,
       doctrine:null,
       show: false,
+      isloading: true
       
     };
   },
@@ -200,6 +206,7 @@ export default {
         {console.log(res.data);
         this.newcampaign = res.data[0];
         if(this.newcampaign != null)
+        this.isloading = false
         await countapi.get(this.newcampaign.count_api_namespace, this.newcampaign.count_api_key).then((result) => { 
                     this.newcampaign['view'] = result.value
                 });
