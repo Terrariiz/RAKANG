@@ -135,13 +135,30 @@
             </v-col>
           </v-row>
           <div>
-            <v-checkbox
-              v-model="register.checkbox"
+            <v-checkbox v-model="register.checkbox"
               :rules="[(v) => !!v || 'You must agree to continue!']"
               label="I accept the terms and use"
-              required
-            >
+              required>
+              <template v-slot:label>
+                <div>
+                  ยอมรับ
+                  <v-tooltip bottom>
+                    <template v-slot:activator="{ on }">
+                      <a
+                        target="_blank"
+                        href="http://localhost:8080/termservice"
+                        @click.stop
+                        v-on="on"
+                      >
+                        ข้อตกลงการใช้งานเว็บไซต์
+                      </a>
+                    </template>
+                    ข้อตกลงการใช้งานเว็บไซต์
+                  </v-tooltip>
+                </div>
+              </template>
             </v-checkbox>
+            
           </div>
           <br />
           <center>

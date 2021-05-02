@@ -4,7 +4,7 @@
     <div>
       <Navbar></Navbar>
     </div>
-    <v-parallax src="../../public/image/rocket.png" height="auto">
+    <v-parallax class="bg" src="../../public/image/rocket.png" height="auto">
       <div class="container" id="team">
         <section class="header textname">
           <h1>OUR TEAM</h1>
@@ -153,4 +153,5 @@ img {
   border-radius: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
 </style>

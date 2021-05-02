@@ -50,11 +50,12 @@
               </div>
               <progress class="progress is-danger" :value="(newcampaign.donate/newcampaign.amount)*100" max="100"></progress>
               
-              <div class="btn-news">
-                <v-btn block style="background-color: #ffdd94; color:#455054;" @click="ViewCampaign(newcampaign._id)">
-                  ดูเนื้อหา</v-btn
-                >
-              </div>
+              
+                <div class="btn-news">
+                  <v-btn block style="background-color: #ffdd94; color:#455054;" @click="ViewCampaign(newcampaign._id)">
+                    ดูเนื้อหา</v-btn>
+                </div>
+              
             </v-container>
           </v-col>
         </v-row>
@@ -99,17 +100,18 @@
               </div>
                 
                 
-                <div class="btn-news">
-                  <v-row>
-                    <v-col cols="12" >
-                      <v-btn block style="background-color: #ffdd94; color:#455054;" @click="ViewCampaign(newcampaign._id)">ดูเนื้อหา</v-btn>
-                    </v-col>
-                    <!-- <v-col cols="12" md="6">
-                      <v-btn block color="green" @click.stop="dialogDonate=true" >บริจาค</v-btn>
-                  <DialogDonate :visible="dialogDonate" @close="dialogDonate=false" />
-                    </v-col> -->
-                  </v-row>
-                </div>
+                <center>
+                    <div class="btn-news">
+                   
+                        <v-btn block style="background-color: #ffdd94; color:#455054;" @click="ViewCampaign(newcampaign._id)">ดูเนื้อหา</v-btn>
+                      
+                      <!-- <v-col cols="12" md="6">
+                        <v-btn block color="green" @click.stop="dialogDonate=true" >บริจาค</v-btn>
+                    <DialogDonate :visible="dialogDonate" @close="dialogDonate=false" />
+                      </v-col> -->
+                    
+                  </div>
+                </center>
                  
               
               </div>
