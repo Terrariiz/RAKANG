@@ -137,6 +137,7 @@
                       ></v-text-field>
                     </template>
                     <v-date-picker
+                      required
                       ref="picker"
                       v-model="campaign.date"
                       :min="new Date().toISOString().substr(0, 10)"
@@ -178,7 +179,8 @@
                           label="เลือกหมวดหมู่"
                           solo
                           required
-                      ></v-select>
+                      >
+                      </v-select>
                     </v-col>
                   </v-row>
             </v-col>
@@ -454,6 +456,10 @@ export default {
   methods: {
     async Addcampaign() {
       try {
+        if(this.campaign.categories == null || this.campaign.overview == null || this.campaign.date == null){
+          swal.fire("เกิดข้อผิดผลาด", "กรุณากรอกข้อมูลให้ครบ", "error");
+        } else{
+        this.isloading = true
         var formData = new FormData();
         formData.append("name", this.campaign.name);
         formData.append("content", this.campaign.content);
@@ -469,13 +475,13 @@ export default {
         let campaign = await this.$http.post("/campaign/addcampaign", formData);
         console.log(campaign);
         if (campaign) {
-          this.isloading = true
           this.$router.push({ name: "ListCampaign" });
           swal.fire("Success", "Add campaign Was successful", "success");
           console.log("success");
         } else {
           swal.fire("Error", "Something Went Wrong", "error");
           console.log("error");
+        }
         }
       } catch (err) {
         let error = err.response;

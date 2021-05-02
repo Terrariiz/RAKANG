@@ -62,8 +62,8 @@ export default {
     data(){
       return{
         admin:{
-          username:'admin',
-          password:"123456789"
+          username:null,
+          password:null
         },
         show1:false,
         rules: {

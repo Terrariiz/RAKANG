@@ -7,7 +7,7 @@
      <div class="project-header">
     <v-container >
       <!-- this.$router.back(); -->
-      <v-btn @click="$router.back()"> <i style="float:left;" class="fa fa-arrow-left fa-lg" aria-hidden="true"></i></v-btn>
+      <v-btn @click="$router.push({ name: 'ListCampaign'})"> <i style="float:left;" class="fa fa-arrow-left fa-lg" aria-hidden="true"></i></v-btn>
       
       <v-row>
           <h1>{{ campaign.name }}</h1>
@@ -45,13 +45,13 @@
                     </span>
                     <v-row style="margin-top:3%;">
                 <v-col  cols = "3"></v-col>
-                <v-col  cols = "3">
+                <!-- <v-col  cols = "3">
                   <v-btn color="error" style="float:right;" @click="DeleteCampaign($route.params.id)">Delete</v-btn>
                 </v-col>
                 <v-col  cols = "3">
                   <v-btn color="success" style="float:left;" @click="EditCampaign($route.params.id)">Edit</v-btn>
                 </v-col>
-                  <v-col  cols = "3"></v-col>
+                  <v-col  cols = "3"></v-col> -->
               </v-row>
                 </div>
 
@@ -111,7 +111,7 @@
 
 <script>
 const Navbar = () => import('@/components/navbar/navbar')
-import swal from "sweetalert2";
+// import swal from "sweetalert2";
 import moment from "moment";
 export default {
     name : "DetailCampaign",
@@ -155,38 +155,38 @@ export default {
           console.log(err)
         })
       },
-      EditCampaign(campaignid){
-        this.$router.push({ name: 'editCampaign' , params: {id : campaignid}})
-      },
-       DeleteCampaign(){
-        const swalWithBootstrapButtons = swal.mixin({
-          customClass: {
-            confirmButton: 'btn btn-success',
-            cancelButton: 'btn btn-danger'
-          },
-          buttonsStyling: false
-        })
-        swalWithBootstrapButtons.fire({
-          title: 'Are you sure?',
-          text: "You won't be able to revert this!",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonText: 'Yes, delete it!',
-          cancelButtonText: 'No, cancel!',
-          reverseButtons: false
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.$http.delete("/campaign/DeleteCampaign/"+this.$route.params.id)
-            console.log("delete")
-            this.$router.push({ name: 'ListCampaign'})
-            swalWithBootstrapButtons.fire(
-              'Deleted!',
-              'Delete Campaign Success.',
-              'success'
-            )
-          } 
-        })
-      },
+      // EditCampaign(campaignid){
+      //   this.$router.push({ name: 'editCampaign' , params: {id : campaignid}})
+      // },
+      //  DeleteCampaign(){
+      //   const swalWithBootstrapButtons = swal.mixin({
+      //     customClass: {
+      //       confirmButton: 'btn btn-success',
+      //       cancelButton: 'btn btn-danger'
+      //     },
+      //     buttonsStyling: false
+      //   })
+      //   swalWithBootstrapButtons.fire({
+      //     title: 'Are you sure?',
+      //     text: "You won't be able to revert this!",
+      //     icon: 'warning',
+      //     showCancelButton: true,
+      //     confirmButtonText: 'Yes, delete it!',
+      //     cancelButtonText: 'No, cancel!',
+      //     reverseButtons: false
+      //   }).then((result) => {
+      //     if (result.isConfirmed) {
+      //       this.$http.delete("/campaign/DeleteCampaign/"+this.$route.params.id)
+      //       console.log("delete")
+      //       this.$router.push({ name: 'ListCampaign'})
+      //       swalWithBootstrapButtons.fire(
+      //         'Deleted!',
+      //         'Delete Campaign Success.',
+      //         'success'
+      //       )
+      //     } 
+      //   })
+      // },
     },
 }
 </script>
