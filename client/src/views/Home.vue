@@ -38,7 +38,7 @@
                 
               <div class="text-align-left">{{newcampaign.content}}</div>
               <div >
-                <v-row>
+                <v-row no-gutters>
                   <v-col style="text-align:left;" cols="12" md="3">
                     <span class="amount">วันสิ้นสุดโครงการ: </span><span>{{newcampaign.date}}</span><br>
                     <span class="amount">สถานที่:</span><span> {{newcampaign.location}}</span>
@@ -85,9 +85,20 @@
                   <div class="name-con" > {{newcampaign.name}} </div>
                   <div class="contents-con">{{newcampaign.content}}</div>
                 
-                <!-- <v-container>
-                <progress class="progress is-danger" :value="(newcampaign.donate/newcampaign.amount)*100" max="100"></progress>
-                </v-container> -->
+                <div >
+                <v-row no-gutters>
+                  <v-col style="text-align:left;" cols="12" md="12">
+                    <span class="amount">วันสิ้นสุดโครงการ: </span><span>{{newcampaign.date}}</span><br>
+                  </v-col>
+                  <v-col style="text-align:left;" cols="12" md="12">  
+                    <span class="amount">สถานที่:</span><span> {{newcampaign.location}}</span>
+                  </v-col>
+                </v-row>
+                <div style="float:right"><span class="amount">ยอดบริจาค:</span><span> {{newcampaign.donate}} / {{newcampaign.amount}} บาท</span></div>
+                <progress style="border: 1px solid #949494 " class="progress is-danger" :value="(newcampaign.donate/newcampaign.amount)*100" max="100"></progress>
+              </div>
+                
+                
                 <div class="btn-news">
                   <v-row>
                     <v-col cols="12" >
@@ -100,9 +111,7 @@
                   </v-row>
                 </div>
                  
-                <div class="social-icons">
-                  <a href="#"></a>
-                </div>
+              
               </div>
               </v-container>
             </div>
@@ -113,35 +122,6 @@
       </div>
      
       <!--  -->
-    <!-- เก็บไว้ -->
-    <!-- <section class="course">
-      <h1>ข่าวล่าสุด</h1>
-      <p>เป็นข่าวที่ใหม่ที่สุดของเว็บของเรา</p>
-      <div class="rowx">
-        <div class="course-col">
-          <h3>Intermediate</h3>
-          <p>loadwwadajnadajdajdbajdabjdajdajdawdd.
-            dawdadadadwad
-            dawddawdawdad
-          </p>
-        </div>
-        <div class="course-col">
-          <h3>Intermediate</h3>
-          <p>loadwwadajnadajdajdbajdabjdajdajdawdd.
-            dawdadadadwad
-            dawddawdawdad
-          </p>
-        </div>
-        <div class="course-col">
-          <h3>Intermediate</h3>
-          <p>loadwwadajnadajdajdbajdabjdajdajdawdd.
-            dawdadadadwad
-            dawddawdawdad
-          </p>
-        </div>
-      </div>
-    </section> -->
-    <!-- เก็บไว้ -->
 
     <!-- hotnews -->
     <section v-if="doctrine != null" class="hotnews">
@@ -331,6 +311,10 @@ export default {
 // import a from '../../public/image/background.png'
 </script>
 <style scoped>
+.content-con{
+  width: 40%;
+  word-wrap: break-word;
+}
 .amount{
   font-weight: 600;
 }
@@ -626,7 +610,10 @@ transform: rotateY(180deg);
   justify-content: center;
   align-items: center;
 }
-.cards .details .contents{
+.contents{
+  word-break: break-all;
+}
+.cards .details .content{
   display: flex;
   justify-content: center;
   align-items: center;
