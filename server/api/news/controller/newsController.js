@@ -54,7 +54,7 @@ exports.ShowListNews = function (req, res) {
         console.log(err)
       } else {
         news.sort(function (a, b) {
-          return new Date(b.edittime) - new Date(a.edittime);
+          return new Date(b.date) - new Date(a.date);
         });
         console.log('else')
         res.json(news);
@@ -111,7 +111,7 @@ exports.EditNews = async (req, res) => {
   try {
     var dataEdit
     var changeimage
-    const today = new Date();
+    // const today = new Date();
     if (req.file) {
       if (req.file.filename != req.body.oldimage) {
 
@@ -127,7 +127,7 @@ exports.EditNews = async (req, res) => {
             content: req.body.content,
             image: result.url,
             cloudinary_id: result.public_id,
-            date: today,
+            // date: today,
             categories: req.body.categories
           }
 
