@@ -84,13 +84,15 @@ export default {
     name : "Listitems",
      data (){
       return {
-        items : []
+        items : [],
+        isloading: true
         }
     },
      mounted: async function mounted(){
       await this.$http.get("/exchangeitem/ShowListItem")
       .then((res) => {
       this.items = res.data;
+      this.isloading = false
        })
       .catch(function(err){
         console.log(err)
