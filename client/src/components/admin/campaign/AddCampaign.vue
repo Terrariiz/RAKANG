@@ -53,8 +53,9 @@
     <!-- อันใหม่ยังไม่ใช่ form     -->
     <v-overlay :value="isloading">
         <v-progress-circular
-          indeterminate
-          size="64"
+          size="100"
+          width="7"
+          color="green"
         ></v-progress-circular>
       </v-overlay>
     <form @submit.prevent="Addcampaign">
@@ -412,7 +413,7 @@ export default {
       tab: null,
       menu: false,
       imageData: null,
-      isloading:false,
+      isloading: false,
       items:['วัด','โรงพยาบาล มูลนิธิ'],
       campaign: {
         name: null,

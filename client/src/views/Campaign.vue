@@ -5,8 +5,9 @@
     </div>
     <v-overlay :value="isloading">
         <v-progress-circular
-          indeterminate
-          size="64"
+         size="100"
+          width="7"
+          color="green"
         ></v-progress-circular>
       </v-overlay>
      <v-container class="container-news">

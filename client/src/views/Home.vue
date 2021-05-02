@@ -6,7 +6,9 @@
      <v-overlay :value="isloading">
         <v-progress-circular
           indeterminate
-          size="64"
+          size="100"
+          width="7"
+          color="green"
         ></v-progress-circular>
       </v-overlay>
     <section >
@@ -197,7 +199,8 @@ export default {
       zone1: false,
       zone2: false,
       zone3: false,
-      
+      filteredListnews:[],
+      filteredListdoctrine:[],
     };
   },
   
@@ -210,24 +213,39 @@ export default {
         this.newcampaign = res.data[0];
         this.zone1 = true
         console.log(this.zone1)
+        console.log(this.newcampaign.date)
         await countapi.get(this.newcampaign.count_api_namespace, this.newcampaign.count_api_key).then((result) => { 
                     this.newcampaign['view'] = result.value
                 });
-       { if(moment(this.newcampaign.date).format('dddd') == 'Mondey'){
-                this.newcampaign.date = moment(this.newcampaign.date).format(" วันจันทร์ DD-MM-YY A");
-              } else if(moment(this.newcampaign.date).format('dddd') == 'Tuesday'){
-                this.newcampaigื.date = moment(this.newcampaign.date).format(" วันอังคาร DD-MM-YY A");
-              } else if(moment(this.newcampaign.date).format('dddd') == 'Wednesday'){
-                this.newcampaign.date = moment(this.newcampaign.date).format(" วันพุธ DD-MM-YY A");
-              } else if(moment(this.newcampaign.date).format('dddd') == 'Thursday'){
-                this.newcampaign.date = moment(this.newcampaign.date).format(" วันพฤหัสบดี DD-MM-YY A");
-              } else if(moment(this.newcampaign.date).format('dddd') == 'Friday'){
-                this.newcampaign.date = moment(this.newcampaign.date).format(" วันศุกร์ DD-MM-YY A");
-              } else if(moment(this.newcampaign.date).format('dddd') == 'Saturday'){
-                this.newcampaign.date = moment(this.newcampaign.date).format(" วันเสาร์ DD-MM-YY A");
-              } else if(moment(this.newcampaign.date).format('dddd') == 'Sunday'){
-                this.newcampaign.date = moment(this.newcampaign.date).format(" วันอาทิตย์ DD-MM-YY A");
-              }}}
+       if (moment(this.newcampaign.date).format("dddd") == "Mondey") {
+           this.newcampaign.date = moment(this.newcampaign.date).format(
+              " วันจันทร์ DD-MM-YY A"
+            );
+          } else if (moment(this.newcampaign.date).format("dddd") == "Tuesday") {
+            this.newcampaign.date = moment(this.newcampaign.date).format(
+              " วันอังคาร DD-MM-YY A"
+            );
+          } else if (moment(this.newcampaign.date).format("dddd") == "Wednesday") {
+            this.newcampaign.date = moment(this.newcampaign.date).format(
+              " วันพุธ DD-MM-YY A"
+            );
+          } else if (moment(this.newcampaign.date).format("dddd") == "Thursday") {
+            this.newcampaign.date = moment(this.newcampaign.date).format(
+              " วันพฤหัสบดี DD-MM-YY A"
+            );
+          } else if (moment(this.newcampaign.date).format("dddd") == "Friday") {
+            this.newcampaign.date = moment(this.newcampaign.date).format(
+              " วันศุกร์ DD-MM-YY A"
+            );
+          } else if (moment(this.newcampaign.date).format("dddd") == "Saturday") {
+            this.newcampaign.date = moment(this.newcampaign.date).format(
+              " วันเสาร์ DD-MM-YY A"
+            );
+          } else if (moment(this.newcampaign.date).format("dddd") == "Sunday") {
+            this.newcampaign.date = moment(this.newcampaign.date).format(
+              " วันอาทิตย์ DD-MM-YY A"
+            );
+          }}
         
 
         
@@ -241,6 +259,7 @@ export default {
         this.news = res.data; 
         this.zone2 = true
         console.log(this.zone2)
+         this.filteredListnews = this.news.slice(0,3);
         var i = 0
         this.news.sort(function(a, b){
             return new Date(b.date) - new Date(a.date);
@@ -250,7 +269,7 @@ export default {
               this.news[i]['view'] = result.value
           });
         }
-       
+        this.filteredListnews = this.news.slice(0,3);
       })
        .catch(function(err) {
         console.log(err);
@@ -261,13 +280,13 @@ export default {
         this.doctrine = res.data;
         this.zone3 = true
         console.log(this.zone3)
+        this.filteredListdoctrine = this.doctrine.slice(0,3);
         for (var i = 0; i<this.doctrine.length; i++) {
         await countapi.get(this.doctrine[i].count_api_namespace, this.doctrine[i].count_api_key).then((result) => { 
               this.doctrine[i]["view"] = result.value
               console.log(result.value)
           });
         }
-        
       })
       .catch(function(err){
       console.log(err);
@@ -309,18 +328,18 @@ export default {
     window.scrollTo(0, 0);
     }
   },
-  computed:{
-    filteredListdoctrine() {
-           var showData = this.doctrine.slice(0,3);
-            console.log(showData);
-            return showData
-        },
-        filteredListnews() {
-           var showData = this.news.slice(0,3);
-            console.log(showData);
-            return showData
-        }
-  },
+  // computed:{
+  //   filteredListdoctrine() {
+  //          var showData = this.doctrine.slice(0,3);
+  //           console.log(showData);
+  //           return showData
+  //       },
+  //       filteredListnews() {
+  //          var showData = this.news.slice(0,3);
+  //           console.log(showData);
+  //           return showData
+  //       }
+  // },
   
   components: {
     Navbar,
@@ -459,9 +478,7 @@ export default {
 }
  /* hotnews */
  /* หลักธรรม */
- .title-color{
-   
- }
+
  .doctrine{
    width: 80%;
    margin: auto;
