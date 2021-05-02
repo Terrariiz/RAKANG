@@ -18,6 +18,10 @@ import VueApexCharts from 'vue-apexcharts'
 Vue.use(VueApexCharts)
 Vue.component('apexchart', VueApexCharts)
 
+import ThailandAutoComplete from 'vue-thailand-address-autocomplete'
+Vue.use(ThailandAutoComplete)
+Vue.component('ThailandAutoComplete', ThailandAutoComplete)
+
 const base = axios.create({
   baseURL: "https://rakang-server.herokuapp.com/"
 });
