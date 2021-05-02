@@ -11,7 +11,7 @@
           color="green"
         ></v-progress-circular>
       </v-overlay>
-    <h1>กรอกที่อยู่ในการจัดส่ง</h1>
+    <div class="head-fill"><h1>กรอกที่อยู่ในการจัดส่ง</h1></div>
     <div v-if="addressUser == null" class="container">
       <h1 class="head">ที่อยู่จัดส่ง</h1>
       <hr>
@@ -49,6 +49,18 @@
                 required
             >
           </v-col>
+           <v-col cols="12" md="12" sm="12">
+            <label for="phone">ที่อยู่</label>
+            <v-textarea
+              clearable
+              v-model="newAddressUser.address"
+              solo
+              filled
+              auto-grow
+              clear-icon="mdi-close-circle"
+              label="46 หมู่ 4 ถนน......."
+            ></v-textarea>
+          </v-col>
 
           <v-col cols="12" md="4" sm="6">
               <ThailandAutoComplete
@@ -70,18 +82,7 @@
           <v-col cols="12" md="4" sm="6">
             <ThailandAutoComplete required v-model="newAddressUser.zipcode" type="zipcode" @select="select" label="รหัสไปรษณีย์" color="#00a4e4" placeholder="รหัสไปรษณีย์..."/>
           </v-col>
-          <v-col cols="12" md="8" sm="12">
-            <label for="phone">ที่อยู่</label>
-            <v-textarea
-              clearable
-              v-model="newAddressUser.address"
-              solo
-              filled
-              auto-grow
-              clear-icon="mdi-close-circle"
-              label="46 หมู่ 4 ถนน......."
-            ></v-textarea>
-          </v-col>
+         
         </v-row>
          <div class="btn"><v-btn color="success" type="submit">ยืนยันสินค้า</v-btn></div>
         </form>
@@ -209,6 +210,18 @@
                 required
             >
           </v-col>
+          <v-col cols="12" md="12" sm="12">
+            <label for="phone">ที่อยู่</label>
+            <v-textarea
+              clearable
+              v-model="newAddressUser.address"
+              solo
+              filled
+              auto-grow
+              clear-icon="mdi-close-circle"
+              label="46 หมู่ 4 ถนน......."
+            ></v-textarea>
+          </v-col>
 
           <v-col cols="12" md="4" sm="6">
               <ThailandAutoComplete
@@ -230,18 +243,7 @@
           <v-col cols="12" md="4" sm="6">
             <ThailandAutoComplete required v-model="newAddressUser.zipcode" type="zipcode" @select="select" label="รหัสไปรษณีย์" color="#00a4e4" placeholder="รหัสไปรษณีย์..."/>
           </v-col>
-          <v-col cols="12" md="8" sm="12">
-            <label for="phone">ที่อยู่</label>
-            <v-textarea
-              clearable
-              v-model="newAddressUser.address"
-              solo
-              filled
-              auto-grow
-              clear-icon="mdi-close-circle"
-              label="46 หมู่ 4 ถนน......."
-            ></v-textarea>
-          </v-col>
+          
         </v-row>
          <div class="btn"><v-btn color="success" @click="confirmAddress" type="submit">ยืนยันสินค้า</v-btn></div>
     </div>
@@ -377,6 +379,11 @@ export default {
 </script>
 
 <style scoped>
+.head-fill{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .container{
    margin-top:30px;
   display: grid;
