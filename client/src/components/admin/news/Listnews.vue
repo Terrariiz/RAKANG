@@ -41,11 +41,26 @@
                 <td>{{ news.title }}</td>
                 <!-- <td v-html="news.content">{{ news.content }}</td> -->
                 <td>
+                  <v-row>
+                      <v-col class="ml-auto" md="12" sm="6" >
+                        <div>
+                          <span>
+                            <v-btn style="margin-right:3%;" @click="ViewNews(news._id)">view</v-btn>
+                          </span>
+                          <span>
+                            <v-btn style="margin-right:3%;" @click="EditNews(news._id)">Edit</v-btn>
+                          </span>
+                          <span>
+                            <v-btn @click="DeleteNews(news._id)">Delete</v-btn>
+                          </span>
+                        </div>
+                      </v-col>
+                  </v-row>
                   <!-- <router-link :to="`/admin/listdoctrine/${doctrine._id}`">detail</router-link> -->
                   <!-- <router-link :to="{name : 'DetailDoctrine', params: {id:doctrine._id}}">detail</router-link> -->
-                  <v-btn style="margin-right:3%;" @click="ViewNews(news._id)">view</v-btn>
-                  <v-btn style="margin-right:3%;" @click="EditNews(news._id)">Edit</v-btn>
-                  <v-btn @click="DeleteNews(news._id)">Delete</v-btn>
+                  
+                  
+                  
 
                 </td>
                 <!-- <td>{{ item.name }}</td>
