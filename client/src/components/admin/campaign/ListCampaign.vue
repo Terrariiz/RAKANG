@@ -49,12 +49,30 @@
                 <td>{{ campaign.amount }}</td>
                 <!-- <td v-html="campaign.content">{{ campaign.content }}</td> -->
                 <td>
+                  <v-row>
+                      <v-col class="ml-auto" md="12" sm="6" >
+                        <div>
+                          <span>
+                            <v-btn style="margin-right:3%;" @click="ViewCampaign(campaign._id)">view</v-btn>
+                          </span>
+                          <span>
+                            <v-btn style="margin-right:3%;" @click="ViewLogCampaign(campaign._id)">Log</v-btn>
+                          </span>
+                          <span>
+                           <v-btn style="margin-right:3%;" @click="EditCampaign(campaign._id)">Edit</v-btn>
+                          </span>
+                          <span>
+                            <v-btn @click="DeleteCampaign(campaign._id)">Delete</v-btn>
+                          </span>
+                        </div>
+                      </v-col>
+                  </v-row>
                   <!-- <router-link :to="`/admin/listdoctrine/${doctrine._id}`">detail</router-link> -->
                   <!-- <router-link :to="{name : 'DetailDoctrine', params: {id:doctrine._id}}">detail</router-link> -->
-                  <v-btn style="margin-right:3%;" @click="ViewCampaign(campaign._id)">view</v-btn>
-                  <v-btn style="margin-right:3%;" @click="ViewLogCampaign(campaign._id)">Log</v-btn>
-                  <v-btn style="margin-right:3%;" @click="EditCampaign(campaign._id)">Edit</v-btn>
-                  <v-btn @click="DeleteCampaign(campaign._id)">Delete</v-btn>
+                  
+                  
+                  
+                  
                 </td>
                 <!-- <td>{{ item.name }}</td>
                 <td>

@@ -42,19 +42,22 @@
                 <td>{{ doctrine.title }}</td>
                 <!-- <td v-html="doctrine.content">{{ doctrine.content }}</td> -->
                 <td>
-                  <!-- <router-link :to="`/admin/listdoctrine/${doctrine._id}`">detail</router-link> -->
-                  <!-- <router-link :to="{name : 'DetailDoctrine', params: {id:doctrine._id}}">detail</router-link> -->
-                  <v-btn style="margin-right:3%;" @click="ViewDoctrine(doctrine._id)">View</v-btn>
-                  <v-btn style="margin-right:3%;" @click="EditDoctrine(doctrine._id)">Edit</v-btn>
-                  <v-btn @click="DeleteDoctrine(doctrine._id)">Delete</v-btn>
-                  
+                  <v-row>
+                      <v-col class="ml-auto" md="12" sm="6" >
+                        <div>
+                          <span>
+                            <v-btn style="margin-right:3%;" @click="ViewDoctrine(doctrine._id)">View</v-btn>
+                          </span>
+                          <span>
+                            <v-btn style="margin-right:3%;" @click="EditDoctrine(doctrine._id)">Edit</v-btn>
+                          </span>
+                          <span>
+                            <v-btn @click="DeleteDoctrine(doctrine._id)">Delete</v-btn>
+                          </span>
+                        </div>
+                      </v-col>
+                  </v-row>
                 </td>
-                <!-- <td>
-                    <v-btn style="margin-left:5%;" class="ma-2"  color="purple" to = "/admin/editnews"  dark><v-icon dark>mdi-wrench</v-icon></v-btn>
-                    <v-btn style="margin-left:5%;"><v-icon>{{ icons.mdiDelete }}</v-icon></v-btn>
-                  dddd=dddddd`fsหหdddssss
-                </td> -->
-                <!-- <td>{{ item.calories }}</td> -->
               </tr>
             </tbody>
           </template>
