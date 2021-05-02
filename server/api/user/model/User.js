@@ -89,11 +89,21 @@ const userSchema = new mongoose.Schema({
         ref: "Doctrine"
     }
   ],
+  userlocation: {
+    name: String,
+    phone: String,
+    locationdetail: String,
+    District: String,
+    Sub_District: String,
+    province: String,
+    postcode: String,
+  },
 });
 
 //this method will hash the password before saving the user model
 userSchema.pre("save", async function(next) {
   const user = this;
+  console.log("saveeeeeeeeeeeee")
   if (user.isModified("password")) {
     user.password = await bcrypt.hash(user.password, 8);
   }

@@ -6,6 +6,15 @@
     <br><br><br>
      <v-overlay :value="isloading">
         <v-progress-circular
+        indeterminate
+         size="100"
+          width="7"
+          color="green"
+        ></v-progress-circular>
+      </v-overlay>
+      <v-overlay :value="isupload">
+        <v-progress-circular
+        indeterminate
          size="100"
           width="7"
           color="green"
@@ -358,6 +367,7 @@ export default {
       Profile:{},
       imageData: null,
       isloading:true,
+      isupload:false,
       valid: false,
       dataEdit: {
         image: null,
@@ -366,6 +376,7 @@ export default {
         oldimage: "",
         
       },
+
       emailRules: [
         (v) => !!v || "Email is required!",
         (v) => /.+@.+/.test(v) || "E-mail must be valid",
@@ -414,6 +425,7 @@ export default {
                 
             ]
       }
+
 
     },
     async mounted(){
@@ -542,18 +554,24 @@ export default {
             confirmButtonText: `Save`,
           })
           .then((result) => {
+            
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
-              this.$http.put("/user/" + id + "/editProfile", formData);
-              this.$router.push("/profile");
-              location.reload();
-              swal.fire(
-                "Saved!",
-                "Edit your profile Was successful.",
-                "success"
-              );
+              this.isupload = true
+              this.$http.put("/user/" + id + "/editProfile", formData, )
+              .then(() => {
+                        this.$router.push("/profile");
+                        location.reload();
+                        swal.fire(
+                          "Saved!",
+                          "Edit your profile Was successful.",
+                          "success"
+                        );
               console.log("success");
-              
+                    })
+                    .catch(function(err){
+                        console.log(err)
+                    });
             }
           });
       } catch (err) {
