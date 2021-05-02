@@ -6,8 +6,9 @@
         <br><br><br><br>
         <v-overlay :value="isloading">
         <v-progress-circular
-          indeterminate
-          size="64"
+          size="100"
+          width="7"
+          color="green"
         ></v-progress-circular>
       </v-overlay>
          <form
@@ -117,23 +118,27 @@ export default {
         },
         async Adddoctrine(){
         try {
-            var formData = new FormData();
-            formData.append('title', this.title)
-            formData.append('content', this.content)
-            formData.append('image', this.image)
-            formData.append('imagepath', this.image.name)
-            formData.append('categories', this.categories)
-            console.log(formData)
-            let doctrine = await this.$http.post("/doctrine/adddoctrine", formData);
-            console.log(doctrine);
-            if (doctrine) {
+            if(this.categories == null || this.content == null || this.content == ""){
+                swal.fire("เกิดข้อผิดผลาด", "กรุณากรอกข้อมูลให้ครบ", "error");
+            } else{
                 this.isloading = true
-                this.$router.push({ name: 'Listdoctrine'})
-                swal.fire("Success", "Add doctrine Was successful", "success");
-                console.log('success')
-            } else {
-                swal.fire("Error", "Something Went Wrong", "error");
-                console.log('error')
+                var formData = new FormData();
+                formData.append('title', this.title)
+                formData.append('content', this.content)
+                formData.append('image', this.image)
+                formData.append('imagepath', this.image.name)
+                formData.append('categories', this.categories)
+                console.log(formData)
+                let doctrine = await this.$http.post("/doctrine/adddoctrine", formData);
+                console.log(doctrine);
+                if (doctrine) {
+                    this.$router.push({ name: 'Listdoctrine'})
+                    swal.fire("Success", "Add doctrine Was successful", "success");
+                    console.log('success')
+                } else {
+                    swal.fire("Error", "Something Went Wrong", "error");
+                    console.log('error')
+                }
             }
         } catch (err) {
             let error = err.response;

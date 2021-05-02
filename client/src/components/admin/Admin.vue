@@ -6,8 +6,9 @@
     <br /><br /><br />
     <!-- <v-overlay :value="isloading">
         <v-progress-circular
-          indeterminate
-          size="64"
+         size="100"
+          width="7"
+          color="green"
         ></v-progress-circular>
       </v-overlay> -->
     <h1>Dashboard</h1>

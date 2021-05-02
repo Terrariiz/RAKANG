@@ -4,16 +4,16 @@
       <Navbar></Navbar>
     </div>
     <br><br>
-    <v-overlay :value="isloading">
+     <v-overlay :value="isloading">
         <v-progress-circular
-          indeterminate
-          size="64"
+         size="100"
+          width="7"
+          color="green"
         ></v-progress-circular>
       </v-overlay>
     <div id ='headaddnews'>
         <div class="text-center">
             <v-btn rounded color="primary" dark to = "/admin/additems">เพิ่มของรางวัล</v-btn>
-            <v-btn rounded color="primary" dark to = "/admin/confirm-order">ยืนยันคำสั่งการแลกของ</v-btn>
         </div>
     </div>
     <v-container>
@@ -49,15 +49,14 @@
                       <v-col class="ml-auto" md="12" sm="6" >
                         <div>
                           <span>
-                            <v-btn style="margin:3%;" @click="Viewitem(item._id)">view</v-btn>
+                            <v-btn style="margin:3%;position: relative;" @click="Viewitem(item._id)">view</v-btn>
                           </span>
-                          <span id="noti">
-                            <a :href="'/admin/Detailitems/'+item._id" class="notification">
-                              <span>Order</span>
+                          <span>
+                            <!-- <a :href="'/admin/Detailitems/'+item._id" class="notification">
+                              <span>ORDER</span>
                               <span v-if="item.waitingorder.length > 0" class="badge">{{item.waitingorder.length}}</span>
-                            </a>
-                            <!-- <v-btn style="margin:3%;" @click="ViewLogitem(item._id)">Log</v-btn>
-                            <a class='notifi'>3</a> -->
+                            </a> -->
+                            <v-btn class="noti" style="margin:3%;" @click="ViewLogitem(item._id)">order <span v-if="item.waitingorder.length > 0" class="badge">{{item.waitingorder.length}}</span></v-btn>
                           </span>
                           <span>
                             <v-btn style="margin:3%;" @click="Edititem(item._id)">Edit</v-btn>
@@ -86,7 +85,7 @@ export default {
      data (){
       return {
         items : [],
-        isloading:true,
+        isloading: true
         }
     },
      mounted: async function mounted(){
@@ -153,17 +152,18 @@ export default {
 </script>
 <style scoped>
 .notification {
-  background-color: #555;
-  color: white;
+  background-color: white;
+  color: #555;
   text-decoration: none;
   padding: 8px 20px;
   position: relative;
   display: inline-block;
   border-radius: 5px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .notification:hover {
-  background: red;
+  background: rgba(133, 133, 133, 0.233);
 }
 
 .notification .badge {
@@ -175,16 +175,17 @@ export default {
   background: red;
   color: white;
 }
-#noti {
-  display: relative;
-}
-.notifi{
+.noti .badge {
   position: absolute;
-  top: 18px;
-  right: 375px;
-  background-color: red;
-  color: aliceblue;
-  z-index: 99;
+  top: -15px;
+  right: -25px;
+  padding: 5px 5px;
+  border-radius: 50%;
+  background: red;
+  color: white;
+}
+.noti {
+  display: relative;
 }
   #table{
         text-align: left;
