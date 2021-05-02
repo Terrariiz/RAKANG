@@ -4,6 +4,13 @@
       <Navbar></Navbar>
     </div>
     <br><br>
+     <v-overlay :value="isloading">
+        <v-progress-circular
+         size="100"
+          width="7"
+          color="green"
+        ></v-progress-circular>
+      </v-overlay>
     <div id ='headaddnews'>
         <div class="text-center">
             <v-btn rounded color="primary" dark to = "/admin/additems">เพิ่มของรางวัล</v-btn>

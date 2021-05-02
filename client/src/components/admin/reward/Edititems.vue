@@ -4,6 +4,13 @@
       <Navbar></Navbar>
     </div>
     <br><br><br>
+     <v-overlay :value="isloading">
+        <v-progress-circular
+         size="100"
+          width="7"
+          color="green"
+        ></v-progress-circular>
+      </v-overlay>
         <form @submit.prevent="Edititems">
         <div class="container">
             <h1>แก้ไขรายการของ</h1>
