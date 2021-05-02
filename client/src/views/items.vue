@@ -130,6 +130,7 @@ export default {
   cursor: pointer;
   height: 200px;
   width: 400px;
+  background-position: center;
 }
 
 /* Grow Shadow */
