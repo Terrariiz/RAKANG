@@ -72,7 +72,7 @@ exports.ShowListDoctrine = async (req, res) => {
 exports.EditDoctrine = async (req, res) => {
   try {
     var changeimage
-    const today = new Date();
+    // const today = new Date();
     if (req.file) {
       if (req.file.filename != req.body.oldimage) {
 
@@ -88,7 +88,7 @@ exports.EditDoctrine = async (req, res) => {
             content: req.body.content[0],
             image: result.url,
             cloudinary_id: result.public_id,
-            edittime: today,
+            // edittime: today,
             categories: req.body.content[1]
           }
 

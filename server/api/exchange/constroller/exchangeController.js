@@ -243,6 +243,7 @@ exports.EditItem = async (req, res) => {
 
 exports.Purchase = function (req, res) {
   try {
+    const now = new Date();
     console.log(req.body)
     var NumOfPurchase = 1
     const NewExchangeLog = new ExchangeLog({
@@ -250,9 +251,10 @@ exports.Purchase = function (req, res) {
       District: req.body.District,
       Sub_District: req.body.Sub_District,
       province: req.body.province,
-      postcode: req.body.postcode
+      postcode: req.body.postcode,
+      date : now
     });
-    ExchangeLog.create(NewExchangeLog, function (err, exlog) {
+    
       User.findOne({ _id: req.params.user }, function (err, user) {
         Exchange.findOne({ _id: req.params.id }, function (err, item) {
           if (user.point < item.cost) {
@@ -263,6 +265,7 @@ exports.Purchase = function (req, res) {
             let message = "ขออภัยสินค้าหมด"
             return res.json(message)
           }
+          ExchangeLog.create(NewExchangeLog, function (err, exlog) {
           exlog.user = user
           exlog.item = item
           user.point = user.point - item.cost
@@ -277,8 +280,9 @@ exports.Purchase = function (req, res) {
           exlog.save()
           return res.json(exlog);
         })
+        })
       })
-    })
+    
   } catch (err) {
     res.status(400).json({ err: err });
     console.log(err)

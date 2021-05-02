@@ -73,6 +73,8 @@
 </template>
 
 <script>
+// import moment from "moment";
+import countapi from 'countapi-js';
 const Navbar = () => import("@/components/navbar/navbar");
 export default {
   name: "Admin",
@@ -81,7 +83,24 @@ export default {
   },
   data() {
     return {
-      startDate: null,
+      TotalDonatePerUser:{},
+      TotalDonatePerCampaign:{},
+      DonatePerDay:{},
+      DoctrineperType:{},
+      NewsPerType:{},
+      CampaignPerType:{},
+      ExchangePerDay:{},
+
+      campaign_view: null,
+      news_view:null,
+      doctrine_view:null,
+
+      campaign:[],
+      news:[],
+      doctrine:[],
+      Exchange_item:[],
+
+      startDate: [],
       toggle_exclusive: 0,
       stopDate: "2021-05-31",
       date: [],
@@ -93,20 +112,20 @@ export default {
         chart: {
           id: "vuechart-example",
         },
-        // title: {
-        //   text: 'ปู่ลูฟี่',
-        //   align: "center",
-        //   margin: 10,
-        //   offsetX: 0,
-        //   offsetY: 0,
-        //   floating: false,
-        //   style: {
-        //     fontSize: "16px",
-        //     fontWeight: "bold",
-        //     fontFamily: undefined,
-        //     color: "#263238",
-        //   },
-        // },
+        title: {
+          text: 'ปู่ลูฟี่',
+          align: "center",
+          margin: 10,
+          offsetX: 0,
+          offsetY: 0,
+          floating: false,
+          style: {
+            fontSize: "16px",
+            fontWeight: "bold",
+            fontFamily: undefined,
+            color: "#263238",
+          },
+        },
         xaxis: {
           title: {
             text: "ปี",
@@ -146,9 +165,104 @@ export default {
         },
       ];
     },
+    getdata(){
+            this.$http.get("/dashboard/Getdata_Campaign")
+                .then(async (res) => {
+                  console.log(res.data)
+                    this.campaign = res.data
+                    await this.campaignview()
+                    
+            })
+            this.$http.get("/dashboard/Getdata_Doctrine")
+                .then(async (res) => {
+                    console.log(res.data)
+                    this.doctrine = res.data
+                    await this.doctrineview()
+                    this.favbycount = await this.favbydoctrine()
+                    
+            })
+            this.$http.get("/dashboard/Getdata_News")
+                .then(async (res) => {
+                    console.log(res.data)
+                    this.news = res.data
+                    await this.newsview()
+            })
+            this.$http.get("/dashboard/TotalDonatePerUser")
+                .then(async (res) => {
+                    console.log(res.data)
+                    this.TotalDonatePerUser = res.data
+            })
+            this.$http.get("/dashboard/TotalDonatePerCampaign")
+                .then(async (res) => {
+                    console.log(res.data)
+                    this.TotalDonatePerCampaign = res.data
+            })
+            this.$http.get("/dashboard/DonatePerDay")
+                .then(async (res) => {
+                    console.log(res.data)
+                    this.DonatePerDay = res.data
+            })
+            this.$http.get("/dashboard/DoctrineperType")
+                .then(async (res) => {
+                    console.log(res.data)
+                    this.DoctrineperType = res.data
+            })
+            this.$http.get("/dashboard/NewsPerType")
+                .then(async (res) => {
+                    console.log(res.data)
+                    this.NewsPerType = res.data
+            })
+            this.$http.get("/dashboard/CampaignPerType")
+                .then(async (res) => {
+                    console.log(res.data)
+                    this.CampaignPerType = res.data
+            })
+            this.$http.get("/dashboard/ExchangePerDay")
+                .then(async (res) => {
+                    console.log(res.data)
+                    this.ExchangePerDay = res.data
+            })
+            this.$http.get("/exchangeitem/ShowListItem")
+                .then(async (res) => {
+                    console.log(res.data)
+                    this.Exchange_item = res.data
+            })
+        },
+        cal(){
+          
+        },
+        campaignview(){
+          var i = 0
+          for (i; i <= this.campaign.length; i++) {
+            countapi.get(this.campaign[i].count_api_namespace, this.campaign[i].count_api_key).then((result) => { 
+            console.log(result)
+            this.campaign_view += result.value
+            });
+          }
+        },
+        doctrineview(){
+          var i = 0
+          for (i; i <= this.doctrine.length; i++) {
+            countapi.get(this.doctrine[i].count_api_namespace, this.doctrine[i].count_api_key).then((result) => { 
+            console.log(result)
+            this.doctrine_view += result.value
+            });
+          }  
+        },
+        newsview(){
+          var i = 0
+          for (i; i <= this.news.length; i++) {
+            countapi.get(this.news[i].count_api_namespace, this.news[i].count_api_key).then((result) => { 
+            console.log(result)
+            this.news_view += result.value
+            });
+          }  
+        },
   },
   // ทำวันที่เป็นสัปดาห์
   created: async function created() {
+    await this.getdata()
+    
     var date_now = new Date();
     this.startDate = date_now.toISOString().substr(0, 10);
     // this.isloading = false
@@ -165,6 +279,7 @@ export default {
     console.log(date_now);
     console.log(this.date);
     console.log(this.dataTest);
+    
   },
   // mounted: async function mounted() {
   // const id = this.$route.params.id;

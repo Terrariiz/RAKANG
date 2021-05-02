@@ -24,7 +24,7 @@ const donateSchema = new mongoose.Schema({
     }
   ,
   amount: {
-    type: String, 
+    type: Number, 
   },
   date: {
     type: Date,

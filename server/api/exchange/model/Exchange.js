@@ -35,11 +35,11 @@ const newSchema = new mongoose.Schema({
     type: String,
   },
 
+
   
 });
 
 
 
 
-const Exchange = mongoose.model("Exchange", newSchema);
-module.exports = Exchange;
+module.exports = mongoose.models.Exchange || mongoose.model('Exchange', newSchema);

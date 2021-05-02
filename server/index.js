@@ -56,12 +56,13 @@ const campaignRoutes = require('./api/campaign/route/campaign');
 const donateRoutes = require('./api/log/route/donatelog');
 const ruletRoutes = require('./api/rulet/route/rulet');
 const ExchangeRoute = require("./api/exchange/route/exchange")
+const Dashboard = require("./api/dashboard/route/dashboard")
 // const testroute = require('./api/test/test');
 
 // app.use("/user", userRoutes);
 app.use("/doctrine", doctrineRoutes);
 
-
+app.use("/dashboard", Dashboard);
 const newsRoutes = require('./api/news/route/news'); //bring in our user routes
 app.use("/user", userRoutes);
 app.use("/news", newsRoutes);
@@ -309,7 +310,7 @@ app.post("/test", async function(req,res){
         })
      })
     }
-  res.redirect('http://localhost:8080/campaign/'+fuckingcampaign)
+  await res.redirect('http://localhost:8080/campaign/'+fuckingcampaign)
 });
 
 
