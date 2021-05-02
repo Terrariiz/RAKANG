@@ -6,7 +6,9 @@
      <v-overlay :value="isloading">
         <v-progress-circular
           indeterminate
-          size="64"
+          size="100"
+          width="7"
+          color="green"
         ></v-progress-circular>
       </v-overlay>
     <section >
@@ -38,7 +40,7 @@
                 
               <div class="text-align-left">{{newcampaign.content}}</div>
               <div >
-                <v-row>
+                <v-row no-gutters>
                   <v-col style="text-align:left;" cols="12" md="3">
                     <span class="amount">วันสิ้นสุดโครงการ: </span><span>{{newcampaign.date}}</span><br>
                     <span class="amount">สถานที่:</span><span> {{newcampaign.location}}</span>
@@ -50,11 +52,12 @@
               </div>
               <progress class="progress is-danger" :value="(newcampaign.donate/newcampaign.amount)*100" max="100"></progress>
               
-              <div class="btn-news">
-                <v-btn block style="background-color: #ffdd94; color:#455054;" @click="ViewCampaign(newcampaign._id)">
-                  ดูเนื้อหา</v-btn
-                >
-              </div>
+              
+                <div class="btn-news">
+                  <v-btn block style="background-color: #ffdd94; color:#455054;" @click="ViewCampaign(newcampaign._id)">
+                    ดูเนื้อหา</v-btn>
+                </div>
+              
             </v-container>
           </v-col>
         </v-row>
@@ -85,24 +88,34 @@
                   <div class="name-con" > {{newcampaign.name}} </div>
                   <div class="contents-con">{{newcampaign.content}}</div>
                 
-                <!-- <v-container>
-                <progress class="progress is-danger" :value="(newcampaign.donate/newcampaign.amount)*100" max="100"></progress>
-                </v-container> -->
-                <div class="btn-news">
-                  <v-row>
-                    <v-col cols="12" >
-                      <v-btn block style="background-color: #ffdd94; color:#455054;" @click="ViewCampaign(newcampaign._id)">ดูเนื้อหา</v-btn>
-                    </v-col>
-                    <!-- <v-col cols="12" md="6">
-                      <v-btn block color="green" @click.stop="dialogDonate=true" >บริจาค</v-btn>
-                  <DialogDonate :visible="dialogDonate" @close="dialogDonate=false" />
-                    </v-col> -->
-                  </v-row>
-                </div>
+                <div >
+                <v-row no-gutters>
+                  <v-col style="text-align:left;" cols="12" md="12">
+                    <span class="amount">วันสิ้นสุดโครงการ: </span><span>{{newcampaign.date}}</span><br>
+                  </v-col>
+                  <v-col style="text-align:left;" cols="12" md="12">  
+                    <span class="amount">สถานที่:</span><span> {{newcampaign.location}}</span>
+                  </v-col>
+                </v-row>
+                <div style="float:right"><span class="amount">ยอดบริจาค:</span><span> {{newcampaign.donate}} / {{newcampaign.amount}} บาท</span></div>
+                <progress style="border: 1px solid #949494 " class="progress is-danger" :value="(newcampaign.donate/newcampaign.amount)*100" max="100"></progress>
+              </div>
+                
+                
+                <center>
+                    <div class="btn-news">
+                   
+                        <v-btn block style="background-color: #ffdd94; color:#455054;" @click="ViewCampaign(newcampaign._id)">ดูเนื้อหา</v-btn>
+                      
+                      <!-- <v-col cols="12" md="6">
+                        <v-btn block color="green" @click.stop="dialogDonate=true" >บริจาค</v-btn>
+                    <DialogDonate :visible="dialogDonate" @close="dialogDonate=false" />
+                      </v-col> -->
+                    
+                  </div>
+                </center>
                  
-                <div class="social-icons">
-                  <a href="#"></a>
-                </div>
+              
               </div>
               </v-container>
             </div>
@@ -113,35 +126,6 @@
       </div>
      
       <!--  -->
-    <!-- เก็บไว้ -->
-    <!-- <section class="course">
-      <h1>ข่าวล่าสุด</h1>
-      <p>เป็นข่าวที่ใหม่ที่สุดของเว็บของเรา</p>
-      <div class="rowx">
-        <div class="course-col">
-          <h3>Intermediate</h3>
-          <p>loadwwadajnadajdajdbajdabjdajdajdawdd.
-            dawdadadadwad
-            dawddawdawdad
-          </p>
-        </div>
-        <div class="course-col">
-          <h3>Intermediate</h3>
-          <p>loadwwadajnadajdajdbajdabjdajdajdawdd.
-            dawdadadadwad
-            dawddawdawdad
-          </p>
-        </div>
-        <div class="course-col">
-          <h3>Intermediate</h3>
-          <p>loadwwadajnadajdajdbajdabjdajdajdawdd.
-            dawdadadadwad
-            dawddawdawdad
-          </p>
-        </div>
-      </div>
-    </section> -->
-    <!-- เก็บไว้ -->
 
     <!-- hotnews -->
     <section v-if="doctrine != null" class="hotnews">
@@ -197,7 +181,8 @@ export default {
       zone1: false,
       zone2: false,
       zone3: false,
-      
+      filteredListnews:[],
+      filteredListdoctrine:[],
     };
   },
   
@@ -210,24 +195,39 @@ export default {
         this.newcampaign = res.data[0];
         this.zone1 = true
         console.log(this.zone1)
+        console.log(this.newcampaign.date)
         await countapi.get(this.newcampaign.count_api_namespace, this.newcampaign.count_api_key).then((result) => { 
                     this.newcampaign['view'] = result.value
                 });
-       { if(moment(this.newcampaign.date).format('dddd') == 'Mondey'){
-                this.newcampaign.date = moment(this.newcampaign.date).format(" วันจันทร์ DD-MM-YY A");
-              } else if(moment(this.newcampaign.date).format('dddd') == 'Tuesday'){
-                this.newcampaigื.date = moment(this.newcampaign.date).format(" วันอังคาร DD-MM-YY A");
-              } else if(moment(this.newcampaign.date).format('dddd') == 'Wednesday'){
-                this.newcampaign.date = moment(this.newcampaign.date).format(" วันพุธ DD-MM-YY A");
-              } else if(moment(this.newcampaign.date).format('dddd') == 'Thursday'){
-                this.newcampaign.date = moment(this.newcampaign.date).format(" วันพฤหัสบดี DD-MM-YY A");
-              } else if(moment(this.newcampaign.date).format('dddd') == 'Friday'){
-                this.newcampaign.date = moment(this.newcampaign.date).format(" วันศุกร์ DD-MM-YY A");
-              } else if(moment(this.newcampaign.date).format('dddd') == 'Saturday'){
-                this.newcampaign.date = moment(this.newcampaign.date).format(" วันเสาร์ DD-MM-YY A");
-              } else if(moment(this.newcampaign.date).format('dddd') == 'Sunday'){
-                this.newcampaign.date = moment(this.newcampaign.date).format(" วันอาทิตย์ DD-MM-YY A");
-              }}}
+       if (moment(this.newcampaign.date).format("dddd") == "Mondey") {
+           this.newcampaign.date = moment(this.newcampaign.date).format(
+              " วันจันทร์ DD-MM-YY A"
+            );
+          } else if (moment(this.newcampaign.date).format("dddd") == "Tuesday") {
+            this.newcampaign.date = moment(this.newcampaign.date).format(
+              " วันอังคาร DD-MM-YY A"
+            );
+          } else if (moment(this.newcampaign.date).format("dddd") == "Wednesday") {
+            this.newcampaign.date = moment(this.newcampaign.date).format(
+              " วันพุธ DD-MM-YY A"
+            );
+          } else if (moment(this.newcampaign.date).format("dddd") == "Thursday") {
+            this.newcampaign.date = moment(this.newcampaign.date).format(
+              " วันพฤหัสบดี DD-MM-YY A"
+            );
+          } else if (moment(this.newcampaign.date).format("dddd") == "Friday") {
+            this.newcampaign.date = moment(this.newcampaign.date).format(
+              " วันศุกร์ DD-MM-YY A"
+            );
+          } else if (moment(this.newcampaign.date).format("dddd") == "Saturday") {
+            this.newcampaign.date = moment(this.newcampaign.date).format(
+              " วันเสาร์ DD-MM-YY A"
+            );
+          } else if (moment(this.newcampaign.date).format("dddd") == "Sunday") {
+            this.newcampaign.date = moment(this.newcampaign.date).format(
+              " วันอาทิตย์ DD-MM-YY A"
+            );
+          }}
         
 
         
@@ -241,6 +241,7 @@ export default {
         this.news = res.data; 
         this.zone2 = true
         console.log(this.zone2)
+         this.filteredListnews = this.news.slice(0,3);
         var i = 0
         this.news.sort(function(a, b){
             return new Date(b.date) - new Date(a.date);
@@ -250,7 +251,7 @@ export default {
               this.news[i]['view'] = result.value
           });
         }
-       
+        this.filteredListnews = this.news.slice(0,3);
       })
        .catch(function(err) {
         console.log(err);
@@ -261,13 +262,13 @@ export default {
         this.doctrine = res.data;
         this.zone3 = true
         console.log(this.zone3)
+        this.filteredListdoctrine = this.doctrine.slice(0,3);
         for (var i = 0; i<this.doctrine.length; i++) {
         await countapi.get(this.doctrine[i].count_api_namespace, this.doctrine[i].count_api_key).then((result) => { 
               this.doctrine[i]["view"] = result.value
               console.log(result.value)
           });
         }
-        
       })
       .catch(function(err){
       console.log(err);
@@ -309,18 +310,18 @@ export default {
     window.scrollTo(0, 0);
     }
   },
-  computed:{
-    filteredListdoctrine() {
-           var showData = this.doctrine.slice(0,3);
-            console.log(showData);
-            return showData
-        },
-        filteredListnews() {
-           var showData = this.news.slice(0,3);
-            console.log(showData);
-            return showData
-        }
-  },
+  // computed:{
+  //   filteredListdoctrine() {
+  //          var showData = this.doctrine.slice(0,3);
+  //           console.log(showData);
+  //           return showData
+  //       },
+  //       filteredListnews() {
+  //          var showData = this.news.slice(0,3);
+  //           console.log(showData);
+  //           return showData
+  //       }
+  // },
   
   components: {
     Navbar,
@@ -331,6 +332,10 @@ export default {
 // import a from '../../public/image/background.png'
 </script>
 <style scoped>
+.content-con{
+  width: 40%;
+  word-wrap: break-word;
+}
 .amount{
   font-weight: 600;
 }
@@ -459,9 +464,7 @@ export default {
 }
  /* hotnews */
  /* หลักธรรม */
- .title-color{
-   
- }
+
  .doctrine{
    width: 80%;
    margin: auto;
@@ -626,7 +629,10 @@ transform: rotateY(180deg);
   justify-content: center;
   align-items: center;
 }
-.cards .details .contents{
+.contents{
+  word-break: break-all;
+}
+.cards .details .content{
   display: flex;
   justify-content: center;
   align-items: center;

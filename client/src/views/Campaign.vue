@@ -5,8 +5,9 @@
     </div>
     <v-overlay :value="isloading">
         <v-progress-circular
-          indeterminate
-          size="64"
+         size="100"
+          width="7"
+          color="green"
         ></v-progress-circular>
       </v-overlay>
      <v-container class="container-news">
@@ -29,9 +30,9 @@
                 <h1>{{ campaign.name }} </h1>
               <div>
                 <span class="icon-people"
-                      ><i class="fa fa-eye"></i> {{ campaign.view }}</span
-                    >
+                      ><i class="fa fa-eye"></i> {{ campaign.view }}</span>
               </div>
+              
               <div >
                 <v-row>
                   <v-col  style="text-align:left;" cols="12" md="6">
