@@ -21,7 +21,7 @@
   
 <v-container class="no-grahp">
   <v-row>
-    <v-col cols="12" md="4" sm="4">
+    <v-col class="color-col" cols="12" md="4" sm="4">
        <div class="overline">
           totalviewsCampaign test
         </div>
@@ -30,7 +30,7 @@
         </div>
     </v-col>
 
-    <v-col cols="12" md="4" sm="4">
+    <v-col class="color-col" cols="12" md="4" sm="4">
        <div class="overline">
           ttotalviewsnews test
         </div>
@@ -39,7 +39,7 @@
         </div>
     </v-col>
 
-    <v-col cols="12" md="4" sm="4">
+    <v-col class="color-col" cols="12" md="4" sm="4">
        <div class="overline">
            totalviewsdoctrine test
         </div>
@@ -627,5 +627,10 @@ export default {
 }
 .no-grahp{
   width: 90%;
+}
+.color-col{
+  background-color: white;
+  /* margin: 10px; */
+  border: 5px #efefef solid;
 }
 </style>

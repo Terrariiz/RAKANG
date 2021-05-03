@@ -20,7 +20,7 @@
                <v-tab-item>
                 <v-card flat>
                   <v-container>
-                    <div class="head-profile">สินค้ารอการยืนยัน</div>
+                    <div class="head-profile">สินค้ารอการยืนยัน </div>
                     <v-card>
                       <v-data-table
                         v-model="selected"
@@ -30,8 +30,9 @@
                         show-select
                         class="elevation-1"
                         :items-per-page="10"
-                      ></v-data-table>
-                      
+                        > 
+            
+                      </v-data-table>
                     </v-card>
                   </v-container>
                 </v-card>
@@ -63,7 +64,12 @@
 const Navbar = () => import("@/components/navbar/navbar");
 import moment from "moment";
 import swal from "sweetalert2";
+import {
+    mdiPencil,
+    mdiDelete,
+  } from '@mdi/js'
 export default {
+  
   components: {
     Navbar,
   },
@@ -72,6 +78,10 @@ export default {
       waitLogs:[],
       confirmLogs:[],
       selected: [],
+      items: {
+        mdiPencil, 
+        mdiDelete,
+      },
       header1: [
                 { text: 'วันที่สั่ง',value: 'date'},
                 { text: 'ชื่อผู้สั่ง', value: 'name' },
@@ -81,6 +91,7 @@ export default {
                 { text: 'จังหวัด', value: 'province' },
                 { text: 'รหัสไปรษณีย์', value: 'postcode' },
                 { text: 'เลขพัสดุ',sortable: false, value: '' },
+                { text: 'การจัดการ',sortable: false, value: 'actions' },
             ],
       
        header2: [
@@ -95,6 +106,8 @@ export default {
                 
                 
             ],
+            
+            
     }
   },
   created: async function created() {
