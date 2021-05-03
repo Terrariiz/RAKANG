@@ -74,7 +74,6 @@
                       <span class="sub-head">แต้มบุญ:</span> {{ Profile.point }}
                     </div>
                   </center>
-                  <br />
                   <div class="btn-cpass">
                     <v-btn
                       class="e-profile"
