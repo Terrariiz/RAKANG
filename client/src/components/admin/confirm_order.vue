@@ -4,6 +4,14 @@
       <Navbar></Navbar>
     </div>
     <br /><br /><br />
+    <v-overlay :value="isloading">
+        <v-progress-circular
+          indeterminate
+          size="100"
+          width="7"
+          color="green"
+        ></v-progress-circular>
+      </v-overlay>
     <h1>ยืนยันคำสั่งการแลกของ</h1>
      <div class="container" >
           <v-card>
@@ -43,7 +51,7 @@
                     <v-card>
                       <v-data-table
                         :headers="header2"
-                        :items="waitLogs"
+                        :items="confirmLogs"
                         :items-per-page="10"
                       ></v-data-table>
                       
@@ -69,6 +77,7 @@ export default {
   },
   data(){
     return {
+      isloading: false,
       waitLogs:[],
       confirmLogs:[],
       selected: [],
@@ -80,12 +89,12 @@ export default {
                 { text: 'เขต/อำเภอ', value: 'District' },
                 { text: 'จังหวัด', value: 'province' },
                 { text: 'รหัสไปรษณีย์', value: 'postcode' },
-                { text: 'เลขพัสดุ',sortable: false, value: '' },
+                { text: 'เลขพัสดุ',sortable: false, value: 'trackings_id' },
             ],
       
        header2: [
                 { text: 'สถานะ',sortable: false, value: 'status'},
-                { text: 'เลขพัสดุ',sortable: false, value: '' },
+                { text: 'เลขพัสดุ',sortable: false, value: 'trackings_id' },
                 { text: 'ชื่อผู้สั่ง', value: 'name' },
                 { text: 'เบอร์',sortable: false, value: 'phone' },
                 { text: 'แขวง/ตำบล', value: 'Sub_District' },
@@ -113,15 +122,21 @@ export default {
       if(this.selected.length <= 0){
         swal.fire("เกิดข้อผิดผลาด", "กรุณาเลือกออเดอร์", "error");
       } else{
+          this.isloading = true
           var formData = new URLSearchParams()
+          // for(var key in this.selected){
+          //   formData.append('AcceptList',this.selected[key])
+          // }
           this.selected.forEach( order =>{
-              formData.append("AcceptList",order)
-              // formData.append("id", order._id);
-              // formData.append("name", order._id);
+              formData.append("id", order._id);
+              formData.append("trackings_id", order._id);
             })
           console.log(formData.getAll("AcceptList"))
-          let kuy = await this.$http.post("/exchangeitem/DetailItem/"+ this.$route.params.id +"/AcceptOrder", formData)
+          // console.log(formData.getAll("id"))
+          // console.log(formData.getAll("trackings_id"))
+          let kuy = await this.$http.post("exchangeitem/DetailItem/"+ this.$route.params.id +"/AcceptOrder", formData)
           console.log(kuy)
+          this.isloading = false
       }
     },
     changeFormatDate1(){
@@ -130,7 +145,6 @@ export default {
         this.waitLogs.length = null
       } else{
         for (var i = 0;i<this.waitLogs.length; i++) {
-          console.log(moment(this.waitLogs[i].date).format('dddd'))
           if(moment(this.waitLogs[i].date).format('dddd') == 'Monday'){
                 this.waitLogs[i].date = moment(this.waitLogs[i].date).format(" วันจันทร์ DD-MM-YY A");
               } else if(moment(this.waitLogs[i].date).format('dddd') == 'Tuesday'){
