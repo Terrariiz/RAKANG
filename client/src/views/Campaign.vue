@@ -115,7 +115,7 @@ export default {
           await countapi.get(this.campaigns[i].count_api_namespace, this.campaigns[i].count_api_key).then((result) => { 
               this.campaigns[i]['view'] = result.value
           });
-          if(moment(this.campaigns[i].date).format('dddd') == 'Mondey'){
+          if(moment(this.campaigns[i].date).format('dddd') == 'Monday'){
                 this.campaigns[i].date = moment(this.campaigns[i].date).format(" วันจันทร์ DD-MM-YY A");
               } else if(moment(this.campaigns[i].date).format('dddd') == 'Tuesday'){
                 this.campaigns[i].date = moment(this.campaigns[i].date).format(" วันอังคาร DD-MM-YY A");
