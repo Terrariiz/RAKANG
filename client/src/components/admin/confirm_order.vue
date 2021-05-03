@@ -62,6 +62,7 @@
 <script>
 const Navbar = () => import("@/components/navbar/navbar");
 import moment from "moment";
+import swal from "sweetalert2";
 export default {
   components: {
     Navbar,
@@ -108,8 +109,20 @@ export default {
     })
   },
   methods:{
-    confirmOrder(){
-      console.log("confirm")
+    async confirmOrder(){
+      if(this.selected.length <= 0){
+        swal.fire("เกิดข้อผิดผลาด", "กรุณาเลือกออเดอร์", "error");
+      } else{
+          var formData = new URLSearchParams()
+          this.selected.forEach( order =>{
+              formData.append("AcceptList",order)
+              // formData.append("id", order._id);
+              // formData.append("name", order._id);
+            })
+          console.log(formData.getAll("AcceptList"))
+          let kuy = await this.$http.post("/exchangeitem/DetailItem/"+ this.$route.params.id +"/AcceptOrder", formData)
+          console.log(kuy)
+      }
     },
     changeFormatDate1(){
       console.log()
