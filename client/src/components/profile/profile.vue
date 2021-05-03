@@ -550,7 +550,6 @@ export default {
       .get("/exchangeitem/GetUserExchangeLog/" + id)
       .then((res) => {
         this.ExchangeLog = res.data;
-        console.log("ExchangeLog");
         console.log(this.ExchangeLog);
         this.pagination1.data = this.ExchangeLog.exchangelog;
 
@@ -684,21 +683,21 @@ export default {
       console.log(showData);
       return showData;
     },
-     filteredList1() {
-      var firstIndex;
-      if (this.pagination1.page == 1) {
-        firstIndex = 0;
-      } else {
-        firstIndex = (this.pagination1.page - 1) * this.pagination1.rowsPerPage;
-      }
-      console.log(firstIndex + " firstIndex");
-      var showData = this.pagination1.data.slice(
-        firstIndex,
-        firstIndex + this.pagination1.rowsPerPage
-      );
-      console.log(showData);
-      return showData;
-    },
+    //  filteredList1() {
+    //   var firstIndex;
+    //   if (this.pagination1.page == 1) {
+    //     firstIndex = 0;
+    //   } else {
+    //     firstIndex = (this.pagination1.page - 1) * this.pagination1.rowsPerPage;
+    //   }
+    //   console.log(firstIndex + " firstIndex");
+    //   var showData = this.pagination1.data.slice(
+    //     firstIndex,
+    //     firstIndex + this.pagination1.rowsPerPage
+    //   );
+    //   console.log(showData);
+    //   return showData;
+    // },
   },
 };
 </script>
