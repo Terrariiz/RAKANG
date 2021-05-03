@@ -218,11 +218,13 @@ export default {
           // }
           var count = 0
           this.selected.forEach( order =>{
-              if(order.trackings_id !== '' || order.trackings_id !== '-'){
+              console.log(order.trackings_id)
+              if(order.trackings_id != '' && order.trackings_id != '-'){
                 formData.append("id", order._id);
                 formData.append("trackings_id", order.trackings_id);
                 count = count+1
               }else{
+                console.log('fail')
                 checkTracking = true
               }
             })
@@ -238,6 +240,7 @@ export default {
               this.isloading = false
               swal.fire("สำเร็จ", "ออเดอร์ได้รับการยืนยันแล้ว", "success");
             }
+            this.isloading = false
       }
     },
     changeFormatDate1(){
