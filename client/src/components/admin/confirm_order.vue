@@ -15,6 +15,7 @@
       ></v-btn>
       <v-row>
         <v-col cols="12" md="6" sm="12">
+          <h1>รอการยืนยัน</h1>
           <v-simple-table >
           <template v-slot:default>
             <thead>
@@ -59,6 +60,7 @@
       </v-simple-table>
         </v-col>
         <v-col cols="12" md="6" sm="12">
+          <h1>ยืนยันเรียบร้อยแล้ว</h1>
           <v-simple-table >
           <template v-slot:default>
             <thead>
