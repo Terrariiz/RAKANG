@@ -1,154 +1,110 @@
 <template>
+  <div>
     <div>
-      <div>
       <Navbar></Navbar>
-    </div>   
-    <br><br><br>
-     <v-overlay :value="isloading">
-        <v-progress-circular
-         size="100"
-          width="7"
-          color="green"
-        ></v-progress-circular>
-      </v-overlay>
-      <v-container>
-        <v-row>
-            <v-col class="pad0"  cols="12" md="4" sm="12"> <!-- class="name-picture" -->
-               <v-row >
-                 <v-card-text  class="border-cardtext" >
-                 <v-col class="name-pic-pro"  cols="12" md="12" sm="12">
-                    <div class="edit-profile">
-                  
-                </div>
-              <center><div v-if="selected == 'โปรไฟล์' || selected == 'ประวัติการบริจาค' || selected =='บุ๊คมาค'" class="image-profile">
-                <img  :src="
-                                Profile.image
-                              ">
-              </div></center>
-
-              <center><div v-if="selected == 'แก้ไขโปรไฟล์'" class="image-profile">
-                <!-- <img src="https://media.wired.com/photos/598e35fb99d76447c4eb1f28/master/pass/phonepicutres-TA.jpg"> -->
-                 <center>
-                <v-div
-                  class="base-image-input"
-                  :style="{ 'background-image': `url(${imageData})` }"
-                  @click="chooseImage"
-                >
-                  <span v-if="!imageData" class="placeholder"
-                    >Choose an Image</span
+    </div>
+    <br /><br /><br />
+    <v-overlay :value="isloading">
+      <v-progress-circular
+        size="100"
+        width="7"
+        color="green"
+      ></v-progress-circular>
+    </v-overlay>
+    <v-container>
+      <v-row>
+        <v-col class="pad0" cols="12" md="4" sm="12">
+          <!-- class="name-picture" -->
+          <v-row>
+            <v-card-text class="border-cardtext">
+              <v-col class="name-pic-pro" cols="12" md="12" sm="12">
+                <div class="edit-profile"></div>
+                <center>
+                  <div
+                    v-if="
+                      selected == 'โปรไฟล์' ||
+                        selected == 'ประวัติการบริจาค' ||
+                        selected == 'บุ๊คมาค'
+                    "
+                    class="image-profile"
                   >
-                  <input
-                    class="file-input"
-                    id="file-input"
-                    ref="fileInput"
-                    type="file"
-                    @input="onSelectFile"
-                  />
-                </v-div>
-                
-              </center>
-              </div></center>
-              <hr>
-              <div class="name">
-                
-                <center><div class="name-profile">{{Profile.firstname}} {{Profile.lastname}}</div>
-                <div><span class="sub-head">แต้มบุญ:</span> {{Profile.point}}  </div></center>
-                <br>
-                <div class="btn-cpass">
-                        <v-btn class="e-profile" v-if="selected == 'โปรไฟล์' || selected == 'ประวัติการบริจาค' || selected =='บุ๊คมาค'" @click="onChange('แก้ไขโปรไฟล์')" color="secondary" >แก้ไขโปรไฟล์</v-btn>
-                        <br>
-                        <v-btn  @click.stop="dialog_ChangePassword=true">เปลี่ยนรหัสผ่าน</v-btn>
-                        <ChangePassword :visible="dialog_ChangePassword" @close="dialog_ChangePassword=false" />                     
+                    <img :src="Profile.image" />
+                  </div>
+                </center>
+
+                <center>
+                  <div v-if="selected == 'แก้ไขโปรไฟล์'" class="image-profile">
+                    <!-- <img src="https://media.wired.com/photos/598e35fb99d76447c4eb1f28/master/pass/phonepicutres-TA.jpg"> -->
+                    <center>
+                      <v-div
+                        class="base-image-input"
+                        :style="{ 'background-image': `url(${imageData})` }"
+                        @click="chooseImage"
+                      >
+                        <span v-if="!imageData" class="placeholder"
+                          >Choose an Image</span
+                        >
+                        <input
+                          class="file-input"
+                          id="file-input"
+                          ref="fileInput"
+                          type="file"
+                          @input="onSelectFile"
+                        />
+                      </v-div>
+                    </center>
+                  </div>
+                </center>
+                <hr />
+                <div class="name">
+                  <center>
+                    <div class="name-profile">
+                      {{ Profile.firstname }} {{ Profile.lastname }}
                     </div>
-                
-              </div>
-              
-                 </v-col>
-                 <hr class="hr-hide">
-                 <v-col class="select-head"  cols="12" md="12" sm="12">
-                  <div class="selectboxs">
-                <div class="setting-proflie2">
-                  <div class="hover-setting" @click="onChange('โปรไฟล์')">โปรไฟล์</div>
-                  <div class="hover-setting" @click="onChange('ประวัติการบริจาค')">ประวัติการบริจาค</div>
-                  <div class="hover-setting" @click="onChange('บุ๊คมาค')">บุ๊คมาค</div>
+                    <div>
+                      <span class="sub-head">แต้มบุญ:</span> {{ Profile.point }}
+                    </div>
+                  </center>
+                  <br />
+                  <div class="btn-cpass">
+                    <v-btn
+                      class="e-profile"
+                      v-if="
+                        selected == 'โปรไฟล์' ||
+                          selected == 'ประวัติการบริจาค' ||
+                          selected == 'บุ๊คมาค'
+                      "
+                      @click="onChange('แก้ไขโปรไฟล์')"
+                      color="secondary"
+                      >แก้ไขโปรไฟล์</v-btn
+                    >
+                    <br />
+                    <v-btn @click.stop="dialog_ChangePassword = true"
+                      >เปลี่ยนรหัสผ่าน</v-btn
+                    >
+                    <ChangePassword
+                      :visible="dialog_ChangePassword"
+                      @close="dialog_ChangePassword = false"
+                    />
+                  </div>
                 </div>
-               
-                
-              </div>
-                 </v-col>
-                 </v-card-text>
-               </v-row>
-            </v-col>
-          
-          <v-col v-if="selected == 'โปรไฟล์' || selected == 'ประวัติการบริจาค' || selected =='บุ๊คมาค'" class="setting-proflie" cols="12" md="4" sm="12">
-            <div class="selectboxs">
-              <div>
-                 <v-select
-                 v-model="selected"
-                :items="items"
-                label="เลือกหัวข้อ"
-                solo
-               
-                ></v-select>
-              </div>
-              
-            </div>
-            
-          </v-col>
-          <!-- โปรไฟล์ -->
-          <v-col  v-if="selected == 'โปรไฟล์'" class="details-profile" cols="12" md="8" sm="12">
+              </v-col>
+              <hr class="hr-hide" />
+            </v-card-text>
+          </v-row>
+        </v-col>
+        <v-col cols="12" md="8" sm="12" v-if="selected == 'แก้ไขโปรไฟล์'">
+          <v-card>
+            <v-toolbar flat color="#cfd6ea" dark> </v-toolbar>
             <v-container>
-              
-              <div class="head-profile">บัญชีของฉัน</div>
-              <div class="sub-profile">ดูและแก้ไขข้อมูลส่วนบุคคลของคุณที่นี่</div>
-              <center><img class="img-rank" :src="
-                                'http://localhost:8080/image/rank/' +
-                                Profile.Rank+'.png'
-                              "></center>
-              <hr>
-             
-                 <div class="row">
-                        <div class="col-sm-6">
-                          <p class="m-b-10 f-w-600 sub-head">อีเมลสำหรับล็อกอิน</p>
-                          <h6 class="text-muted f-w-400">
-                            {{Profile.email}}
-                          </h6>
-                        </div>
-                        <div class="col-sm-6">
-                          <p class="m-b-10 f-w-600 sub-head">เบอร์โทรติดต่อ</p>
-                          <h6 class="text-muted f-w-400">
-                           {{Profile.phone}}
-                          </h6>
-                        </div>
-                        <div class="col-sm-6">
-                          <p class="m-b-10 f-w-600 sub-head">วัน/เดือน/ปีเกิด</p>
-                          <h6 class="text-muted f-w-400">{{Profile.birthdate}}</h6>
-                        </div>
-                        <div class="col-sm-6">
-                          <p class="m-b-10 f-w-600 sub-head">แต้มบุญ</p>
-                          <h6 class="text-muted f-w-400">
-                            {{Profile.point}}
-                          </h6>
-                        </div>
-                        
-                      </div>
-                
-            </v-container>
-          </v-col>
-
-           <!-- editโปรไฟล์ -->
-           
-           <v-col v-else-if="selected == 'แก้ไขโปรไฟล์'" class="details-profile" cols="12" md="8" sm="12">
-            <v-form 
-    ref="form"
-    v-model="valid"
-    lazy-validation
-    @submit.prevent="EditProfile">
-            <v-container>
-                  <h6
-                    class="m-b-20 p-b-5 b-b-default f-w-600"
-                    style="font-size:20px;"
-                  >
+              <v-form
+                ref="form"
+                v-model="valid"
+                lazy-validation
+                @submit.prevent="EditProfile"
+              >
+                <v-container>
+                  <h6 class="head-profile">
                     Edit Profile
                   </h6>
 
@@ -187,7 +143,8 @@
                       >
                         <template v-slot:activator="{ on, attrs }">
                           <v-text-field
-                            single-line solo
+                            single-line
+                            solo
                             v-model="Profile.birthdate"
                             prepend-icon="mdi-calendar"
                             :rules="dateRules"
@@ -217,7 +174,7 @@
                         required
                       ></v-text-field>
                     </div>
-                   
+
                     <v-row>
                       <v-col cols="3"></v-col>
                       <v-col cols="3">
@@ -244,127 +201,185 @@
                       <v-col cols="3"></v-col>
                     </v-row>
                   </div>
-                  
                 </v-container>
-          </v-form>
-
-          </v-col>
-
-          <!-- ประวัติการบริจาค -->
-           <v-col v-else-if="selected == 'ประวัติการบริจาค'"  class="table-profile" cols="12" md="8" sm="12">
-            <v-container > 
-            <h2 class="text-center">ประวัติการบริจาค</h2>
-               <v-card>
-                
-                <v-data-table
-                  :headers="headers"
-            :items="filteredList"
-            :items-per-page="pagination.rowsPerPage" 
-            hide-default-footer
-            class="elevation-1"
-                ></v-data-table>
-                <v-pagination circle :total-visible="7"  v-model="pagination.page" :length="pages"></v-pagination>
-              </v-card>
+              </v-form>
             </v-container>
-          </v-col>
-          
-          <!-- bookmark -->
-          <v-col v-else-if="selected == 'บุ๊คมาค'"  class="bookmark-profile" cols="12" md="8" sm="12">
-            <v-container>
-               <div class="block latestPostBlock">
-      <v-container>
-        <h2 class="text-center">หลักธรรมที่บันทึก</h2>
-        <v-row>
-          <v-col v-for="Bookmark in Bookmarks" :key="Bookmark.id" cols="12" md="4">
-            <v-card
-     
-      max-width="344"
-      outlined
-    >
-     <v-img  class="mx-auto" :src="Bookmark.image"></v-img>
-      <v-list-item three-line>
-        <v-list-item-content>
-          <div class="overline mb-4">
-           {{ Bookmark.categories }}
-          </div>
-          <v-list-item-title class="headline mb-1">
-            {{Bookmark.title}}
-          </v-list-item-title>
-          <v-list-item-subtitle v-html="Bookmark.content" >{{ Bookmark.content }}</v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-            <v-card-actions>
-                      <v-btn @click="ViewDoctrine(Bookmark._id)" color="primary" style="margin-left:auto;" text
-                        >More</v-btn
-                      >
-                    </v-card-actions>
           </v-card>
-                </v-col>
-              </v-row>
-    <v-pagination circle :total-visible="7"  v-model="pagination.page" :length="pages"></v-pagination>
+        </v-col>
 
-              <!-- <router-link to='/news' style="float:right; margin-bottom:3%"
-                >แสดงทั้งหมด <i class="fa fa-chevron-right" aria-hidden="true"></i
-                ><i class="fa fa-chevron-right" aria-hidden="true"></i
-              ></router-link> -->
-            </v-container>
-          </div>
+        <v-col cols="12" md="8" sm="12" v-else>
+          <v-card>
+            <v-toolbar flat color="#cfd6ea" dark> </v-toolbar>
+            <v-tabs>
+              <v-tab>
+                โปรไฟล์
+              </v-tab>
+              <v-tab>
+                ประวัติการบริจาค
+              </v-tab>
+              <v-tab>
+                หลักธรรมที่บันทึก
+              </v-tab>
 
-          
-            </v-container>
-          </v-col>
+              <v-tab-item>
+                <v-card flat>
+                <v-container>
+                  <div class="head-profile">โปรไฟล์ของฉัน</div>
+                  <center>
+                    <img
+                      class="img-rank"
+                      :src="
+                        'http://localhost:8080/image/rank/' +
+                          Profile.Rank +
+                          '.png'
+                      "
+                    />
+                  </center>
 
-           
-          <!-- bookmark -->
+                  <hr />
 
-        
-           
-            
-          
-          
-          
-        </v-row>
-      
-      </v-container>
-    
-    </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <p class="m-b-10 f-w-600 sub-head">อีเมลสำหรับล็อกอิน</p>
+                      <h6 class="text-muted f-w-400">
+                        {{ Profile.email }}
+                      </h6>
+                    </div>
+                    <div class="col-sm-6">
+                      <p class="m-b-10 f-w-600 sub-head">เบอร์โทรติดต่อ</p>
+                      <h6 class="text-muted f-w-400">
+                        {{ Profile.phone }}
+                      </h6>
+                    </div>
+                    <div class="col-sm-6">
+                      <p class="m-b-10 f-w-600 sub-head">วัน/เดือน/ปีเกิด</p>
+                      <h6 class="text-muted f-w-400">
+                        {{ Profile.birthdate }}
+                      </h6>
+                    </div>
+                    <div class="col-sm-6">
+                      <p class="m-b-10 f-w-600 sub-head">แต้มสะสม</p>
+                      <h6 class="text-muted f-w-400">
+                        {{ Profile.point }}
+                      </h6>
+                    </div>
+                  </div>
+                </v-container>
+                </v-card>
+              </v-tab-item>
+              <v-tab-item>
+                <v-card flat>
+                  <v-container>
+                    <div class="head-profile">ประวัติการบริจาค</div>
+                    <v-card>
+                      <v-data-table
+                        :headers="headers"
+                        :items="filteredList"
+                        :items-per-page="pagination.rowsPerPage"
+                        hide-default-footer
+                        class="elevation-1"
+                      ></v-data-table>
+                      <v-pagination
+                        circle
+                        :total-visible="7"
+                        v-model="pagination.page"
+                        :length="pages"
+                      ></v-pagination>
+                    </v-card>
+                  </v-container>
+                </v-card>
+              </v-tab-item>
+              <v-tab-item>
+                <v-card flat
+                  ><v-container>
+                    <div class="block latestPostBlock">
+                      <v-container>
+                        <div class="head-profile">หลักธรรมที่บันทึก</div>
+                        <v-row>
+                          <v-col
+                            v-for="Bookmark in Bookmarks"
+                            :key="Bookmark.id"
+                            cols="12"
+                            md="4"
+                          >
+                            <v-card
+                              class="doctrine-card"
+                              max-width="344"
+                              outlined
+                              @click="ViewDoctrine(Bookmark._id)"
+                            >
+                              <v-img
+                                class="mx-auto"
+                                :src="Bookmark.image"
+                              ></v-img>
+                              <v-list-item three-line>
+                                <v-list-item-content>
+                                  <div class="overline mb-4">
+                                    {{ Bookmark.categories }}
+                                  </div>
+                                  <v-list-item-title class="headline mb-1">
+                                    {{ Bookmark.title }}
+                                  </v-list-item-title>
+                                  <v-list-item-subtitle
+                                    v-html="Bookmark.content"
+                                    >{{
+                                      Bookmark.content
+                                    }}</v-list-item-subtitle
+                                  >
+                                </v-list-item-content>
+                              </v-list-item>
+                            </v-card>
+                          </v-col>
+                        </v-row>
+                        <v-pagination
+                          circle
+                          :total-visible="7"
+                          v-model="pagination.page"
+                          :length="pages"
+                        ></v-pagination>
+                      </v-container>
+                    </div>
+                  </v-container>
+                </v-card>
+              </v-tab-item>
+            </v-tabs>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+  </div>
 </template>
 
-
 <script>
-// const Navbar = () => import('@/components/navbar/navbar')
-import ChangePassword from '@/components/profile/changePassword';
+import ChangePassword from "@/components/profile/changePassword";
 const Navbar = () => import("@/components/navbar/navbar");
-import moment from 'moment';
+import moment from "moment";
 // import a from '../../../public/image/outline_add_photo_alternate_black_24dp.png'
 const id = window.localStorage.getItem("user_id");
 import swal from "sweetalert2";
 export default {
-    name : "test",
-   
-    components:{
-      ChangePassword,
-        Navbar,
-        // Pagination,
-        
-    },
-    data ()  {
-      return{
-      items: ['โปรไฟล์', 'ประวัติการบริจาค', 'บุ๊คมาค'],
-      selected: 'โปรไฟล์',
-      Bookmarks:[],
+  name: "test",
+
+  components: {
+    ChangePassword,
+    Navbar,
+  },
+  data() {
+    return {
+      items: ["โปรไฟล์", "ประวัติการบริจาค", "บุ๊คมาค"],
+      selected: "โปรไฟล์",
+      Bookmarks: [],
       dialog_ChangePassword: false,
-      Log:[],
-      Profile:{},
+      Log: [],
+      Profile: {},
       imageData: null,
-      isloading:true,
+      isloading: true,
       valid: false,
       dataEdit: {
         image: null,
         imagepath: "",
         newimage: null,
         oldimage: "",
-        
       },
       emailRules: [
         (v) => !!v || "Email is required!",
@@ -397,112 +412,108 @@ export default {
         (v) => !!v || "Phone is required",
         (v) => v.length == 10 || "Phone must be 10 numbers",
       ],
-      pagination:{
-                data: null,
-                rowsPerPage: 10,
-                page: 1,
-            },
-            totalNumberOfItems: this.$store.getters.banana.length,
-            headers: [
-                {
-                    text: 'ชื่อแคมเปญ',
-                    sortable: false,
-                    value: 'CampaignName'
-                },
-                { text: 'จำนวนเงิน', value: 'amount' },
-                { text: 'วัน-เดือน-ปี', value: 'date' }
-                
-            ]
-      }
-
-    },
-    async mounted(){
-      const token = window.localStorage.getItem("user_token");
-      const id = window.localStorage.getItem("user_id");
-      if (token) {
+      pagination: {
+        data: null,
+        rowsPerPage: 10,
+        page: 1,
+      },
+      totalNumberOfItems: this.$store.getters.banana.length,
+      headers: [
+        {
+          text: "ชื่อแคมเปญ",
+          sortable: false,
+          value: "CampaignName",
+        },
+        { text: "จำนวนเงิน", value: "amount" },
+        { text: "วัน-เดือน-ปี", value: "date" },
+      ],
+    };
+  },
+  async mounted() {
+    const token = window.localStorage.getItem("user_token");
+    const id = window.localStorage.getItem("user_id");
+    if (token) {
       try {
-        // this.$router.push("/profile");
-        this.forceRerender()
+        this.forceRerender();
       } catch (err) {
         console.log(err);
         localStorage.removeItem("user_token");
         localStorage.removeItem("user_id");
       }
-      }
-      console.log(id)
+    }
+    console.log(id);
     await this.$http
       .get("/user/" + id)
       .then((res) => {
         this.Profile = res.data;
         this.dataEdit.oldimage = res.data.image;
-        this.imageData =res.data.image;
-      
-        console.log("get user data")
-        console.log(this.Profile)
+        this.imageData = res.data.image;
+
+        console.log("get user data");
+        console.log(this.Profile);
       })
-      .catch(function (err) {
+      .catch(function(err) {
         console.log(err);
       });
     await this.$http
       .get("donatelog/donateloguser/" + id)
       .then((res) => {
-        console.log("get log")
-        console.log(this.donatelog)
-        
+        console.log("get log");
+        console.log(this.donatelog);
+
         this.pagination.data = res.data.donatelog;
         this.isloading = false;
 
-        var i = 0
-        for(this.pagination.data[i];;i++){
-            this.pagination.data[i].date = moment(this.pagination.data[i].date).format(" DD-MM-YYYY HH:mm A");
-            }
-             
+        var i = 0;
+        for (this.pagination.data[i]; ; i++) {
+          this.pagination.data[i].date = moment(
+            this.pagination.data[i].date
+          ).format(" DD-MM-YYYY HH:mm A");
+        }
       })
-      .catch(function (err) {
+      .catch(function(err) {
         console.log(err);
       });
-      await this.$http
+    await this.$http
       .get("/doctrine/ShowFavDoctrine/" + id)
       .then((res) => {
-
         this.Bookmarks = res.data.favdoctrinelist;
-        console.log("get user Bookmark")
-        console.log(this.Bookmarks)
+        console.log("get user Bookmark");
+        console.log(this.Bookmarks);
       })
-      .catch(function (err) {
+      .catch(function(err) {
         console.log(err);
       });
-    
+  },
+  watch: {
+    menu(val) {
+      val && setTimeout(() => (this.$refs.picker.activePicker = "YEAR"));
     },
-    watch: {
-      menu (val) {
-        val && setTimeout(() => (this.$refs.picker.activePicker = 'YEAR'))
-      },
-    },
-    methods: {
-          save (date) {
-        this.$refs.menu.save(date)
+  },
+  methods: {
+    save(date) {
+      this.$refs.menu.save(date);
     },
     forceRerender() {
-            this.componentKey += 1;
-          },
-      onChange(value) {
-        this.selected = value;
-        console.log(this.selected);
-      },
-      ViewDoctrine(doctrineid){
+      this.componentKey += 1;
+    },
+    onChange(value) {
+      this.selected = value;
+      console.log(this.selected);
+    },
+    ViewDoctrine(doctrineid) {
       this.$router.push({
         name: "UserDetailDoctrine",
-        params: {id:doctrineid}
-      })
+        params: { id: doctrineid },
+      });
     },
-      validate() {
+    validate() {
       this.$refs.form.validate();
     },
-      chooseImage() {
+    chooseImage() {
       this.$refs.fileInput.click();
     },
-      onSelectFile() {
+    onSelectFile() {
       const input = this.$refs.fileInput;
       const files = input.files;
       this.dataEdit.newimage = event.target.files[0];
@@ -553,7 +564,6 @@ export default {
                 "success"
               );
               console.log("success");
-              
             }
           });
       } catch (err) {
@@ -561,54 +571,56 @@ export default {
         if (error.status == 409) {
           swal.fire("Error", error.data.message, "error");
           console.log("success");
-          this.selected = 'โปรไฟล์';
+          this.selected = "โปรไฟล์";
         } else {
           swal.fire("Error", error.data.err.message, "error");
           console.log("error");
-          this.selected = 'โปรไฟล์';
+          this.selected = "โปรไฟล์";
         }
       }
     },
-      
-    },
-    
-    computed: {
-        pages () {
-            return this.pagination.rowsPerPage ? Math.ceil(this.pagination.data.length / this.pagination.rowsPerPage) : 0
-        },
-        filteredList() {
-            var firstIndex;
-            if (this.pagination.page == 1) {
-                firstIndex = 0;
-            } else{
-                firstIndex = (this.pagination.page-1) * this.pagination.rowsPerPage;
-            }
-            console.log(firstIndex + " firstIndex");
-            var showData = this.pagination.data.slice(firstIndex, firstIndex + this.pagination.rowsPerPage);
-            console.log(showData);
-            return showData
-        },
-        
-    },
-      
-  
-    };
-    
- 
+  },
 
-
+  computed: {
+    pages() {
+      return this.pagination.rowsPerPage
+        ? Math.ceil(this.pagination.data.length / this.pagination.rowsPerPage)
+        : 0;
+    },
+    filteredList() {
+      var firstIndex;
+      if (this.pagination.page == 1) {
+        firstIndex = 0;
+      } else {
+        firstIndex = (this.pagination.page - 1) * this.pagination.rowsPerPage;
+      }
+      console.log(firstIndex + " firstIndex");
+      var showData = this.pagination.data.slice(
+        firstIndex,
+        firstIndex + this.pagination.rowsPerPage
+      );
+      console.log(showData);
+      return showData;
+    },
+  },
+};
 </script>
 
 <style scoped>
-.e-profile{
+.doctrine-card:hover {
+  transition: 0.5s ease;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.25);
+}
+.e-profile {
   margin-bottom: 10px;
 }
-hr{
+hr {
   border-top: 1px solid black;
 }
-.border-cardtext{
+.border-cardtext {
   background-color: #efefef;
-  border: #cfd6ea solid 4px ;
+  border: #cfd6ea solid 4px;
   border-radius: 10px;
 }
 /* .pad0{
@@ -620,10 +632,10 @@ hr{
 .row{
   padding: 0;
 } */
-.rows{
+.rows {
   background-color: #e5e5e5;
 }
-.name-profile{
+.name-profile {
   text-align: center;
   justify-content: center;
   font-size: 32px;
@@ -631,15 +643,15 @@ hr{
   font-weight: bold;
   margin-bottom: 20px;
 }
-.sub-head{
+.sub-head {
   font-size: 20px;
   font-weight: bold;
 }
-.head-profile{
+.head-profile {
   font-size: 30px;
   font-weight: bold;
 }
-.sub-profile{
+.sub-profile {
   font-size: 14px;
 }
 /* previewsimage */
@@ -683,27 +695,26 @@ hr{
   margin-left: auto;
   margin-right: auto;
 }
-.hover-setting:hover{
+.hover-setting:hover {
   color: rgb(190, 160, 60);
   cursor: pointer;
 }
-.head-details{
+.head-details {
   text-align: center;
   font-size: 32px;
   font-weight: 300;
   margin: 2%;
 }
-.edit-profile{
+.edit-profile {
   position: absolute;
   right: 0;
-  top:0;
-  
+  top: 0;
 }
-.btn-cpass{
-    margin: 20px auto;
-    text-align: center;
-  }
-.image-profile{
+.btn-cpass {
+  margin: 20px auto;
+  text-align: center;
+}
+.image-profile {
   display: flex;
   justify-content: center;
   text-align: center;
@@ -711,19 +722,18 @@ hr{
   height: 300px;
   width: 300px;
 }
-.edit-pic{
+.edit-pic {
   padding: 20px;
-  background-color: #C0C5C1;
+  background-color: #c0c5c1;
   position: absolute;
   left: 65%;
   top: 5%;
 }
-.edit-pic:hover{
-  background-color:rgb(230, 230, 154) ;
+.edit-pic:hover {
+  background-color: rgb(230, 230, 154);
 }
 
-.img-rank{
-  
+.img-rank {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -731,7 +741,7 @@ hr{
   width: 40%;
 }
 
-.image-profile img{
+.image-profile img {
   clip-path: circle();
   background-size: cover;
   background-position: center;
@@ -739,63 +749,59 @@ hr{
   height: 100%;
   width: 100%;
 }
-.name-picture{
+.name-picture {
   background-color: cornflowerblue;
   align-items: center;
   justify-content: center;
   border: black solid 0.8px;
   padding: 50px 50px;
   /* height: 80vh;  */
-  
 }
 
-.name-pic-pro{
+.name-pic-pro {
   /* border: black solid 0.8px; */
 }
-.select-head{
+.select-head {
   /* margin-top: 3% ; */
   /* border: black solid 0.8px ; */
-  
 }
-.setting-proflie{
+.setting-proflie {
   display: none;
   margin-top: 3%;
   /* border: black solid 0.8px; */
 }
-.details-profile{
+.details-profile {
   /* border: black solid 0.8px; */
   height: 80vh;
   /* padding: 12px; */
-  
 }
-.table-profile{
+.table-profile {
   height: 80vh;
 }
-.bookmark-profile{
+.bookmark-profile {
   height: 80vh;
   overflow-y: scroll;
 }
 
-
 /* ประวัติการบริจาค */
-.table{
+.table {
   width: 100%;
   border-collapse: collapse;
 }
-.table thead{
+.table thead {
   background-color: #ee2828;
 }
-.table thead tr th{
+.table thead tr th {
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.35px;
-  color:#ffffff;
+  color: #ffffff;
   opacity: 1;
   padding: 12px;
   vertical-align: top;
-  border:1px solid #dee2e685;
+  border: 1px solid #dee2e685;
 }
-.table tbody tr td{
+.table tbody tr td {
   font-size: 14px;
   letter-spacing: 0.35px;
   font-weight: normal;
@@ -805,43 +811,42 @@ hr{
   text-align: left;
   border: 1px solid #dee2e685;
 }
-.mx-auto{
-      height:200px;
-
+.mx-auto {
+  height: 200px;
 }
-@media (max-width:768px){
-  .details-profile{
-  
-  max-height:auto;
-  
-}
-.hr-hide{
-  display: none;
-}
-.setting-proflie2{
-  display: none;
-}
-  .setting-proflie{
-  display: block;
-  margin-top: 3%;
-  
-}
-  .table thead{
+@media (max-width: 768px) {
+  .details-profile {
+    max-height: auto;
+  }
+  .hr-hide {
     display: none;
   }
-  .table, .table tbody,.table tr,.table td{
+  .setting-proflie2 {
+    display: none;
+  }
+  .setting-proflie {
+    display: block;
+    margin-top: 3%;
+  }
+  .table thead {
+    display: none;
+  }
+  .table,
+  .table tbody,
+  .table tr,
+  .table td {
     display: block;
     width: 100%;
   }
-  .table tr{
-    margin-bottom:15px;
+  .table tr {
+    margin-bottom: 15px;
   }
-  .table tbody tr td{
+  .table tbody tr td {
     text-align: right;
     padding-left: 50%;
     position: relative;
   }
-  .table td:before{
+  .table td:before {
     content: attr(data-label);
     position: absolute;
     left: 0;
@@ -850,7 +855,6 @@ hr{
     font-weight: 600;
     font-size: 14px;
     text-align: left;
-    
   }
 }
 /* ประวัติการบริจาค */

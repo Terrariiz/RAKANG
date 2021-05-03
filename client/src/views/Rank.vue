@@ -28,12 +28,12 @@
 
     <!-- อันใหม่  -->
     <v-overlay :value="isloading">
-        <v-progress-circular
-         size="100"
-          width="7"
-          color="green"
-        ></v-progress-circular>
-      </v-overlay>
+      <v-progress-circular
+        size="100"
+        width="7"
+        color="green"
+      ></v-progress-circular>
+    </v-overlay>
     <v-container>
       <!-- tablist -->
       <v-card color="basil">
@@ -44,8 +44,29 @@
         </v-card-title>
 
         <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
-          <v-tab v-for="item in head" :key="item">
-            {{ item }}
+          <v-tab>
+            Beginner
+            <img src="../../public/image/rank/rank-beginner.png" alt="Beginner">
+          </v-tab>
+          <v-tab>
+            Bronze
+            <img src="../../public/image/rank/rank-bronze.png" alt="Bronze">
+          </v-tab>
+          <v-tab>
+            Silver
+            <img src="../../public/image/rank/rank-silver.png" alt="Silver">
+          </v-tab>
+          <v-tab>
+            Gold
+            <img src="../../public/image/rank/rank-gold.png" alt="Gold">
+          </v-tab>
+          <v-tab>
+            Platinum
+            <img src="../../public/image/rank/rank-platinum.png" alt="Platinum">
+          </v-tab>
+          <v-tab>
+            Diamond
+            <img src="../../public/image/rank/rank-diamond.png" alt="Diamond">
           </v-tab>
         </v-tabs>
 
@@ -89,14 +110,14 @@ const Navbar = () => import("@/components/navbar/navbar");
 export default {
   components: {
     Navbar,
-    Footer
+    Footer,
   },
   data() {
     return {
       User: [],
       search: "",
       tab: 0,
-      isloading:true,
+      isloading: true,
 
       headers: [
         { text: "ลำดับ", value: "Rank" },
@@ -104,7 +125,7 @@ export default {
         { text: "Point", value: "point" },
       ],
 
-      head: ["Beginner", "Bronze", "Silver", "Gold", "Platinum"],
+      head: ["Beginner", "Bronze", "Silver", "Gold", "Platinum", "Diamond"],
     };
   },
   mounted: async function mounted() {
@@ -112,7 +133,7 @@ export default {
       .get("/user/RankList")
       .then((res) => {
         this.User = res.data;
-        this.isloading = false
+        this.isloading = false;
         console.log(res.data);
       })
       .catch(function(err) {
@@ -140,3 +161,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+  img {
+  width: 50px;
+  height: 30px;
+}
+</style>

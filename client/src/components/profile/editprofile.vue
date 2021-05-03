@@ -3,14 +3,15 @@
     <div>
       <Navbar></Navbar>
     </div>
-    
-    <v-form 
-    ref="form"
-    v-model="valid"
-    lazy-validation
-    @submit.prevent="EditProfile">
+
+    <v-form
+      ref="form"
+      v-model="valid"
+      lazy-validation
+      @submit.prevent="EditProfile"
+    >
       <div>
-      <br><br><br>
+        <br /><br /><br />
         <v-container>
           <v-row>
             <v-col style="background-color:red;" cols="12" md="4" sm="12">
@@ -21,10 +22,9 @@
                   ></v-btn
                 >
               </div>
-              
+
               <center>
                 <v-div
-                  
                   class="base-image-input"
                   :style="{ 'background-image': `url(${imageData})` }"
                   @click="chooseImage"
@@ -101,7 +101,8 @@
                       >
                         <template v-slot:activator="{ on, attrs }">
                           <v-text-field
-                            single-line solo
+                            single-line
+                            solo
                             v-model="dataUser.birthdate"
                             prepend-icon="mdi-calendar"
                             :rules="dateRules"
@@ -257,13 +258,13 @@ export default {
     }
   },
   watch: {
-      menu (val) {
-        val && setTimeout(() => (this.$refs.picker.activePicker = 'YEAR'))
-      },
+    menu(val) {
+      val && setTimeout(() => (this.$refs.picker.activePicker = "YEAR"));
     },
+  },
   methods: {
-    save (date) {
-        this.$refs.menu.save(date)
+    save(date) {
+      this.$refs.menu.save(date);
     },
     chooseImage() {
       this.$refs.fileInput.click();

@@ -106,7 +106,7 @@ export default {
         this.$router.push({ name: 'Detailitems' , params: {id : itemsid}})
         },
         ViewLogitem(itemsid){
-        this.$router.push({ name: 'Detailitems' , params: {id : itemsid}})
+        this.$router.push({ name: 'Confirm_order' , params: {id : itemsid}})
         },
         Edititem(itemsid){
         this.$router.push({ name: 'Edititems' , params: {id : itemsid}})
