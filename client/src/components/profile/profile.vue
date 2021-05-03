@@ -311,7 +311,7 @@
                     <v-card>
                       <v-data-table
                         :headers="headers2"
-                        :items="filteredList"
+                        :items="filteredList1"
                         :items-per-page="pagination.rowsPerPage"
                         hide-default-footer
                         class="elevation-1"
@@ -413,6 +413,7 @@ export default {
       Bookmarks: [],
       dialog_ChangePassword: false,
       Log: [],
+      ExchangeLog:[],
       Profile: {},
       imageData: null,
       isloading:true,
@@ -463,6 +464,11 @@ export default {
                 rowsPerPage: 10,
                 page: 1,
             },
+      pagination1:{
+                data: null,
+                rowsPerPage: 10,
+                page: 1,
+            },
             totalNumberOfItems: this.$store.getters.banana.length,
             headers: [
                 {
@@ -475,9 +481,9 @@ export default {
                 
             ],
             headers2: [
-                { text: 'ชื่อของรางวัล', sortable: false,  value: ''},
-                { text: 'แต้มที่ใช้', value: '' },
-                { text: 'สถานะ',sortable: false, value: '' }
+                { text: 'ชื่อของรางวัล', sortable: false,  value: 'itemname'},
+                { text: 'แต้มที่ใช้', value: 'point' },
+                { text: 'สถานะ',sortable: false, value: 'status' }
                 
             ]
       }
@@ -537,6 +543,18 @@ export default {
         this.Bookmarks = res.data.favdoctrinelist;
         console.log("get user Bookmark");
         console.log(this.Bookmarks);
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+      await this.$http
+      .get("/exchangeitem/GetUserExchangeLog/" + id)
+      .then((res) => {
+        this.ExchangeLog = res.data;
+        console.log("ExchangeLog");
+        console.log(this.ExchangeLog);
+        this.pagination1.data = this.ExchangeLog.exchangelog;
+
       })
       .catch(function(err) {
         console.log(err);
@@ -663,6 +681,21 @@ export default {
       var showData = this.pagination.data.slice(
         firstIndex,
         firstIndex + this.pagination.rowsPerPage
+      );
+      console.log(showData);
+      return showData;
+    },
+     filteredList1() {
+      var firstIndex;
+      if (this.pagination1.page == 1) {
+        firstIndex = 0;
+      } else {
+        firstIndex = (this.pagination1.page - 1) * this.pagination1.rowsPerPage;
+      }
+      console.log(firstIndex + " firstIndex");
+      var showData = this.pagination1.data.slice(
+        firstIndex,
+        firstIndex + this.pagination1.rowsPerPage
       );
       console.log(showData);
       return showData;
