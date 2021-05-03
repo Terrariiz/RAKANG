@@ -193,16 +193,6 @@ const routes = [
   },
 
   {
-    path: '/admin/dashboard',
-    name: 'Dashboard',
-    component: dashboard,
-    meta: {
-      requiresAdminAuth: true
-    },
-   
-  },
-
-  {
     path: '/admin/login',
     name: 'loginAdmin',
     component: loginAdmin
