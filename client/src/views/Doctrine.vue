@@ -129,6 +129,7 @@
       </div>
       <!-- อันใหม่ -->
     </v-container>
+    <component-to-re-render :key="componentKey" />
     <div>
       <Footer></Footer>
     </div>
