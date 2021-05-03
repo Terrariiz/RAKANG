@@ -468,6 +468,7 @@ export default {
 
         console.log("get user data");
         console.log(this.Profile);
+        console.log(this.Profile.exchangelog[0]._id)
       })
       .catch(function(err) {
         console.log(err);
@@ -476,8 +477,6 @@ export default {
       .get("donatelog/donateloguser/" + id)
       .then((res) => {
         console.log("get log");
-        console.log(this.donatelog);
-
         this.pagination.data = res.data.donatelog;
         this.isloading = false;
 
