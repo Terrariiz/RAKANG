@@ -13,101 +13,47 @@
           aria-hidden="true"
         ></i
       ></v-btn>
-      <div class="small-container single-product">
-        <div class="row">
-          <div class="col-2">
-            <v-simple-table>
-              <template v-slot:default>
-                <thead>
-                  <tr>
-                    <th class="text-left"></th>
-                    <th class="text-left">ชื่อผู้แลก</th>
-                    <th class="text-left">ชื่อสินค้า</th>
-                    <th class="text-left"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="item in items" :key="item._id">
-                    <td>
-                      <center>
-                        <img
-                          :src="item.galleryimage[0].image"
-                          class="img-fluid"
-                          style="
-                            width: 100px;
-                            height: 100px;
-                            object-fit: cover;
-                            margin: 3%;
-                          "
-                          align="center"
-                        />
-                      </center>
-                    </td>
-                    <td>
-                      {{ item.name }}
-                    </td>
-                    <td>
-                      {{ item.remain }}
-                    </td>
-                    <td>
-                      <v-btn
-                        style="margin-right: 3%"
-                        >ยืนยัน</v-btn
-                      >
-                    </td>
-                  </tr>
-                </tbody>
-              </template>
-            </v-simple-table>
-          </div>
-          <div class="col-2">
-            <v-simple-table>
-              <template v-slot:default>
-                <thead>
-                  <tr>
-                    <th class="text-left"></th>
-                    <th class="text-left">ชื่อผู้แลก</th>
-                    <th class="text-left">ชื่อสินค้า</th>
-                    <th class="text-left"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="item in items" :key="item._id">
-                    <td>
-                      <center>
-                        <img
-                          :src="item.galleryimage[0].image"
-                          class="img-fluid"
-                          style="
-                            width: 100px;
-                            height: 100px;
-                            object-fit: cover;
-                            margin: 3%;
-                          "
-                          align="center"
-                        />
-                      </center>
-                    </td>
-                    <td>
-                      {{ item.name }}
-                    </td>
-                    <td>
-                      {{ item.remain }}
-                    </td>
-                    <td>
-                      <v-btn
-                        style="margin-right: 3%"
-                        >ยืนยัน</v-btn
-                      >
-                    </td>
-                  </tr>
-                </tbody>
-              </template>
-            </v-simple-table>
-          </div>
-        </div>
-      </div>
-      <br />
+      <v-row>
+        <v-col cols="12" md="6" sm="12">
+          <v-simple-table >
+          <template v-slot:default>
+            <thead>
+              <tr>
+                <th class="text-left">
+                 
+                </th>
+                <th class="text-left">
+                  Name
+                </th>
+                <th class="text-left">
+                 Amount
+                </th>
+                <th class="text-left">
+                  Editor
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr >  
+                <td><center><img src="" class="img-fluid" style="width: 100px; height: 100px; object-fit: cover;  margin:3%;" align="center"></center></td> 
+                <td>
+                    ชื่อสินค้า
+                </td>
+                <td>
+                    จำนวนสินค้า
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+            </tbody>
+          </template>
+      </v-simple-table>
+        </v-col>
+        <v-col cols="12" md="6" sm="12">
+          
+        </v-col>
+      </v-row>
     </div>
   </div>
 </template>
