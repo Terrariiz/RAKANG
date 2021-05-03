@@ -28,7 +28,7 @@
           <v-col  cols="12" md="6">
             <v-container>
               
-                <h1>{{ campaign.name }} </h1>
+                <h1 class="campaign-name">{{ campaign.name }} </h1>
               <div>
                 <span class="icon-people"
                       ><i class="fa fa-eye"></i> {{ campaign.view }}</span>
@@ -164,6 +164,9 @@ export default {
 </script>
 
 <style >
+.campaign-name{
+  font-size: 42px;
+}
 .header{
   text-align: center;
   margin-top: 3%;

@@ -453,6 +453,7 @@ export default {
   height: 300px;
 }
 .panelx {
+  background-color: white;
   padding: 5%;
   box-shadow: 0px 6px 18px -8px rgba(118, 130, 183, 1);
   border-radius: 10px;
