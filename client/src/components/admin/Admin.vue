@@ -13,58 +13,119 @@
       </v-overlay> -->
     <h1>Dashboard</h1>
     <v-container>
-      <v-card flat class="py-12">
-        <v-card-text>
-          <v-row align="center" justify="center">
-            <v-col cols="12">
-              <p class="text-center">Rounded</p>
-            </v-col>
-            <v-btn-toggle v-model="toggle_exclusive" rounded mandatory>
-              <v-btn @click="updateChart(test1, test2)">change 1</v-btn>
-              <v-btn @click="updateChart(date, dataTest)">change 2</v-btn>
-            </v-btn-toggle>
-          </v-row>
-        </v-card-text>
-      </v-card>
+     
+  <v-card style="display:inline;"
+    class="mx-auto"
+    max-width="200"
+    outlined
+  >
+    <v-list-item three-line>
+      <v-list-item-content>
+        <div class="overline mb-4">
+          totalviewsCampaign
+        </div>
+        <v-list-item-title class="headline mb-1">
+        {{campaign_view}}
+        </v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>
+  </v-card>
+  <v-card style="display:inline;"
+    class="mx-auto"
+    max-width="200"
+    outlined
+  >
+    <v-list-item three-line>
+      <v-list-item-content>
+        <div class="overline mb-4">
+          totalviewsnews
+        </div>
+        <v-list-item-title class="headline mb-1">
+        {{news_view}}
+        </v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>
+  </v-card>
+  <v-card style="display:inline;"
+    class="mx-auto"
+    max-width="200"
+    outlined
+  >
+    <v-list-item three-line>
+      <v-list-item-content>
+        <div class="overline mb-4">
+          totalviewsdoctrine
+        </div>
+        <v-list-item-title class="headline mb-1">
+        {{doctrine_view}}
+        </v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>
+  </v-card>
+           
       <v-row>
         <v-col cols="12" md="6" sm="12">
           <v-card class="mx-auto" max-width="500">
-            <v-card-title>ปู่ลูฟี่</v-card-title>
+            <v-card-title>TotalDonatePerCampaign</v-card-title>
             <apexchart
               type="bar"
-              :options="options"
+              :options="options1"
               :series="series"
             ></apexchart>
           </v-card>
         </v-col>
-        <v-col cols="12" md="6" sm="12">
+         <v-col cols="12" md="6" sm="12">
           <v-card class="mx-auto" max-width="500">
-            <v-card-title>ปู่ลูฟี่</v-card-title>
+            <v-card-title>Exchange_item</v-card-title>
             <apexchart
               type="bar"
-              :options="options"
-              :series="series"
+              :options="options4"
+              :series="series5"
             ></apexchart>
           </v-card>
         </v-col>
         <v-col cols="12" md="6" sm="12">
           <v-card class="mx-auto" max-width="500">
-            <v-card-title>ปู่ลูฟี่</v-card-title>
+            <v-card-title>DonatePerDay</v-card-title>
             <apexchart
               type="line"
-              :options="options"
-              :series="series"
+              :options="options2"
+              :series="series0"
             ></apexchart>
           </v-card>
         </v-col>
         <v-col cols="12" md="6" sm="12">
           <v-card class="mx-auto" max-width="500">
-            <v-card-title>ปู่ลูฟี่</v-card-title>
+            <v-card-title>ExchangePerDay</v-card-title>
             <apexchart
               type="line"
-              :options="options"
-              :series="series"
+              :options="options3"
+              :series="series4"
             ></apexchart>
+          </v-card>
+        </v-col>
+         <v-col cols="12" md="6" sm="12">
+          <v-card class="mx-auto" max-width="500">
+            <v-card-title>หลักธรรม</v-card-title>
+             <div id="chart">
+        <apexchart type="pie"  :options="chartOptions1" :series="series1"></apexchart>
+      </div>
+          </v-card>
+        </v-col>
+         <v-col cols="12" md="6" sm="12">
+          <v-card class="mx-auto" max-width="500">
+            <v-card-title>ข่าวสาร</v-card-title>
+             <div id="chart">
+        <apexchart type="pie"  :options="chartOptions2" :series="series2"></apexchart>
+      </div>
+          </v-card>
+        </v-col>
+         <v-col cols="12" md="6" sm="12">
+          <v-card class="mx-auto" max-width="500">
+            <v-card-title>Campaign</v-card-title>
+             <div id="chart">
+        <apexchart type="pie"  :options="chartOptions3" :series="series3"></apexchart>
+      </div>
           </v-card>
         </v-col>
       </v-row>
@@ -108,12 +169,12 @@ export default {
       // isloading:true,
       test1: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
       test2: [30, 40, 45, 50, 49, 60, 70, 91],
-      options: {
+      options1: {
         chart: {
           id: "vuechart-example",
         },
         title: {
-          text: 'ปู่ลูฟี่',
+          text: 'TotalDonatePerCampaign',
           align: "center",
           margin: 10,
           offsetX: 0,
@@ -128,23 +189,194 @@ export default {
         },
         xaxis: {
           title: {
-            text: "ปี",
+            text: "วัน",
           },
-          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
+          categories: [],
         },
         yaxis: {
           title: {
-            text: "ยอดขาย(ล้านบาท)",
+            text: "ยอดการบริจาค",
+          },
+        },
+      },
+      options2: {
+        chart: {
+          id: "vuechart-example",
+        },
+        title: {
+          text: 'DonatePerDay',
+          align: "center",
+          margin: 10,
+          offsetX: 0,
+          offsetY: 0,
+          floating: false,
+          style: {
+            fontSize: "16px",
+            fontWeight: "bold",
+            fontFamily: undefined,
+            color: "#263238",
+          },
+        },
+        xaxis: {
+          title: {
+            text: "วัน",
+          },
+          categories: [],
+
+        },
+        yaxis: {
+          title: {
+            text: "ยอดการบริจาค",
+          },
+        },
+      },
+      options3: {
+        chart: {
+          id: "vuechart-example",
+        },
+        title: {
+          text: 'ExchangePerDay',
+          align: "center",
+          margin: 10,
+          offsetX: 0,
+          offsetY: 0,
+          floating: false,
+          style: {
+            fontSize: "16px",
+            fontWeight: "bold",
+            fontFamily: undefined,
+            color: "#263238",
+          },
+        },
+        xaxis: {
+          title: {
+            text: "วัน",
+          },
+          categories: [],
+        },
+        yaxis: {
+          title: {
+            text: "ยอดการบริจาค",
+          },
+        },
+      },
+      options4: {
+        chart: {
+          id: "vuechart-example",
+        },
+        title: {
+          text: 'ExchangeItem',
+          align: "center",
+          margin: 10,
+          offsetX: 0,
+          offsetY: 0,
+          floating: false,
+          style: {
+            fontSize: "16px",
+            fontWeight: "bold",
+            fontFamily: undefined,
+            color: "#263238",
+          },
+        },
+        xaxis: {
+          title: {
+            text: "name",
+          },
+          categories: [],
+        },
+        yaxis: {
+          title: {
+            text: "ยอดการสั่ง",
           },
         },
       },
       series: [
         {
-          name: "ยอดขาย(ล้านบาท)",
-          data: [30, 40, 45, 50, 49, 60, 70, 91],
+          name: "ยอด",
+          data: [],
         },
       ],
-    };
+      series0: [
+        {
+          name: "ยอด",
+          data: [],
+        },
+      ],
+     
+      series1: [],
+      series2: [],
+      series3: [],
+
+       series4: [
+        {
+          name: "ยอด",
+          data: [],
+        },
+      ],
+      series5: [
+        {
+          name: "จำนวน",
+          data: [],
+        },
+      ],
+
+
+          chartOptions1: {
+            chart: {
+              width: 360,
+              type: 'pie',
+            },
+            labels: [],
+            responsive: [{
+              breakpoint: 480,
+              options: {
+                chart: {
+                  width: 200
+                },
+                legend: {
+                  position: 'bottom'
+                }
+              }
+            }],
+          },
+          chartOptions2: {
+            chart: {
+              width: 360,
+              type: 'pie',
+            },
+            labels: [],
+            responsive: [{
+              breakpoint: 480,
+              options: {
+                chart: {
+                  width: 200
+                },
+                legend: {
+                  position: 'bottom'
+                }
+              }
+            }],
+          },
+          chartOptions3: {
+            chart: {
+              width: 360,
+              type: 'pie',
+            },
+            labels: [],
+            responsive: [{
+              breakpoint: 480,
+              options: {
+                chart: {
+                  width: 200
+                },
+                legend: {
+                  position: 'bottom'
+                }
+              }
+            }],
+          }
+      
+    }
   },
   methods: {
     async sign_out() {
@@ -153,13 +385,50 @@ export default {
       await this.$router.push("/home");
     },
     // เปลี่ยนข้อมูลในกราฟ
+   
     updateChart(new_categories, new_data) {
-      this.options = {
+      this.options1 = {
         xaxis: {
           categories: new_categories,
         },
       };
       this.series = [
+        {
+          data: new_data,
+        },
+      ];
+    }, 
+    updateChart1(new_categories, new_data) {
+      this.options2 = {
+        xaxis: {
+          categories: new_categories,
+        },
+      };
+      this.series0 = [
+        {
+          data: new_data,
+        },
+      ];
+    },
+    updateChart2(new_categories, new_data) {
+      this.options3 = {
+        xaxis: {
+          categories: new_categories,
+        },
+      };
+      this.series4 = [
+        {
+          data: new_data,
+        },
+      ];
+    },
+    updateChart3(new_categories, new_data) {
+      this.options4 = {
+        xaxis: {
+          categories: new_categories,
+        },
+      };
+      this.series5 = [
         {
           data: new_data,
         },
@@ -191,41 +460,104 @@ export default {
                 .then(async (res) => {
                     console.log(res.data)
                     this.TotalDonatePerUser = res.data
+                    // for(var i=0;i<this.TotalDonatePerUser.length;i++){
+                    //     var y = this.TotalDonatePerUser[i]._id
+                    //     this.options2.xaxis.categories.push(y)
+                    //     var x = this.TotalDonatePerUser[i].total
+                    //     this.series0[0].data.push(x)
+                    //   }
+                    //   let c = this.options2.xaxis.categories
+                    //   let d = this.series0[0].data
+                    //   this.updateChart1(c, d)
             })
             this.$http.get("/dashboard/TotalDonatePerCampaign")
                 .then(async (res) => {
                     console.log(res.data)
                     this.TotalDonatePerCampaign = res.data
+                    for(var i=0;i<this.TotalDonatePerCampaign.length;i++){
+                        var y = this.TotalDonatePerCampaign[i]._id
+                        this.options1.xaxis.categories.push(y)
+                        var x = this.TotalDonatePerCampaign[i].total
+                        this.series[0].data.push(x)
+                      }
+                      let c = this.options1.xaxis.categories
+                      let d = this.series[0].data
+                      this.updateChart(c, d)
             })
             this.$http.get("/dashboard/DonatePerDay")
                 .then(async (res) => {
                     console.log(res.data)
                     this.DonatePerDay = res.data
+                     for(var i=0;i<this.DonatePerDay.length;i++){
+                        var y = this.DonatePerDay[i]._id
+                        this.options2.xaxis.categories.push(y)
+                        var x = this.DonatePerDay[i].total
+                        this.series0[0].data.push(x)
+                      }
+                      let c = this.options2.xaxis.categories
+                      let d = this.series0[0].data
+                      this.updateChart1(c, d)
             })
             this.$http.get("/dashboard/DoctrineperType")
                 .then(async (res) => {
                     console.log(res.data)
                     this.DoctrineperType = res.data
+                      for(var i=0;i<5;i++){
+                        var y = this.DoctrineperType[i]._id
+                        this.chartOptions1.labels.push(y)
+                        var x = this.DoctrineperType[i].count
+                        this.series1.push(x)
+                      }
             })
             this.$http.get("/dashboard/NewsPerType")
                 .then(async (res) => {
                     console.log(res.data)
                     this.NewsPerType = res.data
+                     for(var i=0;i<5;i++){
+                        var y = this.NewsPerType[i]._id
+                        this.chartOptions2.labels.push(y)
+                        var x = this.NewsPerType[i].count
+                        this.series2.push(x)
+                      }
             })
             this.$http.get("/dashboard/CampaignPerType")
                 .then(async (res) => {
                     console.log(res.data)
                     this.CampaignPerType = res.data
+                    for(var i=0;i<3;i++){
+                        var y = this.CampaignPerType[i]._id
+                        this.chartOptions3.labels.push(y)
+                        var x = this.CampaignPerType[i].count
+                        this.series3.push(x)
+                      }
             })
             this.$http.get("/dashboard/ExchangePerDay")
                 .then(async (res) => {
                     console.log(res.data)
                     this.ExchangePerDay = res.data
+                     for(var i=0;i<this.ExchangePerDay.length;i++){
+                        var y = this.ExchangePerDay[i]._id
+                        this.options3.xaxis.categories.push(y)
+                        var x = this.ExchangePerDay[i].count
+                        this.series4[0].data.push(x)
+                      }
+                      let c = this.options3.xaxis.categories
+                      let d = this.series4[0].data
+                      this.updateChart2(c, d)
             })
             this.$http.get("/exchangeitem/ShowListItem")
                 .then(async (res) => {
                     console.log(res.data)
                     this.Exchange_item = res.data
+                    for(var i=0;i<this.Exchange_item.length;i++){
+                        var y = this.Exchange_item[i].name
+                        this.options4.xaxis.categories.push(y)
+                        var x = this.Exchange_item[i].exchange_complete
+                        this.series5[0].data.push(x)
+                      }
+                      let c = this.options4.xaxis.categories
+                      let d = this.series5[0].data
+                      this.updateChart3(c, d)
             })
         },
         cal(){
@@ -257,12 +589,11 @@ export default {
             this.news_view += result.value
             });
           }  
-        },
+          },
   },
   // ทำวันที่เป็นสัปดาห์
   created: async function created() {
     await this.getdata()
-    
     var date_now = new Date();
     this.startDate = date_now.toISOString().substr(0, 10);
     // this.isloading = false
@@ -281,20 +612,8 @@ export default {
     console.log(this.dataTest);
     
   },
-  // mounted: async function mounted() {
-  // const id = this.$route.params.id;
-  // await this.$http
-  //   .get("donatelog/donatelogcampaign/")
-  //   .then((res) => {
-  //   this.loguser = res.data.donatelist;
-  //   var i = 0
-  //   for(this.loguser[i];;i++){
-  //       this.loguser[i].date = moment(this.loguser[i].date).format(" DD-MM-YY HH:mm A");
-  //       }
-  //     })
-  //     .catch(function (err) {
-  //       console.log(err);
-  //     });
-  // },
+  mounted: async function mounted() {
+    // await this.updateChart()
+  },
 };
 </script>
