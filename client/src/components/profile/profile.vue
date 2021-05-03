@@ -43,7 +43,7 @@
 
                 <center>
                   <div v-if="selected == 'แก้ไขโปรไฟล์'" class="image-profile">
-                    <!-- <img src="https://media.wired.com/photos/598e35fb99d76447c4eb1f28/master/pass/phonepicutres-TA.jpg"> -->
+                    <div @click="chooseImage" class="icon-edit"><i class="fa fa-pencil" aria-hidden="true"></i></div>
                     <center>
                       <v-div
                         class="base-image-input"
@@ -698,11 +698,31 @@ export default {
     //   console.log(showData);
     //   return showData;
     // },
+    
   },
 };
 </script>
 
 <style scoped>
+.icon-edit{
+  position: relative;
+  cursor: pointer;
+  
+}
+.icon-edit > i{
+ position: absolute;
+  top: 120px;
+  right: -170px;
+  height: 35px;
+  width: 35px;
+  z-index: 2;
+  background-color: rgb(255, 255, 255);
+  line-height: 35px;
+  border-radius: 50%;
+}
+.icon-edit > i:hover{
+ background-color: rgb(153, 153, 153);
+}
 .no-data{
   display: flex;
   justify-content: center;

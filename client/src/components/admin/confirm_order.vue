@@ -20,7 +20,6 @@
                <v-tab-item>
                 <v-card flat>
                   <v-container>
-                    <div class="head-profile">สินค้ารอการยืนยัน </div>
                     <v-card>
                       <v-data-table
                         v-model="selected"
@@ -31,7 +30,31 @@
                         class="elevation-1"
                         :items-per-page="10"
                         > 
-            
+                       <template v-slot:top>
+                         <v-toolbar flat>
+                            <v-toolbar-title>สินค้ารอการยืนยัน</v-toolbar-title>
+                            <v-spacer></v-spacer>
+                            <v-btn
+                              color="primary"
+                              dark
+                              class="mb-2"
+                              v-bind="attrs"
+                              v-on="on"
+                              @click="confirmOrder"
+                            >
+                              New Item
+                            </v-btn>
+                          </v-toolbar>
+                        </template>
+                        <template v-slot:item.actions>
+                          <v-icon small class="mr-2" @click="addnumber">
+                            mdi-pencil
+                          </v-icon>
+                          <v-icon small @click="deleteitems">
+                            mdi-delete
+                          </v-icon>
+                        </template>
+
                       </v-data-table>
                     </v-card>
                   </v-container>
@@ -40,13 +63,19 @@
               <v-tab-item>
                 <v-card flat>
                   <v-container>
-                    <div class="head-profile">สินค้าที่ยืนยันแล้ว</div>
                     <v-card>
                       <v-data-table
                         :headers="header2"
                         :items="waitLogs"
                         :items-per-page="10"
-                      ></v-data-table>
+                      >
+                        <template v-slot:top>
+                          <v-toolbar flat>
+                            <v-toolbar-title>ยืนยันสินค้าเรียบร้อยแล้ว</v-toolbar-title>
+                            <v-spacer></v-spacer>
+                          </v-toolbar>
+                         </template>
+                      </v-data-table>
                       
                     </v-card>
                   </v-container>
@@ -54,7 +83,7 @@
               </v-tab-item>
              
             </v-tabs>
-            <v-btn @click="confirmOrder">ยืนยัน</v-btn>
+            
           </v-card>
         </div>
   </div>
@@ -64,10 +93,6 @@
 const Navbar = () => import("@/components/navbar/navbar");
 import moment from "moment";
 import swal from "sweetalert2";
-import {
-    mdiPencil,
-    mdiDelete,
-  } from '@mdi/js'
 export default {
   
   components: {
@@ -78,10 +103,6 @@ export default {
       waitLogs:[],
       confirmLogs:[],
       selected: [],
-      items: {
-        mdiPencil, 
-        mdiDelete,
-      },
       header1: [
                 { text: 'วันที่สั่ง',value: 'date'},
                 { text: 'ชื่อผู้สั่ง', value: 'name' },
@@ -90,7 +111,7 @@ export default {
                 { text: 'เขต/อำเภอ', value: 'District' },
                 { text: 'จังหวัด', value: 'province' },
                 { text: 'รหัสไปรษณีย์', value: 'postcode' },
-                { text: 'เลขพัสดุ',sortable: false, value: '' },
+                { text: 'เลขพัสดุ',sortable: false, value: 'number' },
                 { text: 'การจัดการ',sortable: false, value: 'actions' },
             ],
       
@@ -106,6 +127,14 @@ export default {
                 
                 
             ],
+            dialog: false,
+             editedIndex: -1,
+      editedItem: {
+        number: null,
+      },
+      defaultItem: {
+      number: null,
+      },
             
             
     }
@@ -186,6 +215,13 @@ export default {
         }
       }
     },
+    addnumber(){
+      swal.fire("เกิดข้อผิดผลาด", "กรุณาเลือกออเดอร์", "error");
+    },
+    deleteitems(){
+      swal.fire("คุณต้องการจะลบใช่ไหม");
+    }
+
   },
 };
 </script>
