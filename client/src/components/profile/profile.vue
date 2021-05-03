@@ -43,8 +43,11 @@
 
                 <center>
                   <div v-if="selected == 'แก้ไขโปรไฟล์'" class="image-profile">
+                    <!-- <div class="font-z">แก้ไขรูปภาพ</div> -->
                     <div @click="chooseImage" class="icon-edit"><i class="fa fa-pencil" aria-hidden="true"></i></div>
+                    
                     <center>
+                      
                       <v-div
                         class="base-image-input"
                         :style="{ 'background-image': `url(${imageData})` }"
@@ -63,7 +66,7 @@
                       </v-div>
                     </center>
                   </div>
-                </center>
+                 </center>
                 <hr />
                 <div class="name">
                   <center>
@@ -707,6 +710,10 @@ export default {
 </script>
 
 <style scoped>
+.font-z{
+  font-size: 20px;
+  /* margin: 10px; */
+}
 .icon-edit{
   position: relative;
   cursor: pointer;
@@ -823,10 +830,11 @@ hr {
   margin-left: auto;
   margin-right: auto;
 }
-.hover-setting:hover {
+
+/* .hover-setting:hover {
   color: rgb(190, 160, 60);
   cursor: pointer;
-}
+} */
 .head-details {
   text-align: center;
   font-size: 32px;

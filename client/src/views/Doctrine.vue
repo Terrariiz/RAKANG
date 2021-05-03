@@ -3,6 +3,7 @@
     <div>
       <Navbar></Navbar>
     </div>
+    <br>
     <v-overlay :value="isloading">
         <v-progress-circular
         indeterminate
@@ -81,23 +82,26 @@
               >
                 <!-- ปุ่ม bookmark -->
 
-                <h3>
+                <!-- <h3>
                   {{ doctrine.title }}
-                </h3>
+                </h3> -->
                 <v-list-item three-line>
                   <v-list-item-content>
+                    <v-list-item-title class="headline mb-1">
+                      {{ doctrine.title }}
+                    </v-list-item-title>
                     <v-list-item-subtitle v-html="doctrine.content">
                       {{ doctrine.content }}
                     </v-list-item-subtitle>
+                    <hr>
+                    <span class="datex">{{ doctrine.edittime }}</span>
+                    <p>{{ doctrine.categories }}</p>
                   </v-list-item-content>
                 </v-list-item>
-                <span class="datex">{{ doctrine.edittime }}</span>
-                <p>
-                  {{ doctrine.categories }}
-                </p>
-                <span class="icon-people" style="float: right;"
-                      ><i class="fa fa-eye"></i> {{ doctrine.view }}</span
-                    >
+                
+                <span class="icon-people" style="float: right;">
+                  <i class="fa fa-eye"></i> {{ doctrine.view }}
+                </span>
               </div>
               <div class="btn-bookmark" v-if="$store.getters.UserIsLoggedIn">
                 <v-btn

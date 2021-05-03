@@ -13,6 +13,7 @@
       </v-overlay>
      <v-container class="container-news">
        <section class="header">
+         <br>
         <h1>แคมเปญ</h1>
       </section>
       <hr />
@@ -163,7 +164,7 @@ export default {
 };
 </script>
 
-<style >
+<style scoped >
 .campaign-name{
   font-size: 42px;
 }
