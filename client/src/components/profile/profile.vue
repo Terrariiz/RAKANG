@@ -226,9 +226,12 @@
                 ประวัติการบริจาค
               </v-tab>
               <v-tab>
+               ประวัติการแลกของ
+              </v-tab>
+              <v-tab>
                 หลักธรรมที่บันทึก
               </v-tab>
-
+              <!-- โปรไฟล์  -->
               <v-tab-item>
                 <v-card flat>
                 <v-container>
@@ -275,6 +278,8 @@
                 </v-container>
                 </v-card>
               </v-tab-item>
+              <!-- โปรไฟล์ -->
+              <!-- ประวัติการบริจาค  -->
               <v-tab-item>
                 <v-card flat>
                   <v-container>
@@ -297,12 +302,39 @@
                   </v-container>
                 </v-card>
               </v-tab-item>
+              <!-- ประวัติการบริจาค  -->
+              <!-- ประวัติการแลกของ  -->
+              <v-tab-item>
+                <v-card flat>
+                  <v-container>
+                    <div class="head-profile">ประวัติการแลกของ</div>
+                    <v-card>
+                      <v-data-table
+                        :headers="headers2"
+                        :items="filteredList"
+                        :items-per-page="pagination.rowsPerPage"
+                        hide-default-footer
+                        class="elevation-1"
+                      ></v-data-table>
+                      <v-pagination
+                        circle
+                        :total-visible="7"
+                        v-model="pagination.page"
+                        :length="pages"
+                      ></v-pagination>
+                    </v-card>
+                  </v-container>
+                </v-card>
+              </v-tab-item>
+              <!-- ประวัติการแลกของ  -->
+              <!-- หลักธรรมที่บันทึก  -->
               <v-tab-item>
                 <v-card flat
                   ><v-container>
                     <div class="block latestPostBlock">
                       <v-container>
                         <div class="head-profile">หลักธรรมที่บันทึก</div>
+                         <div class="no-data" v-if="Bookmarks.length == 0"><h1>"ไม่มีหลักธรรมที่บันทึก"</h1></div>
                         <v-row>
                           <v-col
                             v-for="Bookmark in Bookmarks"
@@ -340,6 +372,7 @@
                           </v-col>
                         </v-row>
                         <v-pagination
+                          v-if="Bookmarks.length > 0"
                           circle
                           :total-visible="7"
                           v-model="pagination.page"
@@ -350,6 +383,7 @@
                   </v-container>
                 </v-card>
               </v-tab-item>
+              <!-- หลักธรรมที่บันทึก  -->
             </v-tabs>
           </v-card>
         </v-col>
@@ -438,6 +472,12 @@ export default {
                 },
                 { text: 'จำนวนเงิน', value: 'amount' },
                 { text: 'วัน-เดือน-ปี', value: 'date' }
+                
+            ],
+            headers2: [
+                { text: 'ชื่อของรางวัล', sortable: false,  value: ''},
+                { text: 'แต้มที่ใช้', value: '' },
+                { text: 'สถานะ',sortable: false, value: '' }
                 
             ]
       }
@@ -632,6 +672,15 @@ export default {
 </script>
 
 <style scoped>
+.no-data{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.no-data > h1{
+  color: #8d8d91;
+  
+}
 .doctrine-card:hover {
   transition: 0.5s ease;
   transform: translateY(-1px);

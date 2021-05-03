@@ -51,7 +51,7 @@
                             <v-btn style="margin-right:3%;" @click="EditNews(news._id)">Edit</v-btn>
                           </span>
                           <span>
-                            <v-btn @click="DeleteNews(news._id)">Delete</v-btn>
+                            <v-btn color="error" @click="DeleteNews(news._id)">Delete</v-btn>
                           </span>
                         </div>
                       </v-col>
