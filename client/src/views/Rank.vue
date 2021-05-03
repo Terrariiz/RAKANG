@@ -4,29 +4,6 @@
       <Navbar></Navbar>
     </div>
     <br /><br /><br /><br />
-    <!-- <h1 style="text-align:center;">Ranking Board</h1>
-    <v-container >
-      <v-card>
-    <v-card-title>
-      <v-text-field
-        v-model="search"
-        append-icon="mdi-magnify"
-        label="Search"
-        single-line
-        hide-details
-      ></v-text-field>
-    </v-card-title>
-    <v-data-table
-      :headers="headers"
-      :items="User"
-      :search="search"
-    >
-    <template User.fullname="{ User }">{{ User.firstname }} {{ User.lastname }}</template>
-    </v-data-table>
-  </v-card>
-    </v-container>    -->
-
-    <!-- อันใหม่  -->
     <v-overlay :value="isloading">
       <v-progress-circular
       indeterminate

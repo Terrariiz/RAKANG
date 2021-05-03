@@ -45,7 +45,16 @@ exports.registerNewUser = async (req, res) => {
           Playable: true,
           Detail:  null
         },
-        Rank : 'Beginner'
+        Rank : 'Beginner',
+        userlocation: {
+          name: "",
+          phone: "",
+          locationdetail: "",
+          District: "",
+          Sub_District: "",
+          province: "",
+          postcode: "",
+        },
         
       });
       let data = await user.save();
@@ -107,9 +116,8 @@ exports.editProfile = async (req,res) => {
         if(req.body.oldimage != 'https://res.cloudinary.com/koladon52/image/upload/v1619799310/user_icon.png'){
           let this_user = await User.findById(req.params.id);
           await cloudinary.uploader.destroy(this_user.cloudinary_id);
-          this_user.save();
-        }       
-        
+  }       
+
 
         cloudinary.uploader.upload(req.file.path, function(err, result){
           dataEdit = {
@@ -120,7 +128,7 @@ exports.editProfile = async (req,res) => {
             image: result.url,
             cloudinary_id: result.public_id
           }
-          
+
           
 
           User.findByIdAndUpdate({_id:req.params.id}, dataEdit, function(err,update){
@@ -199,7 +207,6 @@ exports.getUserRank = async (req, res) => {
 
 exports.getMyRank = async (req, res) => {
   try{
-    console.log('first')
     User.find({},function(err, found){
       if(err){
         console.log(err);
@@ -212,10 +219,6 @@ exports.getMyRank = async (req, res) => {
       // console.log(found)
 
       for(var i = 0 ; i <= (found.length - 1) ; i++){
-        console.log('****'+i+'****')
-        console.log(found.length)
-        console.log(found[i])
-        console.log('****'+i+'****')
         if(found[i]._id == req.params.id){
           break
         }

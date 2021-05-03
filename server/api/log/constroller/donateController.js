@@ -15,8 +15,7 @@ exports.donateloguser = async function(req,res){
       if(err){
         console.log(err)
       }else{
-        console.log('getuser')
-        console.log(list)
+
         res.json(list);
       }
     })

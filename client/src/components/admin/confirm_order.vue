@@ -5,110 +5,50 @@
     </div>
     <br /><br /><br />
     <h1>ยืนยันคำสั่งการแลกของ</h1>
-    <div class="container">
-      <v-btn class="back-btn" @click="$router.back()">
-        <i
-          style="float: left"
-          class="fa fa-arrow-left fa-lg"
-          aria-hidden="true"
-        ></i
-      ></v-btn>
-      <div class="small-container single-product">
-        <div class="row">
-          <div class="col-2">
-            <v-simple-table>
-              <template v-slot:default>
-                <thead>
-                  <tr>
-                    <th class="text-left"></th>
-                    <th class="text-left">ชื่อผู้แลก</th>
-                    <th class="text-left">ชื่อสินค้า</th>
-                    <th class="text-left"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="item in items" :key="item._id">
-                    <td>
-                      <center>
-                        <img
-                          :src="item.galleryimage[0].image"
-                          class="img-fluid"
-                          style="
-                            width: 100px;
-                            height: 100px;
-                            object-fit: cover;
-                            margin: 3%;
-                          "
-                          align="center"
-                        />
-                      </center>
-                    </td>
-                    <td>
-                      {{ item.name }}
-                    </td>
-                    <td>
-                      {{ item.remain }}
-                    </td>
-                    <td>
-                      <v-btn
-                        style="margin-right: 3%"
-                        >ยืนยัน</v-btn
-                      >
-                    </td>
-                  </tr>
-                </tbody>
-              </template>
-            </v-simple-table>
-          </div>
-          <div class="col-2">
-            <v-simple-table>
-              <template v-slot:default>
-                <thead>
-                  <tr>
-                    <th class="text-left"></th>
-                    <th class="text-left">ชื่อผู้แลก</th>
-                    <th class="text-left">ชื่อสินค้า</th>
-                    <th class="text-left"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="item in items" :key="item._id">
-                    <td>
-                      <center>
-                        <img
-                          :src="item.galleryimage[0].image"
-                          class="img-fluid"
-                          style="
-                            width: 100px;
-                            height: 100px;
-                            object-fit: cover;
-                            margin: 3%;
-                          "
-                          align="center"
-                        />
-                      </center>
-                    </td>
-                    <td>
-                      {{ item.name }}
-                    </td>
-                    <td>
-                      {{ item.remain }}
-                    </td>
-                    <td>
-                      <v-btn
-                        style="margin-right: 3%"
-                        >ยืนยัน</v-btn
-                      >
-                    </td>
-                  </tr>
-                </tbody>
-              </template>
-            </v-simple-table>
-          </div>
+     <div class="container" >
+          <v-card>
+            <v-toolbar flat color="#cfd6ea" dark> </v-toolbar>
+            <v-tabs>
+              <v-tab>
+                รอการยืนยัน
+              </v-tab>
+              <v-tab>
+                ยืนยันแล้ว
+              </v-tab>
+              
+
+               <v-tab-item>
+                <v-card flat>
+                  <v-container>
+                    <div class="head-profile">สินค้ารอการยืนยัน</div>
+                    <v-card>
+                      <v-data-table
+                        :headers="header1"
+                        
+                      ></v-data-table>
+                      
+                    </v-card>
+                  </v-container>
+                </v-card>
+              </v-tab-item>
+              <v-tab-item>
+                <v-card flat>
+                  <v-container>
+                    <div class="head-profile">สินค้าที่ยืนยันแล้ว</div>
+                    <v-card>
+                      <v-data-table
+                        :headers="header2"
+                        
+                      ></v-data-table>
+                      
+                    </v-card>
+                  </v-container>
+                </v-card>
+              </v-tab-item>
+             
+            </v-tabs>
+          </v-card>
         </div>
-      </div>
-      <br />
-    </div>
   </div>
 </template>
 
@@ -120,7 +60,25 @@ export default {
   },
   data(){
     return {
-      logs:[]
+      logs:[],
+      header1: [
+                { text: 'เลือกทั้งหมด',sortable: false,},
+                { text: 'เลือก',sortable: false,},
+                { text: 'รูปภาพประกอบ',sortable: false, value: '' },
+                { text: 'ชื่อของรางวัล',sortable: false,value: ''},
+                { text: 'แต้มที่ใช้',sortable: false, value: '' },
+                
+                
+            ],
+      
+       header2: [
+                { text: 'สถานะ',sortable: false,},
+                { text: 'รูปภาพประกอบ',sortable: false, value: '' },
+                { text: 'ชื่อของรางวัล',sortable: false,value: ''},
+                { text: 'แต้มที่ใช้',sortable: false, value: '' },
+                
+                
+            ],
     }
   },
   created: async function created() {

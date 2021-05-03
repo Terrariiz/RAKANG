@@ -16,8 +16,11 @@
           <br />
           <v-col cols="12" md="3" sm="12">
             <div class="member">
-              <a href="https://www.facebook.com/profile.php?id=100001200256778"
-                ><img
+              <a
+                href="https://www.facebook.com/profile.php?id=100001200256778"
+                target="_blank"
+              >
+                <img
                   class="memberimg"
                   src="../../public/image/sky.png"
                   alt="Project Manager"
@@ -35,8 +38,11 @@
           <br />
           <v-col cols="12" md="3" sm="12">
             <div class="member">
-              <a href="https://www.facebook.com/nattapon.tongta"
-                ><img
+              <a
+                href="https://www.facebook.com/nattapon.tongta"
+                target="_blank"
+              >
+                <img
                   class="memberimg"
                   src="../../public/image/kluay.png"
                   alt="Business Analyst"
@@ -51,7 +57,10 @@
 
           <v-col cols="12" md="3" sm="12">
             <div class="member">
-              <a href="https://www.facebook.com/profile.php?id=100002353314345">
+              <a
+                href="https://www.facebook.com/profile.php?id=100002353314345"
+                target="_blank"
+              >
                 <img
                   class="memberimg"
                   src="../../public/image/aiem.jpg"
@@ -66,7 +75,10 @@
 
           <v-col cols="12" md="3" sm="12">
             <div class="member">
-              <a href="https://www.facebook.com/pitpagon.chinanupagon">
+              <a
+                href="https://www.facebook.com/pitpagon.chinanupagon"
+                target="_blank"
+              >
                 <img
                   class="memberimg"
                   src="../../public/image/fluke.png"
@@ -81,7 +93,7 @@
 
           <v-col cols="12" md="3" sm="12">
             <div class="member">
-              <a href="https://www.facebook.com/ImZekai">
+              <a href="https://www.facebook.com/ImZekai" target="_blank">
                 <img
                   class="memberimg"
                   src="../../public/image/eartdy.jpg"
@@ -154,5 +166,4 @@ img {
   border-radius: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-
 </style>

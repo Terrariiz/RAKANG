@@ -252,6 +252,8 @@ exports.Purchase = function (req, res) {
       Sub_District: req.body.Sub_District,
       province: req.body.province,
       postcode: req.body.postcode,
+      name: req.body.name,
+      phone: req.body.phone,
       date : now
     });
     
@@ -265,20 +267,32 @@ exports.Purchase = function (req, res) {
             let message = "ขออภัยสินค้าหมด"
             return res.json(message)
           }
-          ExchangeLog.create(NewExchangeLog, function (err, exlog) {
+          ExchangeLog.create(NewExchangeLog, async function (err, exlog) {
           exlog.user = user
           exlog.item = item
           user.point = user.point - item.cost
-
+          
           item.remain = item.remain - NumOfPurchase
+          item.exchange_complete = item.exchange_complete + 1
 
           item.waitingorder.push(exlog)
           user.exchangelog.push(exlog)
 
+          if(req.body.savelocation == 'true'){
+            user.userlocation = {
+              name:  req.body.name,
+              phone: req.body.phone,
+              locationdetail: req.body.locationdetail,
+              District: req.body.District,
+              Sub_District: req.body.Sub_District,
+              province: req.body.province,
+              postcode: req.body.postcode,
+            }
+          }
           user.save()
           item.save()
           exlog.save()
-          return res.json(exlog);
+          return res.json(user.savelocation);
         })
         })
       })

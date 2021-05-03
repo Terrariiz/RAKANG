@@ -6,11 +6,20 @@
     <br /><br /><br />
     <v-overlay :value="isloading">
       <v-progress-circular
+      indeterminate
         size="100"
         width="7"
         color="green"
       ></v-progress-circular>
     </v-overlay>
+          <v-overlay :value="isupload">
+        <v-progress-circular
+        indeterminate
+         size="100"
+          width="7"
+          color="green"
+        ></v-progress-circular>
+      </v-overlay>
     <v-container>
       <v-row>
         <v-col class="pad0" cols="12" md="4" sm="12">
@@ -65,7 +74,6 @@
                       <span class="sub-head">แต้มบุญ:</span> {{ Profile.point }}
                     </div>
                   </center>
-                  <br />
                   <div class="btn-cpass">
                     <v-btn
                       class="e-profile"
@@ -115,7 +123,7 @@
                         single-line
                         solo
                         onkeypress="return event.charCode != 32"
-                        v-model="Profile.firstname"
+                        v-model="editfirstname"
                         :rules="firstnameRules"
                         required
                       ></v-text-field>
@@ -126,7 +134,7 @@
                         single-line
                         solo
                         onkeypress="return event.charCode != 32"
-                        v-model="Profile.lastname"
+                        v-model="editlastname"
                         :rules="lastnameRules"
                         required
                       ></v-text-field>
@@ -373,7 +381,8 @@ export default {
       Log: [],
       Profile: {},
       imageData: null,
-      isloading: true,
+      isloading:true,
+      isupload:false,
       valid: false,
       dataEdit: {
         image: null,
@@ -381,6 +390,9 @@ export default {
         newimage: null,
         oldimage: "",
       },
+      editfirstname:"",
+      editlastname:"",
+
       emailRules: [
         (v) => !!v || "Email is required!",
         (v) => /.+@.+/.test(v) || "E-mail must be valid",
@@ -412,27 +424,30 @@ export default {
         (v) => !!v || "Phone is required",
         (v) => v.length == 10 || "Phone must be 10 numbers",
       ],
-      pagination: {
-        data: null,
-        rowsPerPage: 10,
-        page: 1,
-      },
-      totalNumberOfItems: this.$store.getters.banana.length,
-      headers: [
-        {
-          text: "ชื่อแคมเปญ",
-          sortable: false,
-          value: "CampaignName",
-        },
-        { text: "จำนวนเงิน", value: "amount" },
-        { text: "วัน-เดือน-ปี", value: "date" },
-      ],
-    };
-  },
-  async mounted() {
-    const token = window.localStorage.getItem("user_token");
-    const id = window.localStorage.getItem("user_id");
-    if (token) {
+      pagination:{
+                data: null,
+                rowsPerPage: 10,
+                page: 1,
+            },
+            totalNumberOfItems: this.$store.getters.banana.length,
+            headers: [
+                {
+                    text: 'ชื่อแคมเปญ',
+                    sortable: false,
+                    value: 'CampaignName'
+                },
+                { text: 'จำนวนเงิน', value: 'amount' },
+                { text: 'วัน-เดือน-ปี', value: 'date' }
+                
+            ]
+      }
+
+
+    },
+    async mounted(){
+      const token = window.localStorage.getItem("user_token");
+      const id = window.localStorage.getItem("user_id");
+      if (token) {
       try {
         this.forceRerender();
       } catch (err) {
@@ -446,6 +461,8 @@ export default {
       .get("/user/" + id)
       .then((res) => {
         this.Profile = res.data;
+        this.editfirstname = this.Profile.firstname,
+        this.editlastname = this.Profile.lastname,
         this.dataEdit.oldimage = res.data.image;
         this.imageData = res.data.image;
 
@@ -530,8 +547,8 @@ export default {
     async EditProfile() {
       try {
         var formData = new FormData();
-        formData.append("firstname", this.Profile.firstname);
-        formData.append("lastname", this.Profile.lastname);
+        formData.append("firstname", this.editfirstname);
+        formData.append("lastname", this.editlastname);
         formData.append("birthdate", this.Profile.birthdate);
         formData.append("phone", this.Profile.phone);
 
@@ -553,17 +570,25 @@ export default {
             confirmButtonText: `Save`,
           })
           .then((result) => {
+            
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
-              this.$http.put("/user/" + id + "/editProfile", formData);
-              this.$router.push("/profile");
-              location.reload();
-              swal.fire(
-                "Saved!",
-                "Edit your profile Was successful.",
-                "success"
-              );
+              this.isupload = true
+              this.$http.put("/user/" + id + "/editProfile", formData, )
+              .then(() => {
+                this.isupload = false
+                        // this.$router.push("/profile");
+                        location.reload();
+                        swal.fire(
+                          "Saved!",
+                          "Edit your profile Was successful.",
+                          "success"
+                        );
               console.log("success");
+                    })
+                    .catch(function(err){
+                        console.log(err)
+                    });
             }
           });
       } catch (err) {
