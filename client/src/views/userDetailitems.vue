@@ -18,8 +18,10 @@
                     <div class="col-2">
                         <p>แลกของรางวัล/{{items.name}}</p>
                         <hr>
-                        <h1>รางวัล: <span>{{items.name}}</span></h1>
+                        <h2>รางวัล: <span>{{items.name}}</span></h2>
                         <h1>แต้มที่ใช้: <span>{{items.cost}}</span> แต้ม</h1>
+                        <h1>จำนวนที่เหลือ: <span>{{items.remain}}</span> ชิ้น</h1>
+                        <hr>
                         <h3>รายละเอียด</h3>
                         <p>{{items.detail}}</p>
                         <a :href="'/items/'+ items._id + '/' + userID + '/fill-address'" class="btn">แลก</a>
@@ -210,11 +212,18 @@ p{
     margin-bottom: 20px;
 }
 .col-2 h1{
-    font-size: 25px;
+    font-size: 15px;
     font-weight: 200;
 }
-.col-2 h1 span{
+.col-2 h2{
+    font-size: 35px;
+    font-weight: 200;
+}
+.col-2 h2 span{
     color: rgb(138, 138, 138);
+} 
+.col-2 h1 span{
+    color: rgb(255, 0, 0);
 }
 .col-2 h4 span{
     color: rgb(138, 138, 138);
