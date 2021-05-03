@@ -20,7 +20,12 @@
             <thead>
               <tr>
                 <th class="text-left">
-                 
+                 <input type="checkbox" id="select_all_checkboxes" />
+                    <label
+                       for="select_all_checkboxes"
+                       class="visuallyhidden"
+                       >Select all checkboxes
+                      </label>
                 </th>
                 <th class="text-left">
                   Name
@@ -35,6 +40,9 @@
             </thead>
             <tbody>
                 <tr >  
+                   <td>
+                     <input type="checkbox"  />
+                  </td> 
                 <td><center><img src="" class="img-fluid" style="width: 100px; height: 100px; object-fit: cover;  margin:3%;" align="center"></center></td> 
                 <td>
                     ชื่อสินค้า
@@ -51,7 +59,49 @@
       </v-simple-table>
         </v-col>
         <v-col cols="12" md="6" sm="12">
-          
+          <v-simple-table >
+          <template v-slot:default>
+            <thead>
+              <tr>
+                <th class="text-left">
+                  <input type="checkbox" id="select_all_checkboxes" />
+                    <label
+                       for="select_all_checkboxes"
+                       class="visuallyhidden"
+                       >Select all checkboxes
+                </label>
+                </th>
+                <th class="text-left">
+                  
+                </th>
+                <th class="text-left">
+                  Name
+                </th>
+                <th class="text-left">
+                 Amount
+                </th>
+                
+              </tr>
+            </thead>
+            <tbody>
+                <tr >
+                  <td>
+                    <input type="checkbox" />
+                    </td> 
+                <td><center><img src="" class="img-fluid" style="width: 100px; height: 100px; object-fit: cover;  margin:3%;" align="center"></center></td> 
+                <td>
+                    ชื่อสินค้า
+                </td>
+                <td>
+                    จำนวนสินค้า
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+            </tbody>
+          </template>
+      </v-simple-table>
         </v-col>
       </v-row>
     </div>
