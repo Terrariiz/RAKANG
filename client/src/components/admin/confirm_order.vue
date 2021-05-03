@@ -5,108 +5,50 @@
     </div>
     <br /><br /><br />
     <h1>ยืนยันคำสั่งการแลกของ</h1>
-    <div class="container">
-      <v-btn class="back-btn" @click="$router.back()">
-        <i
-          style="float: left"
-          class="fa fa-arrow-left fa-lg"
-          aria-hidden="true"
-        ></i
-      ></v-btn>
-      <v-row>
-        <v-col cols="12" md="6" sm="12">
-          <h1>รอการยืนยัน</h1>
-          <v-simple-table >
-          <template v-slot:default>
-            <thead>
-              <tr>
-                <th class="text-left">
-                 <input type="checkbox" id="select_all_checkboxes" />
-                    <label
-                       for="select_all_checkboxes"
-                       class="visuallyhidden"
-                       >Select all checkboxes
-                      </label>
-                </th>
-                <th class="text-left">
-                  Name
-                </th>
-                <th class="text-left">
-                 Amount
-                </th>
-                <th class="text-left">
-                  Editor
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-                <tr >  
-                   <td>
-                     <input type="checkbox"  />
-                  </td> 
-                <td><center><img src="" class="img-fluid" style="width: 100px; height: 100px; object-fit: cover;  margin:3%;" align="center"></center></td> 
-                <td>
-                    ชื่อสินค้า
-                </td>
-                <td>
-                    จำนวนสินค้า
-                </td>
-                <td>
-                  
-                </td>
-              </tr>
-            </tbody>
-          </template>
-      </v-simple-table>
-        </v-col>
-        <v-col cols="12" md="6" sm="12">
-          <h1>ยืนยันเรียบร้อยแล้ว</h1>
-          <v-simple-table >
-          <template v-slot:default>
-            <thead>
-              <tr>
-                <th class="text-left">
-                  <input type="checkbox" id="select_all_checkboxes" />
-                    <label
-                       for="select_all_checkboxes"
-                       class="visuallyhidden"
-                       >Select all checkboxes
-                </label>
-                </th>
-                <th class="text-left">
-                  
-                </th>
-                <th class="text-left">
-                  Name
-                </th>
-                <th class="text-left">
-                 Amount
-                </th>
-                
-              </tr>
-            </thead>
-            <tbody>
-                <tr >
-                  <td>
-                    <input type="checkbox" />
-                    </td> 
-                <td><center><img src="" class="img-fluid" style="width: 100px; height: 100px; object-fit: cover;  margin:3%;" align="center"></center></td> 
-                <td>
-                    ชื่อสินค้า
-                </td>
-                <td>
-                    จำนวนสินค้า
-                </td>
-                <td>
-                  
-                </td>
-              </tr>
-            </tbody>
-          </template>
-      </v-simple-table>
-        </v-col>
-      </v-row>
-    </div>
+     <div class="container" >
+          <v-card>
+            <v-toolbar flat color="#cfd6ea" dark> </v-toolbar>
+            <v-tabs>
+              <v-tab>
+                รอการยืนยัน
+              </v-tab>
+              <v-tab>
+                ยืนยันแล้ว
+              </v-tab>
+              
+
+               <v-tab-item>
+                <v-card flat>
+                  <v-container>
+                    <div class="head-profile">สินค้ารอการยืนยัน</div>
+                    <v-card>
+                      <v-data-table
+                        :headers="header1"
+                        
+                      ></v-data-table>
+                      
+                    </v-card>
+                  </v-container>
+                </v-card>
+              </v-tab-item>
+              <v-tab-item>
+                <v-card flat>
+                  <v-container>
+                    <div class="head-profile">สินค้าที่ยืนยันแล้ว</div>
+                    <v-card>
+                      <v-data-table
+                        :headers="header2"
+                        
+                      ></v-data-table>
+                      
+                    </v-card>
+                  </v-container>
+                </v-card>
+              </v-tab-item>
+             
+            </v-tabs>
+          </v-card>
+        </div>
   </div>
 </template>
 
@@ -118,7 +60,25 @@ export default {
   },
   data(){
     return {
-      logs:[]
+      logs:[],
+      header1: [
+                { text: 'เลือกทั้งหมด',sortable: false,},
+                { text: 'เลือก',sortable: false,},
+                { text: 'รูปภาพประกอบ',sortable: false, value: '' },
+                { text: 'ชื่อของรางวัล',sortable: false,value: ''},
+                { text: 'แต้มที่ใช้',sortable: false, value: '' },
+                
+                
+            ],
+      
+       header2: [
+                { text: 'สถานะ',sortable: false,},
+                { text: 'รูปภาพประกอบ',sortable: false, value: '' },
+                { text: 'ชื่อของรางวัล',sortable: false,value: ''},
+                { text: 'แต้มที่ใช้',sortable: false, value: '' },
+                
+                
+            ],
     }
   },
   created: async function created() {
