@@ -312,15 +312,15 @@
                       <v-data-table
                         :headers="headers2"
                         :items="filteredList1"
-                        :items-per-page="pagination.rowsPerPage"
+                        :items-per-page="pagination1.rowsPerPage"
                         hide-default-footer
                         class="elevation-1"
                       ></v-data-table>
                       <v-pagination
                         circle
                         :total-visible="7"
-                        v-model="pagination.page"
-                        :length="pages"
+                        v-model="pagination1.page"
+                        :length="pages1"
                       ></v-pagination>
                     </v-card>
                   </v-container>
@@ -481,8 +481,8 @@ export default {
                 
             ],
             headers2: [
-                { text: 'ชื่อของรางวัล', sortable: false,  value: 'itemname'},
-                { text: 'แต้มที่ใช้', value: 'point' },
+                { text: 'ชื่อของรางวัล', sortable: false,  value: 'item.name'},
+                { text: 'แต้มที่ใช้', value: 'date' },
                 { text: 'สถานะ',sortable: false, value: 'status' }
                 
             ]
@@ -490,7 +490,7 @@ export default {
 
 
     },
-    async mounted(){
+    mounted: async function mounted(){
       const token = window.localStorage.getItem("user_token");
       const id = window.localStorage.getItem("user_id");
       if (token) {
@@ -503,6 +503,18 @@ export default {
       }
     }
     console.log(id);
+    await this.$http
+      .get("/exchangeitem/GetUserExchangeLog/" + id)
+      .then((res) => {
+        this.ExchangeLog = res.data;
+        console.log(this.ExchangeLog);
+        this.pagination1.data = this.ExchangeLog.exchangelog;
+        console.log(this.pagination1.data)
+
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
     await this.$http
       .get("/user/" + id)
       .then((res) => {
@@ -525,7 +537,6 @@ export default {
         console.log("get log");
         this.pagination.data = res.data.donatelog;
         this.isloading = false;
-
         var i = 0;
         for (this.pagination.data[i]; ; i++) {
           this.pagination.data[i].date = moment(
@@ -542,17 +553,6 @@ export default {
         this.Bookmarks = res.data.favdoctrinelist;
         console.log("get user Bookmark");
         console.log(this.Bookmarks);
-      })
-      .catch(function(err) {
-        console.log(err);
-      });
-      await this.$http
-      .get("/exchangeitem/GetUserExchangeLog/" + id)
-      .then((res) => {
-        this.ExchangeLog = res.data;
-        console.log(this.ExchangeLog);
-        this.pagination1.data = this.ExchangeLog.exchangelog;
-
       })
       .catch(function(err) {
         console.log(err);
@@ -668,6 +668,11 @@ export default {
         ? Math.ceil(this.pagination.data.length / this.pagination.rowsPerPage)
         : 0;
     },
+    pages1() {
+      return this.pagination1.rowsPerPage
+        ? Math.ceil(this.pagination1.data.length / this.pagination1.rowsPerPage)
+        : 0;
+    },
     filteredList() {
       var firstIndex;
       if (this.pagination.page == 1) {
@@ -683,21 +688,19 @@ export default {
       console.log(showData);
       return showData;
     },
-    //  filteredList1() {
-    //   var firstIndex;
-    //   if (this.pagination1.page == 1) {
-    //     firstIndex = 0;
-    //   } else {
-    //     firstIndex = (this.pagination1.page - 1) * this.pagination1.rowsPerPage;
-    //   }
-    //   console.log(firstIndex + " firstIndex");
-    //   var showData = this.pagination1.data.slice(
-    //     firstIndex,
-    //     firstIndex + this.pagination1.rowsPerPage
-    //   );
-    //   console.log(showData);
-    //   return showData;
-    // },
+     filteredList1() {
+      var firstIndex;
+      if (this.pagination1.page == 1) {
+        firstIndex = 0;
+      } else {
+        firstIndex = (this.pagination1.page - 1) * this.pagination1.rowsPerPage;
+      }
+      console.log(firstIndex + " firstIndex");
+      console.log(this.pagination1.data)
+      var showData = this.pagination1.data.slice(firstIndex, firstIndex+this.pagination1.rowsPerPage)
+      console.log(showData);
+      return showData;
+    },
   },
 };
 </script>
