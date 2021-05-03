@@ -20,10 +20,13 @@
                         </div>
                     </div>
                     <div class="col-2">
+                        
                         <p>แลกของรางวัล/{{item.name}}</p>
                         <hr>
-                        <h1>รางวัล: <span>{{item.name}}</span></h1>
+                        <h2>รางวัล: <span>{{item.name}}</span></h2>
                         <h1>แต้มที่ใช้: <span>{{item.cost}}</span> แต้ม</h1>
+                        <h1>จำนวนที่เหลือ: <span>{{item.remain}}</span> ชิ้น</h1>
+                        <hr>
                         <h3>รายละเอียด</h3>
                         <p v-html="item.detail">{{item.detail}}</p>
 
@@ -80,7 +83,7 @@ export default {
 
 <style scoped>
 .admin{
-    ffont-size: 25px;
+    font-size: 35px;
     font-weight: 200;
     color: #D55F43;
 }
@@ -159,11 +162,21 @@ p{
     margin-bottom: 20px;
 }
 .col-2 h1{
-    font-size: 25px;
+    font-size: 15px;
     font-weight: 200;
 }
 .col-2 h1 span{
     color: rgb(138, 138, 138);
+}
+.col-2 h2{
+    font-size: 35px;
+    font-weight: 200;
+}
+.col-2 h2 span{
+    color: rgb(138, 138, 138);
+} 
+.col-2 h1 span{
+    color: rgb(255, 0, 0);
 }
 .col-2 h4 span{
     color: rgb(138, 138, 138);
