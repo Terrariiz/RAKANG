@@ -57,13 +57,13 @@
                               <span>ORDER</span>
                               <span v-if="item.waitingorder.length > 0" class="badge">{{item.waitingorder.length}}</span>
                             </a> -->
-                            <v-btn class="noti" style="margin:3%;" @click="ViewLogitem(item._id)">order <span v-if="item.waitingorder.length > 0" class="badge">{{item.waitingorder.length}}</span></v-btn>
+                            <v-btn color="primary" class="noti" style="margin:3%;" @click="ViewLogitem(item._id)">order <span v-if="item.waitingorder.length > 0" class="badgex">{{item.waitingorder.length}}</span></v-btn>
                           </span>
                           <span>
                             <v-btn style="margin:3%;" @click="Edititem(item._id)">Edit</v-btn>
                           </span>
                           <span>
-                            <v-btn @click="Deleteitem(item._id)">Delete</v-btn>
+                            <v-btn color="error" @click="Deleteitem(item._id)">Delete</v-btn>
                           </span>
                         </div>
                       </v-col>
@@ -167,22 +167,26 @@ export default {
   background: rgba(133, 133, 133, 0.233);
 }
 
-.notification .badge {
+/* .notification .badge {
   position: absolute;
   top: -10px;
   right: -10px;
-  padding: 5px 10px;
+  padding: 5px 6px;
   border-radius: 50%;
   background: red;
   color: white;
-}
-.noti .badge {
+} */
+.noti .badgex {
   position: absolute;
   top: -15px;
   right: -25px;
-  padding: 5px 5px;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  /* padding: 5px 6px; */
   border-radius: 50%;
-  background: red;
+  background: rgb(228, 81, 81);
   color: white;
 }
 .noti {

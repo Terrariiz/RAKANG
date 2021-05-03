@@ -63,7 +63,7 @@
                            <v-btn style="margin-right:3%;" @click="EditCampaign(campaign._id)">Edit</v-btn>
                           </span>
                           <span>
-                            <v-btn @click="DeleteCampaign(campaign._id)">Delete</v-btn>
+                            <v-btn color="error" @click="DeleteCampaign(campaign._id)">Delete</v-btn>
                           </span>
                         </div>
                       </v-col>
