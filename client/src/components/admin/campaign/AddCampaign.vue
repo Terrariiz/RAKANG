@@ -3,7 +3,6 @@
     <div>
       <Navbar></Navbar>
     </div>
-    <br><br><br><br>
     <!-- <form
          @submit.prevent="Addcampaign">
         <v-container id ='rounded' style="background-color: #F09C0B;">
@@ -60,19 +59,22 @@
         ></v-progress-circular>
       </v-overlay>
     <form @submit.prevent="Addcampaign">
+      <br><br>
       <div class="project-header">
         <v-container>
-          <v-row>
-            <h1>Add new campaign</h1>
-          </v-row>
+          <div class="head">
+            <h1 >Add new campaign</h1>
+          </div>
           <center>
             <v-row class="headname">
-              <v-text-field
-                v-model="campaign.name"
-                solo
-                label="Name"
-                required
-              ></v-text-field>
+              
+                <v-text-field
+                  v-model="campaign.name"
+                  solo
+                  label="Name"
+                  required
+                ></v-text-field>
+              
               <br />
             </v-row>
           </center>
@@ -242,6 +244,16 @@
 </template>
 
 <style >
+.head{
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.head h1{
+  font-size: 48px;
+
+}
 #detailnews {
   text-align: left;
   border-radius: 30px;

@@ -61,23 +61,25 @@
               <div class="panelx">
                 <!-- ปุ่ม bookmark -->
 
-                <v-list-item three-line class="title-font-size">
-                  {{ news.title }}
-                </v-list-item>
+                
                 <v-list-item three-line>
                   <v-list-item-content>
+                    <v-list-item-title class="headline mb-2">
+                       {{ news.title }}
+                    </v-list-item-title>
                     <v-list-item-subtitle v-html="news.content">
                       {{ news.content }}
                     </v-list-item-subtitle>
+                    <hr>
+                    <span class="datex">{{ news.date }}</span>
+                    <p>
+                      {{ news.categories }}
+                    </p>
                   </v-list-item-content>
                 </v-list-item>
-                <span class="datex">{{ news.date }}</span>
-                <p>
-                  {{ news.categories }}
-                  <span class="icon-people" style="float: right;"
-                      ><i class="fa fa-eye"></i> {{ news.view }}</span
-                    >
-                </p>
+                  <span class="icon-people" style="float: right;">
+                    <i class="fa fa-eye"></i> {{ news.view }}</span>
+                
               </div>
             </div>
           </v-col>
