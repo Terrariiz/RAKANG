@@ -305,7 +305,7 @@
               <!-- ประวัติการบริจาค  -->
               <!-- ประวัติการแลกของ  -->
               <v-tab-item>
-                <v-card flat>
+                <v-card flat >
                   <v-container>
                     <div class="head-profile">ประวัติการแลกของ</div>
                     <v-card>
@@ -416,7 +416,7 @@ export default {
       ExchangeLog:[],
       Profile: {},
       imageData: null,
-      isloading:true,
+      isloading: true,
       isupload:false,
       valid: false,
       dataEdit: {
@@ -465,7 +465,7 @@ export default {
                 page: 1,
             },
       pagination1:{
-                data: null,
+                data: [],
                 rowsPerPage: 10,
                 page: 1,
             },
@@ -482,8 +482,9 @@ export default {
             ],
             headers2: [
                 { text: 'ชื่อของรางวัล', sortable: false,  value: 'item.name'},
-                { text: 'แต้มที่ใช้', value: 'date' },
-                { text: 'สถานะ',sortable: false, value: 'status' }
+                { text: 'วัน-เดือน-ปี', value: 'date' },
+                { text: 'สถานะ',sortable: false, value: 'status' },
+                { text: 'trackings-id', value: 'trackings_id' },
                 
             ]
       }
