@@ -11,59 +11,57 @@
           color="green"
         ></v-progress-circular>
       </v-overlay> -->
-    <h1>Dashboard</h1>
+      <div class="head">
+        <h1>ระฆังธรรม</h1>
+      </div>
+      <hr>
     <v-container>
      
-  <v-card style="display:inline;"
-    class="mx-auto"
-    max-width="200"
-    outlined
-  >
-    <v-list-item three-line>
-      <v-list-item-content>
-        <div class="overline mb-4">
-          totalviewsCampaign
+ <!-- ไม่มีกราฟ  -->
+  
+<v-container class="no-grahp">
+  <v-row>
+    <v-col cols="12" md="4" sm="4">
+       <div class="overline">
+          totalviewsCampaign test
         </div>
-        <v-list-item-title class="headline mb-1">
+        <div class="headline">
         {{campaign_view}}
-        </v-list-item-title>
-      </v-list-item-content>
-    </v-list-item>
-  </v-card>
-  <v-card style="display:inline;"
-    class="mx-auto"
-    max-width="200"
-    outlined
-  >
-    <v-list-item three-line>
-      <v-list-item-content>
-        <div class="overline mb-4">
-          totalviewsnews
         </div>
-        <v-list-item-title class="headline mb-1">
+    </v-col>
+
+    <v-col cols="12" md="4" sm="4">
+       <div class="overline">
+          ttotalviewsnews test
+        </div>
+        <div class="headline">
         {{news_view}}
-        </v-list-item-title>
-      </v-list-item-content>
-    </v-list-item>
-  </v-card>
-  <v-card style="display:inline;"
-    class="mx-auto"
-    max-width="200"
-    outlined
-  >
-    <v-list-item three-line>
-      <v-list-item-content>
-        <div class="overline mb-4">
-          totalviewsdoctrine
         </div>
-        <v-list-item-title class="headline mb-1">
+    </v-col>
+
+    <v-col cols="12" md="4" sm="4">
+       <div class="overline">
+           totalviewsdoctrine test
+        </div>
+        <div class="headline">
         {{doctrine_view}}
-        </v-list-item-title>
-      </v-list-item-content>
-    </v-list-item>
-  </v-card>
+        </div>
+    </v-col>
+
+    <!-- <v-col cols="12" md="6" sm="6">
+       <div class="overline">
+          test
+        </div>
+        <div class="headline">
+        
+        </div>
+    </v-col> -->
+  </v-row>
+</v-container>
+
+ <!-- ไม่มีกราฟ  -->
            
-      <v-row>
+      <v-row >
         <v-col cols="12" md="6" sm="12">
           <v-card class="mx-auto" max-width="500">
             <v-card-title>TotalDonatePerCampaign</v-card-title>
@@ -617,3 +615,17 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.head{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.head > h1{
+    font-size: 60px;
+}
+.no-grahp{
+  width: 90%;
+}
+</style>

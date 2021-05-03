@@ -52,7 +52,7 @@
                             <v-btn style="margin-right:3%;" @click="EditDoctrine(doctrine._id)">Edit</v-btn>
                           </span>
                           <span>
-                            <v-btn @click="DeleteDoctrine(doctrine._id)">Delete</v-btn>
+                            <v-btn color="error" @click="DeleteDoctrine(doctrine._id)">Delete</v-btn>
                           </span>
                         </div>
                       </v-col>
